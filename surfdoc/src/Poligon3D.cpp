@@ -384,13 +384,10 @@ void Poligon3D::Drawing( )
 				{
 					COLORREF color = m_pSurface->GetColor(m_vdPoints[i].z);
 					glColor4ub (GetRValue(color), GetGValue(color), GetBValue(color), (GLubyte)m_pSurface->m_alpha); 
-//					glColor4ub (GetRValue(color), GetGValue(color), GetBValue(color), (GLubyte)m_pSurfDoc->m_alpha); 
 				}
 				else
 				{
 					glColor4ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color), (GLubyte)m_pSurfDoc->m_alpha); 
-//					glColor4ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color), (GLubyte)m_pSurfDoc->m_alpha_plane); 
-//					glColor4ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color), (GLubyte)m_alpha); 
 				}
 				glVertex3d (m_vvPoints[i].x, m_vvPoints[i].y, m_vvPoints[i].z);
 
