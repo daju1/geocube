@@ -4,13 +4,13 @@ Copyright (c) Microsoft Corp 1990 - 1995. All rights reserved.
 lab.hpj
     HC1002: Note: 
 	Using existing phrase table: lab.ph.
-    HC3025: Warning: topic #1 of d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\hlp\.\afxcore.rtf : 
+    HC3025: Warning: topic #1 of c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\hlp\.\afxcore.rtf : 
 	Jump to undefined Topic ID: "menu_record".
-    HC3025: Warning: topic #3 of d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\hlp\.\afxcore.rtf : 
+    HC3025: Warning: topic #3 of c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\hlp\.\afxcore.rtf : 
 	Jump to undefined Topic ID: "HID_OLE_EDIT_LINKS".
-    HC3025: Warning: topic #3 of d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\hlp\.\afxcore.rtf : 
+    HC3025: Warning: topic #3 of c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\hlp\.\afxcore.rtf : 
 	Jump to undefined Topic ID: "HID_EDIT_PASTE_LINK".
-    HC3025: Warning: topic #3 of d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\hlp\.\afxcore.rtf : 
+    HC3025: Warning: topic #3 of c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\hlp\.\afxcore.rtf : 
 	Jump to undefined Topic ID: "HID_OLE_INSERT_NEW".
     HC1010: Note: 
 	The following mapped Topic IDs were not used in any topic:
@@ -376,7 +376,7 @@ lab.hpj
 21	Bitmaps
 
 
-Created d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\hlp\lab.HLP, 38,926 bytes
+Created c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\hlp\lab.HLP, 38,926 bytes
 Bitmaps: 5,348 bytes
 Phrase+Zeck compression decreased help file by 13,866 bytes.
 Compile time: 0 minutes, 0 seconds

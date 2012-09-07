@@ -11,9 +11,221 @@ Build Log
 </h3>
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Command Lines
-</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\Release\RSP0000F6.rsp" with contents
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\BAT000032.bat" with contents
 [
-/OUT:"../../../bin/lab.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\Release/../../../lib" /PDB:".\Release/lab.pdb" /SUBSYSTEM:WINDOWS /MACHINE:X86 /FORCE:MULTIPLE  alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib  jpeg.lib  opengl32.lib glu32.lib glaux.lib gdiplus.lib "\drozdov_a\for_work\C++\Win32_90.16\lib\alglib.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\surfdoc.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\wintools.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\laboratory.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\geocube_module.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\labdbdoc.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\excel_connect.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\acad_connect.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\surfer_connect.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\tools.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\geometry2D.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\kohonen.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\dime.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\array.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\dct.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\winplot.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\geoid.lib" "\drozdov_a\for_work\C++\Win32_90.16\lib\jpeg.lib"
+@echo off
+copy "hlp\lab.cnt" ".\Release"
+
+if errorlevel 1 goto VCReportError
+goto VCEnd
+:VCReportError
+echo Project : error PRJ0019: A tool returned an error code from "Copying contents file..."
+exit 1
+:VCEnd
+]
+Creating command line ""c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\BAT000032.bat""
+Creating temporary file "c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\BAT000033.bat" with contents
+[
+@echo off
+echo. >"hlp\lab.hm"
+echo // Commands (ID_* and IDM_*) >>"hlp\lab.hm"
+makehm ID_,HID_,0x10000 IDM_,HIDM_,0x10000 resource.h >>"hlp\lab.hm"
+echo. >>"hlp\lab.hm"
+echo // Prompts (IDP_*) >>"hlp\lab.hm"
+makehm IDP_,HIDP_,0x30000 resource.h >>"hlp\lab.hm"
+echo. >>"hlp\lab.hm"
+echo // Resources (IDR_*) >>"hlp\lab.hm"
+makehm IDR_,HIDR_,0x20000 resource.h >>"hlp\lab.hm"
+echo. >>"hlp\lab.hm"
+echo // Dialogs (IDD_*) >>"hlp\lab.hm"
+makehm IDD_,HIDD_,0x20000 resource.h >>"hlp\lab.hm"
+echo. >>"hlp\lab.hm"
+echo // Frame Controls (IDW_*) >>"hlp\lab.hm"
+makehm IDW_,HIDW_,0x50000 resource.h >>"hlp\lab.hm"
+
+if errorlevel 1 goto VCReportError
+goto VCEnd
+:VCReportError
+echo Project : error PRJ0019: A tool returned an error code from "Making help include file..."
+exit 1
+:VCEnd
+]
+Creating command line ""c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\BAT000033.bat""
+Creating temporary file "c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\BAT000034.bat" with contents
+[
+@echo off
+start /wait hcw /C /E /M "hlp\lab.hpj"
+if errorlevel 1 goto :Error
+if not exist "hlp\lab.hlp" goto :Error
+copy "hlp\lab.hlp" ".\Release"
+goto :done
+:Error
+echo hlp\"lab".hpj(1) : error:
+type "hlp\lab.log"
+:done
+
+if errorlevel 1 goto VCReportError
+goto VCEnd
+:VCReportError
+echo Project : error PRJ0019: A tool returned an error code from "Making help file..."
+exit 1
+:VCEnd
+]
+Creating command line ""c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\BAT000034.bat""
+Creating temporary file "c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000035.rsp" with contents
+[
+/D "NDEBUG" /mktyplib203 /env win32  /tlb ".\Release/lab.tlb"
+".\lab.odl"
+]
+Creating command line "midl.exe @"c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000035.rsp" /nologo"
+Creating temporary file "c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000036.rsp" with contents
+[
+/O2 /I ".\Release/../../../include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FD /EHsc /MD /GR /Yu"stdafx.h" /Fp".\Release/lab.pch" /Fo".\Release/" /Fd".\Release/" /W3 /c /TP
+".\ZrizListLab.cpp"
+".\ZrizList.cpp"
+".\VodaList.cpp"
+".\UstList.cpp"
+".\TSZList.cpp"
+".\tableView.cpp"
+".\TableSet.cpp"
+".\TableFrm.cpp"
+".\tableDoc.cpp"
+".\SoilsListLab.cpp"
+".\SoilsList.cpp"
+".\SetGranSklad.cpp"
+".\PropList.cpp"
+".\PaljaList.cpp"
+".\ObjectDialog.cpp"
+".\MyPalja.cpp"
+"\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\mylicense.cpp"
+".\MainFrm.cpp"
+".\LithoList.cpp"
+".\ListRaschetSvai.cpp"
+".\ListPCK2Fiz.cpp"
+".\ListNaborGruntov.cpp"
+".\ListGrunty.cpp"
+".\ListGruntGran.cpp"
+".\ListGenezis.cpp"
+".\labView.cpp"
+".\LaboratoryView.cpp"
+".\LaboratoryDoc.cpp"
+".\LabObjectsList.cpp"
+".\LabListView.cpp"
+".\LabListCtrl.cpp"
+".\LabElementsList.cpp"
+".\LabElementList.cpp"
+".\lab.cpp"
+".\KTListCtrl.cpp"
+".\KTLabList.cpp"
+".\IGEList.cpp"
+".\IGE2List.cpp"
+".\GranularListLab.cpp"
+".\GranularList.cpp"
+".\FizMehListLab.cpp"
+".\FizMehList.cpp"
+".\ExcelWlp.cpp"
+".\ExcelWlazhnost.cpp"
+".\ExcelWL.cpp"
+".\ExcelVegetableRemains.cpp"
+".\ExcelTSZList.cpp"
+".\ExcelStatZondList.cpp"
+".\ExcelSandGranular.cpp"
+".\ExcelRozrizList.cpp"
+".\ExcelPlotnostGrunta.cpp"
+".\ExcelPlotnostChastic1.cpp"
+".\ExcelPlotnostChastic.cpp"
+".\ExcelPaljaList.cpp"
+".\ExcelLabNList.cpp"
+".\ExcelLabNIGEList.cpp"
+".\ExcelKTLabList.cpp"
+".\ExcelKTEnGeoList.cpp"
+".\ExcelHydroList.cpp"
+".\ExcelDxfRozrizList.cpp"
+".\ExcelCut.cpp"
+".\ExcelCompression.cpp"
+".\ExcelAreometrGranular.cpp"
+".\ExcelArchiveGran.cpp"
+".\ExcelArchiveData.cpp"
+".\ExcelArchiveCut.cpp"
+".\ExcelArchiveCompression.cpp"
+".\ExcelArchiveCaspGeo.cpp"
+".\EnGeoObjectsList.cpp"
+".\EnGeologyView.cpp"
+".\EnGeologyDoc.cpp"
+".\EnGeoListCtrl.cpp"
+".\EnGeoFrame.cpp"
+".\DlgZondUstParam.cpp"
+".\DlgStatZond.cpp"
+".\DlgSoilName.cpp"
+".\DlgRepeatings.cpp"
+".\DlgProbGrunt.cpp"
+".\DlgProbGr_DblClickMode.cpp"
+".\DlgPCK2Fiz.cpp"
+".\DlgPalja.cpp"
+".\DlgNRows.cpp"
+".\DlgNaborGruntovSetting.cpp"
+".\DlgLanguage.cpp"
+".\DlgLabElements.cpp"
+".\DlgIGEList.cpp"
+".\DlgCopyGrunty.cpp"
+".\DBViewList.cpp"
+".\DBTableZriz_tbl.cpp"
+".\DBTableZriz0.cpp"
+".\DBTableZriz.cpp"
+".\DBTableVoda.cpp"
+".\DBTableUmPoz.cpp"
+".\DBTableSurfLitoMapping.cpp"
+".\DBTableSurfIgeMapping.cpp"
+".\DBTableSurfacesOrder.cpp"
+".\DBTableSurfacesBlankOrder.cpp"
+".\DBTableSurfacesBlankFunctions.cpp"
+".\DBTableStZond.cpp"
+".\DBTableSoils.cpp"
+".\DBTableRozrizy.cpp"
+".\DBTableRozriz.cpp"
+".\DBTablePtStZond.cpp"
+".\DBTablePtPalja.cpp"
+".\DBTableProp.cpp"
+".\DBTablePCK2Fiz_Results.cpp"
+".\DBTablePCK2Fiz_Params.cpp"
+".\DBTablePalja.cpp"
+".\DBTableLito0.cpp"
+".\DBTableLito.cpp"
+".\DBTableKT.cpp"
+".\DBTableIGE0.cpp"
+".\DBTableIGE.cpp"
+".\DBTableGrunty.cpp"
+".\DBTableGridDataUsedAlg.cpp"
+".\DBTableGriddataSurfaces.cpp"
+".\DBTableGridData.cpp"
+".\DBTableGranular.cpp"
+".\DBTableGenezis.cpp"
+".\DBTableCubeSize.cpp"
+".\DBTableCompress.cpp"
+".\DBTableCilce0.cpp"
+".\DBTableCilce.cpp"
+".\DBTable.cpp"
+".\DataBaseTalblesList.cpp"
+".\CompressListLab.cpp"
+".\CompressList.cpp"
+".\ComboProbGrKT.cpp"
+".\ChildFrm.cpp"
+".\BaseExcel.cpp"
+".\3DView.cpp"
+".\3DFrame.cpp"
+".\3DDoc.cpp"
+]
+Creating command line "cl.exe @"c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000036.rsp" /nologo"
+Creating temporary file "c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000037.rsp" with contents
+[
+/O2 /I ".\Release/../../../include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FD /EHsc /MD /GR /Yc"stdafx.h" /Fp".\Release/lab.pch" /Fo".\Release/" /Fd".\Release/" /W3 /c /TP
+".\StdAfx.cpp"
+]
+Creating command line "cl.exe @"c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000037.rsp" /nologo"
+Creating command line "rc.exe /d "NDEBUG" /d "_AFXDLL" /l 0x419 /I ".\Release" /fo".\Release/lab.res" ".\lab.rc""
+Creating temporary file "c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000038.rsp" with contents
+[
+/OUT:"../../../bin/lab.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\Release/../../../lib" /PDB:".\Release/lab.pdb" /SUBSYSTEM:WINDOWS /MACHINE:X86 /FORCE:MULTIPLE  alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib  jpeg.lib  opengl32.lib glu32.lib glaux.lib gdiplus.lib "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\alglib.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\surfdoc.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\wintools.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\laboratory.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\geocube_module.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\labdbdoc.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\excel_connect.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\acad_connect.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\surfer_connect.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\tools.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\geometry2D.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\kohonen.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\dime.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\array.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\dct.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\winplot.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\geoid.lib" "\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lib\jpeg.lib"
 ".\Release\3DDoc.obj"
 ".\Release\3DFrame.obj"
 ".\Release\3DView.obj"
@@ -150,10 +362,337 @@ Command Lines
 ".\Release\ZrizList.obj"
 ".\Release\ZrizListLab.obj"
 ]
-Creating command line "link.exe @"d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\Release\RSP0000F6.rsp""
+Creating command line "link.exe @"c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\RSP000038.rsp""
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Output Window
-</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Linking...
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Copying contents file...
+Скопировано файлов:         1.
+Making help include file...
+Making help file...
+Скопировано файлов:         1.
+Creating Type Library...
+Processing .\lab.odl
+lab.odl
+Processing c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\include\oaidl.idl
+oaidl.idl
+Processing c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\include\objidl.idl
+objidl.idl
+Processing c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\include\unknwn.idl
+unknwn.idl
+Processing c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\include\wtypes.idl
+wtypes.idl
+Processing c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\include\basetsd.h
+basetsd.h
+Processing c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\include\guiddef.h
+guiddef.h
+Processing c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\include\oaidl.acf
+oaidl.acf
+Compiling...
+StdAfx.cpp
+ WINVER not defined. Defaulting to 0x0501 (Windows XP and Windows .NET Server)
+Compiling...
+ZrizListLab.cpp
+ZrizList.cpp
+VodaList.cpp
+VodaList.cpp(61) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+VodaList.cpp(66) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+VodaList.cpp(71) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+VodaList.cpp(76) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+UstList.cpp
+TSZList.cpp
+TSZList.cpp(110) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+TSZList.cpp(115) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+tableView.cpp
+TableSet.cpp
+TableFrm.cpp
+tableDoc.cpp
+SoilsListLab.cpp
+SoilsList.cpp
+SetGranSklad.cpp
+PropList.cpp
+PaljaList.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\stdafx.h(124) : warning C4005: 'TRACE' : macro redefinition
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afx.h(306) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(760) : warning C4005: 'IDC_RADIO_SNIP_1' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(107) : see previous definition of 'IDC_RADIO_SNIP_1'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(761) : warning C4005: 'IDC_RADIO_SNIP_2' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(109) : see previous definition of 'IDC_RADIO_SNIP_2'
+PaljaList.cpp(65) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+PaljaList.cpp(70) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+PaljaList.cpp(75) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+PaljaList.cpp(80) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+PaljaList.cpp(85) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+PaljaList.cpp(90) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(183) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPoligon3D.h(51) : see reference to function template instantiation 'void ObjectList::Init_std_vector_Vector<Vector<T>>(std::vector<_Ty> &,Object *)' being compiled
+        with
+        [
+            T=Poligon3D,
+            _Ty=Vector<Poligon3D>
+        ]
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(95) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPlane3D.h(401) : see reference to function template instantiation 'void ObjectList::Init2<ThePoint3D>(Vector<T> &,Object *)' being compiled
+        with
+        [
+            T=Vector<ThePoint3D>
+        ]
+ObjectDialog.cpp
+MyPalja.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\stdafx.h(124) : warning C4005: 'TRACE' : macro redefinition
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afx.h(306) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(760) : warning C4005: 'IDC_RADIO_SNIP_1' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(107) : see previous definition of 'IDC_RADIO_SNIP_1'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(761) : warning C4005: 'IDC_RADIO_SNIP_2' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(109) : see previous definition of 'IDC_RADIO_SNIP_2'
+mylicense.cpp
+MainFrm.cpp
+LithoList.cpp
+LithoList.cpp(61) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+LithoList.cpp(66) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+LithoList.cpp(71) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+LithoList.cpp(76) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+ListRaschetSvai.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\stdafx.h(124) : warning C4005: 'TRACE' : macro redefinition
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afx.h(306) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(760) : warning C4005: 'IDC_RADIO_SNIP_1' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(107) : see previous definition of 'IDC_RADIO_SNIP_1'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(761) : warning C4005: 'IDC_RADIO_SNIP_2' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(109) : see previous definition of 'IDC_RADIO_SNIP_2'
+Generating Code...
+Compiling...
+ListPCK2Fiz.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\stdafx.h(124) : warning C4005: 'TRACE' : macro redefinition
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afx.h(306) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(760) : warning C4005: 'IDC_RADIO_SNIP_1' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(107) : see previous definition of 'IDC_RADIO_SNIP_1'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(761) : warning C4005: 'IDC_RADIO_SNIP_2' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(109) : see previous definition of 'IDC_RADIO_SNIP_2'
+ListNaborGruntov.cpp
+ListNaborGruntov.cpp(95) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+ListNaborGruntov.cpp(101) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+ListNaborGruntov.cpp(106) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+ListGrunty.cpp
+ListGruntGran.cpp
+ListGenezis.cpp
+labView.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\stdAfx.h(107) : warning C4005: 'TRACE' : macro redefinition
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afx.h(306) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\resource.h(760) : warning C4005: 'IDC_RADIO_SNIP_1' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(107) : see previous definition of 'IDC_RADIO_SNIP_1'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\resource.h(761) : warning C4005: 'IDC_RADIO_SNIP_2' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(109) : see previous definition of 'IDC_RADIO_SNIP_2'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(183) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPoligon3D.h(51) : see reference to function template instantiation 'void ObjectList::Init_std_vector_Vector<Vector<T>>(std::vector<_Ty> &,Object *)' being compiled
+        with
+        [
+            T=Poligon3D,
+            _Ty=Vector<Poligon3D>
+        ]
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(95) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPlane3D.h(401) : see reference to function template instantiation 'void ObjectList::Init2<ThePoint3D>(Vector<T> &,Object *)' being compiled
+        with
+        [
+            T=Vector<ThePoint3D>
+        ]
+LaboratoryView.cpp
+LaboratoryView.cpp(42) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+LaboratoryView.cpp(1386) : warning C4995: 'CDaoDatabase': name was marked as #pragma deprecated
+LaboratoryView.cpp(1393) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+LaboratoryView.cpp(1401) : warning C4995: 'CDaoDatabase': name was marked as #pragma deprecated
+LaboratoryView.cpp(1408) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+LaboratoryView.cpp(1438) : warning C4995: 'CDaoRecordset': name was marked as #pragma deprecated
+LaboratoryView.cpp(1439) : warning C4995: 'CDaoRecordset': name was marked as #pragma deprecated
+LaboratoryView.cpp(1445) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+LaboratoryView.cpp(1455) : warning C4995: 'CDaoFieldInfo': name was marked as #pragma deprecated
+LaboratoryView.cpp(1506) : warning C4995: 'CDaoRecordset': name was marked as #pragma deprecated
+LaboratoryView.cpp(1507) : warning C4995: 'CDaoRecordset': name was marked as #pragma deprecated
+LaboratoryView.cpp(1511) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+LaboratoryDoc.cpp
+LabObjectsList.cpp
+LabListView.cpp
+LabListCtrl.cpp
+LabElementsList.cpp
+LabElementsList.cpp(179) : warning C4018: '<' : signed/unsigned mismatch
+LabElementList.cpp
+lab.cpp
+lab.cpp(285) : warning C4996: 'CWinApp::Enable3dControls' was declared deprecated
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afxwin.h(4369) : see declaration of 'CWinApp::Enable3dControls'
+KTListCtrl.cpp
+KTLabList.cpp
+IGEList.cpp
+IGEList.cpp(62) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+IGEList.cpp(67) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+IGEList.cpp(72) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+IGE2List.cpp
+GranularListLab.cpp
+GranularList.cpp
+Generating Code...
+Compiling...
+FizMehListLab.cpp
+FizMehList.cpp
+ExcelWlp.cpp
+ExcelWlazhnost.cpp
+ExcelWL.cpp
+ExcelVegetableRemains.cpp
+ExcelTSZList.cpp
+ExcelStatZondList.cpp
+ExcelStatZondList.cpp(74) : warning C4101: 'y' : unreferenced local variable
+ExcelStatZondList.cpp(74) : warning C4101: 'x' : unreferenced local variable
+ExcelSandGranular.cpp
+ExcelRozrizList.cpp
+ExcelPlotnostGrunta.cpp
+ExcelPlotnostChastic1.cpp
+ExcelPlotnostChastic.cpp
+ExcelPaljaList.cpp
+ExcelLabNList.cpp
+ExcelLabNIGEList.cpp
+ExcelKTLabList.cpp
+ExcelKTEnGeoList.cpp
+ExcelHydroList.cpp
+ExcelDxfRozrizList.cpp
+ExcelDxfRozrizList.cpp(175) : warning C4101: 'val' : unreferenced local variable
+Generating Code...
+Compiling...
+ExcelCut.cpp
+ExcelCompression.cpp
+ExcelAreometrGranular.cpp
+ExcelArchiveGran.cpp
+ExcelArchiveData.cpp
+ExcelArchiveCut.cpp
+ExcelArchiveCompression.cpp
+ExcelArchiveCaspGeo.cpp
+EnGeoObjectsList.cpp
+EnGeologyView.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\stdafx.h(124) : warning C4005: 'TRACE' : macro redefinition
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afx.h(306) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(760) : warning C4005: 'IDC_RADIO_SNIP_1' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(107) : see previous definition of 'IDC_RADIO_SNIP_1'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(761) : warning C4005: 'IDC_RADIO_SNIP_2' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(109) : see previous definition of 'IDC_RADIO_SNIP_2'
+EnGeologyView.cpp(82) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+EnGeologyView.cpp(1214) : warning C4995: 'CDaoDatabase': name was marked as #pragma deprecated
+EnGeologyView.cpp(1221) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+EnGeologyView.cpp(1247) : warning C4995: 'CDaoRecordset': name was marked as #pragma deprecated
+EnGeologyView.cpp(1248) : warning C4995: 'CDaoRecordset': name was marked as #pragma deprecated
+EnGeologyView.cpp(1254) : warning C4995: 'CDaoException': name was marked as #pragma deprecated
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(183) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPoligon3D.h(51) : see reference to function template instantiation 'void ObjectList::Init_std_vector_Vector<Vector<T>>(std::vector<_Ty> &,Object *)' being compiled
+        with
+        [
+            T=Poligon3D,
+            _Ty=Vector<Poligon3D>
+        ]
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(95) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPlane3D.h(401) : see reference to function template instantiation 'void ObjectList::Init2<ThePoint3D>(Vector<T> &,Object *)' being compiled
+        with
+        [
+            T=Vector<ThePoint3D>
+        ]
+EnGeologyDoc.cpp
+EnGeoListCtrl.cpp
+EnGeoFrame.cpp
+DlgZondUstParam.cpp
+DlgStatZond.cpp
+DlgSoilName.cpp
+DlgRepeatings.cpp
+DlgProbGrunt.cpp
+DlgProbGr_DblClickMode.cpp
+DlgPCK2Fiz.cpp
+Generating Code...
+c:\documents and settings\admin\ьюш фюъєьхэЄv\c++\win32_90.17\lab\lab\engeologyview.cpp(730) : warning C4715: 'CEnGeologyView::DefineZoom' : not all control paths return a value
+c:\documents and settings\admin\ьюш фюъєьхэЄv\c++\win32_90.17\lab\lab\engeologyview.cpp(1537) : warning C4715: 'CEnGeologyView::GetSetProbGrFilterStr' : not all control paths return a value
+Compiling...
+DlgPalja.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\stdafx.h(124) : warning C4005: 'TRACE' : macro redefinition
+        c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\atlmfc\include\afx.h(306) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(760) : warning C4005: 'IDC_RADIO_SNIP_1' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(107) : see previous definition of 'IDC_RADIO_SNIP_1'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\..\..\resource.h(761) : warning C4005: 'IDC_RADIO_SNIP_2' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\resource.h(109) : see previous definition of 'IDC_RADIO_SNIP_2'
+c:\documents and settings\admin\мои документы\c++\win32_90.17\lab\lab\..\..\array\src\ap.h(4) : warning C4005: 'M_PI' : macro redefinition
+        Release\../../../include\dime\Basic.h(51) : see previous definition of 'M_PI'
+DlgPalja.cpp(33) : warning C4355: 'this' : used in base member initializer list
+DlgPalja.cpp(33) : warning C4355: 'this' : used in base member initializer list
+DlgPalja.cpp(363) : warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(183) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPoligon3D.h(51) : see reference to function template instantiation 'void ObjectList::Init_std_vector_Vector<Vector<T>>(std::vector<_Ty> &,Object *)' being compiled
+        with
+        [
+            T=Poligon3D,
+            _Ty=Vector<Poligon3D>
+        ]
+c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\ObjectList.h(95) : warning C4018: '<' : signed/unsigned mismatch
+        c:\documents and settings\admin\мои документы\c++\win32_90.17\surfdoc\src\BrokenPlane3D.h(401) : see reference to function template instantiation 'void ObjectList::Init2<ThePoint3D>(Vector<T> &,Object *)' being compiled
+        with
+        [
+            T=Vector<ThePoint3D>
+        ]
+DlgNRows.cpp
+DlgNaborGruntovSetting.cpp
+DlgLanguage.cpp
+DlgLabElements.cpp
+DlgLabElements.cpp(27) : warning C4355: 'this' : used in base member initializer list
+DlgLabElements.cpp(653) : warning C4018: '<' : signed/unsigned mismatch
+DlgIGEList.cpp
+DlgIGEList.cpp(205) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+DlgIGEList.cpp(272) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+DlgIGEList.cpp(481) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+DlgIGEList.cpp(629) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+DlgCopyGrunty.cpp
+DBViewList.cpp
+DBTableZriz_tbl.cpp
+DBTableZriz0.cpp
+DBTableZriz.cpp
+DBTableVoda.cpp
+DBTableUmPoz.cpp
+DBTableSurfLitoMapping.cpp
+DBTableSurfIgeMapping.cpp
+DBTableSurfacesOrder.cpp
+DBTableSurfacesBlankOrder.cpp
+DBTableSurfacesBlankFunctions.cpp
+DBTableStZond.cpp
+DBTableSoils.cpp
+Generating Code...
+c:\documents and settings\admin\ьюш фюъєьхэЄv\c++\win32_90.17\lab\lab\dlgpalja.cpp(234) : warning C4715: 'CDlgPalja::InitDoc' : not all control paths return a value
+Compiling...
+DBTableRozrizy.cpp
+DBTableRozriz.cpp
+DBTablePtStZond.cpp
+DBTablePtPalja.cpp
+DBTableProp.cpp
+DBTablePCK2Fiz_Results.cpp
+DBTablePCK2Fiz_Params.cpp
+DBTablePalja.cpp
+DBTableLito0.cpp
+DBTableLito.cpp
+DBTableKT.cpp
+DBTableIGE0.cpp
+DBTableIGE.cpp
+DBTableGrunty.cpp
+DBTableGridDataUsedAlg.cpp
+DBTableGriddataSurfaces.cpp
+DBTableGridData.cpp
+DBTableGranular.cpp
+DBTableGenezis.cpp
+DBTableCubeSize.cpp
+Generating Code...
+Compiling...
+DBTableCompress.cpp
+DBTableCilce0.cpp
+DBTableCilce.cpp
+DBTable.cpp
+DataBaseTalblesList.cpp
+CompressListLab.cpp
+CompressList.cpp
+ComboProbGrKT.cpp
+ChildFrm.cpp
+BaseExcel.cpp
+3DView.cpp
+3DFrame.cpp
+3DDoc.cpp
+Generating Code...
+Compiling resources...
+Linking...
 surfdoc.lib(BlnProfile3D.obj) : warning LNK4006: "public: int __thiscall GeoSurface::ClearFromDB(bool)" (?ClearFromDB@GeoSurface@@QAEH_N@Z) already defined in surfdoc.lib(GeoSurface.obj); second definition ignored
 surfdoc.lib(GridData.obj) : warning LNK4006: "char const * __cdecl SrfGridAlgorithm_toStr(enum SrfGridAlgorithm)" (?SrfGridAlgorithm_toStr@@YAPBDW4SrfGridAlgorithm@@@Z) already defined in surfdoc.lib(Winsurf.obj); second definition ignored
 msvcprt.lib(MSVCP71.dll) : warning LNK4006: "public: __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::~basic_string<char,struct std::char_traits<char>,class std::allocator<char> >(void)" (??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@XZ) already defined in alglib.lib(ap.obj); second definition ignored
@@ -174,6 +713,6 @@ LINK : warning LNK4089: all references to 'WINSPOOL.DRV' discarded by /OPT:REF
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Results
 </font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
-Build log was saved at "file://d:\drozdov_a\for_work\C++\Win32_90.16\lab\lab\Release\BuildLog.htm"
-lab - 0 error(s), 17 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+Build log was saved at "file://c:\Documents and Settings\Admin\Мои документы\C++\Win32_90.17\lab\lab\Release\BuildLog.htm"
+lab - 0 error(s), 104 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
 </font></table></body></html>
