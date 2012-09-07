@@ -1,0 +1,59 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>meuse.grid</s-topic>
+</s-topics>
+
+<s-title>
+Prediction Grid for Meuse Data Set
+</s-title>
+
+<s-description>
+The <s-expression>meuse.grid</s-expression> data frame has 3103 rows and 2 columns;
+a grid with 40 m x 40 m spacing that covers the Meuse Study area
+</s-description>
+
+<s-usage>
+<s-old-style-usage>data(meuse.grid)</s-old-style-usage>
+</s-usage>
+
+<s-section name="FORMAT">
+This data frame contains the following columns:
+<descrip>
+<tag/x/a numeric vector; x-coordinate (see <s-function name="meuse">meuse</s-function>) 
+<tag/y/a numeric vector; y-coordinate (see <s-function name="meuse">meuse</s-function>) 
+<tag/dist/distance to the Meuse river
+<tag/part.a/arbitrary division of the area in two areas, a and b
+<tag/part.b/see <s-expression>part.a</s-expression>
+</descrip>
+
+</s-section>
+
+<s-details>
+<s-expression>x</s-expression> and <s-expression>y</s-expression> are in RDM, the Dutch topographical map
+coordinate system. Roger Bivand projected this to UTM in the
+R-Grass interface package.
+</s-details>
+
+<s-section name="SOURCE">
+<url url ="http://www.gstat.org/">
+</s-section>
+
+<s-section name="REFERENCES">
+See the <s-function name="meuse">meuse</s-function> documentation
+</s-section>
+
+<s-examples>
+<s-example type = text>
+data(meuse.grid)
+library(MASS)
+eqscplot(meuse.grid,pch="+")
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

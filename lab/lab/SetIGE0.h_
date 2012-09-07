@@ -1,0 +1,51 @@
+#if !defined(AFX_SETIGE0_H__435E36C3_A978_4529_9B3E_E4894AB838B4__INCLUDED_)
+#define AFX_SETIGE0_H__435E36C3_A978_4529_9B3E_E4894AB838B4__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+// SetIGE0.h : header file
+//
+
+/////////////////////////////////////////////////////////////////////////////
+// SetIGE0 recordset
+
+class SetIGE0 : public CRecordset
+{
+public:
+	SetIGE0(CDatabase* pDatabase = NULL);
+	DECLARE_DYNAMIC(SetIGE0)
+
+// Field/Param Data
+	//{{AFX_FIELD(SetIGE0, CRecordset)
+	long	m_ID_OBJ;
+	long	m_ID_IGE;
+	long	m_ID_GR;
+	CString	m_IGE;
+	double	m_mk;
+	double	m_mkz;
+	CString	m_strat;
+	CString	m_desc0;
+	//}}AFX_FIELD
+
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(SetIGE0)
+	public:
+	virtual CString GetDefaultConnect();    // Default connection string
+	virtual CString GetDefaultSQL();    // Default SQL for Recordset
+	virtual void DoFieldExchange(CFieldExchange* pFX);  // RFX support
+	//}}AFX_VIRTUAL
+
+// Implementation
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+};
+
+//{{AFX_INSERT_LOCATION}}
+// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
+
+#endif // !defined(AFX_SETIGE0_H__435E36C3_A978_4529_9B3E_E4894AB838B4__INCLUDED_)

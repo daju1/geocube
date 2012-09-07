@@ -1,0 +1,161 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>variogram</s-topic>
+</s-topics>
+
+<s-title>
+Calculate Sample or Residual Variogram or Variogram Cloud
+</s-title>
+
+<s-description>
+Calculates the sample variogram from data, or in case of a linear model
+is given, for the residuals, with options for directional, robust,
+and pooled variogram, and for irregular distance intervals.
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+variogram(object, ...)
+variogram(formula, locations, data, ...)
+variogram(y, locations, X, cutoff, width, alpha, beta, tol.hor, 
+    tol.ver, cressie, dX, boundaries, cloud, trend.beta, debug.level, ...)
+print.variogram(v, ...)
+print.variogram.cloud(v, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="object">
+object of class <s-expression>gstat</s-expression>; in this form, direct
+and cross (residual) variograms are calculated for all variables and
+variable pairs defined in <s-expression>object</s-expression></s-arg>
+<s-arg name="formula">
+formula defining the response vector and (possible) 
+regressors, in case of absence of regressors, use e.g. <s-expression>z~1</s-expression></s-arg>
+<s-arg name="data">
+data frame where the names in formula are to be found</s-arg>
+<s-arg name="locations">
+spatial data locations.  For variogram.formula: a
+formula with only the coordinate variables in the left hand (dependent
+variable) side (see examples).
+<p>
+For variogram.default: a matrix, with the number of rows matching
+that of y, the number of columns should match the number of spatial
+dimensions spanned by the data (1 (x), 2 (x,y) or 3 (x,y,z)).  </s-arg>
+<s-arg name="...">
+any other arguments that will be passed to <s-function name="variogram.default">variogram.default</s-function></s-arg>
+<s-arg name="y">
+vector with responses </s-arg>
+<s-arg name="X">
+(optional) matrix with regressors/covariates; the number of
+rows should match that of y, the number of columns equals the number
+of regressors (including intercept) </s-arg>
+<s-arg name="cutoff">
+spatial separation distance up to which point pairs
+are included in semivariance estimates </s-arg>
+<s-arg name="width">
+the width of subsequent distance intervals into which
+data point pairs are grouped for semivariance estimates </s-arg>
+<s-arg name="alpha">
+direction in  plane (x,y), in positive degrees clockwise
+from positive y (North): alpha=0 for direction North (increasing y),
+alpha=90 for direction East (increasing x); optional a vector of
+directions in (x,y) </s-arg>
+<s-arg name="beta">
+direction in z, in positive degrees up from the (x,y) plane; </s-arg>
+<s-arg name="tol.hor">
+horizontal tolerance angle in degrees </s-arg>
+<s-arg name="tol.ver">
+vertical tolerance angle in degrees </s-arg>
+<s-arg name="cressie">
+logical; if TRUE, use Cressie's robust variogram estimate;
+if FALSE use the classical method of moments variogram estimate </s-arg>
+<s-arg name="dX">
+include a pair of data points $y(s_1),y(s_2)$ taken at
+locations $s_1$ and $s_2$ for sample variogram calculation only when
+$||x(s_1)-x(s_2)|| &lt; dX$ with and $x(s_i)$ the vector with regressors at
+location $s_i$, and $||.||$ the 2-norm.  This allows pooled estimation of
+within-strata variograms (use a factor variable as regressor, and dX=0.5),
+or variograms of (near-)replicates in a linear model (addressing point
+pairs having similar values for regressors variables) </s-arg>
+<s-arg name="boundaries">
+numerical vector with distance interval boundaries; 
+values should be strictly increasing </s-arg>
+<s-arg name="cloud">
+logical; if TRUE, calculate the semivariogram cloud </s-arg>
+<s-arg name="trend.beta">
+vector with trend coefficients, in case they are
+known. By default, trend coefficients are estimated from the data.</s-arg>
+<s-arg name="debug.level">
+integer; set gstat internal debug level </s-arg>
+<s-arg name="v">
+object of class <s-expression>variogram</s-expression> or <s-expression>variogram.cloud</s-expression>
+to be printed</s-arg>
+</s-args>
+
+<s-value>
+an object of class "variogram" with the following fields:
+<s-return-component name="np">
+the number of point pairs for this estimate; 
+in case of a <s-expression>variogram.cloud</s-expression> see below</s-return-component>
+<s-return-component name="dist">
+the average distance of all point pairs considered
+for this estimate</s-return-component>
+<s-return-component name="gamma">
+the actual sample variogram estimate</s-return-component>
+<s-return-component name="dir.hor">
+the horizontal direction</s-return-component>
+<s-return-component name="dir.ver">
+the vertical direction</s-return-component>
+<s-return-component name="id">
+the combined id pair</s-return-component>
+<s-return-component name="left">
+for variogram.cloud: data id (row number) of one of 
+the data pair</s-return-component>
+<s-return-component name="right">
+for variogram.cloud: data id (row number) of the other 
+data in the pair</s-return-component>
+</s-value>
+
+<s-section name="NOTE">
+
+</s-section>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+Cressie, N.A.C., 1993, Statistics for Spatial Data, Wiley.
+<p>
+<url url ="http://www.gstat.org/">
+</s-section>
+
+<s-see>
+<s-function name="print.variogram">print.variogram</s-function>,
+<s-function name="plot.variogram">plot.variogram</s-function>,
+<s-function name="plot.variogram.cloud">plot.variogram.cloud</s-function>,
+for variogram models: <s-function name="vgm">vgm</s-function>,
+to fit a variogram model to a sample variogram: 
+<s-function name="fit.variogram">fit.variogram</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+# no trend:
+variogram(log(zinc)~1, loc=~x+y, meuse)
+# residual variogram w.r.t. a linear trend:
+variogram(log(zinc)~x+y, loc=~x+y, meuse)
+# directional variogram:
+variogram(log(zinc)~x+y, loc=~x+y, meuse, alpha=c(0,45,90,135))
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

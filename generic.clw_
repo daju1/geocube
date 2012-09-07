@@ -1,0 +1,42 @@
+; CLW file contains information for the MFC ClassWizard
+
+[General Info]
+Version=1
+LastClass=GridDataDailog
+LastTemplate=CRecordset
+NewFileInclude1=#include "stdafx.h"
+NewFileInclude2=#include "generic.h"
+LastPage=0
+
+ClassCount=2
+
+ResourceCount=1
+Resource1=IDD_DIALOG_GRIDDATA_GRIDDATA
+Class1=GridDataDailog
+Class2=SetPodTypyGr
+
+[CLS:GridDataDailog]
+Type=0
+HeaderFile=surfdoc\src\griddatadailog.h
+ImplementationFile=surfdoc\src\GridDataDailog.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=GridDataDailog
+
+[CLS:SetPodTypyGr]
+Type=0
+HeaderFile=SetPodTypyGr.h
+ImplementationFile=SetPodTypyGr.cpp
+BaseClass=CRecordset
+Filter=N
+VirtualFilter=r
+LastObject=SetPodTypyGr
+
+[DB:SetPodTypyGr]
+DB=1
+DBType=ODBC
+ColumnCount=3
+Column1=[TYPGR], 4, 4
+Column2=[PODTYPGR], 4, 4
+Column3=[desc], 12, 510
+

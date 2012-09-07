@@ -1,0 +1,63 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ex31c - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo".\Debug/ex31c.res" /d "_DEBUG" /d "_AFXDLL" "D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\ex31c.rc"" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP84.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR".\Debug/" /Fp".\Debug/ex31c.pch" /Yu"stdafx.h" /Fo".\Debug/" /Fd".\Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\ex31c.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\ex31cdoc.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\ex31cSet.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\ex31cview.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\MainFrm.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\SectionSet.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP84.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP85.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR".\Debug/" /Fp".\Debug/ex31c.pch" /Yc"stdafx.h" /Fo".\Debug/" /Fd".\Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex31c\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP85.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP86.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:".\Debug/ex31c.pdb" /debug /machine:I386 /out:".\Debug/ex31c.exe" 
+".\Debug\ex31c.obj"
+".\Debug\ex31cdoc.obj"
+".\Debug\ex31cSet.obj"
+".\Debug\ex31cview.obj"
+".\Debug\MainFrm.obj"
+".\Debug\SectionSet.obj"
+".\Debug\StdAfx.obj"
+".\Debug\ex31c.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP86.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+ex31c.cpp
+ex31cdoc.cpp
+ex31cSet.cpp
+ex31cview.cpp
+MainFrm.cpp
+SectionSet.cpp
+Generating Code...
+Linking...
+Creating command line "bscmake.exe /nologo /o".\Debug/ex31c.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\ex31c.sbr" ".\Debug\ex31cdoc.sbr" ".\Debug\ex31cSet.sbr" ".\Debug\ex31cview.sbr" ".\Debug\MainFrm.sbr" ".\Debug\SectionSet.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ex31c.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

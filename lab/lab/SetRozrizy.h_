@@ -1,0 +1,48 @@
+#if !defined(AFX_SETROZRIZY_H__312E92DF_6B8B_4419_9D5A_7619A6330F36__INCLUDED_)
+#define AFX_SETROZRIZY_H__312E92DF_6B8B_4419_9D5A_7619A6330F36__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+// SetRozrizy.h : header file
+//
+
+/////////////////////////////////////////////////////////////////////////////
+// SetRozrizy recordset
+
+class SetRozrizy : public CRecordset
+{
+public:
+	SetRozrizy(CDatabase* pDatabase = NULL);
+	DECLARE_DYNAMIC(SetRozrizy)
+
+// Field/Param Data
+	//{{AFX_FIELD(SetRozrizy, CRecordset)
+	long	m_ID_OBJ;
+	long	m_ID_ROZRIZ;
+	CString	m_NOMER;
+	//}}AFX_FIELD
+
+	long GetNewKeyID();
+	void AddNewRow(long ID_OBJ, long ID_ROZRIZ, CString NOMER);
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(SetRozrizy)
+	public:
+	virtual CString GetDefaultConnect();    // Default connection string
+	virtual CString GetDefaultSQL();    // Default SQL for Recordset
+	virtual void DoFieldExchange(CFieldExchange* pFX);  // RFX support
+	//}}AFX_VIRTUAL
+
+// Implementation
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+};
+
+//{{AFX_INSERT_LOCATION}}
+// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
+
+#endif // !defined(AFX_SETROZRIZY_H__312E92DF_6B8B_4419_9D5A_7619A6330F36__INCLUDED_)

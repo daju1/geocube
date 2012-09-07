@@ -1,0 +1,56 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: GraphsDoc - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\temp\RSP10.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/GraphsDoc.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Drozdov\C\Graphs9\GraphsDoc.cpp"
+]
+Creating command line "cl.exe @C:\temp\RSP10.tmp" 
+Creating temporary file "C:\temp\RSP11.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/GraphsDoc.pdb" /debug /machine:I386 /out:"Debug/GraphsDoc.exe" /pdbtype:sept 
+.\Debug\GraphsDoc.obj
+]
+Creating command line "link.exe @C:\temp\RSP11.tmp"
+<h3>Output Window</h3>
+Compiling...
+GraphsDoc.cpp
+Linking...
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: __thiscall SystemNnet::~SystemNnet(void)" (??1SystemNnet@@QAE@XZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: virtual __thiscall vdouble::~vdouble(void)" (??1vdouble@@UAE@XZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: __thiscall vdouble::vdouble(void)" (??0vdouble@@QAE@XZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: __thiscall CDPoint::~CDPoint(void)" (??1CDPoint@@QAE@XZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: double __thiscall vdouble::LagerAlphaDeterm(int,double,double)" (?LagerAlphaDeterm@vdouble@@QAENHNN@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: double & __thiscall vdouble::operator[](int)" (??Avdouble@@QAEAANH@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: __thiscall vdouble::vdouble(int)" (??0vdouble@@QAE@H@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: class vdouble & __thiscall vdouble::operator=(class vdouble &)" (??4vdouble@@QAEAAV0@AAV0@@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "class vdouble __cdecl zeros(int)" (?zeros@@YA?AVvdouble@@H@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: int __thiscall vdouble::Write(char const *)" (?Write@vdouble@@QAEHPBD@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: int __thiscall SystemNnet::LagerInitialization(int,struct LagerStruct &,int)" (?LagerInitialization@SystemNnet@@QAEHHAAULagerStruct@@H@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: __thiscall SystemNnet::SystemNnet(class vdouble &,class vdouble &,class vdouble &,class vdouble &)" (??0SystemNnet@@QAE@AAVvdouble@@000@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: void __thiscall SystemNnet::DeleteAll(void)" (?DeleteAll@SystemNnet@@QAEXXZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: void __thiscall SystemNnet::ErrorNnet(void)" (?ErrorNnet@SystemNnet@@QAEXXZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: void __thiscall SystemNnet::SimulNnet(void)" (?SimulNnet@SystemNnet@@QAEXXZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: void __thiscall SystemNnet::Train(struct TrainParam &,bool)" (?Train@SystemNnet@@QAEXAAUTrainParam@@_N@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: void __thiscall SystemNnet::Default(void)" (?Default@SystemNnet@@QAEXXZ)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "public: __thiscall CParamDlg::CParamDlg(class CGraphsDoc *)" (??0CParamDlg@@QAE@PAVCGraphsDoc@@@Z)
+GraphsDoc.obj : error LNK2001: unresolved external symbol "protected: __thiscall COutLagFrm::COutLagFrm(void)" (??0COutLagFrm@@IAE@XZ)
+nafxcwd.lib(thrdcore.obj) : error LNK2001: unresolved external symbol __endthreadex
+nafxcwd.lib(thrdcore.obj) : error LNK2001: unresolved external symbol __beginthreadex
+libcd.lib(crt0.obj) : error LNK2001: unresolved external symbol _main
+Debug/GraphsDoc.exe : fatal error LNK1120: 22 unresolved externals
+Error executing link.exe.
+
+
+
+<h3>Results</h3>
+GraphsDoc.exe - 23 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: lab - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\DROZDO~1\LOCALS~1\Temp\RSP96D.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/lab.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\drozdov_a\Мои документы\for_work\C++\Win32_90.16\lab\lab\LaboratoryView.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\DROZDO~1\LOCALS~1\Temp\RSP96D.tmp" 
+<h3>Output Window</h3>
+Compiling...
+LaboratoryView.cpp
+c:\documents and settings\drozdov_a\мои документы\for_work\c++\win32_90.16\lab\lab\laboratoryview.cpp(5) : fatal error C1083: Cannot open precompiled header file: 'Debug/lab.pch': No such file or directory
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+LaboratoryView.obj - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

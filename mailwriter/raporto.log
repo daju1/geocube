@@ -1,0 +1,12 @@
+DlgSendMail::OnButtonSend() 1
+Failed to connect to SMTP server
+DlgSendMail::OnButtonSend() end
+DlgSendMail::OnButtonSend() 1
+DlgSendMail::FillMessage(CSMTPMessage & m, LPCTSTR szFrom) 1
+DlgSendMail::AddingBody() 1
+DlgSendMail::AddingBody() end
+DlgSendMail::Attaching() 1
+DlgSendMail::Attaching() end
+DlgSendMail::FillMessage(CSMTPMessage & m, LPCTSTR szFrom) end
+Failed to connect to SMTP server
+DlgSendMail::OnButtonSend() end

@@ -1,0 +1,5 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by generic.rc
+//
+#define HIDC_CHECK_COMMON_USE_MAX_MIN_ANGLE4 \
+                                        0x80a0047c    // IDD_DIALOG_START_FINISH_DATE1

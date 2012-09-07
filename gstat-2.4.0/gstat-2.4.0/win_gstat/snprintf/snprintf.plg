@@ -1,0 +1,28 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: snprintf - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP5F.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fp"Debug/snprintf.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ  /c 
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\win_gstat\snprintf\snprintf.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP5F.tmp" 
+Creating command line "link.exe -lib /nologo /out:"..\..\lib\snprintf.lib"  ".\Debug\snprintf.obj" "
+<h3>Output Window</h3>
+Compiling...
+snprintf.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\win_gstat\snprintf\snprintf.c(402) : warning C4244: '=' : conversion from 'unsigned long ' to 'char ', possible loss of data
+Creating library...
+
+
+
+<h3>Results</h3>
+snprintf.lib - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>

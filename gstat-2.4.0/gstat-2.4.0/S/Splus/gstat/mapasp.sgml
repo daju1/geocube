@@ -1,0 +1,44 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>mapasp</s-topic>
+</s-topics>
+
+<s-title>
+Calculate plot aspect ratio for geographic maps
+</s-title>
+
+<s-description>
+Calculate plot aspect ratio for geographic maps
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+mapasp(data, x = data$x, y = data$y)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="data">
+data frame </s-arg>
+<s-arg name="x">
+x-coordinates </s-arg>
+<s-arg name="y">
+y-coordinates </s-arg>
+</s-args>
+
+<s-value>
+diff(range(y))/diff(range(x))
+</s-value>
+
+<s-see>
+<s-function name="image.data.frame">image.data.frame</s-function>, <s-function name="krige">krige</s-function>
+</s-see>
+
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

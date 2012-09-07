@@ -1,0 +1,73 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>plot.point.pairs</s-topic>
+</s-topics>
+
+<s-title>
+Plot a point pairs, identified from a variogram cloud
+</s-title>
+
+<s-description>
+Plot a point pairs, identified from a variogram cloud
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+plot.point.pairs(x, data, xcol = data$x, ycol = data$y, xlab = "x coordinate", 
+ylab = "y coordinate", ...) 
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="x">
+object of class "point.pairs", obtained from the function 
+<s-function name="plot.variogram.cloud">plot.variogram.cloud</s-function>, containing point pair indices </s-arg>
+<s-arg name="data">
+data frame to which the indices refer (from which the
+variogram cloud was calculated) </s-arg>
+<s-arg name="xcol">
+numeric vector with x-coordinates of data </s-arg>
+<s-arg name="ycol">
+numeric vector with y-coordinates of data </s-arg>
+<s-arg name="xlab">
+x-axis label </s-arg>
+<s-arg name="ylab">
+y-axis label </s-arg>
+<s-arg name="...">
+arguments passed to <s-expression>xyplot</s-expression></s-arg>
+</s-args>
+
+<s-value>
+plots the data locations, with lines connecting the point pairs identified
+(and refered to by indices in) x
+</s-value>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+<url url ="http://www.gstat.org">
+</s-section>
+
+<s-see>
+<s-function name="plot.variogram.cloud">plot.variogram.cloud</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+#data(meuse)
+#vgm1 &lt;- variogram(log(zinc)~1, ~x+y, meuse, cloud = TRUE)
+#pp &lt;- plot(vgm1, id = TRUE)
+# identify the point pairs
+#plot(pp, data = meuse) # meuse has x and y as coordinates
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

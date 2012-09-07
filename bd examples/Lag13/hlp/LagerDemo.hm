@@ -1,0 +1,43 @@
+ 
+// Commands (ID_* and IDM_*) 
+HID_FILE_IMPORT                         0x18004
+HID_FILE_EXPORT                         0x18005
+HID_EDIT_PARAMETRS                      0x18006
+HID_FILE_IMPORT2                        0x18007
+HID_FILE_EXPORT2                        0x18008
+HID_SERVISE_COVARIATION                 0x18009
+HID_EDIT_PROPERTIES                     0x1800A
+HID_EDIT_BACKGROUND                     0x1800B
+HID_VIEW_FILL                           0x1800C
+HID_VIEW_QUAD                           0x1800D
+HID_READ_DATA                           0x1800E
+HID_FILE_NEW2D                          0x1800F
+HID_FILE_NEW_2D                         0x1800F
+HID_FILE_NEW_3D                         0x18010
+HID_ANIMATE_GRAPHIC                     0x18011
+HID_ANIMATE_STOP                        0x18012
+HID_SERVISE_ANALIZECOV                  0x18013
+HID_COM_CONNECT                         0x18014
+HID_COM_READ                            0x18015
+HID_COM_DISCONNECT                      0x18016
+HID_SERVISE_WAVELET                     0x18017
+HID_COM_SET_FILENAME                    0x18018
+ 
+// Prompts (IDP_*) 
+HIDP_OLE_INIT_FAILED                    0x30064
+HIDP_SOCKETS_INIT_FAILED                0x30068
+ 
+// Resources (IDR_*) 
+HIDR_WAVPARAM_TMPL                      0x20069
+HIDR_MAINFRAME                          0x20080
+HIDR_GRAPHSTYPE                         0x20081
+HIDR_OGTYPE                             0x20082
+ 
+// Dialogs (IDD_*) 
+HIDD_ABOUTBOX                           0x20064
+HIDD_PARAM                              0x20066
+HIDD_PARAM2                             0x20083
+HIDD_PROP                               0x20084
+HIDD_WAV_PARAM                          0x20085
+ 
+// Frame Controls (IDW_*) 

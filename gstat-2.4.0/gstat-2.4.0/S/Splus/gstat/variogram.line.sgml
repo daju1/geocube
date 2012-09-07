@@ -1,0 +1,72 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>variogram.line</s-topic>
+</s-topics>
+
+<s-title>
+Semivariance Values For a Given Variogram Model
+</s-title>
+
+<s-description>
+Generates a semivariance values given a variogram model
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+variogram.line(object, maxdist, n, min, ids, dir, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="object">
+variogram model for which we want semivariance function values </s-arg>
+<s-arg name="maxdist">
+maximum distance for which we want semivariances </s-arg>
+<s-arg name="n">
+number of points </s-arg>
+<s-arg name="min">
+minimum distance; a value slightly larger than zero is usually
+used to avoid the discontinuity at distance zero if a nugget component is
+present </s-arg>
+<s-arg name="ids">
+pair of data ids </s-arg>
+<s-arg name="dir">
+direction vector: unit length vector pointing the direction in 
+x (East-West), y (North-South) and z (Up-Down) </s-arg>
+<s-arg name="...">
+ignored</s-arg>
+</s-args>
+
+<s-value>
+a data frame of dimension (<s-expression>n</s-expression> x 2), with columns distance and gamma
+</s-value>
+
+<s-section name="NOTE">
+this function is used to plot a variogram model
+</s-section>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-see>
+<s-function name="plot.variogram">plot.variogram</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+variogram.line(vgm(5, "Exp", 10, 5), 10, 10)
+# anisotropic variogram, plotted in E-W direction:
+variogram.line(vgm(1, "Sph", 10, anis=c(0,0.5)), 10, 10)
+# anisotropic variogram, plotted in N-S direction:
+variogram.line(vgm(1, "Sph", 10, anis=c(0,0.5)), 10, 10, dir=c(0,1,0))
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

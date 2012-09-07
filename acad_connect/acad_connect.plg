@@ -1,0 +1,47 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: acad_connect - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP1B4.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/acad_connect.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\C++\Lag\Win32\Win32_90.16\acad_connect\acad.cpp"
+"D:\C++\Lag\Win32\Win32_90.16\acad_connect\MyAcad.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP1B4.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP1B5.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/acad_connect.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\C++\Lag\Win32\Win32_90.16\acad_connect\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP1B5.tmp" 
+Creating command line "link.exe -lib /nologo /out:"Debug\acad_connect.lib"  ".\Debug\acad.obj" ".\Debug\MyAcad.obj" ".\Debug\StdAfx.obj" "
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+d:\c++\lag\win32\win32_90.16\acad_connect\stdafx.h(25) : warning C4005: 'TRACE' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(218) : see previous definition of 'TRACE'
+d:\c++\lag\win32\win32_90.16\acad_connect\stdafx.h(26) : warning C4005: 'TRACE' : macro redefinition
+        d:\c++\lag\win32\win32_90.16\acad_connect\stdafx.h(25) : see previous definition of 'TRACE'
+Compiling...
+acad.cpp
+MyAcad.cpp
+D:\C++\Lag\Win32\Win32_90.16\acad_connect\MyAcad.cpp(44) : error C2661: 'AfxMessageBox' : no overloaded function takes 12 parameters
+D:\C++\Lag\Win32\Win32_90.16\acad_connect\MyAcad.cpp(68) : error C2665: 'AfxMessageBox' : none of the 2 overloads can convert parameter 2 from type 'struct IDispatch *'
+Generating Code...
+Error executing cl.exe.
+Creating command line "bscmake.exe /nologo /o"Debug/acad_connect.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\acad.sbr" ".\Debug\MyAcad.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+acad_connect.lib - 2 error(s), 2 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "geocube", "geocube.vcproj", "{CA77BEC1-09CC-41D8-9A84-E77322F329AE}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{CA77BEC1-09CC-41D8-9A84-E77322F329AE}.Debug.ActiveCfg = Debug|Win32
+		{CA77BEC1-09CC-41D8-9A84-E77322F329AE}.Debug.Build.0 = Debug|Win32
+		{CA77BEC1-09CC-41D8-9A84-E77322F329AE}.Release.ActiveCfg = Release|Win32
+		{CA77BEC1-09CC-41D8-9A84-E77322F329AE}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

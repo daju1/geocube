@@ -1,0 +1,17 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Output" -1 
+11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 
+0 0 0 1 0 1 0 2 2 0 1 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 68 "WkT:=1+2*sqrt(k*E/nj
+u/Pi/kT)*exp(-k*E/nju/kT)-erf(sqrt(k*E/nju/kT));" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%$WkTG,(\"\"\"F&*(\"\"#F&*,%\"kGF&%\"EGF&%$njuG!\"\"%#
+PiGF-%#kTGF-#F&F(-%$expG6#,$**F*F&F+F&F,F-F/F-F-F&F&-%$erfG6#*$F5F0F-
+" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "simplify(diff(WkT,k));
+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#,$*2\"\"#\"\"\"-%$expG6#,$**%\"kGF
+&%\"EGF&%$njuG!\"\"%#kTGF/F/F&F-F%F,F&%#PiG#F/F%F+F2F.!\"#F0F3F/" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "0 0 0" 0 }
+{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }

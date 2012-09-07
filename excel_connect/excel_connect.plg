@@ -1,0 +1,43 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: excel_connect - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP34.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"excel_connect___Win32_Debug/" /Fo"excel_connect___Win32_Debug/" /Fd"excel_connect___Win32_Debug/" /FD /GZ /c 
+"D:\C++\Lag\Win32\Win32_90.16\excel_connect\src\excel.cpp"
+"D:\C++\Lag\Win32\Win32_90.16\excel_connect\src\MyExcel.cpp"
+"D:\C++\Lag\Win32\Win32_90.16\excel_connect\src\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP34.tmp" 
+Creating command line "link.exe -lib /nologo /out:"../lib/excel_connect.lib"  ".\excel_connect___Win32_Debug\excel.obj" ".\excel_connect___Win32_Debug\MyExcel.obj" ".\excel_connect___Win32_Debug\StdAfx.obj" "
+<h3>Output Window</h3>
+Compiling...
+excel.cpp
+d:\c++\lag\win32\win32_90.16\excel_connect\src\stdafx.h(25) : warning C4005: 'TRACE' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(218) : see previous definition of 'TRACE'
+MyExcel.cpp
+d:\c++\lag\win32\win32_90.16\excel_connect\src\stdafx.h(25) : warning C4005: 'TRACE' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(218) : see previous definition of 'TRACE'
+d:\c++\lag\win32\win32_90.16\excel_connect\src\myexcel.cpp(238) : warning C4101: 'pRange' : unreferenced local variable
+d:\c++\lag\win32\win32_90.16\excel_connect\src\myexcel.cpp(320) : warning C4101: 'pRange' : unreferenced local variable
+StdAfx.cpp
+d:\c++\lag\win32\win32_90.16\excel_connect\src\stdafx.h(25) : warning C4005: 'TRACE' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(218) : see previous definition of 'TRACE'
+Generating Code...
+Creating library...
+Creating command line "bscmake.exe /nologo /o"excel_connect___Win32_Debug/excel_connect.bsc"  ".\excel_connect___Win32_Debug\excel.sbr" ".\excel_connect___Win32_Debug\MyExcel.sbr" ".\excel_connect___Win32_Debug\StdAfx.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+excel_connect.lib - 0 error(s), 5 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,2 @@
+"../bptrain" @demo2trn.rsp
+"../bprecog" @demo2rgn.rsp

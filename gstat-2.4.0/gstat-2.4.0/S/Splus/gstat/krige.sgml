@@ -1,0 +1,147 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>krige</s-topic>
+</s-topics>
+
+<s-title>
+Simple, Ordinary or Universal, global or local, Point or Block Kriging
+</s-title>
+
+<s-description>
+Function for simple, ordinary or universal kriging (sometimes called
+external drift kriging), kriging in a local neighbourhood, point kriging
+or kriging of block mean values (rectangular or irregular blocks), and
+conditional (Gaussian or indicator) simulation equivalents for all kriging 
+variaties.
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+krige(formula, locations, data, newdata, model, beta, nmax, block, nsim, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="formula">
+formula that defines the dependent variable as a linear
+model of independent variables; suppose the dependent variable has name
+<s-expression>z</s-expression>, for ordinary and simple kriging use the formula <s-expression>z~1</s-expression>;
+for simple kriging also define <s-expression>beta</s-expression> (see below); for universal
+kriging, suppose <s-expression>z</s-expression> is linearly dependent on <s-expression>x</s-expression> and <s-expression>y</s-expression>,
+use the formula <s-expression>z~x+y</s-expression></s-arg>
+<s-arg name="locations">
+formula with only independent variables that define the
+spatial data locations (coordinates), e.g. <s-expression>~x+y</s-expression> </s-arg>
+<s-arg name="data">
+data frame; should contain the dependent variable, independent
+variables, and coordinates. </s-arg>
+<s-arg name="newdata">
+data frame with prediction/simulation locations; should 
+contain columns with the independent variables (if present) and the
+coordinates with names as defined in <s-expression>locations</s-expression> </s-arg>
+<s-arg name="model">
+variogram model of dependent variable (or its residuals), 
+defined by a call to <s-function name="vgm">vgm</s-function> or <s-function name="fit.variogram">fit.variogram</s-function></s-arg>
+<s-arg name="beta">
+only for simple kriging (and simulation based on simple
+kriging); vector with the trend coefficients (including intercept);
+if no independent variables are defined the model only contains an
+intercept and this should be the simple kriging mean </s-arg>
+<s-arg name="nmax">
+for local kriging: the number of nearest observations that
+should be used for a kriging prediction or simulation, where nearest
+is defined in terms of the space of the spatial locations. By default,
+all observations are used </s-arg>
+<s-arg name="block">
+block size; a vector with 1, 2 or 3 values containing
+the size of a rectangular in x-, y- and z-dimension respectively
+(0 if not set), or a data frame with 1, 2 or 3 columns, containing
+the points that discretize the block in the x-, y- and z-dimension; 
+the latter can be used to define irregular blocks. By default,
+predictions or simulations refer to point support values. </s-arg>
+<s-arg name="nsim">
+integer; if set to a nonzero value, conditional simulation
+is used instead of kriging interpolation. If <s-expression>nsim</s-expression> is positive,
+<s-expression>nsim</s-expression> realisations will be simulated by using Gaussian simulation,
+following a single random path through the data. If <s-expression>nsim</s-expression> is
+negative, <s-expression>-nsim</s-expression> realisations will be simulated using indicator
+simulation, following a single random path through the data. </s-arg>
+<s-arg name="...">
+other arguments that will be passed to <s-function name="gstat">gstat</s-function></s-arg>
+</s-args>
+
+<s-details>
+This function is a simple wrapper function around <s-function name="gstat">gstat</s-function> and
+<s-function name="predict.gstat">predict.gstat</s-function> for univariate kriging prediction and conditional
+simulation methods available in gstat. For multivariate prediction or
+simulation, or for other interpolation methods provided by gstat (such as
+inverse distance weighted interpolation or trend surface interpolation)
+use the functions <s-function name="gstat">gstat</s-function> and <s-function name="predict.gstat">predict.gstat</s-function> directly.
+<p>
+For further details, see <s-function name="predict.gstat">predict.gstat</s-function>.
+</s-details>
+
+<s-value>
+a data frame containing the coordinates of <s-expression>newdata</s-expression>, and columns
+of prediction and prediction variance (in case of kriging) or the
+<s-expression>abs(nsim)</s-expression> columns of the conditional Gaussian or indicator
+simulations
+</s-value>
+
+<s-section name="NOTE">
+Daniel G. Krige is a South African scientist who was a mining engineer
+when he first used generalised least squares prediction with spatial
+covariances in the 50's. George Matheron coined the term <s-expression>kriging</s-expression>
+in the 60's for the action of doing this, although very similar approaches
+had been taken in the field of meteorology. Beside being Krige's name,
+I consider "krige" to be to "kriging" what "predict" is to "prediction".
+</s-section>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+N.A.C. Cressie, 1993, Statistics for Spatial Data,
+Wiley. 
+<p>
+<url url ="http://www.gstat.org/">
+</s-section>
+
+<s-see>
+<s-function name="gstat">gstat</s-function>, <s-function name="predict.gstat">predict.gstat</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+data(meuse.grid)
+m &lt;- vgm(.59, "Sph", 874, .04)
+# ordinary kriging:
+x &lt;- krige(log(zinc)~1, ~x+y, model = m, data = meuse, newd = meuse.grid)
+levelplot(var1.pred~x+y, x, aspect = mapasp(x),
+        main = "ordinary kriging predictions")
+levelplot(var1.var~x+y, x, aspect = mapasp(x),
+        main = "ordinary kriging variance")
+# simple kriging:
+x &lt;- krige(log(zinc)~1, ~x+y, model = m, data = meuse, newdata = meuse.grid, 
+        beta=5.9)
+# residual variogram:
+m &lt;- vgm(.4, "Sph", 954, .06)
+# universal block kriging:
+x &lt;- krige(log(zinc)~x+y, ~x+y, model = m, data = meuse, newdata = 
+        meuse.grid, block = c(40,40))
+levelplot(var1.pred~x+y, x, aspect = mapasp(x),
+        main = "universal kriging predictions")
+levelplot(var1.var~x+y, x, aspect = mapasp(x),
+        main = "universal kriging variance")
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

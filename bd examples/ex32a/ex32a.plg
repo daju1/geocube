@@ -1,0 +1,69 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ex32a - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/ex32a.res" /d "_DEBUG" /d "_AFXDLL" "D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\ex32a.rc"" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP255.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/ex32a.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\ChildFrm.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\ex32a.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\ex32aDoc.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\ex32aView.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\Isamselect.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\MainFrm.cpp"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\ROWVIEW.CPP"
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\TABLESEL.CPP"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP255.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP256.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/ex32a.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.09\bd examples\ex32a\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP256.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP257.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ex32a.pdb" /debug /machine:I386 /out:"Debug/ex32a.exe" /pdbtype:sept 
+".\Debug\ChildFrm.obj"
+".\Debug\ex32a.obj"
+".\Debug\ex32aDoc.obj"
+".\Debug\ex32aView.obj"
+".\Debug\Isamselect.obj"
+".\Debug\MainFrm.obj"
+".\Debug\ROWVIEW.OBJ"
+".\Debug\StdAfx.obj"
+".\Debug\TABLESEL.OBJ"
+".\Debug\ex32a.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP257.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+ChildFrm.cpp
+ex32a.cpp
+ex32aDoc.cpp
+ex32aView.cpp
+Isamselect.cpp
+MainFrm.cpp
+ROWVIEW.CPP
+TABLESEL.CPP
+Generating Code...
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/ex32a.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\ChildFrm.sbr" ".\Debug\ex32a.sbr" ".\Debug\ex32aDoc.sbr" ".\Debug\ex32aView.sbr" ".\Debug\Isamselect.sbr" ".\Debug\MainFrm.sbr" ".\Debug\ROWVIEW.SBR" ".\Debug\TABLESEL.SBR""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ex32a.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

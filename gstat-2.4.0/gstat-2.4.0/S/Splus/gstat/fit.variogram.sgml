@@ -1,0 +1,81 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>fit.variogram</s-topic>
+</s-topics>
+
+<s-title>
+Fit a Variogram Model to a Sample Variogram
+</s-title>
+
+<s-description>
+Fit a simple or nested variogram model to a sample variogram, allowing
+partial fixing of parameters
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+fit.variogram(object, model, fit.sills = T, fit.ranges = T,
+        fit.method = 7, print.SSE = FALSE, debug.level = 1)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="object">
+sample variogram, output of <s-function name="variogram">variogram</s-function> </s-arg>
+<s-arg name="model">
+variogram model, output of <s-function name="vgm">vgm</s-function> </s-arg>
+<s-arg name="fit.sills">
+logical; determines whether the partial sill
+coefficients (including nugget variance) should be fitted; or logical
+vector: determines for each partial sill parameter whether it should be
+fitted or fixed.  </s-arg>
+<s-arg name="fit.ranges">
+logical; determines whether the range coefficients
+(excluding that of the nugget component) should be fitted; or logical
+vector: determines for each range parameter whether it should be fitted
+or fixed.  </s-arg>
+<s-arg name="fit.method">
+fitting method, used by gstat. The default method uses
+weights $N_h/h^2$ with $N_h$ the number of point pairs and $h$ the
+distance. This criterion is not supported by theory, but by practice. 
+For other values of <s-expression>fit.method</s-expression>, see table 4.2 in the gstat
+manual. </s-arg>
+<s-arg name="print.SSE">
+logical; if TRUE, print the (weighted) sum of squared
+errors of the fitted model </s-arg>
+<s-arg name="debug.level">
+integer; set gstat internal debug level </s-arg>
+</s-args>
+
+<s-value>
+returns a fitted variogram model (of class <s-expression>variogram.model</s-expression>)
+</s-value>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+<url url ="http://www.gstat.org/">
+</s-section>
+
+<s-see>
+<s-function name="variogram">variogram</s-function>,
+<s-function name="vgm">vgm</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+vgm1 &lt;- variogram(log(zinc)~1, ~x+y, meuse)
+fit.variogram(vgm1, vgm(1,"Sph",300,1))
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

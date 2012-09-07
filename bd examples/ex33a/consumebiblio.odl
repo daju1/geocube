@@ -1,0 +1,42 @@
+// consumebiblio.odl : type library source for consumebiblio.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (consumebiblio.tlb).
+
+[ uuid(486A1B84-0D94-11D2-8CAA-DF2C53524146), version(1.0) ]
+library Consumebiblio
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CConsumebiblioDoc
+	
+	[ uuid(486A1B85-0D94-11D2-8CAA-DF2C53524146) ]
+	dispinterface IConsumebiblio
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CConsumebiblioDlgAutoProxy)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CConsumebiblioDlgAutoProxy)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CConsumebiblioDoc
+	
+	[ uuid(486A1B83-0D94-11D2-8CAA-DF2C53524146) ]
+	coclass Consumebiblio
+	{
+		[default] dispinterface IConsumebiblio;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

@@ -1,0 +1,78 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>bubble</s-topic>
+</s-topics>
+
+<s-title>
+Create a bubble plot of spatial data
+</s-title>
+
+<s-description>
+Create a bubble plot of spatial data, with options for bicolour
+residual plots
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+bubble(data, xcol = 1, ycol = 2, zcol = 3, fill = TRUE, maxsize = 3,
+                do.sqrt = TRUE, pch, col = c(2,3), ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="data">
+data frame from which x- and y-coordinate and z-variable are taken</s-arg>
+<s-arg name="xcol">
+x-coordinate column number </s-arg>
+<s-arg name="ycol">
+y-coordinate column number </s-arg>
+<s-arg name="zcol">
+z-variable column number </s-arg>
+<s-arg name="fill">
+logical; if TRUE, filled circles are plotted (pch = 16), 
+else open circles (pch = 1); the pch argument overrides this </s-arg>
+<s-arg name="maxsize">
+<s-expression>cex</s-expression> value for largest circle </s-arg>
+<s-arg name="do.sqrt">
+logical; if TRUE the plotting symbol area (sqrt(diameter)) 
+is proportional to the value of the z-variable; if FALSE, the symbol size
+(diameter) is proportional to the z-variable </s-arg>
+<s-arg name="pch">
+plotting character </s-arg>
+<s-arg name="col">
+colours to be used; numeric vector of size two: first value
+is for negative values, second for positive values. </s-arg>
+<s-arg name="...">
+arguments, passed to <s-expression>xyplot</s-expression></s-arg>
+</s-args>
+
+<s-value>
+returns (or plots) the bubble plot
+</s-value>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+
+</s-section>
+
+<s-see>
+xyplot, <s-function name="mapasp">mapasp</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+bubble(meuse, max = 2.5, main = "cadmium concentrations")
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

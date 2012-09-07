@@ -1,0 +1,33 @@
+gstat is a program for geostatistical modelling, prediction and
+simulation.  See also Computers & Geosciences 28 (1), pp 17-31,
+the gstat manual and other information at the gstat home page,
+http://www.geog.uu.nl/gstat/
+
+
+source distribution -- contents of the directories:
+===================================================
+src       : gstat sources code, copyright notice
+csf       : PCRaster csf library source files (http://www.geog.uu.nl/pcraster.html)
+meschach  : meschach matrix library (basic/dense/sparse routines)
+include   : include file directory
+lib       : where the compiled libraries go (libcsf.a, libmeschach.a)
+cmd       : example command files
+
+to build gstat, type:
+
+	./configure
+	make
+
+and to install the software, type:
+
+	make install
+
+to check which command make would invoke, try:
+
+	make install -n
+
+(note that configure takes several options; try
+
+	./configure --help
+
+for a list)

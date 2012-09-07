@@ -1,0 +1,1465 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/darren@hiebert.com/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://darren.hiebert.com/ctags/	/official site/
+!_TAG_PROGRAM_VERSION	3.5.1	/with C, C++, Eiffel, Fortran, and Java  support/
+ADD_STR	data.c	1617;"	d	file:
+ADD_STR	lex.c	1809;"	d	file:
+ANIS_ERR	parse.c	2110;"	d	file:
+ARGFLT	sem_main.c	60;"	d	file:
+ARGINT	sem_main.c	61;"	d	file:
+AT_GRIDMAP	predict.c	/^	AT_GRIDMAP$/;"	e	file:
+AT_POINTS	predict.c	/^	AT_POINTS,$/;"	e	file:
+BAD	polygon.c	426;"	d	file:
+BAD	polygon.c	538;"	d	file:
+BADCH	getopt.c	35;"	d	file:
+BEGIN	lex.c	79;"	d	file:
+BG_DEPTH	fig.c	75;"	d	file:
+BINARY_NATIVE	mapio.c	163;"	d	file:
+BINARY_NATIVE	mapio_.c	160;"	d	file:
+BINARY_NON_NATIVE	mapio.c	164;"	d	file:
+BINARY_NON_NATIVE	mapio_.c	161;"	d	file:
+C	gls.c	/^	MAT *C,        \/* (Generalized) Covariance matrix *\/$/;"	m	struct:
+CHECK_BITX	data.c	847;"	d	file:
+CHECK_BITY	data.c	848;"	d	file:
+CHECK_BITZ	data.c	849;"	d	file:
+CHECK_CELLSIZE	mapio.c	158;"	d	file:
+CHECK_CELLSIZE	mapio_.c	155;"	d	file:
+CHECK_COLS	mapio.c	157;"	d	file:
+CHECK_COLS	mapio_.c	154;"	d	file:
+CHECK_ROWS	mapio.c	156;"	d	file:
+CHECK_ROWS	mapio_.c	153;"	d	file:
+CHECK_SUM	mapio.c	161;"	d	file:
+CHECK_SUM	mapio_.c	158;"	d	file:
+CHECK_X_UL	mapio.c	159;"	d	file:
+CHECK_X_UL	mapio_.c	156;"	d	file:
+CHECK_Y_UL	mapio.c	160;"	d	file:
+CHECK_Y_UL	mapio_.c	157;"	d	file:
+COLOR_OFFSET	fig.c	76;"	d	file:
+COLOUR_TSIZE	map2gd.c	96;"	d	file:
+CONDSIM	ui.c	/^static enum { VGM = 0, PRED, XVALID, CONDSIM } what = VGM;$/;"	e	file:
+CROSS	polygon.c	76;"	d	file:
+CROSS	polygon.c	805;"	d	file:
+CSUSAGE	stat.c	154;"	d	file:
+CinvX	gls.c	/^		*CinvX,    \/* C-1 X *\/$/;"	m	struct:
+Command	ui.c	/^} Command;$/;"	t	file:
+DATA2FIG_OPTIONS	map2fig.c	56;"	d	file:
+DEFAULT_MISVAL	mapio.c	165;"	d	file:
+DEFAULT_MISVAL	mapio_.c	162;"	d	file:
+DEFAULT_RADIUS	map2fig.c	57;"	d	file:
+DEFAULT_RANGEN	random.c	51;"	d	file:
+DEFAULT_RANGEN	random.c	57;"	d	file:
+DEFAULT_RANGEN	random.c	59;"	d	file:
+DEG2RAD	parse.c	2112;"	d	file:
+DELTA_AB	polygon.c	89;"	d	file:
+DPSWAP	select.c	57;"	d	file:
+ECHO	lex.c	587;"	d	file:
+EMSG	getopt.c	36;"	d	file:
+EOB_ACT_CONTINUE_SCAN	lex.c	104;"	d	file:
+EOB_ACT_END_OF_FILE	lex.c	105;"	d	file:
+EOB_ACT_LAST_MATCH	lex.c	106;"	d	file:
+EPOINT1	polygon.c	79;"	d	file:
+EPOINT1	polygon.c	808;"	d	file:
+EPOINT2	polygon.c	809;"	d	file:
+EPOINT2	polygon.c	80;"	d	file:
+ER_IMPOSVAL	random.c	78;"	d	file:
+EVFMT	sem.c	828;"	d	file:
+EVFMT	sem0.c	811;"	d	file:
+ErrMsg	random.c	79;"	d	file:
+FIGXMAX	fig.c	59;"	d	file:
+FIGXMIN	fig.c	58;"	d	file:
+FIGYMAX	fig.c	61;"	d	file:
+FIGYMIN	fig.c	60;"	d	file:
+FIG_HEADER	fig.c	43;"	d	file:
+FILE_RECORD	utils.c	/^} FILE_RECORD;$/;"	t	file:
+FILE_STATUS	utils.c	/^typedef enum { IS_OPEN, IS_CLOSED, IS_REMOVED } FILE_STATUS;$/;"	t	file:
+FILE_TYPE	utils.c	/^typedef enum { IS_FILE, IS_PIPE } FILE_TYPE;$/;"	t	file:
+FIT_LOG	fit.c	50;"	d	file:
+FLEX_SCANNER	lex.c	7;"	d	file:
+FLT_MAX	read.c	58;"	d	file:
+FLT_MIN	read.c	59;"	d	file:
+FONT_POINT	fig.c	74;"	d	file:
+FP_ERR	userio.c	365;"	d	file:
+FSWRITE	writecmd.c	186;"	d	file:
+FWRITE	writecmd.c	177;"	d	file:
+Float	msim.c	/^typedef double Float; \/* doubles the memory requirement -> may be pretty much *\/$/;"	t	file:
+Float	msim.c	/^typedef float Float;$/;"	t	file:
+GET_BLU	palet.c	69;"	d	file:
+GET_GRE	palet.c	68;"	d	file:
+GET_RED	palet.c	67;"	d	file:
+GET_STRING	ui.c	102;"	d	file:
+GET_STRING	ui.c	104;"	d	file:
+GEZERO	parse.c	/^		GEZERO, $/;"	e	file:
+GLM	gls.c	/^} GLM; \/* structure is locally defined, will be held in void *glm in DATA *\/$/;"	t	file:
+GNUPLOT_TERM	plot.c	/^} GNUPLOT_TERM;$/;"	t	file:
+GSTAT_EXPR	parse.c	/^} GSTAT_EXPR;$/;"	t	file:
+GTZERO	parse.c	/^		GTZERO $/;"	e	file:
+GetFunctionList	pcrstats.c	/^PCR_EXTERNAL_FUNCTION_LIST * PCR_DLL_EXP GetFunctionList(void)$/;"	f
+GetRGB	palet.c	/^float *GetRGB(PALETTE palet, float pos, float maxcol) {$/;"	f
+HELP	gstat.c	112;"	d	file:
+HUGE_VAL	read.c	62;"	d	file:
+IDENT	parse.c	11;"	d	file:
+ID_AREA	parse.c	23;"	d	file:
+ID_BLOCK	parse.c	24;"	d	file:
+ID_BOUNDS	parse.c	26;"	d	file:
+ID_COVARIANCES	parse.c	17;"	d	file:
+ID_DATA	parse.c	12;"	d	file:
+ID_EDGES	parse.c	20;"	d	file:
+ID_MARGINALS	parse.c	27;"	d	file:
+ID_MASKS	parse.c	19;"	d	file:
+ID_MERGE	parse.c	22;"	d	file:
+ID_METHOD	parse.c	25;"	d	file:
+ID_OUTPUT	parse.c	18;"	d	file:
+ID_PREDICTIONS	parse.c	15;"	d	file:
+ID_SET	parse.c	21;"	d	file:
+ID_VARIANCES	parse.c	16;"	d	file:
+ID_VARIOGRAM	parse.c	14;"	d	file:
+ID_X	parse.c	13;"	d	file:
+INCR	utils.c	398;"	d	file:
+INITIAL	lex.c	396;"	d	file:
+INIT_C	random.c	490;"	d	file:
+INIT_CD	random.c	491;"	d	file:
+INIT_CM	random.c	492;"	d	file:
+INT	parse.c	7;"	d	file:
+INT_MAX	read.c	50;"	d	file:
+INT_MIN	read.c	51;"	d	file:
+IN_OUT	polygon.c	473;"	d	file:
+IN_OUT	polygon.c	537;"	d	file:
+IS_CLASSIFIED	map2gd.c	90;"	d	file:
+IS_CLASSIFIED	map2gd.c	94;"	d	file:
+IS_CLOSED	utils.c	/^typedef enum { IS_OPEN, IS_CLOSED, IS_REMOVED } FILE_STATUS;$/;"	e	file:
+IS_D_VECTOR	parse.c	/^		IS_D_VECTOR, $/;"	e	file:
+IS_FILE	utils.c	/^typedef enum { IS_FILE, IS_PIPE } FILE_TYPE;$/;"	e	file:
+IS_INT	parse.c	/^		IS_INT, $/;"	e	file:
+IS_OPEN	utils.c	/^typedef enum { IS_OPEN, IS_CLOSED, IS_REMOVED } FILE_STATUS;$/;"	e	file:
+IS_PIPE	utils.c	/^typedef enum { IS_FILE, IS_PIPE } FILE_TYPE;$/;"	e	file:
+IS_REAL	parse.c	/^		IS_REAL, $/;"	e	file:
+IS_REMOVED	utils.c	/^typedef enum { IS_OPEN, IS_CLOSED, IS_REMOVED } FILE_STATUS;$/;"	e	file:
+IS_STRING	parse.c	/^		IS_STRING, $/;"	e	file:
+IS_UINT	parse.c	/^		IS_UINT, $/;"	e	file:
+IS_VAR	xvalid.c	46;"	d	file:
+IWW	polygon.c	813;"	d	file:
+IWW	polygon.c	86;"	d	file:
+IminAw	reml.c	/^static MAT *IminAw = MNULL;$/;"	v	file:
+InPoly	polygon.c	/^static char InPoly( PLOT_POINT q, POLYGON *Poly)$/;"	f	file:
+KEY_MOUSE	ui.c	117;"	d	file:
+LEGSIZEX	map2gd.c	79;"	d	file:
+LEGSIZEY	map2gd.c	80;"	d	file:
+LEGSIZX	fig.c	68;"	d	file:
+LEGSIZY	fig.c	69;"	d	file:
+LEGSKIP	fig.c	71;"	d	file:
+LEGXMAX	fig.c	64;"	d	file:
+LEGXMIN	fig.c	63;"	d	file:
+LEGYMAX	fig.c	66;"	d	file:
+LEGYMIN	fig.c	65;"	d	file:
+LENGTHOF	ui.c	70;"	d	file:
+LONG_MAX	read.c	54;"	d	file:
+LONG_MIN	read.c	55;"	d	file:
+MANTISSA_SIZE	random.c	488;"	d	file:
+MAXCHAR	lex.c	1810;"	d	file:
+MAXCOL	map2gd.c	84;"	d	file:
+MAXCOL	palet.c	53;"	d	file:
+MAX_ANG	direct.c	149;"	d	file:
+MAX_ANG	direct.c	44;"	d	file:
+MAX_ERRNO	userio.c	92;"	d	file:
+MAX_FIT	ui.c	1024;"	d	file:
+MAX_OPTION	ui.c	172;"	d	file:
+MAX_SAMPLE	sample.c	47;"	d	file:
+MAX_SIZE	utils.c	796;"	d	file:
+MEM_ERR	userio.c	358;"	d	file:
+MINMAX	map2fig.c	58;"	d	file:
+MIN_BESS	vario_fn.c	43;"	d	file:
+MY_input	lex.c	/^int MY_input(void) {$/;"	f
+MY_output	lex.c	/^int MY_output(int c) {$/;"	f
+MY_unput	lex.c	/^int MY_unput(int c) {$/;"	f
+M_DEBUG	gls.c	89;"	d	file:
+My_yy_lineno	lex.c	/^static int yy_Lexpos = 0, yy_Posafternl = 1, My_yy_lineno = 1,$/;"	v	file:
+NEARLY_ZERO	fit.c	51;"	d	file:
+NOLIMIT	parse.c	/^		NOLIMIT, $/;"	e	file:
+NO_ARG	parse.c	/^		NO_ARG $/;"	e	file:
+N_NODES	nsearch.c	73;"	d	file:
+N_PTS	plot.c	48;"	d	file:
+N_RAN_GEN	random.c	50;"	d	file:
+N_RAN_GEN	random.c	56;"	d	file:
+N_RAN_GEN	random.c	60;"	d	file:
+N_WIND	ui.c	91;"	d	file:
+OPTIONS	map2gd.c	63;"	d	file:
+P	random.c	484;"	d	file:
+PAL	palet.c	/^} PAL;$/;"	t	file:
+PALETUSAGE	palet.c	55;"	d	file:
+PI	vario_fn.c	45;"	d	file:
+PM1	random.c	485;"	d	file:
+POLY_EDGE	polygon.c	812;"	d	file:
+POLY_EDGE	polygon.c	85;"	d	file:
+POLY_IN	polygon.c	810;"	d	file:
+POLY_IN	polygon.c	83;"	d	file:
+POLY_OUT	polygon.c	811;"	d	file:
+POLY_OUT	polygon.c	84;"	d	file:
+PRED	ui.c	/^static enum { VGM = 0, PRED, XVALID, CONDSIM } what = VGM;$/;"	e	file:
+PRED_AT	predict.c	/^} PRED_AT;$/;"	t	file:
+PR_DOUBLE	ui.c	/^typedef enum PR_TYPE { PR_INT, PR_DOUBLE, PR_STRING, PR_YN } PR_TYPE ;$/;"	e	file:	enum:PR_TYPE
+PR_INT	ui.c	/^typedef enum PR_TYPE { PR_INT, PR_DOUBLE, PR_STRING, PR_YN } PR_TYPE ;$/;"	e	file:	enum:PR_TYPE
+PR_STRING	ui.c	/^typedef enum PR_TYPE { PR_INT, PR_DOUBLE, PR_STRING, PR_YN } PR_TYPE ;$/;"	e	file:	enum:PR_TYPE
+PR_TYPE	ui.c	/^typedef enum PR_TYPE { PR_INT, PR_DOUBLE, PR_STRING, PR_YN } PR_TYPE ;$/;"	g	file:
+PR_TYPE	ui.c	/^typedef enum PR_TYPE { PR_INT, PR_DOUBLE, PR_STRING, PR_YN } PR_TYPE ;$/;"	t	file:
+PR_YN	ui.c	/^typedef enum PR_TYPE { PR_INT, PR_DOUBLE, PR_STRING, PR_YN } PR_TYPE ;$/;"	e	file:	enum:PR_TYPE
+PTS	sample.c	/^} PTS;$/;"	t	file:
+PTS_LIST	sample.c	/^} PTS_LIST;$/;"	t	file:
+Q	random.c	486;"	d	file:
+QSTR	parse.c	10;"	d	file:
+Q_HELP	pqueue.c	248;"	d	file:
+RANDOM_REALS	random.c	489;"	d	file:
+REAL	parse.c	9;"	d	file:
+REJECT	lex.c	390;"	d	file:
+RGB	palet.c	/^	int *RGB;$/;"	m	struct:
+RanGen	random.c	/^static int init = 0, RanGen = DEFAULT_RANGEN;$/;"	v	file:
+RanGenDescr	random.c	/^static const char *RanGenDescr[] = {$/;"	v	file:
+SAMPLE_USAGE	sample.c	65;"	d	file:
+SCANNED	lex.c	488;"	d	file:
+SCANNED	lex.c	491;"	d	file:
+SEM_INCREMENT	sem.c	55;"	d	file:
+SEM_INCREMENT	sem0.c	55;"	d	file:
+SHORTHELP0	ui.c	71;"	d	file:
+SHORTHELP1	ui.c	73;"	d	file:
+SING_ERR	userio.c	354;"	d	file:
+SIZE	plot.c	47;"	d	file:
+SM_DEBUG	gls.c	98;"	d	file:
+SPOINT1	polygon.c	77;"	d	file:
+SPOINT1	polygon.c	806;"	d	file:
+SPOINT2	polygon.c	78;"	d	file:
+SPOINT2	polygon.c	807;"	d	file:
+STATE_SIZE	random.c	487;"	d	file:
+STEP	lex.c	1906;"	d	file:
+STRATUM	predict.c	86;"	d	file:
+STRLEN	ui.c	164;"	d	file:
+SWAP_M_N	mapio.c	153;"	d	file:
+SWAP_M_N	mapio_.c	150;"	d	file:
+SWAP_N	mapio.c	152;"	d	file:
+SWAP_N	mapio_.c	149;"	d	file:
+TABLE_SIZE	map2gd.c	86;"	d	file:
+TABLE_SIZE	parse.c	1848;"	d	file:
+TEXTSKIP	fig.c	72;"	d	file:
+TICKSHEIGHT	map2gd.c	81;"	d	file:
+TICKSWIDTH	map2gd.c	82;"	d	file:
+TOFIGX	fig.c	78;"	d	file:
+TOFIGY	fig.c	80;"	d	file:
+UINT	parse.c	8;"	d	file:
+UNKNOWN	parse.c	/^		UNKNOWN, $/;"	e	file:
+UPDATE_BLP	gls.c	93;"	d	file:
+UPDATE_BLUP	gls.c	94;"	d	file:
+VGM	ui.c	/^static enum { VGM = 0, PRED, XVALID, CONDSIM } what = VGM;$/;"	e	file:
+V_DEBUG	gls.c	91;"	d	file:
+X	gls.c	/^		*X,        \/* design matrix, y = X beta + e *\/$/;"	m	struct:
+XCinvX	gls.c	/^		*XCinvX;   \/* X' C-1 X *\/$/;"	m	struct:
+XVALID	ui.c	/^static enum { VGM = 0, PRED, XVALID, CONDSIM } what = VGM;$/;"	e	file:
+XVXt_mlt	reml.c	/^MAT *XVXt_mlt(MAT *X, MAT *V, MAT *out) {$/;"	f
+XdXt_mlt	reml.c	/^MAT *XdXt_mlt(MAT *X, VEC *d, MAT *out) {$/;"	f
+Xmax	fig.c	/^static double Xmin, Xmax, Ymin, Ymax;$/;"	v	file:
+Xmin	fig.c	/^static double Xmin, Xmax, Ymin, Ymax;$/;"	v	file:
+XtVX_mlt	reml.c	/^MAT *XtVX_mlt(MAT *X, MAT *V, MAT *out) {$/;"	f
+XtdX_mlt	reml.c	/^MAT *XtdX_mlt(MAT *X, VEC *d, MAT *out) {$/;"	f
+YYABORT	parse.c	561;"	d	file:
+YYACCEPT	parse.c	560;"	d	file:
+YYBACKUP	parse.c	569;"	d	file:
+YYBISON	parse.c	5;"	d	file:
+YYEMPTY	parse.c	558;"	d	file:
+YYEOF	parse.c	559;"	d	file:
+YYERRCODE	parse.c	582;"	d	file:
+YYERROR	parse.c	562;"	d	file:
+YYFAIL	parse.c	567;"	d	file:
+YYFINAL	parse.c	165;"	d	file:
+YYFLAG	parse.c	166;"	d	file:
+YYINITDEPTH	parse.c	629;"	d	file:
+YYLAST	parse.c	408;"	d	file:
+YYLEX	parse.c	585;"	d	file:
+YYLEX	parse.c	591;"	d	file:
+YYLEX	parse.c	593;"	d	file:
+YYLEX	parse.c	597;"	d	file:
+YYLEX	parse.c	599;"	d	file:
+YYMAXDEPTH	parse.c	636;"	d	file:
+YYMAXDEPTH	parse.c	640;"	d	file:
+YYNTBASE	parse.c	167;"	d	file:
+YYPARSE_PARAM_ARG	parse.c	697;"	d	file:
+YYPARSE_PARAM_ARG	parse.c	700;"	d	file:
+YYPARSE_PARAM_ARG	parse.c	704;"	d	file:
+YYPARSE_PARAM_DECL	parse.c	698;"	d	file:
+YYPARSE_PARAM_DECL	parse.c	701;"	d	file:
+YYPARSE_PARAM_DECL	parse.c	705;"	d	file:
+YYPOPSTACK	parse.c	739;"	d	file:
+YYPOPSTACK	parse.c	741;"	d	file:
+YYRECOVERING	parse.c	568;"	d	file:
+YYSTACK_ALLOC	parse.c	547;"	d	file:
+YYSTACK_ALLOC	parse.c	549;"	d	file:
+YYSTACK_USE_ALLOCA	parse.c	506;"	d	file:
+YYSTACK_USE_ALLOCA	parse.c	509;"	d	file:
+YYSTACK_USE_ALLOCA	parse.c	513;"	d	file:
+YYSTACK_USE_ALLOCA	parse.c	530;"	d	file:
+YYSTACK_USE_ALLOCA	parse.c	535;"	d	file:
+YYSTATE	lex.c	86;"	d	file:
+YYSTYPE	parse.c	/^} YYSTYPE;$/;"	t	file:
+YYTERROR	parse.c	581;"	d	file:
+YYTRANSLATE	parse.c	169;"	d	file:
+YY_AT_BOL	lex.c	262;"	d	file:
+YY_BREAK	lex.c	646;"	d	file:
+YY_BUFFER_EOF_PENDING	lex.c	198;"	d	file:
+YY_BUFFER_NEW	lex.c	186;"	d	file:
+YY_BUFFER_NORMAL	lex.c	187;"	d	file:
+YY_BUFFER_STATE	lex.c	/^typedef struct yy_buffer_state *YY_BUFFER_STATE;$/;"	t	file:
+YY_BUF_SIZE	lex.c	97;"	d	file:
+YY_CHAR	lex.c	/^typedef unsigned char YY_CHAR;$/;"	t	file:
+YY_CURRENT_BUFFER	lex.c	207;"	d	file:
+YY_DECL	lex.c	634;"	d	file:
+YY_DO_BEFORE_ACTION	lex.c	278;"	d	file:
+YY_END_OF_BUFFER	lex.c	286;"	d	file:
+YY_END_OF_BUFFER_CHAR	lex.c	94;"	d	file:
+YY_EXIT_FAILURE	lex.c	1637;"	d	file:
+YY_FATAL_ERROR	lex.c	627;"	d	file:
+YY_FLEX_MAJOR_VERSION	lex.c	8;"	d	file:
+YY_FLEX_MINOR_VERSION	lex.c	9;"	d	file:
+YY_FLUSH_BUFFER	lex.c	236;"	d	file:
+YY_INPUT	lex.c	467;"	d	file:
+YY_INPUT	lex.c	468;"	d	file:
+YY_INPUT	lex.c	594;"	d	file:
+YY_MORE_ADJ	lex.c	392;"	d	file:
+YY_NEW_FILE	lex.c	92;"	d	file:
+YY_NO_POP_STATE	lex.c	557;"	d	file:
+YY_NO_PUSH_STATE	lex.c	556;"	d	file:
+YY_NO_TOP_STATE	lex.c	558;"	d	file:
+YY_NULL	lex.c	66;"	d	file:
+YY_NUM_RULES	lex.c	285;"	d	file:
+YY_PROTO	lex.c	60;"	d	file:
+YY_PROTO	lex.c	62;"	d	file:
+YY_READ_BUF_SIZE	lex.c	578;"	d	file:
+YY_RESTORE_YY_MORE_OFFSET	lex.c	393;"	d	file:
+YY_RULE_SETUP	lex.c	649;"	d	file:
+YY_SC_TO_UI	lex.c	73;"	d	file:
+YY_START	lex.c	85;"	d	file:
+YY_START_STACK_INCR	lex.c	622;"	d	file:
+YY_STATE_EOF	lex.c	89;"	d	file:
+YY_USER_ACTION	lex.c	641;"	d	file:
+YY_USE_CONST	lex.c	31;"	d	file:
+YY_USE_CONST	lex.c	38;"	d	file:
+YY_USE_CONST	lex.c	48;"	d	file:
+YY_USE_PROTOS	lex.c	28;"	d	file:
+YY_USE_PROTOS	lex.c	37;"	d	file:
+YY_USE_PROTOS	lex.c	49;"	d	file:
+Ymax	fig.c	/^static double Xmin, Xmax, Ymin, Ymax;$/;"	v	file:
+Ymin	fig.c	/^static double Xmin, Xmax, Ymin, Ymax;$/;"	v	file:
+Z_EPSILON	random.c	279;"	d	file:
+Z_MAX	random.c	280;"	d	file:
+__STDC__	parse.c	107;"	d	file:
+__cplusplus	lex.c	17;"	d	file:
+__errno	gstat.c	/^int __errno;$/;"	v
+__yy_memcpy	parse.c	/^__yy_memcpy (char *to, char *from, unsigned int count)$/;"	f	file:
+__yy_memcpy	parse.c	/^__yy_memcpy (to, from, count)$/;"	f	file:
+__yy_memcpy	parse.c	649;"	d	file:
+add_to_pts_list	sample.c	/^static PTS_LIST *add_to_pts_list(int row_offset, int col_offset, $/;"	f	file:
+all_directions	direct.c	/^static int all_directions = -1;$/;"	v	file:
+alloc_exp_variogram	sem.c	/^static SAMPLE_VGM *alloc_exp_variogram(DATA *a, DATA *b, SAMPLE_VGM *ev) {$/;"	f	file:
+alloc_exp_variogram	sem0.c	/^static SAMPLE_VGM *alloc_exp_variogram(DATA *a, DATA *b, SAMPLE_VGM *ev) {$/;"	f	file:
+alloc_mv_grid	mapio.c	/^void alloc_mv_grid(GRIDMAP * m)$/;"	f
+alloc_mv_grid	mapio_.c	/^void alloc_mv_grid(GRIDMAP *m) {$/;"	f
+alloca	parse.c	510;"	d	file:
+alloca	parse.c	536;"	d	file:
+allow_vector_only	parse.c	/^	fit_sill = 0, fit_range = 0, vector_only = 0, allow_vector_only = 0;$/;"	v	file:
+almost_equals	utils.c	/^int almost_equals(const char *tok, const char *str) {$/;"	f
+alpha	direct.c	/^static double alpha = 0.0, beta = 0.0,$/;"	v	file:
+anis	parse.c	/^static double range = -1.0, anis[5];$/;"	v	file:
+argv0	gstat.c	/^char *argv0 = NULL, *command_line = NULL;$/;"	v
+attroff	ui.c	112;"	d	file:
+attroff	ui.c	113;"	d	file:
+attron	ui.c	110;"	d	file:
+attron	ui.c	111;"	d	file:
+attrset	ui.c	108;"	d	file:
+attrset	ui.c	109;"	d	file:
+average_duplicates	data.c	/^static int average_duplicates(DATA *d) { $/;"	f	file:
+bbox_from_data	nsearch.c	/^static BBOX bbox_from_data(DATA *d) {$/;"	f	file:
+bbox_from_grid	nsearch.c	/^static BBOX bbox_from_grid(const GRIDMAP *gt, const DATA_GRIDMAP *dg) {$/;"	f	file:
+bessi1	vario_fn.c	/^static double bessi1(double x)$/;"	f	file:
+bessk1	vario_fn.c	/^static double bessk1(double x)$/;"	f	file:
+beta	direct.c	/^static double alpha = 0.0, beta = 0.0,$/;"	v	file:
+beta	gls.c	/^		*beta;     \/* parameter vector *\/$/;"	m	struct:
+beta	msim.c	/^	***beta = NULL;$/;"	v	file:
+block	glvars.c	/^static DPOINT block;$/;"	v	file:
+block_discr	block.c	/^DATA *block_discr(DATA *d, const DPOINT *block, const DPOINT *where)$/;"	f
+boundary_file	parse.c	/^static char **ofn = NULL, *boundary_file = NULL;$/;"	v	file:
+bp	parse.c	/^static DPOINT *bp = NULL;$/;"	v	file:
+bquote	lex.c	/^static char *bquote(char *command) {$/;"	f	file:
+c	random.c	/^static double c, cd, cm;$/;"	v	file:
+c	sample.c	/^	int r, c;$/;"	m	struct:
+calc_VinvIminAw	reml.c	/^static MAT *calc_VinvIminAw(MAT *Vw, MAT *X, MAT *VinvIminAw, int calc_Aw) {$/;"	f	file:
+calc_data_mean_std	data.c	/^static void calc_data_mean_std(DATA *d) {$/;"	f	file:
+calc_ll	reml.c	/^static double calc_ll(MAT *Vw, MAT *X, VEC *y, int n) {$/;"	f	file:
+calc_lm	lm.c	/^LM *calc_lm(LM *lm) {$/;"	f
+calc_mu	lm.c	/^double calc_mu(const DATA *d, const DPOINT *where) {$/;"	f
+calc_poly	getest.c	/^static void calc_poly(DPOINT *where, double *est) {$/;"	f	file:
+calc_polynomial	data.c	/^double calc_polynomial(DPOINT *p, int colX) {$/;"	f
+calc_polynomials	data.c	/^void calc_polynomials(DATA *d) {$/;"	f
+calc_progress	ui.c	/^void calc_progress(unsigned int step, unsigned int max_step) {$/;"	f
+calc_r	stat.c	/^void calc_r(double *a, double *b, int n, double *corr) {$/;"	f
+calc_rhs_Tr_m	reml.c	/^static void calc_rhs_Tr_m(int n_models, MAT **Vk,MAT *VinvIminAw, $/;"	f	file:
+calc_stats	stat.c	/^int calc_stats(int argc, char *argv[]) {$/;"	f
+calc_variogram	sem.c	/^int calc_variogram(VARIOGRAM *v \/* pointer to VARIOGRAM structure *\/,$/;"	f
+calc_variogram	sem0.c	/^int calc_variogram(VARIOGRAM *v \/* pointer to VARIOGRAM structure *\/,$/;"	f
+calc_vgm	ui.c	/^int calc_vgm(VARIOGRAM *v, char *name) {$/;"	f
+cd	random.c	/^static double c, cd, cm;$/;"	v	file:
+cdf_read_grd_info	mapio.c	/^static int cdf_read_grd_info(GRIDMAP * m, double *x_max, double *y_min,$/;"	f	file:
+cdf_read_grd_info	mapio_.c	/^static int cdf_read_grd_info (GRIDMAP *m, double *x_max, double *y_min,$/;"	f	file:
+centre_area	data.c	/^void centre_area(DATA *area) {$/;"	f
+check_assign_expr	parse.c	/^static void check_assign_expr(GSTAT_EXPR *expr) {$/;"	f	file:
+check_edges	polygon.c	/^void check_edges(DATA *d, const DPOINT *where) {$/;"	f
+check_global_variables	glvars.c	/^void check_global_variables(void) {$/;"	f
+check_mem	utils.c	/^void check_mem(char *f, int *l) {$/;"	f
+check_only	gstat.c	/^static int check_only = 0;$/;"	v	file:
+check_open	predict.c	/^static GRIDMAP *check_open(const char *name, int i) {$/;"	f	file:
+check_open_edges	polygon.c	/^static unsigned int check_open_edges(const PLOT_POINT data, const int target_side,$/;"	f	file:
+check_variography	vario.c	/^void check_variography(const VARIOGRAM **v, int n_vars)$/;"	f
+choose_variable	ui.c	/^void choose_variable(int key) {$/;"	f
+choose_what	ui.c	/^void choose_what(int key) {$/;"	f
+clean_up	glvars.c	/^static void clean_up(void) {$/;"	f	file:
+close_curses	ui.c	/^void close_curses(void) {$/;"	f
+cm	random.c	/^static double c, cd, cm;$/;"	v	file:
+cmd_written	ui.c	/^int wind = 0, cmd_written = 0, use_pipe = 0;$/;"	v
+col1	parse.c	/^static int id = -1, id1 = -1, id2 = -1, col1 = -1, col2 = -1,$/;"	v	file:
+col2	parse.c	/^static int id = -1, id1 = -1, id2 = -1, col1 = -1, col2 = -1,$/;"	v	file:
+collapse	random.c	/^static unsigned int collapse (int anyint, unsigned int size)$/;"	f	file:
+colour_table	map2gd.c	/^char colour_table[256] = "", *title = NULL, tmp_str[256] = "";$/;"	v
+command	ui.c	/^Command command[MAX_OPTION] = {$/;"	v
+command_file_name	glvars.c	/^char *command_file_name;$/;"	v
+command_line	gstat.c	/^char *argv0 = NULL, *command_line = NULL;$/;"	v
+compare	report.c	/^int compare(const double *a, const double *b) $/;"	f
+cond_sim	sim.c	/^const double *cond_sim(double *est, int dim, METHOD m, int *is_datum, int orc) {$/;"	f
+const	parse.c	159;"	d	file:
+contains_intercept	lm.c	/^static int contains_intercept(MAT *X) {$/;"	f	file:
+convert_C	gls.c	/^static void convert_C(MAT *C, VEC *mu, double (*fn)(double)) {$/;"	f	file:
+convert_C0	gls.c	/^static void convert_C0(MAT *C0, VEC *mu, VEC *mu0, double (*fn)(double)) {$/;"	f	file:
+convert_MSPE	gls.c	/^static void convert_MSPE(MAT *MSPE, VEC *mu0, double (*fn)(double)) {$/;"	f	file:
+convert_help	maputils.c	/^static void convert_help(char *prog) {$/;"	f	file:
+convert_null_to_space	utils.c	/^static void convert_null_to_space(char *cp, const char *fname, const FILE *stream) {$/;"	f	file:
+coordinates_are_equal	data.c	/^int coordinates_are_equal(const DATA *a, const DATA *b) {$/;"	f
+copy_data_gridmap	data.c	/^DATA_GRIDMAP *copy_data_gridmap(void *map) {$/;"	f
+correct_for_anisotropy	fit.c	/^static void correct_for_anisotropy(VARIOGRAM *v) {$/;"	f	file:
+correct_orv	sim.c	/^void correct_orv(double *est, int n_vars, int orc) {$/;"	f
+correct_strata	data.c	/^static void correct_strata(DATA *d) {$/;"	f	file:
+cos_tol_hor	direct.c	/^	cos_tol_hor = -1.0, cos_tol_ver = -1.0, \/* Changed K.M. Fri Feb 27 11:13:47 1998 *\/$/;"	v	file:
+cos_tol_ver	direct.c	/^	cos_tol_hor = -1.0, cos_tol_ver = -1.0, \/* Changed K.M. Fri Feb 27 11:13:47 1998 *\/$/;"	v	file:
+covariogram	sem.c	/^static SAMPLE_VGM *covariogram(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+covariogram	sem0.c	/^static SAMPLE_VGM *covariogram(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+cp	lex.c	/^static char *cp = NULL;$/;"	v	file:
+cpu_is_little_endian	utils.c	/^int cpu_is_little_endian(void) {$/;"	f
+create_data_area	glvars.c	/^void create_data_area(void) {$/;"	f
+create_lm	lm.c	/^static void create_lm(DATA **data, int nvars) {$/;"	f	file:
+cross	xvalid.c	/^static int cross = 0;$/;"	v	file:
+cross_covariogram	sem.c	/^static SAMPLE_VGM *cross_covariogram(DATA *a, DATA *b, SAMPLE_VGM *ev) {$/;"	f	file:
+cross_covariogram	sem0.c	/^static SAMPLE_VGM *cross_covariogram(DATA *a, DATA *b, SAMPLE_VGM *ev) {$/;"	f	file:
+cross_valid	xvalid.c	/^void cross_valid(DATA **data) {$/;"	f
+cross_variogram	sem.c	/^static SAMPLE_VGM *cross_variogram(DATA *a, DATA *b, SAMPLE_VGM *ev) {$/;"	f	file:
+cross_variogram	sem0.c	/^static SAMPLE_VGM *cross_variogram(DATA *a, DATA *b, SAMPLE_VGM *ev) {$/;"	f	file:
+ct_mvaddstr	ui.c	163;"	d	file:
+curses_error	ui.c	/^void curses_error(const char *msg, int errno) {$/;"	f
+curses_open	ui.c	/^	warning_set = 0, curses_open = 0;$/;"	v	file:
+curses_warning	ui.c	/^void curses_warning(const char *msg) {$/;"	f
+cutoff_width	ui.c	/^void cutoff_width(int key) {$/;"	f
+d	parse.c	/^static DATA *d = NULL, **dpp = NULL;$/;"	v	file:
+d2s	msim.c	/^	**d2s = NULL;$/;"	v	file:
+d_cmp	pcrstats.c	/^int d_cmp(const double *a, const double *b) {$/;"	f
+d_cmp	stat.c	/^int d_cmp(const double *a, const double *b) {$/;"	f
+da_fn_exponential	vario_fn.c	/^double da_fn_exponential(double h, double r) {$/;"	f
+da_fn_gaussian	vario_fn.c	/^double da_fn_gaussian(double h, double r) {$/;"	f
+da_fn_hole	vario_fn.c	/^double da_fn_hole(double h, double r) {$/;"	f
+da_fn_linear	vario_fn.c	/^double da_fn_linear(double h, double r) {$/;"	f
+da_fn_logarithmic	vario_fn.c	/^double da_fn_logarithmic(double h, double r) {$/;"	f
+da_fn_pentaspherical	vario_fn.c	/^double da_fn_pentaspherical(double h, double r) {$/;"	f
+da_fn_periodic	vario_fn.c	/^double da_fn_periodic(double h, double r) {$/;"	f
+da_fn_power	vario_fn.c	/^double da_fn_power(double h, double r) {$/;"	f
+da_fn_spherical	vario_fn.c	/^double da_fn_spherical(double h, double r) {$/;"	f
+da_general	vario.c	/^double da_general(VGM_MODEL *part, double h) {$/;"	f
+da_is_zero	vario_fn.c	/^double da_is_zero(double h, double r) {$/;"	f
+data	glvars.c	/^static DATA **data = NULL;$/;"	v	file:
+data_add_X	data.c	/^void data_add_X(DATA *d, int col) {$/;"	f
+data_area	glvars.c	/^static DATA *data_area = NULL; \/* area that discretises block *\/$/;"	v	file:
+data_block_diagonal	data.c	/^double data_block_diagonal(DATA *data) {$/;"	f
+data_not_valid	ui.c	/^int data_not_valid(DATA *data) {$/;"	f
+data_types	data.c	/^const DATA_TYPE data_types[] = {$/;"	v
+datagrid_rebuild	data.c	/^void datagrid_rebuild(DATA *d, int adjust_to_gridcentres) {$/;"	f
+debug_level	glvars.c	/^int debug_level; \/* debug level *\/$/;"	v
+debug_level	mapio.c	/^int debug_level = 1, gl_secure = 0;$/;"	v
+debug_level	mapio_.c	/^ int debug_level = 1, gl_secure = 0;$/;"	v
+debug_level	random.c	/^ int debug_level = 0;$/;"	v
+debug_result	gls.c	/^static void debug_result(VEC *blup, MAT *MSPE, enum GLS_WHAT pred) {$/;"	f	file:
+decide_on_coincide	glvars.c	/^int decide_on_coincide(void) {$/;"	f
+default_error	userio.c	/^void default_error(const char *mess, int level) {$/;"	f
+default_printlog	userio.c	/^void default_printlog(const char *mess) {$/;"	f
+default_progress	userio.c	/^void default_progress(unsigned int current, unsigned int total) {$/;"	f
+default_warning	userio.c	/^void default_warning(const char *mess) {$/;"	f
+dequeue	pqueue.c	/^Q_ELEMENT_WHAT dequeue(QUEUE *q) {$/;"	f
+dir_h	direct.c	/^	dir_v[2] = { 1.0, 0.0 } , dir_h[2] = { 0.0, 1.0 };$/;"	v	file:
+dir_v	direct.c	/^	dir_v[2] = { 1.0, 0.0 } , dir_h[2] = { 0.0, 1.0 };$/;"	v	file:
+direction	ui.c	/^void direction(int key) {$/;"	f
+display_map	ui.c	/^void display_map(int key) {$/;"	f
+display_menu	ui.c	/^void display_menu(int option) {$/;"	f
+display_msg	ui.c	/^void display_msg(const char *msg) {$/;"	f
+dist_cmp	polygon.c	/^static int dist_cmp(const DPOINT **pa, const DPOINT **pb) {$/;"	f	file:
+dist_cmp	select.c	/^int dist_cmp(const DPOINT **pa, const DPOINT **pb) {$/;"	f
+distance_str	plot.c	/^	char *term_name, *term_opt, *gamma_str, *distance_str;$/;"	m	struct:
+divide	sem.c	/^static void divide(SAMPLE_VGM *ev) {$/;"	f	file:
+divide	sem0.c	/^static void divide(SAMPLE_VGM *ev) {$/;"	f	file:
+dj_cursorx	ui.c	/^static int dj_cursorx, dj_cursory;$/;"	v	file:
+dj_cursory	ui.c	/^static int dj_cursorx, dj_cursory;$/;"	v	file:
+dj_textsave	ui.c	/^static char *dj_textsave=NULL;$/;"	v	file:
+do_help	sem_main.c	/^static void do_help(void) {$/;"	f	file:
+do_one_map2gd	map2gd.c	/^static int do_one_map2gd(char *map, const char *f_name, int legend) {$/;"	f	file:
+do_variogram	gstat.c	/^static void do_variogram(int nvars, METHOD m) {$/;"	f	file:
+double_index_cmp	utils.c	/^int double_index_cmp(const Double_index *a, const Double_index *b) {$/;"	f
+double_is_mv	data.c	/^static int double_is_mv(DATA *d, double *f) {$/;"	f	file:
+dpp	parse.c	/^static DATA *d = NULL, **dpp = NULL;$/;"	v	file:
+draw_map	map2fig.c	/^static void draw_map(GRIDMAP *m, int bg) {$/;"	f	file:
+draw_map	ossfim_.c	/^void draw_map(double **table, const char *name, double s, double S,$/;"	f
+draw_map_box	map2gd.c	/^	nc_max = 0, n_table = 0, nclass = 16, draw_map_box = 0, ticks = 0;$/;"	v
+draw_one_cell	map2gd.c	/^static void draw_one_cell(gdImagePtr g, int x, int y, $/;"	f	file:
+dump_all	glvars.c	/^int dump_all(void) {$/;"	f
+dup_csf	mapio.c	/^static GRIDMAP *dup_csf(GRIDMAP * m, GRIDMAP * dup)$/;"	f	file:
+dup_csf	mapio_.c	/^static GRIDMAP *dup_csf(GRIDMAP *m, GRIDMAP *dup) {$/;"	f	file:
+dval	parse.c	/^	double dval;$/;"	m	union:
+e_random	random.c	/^int e_random(int argc, char *argv[]) {$/;"	f
+ecalloc	utils.c	/^void *ecalloc(size_t nobj, size_t size) {$/;"	f
+edcalloc	utils.c	/^void *edcalloc(size_t nobj, size_t size, char *file, int line) {$/;"	f
+edf	ui.c	/^static char *edf = "Enter data first";$/;"	v	file:
+edfree	utils.c	/^void edfree(void *p, char *file, int line) {$/;"	f
+edges	glvars.c	/^static POLYGON **edges = NULL;            \/* per-file edges *\/$/;"	v	file:
+edges_names	glvars.c	/^static char **edges_names = NULL;  \/* names of edges files, n_edges long *\/$/;"	v	file:
+edmalloc	utils.c	/^void *edmalloc(size_t size, char *file, int line) {$/;"	f
+edrealloc	utils.c	/^void *edrealloc(void *p, size_t size, char *file, int line) {$/;"	f
+efclose	userio.c	40;"	d	file:
+efclose	utils.c	/^int efclose(FILE *stream) {$/;"	f
+effective_range	vario.c	/^double effective_range(const VARIOGRAM *v) {$/;"	f
+efopen	utils.c	/^FILE *efopen(const char *filename, const char *mode) {$/;"	f
+efree	pqueue.c	54;"	d	file:
+efree	utils.c	/^void efree(void *p) {$/;"	f
+elapsed	utils.c	/^void elapsed(void) {$/;"	f
+emalloc	pqueue.c	52;"	d	file:
+emalloc	utils.c	/^void *emalloc(size_t size) {$/;"	f
+enlarge_queue	pqueue.c	/^static void enlarge_queue(QUEUE *q) {$/;"	f	file:
+enqueue	pqueue.c	/^void enqueue(QUEUE *q, Q_ELEMENT_WHAT *el, int n) {$/;"	f
+enter_data	ui.c	/^void enter_data(int key) {$/;"	f
+entry	ui.c	/^	char *text, **help, *entry;$/;"	m	struct:
+epclose	utils.c	/^int epclose(FILE *stream) {$/;"	f
+epopen	utils.c	/^FILE *epopen(const char *filename, const char *mode) {$/;"	f
+er_datum	mapio.c	/^static char *er_datum = NULL;$/;"	v	file:
+er_datum	mapio_.c	/^static char *er_datum = NULL;$/;"	v	file:
+er_projection	mapio.c	/^static char *er_projection = NULL;$/;"	v	file:
+er_projection	mapio_.c	/^static char *er_projection = NULL;$/;"	v	file:
+erealloc	pqueue.c	53;"	d	file:
+erealloc	utils.c	/^void *erealloc(void *p, size_t size) {$/;"	f
+eremove	utils.c	/^int eremove(const char *name) {$/;"	f
+error_handler	userio.c	/^	void (*error_handler)(const char *mess, int level);$/;"	m	struct:
+error_message	userio.c	/^	*error_message = NULL, $/;"	v	file:
+error_messages	userio.c	/^static char *error_messages[] = {$/;"	v	file:
+error_prefix	userio.c	/^	*error_prefix = NULL, $/;"	v	file:
+est	predict.c	/^static double *est = NULL;$/;"	v	file:
+est_quant	stat.c	/^double est_quant(double *list, double p, int n) {$/;"	f
+est_quantile_div	getest.c	/^static void est_quantile_div(DATA *data, double *est, int div) {$/;"	f	file:
+esystem	utils.c	/^int esystem(char *cmd) {$/;"	f
+ev2map	sem.c	/^static void ev2map(VARIOGRAM *v) {$/;"	f	file:
+ev2map	sem0.c	/^static void ev2map(VARIOGRAM *v) {$/;"	f	file:
+exec_action	gstat.c	/^static int exec_action(int argc, char *argv[]) {$/;"	f	file:
+exit_predictions	predict.c	/^static void exit_predictions(PRED_AT what) {$/;"	f	file:
+expr	parse.c	/^GSTAT_EXPR expr = { NULL, NULL, UNKNOWN, NOLIMIT };$/;"	v
+f	utils.c	/^	const FILE *f;$/;"	m	struct:
+field_error	data.c	/^static void field_error(char *fname, int line_nr, int fld, char *text) {$/;"	f	file:
+fig_block	fig.c	/^void fig_block(int color, int xmin, int ymin, int xmax, int ymax, int line) {$/;"	f
+fig_color	fig.c	/^void fig_color(int color, float *col) {$/;"	f
+fig_end	fig.c	/^void fig_end(void) {$/;"	f
+fig_legend	fig.c	/^void fig_legend(char *entries[], int n, LEGEND_MODE leg_mode) {$/;"	f
+fig_point	fig.c	/^void fig_point(int color, double x, double y, int radius) {$/;"	f
+fig_run	fig.c	/^void fig_run(int color, double x0, double y0, double cellsizex, double cellsizey, int rl) {$/;"	f
+fig_setup	fig.c	/^void fig_setup(char *fname, double xmin, double ymin, double xmax, double ymax) {$/;"	f
+file_exists	utils.c	/^int file_exists(const char *name) {$/;"	f
+file_record	utils.c	/^static FILE_RECORD *file_record = NULL;$/;"	v	file:
+file_record_size	utils.c	/^static int file_record_size = 0;$/;"	v	file:
+file_size	utils.c	/^size_t file_size(const char *fname) {$/;"	f
+fill_cutoff_width	sem.c	/^void fill_cutoff_width(DATA *data \/* pointer to DATA structure to derive$/;"	f
+fill_cutoff_width	sem0.c	/^void fill_cutoff_width(DATA *data \/* pointer to DATA structure to derive$/;"	f
+fill_entries	ui.c	/^void fill_entries(void) {$/;"	f
+fill_est	gls.c	/^static void fill_est(DATA **d, VEC *blup, MAT *MSPE, int n_vars, double *est)$/;"	f	file:
+fill_table	parse.c	1851;"	d	file:
+fill_weights	fit.c	/^static int fill_weights(const VARIOGRAM *vp, PERM *p, LM *lm) {$/;"	f	file:
+find_class	map2fig.c	/^static int find_class(D_VECTOR *classes, double attr) {$/;"	f	file:
+find_classes	map2fig.c	/^D_VECTOR *find_classes(GRIDMAP *m, DATA *d, double min, double max, $/;"	f
+find_entry	map2gd.c	/^static int find_entry(float *table, int n_table, float value) {$/;"	f	file:
+find_reasonable_hash_interval	map2gd.c	/^static double find_reasonable_hash_interval(double range) {$/;"	f	file:
+find_reasonable_hash_start	map2gd.c	/^static double find_reasonable_hash_start(double min, double max, double hash_interval) {$/;"	f	file:
+fit_GaussNewton	fit.c	/^static int fit_GaussNewton(VARIOGRAM *vp, PERM *p, LM *lm, int iter,$/;"	f	file:
+fit_int2enum	vario.c	/^FIT_TYPE fit_int2enum(int fit) {$/;"	f
+fit_lmc	lmc.c	/^int fit_lmc(DATA *d, VARIOGRAM *v, int n_vars) {$/;"	f
+fit_method	ui.c	/^void fit_method(int key) {$/;"	f
+fit_progress	ui.c	/^void fit_progress(unsigned int step, unsigned int max_step) {$/;"	f
+fit_range	parse.c	/^	fit_sill = 0, fit_range = 0, vector_only = 0, allow_vector_only = 0;$/;"	v	file:
+fit_shift	vario.c	/^FIT_TYPE fit_shift(FIT_TYPE now, int next) {$/;"	f
+fit_sill	parse.c	/^	fit_sill = 0, fit_range = 0, vector_only = 0, allow_vector_only = 0;$/;"	v	file:
+fit_type_str	ui.c	/^char *fit_type_str[] = { $/;"	v
+fit_variogram	fit.c	/^int fit_variogram(VARIOGRAM *v) {$/;"	f
+fit_vgm	ui.c	/^int fit_vgm(VARIOGRAM *v) {$/;"	f
+fix_minmax	data.c	/^static int fix_minmax = 0;$/;"	v	file:
+fix_toggle	ui.c	/^void fix_toggle(VARIOGRAM *v, int fix) {$/;"	f
+fn_bessel	vario_fn.c	/^double fn_bessel(double h, double r) {$/;"	f
+fn_circular	vario_fn.c	/^double fn_circular(double h, double r) {$/;"	f
+fn_exponential	vario_fn.c	/^double fn_exponential(double h, double r) {$/;"	f
+fn_gaussian	vario_fn.c	/^double fn_gaussian(double h, double r) {$/;"	f
+fn_hole	vario_fn.c	/^double fn_hole(double h, double r) {$/;"	f
+fn_intercept	vario_fn.c	/^double fn_intercept(double h, double r) {$/;"	f
+fn_linear	vario_fn.c	/^double fn_linear(double h, double r) {$/;"	f
+fn_logarithmic	vario_fn.c	/^double fn_logarithmic(double h, double r) {$/;"	f
+fn_nugget	vario_fn.c	/^double fn_nugget(double h, double r) {$/;"	f
+fn_pentaspherical	vario_fn.c	/^double fn_pentaspherical(double h, double r) {$/;"	f
+fn_periodic	vario_fn.c	/^double fn_periodic(double h, double r) {$/;"	f
+fn_power	vario_fn.c	/^double fn_power(double h, double r) {$/;"	f
+fn_spherical	vario_fn.c	/^double fn_spherical(double h, double r) {$/;"	f
+fn_spline	vario_fn.c	/^double fn_spline(double h, double r) {$/;"	f
+fname	polygon.c	/^static const char *fname = NULL;$/;"	v	file:
+format	lm.c	/^static char    *format = "%14.9g ";$/;"	v	file:
+fprint_cmd	writecmd.c	/^void fprint_cmd(FILE *f) { $/;"	f
+fprint_gnuplot_model	plot.c	/^void fprint_gnuplot_model(FILE *f, const VARIOGRAM *vgm, int fit) {$/;"	f
+fprint_gnuplot_variogram	plot.c	/^int fprint_gnuplot_variogram(FILE *stream, const VARIOGRAM *v,$/;"	f
+fprint_header_vgm	sem.c	/^void fprint_header_vgm(FILE *f, const DATA *a, const DATA *b,$/;"	f
+fprint_header_vgm	sem0.c	/^void fprint_header_vgm(FILE *f, const DATA *a, const DATA *b,$/;"	f
+fprint_jgraph_variogram	plot.c	/^int fprint_jgraph_variogram(FILE *f, const VARIOGRAM *v) {$/;"	f
+fprint_sample_vgm	sem.c	/^void fprint_sample_vgm(FILE *f, const SAMPLE_VGM *ev) {$/;"	f
+fprint_sample_vgm	sem0.c	/^void fprint_sample_vgm(FILE *f, const SAMPLE_VGM *ev) {$/;"	f
+fprint_variogram	vario.c	/^void fprint_variogram(FILE *f, const VARIOGRAM *v, int verbose) {$/;"	f
+free_data	data.c	/^void free_data(DATA *d) {$/;"	f
+free_data_gridmap	data.c	/^static void free_data_gridmap(DATA_GRIDMAP *t) {$/;"	f	file:
+free_glm	gls.c	/^void free_glm(void *v_glm) {$/;"	f
+free_lm	lm.c	/^void free_lm(void *v_lm) {$/;"	f
+free_queue	pqueue.c	/^void free_queue(QUEUE *q) {$/;"	f
+free_simulations	msim.c	/^static void free_simulations(void) {$/;"	f	file:
+free_variogram	vario.c	/^void free_variogram(VARIOGRAM *v) {$/;"	f
+ftoa	utils.c	/^char *ftoa(const char *fmt, float *a) {$/;"	f
+function	ui.c	/^	void (*function)(int);$/;"	m	struct:
+functionList	pcrstats.c	/^static PCR_EXTERNAL_FUNCTION_LIST functionList;$/;"	v	file:
+gamma_str	plot.c	/^	char *term_name, *term_opt, *gamma_str, *distance_str;$/;"	m	struct:
+gauss	block.c	/^static double gauss[4] = { $/;"	v	file:
+gauss_w	block.c	/^double gauss_w[4] = {$/;"	v
+generate_grid	ossfim.c	/^static void generate_grid(DATA *d, double samplespacing, int neighbourhood) {$/;"	f	file:
+generate_grid	ossfim00.c	/^static void generate_grid(DATA *d, double samplespacing, int neighbourhood) {$/;"	f	file:
+generate_grid	ossfim_.c	/^static void generate_grid(DATA *d, double samplespacing, int neighbourhood) {$/;"	f	file:
+generate_grid	x.c	/^static void generate_grid(DATA *d, double samplespacing, int neighbourhood) {$/;"	f	file:
+getSSErr	fit.c	/^static double getSSErr(const VARIOGRAM *vp, PERM *p, LM *lm) {$/;"	f	file:
+get_X	lm.c	/^MAT *get_X(DATA **d, MAT *X, int nvars) {$/;"	f
+get_X0	lm.c	/^MAT *get_X0(DATA **d, MAT *X0, DPOINT *where, int nvars) {$/;"	f
+get_area_centre	data.c	/^DATA *get_area_centre(DATA *area, DATA *d) {$/;"	f
+get_block_p	glvars.c	/^DPOINT *get_block_p(void) {$/;"	f
+get_colX_nr	lm.c	/^static int get_colX_nr(DATA **d, int var, int this_x) {$/;"	f	file:
+get_corr_mat	gls.c	/^static MAT *get_corr_mat(MAT *C, MAT *R) {$/;"	f	file:
+get_covariance	vario.c	/^double get_covariance(const VARIOGRAM *vp, double dx, double dy, double dz) {$/;"	f
+get_data	glvars.c	/^DATA **get_data(void) {$/;"	f
+get_data_area	glvars.c	/^DATA *get_data_area(void) {$/;"	f
+get_dataval	glvars.c	/^DATA *get_dataval(void) {$/;"	f
+get_default_method	glvars.c	/^METHOD get_default_method(void) {$/;"	f
+get_edges	glvars.c	/^POLYGON **get_edges(void) {$/;"	f
+get_edges_name	glvars.c	/^const char *get_edges_name(const int i) {$/;"	f
+get_est	getest.c	/^void get_est(DATA **data, METHOD method, DPOINT *where, double *est) {$/;"	f
+get_free	pqueue.c	/^static Q_ELEMENT *get_free(QUEUE *q) {$/;"	f	file:
+get_gstat_errno	userio.c	/^enum Gstat_errno get_gstat_errno(void) {$/;"	f
+get_gstat_error_message	userio.c	/^const char *get_gstat_error_message(void) {$/;"	f
+get_index	nsearch.c	90;"	d	file:
+get_index	sem.c	/^static int get_index(double dist, SAMPLE_VGM *ev) {$/;"	f	file:
+get_index	sem0.c	/^static int get_index(double dist, SAMPLE_VGM *ev) {$/;"	f	file:
+get_line	utils.c	/^char *get_line(char **s, int *size, FILE *stream) {$/;"	f
+get_locations	ui.c	/^void get_locations(int key) {$/;"	f
+get_map_location	predict.c	/^static int get_map_location(DPOINT *loc, int random_path,$/;"	f	file:
+get_mask0	predict.c	/^const void *get_mask0(void) {$/;"	f
+get_maskX	predict.c	/^static double *get_maskX(DATA **data, DPOINT *p,$/;"	f	file:
+get_mask_name	glvars.c	/^const char *get_mask_name(int i) {$/;"	f
+get_max_sill	vario.c	/^double get_max_sill(int n) {$/;"	f
+get_method	glvars.c	/^METHOD get_method(void) {$/;"	f
+get_minmax_y	plot.c	/^static void get_minmax_y(const VARIOGRAM *v, double max_x, double *min_y, double *max_y) {$/;"	f	file:
+get_mode	glvars.c	/^MODE get_mode(void) {$/;"	f
+get_mouse_button	ui.c	/^int get_mouse_button(void) {$/;"	f
+get_mouse_y	ui.c	/^int get_mouse_y(void) {$/;"	f
+get_mu	gls.c	/^static VEC *get_mu(VEC *mu, const VEC *y, DATA **d, int n_vars) {$/;"	f	file:
+get_n_beta_set	glvars.c	/^int get_n_beta_set(void) {$/;"	f
+get_n_edges	glvars.c	/^int get_n_edges(void) {$/;"	f
+get_n_edges_polys	glvars.c	/^int *get_n_edges_polys(void) {$/;"	f
+get_n_masks	glvars.c	/^int get_n_masks(void) {$/;"	f
+get_n_outfile	glvars.c	/^int get_n_outfile(void) {$/;"	f
+get_n_sim_locs_table	predict.c	/^unsigned int *get_n_sim_locs_table(unsigned int *size) {$/;"	f
+get_n_vars	glvars.c	/^int get_n_vars(void) {$/;"	f
+get_n_vgms	glvars.c	/^int get_n_vgms(void) {$/;"	f
+get_nearest_point	nsearch.c	/^static DPOINT *get_nearest_point(QUEUE *q, DPOINT *where, DATA *d) {$/;"	f	file:
+get_neighbourhood	ui.c	/^void get_neighbourhood(int key) {$/;"	f
+get_next_random_number	random.c	/^static double get_next_random_number(void)$/;"	f	file:
+get_outfile_name	glvars.c	/^const char **get_outfile_name(void) {$/;"	f
+get_outfile_namei	glvars.c	/^const char *get_outfile_namei(int i) {$/;"	f
+get_point_location	predict.c	/^static DPOINT *get_point_location(int random_path) {$/;"	f	file:
+get_random_cell	predict.c	/^static int get_random_cell(GRIDMAP *m, unsigned int *row, unsigned int *col) {$/;"	f	file:
+get_sample	sample.c	/^static PTS_LIST *get_sample(PTS_LIST *idx, int size, int nrows, int ncols) {$/;"	f	file:
+get_seed	random.c	/^unsigned long int get_seed(void) {$/;"	f
+get_semivariance	vario.c	/^double get_semivariance(const VARIOGRAM *vp, double dx, double dy, double dz) {$/;"	f
+get_tm	parse.c	/^static ANIS_TM *get_tm(double anis[5]) {$/;"	f	file:
+get_values	fit.c	/^static void get_values(const char *fname, VARIOGRAM *v) {$/;"	f	file:
+get_vgm	glvars.c	/^VARIOGRAM *get_vgm(int i) {$/;"	f
+get_weights	lm.c	/^static VEC *get_weights(DATA **d, VEC *weights, int nvars) {$/;"	f	file:
+get_y	lm.c	/^VEC *get_y(DATA **d, VEC *y, int nvars) {$/;"	f
+getopt	getopt.c	/^getopt(nargc, nargv, ostr)$/;"	f
+gis_init	mapio_.c	/^int gis_init = 0;$/;"	v
+gl_alpha	glvars.c	/^double gl_alpha; \/* alpha, beta, tol_[hor|ver]: anisotropy parameters *\/$/;"	v
+gl_beta	glvars.c	/^double gl_beta;$/;"	v
+gl_bounds	glvars.c	/^double *gl_bounds; \/* boundaries semivariogram intervals *\/$/;"	v
+gl_cn_max	glvars.c	/^double gl_cn_max; \/* check maximum condition number. Default: don't *\/$/;"	v
+gl_coincide	glvars.c	/^int gl_coincide; \/* do the variable locations coincide? *\/$/;"	v
+gl_cressie	glvars.c	/^int gl_cressie; \/* use cressie's estimator ? *\/$/;"	v
+gl_cutoff	glvars.c	/^double gl_cutoff; \/* variogram cutoff *\/$/;"	v
+gl_display	glvars.c	/^char *gl_display;$/;"	v
+gl_dots	glvars.c	/^int gl_dots; \/* treshold nr for points -> dots, gnuplot *\/$/;"	v
+gl_fit	glvars.c	/^int gl_fit; \/* do not fit a variogram *\/$/;"	v
+gl_fit_limit	glvars.c	/^double gl_fit_limit; \/* convergence criterion on fit *\/$/;"	v
+gl_format	glvars.c	/^char *gl_format;$/;"	v
+gl_fraction	glvars.c	/^double gl_fraction; \/* fraction of max dist for cutoff *\/$/;"	v
+gl_gauss	glvars.c	/^int gl_gauss; \/* gaussian quadr. block covariances ? *\/$/;"	v
+gl_gcv	glvars.c	/^double gl_gcv; \/* generalized covariance constant *\/$/;"	v
+gl_gls_residuals	glvars.c	/^int gl_gls_residuals; \/* calc. gls residuals? *\/$/;"	v
+gl_gnufile	glvars.c	/^char *gl_gnufile;  \/* gnuplot file name *\/$/;"	v
+gl_gnuname_tmp	glvars.c	/^char *gl_gnuname_tmp;$/;"	v
+gl_gnuplot	glvars.c	/^char *gl_gnuplot;$/;"	v
+gl_gnuplot35	glvars.c	/^char *gl_gnuplot35;$/;"	v
+gl_gpterm	glvars.c	/^char *gl_gpterm;$/;"	v
+gl_idp	glvars.c	/^double gl_idp; \/* default inverse distance power *\/$/;"	v
+gl_iter	glvars.c	/^int gl_iter; \/* max. n. iter for mivque estimates *\/$/;"	v
+gl_iwidth	glvars.c	/^double gl_iwidth; \/* variogram class width *\/$/;"	v
+gl_jgraph	glvars.c	/^int gl_jgraph; \/* do jgraph plot in batch mode ? *\/$/;"	v
+gl_lhs	glvars.c	/^int gl_lhs;$/;"	v
+gl_marginal_names	glvars.c	/^char **gl_marginal_names;$/;"	v
+gl_marginal_values	glvars.c	/^double *gl_marginal_values;$/;"	v
+gl_mv_string	glvars.c	/^char *gl_mv_string;$/;"	v
+gl_mv_string	mapio.c	/^char *gl_mv_string = "NA";$/;"	v
+gl_mv_string	mapio_.c	/^ char *gl_mv_string = "NA";$/;"	v
+gl_mv_string	random.c	/^ char *gl_mv_string = "NA";$/;"	v
+gl_n_intervals	glvars.c	/^int gl_n_intervals; \/* n variogram intervals *\/$/;"	v
+gl_n_marginals	glvars.c	/^int gl_n_marginals; \/* the n marginal distributions *\/$/;"	v
+gl_n_uk	glvars.c	/^int gl_n_uk; \/* min. # of cs points to use ok *\/$/;"	v
+gl_nblockdiscr	glvars.c	/^int gl_nblockdiscr; \/* block discrimination in each dimension *\/$/;"	v
+gl_nocheck	glvars.c	/^int gl_nocheck; \/* do not check LMC\/IC ? *\/$/;"	v
+gl_nsim	glvars.c	/^int gl_nsim; \/* number of simultanious simulations *\/$/;"	v
+gl_numbers	glvars.c	/^int gl_numbers; \/* plot numbers on variogram plot? *\/$/;"	v
+gl_order	glvars.c	/^int gl_order; \/* do order relation correction *\/$/;"	v
+gl_outname_tmp	glvars.c	/^char *gl_outname_tmp;$/;"	v
+gl_pager	glvars.c	/^char *gl_pager;$/;"	v
+gl_plotweights	glvars.c	/^int gl_plotweights; \/* plot kriging weights? *\/$/;"	v
+gl_quantile	glvars.c	/^double gl_quantile; \/* sample quantile *\/$/;"	v
+gl_register_pairs	glvars.c	/^int gl_register_pairs; \/* register sample variogram pairs? *\/$/;"	v
+gl_rp	glvars.c	/^int gl_rp; \/* follow random path for gs\/is? *\/$/;"	v
+gl_secure	glvars.c	/^int gl_secure; \/* disallow system() and popen()? *\/$/;"	v
+gl_secure	mapio.c	/^int debug_level = 1, gl_secure = 0;$/;"	v
+gl_secure	mapio_.c	/^ int debug_level = 1, gl_secure = 0;$/;"	v
+gl_secure	random.c	/^ int gl_secure = 0;$/;"	v
+gl_seed	glvars.c	/^int gl_seed; \/* seed is set? *\/$/;"	v
+gl_sparse	glvars.c	/^int gl_sparse; \/* use sparse covariance matrices? *\/$/;"	v
+gl_spiral	glvars.c	/^int gl_spiral; \/* do spiral search if possible? *\/$/;"	v
+gl_split	glvars.c	/^int gl_split; \/* see nsearch.c: was Q_SPLIT_AT *\/$/;"	v
+gl_sym_ev	glvars.c	/^int gl_sym_ev; \/* default symmetric ps.cr.v.\/cr.cv. ? *\/$/;"	v
+gl_tol_hor	glvars.c	/^double gl_tol_hor;$/;"	v
+gl_tol_ver	glvars.c	/^double gl_tol_ver;$/;"	v
+gl_xvalid	glvars.c	/^int gl_xvalid; \/* do cross validation on first variable *\/$/;"	v
+gl_zero	glvars.c	/^double gl_zero; \/* zero tolerance; 2-squared *\/$/;"	v
+gl_zero	mapio.c	/^double gl_zero = DEF_zero;$/;"	v
+gl_zero	mapio_.c	/^ double gl_zero = DEF_zero;$/;"	v
+gl_zero_est	glvars.c	/^int gl_zero_est; \/* est. variogram at h 0 seperately? *\/$/;"	v
+gl_zmap	glvars.c	/^double gl_zmap; \/* height of the map *\/$/;"	v
+gls	gls.c	/^void gls(DATA **d \/* pointer to DATA array *\/,$/;"	f
+gnu_filename	ui.c	/^char *header = NULL, *msg = NULL, *gnu_filename, *gnuplot_name = NULL;$/;"	v
+gnu_fit	fit.c	/^static void gnu_fit(VARIOGRAM *v) {$/;"	f	file:
+gnu_stream	ui.c	/^static FILE *gnu_stream = NULL;$/;"	v	file:
+gnuplot_header	ossfim00.c	/^static void gnuplot_header(int x, int y) {$/;"	f	file:
+gnuplot_header	ossfim_.c	/^static void gnuplot_header(int x, int y) {$/;"	f	file:
+gnuplot_header	x.c	/^static void gnuplot_header(int x, int y) {$/;"	f	file:
+gnuplot_name	ui.c	/^char *header = NULL, *msg = NULL, *gnu_filename, *gnuplot_name = NULL;$/;"	v
+gnuplot_terms	plot.c	/^GNUPLOT_TERM gnuplot_terms[] = {$/;"	v
+grass	utils.c	/^int grass(void) {$/;"	f
+grid_push_point	data.c	/^static void grid_push_point(DATA *d, DPOINT *p, int adjust_to_gridcentres) {$/;"	f	file:
+gstat_clo_error	userio.c	/^void gstat_clo_error(char *f, int l, enum Gstat_errno err, int a) {$/;"	f
+gstat_errno	userio.c	/^static enum Gstat_errno gstat_errno;$/;"	v	file:
+gstat_error	userio.c	/^void gstat_error(char *fname, int line,$/;"	f
+gstat_handler	userio.c	/^} gstat_handler = { NULL, NULL, NULL, NULL };$/;"	v	file:
+gstat_start	utils.c	/^void gstat_start(void) {$/;"	f
+header	ui.c	/^char *header = NULL, *msg = NULL, *gnu_filename, *gnuplot_name = NULL;$/;"	v
+help	ui.c	/^	char *text, **help, *entry;$/;"	m	struct:
+help_menu	ui.c	/^void help_menu(int option) {$/;"	f
+id	parse.c	/^static int id = -1, id1 = -1, id2 = -1, col1 = -1, col2 = -1,$/;"	v	file:
+id1	parse.c	/^static int id = -1, id1 = -1, id2 = -1, col1 = -1, col2 = -1,$/;"	v	file:
+id2	parse.c	/^static int id = -1, id1 = -1, id2 = -1, col1 = -1, col2 = -1,$/;"	v	file:
+ids	glvars.c	/^static char **outfile_names = NULL, **ids = NULL, **mask_names = NULL;$/;"	v	file:
+in_bbox	nsearch.c	/^static int in_bbox(const DPOINT *where, BBOX bbox) {$/;"	f	file:
+init	random.c	/^static int init = 0, RanGen = DEFAULT_RANGEN;$/;"	v	file:
+init_data	glvars.c	/^static void init_data(int n) {$/;"	f	file:
+init_dpoint	data.c	/^static void init_dpoint(DATA *d, DPOINT *current) {$/;"	f	file:
+init_ev	vario.c	/^SAMPLE_VGM *init_ev(void) {$/;"	f
+init_global_variables	glvars.c	/^int init_global_variables(void) {$/;"	f
+init_lm	lm.c	/^LM *init_lm(LM *lm) {$/;"	f
+init_one_data	data.c	/^DATA *init_one_data(DATA *data) {$/;"	f
+init_predictions	predict.c	/^static void init_predictions(PRED_AT w) {$/;"	f	file:
+init_qnode	nsearch.c	/^static void init_qnode(QTREE_NODE **p_node, int isleaf, BBOX bb) {$/;"	f	file:
+init_qtree	nsearch.c	/^static void init_qtree(DATA *d) {$/;"	f	file:
+init_queue	pqueue.c	/^QUEUE *init_queue(QUEUE *q,$/;"	f
+init_random	random.c	/^static void init_random(void) {$/;"	f	file:
+init_simulations	msim.c	/^void init_simulations(DATA **d) {$/;"	f
+init_userio	userio.c	/^void init_userio(int use_stdio) {$/;"	f
+init_variogram	vario.c	/^VARIOGRAM *init_variogram(VARIOGRAM *v) {$/;"	f
+init_variogram_part	vario.c	/^void init_variogram_part(VGM_MODEL *p) {$/;"	f
+input	lex.c	474;"	d	file:
+input	lex.c	482;"	d	file:
+int2pal	palet.c	/^PALETTE int2pal(int ipal) {$/;"	f
+intercept_only	data.c	/^int intercept_only(const DATA *d) {$/;"	f
+interlace	map2gd.c	/^int px = 0, interlace = 0, transparent = 1,$/;"	v
+interpolate_pal	palet.c	/^static void interpolate_pal(double pos, PAL *pal, float colors[3]) {$/;"	f	file:
+interval	map2gd.c	/^float min, max, interval, *table; $/;"	v
+inverse_dist	getest.c	/^static double inverse_dist(DATA *data, DPOINT *where, double idPow) {$/;"	f	file:
+is_block_expr	parse.c	/^static int is_block_expr(GSTAT_EXPR *expr, const char *s) {$/;"	f	file:
+is_data_expr	parse.c	/^static int is_data_expr(DATA *d, GSTAT_EXPR *expr, const char *fld) {$/;"	f	file:
+is_directional	sem.c	/^int is_directional(VARIOGRAM *v) {$/;"	f
+is_directional	sem0.c	/^int is_directional(VARIOGRAM *v) {$/;"	f
+is_leaf	nsearch.c	88;"	d	file:
+is_left_key	ui.c	162;"	d	file:
+is_mv_double	utils.c	/^int is_mv_double(const double *d) {$/;"	f
+is_mv_float	utils.c	/^int is_mv_float(const float *f) {$/;"	f
+is_one_integer	data.c	/^static int is_one_integer(char *line, int *n) {$/;"	f	file:
+is_openf	userio.c	50;"	d	file:
+is_posdef	vario.c	/^static int is_posdef(MAT *A) {$/;"	f	file:
+is_qtree_search	nsearch.c	89;"	d	file:
+is_set_expr	parse.c	/^static int is_set_expr(GSTAT_EXPR *expr, const char *name) {$/;"	f	file:
+is_simulation	glvars.c	/^int is_simulation(METHOD m) {$/;"	f
+is_singular	lm.c	/^int is_singular(MAT *X, double cond_max) {$/;"	f
+is_singular_silent	lm.c	/^static int is_singular_silent(MAT *X, double cond_max, double *ce) {$/;"	f	file:
+is_valid_cs	vario.c	/^static int is_valid_cs(const VARIOGRAM *aa, const VARIOGRAM *bb,$/;"	f	file:
+is_valid_strata_map	predict.c	/^int is_valid_strata_map(const char *name, int n_vars) {$/;"	f
+ival	parse.c	/^	int ival;$/;"	m	union:
+key2plot	ui.c	/^PLOT_TYPE key2plot(int key) {$/;"	f
+lastnl	lex.c	/^static const char *yy_Source = NULL, *lastnl = NULL;$/;"	v	file:
+lex_error	lex.c	/^void lex_error(void) {$/;"	f
+lhs	msim.c	/^void lhs(DATA **d, int n_vars, int stratify) {$/;"	f
+lhs_one	msim.c	/^static void lhs_one(Double_index *list, unsigned int dim, $/;"	f	file:
+limit	parse.c	/^	} limit;$/;"	m	struct:
+line_buf	mapio.c	/^static char *line_buf = NULL;$/;"	v	file:
+line_buf	mapio_.c	/^static char *line_buf = NULL;$/;"	v	file:
+line_of_sight	polygon.c	/^unsigned char line_of_sight(const PLOT_POINT data, const PLOT_POINT target,$/;"	f
+line_size	mapio.c	/^static int line_size = 0;$/;"	v	file:
+line_size	mapio_.c	/^static int line_size = 0;$/;"	v	file:
+load_ev	sem.c	/^static SAMPLE_VGM *load_ev(SAMPLE_VGM *ev, const char *fname) {$/;"	f	file:
+load_ev	sem0.c	/^static SAMPLE_VGM *load_ev(SAMPLE_VGM *ev, const char *fname) {$/;"	f	file:
+logfile	userio.c	/^static FILE *logfile = NULL;$/;"	v	file:
+logfile_name	glvars.c	/^char *logfile_name;$/;"	v
+logprint_cmd	writecmd.c	/^void logprint_cmd() { $/;"	f
+logprint_data_header	data.c	/^static void logprint_data_header(const DATA *d) {$/;"	f	file:
+logprint_lm	lm.c	/^void logprint_lm(DATA *d, LM *lm) {$/;"	f
+logprint_point	data.c	/^void logprint_point(const DPOINT *p, const DATA *d) {$/;"	f
+logprint_qtree	nsearch.c	/^static void logprint_qtree(QTREE_NODE *node, int depth) {$/;"	f	file:
+logprint_queue	nsearch.c	/^void logprint_queue(QUEUE *queue) {$/;"	f
+logprint_variogram	vario.c	/^void logprint_variogram(const VARIOGRAM *v, int verbose) {$/;"	f
+lt	plot.c	/^	int pt, lt;$/;"	m	struct:
+m_logoutput	lm.c	/^void    m_logoutput(MAT *a)$/;"	f
+main	gstat.c	/^int main(int argc, char *argv[]) {$/;"	f
+main	lex.c	/^int main()$/;"	f
+main	mapio.c	/^int main(int argc, char *argv[])$/;"	f
+main	mapio_.c	/^int main(int argc, char *argv[]) {$/;"	f
+main	pqueue.c	/^int main(int argc, char *argv[]) {$/;"	f
+main	read.c	/^int main(int argc, char *argv[]) {$/;"	f
+main_sem	sem_main.c	/^int main_sem(int argc, char *argv[]) $/;"	f
+make_gls	gls.c	/^double *make_gls(DATA *d, int calc_residuals) {$/;"	f
+make_residuals_lm	lm.c	/^void make_residuals_lm(DATA *d) {$/;"	f
+map2fig	map2fig.c	/^int map2fig(int argc, char *argv[]) {$/;"	f
+map2gd	map2gd.c	/^int map2gd(int argc, char *argv[]) {$/;"	f
+map2gd	map2gd.c	106;"	d	file:
+map_cell_is_mv	mapio.c	/^int map_cell_is_mv(GRIDMAP * m \/* pointer to map *\/ ,$/;"	f
+map_cell_is_mv	mapio_.c	/^int map_cell_is_mv(GRIDMAP *m \/* pointer to map *\/,$/;"	f
+map_convert	maputils.c	/^int map_convert(int argc, char *argv[]) {$/;"	f
+map_cover	maputils.c	/^int map_cover(int argc, char *argv[]) {$/;"	f
+map_cut	maputils.c	/^int map_cut(int argc, char *argv[]) {$/;"	f
+map_diff	maputils.c	/^int map_diff(int argc, char *argv[]) {$/;"	f
+map_dup	mapio.c	/^GRIDMAP *map_dup(const char *fname, GRIDMAP * m)$/;"	f
+map_dup	mapio_.c	/^GRIDMAP *map_dup(const char *fname, GRIDMAP *m) {$/;"	f
+map_equal	mapio.c	/^int map_equal(GRIDMAP * a, GRIDMAP * b)$/;"	f
+map_equal	mapio_.c	/^int map_equal(GRIDMAP *a, GRIDMAP *b) {$/;"	f
+map_free	mapio.c	/^void map_free(GRIDMAP * m \/* pointer to GRIDMAP structure *\/ )$/;"	f
+map_free	mapio_.c	/^void map_free(GRIDMAP *m \/* pointer to GRIDMAP structure *\/) {$/;"	f
+map_get_cell	mapio.c	/^float map_get_cell(GRIDMAP * m \/* pointer to GRIDMAP *\/ ,$/;"	f
+map_get_cell	mapio_.c	/^float map_get_cell(GRIDMAP *m \/* pointer to GRIDMAP *\/,$/;"	f
+map_lnh	maputils.c	/^int map_lnh(int argc, char *argv[]) {$/;"	f
+map_name_nr	maputils.c	/^void map_name_nr(GRIDMAP *mask, const char *base, char *name, int nr, int max) {$/;"	f
+map_nominal	maputils.c	/^int map_nominal(int argc, char *argv[]) {$/;"	f
+map_put_cell	mapio.c	/^int map_put_cell(GRIDMAP * m,	\/* pointer to GRIDMAP structure *\/$/;"	f
+map_put_cell	mapio_.c	/^int map_put_cell(GRIDMAP *m, \/* pointer to GRIDMAP structure *\/$/;"	f
+map_q	maputils.c	/^int map_q(int argc, char *argv[]) {$/;"	f
+map_read	mapio.c	/^GRIDMAP *map_read(GRIDMAP * m)$/;"	f
+map_read	mapio_.c	/^GRIDMAP *map_read(GRIDMAP *m) {$/;"	f
+map_rowcol2xy	mapio.c	/^int map_rowcol2xy(GRIDMAP * m,	\/* pointer to gridmap *\/$/;"	f
+map_rowcol2xy	mapio_.c	/^int map_rowcol2xy(GRIDMAP *m, \/* pointer to gridmap *\/$/;"	f
+map_sign	predict.c	/^void map_sign(GRIDMAP *m, const char *what) {$/;"	f
+map_switch_type	mapio.c	/^GRIDMAP *map_switch_type(GRIDMAP * in, MAPTYPE type)$/;"	f
+map_switch_type	mapio_.c	/^GRIDMAP *map_switch_type(GRIDMAP *in, MAPTYPE type) {$/;"	f
+map_xy2rowcol	mapio.c	/^int map_xy2rowcol(GRIDMAP * m \/* pointer to map *\/ ,$/;"	f
+map_xy2rowcol	mapio_.c	/^int map_xy2rowcol(GRIDMAP *m \/* pointer to map *\/,$/;"	f
+mask_names	glvars.c	/^static char **outfile_names = NULL, **ids = NULL, **mask_names = NULL;$/;"	v	file:
+mask_topology	predict.c	/^static DATA_GRIDMAP *mask_topology = NULL;$/;"	v	file:
+masks	predict.c	/^static GRIDMAP **masks = NULL, **outmap = NULL;$/;"	v	file:
+max	data.c	/^static DPOINT min, max;$/;"	v	file:
+max	map2gd.c	/^float min, max, interval, *table; $/;"	v
+max_block_dimension	glvars.c	/^double max_block_dimension(void) {$/;"	f
+max_set	map2gd.c	/^	min_set = 0, max_set = 0, table_read = 0, nc = 0, nice_legend = 0,$/;"	v
+max_size	sample.c	/^	int max_size, size;$/;"	m	struct:
+message	userio.c	/^void message(char *fmt, ...) {$/;"	f
+method	glvars.c	/^static METHOD method = NSP;$/;"	v	file:
+method_string	glvars.c	/^const char *method_string(METHOD i) {$/;"	f
+methods	glvars.c	/^const METHODS methods[] = { \/* methods and codes *\/$/;"	v
+min	data.c	/^static DPOINT min, max;$/;"	v	file:
+min	map2gd.c	/^float min, max, interval, *table; $/;"	v
+min_set	map2gd.c	/^	min_set = 0, max_set = 0, table_read = 0, nc = 0, nice_legend = 0,$/;"	v
+mk_var_names	data.c	/^static void mk_var_names(DATA *d) {$/;"	f	file:
+mknan	mapio.c	1303;"	d	file:
+mknan	mapio.c	1308;"	d	file:
+mknan	mapio.c	1313;"	d	file:
+mknan	mapio_.c	1279;"	d	file:
+mknan	mapio_.c	1284;"	d	file:
+mknan	mapio_.c	1289;"	d	file:
+mode	glvars.c	/^static MODE mode = MODE_NSP; \/* MODE_NSP, SIMPLE, STRATIFY or MULTIVARIABLE *\/$/;"	v	file:
+mode	utils.c	/^	char *name, *mode;$/;"	m	struct:
+model_shift	vario.c	/^VGM_MODEL_TYPE model_shift(VGM_MODEL_TYPE now, int next) {$/;"	f
+more_file	ui.c	/^void more_file(const char *name) {$/;"	f
+msg	ui.c	/^char *header = NULL, *msg = NULL, *gnu_filename, *gnuplot_name = NULL;$/;"	v
+msim	msim.c	/^	***msim = NULL, $/;"	v	file:
+msim_base	msim.c	/^	**msim_base = NULL; \/* base structure for blocked allocation *\/$/;"	v	file:
+mu	gls.c	/^		*mu,       \/* mu vector, E(y) *\/$/;"	m	struct:
+mu0	gls.c	/^		*mu0,      \/* mu at loc x0 *\/$/;"	m	struct:
+my_dtoa	utils.c	/^char *my_dtoa(const char *fmt, double *a) {$/;"	f
+n	palet.c	/^	int n;$/;"	m	struct:
+n_done	predict.c	/^static unsigned int n_done;$/;"	v	file:
+n_edges	glvars.c	/^static int n_edges = 0; \/*really n of edges files *\/$/;"	v	file:
+n_edges_polys	glvars.c	/^static int *n_edges_polys = NULL;  \/* number of edges in every edge file *\/$/;"	v	file:
+n_last	glvars.c	/^static int n_last = 0, n_v_last = 0, n_o_last = 0;$/;"	v	file:
+n_mallocs	utils.c	/^unsigned int n_mallocs = 0;$/;"	v
+n_masks	glvars.c	/^static int n_vars = 0, n_masks = 0;$/;"	v	file:
+n_o_last	glvars.c	/^static int n_last = 0, n_v_last = 0, n_o_last = 0;$/;"	v	file:
+n_orvc	sim.c	/^static unsigned int n_orvc = 0, n_total = 0;$/;"	v	file:
+n_pred_locs	predict.c	/^unsigned int n_pred_locs = 0;$/;"	v
+n_sim_locs	msim.c	/^	*n_sim_locs = NULL, \/* n simulation locations per data variable *\/$/;"	v	file:
+n_table	map2gd.c	/^	nc_max = 0, n_table = 0, nclass = 16, draw_map_box = 0, ticks = 0;$/;"	v
+n_total	sim.c	/^static unsigned int n_orvc = 0, n_total = 0;$/;"	v	file:
+n_v_last	glvars.c	/^static int n_last = 0, n_v_last = 0, n_o_last = 0;$/;"	v	file:
+n_variograms_set	glvars.c	/^int n_variograms_set(void) {$/;"	f
+n_vars	glvars.c	/^static int n_vars = 0, n_masks = 0;$/;"	v	file:
+name	parse.c	/^	const char *name;$/;"	m	struct:
+name	utils.c	/^	char *name, *mode;$/;"	m	struct:
+name_identifier	glvars.c	/^const char *name_identifier(int i) {$/;"	f
+nc	map2gd.c	/^	min_set = 0, max_set = 0, table_read = 0, nc = 0, nice_legend = 0,$/;"	v
+nc_max	map2gd.c	/^	nc_max = 0, n_table = 0, nclass = 16, draw_map_box = 0, ticks = 0;$/;"	v
+nclass	map2gd.c	/^	nc_max = 0, n_table = 0, nclass = 16, draw_map_box = 0, ticks = 0;$/;"	v
+nesting_level	fig.c	/^static int nesting_level = 0;$/;"	v	file:
+new_glm	gls.c	/^static GLM *new_glm(void) {$/;"	f	file:
+new_map	mapio.c	/^GRIDMAP *new_map(void)$/;"	f
+new_map	mapio_.c	/^GRIDMAP *new_map(void) {$/;"	f
+new_source	lex.c	/^	new_source = 0;$/;"	v	file:
+next_location	predict.c	/^static DPOINT *next_location(DPOINT *loc, PRED_AT what, int random_path,$/;"	f	file:
+ni	random.c	/^static unsigned int ni;$/;"	v	file:
+nice_legend	map2gd.c	/^	min_set = 0, max_set = 0, table_read = 0, nc = 0, nice_legend = 0,$/;"	v
+nj	random.c	/^static unsigned int nj;$/;"	v	file:
+node_cmp	nsearch.c	/^static int node_cmp(const QUEUE_NODE *a, const QUEUE_NODE *b) {$/;"	f	file:
+nr	utils.c	/^	int nr;$/;"	m	struct:
+o_file	predict.c	/^static FILE *o_file = NULL;$/;"	v	file:
+o_filename	glvars.c	/^char *o_filename;$/;"	v
+octant_select	select.c	/^static int octant_select(DATA *d, DPOINT *where) {$/;"	f	file:
+ofn	parse.c	/^static char **ofn = NULL, *boundary_file = NULL;$/;"	v	file:
+one_map2gd	map2gd.c	/^int one_map2gd(GRIDMAP *m, const char *f_name, TICKS *xt, TICKS *yt, $/;"	f
+one_map2gd	map2gd.c	/^int one_map2gd(GRIDMAP *m, const char *f_name, TICKS *xt, TICKS *yt, int legend) {$/;"	f
+open_curses	ui.c	/^void open_curses(void) {$/;"	f
+optarg	getopt.c	/^char	*optarg;		\/* argument associated with option *\/$/;"	v
+opterr	getopt.c	/^int	opterr = 1,		\/* if error message should be printed *\/$/;"	v
+optind	getopt.c	/^	optind = 1,		\/* index into parent argv vector *\/$/;"	v
+optopt	getopt.c	/^	optopt; 		\/* character checked for validity *\/$/;"	v
+ossfim	ossfim.c	/^int ossfim(int argc, char *argv[]) {$/;"	f
+ossfim	ossfim00.c	/^int ossfim(int argc, char *argv[]) {$/;"	f
+ossfim	ossfim_.c	/^int ossfim(int argc, char *argv[]) {$/;"	f
+ossfim	x.c	/^int ossfim(int argc, char *argv[]) {$/;"	f
+ossfim2map	ossfim.c	/^void ossfim2map(double **table, const char *name, double s, double S,$/;"	f
+out	fig.c	/^static FILE *out = NULL;$/;"	v	file:
+outfile_names	glvars.c	/^static char **outfile_names = NULL, **ids = NULL, **mask_names = NULL;$/;"	v	file:
+outmap	predict.c	/^static GRIDMAP **masks = NULL, **outmap = NULL;$/;"	v	file:
+output	lex.c	480;"	d	file:
+output	lex.c	484;"	d	file:
+output_line	report.c	/^void output_line(FILE *out_file, DATA *data, DPOINT *where, double *est, int n_outfl) {$/;"	f
+p	plot.c	/^	PLOT_TYPE p;$/;"	m	struct:
+p_normal	random.c	/^double p_normal(double z) {$/;"	f
+p_triangular	random.c	/^double p_triangular(double z) {$/;"	f
+p_uniform	random.c	/^double p_uniform(double z) {$/;"	f
+pal	map2gd.c	/^PALETTE pal = GYR0;$/;"	v
+palet	palet.c	/^int palet(int argc, char *argv[]) {$/;"	f
+parse_cmd	parse.c	/^int parse_cmd(const char *cmd, const char *fname) {$/;"	f
+parse_file	parse.c	/^int parse_file(const char *fname) {$/;"	f
+parse_gstatrc	parse.c	/^void parse_gstatrc(void) {$/;"	f
+parse_options	gstat.c	/^static void parse_options(int argc, char *argv[]) {$/;"	f	file:
+parse_variogram	parse.c	/^static VARIOGRAM *parse_variogram = NULL;$/;"	v	file:
+pb_norm_1D	nsearch.c	/^double pb_norm_1D(const DPOINT *where, BBOX bbox) {$/;"	f
+pb_norm_2D	nsearch.c	/^double pb_norm_2D(const DPOINT *where, BBOX bbox) {$/;"	f
+pb_norm_3D	nsearch.c	/^double pb_norm_3D(const DPOINT *where, BBOX bbox) {$/;"	f
+plot_weights	gls.c	/^static void plot_weights(DATA **d, int nvars, DPOINT *where, MAT *weights) {$/;"	f	file:
+plotfile	glvars.c	/^FILE *plotfile;$/;"	v
+pnorm_Algorithm	pcrstats.c	/^static int  pnorm_Algorithm($/;"	f	file:
+pnorm_ResultTypes	pcrstats.c	/^static int pnorm_ResultTypes($/;"	f	file:
+pnorm_synopsis	pcrstats.c	/^static PCR_EXTERNAL_FUNCTION_SYNOPSIS pnorm_synopsis = {$/;"	v	file:
+point_in_polygon	polygon.c	/^int point_in_polygon(PLOT_POINT point, POLYGON *pl)$/;"	f
+point_norm_1D	data.c	/^static double point_norm_1D(const DPOINT *p) {$/;"	f	file:
+point_norm_2D	data.c	/^static double point_norm_2D(const DPOINT *p) {$/;"	f	file:
+point_norm_3D	data.c	/^static double point_norm_3D(const DPOINT *p) {$/;"	f	file:
+polynomial	data.c	/^const POLY_NM polynomial[N_POLY] =$/;"	v
+pop_point	data.c	/^void pop_point(DATA *d, int list_nr)$/;"	f
+pp_norm_1D	data.c	/^static double pp_norm_1D(const DPOINT *a, const DPOINT *b) {$/;"	f	file:
+pp_norm_2D	data.c	/^static double pp_norm_2D(const DPOINT *a, const DPOINT *b) {$/;"	f	file:
+pp_norm_3D	data.c	/^static double pp_norm_3D(const DPOINT *a, const DPOINT *b) {$/;"	f	file:
+pr_type_str	ui.c	/^const char *pr_type_str[] = {$/;"	v
+pr_warning	userio.c	/^void pr_warning(char *fmt, ...) {$/;"	f
+pred_lm	lm.c	/^void pred_lm(DATA **data, int n_vars, DPOINT *where, double *est) {$/;"	f
+predict_all	predict.c	/^void predict_all(DATA **data) {$/;"	f
+predict_lm	lm.c	/^static void predict_lm(LM *lm, MAT *X0, double *est) {$/;"	f	file:
+print_data	data.c	/^void print_data(const DATA *d, int list) {$/;"	f
+print_data_line	data.c	/^char *print_data_line(const DATA *d, char **to) {$/;"	f
+print_file_record	utils.c	/^void print_file_record(void) {$/;"	f
+print_n	utils.c	/^void print_n(void) {$/;"	f
+print_orvc	sim.c	/^void print_orvc(void) {$/;"	f
+print_poly_log	polygon.c	/^static void print_poly_log(POLYGON *edge) {$/;"	f	file:
+print_progress	userio.c	/^void print_progress(unsigned int current, unsigned int total) {$/;"	f
+print_queue	pqueue.c	/^static void print_queue(QUEUE *q) {$/;"	f	file:
+print_selection	select.c	/^static void print_selection(DATA *d, DPOINT *where) {$/;"	f	file:
+print_sim	msim.c	/^void print_sim(void) {$/;"	f
+print_start_up	random.c	/^static void print_start_up(void) {$/;"	f	file:
+printlog	random.c	80;"	d	file:
+printlog	userio.c	/^void printlog(const char *fmt, ...) {$/;"	f
+printlog_handler	userio.c	/^	void (*printlog_handler)(const char *mess);$/;"	m	struct:
+progname	sem_main.c	/^static char *progname = NULL;$/;"	v	file:
+progress_handler	userio.c	/^	void (*progress_handler)(unsigned int this, unsigned int total);$/;"	m	struct:
+prompt_for	ui.c	/^int prompt_for(const char *pr, PR_TYPE what, void *def_ret) {$/;"	f
+pt	plot.c	/^	int pt, lt;$/;"	m	struct:
+ptr	parse.c	/^	void *ptr;$/;"	m	struct:
+pts	sample.c	/^	PTS *pts;$/;"	m	struct:
+push_bound	glvars.c	/^void push_bound(double value) {$/;"	f
+push_data_X	parse.c	/^static void push_data_X(DATA *d, int id) {$/;"	f	file:
+push_edges_name	glvars.c	/^void push_edges_name(const char *name) {$/;"	f
+push_marginal	parse.c	/^static void push_marginal(char *name, double value) {$/;"	f	file:
+push_mask_name	glvars.c	/^void push_mask_name(const char *name) {$/;"	f
+push_point	data.c	/^void push_point(DATA *d, const DPOINT *p) {$/;"	f
+push_to_cloud	sem.c	/^static void push_to_cloud(SAMPLE_VGM *ev, double gamma, double dist,$/;"	f	file:
+push_to_cloud	sem0.c	/^static void push_to_cloud(SAMPLE_VGM *ev, double gamma, double dist,$/;"	f	file:
+push_to_merge_table	data.c	/^int push_to_merge_table(DATA *d, int to_var, int col_this_X, int col_other_X) {$/;"	f
+push_to_palet	palet.c	/^static PAL *push_to_palet(PAL *p, unsigned int rgb) {$/;"	f	file:
+push_to_v	parse.c	/^static void push_to_v(const char *mod, double sill, double range, double *d,$/;"	f	file:
+push_to_vector	data.c	/^D_VECTOR *push_to_vector(double d, D_VECTOR *v) {$/;"	f
+push_variogram_model	vario.c	/^int push_variogram_model(VARIOGRAM *v, VGM_MODEL part) {$/;"	f
+px	map2gd.c	/^int px = 0, interlace = 0, transparent = 1,$/;"	v
+q_Algorithm	pcrstats.c	/^static int q_Algorithm($/;"	f	file:
+q_ResultTypes	pcrstats.c	/^static int q_ResultTypes($/;"	f	file:
+q_normal	random.c	/^double q_normal(double p) {$/;"	f
+q_synopsis	pcrstats.c	/^static PCR_EXTERNAL_FUNCTION_SYNOPSIS q_synopsis = {$/;"	v	file:
+q_triangular	random.c	/^double q_triangular(double p) {$/;"	f
+q_uniform	random.c	/^double q_uniform(double p) {$/;"	f
+qnorm_Algorithm	pcrstats.c	/^static int qnorm_Algorithm($/;"	f	file:
+qnorm_ResultTypes	pcrstats.c	/^static int qnorm_ResultTypes($/;"	f	file:
+qnorm_synopsis	pcrstats.c	/^static PCR_EXTERNAL_FUNCTION_SYNOPSIS qnorm_synopsis = {$/;"	v	file:
+qtree_expand	nsearch.c	/^static QTREE_NODE *qtree_expand(const DPOINT *where, QTREE_NODE *root) {$/;"	f	file:
+qtree_find_node	nsearch.c	/^static QTREE_NODE **qtree_find_node(const DPOINT *where, QTREE_NODE **p_node,$/;"	f	file:
+qtree_free	nsearch.c	/^void qtree_free(QTREE_NODE *node) {$/;"	f
+qtree_pop_point	nsearch.c	/^void qtree_pop_point(DPOINT *where, DATA *d) {$/;"	f
+qtree_print	nsearch.c	/^void qtree_print(DATA *d) {$/;"	f
+qtree_push	nsearch.c	/^static void qtree_push(DPOINT *where, QTREE_NODE **p_node) {$/;"	f	file:
+qtree_push_point	nsearch.c	/^void qtree_push_point(DATA *d, DPOINT *where) {$/;"	f
+qtree_rebuild	nsearch.c	/^void qtree_rebuild(DATA *d) {$/;"	f
+qtree_select	nsearch.c	/^int qtree_select(DPOINT *where, DATA *d) {$/;"	f
+qtree_split_node	nsearch.c	/^static void qtree_split_node(QTREE_NODE *node, BBOX bbox) {$/;"	f	file:
+qtree_zero_all_leaves	nsearch.c	/^static void qtree_zero_all_leaves(QTREE_NODE *node) {$/;"	f	file:
+r	sample.c	/^	int r, c;$/;"	m	struct:
+r_normal	random.c	/^double r_normal(void) {$/;"	f
+r_triangular	random.c	/^double r_triangular(void) {$/;"	f
+r_uniform	random.c	/^double r_uniform(void) {$/;"	f
+range	parse.c	/^static double range = -1.0, anis[5];$/;"	v	file:
+rcs_id	pcrstats.c	/^static const char *rcs_id = $/;"	v	file:
+read_T2	mapio.c	/^GRIDMAP *read_T2(GRIDMAP * m)$/;"	f
+read_T2	mapio_.c	/^GRIDMAP *read_T2(GRIDMAP *m) {$/;"	f
+read_all_data	gstat.c	/^static void read_all_data(DATA **data, DATA *valdata, int n_vars) {$/;"	f	file:
+read_arcgrid	mapio.c	/^static GRIDMAP *read_arcgrid(GRIDMAP * m)$/;"	f	file:
+read_arcgrid	mapio_.c	/^static GRIDMAP *read_arcgrid(GRIDMAP *m) {$/;"	f	file:
+read_arcgrid_header	mapio.c	/^static int read_arcgrid_header(GRIDMAP * m, FILE * f)$/;"	f	file:
+read_arcgrid_header	mapio_.c	/^static int read_arcgrid_header(GRIDMAP *m, FILE *f) {$/;"	f	file:
+read_ascii_grid	mapio.c	/^static int read_ascii_grid(GRIDMAP * m, FILE * f, int first_line_in_buffer)$/;"	f	file:
+read_ascii_grid	mapio_.c	/^static int read_ascii_grid(GRIDMAP *m, FILE *f, int first_line_in_buffer) {$/;"	f	file:
+read_csf	mapio.c	/^static GRIDMAP *read_csf(GRIDMAP * m)$/;"	f	file:
+read_csf	mapio_.c	/^static GRIDMAP *read_csf(GRIDMAP *m) {$/;"	f	file:
+read_data	data.c	/^DATA *read_data(DATA *d) {$/;"	f
+read_data_from_map	data.c	/^static int read_data_from_map(DATA *d) {$/;"	f	file:
+read_data_line	data.c	/^static int read_data_line(FILE *f, char *line, DATA *d, DPOINT *current,$/;"	f	file:
+read_double	read.c	/^int read_double(const char *s, double *d) {$/;"	f
+read_eas_header	data.c	/^static int read_eas_header(FILE *infile, DATA *d, int ncols) {$/;"	f	file:
+read_edges	polygon.c	/^void read_edges(void) $/;"	f
+read_ermapper	mapio.c	/^static GRIDMAP *read_ermapper(GRIDMAP * m)$/;"	f	file:
+read_ermapper	mapio_.c	/^static GRIDMAP *read_ermapper(GRIDMAP *m) {$/;"	f	file:
+read_ermapper_header	mapio.c	/^static int read_ermapper_header(GRIDMAP * m, FILE * f)$/;"	f	file:
+read_ermapper_header	mapio_.c	/^static int read_ermapper_header(GRIDMAP *m, FILE *f) {$/;"	f	file:
+read_float	read.c	/^int read_float(const char *s, float *f) {$/;"	f
+read_gmt	mapio.c	/^static GRIDMAP *read_gmt(GRIDMAP * m)$/;"	f	file:
+read_gmt	mapio_.c	/^static GRIDMAP *read_gmt (GRIDMAP *m) {$/;"	f	file:
+read_grass	mapio.c	/^static GRIDMAP *read_grass(GRIDMAP * m)$/;"	f	file:
+read_grass	mapio_.c	/^static GRIDMAP *read_grass(GRIDMAP *m) {$/;"	f	file:
+read_grass_data	data.c	/^static DATA *read_grass_data(DATA * d) {$/;"	f	file:
+read_gslib	mapio.c	/^static GRIDMAP *read_gslib(GRIDMAP * m)$/;"	f	file:
+read_gslib	mapio_.c	/^static GRIDMAP *read_gslib(GRIDMAP *m) {$/;"	f	file:
+read_idrisi_header	mapio.c	/^static int read_idrisi_header(GRIDMAP * m, const char *fname)$/;"	f	file:
+read_idrisi_header	mapio_.c	/^static int read_idrisi_header(GRIDMAP *m, const char *fname) {$/;"	f	file:
+read_idrisi_image	mapio.c	/^static GRIDMAP *read_idrisi_image(GRIDMAP * m)$/;"	f	file:
+read_idrisi_image	mapio_.c	/^static GRIDMAP *read_idrisi_image(GRIDMAP *m) {$/;"	f	file:
+read_idrisi_point_data	data.c	/^static int read_idrisi_point_data(DATA *d, const char *fname) {$/;"	f	file:
+read_idrisi_point_header	data.c	/^static int read_idrisi_point_header(DATA *d, const char *fname) {$/;"	f	file:
+read_idrisi_points	data.c	/^static int read_idrisi_points(DATA *d) {$/;"	f	file:
+read_int	read.c	/^int read_int(const char *s, int *i) {$/;"	f
+read_long	read.c	/^int read_long(const char *s, long *l) {$/;"	f
+read_multiformat_bgrid	mapio.c	/^static int read_multiformat_bgrid(GRIDMAP * m, const char *fname, int swap)$/;"	f	file:
+read_multiformat_bgrid	mapio_.c	/^static int read_multiformat_bgrid(GRIDMAP *m, const char *fname, int swap) {$/;"	f	file:
+read_n_points	polygon.c	/^POLYGON read_n_points(FILE *f, int np) {$/;"	f
+read_polygons	polygon.c	/^POLYGON *read_polygons(const char *filename, int *n_polys, double **iso_values) {$/;"	f
+read_surfer	mapio.c	/^static GRIDMAP *read_surfer(GRIDMAP * m)$/;"	f	file:
+read_surfer	mapio_.c	/^static GRIDMAP *read_surfer(GRIDMAP *m) {$/;"	f	file:
+read_surfer_header	mapio.c	/^static int read_surfer_header(GRIDMAP * m, FILE * f)$/;"	f	file:
+read_surfer_header	mapio_.c	/^static int read_surfer_header(GRIDMAP *m, FILE *f) {$/;"	f	file:
+read_table	data.c	/^static DATA *read_table(DATA *d) {$/;"	f	file:
+read_table	map2gd.c	/^static void read_table(char *s) {$/;"	f	file:
+read_uint	read.c	/^int read_uint(const char *s, unsigned int *u) {$/;"	f
+read_ulong	read.c	/^int read_ulong(const char *s, unsigned long *u) {$/;"	f
+read_variogram	parse.c	/^int read_variogram(VARIOGRAM *v, const char *source) {$/;"	f
+read_vector	parse.c	/^int read_vector(D_VECTOR *d, char *fname) {$/;"	f
+record_closed	utils.c	/^static void record_closed(const FILE *f) {$/;"	f	file:
+record_open	utils.c	/^static void record_open(const FILE *f, const char *name, const char *mode,$/;"	f	file:
+record_removed	utils.c	/^static void record_removed(const char *name) {$/;"	f	file:
+redraw_scr	ui.c	/^static int var_ids[2] = { -1, -1 }, redraw_scr = 0, window_nr = -1,$/;"	v	file:
+register_pairs	sem.c	/^static void *register_pairs(void *pairs, unsigned long nh,$/;"	f	file:
+register_pairs	sem0.c	/^static void *register_pairs(void *pairs, unsigned long nh,$/;"	f	file:
+relative_nugget	vario.c	/^double relative_nugget(VARIOGRAM *v) {$/;"	f
+reml	reml.c	/^static int reml(VEC *Y, MAT *X, MAT **Vk, int n_k, int max_iter,$/;"	f	file:
+reml_sills	reml.c	/^VARIOGRAM *reml_sills(DATA *data, VARIOGRAM *vp) {$/;"	f
+remove_all	glvars.c	/^void remove_all(void) {$/;"	f
+remove_id	glvars.c	/^int remove_id(const int id) {$/;"	f
+remove_tmp	gstat.c	/^void remove_tmp(void) {$/;"	f
+remove_where_from_selection	xvalid.c	/^static void remove_where_from_selection(DATA *data, DPOINT *pt, int at0) {$/;"	f	file:
+report	report.c	/^void report(double *xdata, double *xpred, double *xdiff, double *xstd,$/;"	f
+report_data	data.c	/^void report_data(const DATA *d) {$/;"	f
+report_edges	polygon.c	/^void report_edges(void) {$/;"	f
+reset_anyway	block.c	/^int reset_anyway = 0;$/;"	v
+reset_block_discr	block.c	/^void reset_block_discr(void) {$/;"	f
+reset_gstat_errno	userio.c	/^void reset_gstat_errno(void) {$/;"	f
+reset_lex	lex.c	/^static void reset_lex(void) {$/;"	f	file:
+reset_parser	parse.c	/^static void reset_parser(void) {$/;"	f	file:
+resize_ev	sem.c	/^static void resize_ev(SAMPLE_VGM *ev, unsigned int size) {$/;"	f	file:
+resize_ev	sem0.c	/^static void resize_ev(SAMPLE_VGM *ev, unsigned int size) {$/;"	f	file:
+resize_pts_list	sample.c	/^static PTS_LIST *resize_pts_list(PTS_LIST *p, int new_max_size) {$/;"	f	file:
+resize_strbuf	utils.c	/^STRING_BUFFER *resize_strbuf(STRING_BUFFER *b, unsigned int size) {$/;"	f
+restore_data_list	msim.c	/^static void restore_data_list(DATA **data, int sim, int n_vars) {$/;"	f	file:
+restore_data_sel	msim.c	/^void restore_data_sel(DATA **data, int sim, int n_vars) {$/;"	f
+rng	random.c	/^static gsl_rng *rng = NULL;$/;"	v	file:
+rnorm_Algorithm	pcrstats.c	/^static int rnorm_Algorithm($/;"	f	file:
+rnorm_ResultTypes	pcrstats.c	/^static int rnorm_ResultTypes($/;"	f	file:
+rnorm_synopsis	pcrstats.c	/^static PCR_EXTERNAL_FUNCTION_SYNOPSIS rnorm_synopsis = {$/;"	v	file:
+s2d	msim.c	/^	**s2d = NULL, $/;"	v	file:
+sample_main	sample.c	/^int sample_main(int argc, char *argv[]) {$/;"	f
+sample_mean	stat.c	/^double sample_mean(double *list, int n) {$/;"	f
+sample_std	stat.c	/^double sample_std(double *list, double mean, int n) {$/;"	f
+sample_var	stat.c	/^double sample_var(double *list, double mean, int n) {$/;"	f
+save_as	ui.c	/^int save_as(int key) {$/;"	f
+save_sim	msim.c	/^void save_sim(DATA **data, DPOINT *where, int sim, int n_vars,$/;"	f
+save_sim_strat	msim.c	/^void save_sim_strat(DATA *d, DPOINT *where, int sim, double value, int is_pt) {$/;"	f
+save_simulations_to_ascii	msim.c	/^void save_simulations_to_ascii(const char *fname) {$/;"	f
+save_simulations_to_maps	msim.c	/^void save_simulations_to_maps(GRIDMAP *mask) {$/;"	f
+save_strcat	utils.c	/^void save_strcat(STRING_BUFFER *dest, const char *src) {$/;"	f
+save_string	utils.c	/^const char *save_string(const char *msg) {$/;"	f
+sccsid	getopt.c	/^static char sccsid[] = "@(#)getopt.c    4.7 (Berkeley) 6\/27\/88";$/;"	v	file:
+sd_vector	parse.c	/^static D_VECTOR *sd_vector = NULL;$/;"	v	file:
+seed	pcrstats.c	/^static unsigned long seed = 0;$/;"	v	file:
+seed	random.c	/^static unsigned long int seed = 0;$/;"	v	file:
+segment_between_check	polygon.c	/^static int segment_between_check(PLOT_POINT a, PLOT_POINT b, PLOT_POINT c) {$/;"	f	file:
+segment_cross_check	polygon.c	/^static unsigned int segment_cross_check(PLOT_POINT A, PLOT_POINT B, $/;"	f	file:
+segment_parallel_check	polygon.c	/^static unsigned int segment_parallel_check(PLOT_POINT A, PLOT_POINT B, $/;"	f	file:
+select_at	select.c	/^int select_at(DATA *d, DPOINT *where) {$/;"	f
+sem_cov_ab	vario_io.c	/^double sem_cov_ab(VARIOGRAM *v, DPOINT *a, DPOINT *b, int sem)$/;"	f
+sem_cov_blocks	vario_io.c	/^static double sem_cov_blocks(VARIOGRAM *v, DATA *a, DATA *b, int sem) {$/;"	f	file:
+semivariogram	sem.c	/^static SAMPLE_VGM *semivariogram(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+semivariogram	sem0.c	/^static SAMPLE_VGM *semivariogram(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+semivariogram_grid	sem.c	/^static SAMPLE_VGM *semivariogram_grid(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+semivariogram_grid	sem0.c	/^static SAMPLE_VGM *semivariogram_grid(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+semivariogram_list	sem.c	/^static SAMPLE_VGM *semivariogram_list(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+semivariogram_list	sem0.c	/^static SAMPLE_VGM *semivariogram_list(DATA *d, SAMPLE_VGM *ev) {$/;"	f	file:
+set_back_radius	select.c	55;"	d	file:
+set_beta	beta.c	/^void set_beta(DATA **d, int sim, int n_vars, METHOD method) {$/;"	f
+set_beta	msim.c	/^void set_beta(DATA **d, int sim, int n_vars, METHOD method) {$/;"	f
+set_direction_values	direct.c	/^void set_direction_values(double a, double b, double t_h, double t_v) {$/;"	f
+set_edges	glvars.c	/^POLYGON **set_edges(POLYGON **new_edges) {$/;"	f
+set_gstat_error_handler	userio.c	/^void set_gstat_error_handler(void (*error_fn)(const char *message, int level)) {$/;"	f
+set_gstat_log_file	userio.c	/^int set_gstat_log_file(FILE *f) {$/;"	f
+set_gstat_log_handler	userio.c	/^void set_gstat_log_handler(void (*logprint)(const char *str)) {$/;"	f
+set_gstat_progress_handler	userio.c	/^void set_gstat_progress_handler($/;"	f
+set_gstat_warning_handler	userio.c	/^void set_gstat_warning_handler(void (*warning_fn)(const char *message)) {$/;"	f
+set_key	plot.c	/^static int set_key(FILE *f, const VARIOGRAM *v, double min, double max) {$/;"	f	file:
+set_lex_source	lex.c	/^void set_lex_source(const char *source, const char *fname) {$/;"	f
+set_method	glvars.c	/^void set_method(METHOD m) {$/;"	f
+set_mode	glvars.c	/^void set_mode(void) {$/;"	f
+set_mouse_on	ui.c	/^void set_mouse_on(void) {$/;"	f
+set_mv_double	utils.c	/^void set_mv_double(double *d) {$/;"	f
+set_mv_float	utils.c	/^void set_mv_float(float *f) {$/;"	f
+set_n_edges_polys	glvars.c	/^int *set_n_edges_polys(int *n) {$/;"	f
+set_norm_fns	data.c	/^void set_norm_fns(DATA *d) {$/;"	f
+set_output	ui.c	/^void set_output(int key) {$/;"	f
+set_random_number_generator	random.c	/^void set_random_number_generator(int i) {$/;"	f
+set_seed	random.c	/^void set_seed(unsigned long int i) {$/;"	f
+setup_beta	beta.c	/^void setup_beta(DATA **d, int n_vars, int n_sim) {$/;"	f
+setup_beta	msim.c	/^void setup_beta(DATA **d, int n_vars, int n_sim) {$/;"	f
+setup_command	ui.c	/^void setup_command(void) {$/;"	f
+setup_data_minmax	data.c	/^void setup_data_minmax(DATA *d) {$/;"	f
+setup_meschach_error_handler	userio.c	/^void setup_meschach_error_handler(void) {$/;"	f
+setup_poly_method	glvars.c	/^DATA *setup_poly_method(void) {$/;"	f
+setup_poly_minmax	polygon.c	/^static void setup_poly_minmax(POLYGON *pl) {$/;"	f	file:
+setup_polynomial_X	data.c	/^static void setup_polynomial_X(DATA *d) {$/;"	f	file:
+setup_valdata_X	glvars.c	/^void setup_valdata_X(DATA *d) {$/;"	f
+show_plot	ui.c	/^void show_plot(int key) {$/;"	f
+simulate_mvn	sim.c	/^static void simulate_mvn(const double *est, VEC *result, const int *is_datum) {$/;"	f	file:
+simulate_uniform	sim.c	/^static void simulate_uniform(double *est, VEC *result, int orc) {$/;"	f	file:
+size	sample.c	/^	int max_size, size;$/;"	m	struct:
+sizeof_ct	mapio.c	/^static unsigned int sizeof_ct(CellType ct)$/;"	f	file:
+sizeof_ct	mapio_.c	/^static unsigned int sizeof_ct(CellType ct) {$/;"	f	file:
+spC	gls.c	/^	SPMAT *spC;    \/* sparse version of C *\/$/;"	m	struct:
+spC	gls.c	/^	void *spC;$/;"	m	struct:
+sprint_cmd	writecmd.c	/^const char *sprint_cmd(void) {$/;"	f
+sprint_glvars	writecmd.c	/^const char *sprint_glvars(int anyway) {$/;"	f
+sprint_variogram	vario.c	/^const char *sprint_variogram(const VARIOGRAM *v, int verbose) {$/;"	f
+start	utils.c	/^static time_t start;$/;"	v	file:
+start_random_number	random.c	/^static void start_random_number (int seed_a, int seed_b)$/;"	f	file:
+start_ui	ui.c	/^int start_ui(void) {$/;"	f
+start_up	random.c	/^static char start_up[100];$/;"	v	file:
+stats	stat.c	/^static int stats(char *name, int silent, double q) {$/;"	f	file:
+status	utils.c	/^	FILE_STATUS status;$/;"	m	struct:
+store_argv	utils.c	/^char *store_argv(int argc, char *argv[]) {$/;"	f
+store_radius	select.c	54;"	d	file:
+strata_min	predict.c	/^int strata_min;$/;"	v
+strcat_tm	vario.c	/^static void strcat_tm(char *cp, ANIS_TM *tm) {$/;"	f	file:
+stream_name	utils.c	/^static const char *stream_name(const FILE *f) {$/;"	f	file:
+string_casecmp	utils.c	/^int string_casecmp(const char *a, const char *b) {$/;"	f
+string_cat	utils.c	/^const char *string_cat(const char *s, const char *t) {$/;"	f
+string_file	utils.c	/^char *string_file(const char *fname) {$/;"	f
+string_prompt	utils.c	/^char *string_prompt(const char *prompt) {$/;"	f
+sub_bbox	nsearch.c	/^static BBOX sub_bbox(const BBOX bbox, int index) {$/;"	f	file:
+sval	parse.c	/^	char *sval;$/;"	m	union:
+swap_floats	mapio.c	/^static void swap_floats(unsigned char *b, unsigned int n)$/;"	f	file:
+swap_floats	mapio_.c	/^static void swap_floats(unsigned char *b, unsigned int n) {$/;"	f	file:
+swap_multiformat	mapio.c	/^static void swap_multiformat(unsigned char *b, unsigned int m,$/;"	f	file:
+swap_multiformat	mapio_.c	/^static void swap_multiformat(unsigned char *b, unsigned int m, unsigned int n) {$/;"	f	file:
+table	map2gd.c	/^float min, max, interval, *table; $/;"	v
+table_read	map2gd.c	/^	min_set = 0, max_set = 0, table_read = 0, nc = 0, nice_legend = 0,$/;"	v
+table_size	msim.c	/^	table_size = 0, \/* offset strata table size *\/$/;"	v	file:
+tell	getopt.c	37;"	d	file:
+term_name	plot.c	/^	char *term_name, *term_opt, *gamma_str, *distance_str;$/;"	m	struct:
+term_opt	plot.c	/^	char *term_name, *term_opt, *gamma_str, *distance_str;$/;"	m	struct:
+text	ui.c	/^	char *text, **help, *entry;$/;"	m	struct:
+text_a	ui.c	/^static char *text_a[MAX_OPTION] = {$/;"	v	file:
+text_b	ui.c	/^static char *text_b[MAX_OPTION] = {$/;"	v	file:
+ticks	map2gd.c	/^	nc_max = 0, n_table = 0, nclass = 16, draw_map_box = 0, ticks = 0;$/;"	v
+time_seed	random.c	/^static unsigned long int time_seed(void) {$/;"	f	file:
+title	map2gd.c	/^char colour_table[256] = "", *title = NULL, tmp_str[256] = "";$/;"	v
+tmp_str	map2gd.c	/^char colour_table[256] = "", *title = NULL, tmp_str[256] = "";$/;"	v
+toggle_model	ui.c	/^VGM_MODEL_TYPE toggle_model(int i, VGM_MODEL_TYPE m) {$/;"	f
+tol_hor	direct.c	/^	tol_hor = PI, tol_ver = PI,$/;"	v	file:
+tol_ver	direct.c	/^	tol_hor = PI, tol_ver = PI,$/;"	v	file:
+trace_matrix	reml.c	/^static double trace_matrix(MAT *m) {$/;"	f	file:
+transform_data	data.c	/^static void transform_data(DATA *d) {$/;"	f	file:
+transform_norm	vario.c	/^double transform_norm(const ANIS_TM *tm, double dx, double dy, double dz) {$/;"	f
+transparent	map2gd.c	/^int px = 0, interlace = 0, transparent = 1,$/;"	v
+type	utils.c	/^	FILE_TYPE type;$/;"	m	struct:
+u	random.c	/^static double u[STATE_SIZE];$/;"	v	file:
+unput	lex.c	135;"	d	file:
+unput	lex.c	477;"	d	file:
+unput	lex.c	483;"	d	file:
+unquote	lex.c	/^static char *unquote(const char *txt) {$/;"	f	file:
+update_variogram	vario.c	/^void update_variogram(VARIOGRAM *vp) {$/;"	f
+use_pipe	ui.c	/^int wind = 0, cmd_written = 0, use_pipe = 0;$/;"	v
+user_palette	palet.c	/^static PAL *user_palette = NULL;$/;"	v	file:
+uval	parse.c	/^	unsigned int uval;$/;"	m	union:
+v	parse.c	/^static VARIOGRAM *v = NULL;$/;"	v	file:
+v	ui.c	/^static VARIOGRAM *v = NULL, *v_tmp = NULL;$/;"	v	file:
+v_bin	data.c	/^double v_bin(double mu) {$/;"	f
+v_identity	data.c	/^double v_identity(double mu) {$/;"	f
+v_logoutput	lm.c	/^void    v_logoutput(VEC *x)$/;"	f
+v_models	vario.c	/^const V_MODEL v_models[] = { \/* the variogram model ``data base'': *\/$/;"	v
+v_mu	data.c	/^double v_mu(double mu) {$/;"	f
+v_tmp	ui.c	/^static VARIOGRAM *v = NULL, *v_tmp = NULL;$/;"	v	file:
+val_data	predict.c	/^static DATA *val_data = NULL;$/;"	v	file:
+valdata	glvars.c	/^static DATA *valdata = NULL;$/;"	v	file:
+valid_direction	direct.c	/^double valid_direction(DPOINT *p, int symmetric, const DATA *d) {$/;"	f
+valid_distance	sem.c	/^static double valid_distance(DPOINT *a, DPOINT *b, double max, $/;"	f	file:
+valid_distance	sem0.c	/^static double valid_distance(DPOINT *a, DPOINT *b, double max, $/;"	f	file:
+var_ids	ui.c	/^static int var_ids[2] = { -1, -1 }, redraw_scr = 0, window_nr = -1,$/;"	v	file:
+vario	vario.c	/^int vario(int argc, char **argv) {$/;"	f
+vector_only	parse.c	/^	fit_sill = 0, fit_range = 0, vector_only = 0, allow_vector_only = 0;$/;"	v	file:
+verify_data	parse.c	/^static void verify_data(DATA *d) { \/* declaration : contents *\/$/;"	f	file:
+vgm	glvars.c	/^static VARIOGRAM **vgm = NULL;$/;"	v	file:
+vgm_init_block_values	vario.c	/^void vgm_init_block_values(VARIOGRAM *v) {$/;"	f
+vgm_model	ui.c	/^void vgm_model(int key) {$/;"	f
+vgm_type	ui.c	/^SAMPLE_VGM_TYPE vgm_type = NOTSPECIFIED;$/;"	v
+vgm_type_str	vario.c	/^const char *vgm_type_str[] = { $/;"	v
+warning_handler	userio.c	/^	void (*warning_handler)(const char *mess);$/;"	m	struct:
+warning_message	userio.c	/^	*warning_message = NULL;$/;"	v	file:
+warning_msg	ui.c	/^	*warning_msg = NULL;$/;"	v	file:
+warning_set	ui.c	/^	warning_set = 0, curses_open = 0;$/;"	v	file:
+what	parse.c	/^	} what;$/;"	m	struct:
+what	ui.c	/^static enum { VGM = 0, PRED, XVALID, CONDSIM } what = VGM;$/;"	v	file:
+what_cmp	pqueue.c	/^int what_cmp(const Q_ELEMENT_WHAT *a, const Q_ELEMENT_WHAT *b) {$/;"	f
+what_is_file	utils.c	/^static FILE_TYPE what_is_file(const FILE *f) {$/;"	f	file:
+what_is_outfile	glvars.c	/^const char *what_is_outfile(int i) {$/;"	f
+which_identifier	glvars.c	/^int which_identifier(const char *id) {$/;"	f
+which_octant	select.c	/^static int which_octant(DPOINT *where, DPOINT *p, int mode) {$/;"	f	file:
+which_point	msim.c	/^static DPOINT *which_point(DATA *d, DPOINT *where) {$/;"	f	file:
+which_variogram_model	vario.c	/^VGM_MODEL_TYPE which_variogram_model(const char *m) {$/;"	f
+wind	ui.c	/^int wind = 0, cmd_written = 0, use_pipe = 0;$/;"	v
+window_nr	ui.c	/^static int var_ids[2] = { -1, -1 }, redraw_scr = 0, window_nr = -1,$/;"	v	file:
+winds	ui.c	/^static const char *winds[N_WIND] = { "N","NE","E","SE","S","SW","W","NW" },$/;"	v	file:
+wls_fit	fit.c	/^static void wls_fit(VARIOGRAM *vp) {$/;"	f	file:
+write_T2	mapio.c	/^static GRIDMAP *write_T2(GRIDMAP * m)$/;"	f	file:
+write_T2	mapio_.c	/^static GRIDMAP *write_T2(GRIDMAP *m) {$/;"	f	file:
+write_arcgrid	mapio.c	/^static GRIDMAP *write_arcgrid(GRIDMAP * m)$/;"	f	file:
+write_arcgrid	mapio_.c	/^static GRIDMAP *write_arcgrid(GRIDMAP *m) {$/;"	f	file:
+write_arcgrid_header	mapio.c	/^static int write_arcgrid_header(GRIDMAP * m, FILE * f)$/;"	f	file:
+write_arcgrid_header	mapio_.c	/^static int write_arcgrid_header(GRIDMAP *m, FILE *f) {$/;"	f	file:
+write_ascii_grid	mapio.c	/^static void write_ascii_grid(GRIDMAP * m, FILE * f, int as_rows)$/;"	f	file:
+write_ascii_grid	mapio_.c	/^static void write_ascii_grid(GRIDMAP *m, FILE *f, int as_rows) {$/;"	f	file:
+write_binary_grid	mapio.c	/^static void write_binary_grid(GRIDMAP * m, const char *fname, int swap)$/;"	f	file:
+write_binary_grid	mapio_.c	/^static void write_binary_grid(GRIDMAP *m, const char *fname, int swap) {$/;"	f	file:
+write_csf	mapio.c	/^static GRIDMAP *write_csf(GRIDMAP * m)$/;"	f	file:
+write_csf	mapio_.c	/^static GRIDMAP *write_csf(GRIDMAP *m) {$/;"	f	file:
+write_ermapper	mapio.c	/^static GRIDMAP *write_ermapper(GRIDMAP * m)$/;"	f	file:
+write_ermapper	mapio_.c	/^static GRIDMAP *write_ermapper(GRIDMAP *m) {$/;"	f	file:
+write_ermapper_header	mapio.c	/^static void write_ermapper_header(GRIDMAP * m, FILE * fp)$/;"	f	file:
+write_ermapper_header	mapio_.c	/^static void write_ermapper_header(GRIDMAP *m, FILE *fp) {$/;"	f	file:
+write_error	mapio.c	/^static GRIDMAP *write_error(GRIDMAP * m)$/;"	f	file:
+write_error	mapio_.c	/^static GRIDMAP *write_error(GRIDMAP *m) {$/;"	f	file:
+write_fx	fit.c	/^static void write_fx(FILE *f, VARIOGRAM *v) {$/;"	f	file:
+write_gmt	mapio.c	/^static GRIDMAP *write_gmt(GRIDMAP * m)$/;"	f	file:
+write_gmt	mapio_.c	/^static  GRIDMAP *write_gmt (GRIDMAP *m) {$/;"	f	file:
+write_gnuplot_binary	mapio.c	/^static GRIDMAP *write_gnuplot_binary(GRIDMAP * m)$/;"	f	file:
+write_gnuplot_binary	mapio_.c	/^static GRIDMAP *write_gnuplot_binary(GRIDMAP *m) {$/;"	f	file:
+write_grass	mapio.c	/^static GRIDMAP *write_grass(GRIDMAP * m)$/;"	f	file:
+write_grass	mapio_.c	/^static GRIDMAP *write_grass(GRIDMAP *m) {$/;"	f	file:
+write_gslib	mapio.c	/^static GRIDMAP *write_gslib(GRIDMAP * m)$/;"	f	file:
+write_gslib	mapio_.c	/^static GRIDMAP *write_gslib(GRIDMAP *m) {$/;"	f	file:
+write_header	report.c	/^void write_header(FILE *out_file, DATA *data, int n_outfl, int cross) {$/;"	f
+write_idrisi	mapio.c	/^static GRIDMAP *write_idrisi(GRIDMAP * m)$/;"	f	file:
+write_idrisi	mapio_.c	/^static GRIDMAP *write_idrisi(GRIDMAP *m) {$/;"	f	file:
+write_idrisi_header	mapio.c	/^static int write_idrisi_header(GRIDMAP * m, const char *fname)$/;"	f	file:
+write_idrisi_header	mapio_.c	/^static int write_idrisi_header(GRIDMAP *m, const char *fname) {$/;"	f	file:
+write_output	predict.c	/^static void write_output(double *est, PRED_AT w, DPOINT *here,$/;"	f	file:
+write_surfer	mapio.c	/^static GRIDMAP *write_surfer(GRIDMAP * m)$/;"	f	file:
+write_surfer	mapio_.c	/^static GRIDMAP *write_surfer(GRIDMAP *m) {$/;"	f	file:
+x	sample.c	/^	float x, y;  \/* x and y coordinate in [0,1]x[0,1] area *\/$/;"	m	struct:
+xy_ratio	sample.c	/^	float xy_ratio; \/* dx\/dy *\/$/;"	m	struct:
+y	gls.c	/^	VEC *y,        \/* measurement vector *\/$/;"	m	struct:
+y	sample.c	/^	float x, y;  \/* x and y coordinate in [0,1]x[0,1] area *\/$/;"	m	struct:
+yy_File_name	lex.c	/^static const char *yy_File_name = NULL;$/;"	v	file:
+yy_Lexpos	lex.c	/^static int yy_Lexpos = 0, yy_Posafternl = 1, My_yy_lineno = 1,$/;"	v	file:
+yy_Posafternl	lex.c	/^static int yy_Lexpos = 0, yy_Posafternl = 1, My_yy_lineno = 1,$/;"	v	file:
+yy_Source	lex.c	/^static const char *yy_Source = NULL, *lastnl = NULL;$/;"	v	file:
+yy_accept	lex.c	/^static yyconst short int yy_accept[43] =$/;"	v	file:
+yy_at_bol	lex.c	/^	int yy_at_bol;$/;"	m	struct:yy_buffer_state
+yy_base	lex.c	/^static yyconst short int yy_base[52] =$/;"	v	file:
+yy_buf_pos	lex.c	/^	char *yy_buf_pos;		\/* current position in input buffer *\/$/;"	m	struct:yy_buffer_state
+yy_buf_size	lex.c	/^	yy_size_t yy_buf_size;$/;"	m	struct:yy_buffer_state
+yy_buffer_state	lex.c	/^struct yy_buffer_state$/;"	s	file:
+yy_buffer_status	lex.c	/^	int yy_buffer_status;$/;"	m	struct:yy_buffer_state
+yy_c_buf_p	lex.c	/^static char *yy_c_buf_p = (char *) 0;$/;"	v	file:
+yy_ch_buf	lex.c	/^	char *yy_ch_buf;		\/* input buffer *\/$/;"	m	struct:yy_buffer_state
+yy_chk	lex.c	/^static yyconst short int yy_chk[100] =$/;"	v	file:
+yy_create_buffer	lex.c	/^YY_BUFFER_STATE yy_create_buffer( FILE *file, int size )$/;"	f
+yy_current_buffer	lex.c	/^static YY_BUFFER_STATE yy_current_buffer = 0;$/;"	v	file:
+yy_def	lex.c	/^static yyconst short int yy_def[52] =$/;"	v	file:
+yy_delete_buffer	lex.c	/^void yy_delete_buffer( YY_BUFFER_STATE b )$/;"	f
+yy_did_buffer_switch_on_eof	lex.c	/^static int yy_did_buffer_switch_on_eof;$/;"	v	file:
+yy_ec	lex.c	/^static yyconst int yy_ec[256] =$/;"	v	file:
+yy_fatal_error	lex.c	/^static void yy_fatal_error( yyconst char msg[] )$/;"	f	file:
+yy_fill_buffer	lex.c	/^	int yy_fill_buffer;$/;"	m	struct:yy_buffer_state
+yy_flex_alloc	lex.c	/^static void *yy_flex_alloc( yy_size_t size )$/;"	f	file:
+yy_flex_free	lex.c	/^static void yy_flex_free( void *ptr )$/;"	f	file:
+yy_flex_realloc	lex.c	/^static void *yy_flex_realloc( void *ptr, yy_size_t size )$/;"	f	file:
+yy_flex_strlen	lex.c	/^static int yy_flex_strlen( yyconst char *s )$/;"	f	file:
+yy_flex_strncpy	lex.c	/^static void yy_flex_strncpy( char *s1, yyconst char *s2, int n )$/;"	f	file:
+yy_flush_buffer	lex.c	/^void yy_flush_buffer( YY_BUFFER_STATE b )$/;"	f
+yy_get_next_buffer	lex.c	/^static int yy_get_next_buffer()$/;"	f	file:
+yy_get_previous_state	lex.c	/^static yy_state_type yy_get_previous_state()$/;"	f	file:
+yy_hold_char	lex.c	/^static char yy_hold_char;$/;"	v	file:
+yy_init	lex.c	/^static int yy_init = 1;		\/* whether we need to initialize *\/$/;"	v	file:
+yy_init_buffer	lex.c	/^void yy_init_buffer( YY_BUFFER_STATE b, FILE *file )$/;"	f
+yy_input_file	lex.c	/^	FILE *yy_input_file;$/;"	m	struct:yy_buffer_state
+yy_is_interactive	lex.c	/^	int yy_is_interactive;$/;"	m	struct:yy_buffer_state
+yy_is_our_buffer	lex.c	/^	int yy_is_our_buffer;$/;"	m	struct:yy_buffer_state
+yy_last_accepting_cpos	lex.c	/^static char *yy_last_accepting_cpos;$/;"	v	file:
+yy_last_accepting_state	lex.c	/^static yy_state_type yy_last_accepting_state;$/;"	v	file:
+yy_load_buffer_state	lex.c	/^void yy_load_buffer_state( void )$/;"	f
+yy_meta	lex.c	/^static yyconst int yy_meta[16] =$/;"	v	file:
+yy_n_chars	lex.c	/^	int yy_n_chars;$/;"	m	struct:yy_buffer_state
+yy_n_chars	lex.c	/^static int yy_n_chars;		\/* number of characters read into yy_ch_buf *\/$/;"	v	file:
+yy_new_buffer	lex.c	246;"	d	file:
+yy_nxt	lex.c	/^static yyconst short int yy_nxt[100] =$/;"	v	file:
+yy_pop_state	lex.c	/^static void yy_pop_state()$/;"	f	file:
+yy_push_state	lex.c	/^static void yy_push_state( int new_state )$/;"	f	file:
+yy_scan_buffer	lex.c	/^YY_BUFFER_STATE yy_scan_buffer( char *base, yy_size_t size )$/;"	f
+yy_scan_bytes	lex.c	/^YY_BUFFER_STATE yy_scan_bytes( yyconst char *bytes, int len )$/;"	f
+yy_scan_string	lex.c	/^YY_BUFFER_STATE yy_scan_string( yyconst char *yy_str )$/;"	f
+yy_set_bol	lex.c	255;"	d	file:
+yy_set_interactive	lex.c	248;"	d	file:
+yy_size_t	lex.c	/^typedef unsigned int yy_size_t;$/;"	t	file:
+yy_start	lex.c	/^static int yy_start = 0;	\/* start state number *\/$/;"	v	file:
+yy_start_stack	lex.c	/^static int *yy_start_stack = 0;$/;"	v	file:
+yy_start_stack_depth	lex.c	/^static int yy_start_stack_depth = 0;$/;"	v	file:
+yy_start_stack_ptr	lex.c	/^static int yy_start_stack_ptr = 0;$/;"	v	file:
+yy_state_type	lex.c	/^typedef int yy_state_type;$/;"	t	file:
+yy_switch_to_buffer	lex.c	/^void yy_switch_to_buffer( YY_BUFFER_STATE new_buffer )$/;"	f
+yy_top_state	lex.c	/^static int yy_top_state()$/;"	f	file:
+yy_try_NUL_trans	lex.c	/^static yy_state_type yy_try_NUL_trans( yy_state_type yy_current_state )$/;"	f	file:
+yychar	parse.c	/^int	yychar;			\/*  the lookahead symbol		*\/$/;"	v
+yycheck	parse.c	/^static const short yycheck[] = {     0,$/;"	v	file:
+yyclearin	parse.c	557;"	d	file:
+yyconst	lex.c	53;"	d	file:
+yyconst	lex.c	55;"	d	file:
+yydebug	parse.c	/^int yydebug;			\/*  nonzero means print parse trace	*\/$/;"	v
+yydefact	parse.c	/^static const short yydefact[] = {     1,$/;"	v	file:
+yydefgoto	parse.c	/^static const short yydefgoto[] = {     3,$/;"	v	file:
+yyerrok	parse.c	556;"	d	file:
+yyerror	parse.c	145;"	d	file:
+yyin	lex.c	/^FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;$/;"	v
+yyinput	lex.c	/^static int yyinput()$/;"	f	file:
+yyleng	lex.c	/^int yyleng;$/;"	v
+yyless	lex.c	124;"	d	file:
+yyless	lex.c	1655;"	d	file:
+yyless	lex.c	1656;"	d	file:
+yylloc	parse.c	/^YYLTYPE yylloc;			\/*  location data for the lookahead	*\/$/;"	v
+yylval	parse.c	/^YYSTYPE	yylval;			\/*  the semantic value of the		*\/$/;"	v
+yymore	lex.c	391;"	d	file:
+yynerrs	parse.c	/^int yynerrs;			\/*  number of parse errors so far       *\/$/;"	v
+yyout	lex.c	/^FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;$/;"	v
+yypact	parse.c	/^static const short yypact[] = {    69,$/;"	v	file:
+yyparse	parse.c	/^yyparse(YYPARSE_PARAM_ARG)$/;"	f
+yypgoto	parse.c	/^static const short yypgoto[] = {-32768,$/;"	v	file:
+yyprhs	parse.c	/^static const short yyprhs[] = {     0,$/;"	v	file:
+yyr1	parse.c	/^static const short yyr1[] = {     0,$/;"	v	file:
+yyr2	parse.c	/^static const short yyr2[] = {     0,$/;"	v	file:
+yyrestart	lex.c	/^void yyrestart( FILE *input_file )$/;"	f
+yyrhs	parse.c	/^static const short yyrhs[] = {    -1,$/;"	v	file:
+yyrline	parse.c	/^static const short yyrline[] = { 0,$/;"	v	file:
+yytable	parse.c	/^static const short yytable[] = {     4,$/;"	v	file:
+yyterminate	lex.c	617;"	d	file:
+yytext	lex.c	/^char *yytext;$/;"	v
+yytext_ptr	lex.c	268;"	d	file:
+yytname	parse.c	/^static const char * const yytname[] = {   "$","error","$undefined.","INT","UINT",$/;"	v	file:
+yytranslate	parse.c	/^static const char yytranslate[] = {     0,$/;"	v	file:
+yyunput	lex.c	/^static void yyunput( int c, register char *yy_bp )$/;"	f	file:
+yywrap	lex.c	/^int yywrap(void) {$/;"	f
+yywrap	lex.c	454;"	d	file:
+zero_int2enum	vario.c	/^DO_AT_ZERO zero_int2enum(int zero) {$/;"	f
+zero_sel_dist2	select.c	/^static void zero_sel_dist2(DATA *d) {$/;"	f	file:
+zero_shift	vario.c	/^DO_AT_ZERO zero_shift(DO_AT_ZERO now, int next) {$/;"	f

@@ -1,0 +1,129 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Win32 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x422 /fo"Debug/generic.res" /d "_DEBUG" "D:\Drozdov\C\Lag\Win32_87.98\generic.rc"" 
+Creating temporary file "C:\temp\RSP2F.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/Win32.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /EHsc /EHsc /GZ /c 
+"D:\Drozdov\C\Lag\Win32_87.98\Drill_3D.cpp"
+]
+Creating command line "cl.exe @C:\temp\RSP2F.tmp" 
+Creating temporary file "C:\temp\RSP30.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib glaux.lib comctl32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/tezeyvar.pdb" /debug /machine:I386 /out:"Debug/tezeyvar.exe" /pdbtype:sept 
+.\Debug\BrokenPlane3D.obj
+.\Debug\CommonMeanFileDialog.obj
+.\Debug\LayerKohonen.obj
+.\Debug\NetKohonen.obj
+.\Debug\NeuronKohonen.obj
+.\Debug\Object.obj
+.\Debug\ObjectList.obj
+.\Debug\Poligon3D.obj
+.\Debug\ThePoint3D.obj
+.\Debug\Layer.obj
+.\Debug\Net.obj
+.\Debug\Neuron.obj
+.\Debug\abortPrint.obj
+.\Debug\BlnProfile3D.obj
+.\Debug\BlnProfilePlane3D.obj
+.\Debug\BrokenLine3D.obj
+.\Debug\BrokenPoligon3D.obj
+.\Debug\BrokenPoligon_3D.obj
+.\Debug\camera.obj
+.\Debug\checkListBox.obj
+.\Debug\colormap.obj
+.\Debug\ComPort.obj
+.\Debug\conjgrad.obj
+.\Debug\datenum.obj
+.\Debug\DelaunayTriangulation.obj
+.\Debug\DrawListArray.obj
+.\Debug\DrawScene.obj
+.\Debug\Drill_3D.obj
+.\Debug\error.obj
+.\Debug\filedlg.obj
+.\Debug\FileFormat.obj
+.\Debug\generic.obj
+.\Debug\GLMan.obj
+.\Debug\GLPrintMan.obj
+.\Debug\Graph.obj
+.\Debug\Graph2.obj
+.\Debug\GraphsDoc.obj
+.\Debug\GraphsView.obj
+.\Debug\Grid.obj
+.\Debug\GridProfile3D.obj
+.\Debug\interp.obj
+.\Debug\InterWellsLine3D.obj
+.\Debug\iso.obj
+.\Debug\KohonenDlg.obj
+.\Debug\KohonenMapWnd.obj
+.\Debug\Line3D.obj
+.\Debug\listfun.obj
+.\Debug\matrixes.obj
+.\Debug\memory_track.obj
+.\Debug\MessageItem.obj
+.\Debug\mtools.obj
+.\Debug\objects.obj
+.\Debug\palette.obj
+.\Debug\ParseTimeString.obj
+.\Debug\PolyotyNnetDlg.obj
+.\Debug\Primitive3D.obj
+.\Debug\print.obj
+.\Debug\PrintDlgBox.obj
+.\Debug\project.obj
+.\Debug\raporto.obj
+.\Debug\readfile.obj
+.\Debug\RoomQueueItem.obj
+.\Debug\SelectLine.obj
+.\Debug\sorting.obj
+.\Debug\Sphere3D.obj
+.\Debug\StdAfx.obj
+.\Debug\String3D.obj
+.\Debug\Surface3D.obj
+.\Debug\SurfDoc.obj
+.\Debug\systemnnet.obj
+.\Debug\texture.obj
+.\Debug\Triangle3D.obj
+.\Debug\TriangulatedGrid3D.obj
+.\Debug\utility.obj
+.\Debug\vdouble.obj
+.\Debug\vect.obj
+.\Debug\VectItem.obj
+.\Debug\Vector.obj
+.\Debug\views.obj
+.\Debug\wav.obj
+.\Debug\win32_app.obj
+.\Debug\win32_dialog.obj
+.\Debug\win32_graphics_view.obj
+.\Debug\win32_plot_views.obj
+.\Debug\win32_project.obj
+.\Debug\win32_project_view.obj
+.\Debug\win32_views.obj
+.\Debug\wingeoid.obj
+.\Debug\winmap.obj
+.\Debug\winplot.obj
+.\Debug\winsurf.obj
+.\Debug\winsurfproc.obj
+.\Debug\winsurftree.obj
+.\Debug\XYZBuffer.obj
+.\Debug\generic.res
+]
+Creating command line "link.exe @C:\temp\RSP30.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+Drill_3D.cpp
+fatal error C1083: Cannot open source file: 'D:\Drozdov\C\Lag\Win32_87.98\Drill_3D.cpp': No such file or directory
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+tezeyvar.exe - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

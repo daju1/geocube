@@ -1,0 +1,28 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Output" -1 
+11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 
+0 0 0 1 0 1 0 2 2 0 1 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "
+> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 
+"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 30 "In1 := int(Pi/(a^2*b*s
+qw), a);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$In1G,$**%#PiG\"\"\"%\"b
+G!\"\"%$sqwGF*%\"aGF*F*" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 35 "
+In2 := int(Pi*hi^2/(a^4*b*sqw), a);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6
+#>%$In2G,$*.\"\"$!\"\"%#PiG\"\"\"%$hi|irG\"\"#%\"bGF(%$sqwGF(%\"aG!\"$
+F(" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 46 "In3 := int(Pi*exp(-2*
+a*b*sqw)/(a^2*b*sqw), a);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$In3G,$
+*(\"\"#\"\"\"%#PiGF(,&*&#F(F'F(**%\"aG!\"\"%\"bGF/%$sqwGF/-%$expG6#,$*
+*F'F(F.F(F0F(F1F(F/F(F(F(-%#EiG6$F(,$**F'F(F.F(F0F(F1F(F(F/F(F/" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 51 "In4 := int(Pi*hi^2*exp(-2*a*
+b*sqw)/(a^4*b*sqw), a);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$In4G,$*.
+\"\")\"\"\"%#PiGF()%$hi|irG\"\"#F()%\"bGF,F()%$sqwGF,F(,**&#F(\"#CF(**
+%\"aG!\"$F.F7F0F7-%$expG6#,$**F,F(F6F(F.F(F0F(!\"\"F(F(F(*&#F(F4F(**F8
+F(F6!\"#F.FAF0FAF(F=*&#F(\"#7F(**F6F=F.F=F0F=F8F(F(F(*&#F(\"\"'F(-%#Ei
+G6$F(,$**F,F(F6F(F.F(F0F(F(F(F=F(F=" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "6 0 0" 51 }
+{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }

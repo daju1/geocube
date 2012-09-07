@@ -1,0 +1,33 @@
+BODY {
+	MARGIN: 0px; COLOR: #000000; BACKGROUND-COLOR: #ffffff
+}
+A:hover {
+	COLOR: #cc0000
+}
+.navbar {
+	FONT-WEIGHT: bold; COLOR: #ffffff; FONT-FAMILY: Helvetica, Arial, sans-serif; TEXT-DECORATION: none
+}
+.leftbar {
+	FONT-WEIGHT: bold; COLOR: #000000; FONT-FAMILY: Helvetica, Arial, sans-serif; TEXT-DECORATION: none
+}
+.bodytext {
+	COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.footer {
+	FONT-SIZE: 9pt; FONT-FAMILY: Helvetica, Arial, sans-serif
+}
+.tab {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #ffffff; FONT-FAMILY: Helvetica, Arial, sans-serif; TEXT-DECORATION: none
+}
+.tab_sel {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #cc0000; FONT-FAMILY: Helvetica, Arial, sans-serif; TEXT-DECORATION: none; size: 3
+}
+.navbar_sel {
+	FONT-WEIGHT: bold; COLOR: #cc0000; FONT-FAMILY: Helvetica, Arial, sans-serif; TEXT-DECORATION: none
+}
+.nav {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #000000; FONT-FAMILY: verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.eqinthenews {
+	FONT-WEIGHT: bold; COLOR: #cc0000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}

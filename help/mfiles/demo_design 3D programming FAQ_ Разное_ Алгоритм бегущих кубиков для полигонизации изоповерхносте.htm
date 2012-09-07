@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0048)http://www.enlight.ru:8002/faq3d/articles/74.htm -->
+<!--
+	demo.design 3D programming FAQ
+
+	Idea, texts, screenshots:
+		Andrew A. Aksyonoff,
+		shodan@chat.ru
+
+	Web-design, illustrations:
+		Andrey Samoilov,
+		asy@sense.simbirsk.su
+--><HTML><HEAD><TITLE>demo.design 3D programming FAQ. Разное. Алгоритм "бегущих кубиков" для полигонизации изоповерхностей.</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251"><LINK 
+href="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/style.css" 
+type=text/css rel=stylesheet>
+<SCRIPT language=javascript>
+<!--//
+browser = navigator.appName;
+version = parseFloat(navigator.appVersion);
+if (browser == "Netscape" && version >= 3.0) { jsenabled = 1; } else
+if (browser == "Microsoft Internet Explorer" && version >= 3.0) { jsenabled = 1; } else { jsenabled = 0; }
+
+function swap(img,ref) { if (jsenabled) {document.images[img].src = ref;} }
+function loadtocache(img,ref) { cache[img] = new Image(); cache[img].src = ref; }
+
+if (jsenabled) {
+cache = new Array();
+loadtocache(0,"../img/xdl.gif");
+loadtocache(1,"../img/xfaq.gif");
+loadtocache(2,"../img/xlinks.gif");
+loadtocache(3,"../img/xauthor.gif");
+loadtocache(4,"../img/xe.gif");
+loadtocache(5,"../img/xprev.gif");
+loadtocache(6,"../img/xnext.gif");}
+//-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY bgColor=white>
+<CENTER><!-- Title --><IMG height=1 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/b.gif" 
+width=500><BR><IMG height=1 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+width=500><BR><IMG height=1 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/b.gif" 
+width=500><BR><IMG height=2 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+width=500><BR>
+<TABLE cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR>
+    <TD><IMG height=1 alt="" 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+      width=5><A onmouseover="swap('logo','../img/xe.gif');" 
+      onmouseout="swap('logo','../img/e.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/main.htm"><IMG height=50 
+      alt=" в самое начало " hspace=10 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/e.gif" 
+      width=60 border=0 name=logo></A></TD>
+    <TD>
+      <P class=pagetitle><IMG height=1 alt="" 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+      width=265><BR>demo.design<BR>3D programming FAQ</P></TD>
+    <TD align=middle>
+      <P class=navy><A onmouseover="swap('dl','../img/xdl.gif');" 
+      onmouseout="swap('dl','../img/dl.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/download.htm"><IMG height=40 
+      alt=" download " hspace=5 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/dl.gif" 
+      width=40 border=0 name=dl></A><BR>download</P></TD>
+    <TD align=middle>
+      <P class=navy><A onmouseover="swap('links','../img/xlinks.gif');" 
+      onmouseout="swap('links','../img/links.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/links.htm"><IMG height=40 
+      alt=" коллекция линков " hspace=5 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/links.gif" 
+      width=40 border=0 name=links></A><BR>links</P></TD>
+    <TD align=middle>
+      <P class=navy><A onmouseover="swap('author','../img/xauthor.gif');" 
+      onmouseout="swap('author','../img/author.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/author.htm"><IMG height=40 
+      alt=" автора! " hspace=5 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/author.gif" 
+      width=40 border=0 name=author></A><BR>author</P></TD></TR></TBODY></TABLE><IMG 
+height=4 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+width=500><BR><IMG height=1 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/b.gif" 
+width=500><BR><!-- Head -->
+<TABLE cellSpacing=10 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <DIV align=justify>
+      <P class=title><IMG height=70 alt="" hspace=0 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/b7.gif" 
+      width=70 align=left> <IMG height=70 alt="" hspace=0 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+      width=5 align=left> РАЗНОЕ<BR>7.4. Алгоритм "бегущих кубиков" для 
+      полигонизации изоповерхностей <!-- Article -->
+      <P>Сооветствующий английский термин - marching cubes algorithm; приведен 
+      здесь, так сказать, just to avoid any confusion. Алгоритм предназначен для 
+      быстрого построения полигональной модели изоповерхности трехмерного 
+      скалярного поля, заданного значениями на равномерной сетке. Выражаясь 
+      менее академичным и, надеюсь, более понятным языком, этот алгоритм нужен 
+      для быстрого построения набора треугольных граней, достаточно хорошо 
+      приближающего изоповерхность, то есть такую поверхность, на которой 
+      определенная функция равна какой-то константе - изоуровню. Например, сфера 
+      радиуса 1 с центром в нуле - это изоповерхность функции f=1/(x*x+y*y+z*z) 
+      для изоуровня 1. Т.н. "3D капли", столь любимые ныне, тоже являются 
+      изоповерхностью, правда, немного более сложной функции (да, функция задана 
+      в трехмерном пространстве): <PRE class=formula>     n
+f = sum c[i]/((x[i]-x)*(x[i]-x)+(y[i]-y)*(y[i]-y)+(z[i]-z)*(z[i]-z)),
+    i=1
+</PRE>
+      <P>где 
+      <P>
+      <TABLE cellSpacing=0 cellPadding=0 width=480 align=center border=0>
+        <TBODY>
+        <TR>
+          <TD>
+            <P class=expression>n</P></TD>
+          <TD>количество источников поля (капелек)</TD></TR>
+        <TR>
+          <TD>
+            <P class=expression>c[i]</P></TD>
+          <TD>интенсивность каждого источника (радиус капельки)</TD></TR>
+        <TR>
+          <TD>
+            <P class=expression>x[i], y[i], z[i]</P></TD>
+          <TD>координаты каждого источника (центра 
+      капельки)</TD></TR></TBODY></TABLE>
+      <P>Работает алгоритм следующим образом. 
+      <P>Рассматриваем какой-то параллелипипед, внутри которого заведомо 
+      находится изоповерхность (или та ее часть, которую мы хотим нарисовать). 
+      Разбиваем его сеткой, ну, как бы разрезаем его на несколько меньших 
+      параллелипипедов, и считаем значения функции (поля) в узлах сетки, то есть 
+      вершинах этих самых маленьких параллелипипедов. Для большей ясности можно 
+      заменить длинное слово "параллелипипед" на слово "куб" и представить себе 
+      кубик Рубика. Теперь проходим по всем кубикам (дальше я буду везде 
+      использовать слово "кубик", надоело "параллелипипед" писать). Смотрим на 
+      значения функции в вершинах кубика. Если все они больше (или меньше) 
+      изоуровня - значит, кубик находится целиком над (или под) изоповерхностью, 
+      внутри этого кубика поверхности нет и мы его просто отбрасываем. Если же 
+      часть больше, а часть меньше, то некоторые ребра кубика пересекаются с 
+      изоповерхностью. Линейной интерполяцией приближаем эти точки пересечения и 
+      в зависимости от того, какие вершины находятся над изоповерхностью, а 
+      какие под, генерируем несколько треугольных граней. Все вершины этих 
+      граней - это как раз точки пересечения поверхности с ребрами. Как 
+      генерировать грани и пересечения каких ребер с поверхностью считать, 
+      смотрим по таблице, это зависит лишь от того, какие вершины находятся над 
+      поверхностью, а какие - под. Вершин восемь, состояний два - над и под. Это 
+      дает нам 256 возможных расположений, так что таблица не такая уж и 
+      большая. Индекс в таблице тоже генерируется совсем просто: если вершина 
+      находится над поверхностью, устанавливаем соответствующий этой вершине бит 
+      индекса, иначе - сбрасываем. 
+      <P>Вот простенький пример. 
+      <P>
+      <CENTER><IMG height=180 alt="рисунок (illu/illu74a.gif)" 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/illu74a.gif" 
+      width=180></CENTER>
+      <P>Пусть точка 6 находится под поверхностью, остальные - над. Тогда 
+      поверхность проходит через точки (*), приближаем их линейной интерполяцией 
+      и проводим через них треугольную грань. Какие ребра пересекаются с 
+      поверхностью, какие точки пересечния и как соединять - узнаем из таблиц по 
+      индексу; в данном случае индекс равен 11011111b=0DFh (установлены все 
+      биты, кроме 6го). 
+      <P>Алгоритм по шагам: 
+      <UL>
+        <LI>
+        <P>посчитать значения функции в узлах сетки (вершинах кубиков) </P>
+        <LI>
+        <P>для каждого кубика: 
+        <UL>
+          <LI>
+          <P>посчитать индекс этого кубика в таблице. Каждый бит соответствует 
+          какой-то из вершин, если в ней значение функции больше изоуровня, то 
+          надо установить этот бит, иначе - сбросить </P>
+          <LI>
+          <P>взять из таблицы по индексу кубика слово, каждый бит в котором 
+          определяет, пересекает ли соответствующее ему (биту) ребро кубика 
+          изоповерхность, или нет. Если да, то посчитать (простая линейная 
+          интерполяция между соответствующими ребру вершинами) координаты точки 
+          пересечения </P>
+          <LI>
+          <P>взять из таблицы по индексу кубика число генерируемых граней и 
+          собственно тройки номеров ребер, (уже посчитанные) пересечения которых 
+          с изоповерхностью и будут вершинами нужных граней </P></LI></UL></LI></UL>
+      <P>Неоднократно упоминавшиеся магические таблицы приведены в примерчике, 
+      там же приведен кусок кода, который довольно легко переделть под свой 
+      engine. Пример взят с <A 
+      href="http://www.mhri.edu.au/~pdb/modelling/polygonise">http://www.mhri.edu.au/~pdb/modelling/polygonise</A>, 
+      сам по себе он компилироваться НЕ будет, но все там написано правильно и 
+      никаких ошибок в таблицах нет (так что ищите ошибку в своем коде). 
+      </P></DIV></TD></TR></TBODY></TABLE><!-- Bottom Navigation --><IMG height=1 
+alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/b.gif" 
+width=500><BR><IMG height=2 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+width=500><BR>
+<TABLE cellSpacing=0 cellPadding=0 width=500 border=0>
+  <TBODY>
+  <TR>
+    <TD><IMG height=1 alt="" 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+      width=5><A onmouseover="swap('logo2','../img/xe.gif');" 
+      onmouseout="swap('logo2','../img/e.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/main.htm"><IMG height=50 
+      alt=" в самое начало " hspace=10 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/e.gif" 
+      width=60 border=0 name=logo2></A></TD>
+    <TD>
+      <P class=pagetitle><IMG height=1 alt="" 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+      width=215><BR>demo.design<BR>3D programming FAQ</P></TD>
+    <TD align=middle>
+      <P class=navy><A onmouseover="swap('src','../img/xsrc.gif');" 
+      onmouseout="swap('src','../img/src.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/examples/iso.c"><IMG height=40 
+      alt=" исходник примера " hspace=5 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/src.gif" 
+      width=40 border=0 name=src></A><BR>source</P></TD>
+    <TD align=middle>
+      <P class=navy><A onmouseover="swap('prev','../img/xprev.gif');" 
+      onmouseout="swap('prev','../img/prev.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/articles/73.htm"><IMG height=40 
+      alt=" предыдущая статья " hspace=5 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/prev.gif" 
+      width=40 border=0 name=prev></A><BR>previous</P></TD>
+    <TD align=middle>
+      <P class=navy><A onmouseover="swap('faq','../img/xfaq.gif');" 
+      onmouseout="swap('faq','../img/faq.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/content.htm"><IMG height=40 
+      alt=" содержание " hspace=5 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/faq.gif" 
+      width=40 border=0 name=faq></A><BR>content</P></TD>
+    <TD align=middle>
+      <P class=navy><A onmouseover="swap('next','../img/xnext.gif');" 
+      onmouseout="swap('next','../img/next.gif');" 
+      href="http://www.enlight.ru:8002/faq3d/articles/75.htm"><IMG height=40 
+      alt=" следующая статья " hspace=5 
+      src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/next.gif" 
+      width=40 border=0 name=next></A><BR>next</P></TD></TR></TBODY></TABLE><IMG 
+height=4 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+width=500><BR><IMG height=1 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/b.gif" 
+width=500><BR><IMG height=1 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/t.gif" 
+width=500><BR><IMG height=1 alt="" 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/b.gif" 
+width=500><BR>
+<P align=center><!-- BEGIN EPN CODE. (C) EPN 2K1 -->
+<SCRIPT language=javascript>
+w9=window;d9=document;n9=navigator;r9="";t9a=new Date();d9.cookie="epn_f=1";ns=(n9.appName.substring(0,2)=="Mi")?0:1; 
+r9+="a="+escape(n9.appName)+"&n="+Math.random()+"&d1="+t9a.getTime()+"&zo="+t9a.getTimezoneOffset()+"&ck="+((d9.cookie)?1:0)+"&l="+
+escape(w9.location.href)+"&u="+escape(n9.userAgent)+"&r="+escape(d9.referrer);
+v9="1.0";</SCRIPT>
+
+<SCRIPT 
+language=javascript1.1>r9+="&j="+((n9.javaEnabled())?1:0);v9="1.1";</SCRIPT>
+
+<SCRIPT language=javascript1.2>s9=screen;r9+="&sw="+s9.width+"&sh="+s9.height+"&aw="+s9.availWidth+
+"&ah="+s9.availHeight+"&p="+escape(n9.platform);if (ns==1) {r9+="&iw="+w9.innerWidth+"&ih="+w9.innerHeight+"&ps="+n9.plugins.length+
+"&co="+s9.pixelDepth;} else { r9+="&iw="+d9.body.clientWidth+"&ih="+d9.body.clientHeight+"&c="+escape(n9.cpuClass)+"&co="+s9.colorDepth+"&ce="+((n9.cookieEnabled)?1:0)+
+"&o="+((n9.onLine)?1:0)+"&sl="+escape(n9.systemLanguage)+"&bl="+escape(n9.browserLanguage);} v9="1.2";
+</SCRIPT>
+
+<SCRIPT language=javascript1.3>v9="1.3";</SCRIPT>
+
+<SCRIPT language=javascript1.4>v9="1.4";</SCRIPT>
+
+<SCRIPT language=javascript1.5>v9="1.5";</SCRIPT>
+
+<SCRIPT language=javascript>r9+="&li=ba731bb44737f8182ba8d1c82a031e15";</SCRIPT>
+
+<SCRIPT language=javascript>t9b=new Date();r9+="&js="+v9+"&d2=" + t9b.getTime();
+d9.write('<a href="http://www.enlight.ru"><img src="http://www.enlight.ru/epn/stat.php?et=1&'+r9+'" border="0" alt="EPN" width="13" height="13"></a>');
+</SCRIPT>
+<NOSCRIPT><A href="http://www.enlight.ru/"><IMG height=13 alt=EPN 
+src="demo_design 3D programming FAQ_ Разное_ Алгоритм бегущих кубиков для полигонизации изоповерхностей.files/epn_counter.gif" 
+width=13 border=0> </A></NOSCRIPT><!-- END EPN CODE -->
+<P align=center></CENTER></P></BODY></HTML>

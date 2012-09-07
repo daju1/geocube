@@ -1,0 +1,367 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: SurfConsole - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x422 /fo"Debug/generic.res" /d "_DEBUG" /d "_AFXDLL" "C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\generic.rc"" 
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP5.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/SurfConsole.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\abortPrint.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BlnProfile3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BlnProfilePlane3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Bmp3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BmpProfile3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenLine3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenPlane3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenPoligon3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenPoligon_3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\camera.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\checkListBox.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\colormap.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\conjgrad.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\dct\DelaunayTriangulation.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\distance3d.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\DlgAddingGeoCube.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\DrawListArray.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\DrawScene.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Drill_3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\error.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\filedlg.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\GLMan.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\GLPrintMan.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Graph2.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Grid.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\GridProfile3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\interp.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\InterWellsLine3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Line3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\listfun.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\matrixes.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\memory_track.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\mtools.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\mylicense.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Object.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\ObjectList.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\objects.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\palette.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Poligon3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\print.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\PrintDlgBox.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\project.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\raporto.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\readfile.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\SelectLine.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\SetPodTypyGr.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\sorting.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Sphere3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\String3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Surface3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\SurfCube.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\SurfDoc.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\texture.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\tga.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\ThePoint3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Triangle3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\TriangulatedGrid3D.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\utility.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Vdouble.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\vect.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\VectItem.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Vector.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\views.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\wav.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_app.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_dialog.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_graphics_view.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_plot_views.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_project.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_project_view.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_views.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Wingeoid.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\winplot.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Winsurf.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\winsurfproc.cpp"
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\winsurftree.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP5.tmp" 
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP6.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GR /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/SurfConsole.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP6.tmp" 
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP7.tmp" with contents
+[
+opengl32.lib glu32.lib glaux.lib comctl32.lib jpeg.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/SurfConsole.pdb" /debug /machine:I386 /out:"Debug/SurfConsole.exe" /pdbtype:sept 
+".\Debug\abortPrint.obj"
+".\Debug\BlnProfile3D.obj"
+".\Debug\BlnProfilePlane3D.obj"
+".\Debug\Bmp3D.obj"
+".\Debug\BmpProfile3D.obj"
+".\Debug\BrokenLine3D.obj"
+".\Debug\BrokenPlane3D.obj"
+".\Debug\BrokenPoligon3D.obj"
+".\Debug\BrokenPoligon_3D.obj"
+".\Debug\camera.obj"
+".\Debug\checkListBox.obj"
+".\Debug\colormap.obj"
+".\Debug\conjgrad.obj"
+".\Debug\DelaunayTriangulation.obj"
+".\Debug\distance3d.obj"
+".\Debug\DlgAddingGeoCube.obj"
+".\Debug\DrawListArray.obj"
+".\Debug\DrawScene.obj"
+".\Debug\Drill_3D.obj"
+".\Debug\error.obj"
+".\Debug\filedlg.obj"
+".\Debug\GLMan.obj"
+".\Debug\GLPrintMan.obj"
+".\Debug\Graph2.obj"
+".\Debug\Grid.obj"
+".\Debug\GridProfile3D.obj"
+".\Debug\interp.obj"
+".\Debug\InterWellsLine3D.obj"
+".\Debug\Line3D.obj"
+".\Debug\listfun.obj"
+".\Debug\matrixes.obj"
+".\Debug\memory_track.obj"
+".\Debug\mtools.obj"
+".\Debug\mylicense.obj"
+".\Debug\Object.obj"
+".\Debug\ObjectList.obj"
+".\Debug\objects.obj"
+".\Debug\palette.obj"
+".\Debug\Poligon3D.obj"
+".\Debug\print.obj"
+".\Debug\PrintDlgBox.obj"
+".\Debug\project.obj"
+".\Debug\raporto.obj"
+".\Debug\readfile.obj"
+".\Debug\SelectLine.obj"
+".\Debug\SetPodTypyGr.obj"
+".\Debug\sorting.obj"
+".\Debug\Sphere3D.obj"
+".\Debug\StdAfx.obj"
+".\Debug\String3D.obj"
+".\Debug\Surface3D.obj"
+".\Debug\SurfCube.obj"
+".\Debug\SurfDoc.obj"
+".\Debug\texture.obj"
+".\Debug\tga.obj"
+".\Debug\ThePoint3D.obj"
+".\Debug\Triangle3D.obj"
+".\Debug\TriangulatedGrid3D.obj"
+".\Debug\utility.obj"
+".\Debug\Vdouble.obj"
+".\Debug\vect.obj"
+".\Debug\VectItem.obj"
+".\Debug\Vector.obj"
+".\Debug\views.obj"
+".\Debug\wav.obj"
+".\Debug\win32_app.obj"
+".\Debug\win32_dialog.obj"
+".\Debug\win32_graphics_view.obj"
+".\Debug\win32_plot_views.obj"
+".\Debug\win32_project.obj"
+".\Debug\win32_project_view.obj"
+".\Debug\win32_views.obj"
+".\Debug\Wingeoid.obj"
+".\Debug\winplot.obj"
+".\Debug\Winsurf.obj"
+".\Debug\winsurfproc.obj"
+".\Debug\winsurftree.obj"
+".\Debug\generic.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP7.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+abortPrint.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\abortPrint.cpp': No such file or directory
+BlnProfile3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BlnProfile3D.cpp': No such file or directory
+BlnProfilePlane3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BlnProfilePlane3D.cpp': No such file or directory
+Bmp3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Bmp3D.cpp': No such file or directory
+BmpProfile3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BmpProfile3D.cpp': No such file or directory
+BrokenLine3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenLine3D.cpp': No such file or directory
+BrokenPlane3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenPlane3D.cpp': No such file or directory
+BrokenPoligon3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenPoligon3D.cpp': No such file or directory
+BrokenPoligon_3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\BrokenPoligon_3D.cpp': No such file or directory
+camera.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\camera.cpp': No such file or directory
+checkListBox.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\checkListBox.cpp': No such file or directory
+colormap.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\colormap.cpp': No such file or directory
+conjgrad.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\conjgrad.cpp': No such file or directory
+DelaunayTriangulation.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\dct\DelaunayTriangulation.cpp': No such file or directory
+distance3d.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\distance3d.cpp': No such file or directory
+DlgAddingGeoCube.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\DlgAddingGeoCube.cpp': No such file or directory
+DrawListArray.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\DrawListArray.cpp': No such file or directory
+DrawScene.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\DrawScene.cpp': No such file or directory
+Drill_3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Drill_3D.cpp': No such file or directory
+error.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\error.cpp': No such file or directory
+filedlg.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\filedlg.cpp': No such file or directory
+GLMan.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\GLMan.cpp': No such file or directory
+GLPrintMan.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\GLPrintMan.cpp': No such file or directory
+Graph2.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Graph2.cpp': No such file or directory
+Grid.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Grid.cpp': No such file or directory
+GridProfile3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\GridProfile3D.cpp': No such file or directory
+interp.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\interp.cpp': No such file or directory
+InterWellsLine3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\InterWellsLine3D.cpp': No such file or directory
+Line3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Line3D.cpp': No such file or directory
+listfun.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\listfun.cpp': No such file or directory
+matrixes.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\matrixes.cpp': No such file or directory
+memory_track.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.16\memory_track.cpp(3) : fatal error C1083: Cannot open include file: 'raporto.h': No such file or directory
+mtools.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\mtools.cpp': No such file or directory
+mylicense.cpp
+Object.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Object.cpp': No such file or directory
+ObjectList.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\ObjectList.cpp': No such file or directory
+objects.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\objects.cpp': No such file or directory
+palette.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\palette.cpp': No such file or directory
+Poligon3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Poligon3D.cpp': No such file or directory
+print.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\print.cpp': No such file or directory
+PrintDlgBox.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\PrintDlgBox.cpp': No such file or directory
+project.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\project.cpp': No such file or directory
+raporto.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\raporto.cpp': No such file or directory
+readfile.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\readfile.cpp': No such file or directory
+SelectLine.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\SelectLine.cpp': No such file or directory
+SetPodTypyGr.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(14) : error C2504: 'CRecordset' : base class undefined
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(16) : error C2629: unexpected 'class SetPodTypyGr ('
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(16) : error C2238: unexpected token(s) preceding ';'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(21) : warning C4518: 'long ' : storage-class or type specifier(s) unexpected here; ignored
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(21) : error C2146: syntax error : missing ';' before identifier 'm_TYPGR'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(21) : error C2501: 'm_TYPGR' : missing storage-class or type specifiers
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(23) : error C2146: syntax error : missing ';' before identifier 'm_desc'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(23) : error C2501: 'CString' : missing storage-class or type specifiers
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(23) : error C2501: 'm_desc' : missing storage-class or type specifiers
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(31) : error C2146: syntax error : missing ';' before identifier 'GetDefaultConnect'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(31) : error C2433: 'CString' : 'virtual' not permitted on data declarations
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(31) : error C2501: 'CString' : missing storage-class or type specifiers
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(32) : error C2146: syntax error : missing ';' before identifier 'GetDefaultSQL'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(32) : error C2433: 'CString' : 'virtual' not permitted on data declarations
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(32) : error C2501: 'CString' : missing storage-class or type specifiers
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(33) : error C2061: syntax error : identifier 'CFieldExchange'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.h(39) : error C2061: syntax error : identifier 'CDumpContext'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.cpp(17) : error C2061: syntax error : identifier 'CRecordset'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.cpp(19) : error C2143: syntax error : missing ';' before 'tag::id'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\setpodtypygr.cpp(19) : fatal error C1004: unexpected end of file found
+sorting.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\sorting.cpp': No such file or directory
+Sphere3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Sphere3D.cpp': No such file or directory
+String3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\String3D.cpp': No such file or directory
+Surface3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Surface3D.cpp': No such file or directory
+SurfCube.cpp
+c:\documents and settings\admin\мои документы\c++\win32_90.16\surfcube.cpp(15) : warning C4005: 'TRACE' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(218) : see previous definition of 'TRACE'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\stdafx.h(33) : warning C4005: 'DEBUG_NEW' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(1632) : see previous definition of 'DEBUG_NEW'
+c:\documents and settings\admin\мои документы\c++\win32_90.16\stdafx.h(107) : warning C4005: 'TRACE' : macro redefinition
+        c:\documents and settings\admin\мои документы\c++\win32_90.16\surfcube.cpp(15) : see previous definition of 'TRACE'
+SurfDoc.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\SurfDoc.cpp': No such file or directory
+texture.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\texture.cpp': No such file or directory
+tga.cpp
+ThePoint3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\ThePoint3D.cpp': No such file or directory
+Triangle3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Triangle3D.cpp': No such file or directory
+TriangulatedGrid3D.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\TriangulatedGrid3D.cpp': No such file or directory
+utility.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\utility.cpp': No such file or directory
+Vdouble.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Vdouble.cpp': No such file or directory
+vect.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\vect.cpp': No such file or directory
+VectItem.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\VectItem.cpp': No such file or directory
+Vector.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Vector.cpp': No such file or directory
+views.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\views.cpp': No such file or directory
+wav.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\wav.cpp': No such file or directory
+win32_app.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_app.cpp': No such file or directory
+win32_dialog.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_dialog.cpp': No such file or directory
+win32_graphics_view.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_graphics_view.cpp': No such file or directory
+win32_plot_views.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_plot_views.cpp': No such file or directory
+win32_project.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_project.cpp': No such file or directory
+win32_project_view.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_project_view.cpp': No such file or directory
+win32_views.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\win32_views.cpp': No such file or directory
+Wingeoid.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Wingeoid.cpp': No such file or directory
+winplot.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\winplot.cpp': No such file or directory
+Winsurf.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\Winsurf.cpp': No such file or directory
+winsurfproc.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\winsurfproc.cpp': No such file or directory
+winsurftree.cpp
+fatal error C1083: Cannot open source file: 'C:\Documents and Settings\Admin\Мои документы\C++\Win32_90.16\winsurftree.cpp': No such file or directory
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+SurfConsole.exe - 91 error(s), 4 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<html>
+ <head>
+<title>Underground InformatioN Center [&artciles]:Написание экстра-маленьких Win32 приложений на С++...</title>
+ <link rel="shortcut icon" href="/scripts/icon.pl">
+<META NAME="ResourceName" CONTENT="uinC Team">
+<META NAME="ResourceURL" CONTENT="http://www.uinc.ru">
+<META NAME="subject" CONTENT="HACK, SECURITY, PROGRAMMING">
+<META NAME="copyright" CONTENT="2001-2006 uinC Team">
+<META NAME="rating" CONTENT="general">
+<META HTTP-EQUIV="revisit-after" CONTENT="7 days">
+<META NAME="EMAIL" CONTENT="mailto:web@uinc.ru">
+<META NAME="MSSmartTagsPreventParsing" CONTENT="TRUE">
+<META NAME="Description" CONTENT="Написание экстра-маленьких Win32 приложений на С++ от 1 КБ используя лишь API. Данный документ описывает способ создания Win32 программ, при котором можно добиться размера exe файла от 1 Kb, на примере программы WindowsHiderPro. Также описаны подводные камни, которые могут встретиться на пути при таком необычном проектировании.">
+<META NAME="Keywords" CONTENT="Win32, tutorial, HotKeys, examples, sources, linker options, runtime, EnumWindowsProc">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+ </head>
+
+ <style type="text/css">
+ <!--
+ a { text-decoration:none;color: #ff0000;}
+ a:hover { text-decoration:none;color: #007c00;}
+ a:visited { text-decoration:none;}
+ a:active { text-decoration:none;color:00aa00;}
+ -->
+ </style>
+
+
+ <body bgcolor="#ffffff" text="#000000" link="#ff0000" vlink="#ff0000">
+ <!-- menu -->
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr><td colspan="2" bgcolor="#ff0000"><font face="arial,helvetica,sans-serif" size="2">&nbsp;Underground InformatioN Center [&articles]&nbsp;</font></td></tr>
+    <tr><td><font face="arial,helvetica,sans-serif" size="2">[<a href="/news/">network & security news</a>] [<a href="/news/rss/">RSS</a>] [<a href="/articles/">articles, programing info</a>] [<a href="/forum/"><font color="#000000">uin</font><b>C</b> info board</a>] [<a href="/links/">links, soft & more...</a>] [<a href="/news/soft/">soft archive</a>]</font></td><td align="right"><font face="arial,helvetica,sans-serif" size="2">[<a href="/">home</a>]</font></td></tr>      
+</table><br>
+ <!-- end menu -->
+
+<div align=center>
+
+<table width="570" cellspacing="0" cellpadding="0"><tr><td>
+
+<font face=arial,verdana size="2">
+
+<center><b><font size="3">Написание экстра-маленьких Win32 приложений на С++ от 1 КБ используя лишь API, на примере программы Windows Hider</font></b>
+</center>
+<p>
+
+<p align="justify"><b>Введение</b><br>
+&nbsp;&nbsp;
+Натыкаясь в Интернете на довольно интересные программы, я часто не решался их закачивать после
+того, как узнавал их размер. Какую ни возьми - все огромные. Да и ресурсов системных потребляют
+немало. В этой статье я расскажу о том, как сделать программу в среднем в 10 - 100 раз
+меньше размером, чем попадаются аналогичные.
+</p>
+
+<p align="justify"><b>Цель</b><br>
+&nbsp;&nbsp;
+Написать очень быструю и маленькую программу, скрывающую по CTRL+F12 заданные окна. При нажатии
+комбинации CTRL+F10 она должна показать спрятанные окна. Входные данные:</p>
+
+<pre><font color="008000" size="2">TXT Файл вида
+------------
+Internet Explorer
+The Bat!
+Visual C++
+911
+------------</font></pre>
+
+<p align="justify">
+Если будут найдены окна, содержащие в своем заголовке указанные строки, они будут спрятаны.<br>
+В вышеуказанном примере будут спрятаны все окна IE, окно Microsoft Visual C++, окно почтовой
+программы "The Bat!" и все окна, в заголовках которых содержится комбинация символов "911".
+<br>&nbsp;&nbsp;
+Итак, писать будем на чистом Win32 API. Создадим окно, привяжем к нему горячие клавиши. По
+требованию будем осуществлять перебор видимых окон в системе и в заголовке каждого будем
+искать заданные комбинации символов.</p>
+
+<p align="justify"><b>Опции линкера</b><br>
+&nbsp;&nbsp;
+Если ничего не предпринимать, то нам не удастся получить в итоге файл менее 32 КБ(примерно).
+Поэтому пишем:</p>
+
+<pre><font color="008000" size="2">#pragma comment(linker,"/MERGE:.rdata=.text")
+#pragma comment(linker,"/FILEALIGN:512 /SECTION:.text,EWRX
+                                                        /IGNORE:4078")
+#pragma comment(linker,"/ENTRY:New_WinMain")
+#pragma comment(linker,"/NODEFAULTLIB")</font></pre>
+
+На что теперь стоит обратить особое внимание? Обычно точка входа в программу выглядит так:<br>
+<font color="008000" size="2" face="courier new">int WINAPI WinMain(HINSTANCE hInst,HINSTANCE hPrevInst,LPSTR szCmdLine,int nCmdShow)</font><br>
+(кстати, для Win32 приложений второй параметр всегда NULL)<br>
+<p align="justify">Но(!)... Так как мы отключили "Runtime library", нам теперь  передается в этих параметрах
+разный мусор. Поэтому называем точку входа не WinMain а New_WinMain, которую объявим, как
+void New_WinMain(void), чтобы не забыть о том, что нам ничего не передается. А параметр
+HINSTANCE получаем функцией GetModuleHandle(NULL). Ах да, и выходить из программы будем
+функцией ExitProcess.
+<br>&nbsp;&nbsp;
+Теперь если собрать нашу пустую программку, которая ничего делать не будет, размер ее будет
+1 Кб. Но нам нужно еще дописать 3 Кб кода. Продолжим.
+<br>&nbsp;&nbsp;
+Чтобы все дальнейшее было понятно даже новичку в программировании под Windows, я
+прокомментирую все.
+</p>
+
+<p><b>Объявим кое-какие константы</b><br>
+Это понадобится для регистрации "горячих" клавиш функцией RegisterHotKey.<br>
+<font color="008000" size="2" face="courier new">#define HOTKEYHIDE 1<br>
+#define HOTKEYSHOW 2</font><br><br>
+
+Размер буффера, куда будет считываться заголовок окна функцией GetWindowText.<br>
+<font color="008000" size="2" face="courier new">#define SSZZ 256</font><br><br>
+
+Размер буфера, куда будет считываться файл со стоками фильтрации (используется в
+объявлении char FilterStrings[MAXFIL];)<br>
+<font color="008000" size="2" face="courier new">#define MAXFIL 1024</font><br>
+(Примечание: При желании можно сделать и выделение памяти динамически - найти файл, узнать его
+размер и выделить блок. Приблизительный пример:
+
+<pre><font color="008000" size="2"><font color="6aa5e6">// .....................</font>
+WIN32_FIND_DATA FindData;
+HANDLE hFind=FindFirstFile(szFilterStringsFile,&FindData);
+if (hFind!=INVALID_HANDLE_VALUE)
+{
+  i=(FindData.nFileSizeHigh * MAXDWORD) + FindData.nFileSizeLow;
+  HGLOBAL hGA=GlobalAlloc(GMEM_ZEROINIT|GMEM_MOVEABLE,i+1);
+  <font color="6aa5e6">// (+ end-ZERO)</font>
+  if (hGA!=NULL)
+  {
+    LPVOID lpStrings=GlobalLock(hGA);
+    DWORD dw;
+    if (lpStrings!=NULL) ReadFile(hFile,lpStrings,i,&dw,NULL);
+    }
+        
+  }
+  FindClose(hFind);
+  CloseHandle(hFile);
+<font color="6aa5e6">// ...............................
+// Но так как вряд ли файл настроек у нас будет больше одного
+// килобайта, я оставил статичный массив.</font>
+)</font></pre>
+</p>
+
+<p><b>Зададим глобальные переменные</b><br>
+Массив хендлов окон (вряд ли будет у нас более 300 окон)<br>
+<font color="008000" size="2" face="courier new">HWND aHwnd[300];</font><br><br>
+
+Кол-во инициализированных элементов в этом массиве<br>
+<font color="008000" size="2" face="courier new">unsigned int cHwnd=0;</font><br><br>
+
+Дескрипторы окон - главное и два дочерних - кнопка "Hide" и кнопка "Edit filter strings"<br>
+<font color="008000" size="2" face="courier new">HWND hwndMain, hwndButtonHide, hwndButtonEditFilter;</font><br><br>
+
+Тут будет что-то типа "c:\programs\winhider\winhider.settings.txt"<br>
+<font color="008000" size="2" face="courier new">char szFilterStringsFile[MAX_PATH]="(с)2002 KMiNT21";</font><br><br>
+
+Соответственно, хендл файла с именем "что-то типа"<br>
+<font color="008000" size="2" face="courier new">HANDLE hFile;</font><br><br>
+
+А это место, куда будем считывать все из этого файла<br>
+<font color="008000" size="2" face="courier new">char FilterStrings[MAXFIL];</font></p>
+
+<p><b>Функции</b><br>
+Обработка сообщений главного окна<br>
+<font color="008000" size="2" face="courier new">LRESULT CALLBACK MainWndProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam);</font><br><br>
+
+Функция, которая будет вызываться для каждого окна при переборе всех окон<br>
+<font color="008000" size="2" face="courier new">static BOOL FAR PASCAL my_EnumWindowsProc(HWND  hwnd, DWORD lParam);</font><br><br>
+
+Проверка наличия строки str2 в str1<br>
+<font color="008000" size="2" face="courier new">BOOL Contain(char* str1, char* str2);</font><br><br>
+
+Скрывание с экрана очередного окна<br>
+<font color="008000" size="2" face="courier new">inline void HideNext(HWND hwnd){ ShowWindow(aHwnd[cHwnd++]=hwnd,SW_HIDE); }</font><br><br>
+
+Возврат всех спрятанных окон на экран<br>
+<font color="008000" size="2" face="courier new">inline void ShowAll(void) { while(cHwnd) ShowWindow(aHwnd[--cHwnd],SW_SHOW);}</font><br><br>
+</p>
+
+<p><b>Пройдемся по главным строкам функции NewWinMain</b><br>
+
+* Получим INSTANCE модуля. Это нам нужно для регистрации оконного класса<br>
+<font color="008000" size="2" face="courier new">HINSTANCE hInst=GetModuleHandle(NULL);</font><br><br>
+
+* Зарегистрируем оконный класс
+<pre><font color="008000" size="2"> WNDCLASS wc;
+  wc.style = CS_HREDRAW|CS_VREDRAW ;
+  wc.lpfnWndProc = (WNDPROC)MainWndProc;
+  wc.hInstance = hInst;
+  wc.hbrBackground = (HBRUSH)(COLOR_WINDOW);
+  wc.lpszClassName = "CKMINT21WINDOWSHIDERPRO";
+  wc.hCursor = LoadCursor(NULL,IDC_ARROW);
+  wc.hIcon = LoadIcon(NULL,IDI_APPLICATION);
+  wc.lpszMenuName=NULL;
+  wc.cbClsExtra=0;
+  wc.cbWndExtra=0;
+  if (!RegisterClass(&wc)) MessageBox(0,"I can't register window
+               class.","Error:",0), ExitProcess(0);</font></pre>
+
+* Создаем главное окно приложения<br>
+<font color="008000" size="2" face="courier new">hwndMain=CreateWindow(wc.lpszClassName,"Small windows hider!", WS_BORDER|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX, CW_USEDEFAULT,0,291,180, NULL, NULL, hInst, NULL);</font><br><br>
+  
+И помещаем на него две кнопки. Как видим, кнопки имеют класс "BUTTON". Они являются
+дочерними окну hwndMain.<br>
+<font color="008000" size="2" face="courier new">
+hwndButtonHide=CreateWindow("BUTTON","Hide!", WS_VISIBLE | WS_CHILD   , 10,10,261,90, hwndMain, NULL, hInst, NULL);<br>
+ShowWindow(hwndButtonHide,SW_SHOW), UpdateWindow(hwndButtonHide);<br>
+hwndButtonEditFilter=CreateWindow("BUTTON","Edit filters", WS_VISIBLE|WS_CHILD|WS_BORDER|WS_TABSTOP  , 10,110,261,30, hwndMain, NULL, hInst, NULL);<br>
+ShowWindow(hwndButtonEditFilter,SW_SHOW), UpdateWindow(hwndButtonEditFilter);</font><br><br>
+
+Наконец, показываем главное окно<br>
+<font color="008000" size="2" face="courier new">ShowWindow(hwndMain,SW_SHOW), UpdateWindow(hwndMain);</font></p>
+
+<p align="justify">Примечание: Так как кто-то этого может не знать, хочу отметить, что в языке С++ есть
+"операция следования" - запятая. Т.е. просто последовательно выполнятся обе функции
+ShowWindow и UpdateWindow (как отдельный блок). В вышеуказанной строке можно было бы и
+просто поставить ";", а вообще иногда это помогает избавиться от огромного количества
+фигурных скобок {}, в тексте программы.</p>
+
+* Затем регистрируем в системе HotKeys. Они будут привязаны к главному окну, которому
+будут передаватся сообщения WM_HOTKEY.<br>
+<font color="008000" size="2" face="courier new">RegisterHotKey(hwndMain,HOTKEYHIDE,MOD_CONTROL,VK_F12)<br>
+RegisterHotKey(hwndMain,HOTKEYSHOW,MOD_CONTROL,VK_F10)</font><br><br>
+
+* Затем считываем настройки из файла и запускаем главный цикл обработки оконных
+сообщений для текущего процесса.<br>
+<font color="008000" size="2" face="courier new">MSG  msg;<br>
+while(GetMessage(&msg,NULL,0,0)) TranslateMessage(&msg), DispatchMessage(&msg);</font>
+
+<p align="justify"><b>Оконная процедура</b><br>
+<pre><font color="008000" size="2"><font color="6aa5e6">// Тут все довольно стандартно. Делаем  switch (msg).
+// ...</font>
+case WM_HOTKEY:
+    if (HOTKEYSHOW == (int)wParam)
+    <font color="6aa5e6">// показываем все, что мы до этого прятали, а так же главное
+    // окно программы</font>
+      ShowAll(), ShowWindow(hwnd,SW_SHOW);
+
+    if (HOTKEYHIDE == (int)wParam)
+    <font color="6aa5e6">// Скрываем наше главное окно и запускаем перебор всех окон в
+    // системе - EnumWindows. Теперь будет вызываться функция
+    // my_EnumWindowsProc для каждого обнаруженного в системе окна.</font>
+      ShowWindow(hwnd,SW_HIDE), EnumWindows((int (__stdcall *)(struct
+                               HWND__ *,long))my_EnumWindowsProc, 0);
+    break;
+<font color="6aa5e6">// ...
+
+// Если программу пытаются минимизировать, просто скрываем ее
+// .........................</font>
+  case WM_SYSCOMMAND:
+    if(SC_MINIMIZE == wParam) { ShowWindow(hwnd,SW_HIDE); return 0; }
+    break;       
+    <font color="6aa5e6">// Внимание, после ShowWindow(hwnd,SW_HIDE) мы пишем return 0,
+    // вместо break. Почему? Да потому что не хотим, чтобы это
+    // сообщение пошло дальше в систему. Мы его уже обработали
+    // по-своему.
+// ...
+// А затем обрабатываем нажатия на кнопки.</font>
+    case BN_CLICKED: 
+      if (hwndButtonHide==(HWND)lParam)ShowWindow(hwndMain,SW_HIDE);
+      if (hwndButtonEditFilter==(HWND)lParam)ShellExecute(NULL,"open",
+                      szFilterStringsFile,NULL,NULL,SW_SHOWMAXIMIZED);
+      break;</font></pre>
+</p>
+
+<p align="justify"><b>Рассмотрим функцию my_EnumWindowsProc</b><br>
+Пропустим все невидимые окна<br>
+<font color="008000" size="2" face="courier new">if (!IsWindowVisible(hwnd)) return TRUE;</font><br><br>
+
+Получим TITLE очередного окна<br>
+<font color="008000" size="2" face="courier new">GetWindowText(hwnd, szWindowsTitle, SSZZ)</font><br><br>
+  
+Затем перебираем все стоки из файла настроек
+<pre><font color="008000" size="2">  for(i=0;i&lt;MAXFIL;i++)
+    if (FilterStrings[i]) <font color="6aa5e6">// если это начало строки, то</font>
+    {
+     if (Contain(szWindowsTitle, FilterStrings+i)) HideNext(hwnd);
+     <font color="6aa5e6">// скроем окно, если эта строка содержится в szWindowsTitle</font>
+     while(FilterStrings[i]) i++;
+     <font color="6aa5e6">// сместим указатель на следующий 0</font>
+    }</font></pre>
+
+Продолжаем дальнейший перебор окон<br>
+<font color="008000" size="2" face="courier new">return TRUE;</font><br>
+(Если бы было return FALSE, перебор бы закончился.)<br><br>
+
+В остальных функциях особо описывать нечего.</p>
+
+<p align="justify"><b>FAQ, возникший в результате множества заданных мне вопросов.</b><br><br>
+
+Q: <i>Почему программа не линкуется?</i><br>
+A: Попробуйте собрать не debug, а release версию. А если вам нужна возможность отладки,
+воспользуйтесь обычными #define. И все-таки есть еще одни вариант. В отладочной версии линкер не
+может собрать файл потому, что не находит "__chkesp", которая содержится в "CHKESP.OBJ". Что мы
+можем сделать? Да взять и заменить тот obj на свой, который будет меньше размером и не будет
+содержать ненужный нам код.<br><br>
+
+Q: <i>Как теперь получить переданную командную строку?</i><br>
+A: Ну тут все просто. Пользуйтесь стандартными API. То же самое и для Instance приложения. Вот они - GetCommandLine, GetModuleHandle.<br><br>
+
+Q: <i>А какой минимальный align возможен?</i><br>
+A: Для того, чтобы ваша программа запускалась нормально в любой версии Windows, используйте 512 байт.<br><br>
+
+Q: <i>А можно ли делать такими маленькими DLL?</i><br>
+A: Да. Назначьте свою точку входа вместо _DllMainCRTStartup. Вот <a href="http://www.uinc.ru/scripts/load.cgi?articles/28/dll.zip">пример</a>. <br><br>
+
+Q: <i>А почему пропали функции strcmp, strlen и т.п.?</i><br>
+A: Так как они были реализованы в RTL, теперь вы не можете их использовать. Но это не беда. В модуле
+kernel есть отличная замена этим функциям. Названия те же, но с буквой "l" вначале. Например - lstrlen,
+lstrcmp, lstrcat.<br><br>
+
+Q: <i>А теперь стали недоступны функции работы с памятью - memset, CopyMemory?</i><br>
+A: RTL сам предоставляет интефейс для работы с памятью. Во-первых, чтобы соблюдать снандарт,
+во-вторых, чтобы упростить работу с памятью в среде Win32. Вот посмотрите на функцию CopyMemory
+- она на самом деле не является настоящей API функцией. Попробуйте слинковать проект без RTL, в
+котором используется эта функция. Результат - неудачная попытка линковки - ссылка на _memcpy. Еще
+один пример - функция new. В среде Win32 вы должы воспользоваться функциями GlobalAlloc, GlobalLoc
+и т.п. Однако вы можете просто заменить RTL функции своими. В файле
+<a href="http://www.uinc.ru/scripts/load.cgi?articles/28/add.txt" target="_blank">add.txt</a>
+вы можете взять уже готовые функции, если не хотите писать их сами.<br><br>
+
+Q: <i>У меня есть один вопрос, которого нет в этом FAQ, что делать?</i><br>
+A: В таком случае вы можете задать вопрос на нашем форуме. <a href="http://www.uinc.ru/forum/">www.uinc.ru/forum/</a></p>
+
+<p><b>Links:</b><br>
+
++ Полный исходник программы и готовый exe можно скачать
+<a href="/scripts/load.cgi?articles/28/winhider.zip" target="_blank">здесь</a>.
+(Скачано 7460 раз)<br>
+
++ Пример написания микро-DLL - 
+<a href="http://www.uinc.ru/scripts/load.cgi?articles/28/dll.zip" target="_blank">dll.zip</a>.
+(Скачано 7315 раз)<br>
+
++ Набор c++ функций, которыми можно заменить RTL аналоги - 
+<a href="http://www.uinc.ru/scripts/load.cgi?articles/28/add.txt" target="_blank">add.txt</a>.
+(Скачано 6986 раз)<br>
+
++ Постоянное место статьи: <a href="http://www.uinc.ru/articles/28/index.shtml" target="_blank">http://www.uinc.ru/articles/28/index.shtml</a><br>
+
++ Программа <a href="http://www.kmint21.com/whidepro" target="_blank">"Windows Hider Pro"</a>,
+примерный скелет которой был тут приведен.<br>
+
++ Вскоре после выхода этого документа мне на глаза попалась <a href="http://www.rsdn.ru">статья</a> на эту же тему.<br>
+<p>
+
+Special thanks: Dr.Golova[uinC], NiFi[uinC].<p>
+
+[c] Copyright 2002. Украина, Запорожье.
+<a href="http://www.kmint21.com" target="_blank">KMiNT21</a> (<a href="mailto:kmint21@mail.ru?subj=NEPNCPP" target="_blank">mailto:kmint21@mail.ru</a>).<br>
+uinC Member<br>
+[c]uinC<p>
+
+Замечания/пожелания/поправления/дополнения всегда приветствуются.<p>
+
+Статья написана специально для UInC (<a href="http://www.uinc.ru" target="_blank">www.uinc.ru</a>).<br>
+
+<p align="justify"><font color="#ff0000" size="1" face="arial,verdana" class="strokedtext">
+Все документы и программы на этом сайте собраны ТОЛЬКО для образовательных целей, мы
+не отвечаем ни за какие последствия, которые имели место как следствие использования
+этих материалов\программ. Вы используете все вышеперечисленное на свой страх и риск.<br><br>
+
+Любые материалы с этого сайта не могут быть скопированы без разрешения автора или
+администрации.
+</font></p>
+ 
+
+</td></tr>
+</table>
+</div>
+
+ <!-- revmenu -->
+<br><table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td><font face="arial,helvetica,sans-serif" size="2">[<a href="/news/">network & security news</a>] [<a href="/news/rss/">RSS</a>] [<a href="/articles/">articles, programing info</a>] [<a href="/forum/"><font color="#000000">uin</font><b>C</b> info board</a>] [<a href="/links/">links, soft & more...</a>] [<a href="/news/soft/">soft archive</a>]</font></td><td align="right"><font face="arial,helvetica,sans-serif" size="2">[<a href="/">home</a>]</font></td></tr>      
+ <tr><td colspan="2" bgcolor="#ff0000"><font face="arial,helvetica,sans-serif" size="2">&nbsp;Underground InformatioN Center [&articles]&nbsp;</font></td></tr>
+</table>
+ <!-- end revmenu -->
+  <!-- copyleft -->
+ <table width="80%" align="center" cellspacing="0" cellpadding="0"><tr><td width="50%" align="left"><font face="arial,helvetica,sans-serif" size="2">Hosted by: <a href="http://www.void.ru" target="_blank">Void.Ru</a></font></td>
+
+<td width="50%" align="right"><script language="javascript">
+sid=27146;
+rf=escape(document.referrer); rn=Math.random();
+ct="<a href='http://top100.sec.ru/jump.cfm?sid=27146' target=_blank>";
+ct+="<img src=http://top100.sec.ru/fscounter.cfm";
+ct+="?sid="+sid+"&rf="+rf+"&rn="+rn+" ";
+ct+="width=1 height=1 border=0 alt='top100.sec.ru'>";
+ct+="</a>";
+document.write(ct);
+</script>
+<noscript>
+<a href="http://top100.sec.ru/jump.cfm?sid=27146">
+<img src="http://top100.sec.ru/fscounter.cfm?sid=27146"
+width=1 height=1 border=0 alt='top100.sec.ru'></a>
+</noscript><font face="arial,helvetica,sans-serif" size="2"><sup><small>CopyLeft</small></sup> <a href="/news/sendnews.php">UInC</a></font></td></tr></table>
+ <!-- end copyleft -->
+ </body>
+</html>
+

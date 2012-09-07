@@ -1,0 +1,111 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>krige.cv</s-topic>
+</s-topics>
+
+<s-title>
+kriging cross validation, n-fold or leave-one-out
+</s-title>
+
+<s-description>
+Cross validation function for simple, ordinary or universal
+point kriging, kriging in a local neighbourhood.
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+krige.cv(formula, locations, data, model = NULL, beta = NULL, nmax = Inf, 
+        nfold = nrow(data), verbose = TRUE, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="formula">
+formula that defines the dependent variable as a linear
+model of independent variables; suppose the dependent variable has name
+<s-expression>z</s-expression>, for ordinary and simple kriging use the formula <s-expression>z~1</s-expression>;
+for simple kriging also define <s-expression>beta</s-expression> (see below); for universal
+kriging, suppose <s-expression>z</s-expression> is linearly dependent on <s-expression>x</s-expression> and <s-expression>y</s-expression>,
+use the formula <s-expression>z~x+y</s-expression></s-arg>
+<s-arg name="locations">
+formula with only independent variables that define the
+spatial data locations (coordinates), e.g. <s-expression>~x+y</s-expression> </s-arg>
+<s-arg name="data">
+data frame; should contain the dependent variable, independent
+variables, and coordinates. </s-arg>
+<s-arg name="model">
+variogram model of dependent variable (or its residuals), 
+defined by a call to <s-function name="vgm">vgm</s-function> or <s-function name="fit.variogram">fit.variogram</s-function></s-arg>
+<s-arg name="beta">
+only for simple kriging (and simulation based on simple
+kriging); vector with the trend coefficients (including intercept);
+if no independent variables are defined the model only contains an
+intercept and this should be the simple kriging mean </s-arg>
+<s-arg name="nmax">
+for local kriging: the number of nearest observations that
+should be used for a kriging prediction or simulation, where nearest
+is defined in terms of the space of the spatial locations. By default,
+all observations are used </s-arg>
+<s-arg name="nfold">
+apply n-fold cross validation; if <s-expression>nfold</s-expression> is set
+to <s-expression>nrow(data)</s-expression> (the default), leave-one-out cross validation is
+done; if set to e.g. 5, five-fold cross validation is done </s-arg>
+<s-arg name="verbose">
+logical; if TRUE, progress is printed </s-arg>
+<s-arg name="...">
+other arguments that will be passed to <s-function name="gstat">gstat</s-function></s-arg>
+</s-args>
+
+<s-details>
+Leave-one-out cross validation (LOOCV) visits a data point, and
+predicts the value at that location by leaving out the observed value,
+and proceeds with the next data point. (The observed value is left
+out because kriging would otherwise predict the value itself.) N-fold
+cross validation makes a partitions the data set in N parts. For all
+observation in a part, predictions are made based on the remaining N-1
+parts; this is repeated for each of the N parts. N-fold cross validation
+is much faster than LOOCV.
+</s-details>
+
+<s-value>
+a data frame containing the coordinates of <s-expression>newdata</s-expression>, and
+columns of prediction and prediction variance of cross validated data
+points, observed values, residuals, zscore (residual divided by kriging
+standard error), and fold.
+</s-value>
+
+<s-section name="NOTE">
+Leave-one-out cross validation seems to be much faster in plain
+(stand-alone) gstat, apparently most of the effort is the moving around
+of data from R to gstat.
+</s-section>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+<url url ="http://www.gstat.org/">
+</s-section>
+
+<s-see>
+<s-function name="krige">krige</s-function>, <s-function name="gstat">gstat</s-function>, <s-function name="predict.gstat">predict.gstat</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+m &lt;- vgm(.59, "Sph", 874, .04)
+# five-fold cross validation:
+x &lt;- krige.cv(log(zinc)~1, ~x+y, model = m, data = meuse, nmax = 40, nfold=5)
+bubble(x, z = "residual", main = "log(zinc): 5-fold CV residuals")
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

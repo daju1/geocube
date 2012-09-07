@@ -1,0 +1,159 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>gstat</s-topic>
+</s-topics>
+
+<s-title>
+Creates gstat Objects
+</s-title>
+
+<s-description>
+Function that creates gstat objects; objects that hold all the information
+necessary for univariate or multivariate geostatistical prediction
+(simple, ordinary or universal (co)kriging), or its conditional or
+unconditional Gaussian or indicator simulation equivalents.
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+gstat(g, id, formula, locations, data, model = NULL, beta, nmax = Inf,
+        dummy = FALSE, set, fill.all = FALSE, variance = "identity")
+print.gstat(x, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="g">
+gstat object to append to; if missing, a new gstat object
+is created </s-arg>
+<s-arg name="id">
+id of new variable; if missing, <s-expression>varn</s-expression> is used with
+<s-expression>n</s-expression> the number for this variable. If a cross variogram is entered,
+<s-expression>id</s-expression> is a vector with the two <s-expression>id</s-expression> values , e.g. 
+<s-expression>c("zn", "cd")</s-expression> and further only supply arguments <s-expression>g</s-expression> 
+and <s-expression>model</s-expression></s-arg>
+<s-arg name="formula">
+formula that defines the dependent variable as a linear
+model of independent variables; suppose the dependent variable has name
+<s-expression>z</s-expression>, for ordinary and simple kriging use the formula <s-expression>z~1</s-expression>;
+for simple kriging also define <s-expression>beta</s-expression> (see below); for universal
+kriging, suppose <s-expression>z</s-expression> is linearly dependent on <s-expression>x</s-expression> and <s-expression>y</s-expression>,
+use the formula <s-expression>z~x+y</s-expression></s-arg>
+<s-arg name="locations">
+formula with only independent variables that define the
+spatial data locations (coordinates), e.g. <s-expression>~x+y</s-expression> </s-arg>
+<s-arg name="data">
+data frame; contains the dependent variable, independent
+variables, and locations. </s-arg>
+<s-arg name="model">
+variogram model for this <s-expression>id</s-expression>; defined by a call to 
+<s-function name="vgm">vgm</s-function>; see argument <s-expression>id</s-expression> to see how cross variograms are entered </s-arg>
+<s-arg name="beta">
+only for simple kriging (and simulation based on simple
+kriging); vector with the trend coefficients (including intercept);
+if no independent variables are defined the model only contains an
+intercept and this should be the simple kriging mean </s-arg>
+<s-arg name="nmax">
+for local kriging: the number of nearest observations that
+should be used for a kriging prediction or simulation, where nearest
+is defined in terms of the space of the spatial locations </s-arg>
+<s-arg name="dummy">
+logical; if TRUE, consider this data as a dummy variable
+(only necessary for unconditional simulation) </s-arg>
+<s-arg name="set">
+named list with optional parameters to be passed to
+gstat (only <s-expression>set</s-expression> commands of gstat are allowed; see gstat manual) </s-arg>
+<s-arg name="x">
+gstat object to print </s-arg>
+<s-arg name="fill.all">
+logical; if TRUE, fill all of the variogram and cross
+variogram model slots in <s-expression>g</s-expression> with the given variogram model </s-arg>
+<s-arg name="variance">
+character; variance function to transform to non-stationary
+covariances; "identity" does not transform, other options are "mu" (poisson)
+and "mu(1-mu)" (binomial) </s-arg>
+<s-arg name="...">
+arguments that are passed to the printing of the variogram
+models only</s-arg>
+</s-args>
+
+<s-details>
+to print the full contents of the object <s-expression>g</s-expression> returned,
+use <s-expression>as.list(g)</s-expression>
+</s-details>
+
+<s-value>
+an object of class <s-expression>gstat</s-expression>, which inherits from <s-expression>list</s-expression>.
+Its components are: 
+<s-return-component name="data">
+list; each element is a list with the <s-expression>formula</s-expression>, 
+<s-expression>locations</s-expression>, <s-expression>data</s-expression>, <s-expression>nvars</s-expression>, and <s-expression>beta</s-expression> for a 
+variable</s-return-component>
+<s-return-component name="model">
+list; each element contains a variogram model; names are
+those of the elements of <s-expression>data</s-expression>; cross variograms have names of
+the pairs of data elements, separated by a <s-expression>.</s-expression> (e.g.: 
+<s-expression>var1.var2</s-expression></s-return-component>
+<s-return-component name="set">
+list; named list, corresponding to set <s-expression>name</s-expression>=<s-expression>value</s-expression>;
+gstat commands (look up the set command in the gstat manual for a full list)</s-return-component>
+</s-value>
+
+<s-section name="NOTE">
+the function currently copies the data objects into the gstat object, so
+this may become a large object. I would like to copy only the name of the
+data frame, but could not get this to work. Any help is appreciated.
+</s-section>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+<url url ="http://www.gstat.org/">
+</s-section>
+
+<s-see>
+<s-function name="predict.gstat">predict.gstat</s-function>, <s-function name="krige">krige</s-function>
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+# let's do some manual fitting of two direct variograms and a cross variogram
+g &lt;- gstat(id = "ln.zinc", formula = log(zinc)~1, locations = ~x+y, 
+        data = meuse)
+g &lt;- gstat(g, id = "ln.lead", formula = log(lead)~1, locations = ~x+y, 
+        data = meuse)
+# examine variograms and cross variogram:
+plot(variogram(g))
+# enter direct variograms:
+g &lt;- gstat(g, id = "ln.zinc", model = vgm(.55, "Sph", 900, .05))
+g &lt;- gstat(g, id = "ln.lead", model = vgm(.55, "Sph", 900, .05))
+# enter cross variogram:
+g &lt;- gstat(g, id = c("ln.zinc", "ln.lead"), model = vgm(.47, "Sph", 900, .03))
+# examine fit:
+plot(variogram(g), model = g$model, main = "models fitted by eye")
+# see also demo(cokriging) for a more efficient approach
+
+# Inverse distance interpolation with inverse distance power set to .5:
+# (kriging variants need a variogram model to be specified)
+data(meuse)
+data(meuse.grid)
+meuse.gstat &lt;- gstat(id = "zinc", formula = zinc ~ 1, locations = ~ x + y,
+        data = meuse, nmax = 7, set = list(idp = .5))
+meuse.gstat
+z &lt;- predict(meuse.gstat, meuse.grid)
+levelplot(zinc.pred~x+y, z, aspect = mapasp(z))
+# see demo(cokriging) and demo(examples) for further examples, 
+# and the manuals for predict.gstat and image
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

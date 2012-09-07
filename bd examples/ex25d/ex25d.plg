@@ -1,0 +1,85 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ex25d - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/ex25d.res" /d "_DEBUG" /d "_AFXDLL" "D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\ex25d.rc"" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSPF5.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/ex25d.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\AlarmDialog.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\AutoDriver.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\BankDriver.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\ClockDriver.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\ex25d.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\ex25dDoc.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\ex25dView.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\excel8.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\MainFrm.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSPF5.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSPF6.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/ex25d.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex25d\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSPF6.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSPF7.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ex25d.pdb" /debug /machine:I386 /out:"Debug/ex25d.exe" /pdbtype:sept 
+".\Debug\AlarmDialog.obj"
+".\Debug\AutoDriver.obj"
+".\Debug\BankDriver.obj"
+".\Debug\ClockDriver.obj"
+".\Debug\ex25d.obj"
+".\Debug\ex25dDoc.obj"
+".\Debug\ex25dView.obj"
+".\Debug\excel8.obj"
+".\Debug\MainFrm.obj"
+".\Debug\StdAfx.obj"
+".\Debug\ex25d.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSPF7.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AlarmDialog.cpp
+AutoDriver.cpp
+BankDriver.cpp
+ClockDriver.cpp
+ex25d.cpp
+ex25dDoc.cpp
+ex25dView.cpp
+excel8.cpp
+MainFrm.cpp
+Generating Code...
+Linking...
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSPF9.tmp" with contents
+[
+/nologo /o"Debug/ex25d.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\AlarmDialog.sbr"
+".\Debug\AutoDriver.sbr"
+".\Debug\BankDriver.sbr"
+".\Debug\ClockDriver.sbr"
+".\Debug\ex25d.sbr"
+".\Debug\ex25dDoc.sbr"
+".\Debug\ex25dView.sbr"
+".\Debug\excel8.sbr"
+".\Debug\MainFrm.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSPF9.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ex25d.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

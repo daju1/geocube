@@ -1,0 +1,2582 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE MOVEABLE PURE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE MOVEABLE PURE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE MOVEABLE PURE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\lab.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#include ""afxdb.rc""          // Database resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_HDRICON1            ICON    DISCARDABLE     "hdricon1.ico"
+IDI_HDRICON2            ICON    DISCARDABLE     "hdricon2.ico"
+IDI_ICONLIST1           ICON    DISCARDABLE     "iconlist1.ico"
+IDI_ICONLIST2           ICON    DISCARDABLE     "iconlist2.ico"
+IDI_ICONLIST3           ICON    DISCARDABLE     "iconlist3.ico"
+IDI_ICONLIST4           ICON    DISCARDABLE     "iconlist4.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_SPYGLASS            CURSOR  DISCARDABLE     "cursor1.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOG DISCARDABLE  0, 0, 329, 17
+STYLE DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Requery",IDC_REQUERY,0,-4,50,21
+    EDITTEXT        IDC_QUERY,61,1,261,14,ES_AUTOHSCROLL
+END
+
+IDD_ENGEO_FORM DIALOG DISCARDABLE  0, 0, 667, 697
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_LIST_EN_GEO_OBJECTS,"SysListView32",
+                    WS_BORDER | WS_TABSTOP,7,17,109,91
+    CONTROL         "List1",IDC_LIST_DB_TABLES,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,587,110,103
+    CONTROL         "List1",IDC_LIST_KT,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,269,17,238,91
+    CONTROL         "List1",IDC_LIST_VIEW,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,134,587,526,103
+    CONTROL         "List1",IDC_LIST_SOIL,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,122,329,139
+    CONTROL         "List1",IDC_LIST_GRANULAR,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,280,151,119
+    CONTROL         "List1",IDC_LIST_PROP,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,352,122,308,139
+    CONTROL         "List1",IDC_LIST_ZRIZ,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,352,280,308,50
+    CONTROL         "List2",IDC_LIST_COMPRESS,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,352,347,308,52
+    CONTROL         "List1",IDC_LIST_TSZ,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,171,322,165,31
+    CONTROL         "List2",IDC_LIST_PALJA,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,171,366,165,33
+    CONTROL         "List3",IDC_LIST_IGE,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,125,17,135,91
+    CONTROL         "List4",IDC_LIST_LITHO,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,515,17,145,91
+    CONTROL         "List5",IDC_LIST_VODA,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,171,280,165,30
+    CTEXT           "Объекты",IDC_STATIC,7,7,109,8
+    CTEXT           "Таблица ИГЭ выбранного объекта",IDC_STATIC,127,7,133,8
+    CTEXT           "Комплексные точки: скважины, шурфы, ТСЗ",IDC_STATIC,269,
+                    7,239,8
+    CTEXT           "Образцы грунта",IDC_STATIC,7,112,329,8
+    CTEXT           "Лабораторные свойства выбранного образца грунта",
+                    IDC_STATIC,352,112,308,8
+    CTEXT           "Литология в выбранной КТ",IDC_STATIC,516,7,144,8
+    CTEXT           "Грансосотав",IDC_STATIC,7,268,151,8
+    CTEXT           "Уровень грунтовых вод",IDC_STATIC,171,268,165,8
+    CTEXT           "Статическое зондирование",IDC_STATIC,171,312,165,8
+    CTEXT           "Предельное сопротивление сваи",IDC_STATIC,171,355,165,8
+    CTEXT           "Срез",IDC_STATIC,352,268,308,8
+    CTEXT           "Компрессия",IDC_STATIC,352,335,308,8
+    CTEXT           "Список таблиц БД",IDC_STATIC,9,574,107,8
+    LTEXT           "Содержание таблицы",IDC_STATIC,128,572,74,8
+END
+
+IDD_DIALOG_OBJECT DIALOG DISCARDABLE  0, 0, 266, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Объект"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,47,69,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,111,69,50,14
+    LTEXT           "Контракт",IDC_STATIC,15,26,32,8
+    LTEXT           "Название",IDC_STATIC,15,46,34,8
+    EDITTEXT        IDC_EDIT_CONTRACT,60,23,79,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_OBJECT_NAME,59,42,188,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_PROB_GR_NEW DIALOG DISCARDABLE  0, 0, 186, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Проба грунта"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,42,84,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,107,84,50,14
+    EDITTEXT        IDC_EDIT_LAB_N,7,61,40,14,ES_AUTOHSCROLL
+    LTEXT           "Лабораторный номер",IDC_STATIC,7,47,74,8
+    EDITTEXT        IDC_EDIT_PROB_GR_H,108,61,40,14,ES_AUTOHSCROLL
+    LTEXT           "Глубина",IDC_STATIC,109,47,28,8
+    COMBOBOX        IDC_COMBO_KT,65,7,114,104,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Выработка",IDC_STATIC,7,11,51,8
+    LTEXT           "Код пробы",IDC_STATIC,7,31,37,8
+    COMBOBOX        IDC_COMBO_KOD_PROB_GR,65,25,114,73,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALOG_SOIL_NAME DIALOG DISCARDABLE  0, 0, 554, 57
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Название грунта"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Внести в базу",IDOK,251,36,59,14
+    PUSHBUTTON      "Cancel",IDCANCEL,488,36,59,14
+    EDITTEXT        IDC_EDIT_SOIL_NAME,7,7,540,21,ES_MULTILINE | 
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "Сгенерировать на основе свойств",
+                    IDC_BUTTON_GENERATE_SOIL_NAME,91,36,124,14
+    PUSHBUTTON      "Из базы",IDC_BUTTON_SOIL_NAME_FROM_DB,7,36,50,14
+END
+
+IDD_DIALOG_LANGUAGE DIALOG DISCARDABLE  0, 0, 186, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Язык - Мова - Language"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+    COMBOBOX        IDC_COMBO_LANGUAGE,7,7,112,76,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+END
+
+IDD_DIALOG_PROBGR_DBL_CLICK_MODE DIALOG DISCARDABLE  0, 0, 186, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Выбор режима двойного щелчка"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+    GROUPBOX        "Редактировать:",IDC_STATIC,7,7,116,51
+    CONTROL         "Лабораторный номер",IDC_RADIO_LAB_NUMBER,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,23,21,89,10
+    CONTROL         "Название грунта",IDC_RADIO_GRUNT_NAME,"Button",
+                    BS_AUTORADIOBUTTON,23,38,89,10
+END
+
+IDD_DIALOG_LAB_ELEMENTS DIALOG DISCARDABLE  0, 0, 668, 198
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Лабораторные элементы"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,611,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,611,24,50,14
+    CONTROL         "List1",IDC_LIST_LAB_ELEMENTS,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,7,109,184
+    CONTROL         "List2",IDC_LIST_LAB_ELEMENT,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,119,7,379,184
+    PUSHBUTTON      "Разделить по связности",
+                    IDC_BUTTON_DIVIDE_LAB_ELEMENT_BY_SVYAZNOST,611,48,50,25,
+                    BS_MULTILINE
+    PUSHBUTTON      "Разделить",IDC_BUTTON_DIVIDE_LAB_ELEMENT,611,177,50,14
+    PUSHBUTTON      "Подготовить разделение",
+                    IDC_BUTTON_PREPARE__DIVIDE_LAB_ELEMENT,611,118,50,23,
+                    BS_MULTILINE
+    COMBOBOX        IDC_COMBO_SOIL_DESCRIPTION_SORT_MODE,508,82,153,87,
+                    CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Сортировка",IDC_BUTTON_SORT_LAB_ELEMENT,611,99,50,14
+    PUSHBUTTON      "Расчёт t по всем параметрам",
+                    IDC_BUTTON_PREPARE__DIVIDE_LAB_ELEMENT_ALL,611,145,50,27,
+                    BS_MULTILINE
+    PUSHBUTTON      "Корреляция E,c, fi  и PCK",IDC_BUTTON_PCK_KORRELATION_1,
+                    507,177,97,14
+    PUSHBUTTON      "Корр.выбран парам.и PCK",IDC_BUTTON_PCK_KORRELATION_2,
+                    509,99,97,14
+END
+
+IDD_DIALOG_REPEATINGS DIALOG DISCARDABLE  0, 0, 212, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Число повторностей"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,155,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,155,24,50,14
+    GROUPBOX        "",IDC_STATIC,7,7,140,76
+    CONTROL         "Две повторности",IDC_RADIO_TWO_REPEATINGS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,16,15,75,10
+    CONTROL         "Три повторности",IDC_RADIO_THREE_REPEATINGS,"Button",
+                    BS_AUTORADIOBUTTON,16,28,73,10
+    CONTROL         "Шесть повторностей (только для плотности грунта, влажности и среза, если срез выполняется в числе точек от 4 до 6)",
+                    IDC_RADIO_SIX_REPEATINGS,"Button",BS_AUTORADIOBUTTON | 
+                    BS_MULTILINE,16,41,129,35
+END
+
+IDD_DIALOG_NABOR_GRUNTOV_SETTING DIALOG DISCARDABLE  0, 0, 480, 372
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Определение набора грунтов"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,413,205,50,14,NOT WS_TABSTOP
+    PUSHBUTTON      "Cancel",IDCANCEL,413,181,50,14,NOT WS_TABSTOP
+    COMBOBOX        IDC_COMBO_GRUNT_CLASS,17,26,106,30,CBS_DROPDOWN | 
+                    CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Класс грунта",IDC_STATIC,17,16,106,8,WS_DISABLED
+    GROUPBOX        "Грунт",IDC_STATIC,7,7,228,164
+    GROUPBOX        "Генезис",IDC_STATIC,237,7,116,164
+    CONTROL         "List2",IDC_LIST_GENEZIS,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,243,21,102,143
+    CONTROL         "List3",IDC_LIST_NABOR_GRUNTOV,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,17,241,446,113
+    COMBOBOX        IDC_COMBO_GRUNT_GRUPPA,17,51,106,30,CBS_DROPDOWN | 
+                    CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Группа",IDC_STATIC,17,41,106,8,WS_DISABLED
+    COMBOBOX        IDC_COMBO_GRUNT_PODGRUPPA,17,77,106,30,CBS_DROPDOWN | 
+                    CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Подгруппа",IDC_STATIC,17,65,106,8,WS_DISABLED
+    COMBOBOX        IDC_COMBO_GRUNT_TYP,17,100,106,30,CBS_DROPDOWN | 
+                    CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Тип",IDC_STATIC,17,92,106,8,WS_DISABLED
+    COMBOBOX        IDC_COMBO_GRUNT_VID,17,125,106,30,CBS_DROPDOWN | 
+                    CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Вид",IDC_STATIC,17,116,106,8,WS_DISABLED
+    COMBOBOX        IDC_COMBO_GRUNT_RAZNOVIDNOST,17,151,106,30,CBS_DROPDOWN | 
+                    CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Разновидность",IDC_STATIC,17,140,106,8,WS_DISABLED
+    GROUPBOX        "Гранулометрия",IDC_STATIC,354,7,119,164
+    CONTROL         "List1",IDC_LIST_GRUNT_GRAN,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,361,20,102,144
+    PUSHBUTTON      "Удалить выбор грунта, генезиса и гранолометрии",
+                    IDC_BUTTON_CANCEL_GRUNT_SELECTING,17,181,216,14,NOT 
+                    WS_TABSTOP
+    PUSHBUTTON      "Выбранные грунт, генезис и гранолометрию поместить в таблицу грунтов для объекта ",
+                    IDC_BUTTON_SELECTED_GRUNT_TO_LIST,17,205,338,14,NOT 
+                    WS_TABSTOP
+    CONTROL         "List2",IDC_LIST_GRUNT,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,130,20,102,144
+    EDITTEXT        IDC_EDIT1,328,178,40,14,ES_AUTOHSCROLL | NOT WS_VISIBLE | 
+                    NOT WS_BORDER
+    LTEXT           "Таблица грунтов для данного объекта",IDC_STATIC,17,228,
+                    131,8
+END
+
+IDD_DIALOG_STAT_ZOND DIALOG DISCARDABLE  0, 0, 308, 134
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Статичесткое зондирование"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,251,113,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,190,113,50,14
+    COMBOBOX        IDC_COMBO_UST,208,50,93,77,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Установка",IDC_STATIC,208,35,93,8
+    EDITTEXT        IDC_EDIT_KG,28,48,40,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Kg",IDC_STATIC,12,49,10,13
+    EDITTEXT        IDC_EDIT_KF,28,83,40,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Kf",IDC_STATIC,12,83,8,14
+    EDITTEXT        IDC_EDIT_BG,108,48,40,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Bg",IDC_STATIC,92,49,10,13
+    EDITTEXT        IDC_EDIT_BF,108,83,40,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Bf",IDC_STATIC,92,83,8,14
+    EDITTEXT        IDC_EDIT_ZOND_TYPE,261,83,40,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Тип зонда",IDC_STATIC,208,89,36,8
+    LTEXT           "Коэффициенты перерасчёта лобового сопротивления",
+                    IDC_STATIC,12,35,184,8
+    LTEXT           "Коэффициенты перерасчёта бокового сопротивления",
+                    IDC_STATIC,7,70,184,8
+    EDITTEXT        IDC_EDIT_OBJECT,49,13,122,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Объект",IDC_STATIC,12,19,26,8
+    LTEXT           "ТСЗ",IDC_STATIC,208,19,15,8
+    EDITTEXT        IDC_EDIT_TSZ,237,13,40,14,ES_AUTOHSCROLL | WS_DISABLED
+    PUSHBUTTON      "Передать в Excel",IDC_BUTTON_TO_EXCEL,7,113,85,14
+END
+
+IDD_DIALOG_PALJA DIALOG DISCARDABLE  0, 0, 481, 342
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Расчёт забивных свай"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Расчитать",IDOK,7,321,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,424,321,50,14
+    LTEXT           "Контракт",IDC_STATIC,7,7,32,14
+    EDITTEXT        IDC_EDIT_CONTRACT,49,7,47,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Объект",IDC_STATIC,102,7,26,14
+    EDITTEXT        IDC_EDIT_OBJECT,130,7,124,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Точка зондирования",IDC_STATIC,7,29,71,14
+    EDITTEXT        IDC_EDIT_TSZ,86,29,103,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Тип зонда",IDC_STATIC,201,29,36,14
+    EDITTEXT        IDC_EDIT_ZOND_TYPE,247,29,23,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    GROUPBOX        "Сечение сваи",IDC_STATIC,7,48,172,94
+    LTEXT           "Радиус, см",IDC_STATIC,84,65,38,8
+    EDITTEXT        IDC_EDIT_R_SVAI,130,62,40,14,ES_AUTOHSCROLL
+    LTEXT           "Сечение X",IDC_STATIC,86,103,36,8
+    EDITTEXT        IDC_EDIT_SECH_X,130,99,40,14,ES_AUTOHSCROLL
+    LTEXT           "Сечение Y       см",IDC_STATIC,86,119,36,17
+    EDITTEXT        IDC_EDIT_SECH_Y,130,116,40,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_SVAI_STORONA_KVADRATA,82,82,88,80,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Метод расчёта",IDC_STATIC,184,48,196,46
+    CONTROL         "СНиП 2.02.03-85",IDC_RADIO_SNIP1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,192,62,71,10
+    CONTROL         "СП 50-102-2003",IDC_RADIO_SNIP2,"Button",
+                    BS_AUTORADIOBUTTON,192,79,68,10
+    CONTROL         "1-тип зонда расчёт с разбивкой на песчаные и пылеватоглинистые толщи",
+                    IDC_CHECK_1_ZOND_TYPE_RAZBIVKA_NA_TOLSCHI,"Button",
+                    BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,266,55,107,
+                    26
+    CONTROL         "List1",IDC_LIST_SVAI,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,142,467,168
+    EDITTEXT        IDC_EDIT_ROSTVERK_H,339,19,32,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Сохранить в базу",IDC_BUTTON_SAVE_TO_DB,70,321,100,14
+    PUSHBUTTON      "Передать в Excel",IDC_BUTTON_TO_EXCEL,192,321,74,14
+    CONTROL         "Круглая",IDC_RADIO_SVAI_SECH_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,16,67,43,10
+    CONTROL         "Квадратная",IDC_RADIO_SVAI_SECH_2,"Button",
+                    BS_AUTORADIOBUTTON,16,84,56,10
+    CONTROL         "Прямоугольная",IDC_RADIO_SVAI_SECH_3,"Button",
+                    BS_AUTORADIOBUTTON,16,103,69,10
+    GROUPBOX        "Ростверк",IDC_STATIC,281,7,99,39
+    CONTROL         "Глубина",IDC_RADIO_ROSTVERK_H_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,289,18,43,10
+    CONTROL         "Альтитуда",IDC_RADIO_ROSTVERK_H_2,"Button",
+                    BS_AUTORADIOBUTTON,289,31,51,10
+    GROUPBOX        "Среднее сопр.конусу",IDC_STATIC,385,7,89,135
+    CONTROL         "Простое усреднение",IDC_RADIO_METHOD_FIND_MEAN_PCK_1,
+                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE | WS_GROUP,
+                    391,28,58,17
+    CONTROL         "То же с захватом значения вне интервала",
+                    IDC_RADIO_METHOD_FIND_MEAN_PCK_2,"Button",
+                    BS_AUTORADIOBUTTON | BS_MULTILINE,391,48,74,29
+    CONTROL         "Интегрирование методом прямоугольников",
+                    IDC_RADIO_METHOD_FIND_MEAN_PCK_3,"Button",
+                    BS_AUTORADIOBUTTON | BS_MULTILINE,391,76,74,27
+    CONTROL         "Интегрирование методом трапеций",
+                    IDC_RADIO_METHOD_FIND_MEAN_PCK_4,"Button",
+                    BS_AUTORADIOBUTTON | BS_MULTILINE,391,106,71,25
+    LTEXT           "Методы вычисления:",IDC_STATIC,391,17,72,8
+    GROUPBOX        "Тип грунта (1 тип зонда) выбор коэффициента В2",
+                    IDC_STATIC_GRUNT_TYPE_1_ZT,184,97,196,45
+    CONTROL         "по макс.сумм.толще",IDC_RADIO_TYP_GRUNT_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,192,108,87,10
+    CONTROL         "по устью сваи",IDC_RADIO_TYP_GRUNT_2,"Button",
+                    BS_AUTORADIOBUTTON,192,122,64,10
+    CONTROL         "по минимуму (с макс. запасом)",IDC_RADIO_TYP_GRUNT_3,
+                    "Button",BS_AUTORADIOBUTTON | BS_MULTILINE,283,106,79,17
+    CONTROL         "пропорционально суммарной толщине",
+                    IDC_RADIO_TYP_GRUNT_4,"Button",BS_AUTORADIOBUTTON | 
+                    BS_MULTILINE,283,123,89,17
+    EDITTEXT        IDC_EDIT_STEP,43,122,33,14,ES_AUTOHSCROLL
+    LTEXT           "Шаг, м",IDC_STATIC,16,124,24,8
+END
+
+IDD_DIALOG_ZOND_UST_PARAM DIALOG DISCARDABLE  0, 0, 368, 143
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Параметры установок зондирования"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,311,121,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,248,121,50,14
+    CONTROL         "List1",IDC_LIST_UST,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,7,354,87
+    LTEXT           "Формулы для перерасчёта лобового сопротивлений имеют вид: q = q0 * Kg + Bg   А бокового сопротивления:   Qs = Qo * Kf + Bf  (для I типа зонда)   f = f0 * Kf + Bf  (для II типа зонда) ",
+                    IDC_STATIC,7,100,224,35
+    EDITTEXT        IDC_EDIT1,235,98,40,14,ES_AUTOHSCROLL | NOT WS_VISIBLE | 
+                    NOT WS_BORDER
+    PUSHBUTTON      "Добавить установку",IDC_BUTTON_ADD_UST,276,98,85,14
+END
+
+IDD_DIALOG_N_ROWS DIALOG DISCARDABLE  0, 0, 179, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Ввведите число строк"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,122,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,122,24,50,14
+    EDITTEXT        IDC_EDIT_N_ROWS,62,17,40,14,ES_AUTOHSCROLL
+    GROUPBOX        "Число строк в шаблоне",IDC_STATIC,7,7,106,32
+    CTEXT           "для заполнения",IDC_STATIC,13,18,44,15
+END
+
+IDD_DIALOG_COPY_GRUNTY DIALOG DISCARDABLE  0, 0, 310, 106
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Копирование грунтов одного объекта в другой"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,253,85,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,7,85,50,14
+    CTEXT           "Набор грунтов объекта",IDC_STATIC,7,13,80,11
+    EDITTEXT        IDC_EDIT_SOURCE_OBJECT,95,9,208,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Скопировать в ",IDC_STATIC,7,42,53,8
+    COMBOBOX        IDC_COMBO_DEST_OBJECT,95,39,208,206,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "А также набор ИГЭ",IDC_CHECK_ALSO_IGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,95,60,81,10
+END
+
+IDD_DIALOG_PCK2FIZ DIALOG DISCARDABLE  0, 0, 650, 315
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Расчёт фичических параметров на основе PCK"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Рассчитать",IDOK,275,7,81,14
+    PUSHBUTTON      "Cancel",IDCANCEL,275,57,81,14
+    LTEXT           "Контракт",IDC_STATIC,15,7,32,14
+    EDITTEXT        IDC_EDIT_CONTRACT,49,7,47,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Объект",IDC_STATIC,102,7,26,14
+    EDITTEXT        IDC_EDIT_OBJECT,132,7,128,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    COMBOBOX        IDC_COMBO_CALC_PARAMS,15,45,135,94,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Расчитываемый параметр",IDC_STATIC,15,30,130,8
+    EDITTEXT        IDC_EDIT_FORMULA,16,223,185,14,ES_AUTOHSCROLL
+    LTEXT           "Для зондов типов ",IDC_STATIC,200,195,64,8
+    EDITTEXT        IDC_EDIT_K0,217,223,40,14,ES_AUTOHSCROLL
+    LTEXT           "K0",IDC_STATIC_K0,229,209,10,8
+    EDITTEXT        IDC_EDIT_K1,265,222,40,14,ES_AUTOHSCROLL
+    LTEXT           "K1",IDC_STATIC_K1,281,209,10,8
+    EDITTEXT        IDC_EDIT_KLOG,316,222,40,14,ES_AUTOHSCROLL
+    LTEXT           "KL",IDC_STATIC_KL,331,209,10,8
+    LTEXT           "Общ. вид формулы K0 + K1 * qs + KL * lg (qs)",
+                    IDC_STATIC_VID_FORMULY,206,244,149,8
+    COMBOBOX        IDC_COMBO_CALC_METHODS,15,110,341,164,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Метод расчёта для каждого ИГЭ",IDC_STATIC,7,71,349,103
+    LTEXT           "Для ИГЭ",IDC_STATIC,15,82,31,8
+    COMBOBOX        IDC_COMBO_IGE,50,80,306,180,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Стандартный метод расчёта",IDC_RADIO_METHOD_1,"Button",
+                    BS_AUTORADIOBUTTON | BS_MULTILINE | WS_GROUP,15,137,117,
+                    14
+    CONTROL         "Свой метод, специфичный для  объекта",
+                    IDC_RADIO_METHOD_2,"Button",BS_AUTORADIOBUTTON | 
+                    BS_MULTILINE,15,154,153,12
+    PUSHBUTTON      "Установить данный метод для ИГЭ",
+                    IDC_BUTTON_SET_METHOD_FOR_IGE,214,140,142,14
+    EDITTEXT        IDC_EDIT_FOR_TYPZOND,270,190,86,14,ES_AUTOHSCROLL
+    LTEXT           "Выберите метод расчёта из списка методов применимых ко следующим типам грунтов",
+                    IDC_STATIC,17,97,300,8
+    GROUPBOX        "Внутреннее трение",IDC_STATIC_VNUTR_TRENIE,164,23,96,43
+    CONTROL         "В виде тангенса",IDC_RADIO_VNUTR_TRENIE_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,175,36,71,10
+    CONTROL         "В виде угла",IDC_RADIO_VNUTR_TRENIE_2,"Button",
+                    BS_AUTORADIOBUTTON,175,48,55,10
+    PUSHBUTTON      "Удалить метод расчёта из ИГЭ",
+                    IDC_BUTTON_UNSET_METHOD_FOR_IGE,214,156,142,14
+    PUSHBUTTON      "Занести в базу метод определённый пользователем",
+                    IDC_BUTTON_SAVE_USER_DEFINED_METHOD,15,239,185,14
+    GROUPBOX        "Формула или интерполяция таблицы",IDC_STATIC,7,180,349,
+                    128
+    CONTROL         "Формула",IDC_RADIO_FORMULA_OR_TAB_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,15,196,48,10
+    CONTROL         "Таблица 1D",IDC_RADIO_FORMULA_OR_TAB_2,"Button",
+                    BS_AUTORADIOBUTTON,70,196,56,10
+    CONTROL         "Таблица 2D",IDC_RADIO_FORMULA_OR_TAB_3,"Button",
+                    BS_AUTORADIOBUTTON,132,196,56,10
+    EDITTEXT        IDC_EDIT_TAB_ROW_PCK,73,259,283,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TAB_ROW_PCB,73,277,283,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TAB_ROW_PAR,73,294,283,14,ES_AUTOHSCROLL
+    LTEXT           "PCK, МПа",IDC_STATIC_PCK,31,263,34,8
+    LTEXT           "PCB, кПа",IDC_STATIC_PCB,31,279,32,8
+    LTEXT           "Параметр",IDC_STATIC_PAR,23,294,35,8
+    CONTROL         "List1",IDC_LIST_PCK2FIZ,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,363,7,280,301
+    PUSHBUTTON      "Удалить результаты",IDC_BUTTON_DELETE_RESULTS,276,22,80,
+                    14
+    CONTROL         "Показывать в списке только подходящие для грунтов выбранного ИГЭ методы",
+                    IDC_CHECK_SHOW_ONLY_SUITABLE_METHODS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,127,287,10
+    PUSHBUTTON      "В Excel",IDC_BUTTON_EXPORT_TO_EXCEL,321,40,35,14
+END
+
+IDD_DIALOG_IGE DIALOG DISCARDABLE  0, 0, 754, 177
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Набор ИГЭ для данного объекта"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_LIST_IGE,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,7,740,143
+    EDITTEXT        IDC_EDIT1,64,156,40,14,ES_AUTOHSCROLL | NOT WS_VISIBLE | 
+                    NOT WS_BORDER
+    COMBOBOX        IDC_COMBO1,699,158,48,163,CBS_DROPDOWN | NOT WS_VISIBLE | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        RIGHTMARGIN, 322
+    END
+
+    IDD_ENGEO_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 660
+        VERTGUIDE, 171
+        VERTGUIDE, 336
+        VERTGUIDE, 352
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 690
+        HORZGUIDE, 7
+        HORZGUIDE, 17
+        HORZGUIDE, 108
+        HORZGUIDE, 112
+        HORZGUIDE, 122
+        HORZGUIDE, 261
+        HORZGUIDE, 268
+        HORZGUIDE, 280
+        HORZGUIDE, 399
+        HORZGUIDE, 587
+    END
+
+    IDD_DIALOG_OBJECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 259
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+
+    IDD_DIALOG_PROB_GR_NEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+        HORZGUIDE, 19
+        HORZGUIDE, 47
+        HORZGUIDE, 61
+    END
+
+    IDD_DIALOG_SOIL_NAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 547
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 50
+    END
+
+    IDD_DIALOG_LANGUAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_DIALOG_PROBGR_DBL_CLICK_MODE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        VERTGUIDE, 23
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_DIALOG_LAB_ELEMENTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 661
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 191
+        HORZGUIDE, 99
+    END
+
+    IDD_DIALOG_REPEATINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        VERTGUIDE, 16
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+
+    IDD_DIALOG_NABOR_GRUNTOV_SETTING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 473
+        VERTGUIDE, 17
+        VERTGUIDE, 123
+        VERTGUIDE, 463
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 365
+        HORZGUIDE, 164
+        HORZGUIDE, 171
+        HORZGUIDE, 195
+        HORZGUIDE, 219
+        HORZGUIDE, 354
+    END
+
+    IDD_DIALOG_STAT_ZOND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 301
+        VERTGUIDE, 12
+        VERTGUIDE, 28
+        VERTGUIDE, 92
+        VERTGUIDE, 108
+        VERTGUIDE, 208
+        VERTGUIDE, 301
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 127
+        HORZGUIDE, 27
+        HORZGUIDE, 43
+        HORZGUIDE, 62
+        HORZGUIDE, 97
+    END
+
+    IDD_DIALOG_PALJA, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 474
+        VERTGUIDE, 16
+        VERTGUIDE, 122
+        VERTGUIDE, 170
+        VERTGUIDE, 184
+        VERTGUIDE, 192
+        VERTGUIDE, 266
+        VERTGUIDE, 283
+        VERTGUIDE, 380
+        VERTGUIDE, 391
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 335
+        HORZGUIDE, 21
+        HORZGUIDE, 43
+        HORZGUIDE, 48
+        HORZGUIDE, 142
+    END
+
+    IDD_DIALOG_ZOND_UST_PARAM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 361
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 135
+    END
+
+    IDD_DIALOG_N_ROWS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 172
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_DIALOG_COPY_GRUNTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 303
+        VERTGUIDE, 95
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 99
+    END
+
+    IDD_DIALOG_PCK2FIZ, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 643
+        VERTGUIDE, 15
+        VERTGUIDE, 356
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 308
+        HORZGUIDE, 86
+        HORZGUIDE, 116
+        HORZGUIDE, 174
+    END
+
+    IDD_DIALOG_IGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 747
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 170
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_LABTYPE MENU DISCARDABLE 
+BEGIN
+    POPUP "Объекты"
+    BEGIN
+        MENUITEM "Новый объект\tCtrl+N",        ID_FILE_NEW
+        MENUITEM "&Редактировать объект\tCtrl+O", ID_FILE_OPEN
+        MENUITEM "Удалить объект",              ID_FILE_DELETEOBJECT
+        MENUITEM "Close",                       ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "ODBC &Connect",               ID_FILE_ODBCCONNECT
+        MENUITEM "ODBC &Disconnect",            ID_FILE_ODBCDISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "Экспорт объекта",             ID__EXPORTOBJECT
+    END
+    POPUP "Комплексные точки"
+    BEGIN
+        POPUP "Список КТ"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_KT_KTLIST_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_KT_KTLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить",                   ID_KT_KTLIST_FILL
+            MENUITEM "Загрузить в базу",            ID_KT_KTLIST_SAVETODB
+            MENUITEM "Сохранить и переименовать",   ID_KT_KTLIST_SAVEANDRENAME
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_KT_KTLIST_DISCONNECTEXCEL
+
+        END
+    END
+    POPUP "Пробы грунта"
+    BEGIN
+        MENUITEM "Новый лабораторный номер",    ID_PROBGR_NEWLABNUMBER
+        POPUP "Лабораторные номера"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить справку",           ID_PROBYGRUNTA_LABNUMBERS_FILL
+
+            MENUITEM "Сохранить в базу",            ID_PROBYGRUNTA_LABNUMBERS_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_PROBYGRUNTA_LABNUMBERS_DISCONNECTEXCEL
+
+        END
+        MENUITEM "Название грунта",             ID_PROBGR_SOILNAME
+        MENUITEM SEPARATOR
+        POPUP "Паспорта"
+        BEGIN
+            MENUITEM "Все имеющиеся",               ID_PROBGR_PASPORT_ALLPOSSIBLE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Язык",                        ID___LANGUAGE
+            MENUITEM "График относительного сжатия", 
+                                                    ID_PROBYGRUNTA_PASSPORTS_OTNOSITDEFONGRAPH
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Режим двойного щелчка",       ID_PROBYGRUNTA_DBLCLICKMODE
+    END
+    POPUP "Лаборатория"
+    BEGIN
+        MENUITEM "Число повторностей",          ID_LABORATORY_REPEATINGS
+        MENUITEM SEPARATOR
+        POPUP "Грансостав песчаных грунтов"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_SANDGRANULAR_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_SANDGRANULAR_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Рассчёт",                     ID_LABORATORY_SANDGRANULAR_COMPUTE
+
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_SANDGRANULAR_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_SANDGRANULAR_DISCONNECTEXCEL
+
+        END
+        POPUP "Ареометрический грансостав"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_AREOMETRGRANULAR_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_AREOMETRGRANULAR_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Расчёт",                      ID_LABORATORY_AREOMETRGRANULAR_COMPUTE
+
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_AREOMETRGRANULAR_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_AREOMETRGRANULAR_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Растительные остатки"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_VEGETABLEREMAINS_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_VEGETABLEREMAINS_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Рассчёт",                     ID_LABORATORY_VEGETABLEREMAINS_COMPUTE
+
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_VEGETABLEREMAINS_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_VEGETABLEREMAINS_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Плотность грунта"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_PLOTNOSTGRUNTA_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_PLOTNOSTGRUNTA_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Расчёт",                      ID_LABORATORY_PLOTNOSTGRUNTA_COMPUTE
+
+            MENUITEM "Сохранить в базу - усреднённое значение", 
+                                                    ID_LABORATORY_PLOTNOSTGRUNTA_SAVETODB
+
+            MENUITEM "Сохранить испытания (2 повт - компр, 3 или 6 повт - срез)", 
+                                                    ID_LABORATORY_PLOTNOSTGRUNTA_SAVETODB_DIFFERENT_VYPROB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_PLOTNOSTGRUNTA_DISCONNECTEXCEL
+
+        END
+        POPUP "Плотность чатиц табличная"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_PLOTNOSTCHASTIC1_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_PLOTNOSTCHASTIC1_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_PLOTNOSTCHASTIC1_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_PLOTNOSTCHASTIC1_DISCONNECTEXCEL
+
+        END
+        POPUP "Плотность частиц"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_PLOTNOSTCHASTIC_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_PLOTNOSTCHASTIC_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Рассчёт",                     ID_LABORATORY_PLOTNOSTCHASTIC_COMPUTE
+
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_PLOTNOSTCHASTIC_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_PLOTNOSTCHASTIC_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Влажность природная W"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_W_LOADFORM_NEW
+
+                MENUITEM "Сущестующую",                 ID_LABORATORY_W_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Расчёт",                      ID_LABORATORY_W_COMPUTE
+            MENUITEM "Сохранить в базу - усреднённое значение", 
+                                                    ID_LABORATORY_W_SAVETODB
+            MENUITEM "Сохранить испытания (2 повт - компр, 3 или 6 повт - срез)", 
+                                                    ID_LABORATORY_W_SAVETODB_DIFFERENT_VYPROB
+            , GRAYED
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_W_DISCONNECTEXCEL
+
+        END
+        POPUP "Влажность на границе текучести WL"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_WL_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_WL_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Расчёт",                      ID_LABORATORY_WL_COMPUTE
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_WL_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_WL_DISCONNECTEXCEL
+
+        END
+        POPUP "И на границе пластичности WLP"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_WLP_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_WLP_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Расчёт",                      ID_LABORATORY_WLP_COMPUTE
+
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_WLP_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_WLP_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Срез"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_CUT_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_CUT_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить",                   ID_LABORATORY_CUT_FILL
+            MENUITEM "Рассчёт",                     ID_LABORATORY_CUT_COMPUTE
+
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_CUT_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_CUT_DISCONNECTEXCEL
+
+        END
+        POPUP "Компрессия"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_LABORATORY_COMPRESSION_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_LABORATORY_COMPRESSION_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить",                   ID_LABORATORY_COMPRESSION_FILL
+
+            MENUITEM "Рассчитать",                  ID_LABORATORY_COMPRESSION_COMPUTE
+
+            MENUITEM "Сохранить в базу",            ID_LABORATORY_COMPRESSION_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_LABORATORY_COMPRESSION_DISCONNECTEXCEL
+
+        END
+    END
+    POPUP "Excel"
+    BEGIN
+        MENUITEM "Kill",                        ID_EXCEL_KILL
+        MENUITEM "Автоматически отсоединять при загрузке формы", 
+                                                ID_EXCEL_TODISSCONNECTWHENLOADFORM_L
+        , CHECKED
+        MENUITEM "Автоматически сохранять при отсоединении", 
+                                                ID_EXCEL_AUTOMATICSAVEWHENDISSCONNECTL
+
+    END
+    POPUP "&Edit", INACTIVE
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&About lab...",               ID_APP_ABOUT
+    END
+END
+
+IDR_MENU1 MENU DISCARDABLE 
+BEGIN
+    MENUITEM "",                            65535
+    POPUP "Compression"
+    BEGIN
+        MENUITEM "Pasport",                     ID_COMPRESSION_PASPORT
+        MENUITEM "Pasport 2 as 1",              ID_COMPRESSION_PASPORT2AS1
+        MENUITEM "Passport 2 as mean",          ID_COMPRESSION_PASSPORT2ASMEAN
+
+        MENUITEM "Pasport 2 as diff vyprob",    ID_COMPRESSION_PASPORT2ASDIFFVYPROB
+
+        MENUITEM "Passport 1",                  ID_COMPRESSION_PASSPORT1
+    END
+    POPUP "Cut"
+    BEGIN
+        MENUITEM "Pasport",                     ID_CUT_PASPORT
+        MENUITEM "Passport new",                ID_CUT_PASSPORTNEW
+    END
+    POPUP "Granular"
+    BEGIN
+        MENUITEM "Pasport",                     ID_GRANULAR_PASPORT
+        MENUITEM "Passport new",                ID_GRANULAR_PASSPORTNEW
+    END
+    POPUP "LabLayer"
+    BEGIN
+        MENUITEM "Pasport",                     ID_LABLAYER_PASPORT
+        MENUITEM "Property Window",             ID_LABLAYER_PROPERTYWINDOW
+        MENUITEM "Chastnye",                    ID_LABLAYER_CHASTNYE
+        MENUITEM "Pasport_normatives1",         ID_LABLAYER_PASPORTNORMATIVES1
+
+        MENUITEM "Pasport_normatives2",         ID_LABLAYER_PASPORTNORMATIVES2
+
+        MENUITEM "Pasport_normatives3",         ID_LABLAYER_PASPORTNORMATIVES3
+
+    END
+    POPUP "Soil"
+    BEGIN
+        MENUITEM "Property Window",             ID_SOIL_PROPERTYWINDOW
+    END
+END
+
+IDR_GEOTYPE MENU DISCARDABLE 
+BEGIN
+    POPUP "Объекты"
+    BEGIN
+        MENUITEM "&Новый объект\tCtrl+N",       ID_FILE_NEW
+        MENUITEM "&Редактировать объект\tCtrl+O", ID_FILE_OPEN
+        MENUITEM "Удалить объект",              ID_FILE_DELETEOBJECT
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "ODBC &Connect",               ID_FILE_ODBCCONNECT
+        MENUITEM "ODBC &Disconnect",            ID_FILE_ODBCDISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Вставить объект в 3D окно",   ID_FILE_3D
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "Импорт объекта",              ID_OBJECTS_IMPORTOBJECT
+        MENUITEM "Определить набор грунтов",    ID_OBJECTS_SETNABORGRUNTOV
+        MENUITEM "Определить набор ИГЭ для данного объекта", 
+                                                ID_OBJECTS_NABORIGE
+        MENUITEM "Скопировать грунты данного объекта в другой", 
+                                                ID_OBJECTS_COPYGRUNTY
+    END
+    POPUP "Комплексные точки"
+    BEGIN
+        POPUP "Список КТ"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_KT_KTLIST_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_KT_KTLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Сохранить в базу",            ID_KT_KTLIST_SAVETODB
+            MENUITEM "Сохранить и переименовать",   ID_KT_KTLIST_SAVEANDRENAME
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_KT_KTLIST_DISCONNECTEXCEL
+
+        END
+        POPUP "Уровень грунтовых вод"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_KT_HYDROLIST_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_KT_HYDROLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Сохранить в базу",            ID_KT_HYDROLIST_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_KT_HYDROLIST_DISCONNECTEXCEL
+
+        END
+        POPUP "Список разрезов"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_KT_ROZRIZLIST_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_KT_ROZRIZLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Сохранить в базу",            ID_KT_ROZRIZLIST_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_KT_ROZRIZLIST_DISCONNECTEXCEL
+
+        END
+        POPUP "Список Dxf разрезов"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "новую",                       ID_KT_DXFROZRIZLIST_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_KT_DXFROZRIZLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Сохранить в базу",            ID_KT_DXFROZRIZLIST_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_KT_DXFROZRIZLIST_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Параметры установок зондирования", ID_KT_ZONDUSTPARAM
+        MENUITEM SEPARATOR
+        POPUP "Статическое зондирование"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_KT_STATZOND_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_KT_STATZOND_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить",                   ID_KT_STATZOND_FILL
+            MENUITEM "Расчёт",                      ID_KT_STATZOND_COMPUTE
+            MENUITEM "Сохранить в базу",            ID_KT_STATZOND_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_KT_STATZOND_DISCONNECTEXCEL
+
+        END
+        POPUP "Список соответствия КТ и файлов ТСЗ"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_KT_TSZLIST_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_KT_TSZLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить",                   ID_KT_TSZLIST_FILL
+            MENUITEM "Автоматическое сохранение ТСЗ по списку", 
+                                                    ID_KT_TSZLIST_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_KT_TSZLIST_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Статическое зондирование...", ID_KT_STATZOND
+        MENUITEM "Несущая способность забивной сваи...", ID_KT_PALJA
+        MENUITEM "Несущая способность всех забивных свай объекта...", 
+                                                ID_KT_ALLPALJA
+        MENUITEM SEPARATOR
+        MENUITEM "Расчёт физических параметров на основе PCK", ID_KT_PCK2FIZ
+    END
+    POPUP "Пробы грунта"
+    BEGIN
+        MENUITEM "новый лабораторный номер",    ID_PROBGR_NEWLABNUMBER
+        MENUITEM "Название грунта",             ID_PROBGR_SOILNAME
+        MENUITEM "Сгенерировать все названия грунта", 
+                                                ID_PROBGR_SOILAUTONAMES
+        MENUITEM SEPARATOR
+        POPUP "Паспорта"
+        BEGIN
+            MENUITEM "Все имеющиеся",               ID_PROBGR_PASPORT_ALLPOSSIBLE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Язык",                        ID_PROBGR_PASPORT_LANGUAGE
+
+            MENUITEM "График относительного сжатия", 
+                                                    ID_PROBGR_PASPORT_OTNOSITDEFONGRAPH
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Режим двойного щелчка",       ID_PROBYGRUNTA_DBLCLICKMODE
+        MENUITEM SEPARATOR
+        MENUITEM "Классификация",               ID_PROBGR_CLASSIFICATION
+        MENUITEM SEPARATOR
+        MENUITEM "Автозаполнение ИГЭ по разб.скв.", ID_PROBGR_IGEAUTOFILL
+        POPUP "Или заполнение ИГЭ в лабор. номерах"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить справку",           ID_PROBYGRUNTA_LABNUMBERS_FILL
+
+            MENUITEM "Сохранить в базу",            ID_PROBYGRUNTA_LABNUMBERS_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_PROBYGRUNTA_LABNUMBERS_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Исключённые опыты",           ID_PROBGR_EXCLUDEDTRIALLIST
+    END
+    POPUP "Архивные данные"
+    BEGIN
+        POPUP "Лабораторные данные"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_ARCHIVE_LABORATORY_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_ARCHIVE_LABORATORY_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить",                   ID_ARCHIVE_LABORATORY_FILL
+
+            MENUITEM "Сохранить в базу",            ID_ARCHIVE_LABORATORY_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_ARCHIVE_LABORATORY_DISCONNECTEXCEL
+
+        END
+        POPUP "Компрессионных испытаний"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_ARCHIVE_COMPRESSION_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_ARCHIVE_COMPRESSION_LOADFORM_EXISTING
+
+            END
+            POPUP "Заполнить"
+            BEGIN
+                POPUP "Только компрессию"
+                BEGIN
+                    MENUITEM "Одним столбцом",              ID_ARCHIVE_COMPRESSION_FILL
+
+                    MENUITEM "Если 2 кривые, то отдельно",  ID_ARCHIVE_COMPRESSION_FILL2
+
+                END
+                POPUP "Все лабораторные номера"
+                BEGIN
+                    MENUITEM "Одним столбцом",              ID_ARCHIVE_COMPRESSION_FILLALLLABN
+
+                    MENUITEM "Если 2 кривые, то отдельно",  ID_ARCHIVE_COMPRESSION_FILL_ALLLABN_IF2THEN2
+
+                    MENUITEM "Двумя столбцами",             ID_ARCHIVE_COMPRESSION_FILLALLLABN2
+
+                END
+            END
+            MENUITEM "Сохранить в базу",            ID_ARCHIVE_COMPRESSION_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединиь Excel",            ID_ARCHIVE_COMPRESSION_DISCONNECTEXCEL
+
+        END
+        POPUP "Срез"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_ARCHIVE_CUT_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_ARCHIVE_CUT_LOADFORM_EXISTING
+
+            END
+            POPUP "Заполнить"
+            BEGIN
+                MENUITEM "Срез",                        ID_ARCHIVE_CUT_FILL_CUT
+
+                MENUITEM "Все лабораторные номера",     ID_ARCHIVE_CUT_FILL_ALLLABN
+
+                MENUITEM "Все лаб.номера как 3 колонки", 
+                                                        ID_ARCHIVE_CUT_FILL_ALLLABN2
+
+                MENUITEM "Срез как 2 колонки",          ID_ARCHIVE_CUT_FILL_CUTAS2COLOMNS
+
+                MENUITEM "Все лаб.номера как 2 колонки", 
+                                                        ID_ARCHIVE_CUT_FILL_ALLLABNAS2COLOMNS
+
+            END
+            MENUITEM "Сохранить в базу",            ID_ARCHIVE_CUT_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_ARCHIVE_CUT_DISCONNECTEXCEL
+
+        END
+        POPUP "Грансостав"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_ARCHIVE_GRAN_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_ARCHIVE_GRAN_LOADFORM_EXISTING
+
+            END
+            POPUP "Заполнить"
+            BEGIN
+                MENUITEM "Грансоставы",                 ID_ARCHIVE_GRAN_FILL_GRAN
+
+                MENUITEM "Все лабораторные номера",     ID_ARCHIVE_GRAN_FILL_ALLLABN
+
+            END
+            MENUITEM "Сохранить в базу",            ID_ARCHIVE_GRAN_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_ARCHIVE_GRAN_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Касп Гео (caspgeo) физхим+грансостав"
+        BEGIN
+            POPUP "Загрузить форму"
+            BEGIN
+                MENUITEM "Новую",                       ID_ARCHIVE_CASPGEO_LOADFORM_NEW
+
+                MENUITEM "Существующую",                ID_ARCHIVE_CASPGEO_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Заполнить",                   ID_ARCHIVE_CASPGEO_FILL
+            MENUITEM "Сохранить в базу",            ID_ARCHIVE_CASPGEO_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Отсоединить Excel",           ID_ARCHIVE_CASPGEO_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Удалить из объекта все срезы", ID_ARCHIVE_DELETEALLCUTS
+        MENUITEM "Удалить из объекта все компрессии", 
+                                                ID_ARCHIVE_DELETEALLCOMPRESSIONS
+
+        MENUITEM "Удалить из объекта все грансоставы", 
+                                                ID_ARCHIVE_DELETEALLGRANULARS
+
+        MENUITEM "Удалить из объекта все физ-мех свойства", 
+                                                ID_ARCHIVE_DELETEALLFIZMEH
+    END
+    POPUP "Excel"
+    BEGIN
+        MENUITEM "Kill",                        ID_EXCEL_KILL
+        MENUITEM "Автоматически отсоединять при загрузке формы", 
+                                                ID_EXCEL_TODISSCONNECTWHENLOADFORM_G
+        , CHECKED
+        MENUITEM "Автоматически сохранять при отсоединении", 
+                                                ID_EXCEL_AUTOMATICSAVEWHENDISCONNECT
+
+    END
+    POPUP "&Edit", INACTIVE
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        POPUP "Property window with"
+        BEGIN
+            MENUITEM "Plot",                        ID_VIEW_PROPERTYWINDOWWITH_PLOT
+
+            MENUITEM "Results",                     ID_VIEW_PROPERTYWINDOWWITH_RESULTS
+
+            MENUITEM "Labnumber trial list",        ID_VIEW_PROPERTYWINDOWWITH_LABNUMBERTRIALLIST
+
+            MENUITEM "Normatives",                  ID_VIEW_PROPERTYWINDOWWITH_NORMATIVES
+
+            MENUITEM SEPARATOR
+            MENUITEM "Correlation",                 ID_VIEW_PROPERTYWINDOWWITH_CORRELATION
+
+            MENUITEM "Normatives by all Experiences", 
+                                                    ID_VIEW_PROPERTYWINDOWWITH_NORMATIVESBYALLEXPERIENCES
+
+        END
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&About lab...",               ID_APP_ABOUT
+    END
+END
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\lab.ico"
+IDR_LABTYPE             ICON    DISCARDABLE     "res\\labDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About lab"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "lab Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2009",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_LAB_FORM DIALOG DISCARDABLE  0, 0, 608, 390
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_LIST_EN_GEO_OBJECTS,"SysListView32",
+                    WS_BORDER | WS_TABSTOP,7,19,254,98
+    CONTROL         "List1",IDC_LIST_SOIL,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,130,254,124
+    CONTROL         "List1",IDC_LIST_GRANULAR,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,7,264,254,119
+    CONTROL         "List1",IDC_LIST_PROP,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,284,130,317,124
+    CONTROL         "List2",IDC_LIST_KT,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,284,19,317,98
+    CONTROL         "List1",IDC_LIST_ZRIZ,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,284,267,317,51
+    CONTROL         "List2",IDC_LIST_COMPRESS,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,284,331,317,52
+    CTEXT           "Объекты",IDC_STATIC,95,7,109,8
+    CTEXT           "Комплексные точки: скважины, шурфы, ТСЗ",IDC_STATIC,289,
+                    9,239,8
+    CTEXT           "Образцы грунта",IDC_STATIC,7,118,254,8
+    CTEXT           "Лабораторные свойства выбранного образца грунта",
+                    IDC_STATIC,286,119,315,8
+    CTEXT           "Грансосотав",IDC_STATIC,7,255,254,10
+    CTEXT           "Срез",IDC_STATIC,284,256,317,8
+    CTEXT           "Компрессия",IDC_STATIC,286,320,315,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO MOVEABLE PURE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_LAB_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 601
+        VERTGUIDE, 261
+        VERTGUIDE, 284
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 383
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&About lab...",               ID_APP_ABOUT
+    END
+END
+
+IDR_LABTYPE MENU DISCARDABLE 
+BEGIN
+    POPUP "Objects"
+    BEGIN
+        MENUITEM "&New Object\tCtrl+N",         ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "Delete Object",               ID_FILE_DELETEOBJECT
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "ODBC &Connect",               ID_FILE_ODBCCONNECT
+        MENUITEM "ODBC &Disconnect",            ID_FILE_ODBCDISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "Export Object",               ID__EXPORTOBJECT
+    END
+    POPUP "KT"
+    BEGIN
+        POPUP "KT List"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_KTLIST_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_KTLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_KT_KTLIST_FILL
+            MENUITEM "Save to DB",                  ID_KT_KTLIST_SAVETODB
+            MENUITEM "Save and rename",             ID_KT_KTLIST_SAVEANDRENAME
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_KTLIST_DISCONNECTEXCEL
+
+        END
+    END
+    POPUP "Proby Grunta"
+    BEGIN
+        MENUITEM "New Lab N",                   ID_PROBGR_NEWLABNUMBER
+        POPUP "Lab Numbers"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_PROBYGRUNTA_LABNUMBERS_FILL
+
+            MENUITEM "Save to DB",                  ID_PROBYGRUNTA_LABNUMBERS_SAVETODB
+
+            MENUITEM "Save Izmenenija to DB",       ID_PROBYGRUNTA_LABNUMBERS_SAVEIZMENENIJATODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_PROBYGRUNTA_LABNUMBERS_DISCONNECTEXCEL
+
+        END
+        MENUITEM "Soil name",                   ID_PROBGR_SOILNAME
+        MENUITEM SEPARATOR
+        POPUP "Passports"
+        BEGIN
+            MENUITEM "All possible",                ID_PROBGR_PASPORT_ALLPOSSIBLE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Language",                    ID_PROBYGRUNTA_PASSPORTS_LANGUAGE
+
+            MENUITEM "otnosit_def_on_graph",        ID_PROBYGRUNTA_PASSPORTS_OTNOSITDEFONGRAPH
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "DblClickMode",                ID_PROBYGRUNTA_DBLCLICKMODE
+    END
+    POPUP "Laboratory"
+    BEGIN
+        MENUITEM "Repeatings",                  ID_LABORATORY_REPEATINGS
+        MENUITEM SEPARATOR
+        POPUP "Sand Granular"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_SANDGRANULAR_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_SANDGRANULAR_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_SANDGRANULAR_COMPUTE
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_SANDGRANULAR_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_SANDGRANULAR_DISCONNECTEXCEL
+
+        END
+        POPUP "Areometr granular"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_AREOMETRGRANULAR_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_AREOMETRGRANULAR_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_AREOMETRGRANULAR_COMPUTE
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_AREOMETRGRANULAR_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_AREOMETRGRANULAR_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Rastitelnue ostatki"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_VEGETABLEREMAINS_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_VEGETABLEREMAINS_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_VEGETABLEREMAINS_COMPUTE
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_VEGETABLEREMAINS_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_VEGETABLEREMAINS_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Plotnost grunta"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_PLOTNOSTGRUNTA_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_PLOTNOSTGRUNTA_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_PLOTNOSTGRUNTA_COMPUTE
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_PLOTNOSTGRUNTA_SAVETODB
+
+            MENUITEM "Save to DB diff vyprob",      ID_LABORATORY_PLOTNOSTGRUNTA_SAVETODB_DIFFERENT_VYPROB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_PLOTNOSTGRUNTA_DISCONNECTEXCEL
+
+        END
+        POPUP "Plotnost chastic 1"
+        BEGIN
+            POPUP "Load form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_PLOTNOSTCHASTIC1_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_PLOTNOSTCHASTIC1_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Save to DB",                  ID_LABORATORY_PLOTNOSTCHASTIC1_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "disconnect Excel",            ID_LABORATORY_PLOTNOSTCHASTIC1_DISCONNECTEXCEL
+
+        END
+        POPUP "Plotnost chastic"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_PLOTNOSTCHASTIC_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_PLOTNOSTCHASTIC_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_PLOTNOSTCHASTIC_COMPUTE
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_PLOTNOSTCHASTIC_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_PLOTNOSTCHASTIC_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "W"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_W_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_W_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_W_COMPUTE
+            MENUITEM "Save to DB",                  ID_LABORATORY_W_SAVETODB
+            MENUITEM "Save to DB diff vypr",        ID_LABORATORY_W_SAVETODB_DIFFERENT_VYPROB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_W_DISCONNECTEXCEL
+
+        END
+        POPUP "WL"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_WL_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_WL_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_WL_COMPUTE
+            MENUITEM "Save to DB",                  ID_LABORATORY_WL_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_WL_DISCONNECTEXCEL
+
+        END
+        POPUP "WLP"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_WLP_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_WLP_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute",                     ID_LABORATORY_WLP_COMPUTE
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_WLP_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_WLP_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Cut"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_CUT_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_CUT_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_LABORATORY_CUT_FILL
+            MENUITEM "Compute",                     ID_LABORATORY_CUT_COMPUTE
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_CUT_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_CUT_DISCONNECTEXCEL
+
+        END
+        POPUP "Compression"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_LABORATORY_COMPRESSION_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_LABORATORY_COMPRESSION_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Compute and Save to DB",      ID_LABORATORY_COMPRESSION_COMPUTE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_LABORATORY_COMPRESSION_DISCONNECTEXCEL
+
+            MENUITEM "Save to DB",                  ID_LABORATORY_COMPRESSION_SAVETODB
+
+            MENUITEM "Fill",                        ID_LABORATORY_COMPRESSION_FILL
+
+        END
+    END
+    POPUP "Excel"
+    BEGIN
+        MENUITEM "Kill",                        ID_EXCEL_KILL
+        MENUITEM "To Dissconnect when load form", 
+                                                ID_EXCEL_TODISSCONNECTWHENLOADFORM_L
+
+        MENUITEM "Automatic_save_when_dissconnect_L", 
+                                                ID_EXCEL_AUTOMATICSAVEWHENDISSCONNECTL
+
+    END
+    POPUP "&Edit", INACTIVE
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&About lab...",               ID_APP_ABOUT
+    END
+END
+
+IDR_GEOTYPE MENU DISCARDABLE 
+BEGIN
+    POPUP "Objects"
+    BEGIN
+        MENUITEM "&New Object\tCtrl+N",         ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "Delete Object",               ID_FILE_DELETEOBJECT
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "ODBC &Connect",               ID_FILE_ODBCCONNECT
+        MENUITEM "ODBC &Disconnect",            ID_FILE_ODBCDISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "3D",                          ID_FILE_3D
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "Import object",               ID_OBJECTS_IMPORTOBJECT
+        MENUITEM "Set Nabor Gruntov",           ID_OBJECTS_SETNABORGRUNTOV
+        MENUITEM "Nabor IGE",                   ID_OBJECTS_NABORIGE
+        MENUITEM "Copy grunty",                 ID_OBJECTS_COPYGRUNTY
+    END
+    POPUP "KT"
+    BEGIN
+        POPUP "KT List"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_KTLIST_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_KTLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_KT_KTLIST_FILL
+            MENUITEM "Save to DB",                  ID_KT_KTLIST_SAVETODB
+            MENUITEM "SaveAndRename",               ID_KT_KTLIST_SAVEANDRENAME
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_KTLIST_DISCONNECTEXCEL
+
+        END
+        POPUP "Hydro List"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_HYDROLIST_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_HYDROLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Save to Db",                  ID_KT_HYDROLIST_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_HYDROLIST_DISCONNECTEXCEL
+
+        END
+        POPUP "Rozriz List"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_ROZRIZLIST_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_ROZRIZLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_KT_ROZRIZLIST_FILL
+            MENUITEM "Save To DB",                  ID_KT_ROZRIZLIST_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_ROZRIZLIST_DISCONNECTEXCEL
+
+        END
+        POPUP "Dxf Rozriz List"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_DXFROZRIZLIST_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_DXFROZRIZLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_KT_DXFROZRIZLIST_FILL
+            MENUITEM "Save to DB",                  ID_KT_DXFROZRIZLIST_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_DXFROZRIZLIST_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Zond Ust Param",              ID_KT_ZONDUSTPARAM
+        MENUITEM SEPARATOR
+        POPUP "Stat Zond"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_STATZOND_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_STATZOND_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_KT_STATZOND_FILL
+            MENUITEM "Compute",                     ID_KT_STATZOND_COMPUTE
+            MENUITEM "Save To DB",                  ID_KT_STATZOND_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_STATZOND_DISCONNECTEXCEL
+
+        END
+        POPUP "TSZ List"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_TSZLIST_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_TSZLIST_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_KT_TSZLIST_FILL
+            MENUITEM "SaveToDB",                    ID_KT_TSZLIST_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_TSZLIST_DISCONNECTEXCEL
+
+        END
+        POPUP "Palja"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_KT_PALJA_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_KT_PALJA_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_KT_PALJA_FILL
+            MENUITEM "Compute",                     ID_KT_PALJA_COMPUTE
+            MENUITEM "Save to DB",                  ID_KT_PALJA_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_KT_PALJA_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Stat Zond",                   ID_KT_STATZOND
+        MENUITEM "Palja",                       ID_KT_PALJA
+        MENUITEM "All Palja",                   ID_KT_ALLPALJA
+        MENUITEM SEPARATOR
+        MENUITEM "PCK2Fiz",                     ID_KT_PCK2FIZ
+    END
+    POPUP "ProbGr"
+    BEGIN
+        MENUITEM "New Lab Number",              ID_PROBGR_NEWLABNUMBER
+        MENUITEM "Soil Name",                   ID_PROBGR_SOILNAME
+        MENUITEM "Soil Auto Names",             ID_PROBGR_SOILAUTONAMES
+        MENUITEM SEPARATOR
+        POPUP "Pasport"
+        BEGIN
+            MENUITEM "All Possible",                ID_PROBGR_PASPORT_ALLPOSSIBLE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Language",                    ID_PROBGR_PASPORT_LANGUAGE
+
+            MENUITEM "otnosit_def_on_graph",        ID_PROBGR_PASPORT_OTNOSITDEFONGRAPH
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "DblClickMode",                ID_PROBYGRUNTA_DBLCLICKMODE
+        MENUITEM SEPARATOR
+        MENUITEM "Classification",              ID_PROBGR_CLASSIFICATION
+        MENUITEM SEPARATOR
+        MENUITEM "IGE Auto Fill",               ID_PROBGR_IGEAUTOFILL
+        POPUP "Lab Numbers"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_PROBYGRUNTA_LABNUMBERS_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_PROBYGRUNTA_LABNUMBERS_FILL
+
+            MENUITEM "Save to DB",                  ID_PROBYGRUNTA_LABNUMBERS_SAVETODB
+
+            MENUITEM "Save Izmenenija to DB",       ID_PROBGR_LABNUMBERS_SAVEIZMENENIJATODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_PROBYGRUNTA_LABNUMBERS_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Excluded trial List",         ID_PROBGR_EXCLUDEDTRIALLIST
+    END
+    POPUP "Archive"
+    BEGIN
+        POPUP "Laboratory"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_ARCHIVE_LABORATORY_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_ARCHIVE_LABORATORY_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_ARCHIVE_LABORATORY_FILL
+
+            MENUITEM "Save to DB",                  ID_ARCHIVE_LABORATORY_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_ARCHIVE_LABORATORY_DISCONNECTEXCEL
+
+        END
+        POPUP "Compression"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_ARCHIVE_COMPRESSION_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_ARCHIVE_COMPRESSION_LOADFORM_EXISTING
+
+            END
+            POPUP "Fill"
+            BEGIN
+                POPUP "Comp"
+                BEGIN
+                    MENUITEM "Fill",                        ID_ARCHIVE_COMPRESSION_FILL
+
+                    MENUITEM "Fill2",                       ID_ARCHIVE_COMPRESSION_FILL2
+
+                END
+                POPUP "All LabN"
+                BEGIN
+                    MENUITEM "Fill All LabN",               ID_ARCHIVE_COMPRESSION_FILLALLLABN
+
+                    MENUITEM "Fill All LabN 2",             ID_ARCHIVE_COMPRESSION_FILLALLLABN2
+
+                    MENUITEM "If 2 then 2",                 ID_ARCHIVE_COMPRESSION_FILL_ALLLABN_IF2THEN2
+
+                END
+            END
+            MENUITEM "Save to DB",                  ID_ARCHIVE_COMPRESSION_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_ARCHIVE_COMPRESSION_DISCONNECTEXCEL
+
+        END
+        POPUP "Cut"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_ARCHIVE_CUT_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_ARCHIVE_CUT_LOADFORM_EXISTING
+
+            END
+            POPUP "Fill"
+            BEGIN
+                MENUITEM "Cut",                         ID_ARCHIVE_CUT_FILL_CUT
+
+                MENUITEM "AllLabN",                     ID_ARCHIVE_CUT_FILL_ALLLABN
+
+                MENUITEM "AllLabN2",                    ID_ARCHIVE_CUT_FILL_ALLLABN2
+
+                MENUITEM "Cut as 2 colomns",            ID_ARCHIVE_CUT_FILL_CUTAS2COLOMNS
+
+                MENUITEM "All Lab N as 2 colomns",      ID_ARCHIVE_CUT_FILL_ALLLABNAS2COLOMNS
+
+            END
+            MENUITEM "Save to DB",                  ID_ARCHIVE_CUT_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_ARCHIVE_CUT_DISCONNECTEXCEL
+
+        END
+        POPUP "Gran"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_ARCHIVE_GRAN_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_ARCHIVE_GRAN_LOADFORM_EXISTING
+
+            END
+            POPUP "Fill"
+            BEGIN
+                MENUITEM "Gran",                        ID_ARCHIVE_GRAN_FILL_GRAN
+
+                MENUITEM "AllLabN",                     ID_ARCHIVE_GRAN_FILL_ALLLABN
+
+            END
+            MENUITEM "Save to DB",                  ID_ARCHIVE_GRAN_SAVETODB
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_ARCHIVE_GRAN_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "caspgeo"
+        BEGIN
+            POPUP "Load Form"
+            BEGIN
+                MENUITEM "New",                         ID_ARCHIVE_CASPGEO_LOADFORM_NEW
+
+                MENUITEM "Existing",                    ID_ARCHIVE_CASPGEO_LOADFORM_EXISTING
+
+            END
+            MENUITEM "Fill",                        ID_ARCHIVE_CASPGEO_FILL
+            MENUITEM "Save to DB",                  ID_ARCHIVE_CASPGEO_SAVETODB
+
+            MENUITEM SEPARATOR
+            MENUITEM "Disconnect Excel",            ID_ARCHIVE_CASPGEO_DISCONNECTEXCEL
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Delete All Cuts",             ID_ARCHIVE_DELETEALLCUTS
+        MENUITEM "Delete All Compressions",     ID_ARCHIVE_DELETEALLCOMPRESSIONS
+
+        MENUITEM "Delete All Granulars",        ID_ARCHIVE_DELETEALLGRANULARS
+
+        MENUITEM "Delete All FizMeh",           ID_ARCHIVE_DELETEALLFIZMEH
+    END
+    POPUP "&Edit", INACTIVE
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        POPUP "Property window with"
+        BEGIN
+            MENUITEM "Plot",                        ID_VIEW_PROPERTYWINDOWWITH_PLOT
+
+            MENUITEM "Results",                     ID_VIEW_PROPERTYWINDOWWITH_RESULTS
+
+            MENUITEM "Labnumber trial list",        ID_VIEW_PROPERTYWINDOWWITH_LABNUMBERTRIALLIST
+
+            MENUITEM "Normatives",                  ID_VIEW_PROPERTYWINDOWWITH_NORMATIVES
+
+            MENUITEM SEPARATOR
+            MENUITEM "Correlation",                 ID_VIEW_PROPERTYWINDOWWITH_CORRELATION
+
+            MENUITEM "Normatives by all Experiences", 
+                                                    ID_VIEW_PROPERTYWINDOWWITH_NORMATIVESBYALLEXPERIENCES
+
+        END
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&About lab...",               ID_APP_ABOUT
+    END
+    POPUP "Excel"
+    BEGIN
+        MENUITEM "Kill",                        ID_EXCEL_KILL
+        MENUITEM "To Dissconnect when load form", 
+                                                ID_EXCEL_TODISSCONNECTWHENLOADFORM_G
+
+        MENUITEM "Automatic_save_when_disconnect", 
+                                                ID_EXCEL_AUTOMATICSAVEWHENDISCONNECT
+
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR MOVEABLE PURE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT
+    VK_F1,          ID_HELP,                VIRTKEY 
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "lab MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "lab\0"
+            VALUE "LegalCopyright", "Copyright (C) 2009\0"
+            VALUE "OriginalFilename", "lab.EXE\0"
+            VALUE "ProductName", "lab Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_OLE_INIT_FAILED     "OLE initialization failed.  Make sure that the OLE libraries are the correct version."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "lab"
+    IDR_LABTYPE             "\nLaboratory\nLaboratory\n\n\nLaboratory.Document\nLaboratory Document"
+    IDR_GEOTYPE             "\nEngenier Geology\nEngenier Geology\n\n\nEngenier Geology.Document\nEngenier Geology Document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "lab"
+    AFX_IDS_IDLEMESSAGE     "For Help, press F1"
+    AFX_IDS_HELPMODEMESSAGE "Select an object on which to get Help"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+    ID_HELP_INDEX           "Opens Help\nHelp Topics"
+    ID_HELP_FINDER          "List Help topics\nHelp Topics"
+    ID_HELP_USING           "Display instructions about how to use help\nHelp"
+    ID_CONTEXT_HELP         "Display help for clicked on buttons, menus and windows\nHelp"
+    ID_HELP                 "Display help for current task or command\nHelp"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\lab.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#include "afxdb.rc"          // Database resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,241 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: meschach - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP45.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fp"Debug/meschach.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\chfactor.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\err.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\hsehldr.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\init.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\lufactor.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\machine.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matrixio.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\meminfo.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memstat.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\norm.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\otherio.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\pxop.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\qrfactor.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\solve.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparse.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparseio.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spchfctr.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\splufctr.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sprow.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spswap.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\submat.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c"
+"C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\version.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP45.tmp" 
+Creating temporary file "C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP46.tmp" with contents
+[
+/nologo /out:"..\..\lib\meschach.lib" 
+".\Debug\chfactor.obj"
+".\Debug\copy.obj"
+".\Debug\err.obj"
+".\Debug\hsehldr.obj"
+".\Debug\init.obj"
+".\Debug\ivecop.obj"
+".\Debug\lufactor.obj"
+".\Debug\machine.obj"
+".\Debug\matop.obj"
+".\Debug\matrixio.obj"
+".\Debug\meminfo.obj"
+".\Debug\memory.obj"
+".\Debug\memstat.obj"
+".\Debug\norm.obj"
+".\Debug\otherio.obj"
+".\Debug\pxop.obj"
+".\Debug\qrfactor.obj"
+".\Debug\solve.obj"
+".\Debug\sparse.obj"
+".\Debug\sparseio.obj"
+".\Debug\spbkp.obj"
+".\Debug\spchfctr.obj"
+".\Debug\splufctr.obj"
+".\Debug\sprow.obj"
+".\Debug\spswap.obj"
+".\Debug\submat.obj"
+".\Debug\vecop.obj"
+".\Debug\version.obj"
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\Admin\LOCALS~1\Temp\RSP46.tmp"
+<h3>Output Window</h3>
+Compiling...
+chfactor.c
+copy.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(110) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(110) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(115) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(115) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(116) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(116) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(134) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(137) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(157) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(157) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(161) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(182) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(188) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\copy.c(188) : warning C4018: '>' : signed/unsigned mismatch
+err.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\err.c(243) : warning C4018: '>=' : signed/unsigned mismatch
+hsehldr.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\hsehldr.c(109) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\hsehldr.c(155) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\hsehldr.c(159) : warning C4018: '<' : signed/unsigned mismatch
+init.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\init.c(60) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\init.c(235) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\init.c(252) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\init.c(266) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\init.c(267) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\init.c(281) : warning C4018: '<' : signed/unsigned mismatch
+ivecop.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(103) : warning C4018: '==' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(106) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(117) : warning C4018: '<=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(134) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(149) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(152) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(220) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\ivecop.c(320) : warning C4018: '<' : signed/unsigned mismatch
+lufactor.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\lufactor.c(106) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\lufactor.c(203) : warning C4018: '<' : signed/unsigned mismatch
+machine.c
+matop.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(149) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(150) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(185) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(186) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(315) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(316) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(319) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(339) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(339) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(342) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(364) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(364) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\matop.c(367) : warning C4018: '<' : signed/unsigned mismatch
+matrixio.c
+meminfo.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\meminfo.c(184) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\meminfo.c(235) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\meminfo.c(249) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\meminfo.c(319) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\meminfo.c(365) : warning C4018: '>=' : signed/unsigned mismatch
+memory.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(275) : warning C4018: '==' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(275) : warning C4018: '==' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(279) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(290) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(291) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(295) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(411) : warning C4018: '==' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(414) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(425) : warning C4018: '<=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(452) : warning C4018: '==' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(458) : warning C4018: '>' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memory.c(471) : warning C4018: '>' : signed/unsigned mismatch
+memstat.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memstat.c(162) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\memstat.c(293) : warning C4018: '<' : signed/unsigned mismatch
+norm.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\norm.c(52) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\norm.c(88) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\norm.c(100) : warning C4005: 'max' : macro redefinition
+        c:\program files\microsoft visual studio\vc98\include\stdlib.h(427) : see previous definition of 'max'
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\norm.c(119) : warning C4018: '<' : signed/unsigned mismatch
+otherio.c
+pxop.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\pxop.c(62) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\pxop.c(305) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\pxop.c(305) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\pxop.c(342) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\pxop.c(342) : warning C4018: '!=' : signed/unsigned mismatch
+qrfactor.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\qrfactor.c(196) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\qrfactor.c(250) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\qrfactor.c(304) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\qrfactor.c(351) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\qrfactor.c(353) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\qrfactor.c(372) : warning C4018: '<' : signed/unsigned mismatch
+solve.c
+sparse.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparse.c(133) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparse.c(135) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparse.c(169) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparse.c(171) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparse.c(447) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\sparse.c(447) : warning C4018: '<' : signed/unsigned mismatch
+sparseio.c
+spbkp.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(425) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(586) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(666) : warning C4018: '>=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(669) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(699) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(838) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(841) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(844) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(851) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(868) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(988) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(991) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(994) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(997) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1003) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1042) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1075) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1244) : warning C4113: 'int (__cdecl *)()' differs in parameter lists from 'int (__cdecl *)(const void *,const void *)'
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1269) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1269) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1269) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1287) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1318) : warning C4018: '==' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spbkp.c(1348) : warning C4018: '>' : signed/unsigned mismatch
+spchfctr.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spchfctr.c(323) : warning C4018: '!=' : signed/unsigned mismatch
+splufctr.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\splufctr.c(63) : warning C4018: '<=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\splufctr.c(176) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\splufctr.c(176) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\splufctr.c(178) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\splufctr.c(231) : warning C4018: '!=' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\splufctr.c(231) : warning C4018: '!=' : signed/unsigned mismatch
+sprow.c
+spswap.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\spswap.c(64) : warning C4018: '<' : signed/unsigned mismatch
+submat.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\submat.c(162) : warning C4018: '<' : signed/unsigned mismatch
+vecop.c
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c(364) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c(386) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c(412) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c(442) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c(554) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c(575) : warning C4018: '<' : signed/unsigned mismatch
+C:\Documents and Settings\Admin\Мои документы\C++\gstat-2.4.0\gstat-2.4.0\meschach\vecop.c(597) : warning C4018: '<' : signed/unsigned mismatch
+version.c
+Creating library...
+
+
+
+<h3>Results</h3>
+meschach.lib - 0 error(s), 127 warning(s)
+</pre>
+</body>
+</html>

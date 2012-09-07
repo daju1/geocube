@@ -1,0 +1,69 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ex31d - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/ex31d.res" /d "_DEBUG" /d "_AFXDLL" "D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\ex31d.rc"" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP80.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/ex31d.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\ChildFrm.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\ex31d.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\ex31dDoc.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\ex31dView.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\MainFrm.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\Rowview.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\TableSel.cpp"
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\TableSet.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP80.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP81.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/ex31d.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\C++\Lag\Win32\Win32_90.12\bd examples\ex31d\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP81.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP82.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/ex31d.pdb" /debug /machine:I386 /out:"Debug/ex31d.exe" /pdbtype:sept 
+".\Debug\ChildFrm.obj"
+".\Debug\ex31d.obj"
+".\Debug\ex31dDoc.obj"
+".\Debug\ex31dView.obj"
+".\Debug\MainFrm.obj"
+".\Debug\Rowview.obj"
+".\Debug\StdAfx.obj"
+".\Debug\TableSel.obj"
+".\Debug\TableSet.obj"
+".\Debug\ex31d.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP82.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+ChildFrm.cpp
+ex31d.cpp
+ex31dDoc.cpp
+ex31dView.cpp
+MainFrm.cpp
+Rowview.cpp
+TableSel.cpp
+TableSet.cpp
+Generating Code...
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/ex31d.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\ChildFrm.sbr" ".\Debug\ex31d.sbr" ".\Debug\ex31dDoc.sbr" ".\Debug\ex31dView.sbr" ".\Debug\MainFrm.sbr" ".\Debug\Rowview.sbr" ".\Debug\TableSel.sbr" ".\Debug\TableSet.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+ex31d.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

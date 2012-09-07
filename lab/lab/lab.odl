@@ -1,0 +1,42 @@
+// lab.odl : type library source for lab.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (lab.tlb).
+
+[ uuid(F098DD74-FE0C-44B9-BF88-352C2ED2D3CA), version(1.0) ]
+library Lab
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CLabDoc
+	
+	[ uuid(F8CBCD3C-AD09-4C3D-8048-5D311000B3A4) ]
+	dispinterface ILab
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CLabDoc)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CLabDoc)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CLabDoc
+	
+	[ uuid(6BA2EE4C-3D87-442B-A459-59CFB8F2A162) ]
+	coclass Document
+	{
+		[default] dispinterface ILab;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

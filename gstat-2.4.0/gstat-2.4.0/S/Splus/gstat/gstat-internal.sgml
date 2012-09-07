@@ -1,0 +1,29 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>gstat-internal</s-topic>
+</s-topics>
+
+<s-title>
+Gstat Internal Functions
+</s-title>
+
+<s-description>
+gstat internal functions
+</s-description>
+
+<s-section name="NOTE">
+these functions should not be called by users directly
+</s-section>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

@@ -1,0 +1,57 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>map.to.lev</s-topic>
+</s-topics>
+
+<s-title>
+rearrange data frame for plotting with levelplot
+</s-title>
+
+<s-description>
+rearrange data frame for plotting with levelplot
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+map.to.lev(data, xcol = 1, ycol = 2, zcol = c(3, 4), ns = names(data)[zcol])
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="data">
+data frame, e.g. output from <s-function name="krige">krige</s-function> or <s-function name="predict.gstat">predict.gstat</s-function> </s-arg>
+<s-arg name="xcol">
+x-coordinate column number </s-arg>
+<s-arg name="ycol">
+y-coordinate column number </s-arg>
+<s-arg name="zcol">
+z-coordinate column number range </s-arg>
+<s-arg name="ns">
+names of the set of z-columns to be viewed</s-arg>
+</s-args>
+
+<s-value>
+data frame with the following elements:
+<s-return-component name="x">
+x-coordinate for each row</s-return-component>
+<s-return-component name="y">
+y-coordinate for each row</s-return-component>
+<s-return-component name="z">
+column vector with each of the elements in columns <s-expression>zcol</s-expression>
+of <s-expression>data</s-expression> stacked </s-return-component>
+<s-return-component name="name">
+factor; name of each of the stacked <s-expression>z</s-expression> columns </s-return-component>
+</s-value>
+
+<s-see>
+<s-function name="levelplot">levelplot</s-function> <s-function name="image.data.frame">image.data.frame</s-function>, <s-function name="krige">krige</s-function>
+</s-see>
+
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

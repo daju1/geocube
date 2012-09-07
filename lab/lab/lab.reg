@@ -1,0 +1,13 @@
+REGEDIT
+; This .REG file may be used by your SETUP program.
+;   If a SETUP program is not available, the entries below will be
+;   registered in your InitInstance automatically with a call to
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+
+HKEY_CLASSES_ROOT\Lab.Document = Lab Document
+HKEY_CLASSES_ROOT\Lab.Document\CLSID = {6BA2EE4C-3D87-442B-A459-59CFB8F2A162}
+
+HKEY_CLASSES_ROOT\CLSID\{6BA2EE4C-3D87-442B-A459-59CFB8F2A162} = Lab Document
+HKEY_CLASSES_ROOT\CLSID\{6BA2EE4C-3D87-442B-A459-59CFB8F2A162}\ProgId = Lab.Document
+HKEY_CLASSES_ROOT\CLSID\{6BA2EE4C-3D87-442B-A459-59CFB8F2A162}\LocalServer32 = LAB.EXE

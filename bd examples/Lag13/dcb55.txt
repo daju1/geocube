@@ -1,0 +1,64 @@
+55
+
+Настройки Порта перед устанвкой: 
+dcb.DCBlength = 28
+dcb.BaudRate = 9600
+dcb.fBinary = 1
+dcb.fParity = 0
+dcb.fOutxCtsFlow = 0
+dcb.fOutxDsrFlow = 0
+dcb.fDtrControl = 1
+dcb.fDsrSensitivity = 0
+dcb.fTXContinueOnXoff = 1
+dcb.fOutX = 0
+dcb.fInX = 0
+dcb.fErrorChar = 0
+dcb.fNull = 0
+dcb.fRtsControl = 1
+dcb.fAbortOnError = 1
+dcb.fDummy2 = 0
+dcb.wReserved = 0
+dcb.XonLim = 2048
+dcb.XoffLim = 512
+dcb.ByteSize = 8
+dcb.Parity = 0
+dcb.StopBits = 0
+dcb.XonChar = 
+dcb.XoffChar = 
+dcb.ErrorChar = &
+dcb.EofChar = $
+dcb.EvtChar = !
+dcb.wReserved1 = 0
+
+
+ новые Настройки Порта: 
+dcb.DCBlength = 28
+dcb.BaudRate = 9600
+dcb.fBinary = 1
+dcb.fParity = 0
+dcb.fOutxCtsFlow = 0
+dcb.fOutxDsrFlow = 0
+dcb.fDtrControl = 1
+dcb.fDsrSensitivity = 0
+dcb.fTXContinueOnXoff = 1
+dcb.fOutX = 0
+dcb.fInX = 0
+dcb.fErrorChar = 0
+dcb.fNull = 0
+dcb.fRtsControl = 1
+dcb.fAbortOnError = 1
+dcb.fDummy2 = 0
+dcb.wReserved = 0
+dcb.XonLim = 2048
+dcb.XoffLim = 512
+dcb.ByteSize = 8
+dcb.Parity = 0
+dcb.StopBits = 0
+dcb.XonChar = @
+dcb.XoffChar = #
+dcb.ErrorChar = &
+dcb.EofChar = $
+dcb.EvtChar = !
+dcb.wReserved1 = 0
+
+

@@ -1,0 +1,10 @@
+using Marsaglia's random number generator
+data(zinc):          zinc.eas     (GeoEAS file)
+attribute:          zinc, ppm     [x:] xcoord, m  : [    178605,    181390]
+n:                        155     [y:] ycoord, m  : [    329714,    333611]
+sample mean:          469.716     sample std.:          367.074     
+[calculating sample variogram]
+variogram(zinc): 'zinc.est': 36671.9 Nug(0) + 125417 Sph(946.895);
+# model: 0 type: Nug (nugget) sill: 36671.9 range: 0
+# model: 1 type: Sph (spherical) sill: 125417 range: 946.895
+# sum sills 162089, max 162089, min 0, flat at distance 946.895

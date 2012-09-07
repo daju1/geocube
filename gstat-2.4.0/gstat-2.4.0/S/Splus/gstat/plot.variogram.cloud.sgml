@@ -1,0 +1,77 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>plot.variogram.cloud</s-topic>
+</s-topics>
+
+<s-title>
+Plot and Identify Data Pairs on Sample Variogram Cloud
+</s-title>
+
+<s-description>
+Plot a sample variogram cloud, possibly with identification of
+individual point pairs
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+plot.variogram.cloud(x, identify = FALSE, xlim, ylim, xlab, ylab, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="x">
+object of class variogram.cloud </s-arg>
+<s-arg name="identify">
+logical; if TRUE, the plot allows identification of
+the indexes of point pairs that correspond to individual variogram
+cloud points </s-arg>
+<s-arg name="xlim">
+limits of x-axis </s-arg>
+<s-arg name="ylim">
+limits of y-axis </s-arg>
+<s-arg name="xlab">
+x axis label </s-arg>
+<s-arg name="ylab">
+y axis label </s-arg>
+<s-arg name="...">
+parameters that are passed through to <s-function name="plot.variogram">plot.variogram</s-function>
+(in case of identify = FALSE) or to plot (in case of identify = TRUE) </s-arg>
+</s-args>
+
+<s-value>
+if identify is T, a data frame of class <s-expression>point.pairs</s-expression> with in its 
+rows the point pairs identified, if identify is F, a plot of the 
+variogram cloud (see <s-function name="plot.variogram">plot.variogram</s-function>)
+</s-value>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+<url url ="http://www.gstat.org/">
+</s-section>
+
+<s-see>
+<s-function name="plot.point.pairs">plot.point.pairs</s-function>,
+<s-function name="variogram.formula">variogram.formula</s-function>,
+<s-function name="variogram">variogram</s-function>,
+<s-function name="plot.variogram">plot.variogram</s-function>,
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+# no trend:
+plot(variogram(log(zinc)~1, loc=~x+y, data=meuse, cloud=TRUE))
+# plot(variogram(log(zinc)~1, loc=~x+y, data=meuse, cloud=TRUE, cressie=TRUE))
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mailwriter", "mailwriter.vcproj", "{CA50EFDF-C483-4C50-B8DB-8CDCA7B0E470}"
+	ProjectSection(ProjectDependencies) = postProject
+		{207B0726-3047-43E6-AA8A-70B04B3D40CC} = {207B0726-3047-43E6-AA8A-70B04B3D40CC}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "excel_connect", "..\excel_connect\excel_connect.vcproj", "{207B0726-3047-43E6-AA8A-70B04B3D40CC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{CA50EFDF-C483-4C50-B8DB-8CDCA7B0E470}.Debug.ActiveCfg = Debug|Win32
+		{CA50EFDF-C483-4C50-B8DB-8CDCA7B0E470}.Debug.Build.0 = Debug|Win32
+		{CA50EFDF-C483-4C50-B8DB-8CDCA7B0E470}.Release.ActiveCfg = Release|Win32
+		{CA50EFDF-C483-4C50-B8DB-8CDCA7B0E470}.Release.Build.0 = Release|Win32
+		{207B0726-3047-43E6-AA8A-70B04B3D40CC}.Debug.ActiveCfg = Debug|Win32
+		{207B0726-3047-43E6-AA8A-70B04B3D40CC}.Debug.Build.0 = Debug|Win32
+		{207B0726-3047-43E6-AA8A-70B04B3D40CC}.Release.ActiveCfg = Release|Win32
+		{207B0726-3047-43E6-AA8A-70B04B3D40CC}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

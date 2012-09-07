@@ -1,0 +1,1381 @@
+function varargout=Mercury1;
+
+% Mercury1  c*10^-4 = % масс.
+%
+% Дроздов Алексей Юрьевич. E-mail: alexey_drozdov@mail.ru
+% "Научно-Технологический Институт Транскрипции Трансляции и Репликации".
+% г. Харьков. 8-0572-19-55-77
+%
+close all;clear;%pack;
+ud=[];ude=[];FILENAME='';
+mwork=0;
+while mwork<3
+   mwork=menu('Programm of data prepare for 3D visualization - Программа подготовки данных для 3D-Geo визуализации',...
+      'Start - Запустить','Save - Cохранить','Visualissate - Визуализация','Exit - Выход');
+if mwork==1
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@   Блок загрузки файла   @@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+f00=0;way=[];
+while f00<3
+   f00=menu('Open file? - Открыть файл?','wk1','mat','No - Нет');
+   if f00==1
+      [FILENAME, PATHNAME]=uigetfile('*.wk1','open data file.wk1');  
+      cd(PATHNAME);
+      if all(FILENAME==0) 
+         f00=0;
+      else
+         tp=FILENAME(end-3:end);
+         if  strcmp(tp,'.wk1')
+            M=wk1read([PATHNAME FILENAME]);f00=2;
+         else
+            errordlg(['Расширение файла должно быть .wk1'],'ERROR','CREATEMODE');
+            f00=0;
+         end
+      end;
+      if f00==2
+         [d1,d2]=size(M);
+         if d2<8
+            errordlg(['Число столбцов матрицы должно быть не меньше 8. ' ...
+               'Первый столбец соответствует X координате. ' ...
+               'Второй столбец соответствует Y координате.'],'ERROR','CREATEMODE');
+            f00=0;
+         else f00=3;way=1;
+         end 
+      end
+   end
+   if f00==2
+      [FILENAME, PATHNAME]=uigetfile('*.mat','open data file.mat');  
+      cd(PATHNAME);
+      if all(FILENAME==0) 
+         f00=0;
+      else
+         tp=FILENAME(end-3:end);
+         if  strcmp(tp,'.mat')
+            %PA=FILENAME(1:end-4);ud=[]; eval([PA '=[];']);
+            load([PATHNAME FILENAME]);
+            if ~isempty(ud) | ~isempty(ude); 
+            %elseif ~isempty(eval(PA)) ud=eval(PA);
+            else f00=0; errordlg('sorry incorrect data or variable name','ERROR','CREATEMODE');
+            end;   
+            f00=3;way=2;
+            if ~isempty(ud) mgeoelektr = 1; 
+            elseif ~isempty(ude) mgeoelektr = 4; 
+            end
+         else
+            errordlg(['Расширение файла должно быть .mat'],'ERROR','CREATEMODE');
+            f00=0;
+         end
+      end;
+   end
+end
+clear PATHNAME d1 d2 f00 tp;
+ud.FILENAME=FILENAME;
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@  Конец блока загрузки файла   @@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if way==1
+   mgeoelektr=menu('wk1 file data contents: Данные в файле с расширением .wk1 содержат:',...
+      'concentration data on drills - Информацию об распределении концентрации вещества по скважинам на разных глубинах',...
+      'h of water gorizont - Глубину водоносного горизонта',...
+      'Stratigrafical information Cтратиграфическую информацию',...
+      'EIMPZ field Информацию об электромагнитном ЕИЭМПЗ сигнале');
+if mgeoelektr ==1
+    
+    ud.input_M = M;
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@ Обработка информации об распределении  @@@@@@@@@@@@
+%@@@@@@@@@@@@  концентрации вещества по скважинам  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@  на разных глубинах  @@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@ Обработка информации   @@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@  об электромагнитном ЕИЭМПЗ сигнале  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@  Блок подготовки данных к интерполяции  @@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   
+% ПДК   % macc
+% PDC=2.1*10^-4; % macc
+%log10PDC=log10(PDC);
+% Минимальная концентрация, определяемая лабораторно
+% mindetc=3*10^-6/2;
+% log10mindetc=log10(mindetc);
+% logmindetc=log(mindetc);
+% Плотность грунта
+% rho=1.9*10^3;%rho=1.8:0.1:2.0*10^3;
+% x,y -координаты скважин
+Xdril=M(:,2);Xdril(1:2)=[];
+Ydril=M(:,3);Ydril(1:2)=[];
+%Коэффициент перевода из юнитов сёрфера в метры
+% k=1.729828;
+% Xdril=Xdril/k;Ydril=Ydril/k;
+
+% Проверка координат скважин на дублирование
+dupl=[]; ndupl=[]; ons1=ones(size(Xdril));
+for ndril=1:length(Xdril)
+   ons2=ons1;ons2(ndril)=0;
+   fdupl = find( Xdril(ndril)==Xdril & Ydril(ndril)==Ydril & ons2 );
+   if ~isempty(fdupl)
+      ndupl=[ndupl ndril];
+   end
+end
+if ~isempty(ndupl)
+   errordlg(['Координаты скважин №№ ' num2str(ndupl) ' дублируются'],'ERROR','CREATEMODE');
+end
+%Построение карты скважин
+plot(Xdril,Ydril,'.');title('Карта скважин');
+
+xmax=floor(max(Xdril));   % xmax=ceil(max(Xdril));
+xmin=ceil(min(Xdril));   % xmin=floor(min(Xdril));
+
+ymax=floor(max(Ydril));   % ymax=ceil(max(Ydril));
+ymin=ceil(min(Ydril));   % ymin=floor(min(Ydril));
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+malt=menu('Use plane surface? - Применить приближение плоской дневной поверхности','Yes - Да','No - Нет');
+if malt==1
+   Altulok=zeros(size(Xdril));zmax=0;zmin=0;lokzer=0;
+elseif malt==2
+   
+% z (альтитуды над пов-стью моря) устья скважин
+Altu=M(:,4);Altu(1:2)=[];
+% максимальная альтитуда поверхности
+almax=max(Altu);almin=min(Altu);
+% Местный ноль высоты
+mzer=menu('Local zero evaluation - Местный ноль высоты',...
+   ['On max altitude - по максимальной альтитуде поверхности = ' num2str(round(almax)) ' м'],...
+   ['On min altitude - по минимальной альтитуде поверхности = ' num2str(round(almin)) ' м'],...
+   ['Zero'],...
+   'Enter with keyboard - Ввести с клавиатуры');
+if mzer==1
+   lokzer=round(almax);
+elseif mzer==2
+   lokzer=round(almin);
+elseif mzer==3
+   lokzer=0;
+elseif mzer==4
+   lokzer=inputdlg('Enter local zero altitude - Введите альтитуду местного ноля высоты,м =');lokzer=(str2num(lokzer{:}));
+end
+
+Altulok=Altu-lokzer;
+% максимальная альтитуда поверхности, округлённая до целого числа
+zmax = ceil(almax);
+zmin = floor(almin);
+end %if malt==1
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Матрица концентраций
+C=M(:,6:end);C(1,:)=[];%clear M;
+% Значения глубин отметок
+h=C(1,:);C(1,:)=[];
+%    mprived=menu(' Privesti consetration to mass % ? - Приведение концентрации к % масс',...
+%       'Yes','No');
+% if mprived==1
+% % Приведение концентрации к % масс
+% C=C*10^-4;
+% end
+% Минимальная альтитуда исследования:
+MinZ=floor(zmin-h(end));%clear zmin;
+%Замена нулевых значений на NaN поскольку машина пустые клетки считывает как нули
+[dril,hz]=find(C);
+NC=NaN*ones(size(C));
+for q=1:length(dril)
+   NC(dril(q),hz(q))=C(dril(q),hz(q));
+end
+maxNC=max(max(NC));
+disp(['Максимальное значение в исходных данных ' num2str(maxNC)]);
+minNC=min(min(NC));
+disp(['Минимальное значение в исходных данных ' num2str(minNC)]);
+
+% Матрица абсолютных отметок анализов
+MAltulok=(Altulok*ones(1,size(NC,2))-ones(size(NC,1),1)*h);
+%Номер скважины и номер глубины каждого измерения
+[ndfin,nhfin]=find(isfinite(NC));
+% Число анализов
+Nanaliz=length(ndfin);
+% Cоставление векторов координат анализов в пространстве и значений концентраций
+for ii=1:Nanaliz
+   Xanaliz(ii)=Xdril(ndfin(ii));
+   Yanaliz(ii)=Ydril(ndfin(ii));
+   Zanaliz(ii)=MAltulok(ndfin(ii),nhfin(ii));
+   Canaliz(ii)=NC(ndfin(ii),nhfin(ii));
+end
+figure;plot(Xanaliz,Yanaliz,'r.');title('Координаты реальных анализов');
+ff=figure;plot3(Xanaliz,Yanaliz,Zanaliz,'r.');view([-30 45]);title('Координаты реальных анализов');
+set(ff,'Color',[1 1 1]);
+% Минимальное расстояние между скважинами
+minr=[];
+for jj=1:length(Xdril)
+   Xd=Xdril;Xd(jj)=[];
+   Yd=Ydril;Yd(jj)=[];
+   r=sqrt((Xdril(jj)-Xd).^2+(Ydril(jj)-Yd).^2);
+   minr=min([r; minr]);
+end
+disp(['Минимальное расстояние между скважинами = ' num2str(minr)]);
+dx=minr/2;dy=minr/2;
+
+
+% Шаг интерполяции
+dz=.1;
+mstep=menu('Interpolation step - Шаг интерполяции',...
+   ['Use Использовать по умолчанию dz=0.1м dx=dy=половине расстояния между скважинами = ' num2str(dx) ' м'],...
+   'dx=dy=10 м, dz=0.2 м ',...
+   'Enter with keyboard - Ввести с клавиатуры');
+if mstep==2,dx=10; dy=10; dz=0.2;
+elseif mstep==3
+dxdydz=inputdlg('Enter - Введите [dx dy dz],м =');dxdydz=(str2num(dxdydz{:}));
+dx=dxdydz(1);dy=dxdydz(2);dz=dxdydz(3);
+end
+
+x=xmin:dx:xmax; %clear xmin xmax;
+y=ymin:dy:ymax; %clear ymin ymax;
+z=(MinZ:dz:zmax)-lokzer;% clear MinZ zmax;%lokzer;
+lnz=length(z);lny=length(y);lnx=length(x);
+
+% Собственная интерполяционная сетка для каждой скважины
+%zs=-fliplr(h(1):dz:h(end));
+
+
+
+mmet=menu('Select interpolation metod for relief (v4 recommended)Выберите метод интерполяции дневной поверхности.Рекомендуется v4',...
+   'linear','cubic','nearest','v4');
+switch mmet
+case 1, method3='linear';
+case 2, method3='cubic';
+case 3, method3='nearest';
+case 4, method3='v4';
+end
+
+% Построение поверхностей, повторяющих рельеф земной поверхности
+Altday = griddata(Xdril,Ydril,Altulok,x,y',method3);
+figure(2);surf(x,y,Altday);title('Карта дневной поверхности');
+xlabel('X');ylabel('Y');
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+mlog1=menu('Use log of input data? - Применить логарифмирование исходных данных?',...
+   'log10 Десятичный логарифм',...
+   'log Натуральный логарифм','Do not use - Не применять');
+if mlog1==1
+   ll=log10(NC);ll(find(~isfinite(ll)))=NaN;NC=ll;
+   Canaliz=log10(Canaliz);
+   disp('Применено логарифмирование исходных данных десятичным логарифмом');
+elseif mlog1==2
+   ll=log(NC);ll(find(~isfinite(ll)))=NaN;NC=ll;
+   Canaliz=log(Canaliz);
+   disp('Применено логарифмирование исходных данных натуральным логарифмом');
+elseif mlog1==3
+   disp('Логарифмирование исходных данных не применено');
+end
+
+maxNC=max(max(NC));
+disp(['Максимальное значение в исходных данных ' num2str(maxNC)]);
+minNC=min(min(NC));
+disp(['Минимальное значение в исходных данных ' num2str(minNC)]);
+disp(' ');
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+madd=menu('Use over contour drills with zero concentration? Добавить за контуром исследуемой территории мнимые скважины с нулевыми значениями концентраций для лучшей интерполяции ?',...
+   'Yes - Да','No - Нет');
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+if madd==1
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+mcon=menu('Number of zero concentration drills profils Число окружных профилей мнимых скважин',...
+   'Use Использовать 1',...
+   'Use Использовать 2',...
+   'Use Использовать 3',...
+   'Enter with keyboard - Ввести с клавиатуры');
+switch mcon
+case 1,nmp=1;
+case 2,nmp=2;
+case 3,nmp=3;
+case 4
+nmp=inputdlg('Enter Number of zero concentration drills profils Введите Число контуров мнимых скважин');nmp=round(str2num(nmp{:}));
+end
+st=5;
+mst=menu('distance between zero conc. drills profils - Расстояние между профилями мнимых скважин',...
+   'use 5 * step of interpolation - Использовать равным 5 * шаг интерполяции',...
+   'enter x * step of interpolation Ввести с клавиатуры число, которое надо умножить на шаг интерполяции');
+if mst==2
+st=inputdlg('enter x * step of interpolation - Ввести с клавиатуры число, которое надо умножить на шаг интерполяции');st=round(str2num(st{:}));
+end
+xp=x;yp=y;
+Xadd=[ ];Yadd=[ ];Altadd=[];
+for mp=1:nmp
+   lx=length(xp);ly=length(yp);
+   Xadd=[Xadd [xp xp(end)+st*dx]  (xp(end)+st*dx)*ones(1,ly+1) [fliplr(xp) xp(1)-st*dx] (xp(1)-st*dx)*ones(1,ly+1)];
+   Yadd=[Yadd (yp(1)-st*dy)*ones(1,lx+1) [yp yp(end)+st*dy] (yp(end)+st*dy)*ones(1,lx+1) [fliplr(yp) yp(1)-st*dy]];
+   
+   Altadd=[Altadd ...
+         repmat(Altday(1,1),1,mp-1)     Altday(1,:)           repmat(Altday(1,end),1,mp)...
+         repmat(Altday(1,end),1,mp-1)   Altday(:,end)'        repmat(Altday(end,end),1,mp)...
+         repmat(Altday(end,end),1,mp-1) fliplr(Altday(end,:)) repmat(Altday(end,1),1,mp)...
+         repmat(Altday(end,1),1,mp-1)   fliplr(Altday(:,1)')  repmat(Altday(1,1),1,mp)];
+   
+   xp=[xp(1)-st*dx xp xp(end)+st*dx];yp=[yp(1)-st*dy yp yp(end)+st*dy];
+end
+
+if mlog1==1
+   minC=10.^(minNC);
+elseif mlog1==2
+   minC=exp(minNC);
+end
+
+mim=menu('As zero concentration use - В качестве значений концентраций в мнимых скважинах использовать:',...
+   ['C which is min may be detected by detector Минимально определяемую прибором концентрацию = ' num2str(mindetc) ' % масс mass'],...
+   ['PDC ПДК = ' num2str(PDC) ' % масс mass'],...
+   ['C which is min detected from all the analises - Минимальную из проведенных анализов концентрацию = ' num2str(minC) ' % масс'],...
+   'Enter with keyboard - Ввести с клавиатуры');
+switch mim
+case 1, imc=mindetc;
+case 2, imc=PDC;
+case 3, imc=minC;
+case 4
+   imc=inputdlg('As zero concentration use - Введите значения концентраций в мнимых скважинах');
+   imc=(str2num(imc{:}));
+end
+
+% Логарифмирование значений концентраций в мнимых скважинах в случае, 
+% если применёно логарифмирование исходных данных
+if mlog1==1
+   imc=log10(imc);
+elseif mlog1==2
+   imc=log(imc);
+end
+
+for q=1:length(Xadd)
+   CIad=imc*ones(1,lnz);
+   CIad(find(z>Altadd(q)))=NaN;
+   CIad(find(CIad<imc & isfinite(CIad)))=imc;
+   Czad(q,:)=CIad;
+end
+
+figure(3);plot([Xdril],[Ydril],'r.');
+hold on;plot([Xadd'],[ Yadd'],'b.');title('Карта скважин реальных и мнимых');
+xa=xp(1):dx:xp(end);
+ya=yp(1):dy:yp(end);
+Altdayadd = griddata([Xdril;Xadd'],[Ydril;Yadd'],[Altulok;Altadd'],xa,ya',method3);
+figure(4);surf(xa,ya,Altdayadd);title('Приблизительная карта дневной поверхности с мнимымы профилями');
+xlabel('X');ylabel('Y');
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+end %if madd==1
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@  Конец блока подготовки данных к интерполяции @@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@  БЛОК ИНТЕРПОЛЯЦИИ  @@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+mm=menu('Select C interpolation method Выберите метод интерполяции  концентрации ',...
+   'First by drills after by gorizontal planes - Отдельно по скважинам - затем по секущим горизонтальным плоскостям',...
+   'by all volume without relief Сразу по всему объёму без учёта рельефа',...
+   'by all volume with relief Сразу по всему объёму c учётoм рельефа',...
+   'by all volume with relief use nnet Сразу по всему объёму c учётoм рельефа c использованием нейросетевого апроксиматора');
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if mm==4
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@  ПОДБЛОК ИНТЕРПОЛЯЦИИ  @@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@ c использованием нейросетевого апроксиматора @@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   
+   %x,y,z
+   
+   
+   P=[Xanaliz;Yanaliz;Zanaliz];
+   
+   
+   T=Canaliz;
+   size(P)
+   size(T)
+   Nanaliz
+   
+   MinNeurons=[5,5,3];
+   MaxNeurons=200;
+   Sigma0=[10,10,1];;
+   Goal=10;
+   W0=1;
+   A0=0.00;
+   B0=.0;
+   
+   minmaxSigma=[1,50; 1,50; .0001,5; ];
+   
+minmaxAlpha=[-1,1;     -1,1;    -1,1;];
+minmaxC    =minmax(P);
+minmaxA    =[-10,10;     -10,10;    -10,10;];
+minmaxB    =[-10,10;     -10,10;    -10,10;];
+minmaxW    =[-1000,1000;];
+
+net=myrbnet_6(P,T,Goal,Sigma0,W0,A0,B0,MinNeurons,MaxNeurons,minmaxSigma,minmaxAlpha,minmaxC,minmaxA,minmaxB,minmaxW);
+
+net.Sigma
+net.Alpha
+net.A
+net.B
+net.C
+net.W
+
+hw=waitbar(0,'digitizing on volume - оцифровка по объёму');
+Lz=length(z)
+for k=1:Lz,
+[Y,X,Z]=ndgrid(y,x,z(k));XX=[X(:)';Y(:)';Z(:)'];
+% Выходной сигнал радиального слоя равен:
+Nu=output_radial_6(XX,net.C,net.Sigma,net.Alpha);
+% Выходной сигнал сети равен:
+YXZ=net.W*Nu+net.A*XX+sum(net.B);
+V(:,:,k)=reshape(YXZ,size(X));
+waitbar(k/Lz,hw);
+end
+close(hw)
+
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+elseif mm==2
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@  ПОДБЛОК ИНТЕРПОЛЯЦИИ  @@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@  СРАЗУ  ПО ВСЕМУ ОБЪЁМУ  @@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+if madd==2
+   
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+V=grid3data(Xanaliz,Yanaliz,Zanaliz,Canaliz,x,y,z,'cubic');
+if mlog1==1
+   V(find(V<log10mindetc & isfinite(V)))=log10mindetc;
+elseif mlog1==2
+   V(find(V<logmindetc & isfinite(V)))=logmindetc;
+elseif mlog1==3
+   V(find(V<mindetc & isfinite(V)))=mindetc;
+end
+[X,Y,Z]=meshgrid(x,y,z);clear X Y;
+for jj=1:lnz
+   ALTDAY(:,:,jj)=Altday;
+end
+V(find(Z>ALTDAY(q)))=NaN;clear ALTDAY;
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+elseif madd==1
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+% Составление объёмной матрицы концентрациий
+qw=0;hw=waitbar(0,['Interpolation of concentration on slice gorizontal planes by method - Интерполяция концентрации на секущие горизонтальные плоскости методом ' method2]);
+lnya=length(ya);lnxa=length(xa);
+%[XIa,YIa]=meshgrid(xa,ya);
+Ydra=[Xanaliz;Yadd'];
+Xdra=[Xanaliz;Xadd'];
+Cza=[Cz; Czad];
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+end % if madd==2
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@  КОНЕЦ ПОДБЛОКА ИНТЕРПОЛЯЦИИ  @@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@  СРАЗУ ПО ВСЕМУ ОБЪЁМУ  @@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+   
+elseif mm==1
+   
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@  ПОДБЛОК ИНТЕРПОЛЯЦИИ ОТДЕЛЬНО  @@@@@@@@@@@@@@@@@
+%@@@@@@@@@@  ПО СКВАЖИНАМ ОТДЕЛЬНО ПО ГОРИЗОНТАЛИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   
+
+mmet=menu('Select interpolation method on every drill - Выберите метод интерполяции  концентрации по каждой скважине.Рекомендуется nearest or linear recommended',...
+   'nearest','linear','spline','cubic','*nearest','*linear','*cubic');
+switch mmet
+case 1, method='nearest';
+case 2, method='linear';
+case 3, method='spline';
+case 4, method='cubic';
+case 5, method='*nearest';
+case 6, method='*linear';
+case 7, method='*cubic';
+end
+mextr=menu('While interpolation along well if absent day surface data to extrapolate them with data on nearest glubina ? При интерполяции по скважинам при отсутствии данных на поверхности экстраполировать ли их равными значению на ближайшей глубине','Yes - Да','No - Нет')   
+% Интерполяция данных по каждой скважине на сетку абсолютных альтитуд
+hw=waitbar(0,['Interpolation of concetration on every well by method - Интерполяция  концентрации по каждой скважине методом ' method]);
+for q=1:size(NC,1)
+   hhh=NC(q,:);nfinit=find(isfinite(hhh));
+   if ~isempty(nfinit) & length(nfinit)>2
+      switch mmet
+      case {2,3, 4, 7}
+      CI=interp1(Altulok(q)-h(nfinit),hhh(nfinit),z,method);
+      case {1,  5,  6}
+      CI=interp1(Altulok(q)-h,hhh,z,method);
+      end
+   elseif isempty(nfinit)
+      CI=NaN*ones(size(z)); 
+   elseif ~isempty(nfinit) & (length(nfinit)==1)
+      CI=NaN*ones(size(z)); 
+      for jj=1:length(nfinit)
+      CI(find(abs((z - Altulok(q)+h(nfinit(jj)) )/dz)<1))=hhh(nfinit(jj));
+      end
+   elseif ~isempty(nfinit) & (length(nfinit)==2)
+      CI=interp1(Altulok(q)-h,hhh,z,'linear');
+   end
+   if ~isempty(nfinit)
+      nfci=find(isfinite(CI));
+      if nfci(1)>2, CI(nfci(1)-1)=hhh(nfinit(end));CI(nfci(1)-2)=hhh(nfinit(end))/2;end
+      if nfci(end)<length(z)-1, CI(nfci(end)+1)=hhh(nfinit(1));CI(nfci(end)+2)=hhh(nfinit(1))/2;end
+   end
+   CI(find(z>Altulok(q)))=NaN;
+   if mextr==1,
+      nfc=find(isfinite(CI));
+      if ~isempty(nfc),CI(find(isnan(CI) &  z<=Altulok(q) &  z>z(nfc(end))))=CI(nfc(end));end;
+   end 
+   
+%    if mlog1==1
+%    CI(find(CI<log10mindetc & isfinite(CI)))=log10mindetc;
+%    elseif mlog1==2
+%    CI(find(CI<logmindetc & isfinite(CI)))=logmindetc;
+%    elseif mlog1==3
+%    CI(find(CI<mindetc & isfinite(CI)))=mindetc;
+%    end
+   Cz(q,:)=CI;
+   waitbar(q/size(NC,1),hw);
+end 
+close(hw);
+   
+surf(z,1:size(NC,1),Cz);
+maxCz=max(max(max(Cz)));
+disp(['Интерполяция  концентрации по каждой скважине методом ' method]);
+disp(['Макс.значение в интерп.данных по скваж. ' num2str(maxCz)]);
+minCz=min(min(min(Cz)));
+disp(['Минимальное значение в интерп.данных по скваж. ' num2str(minCz)]);
+disp(' ');
+
+
+% Интерполяция на объём на секущие горизонтальные плоскости c мнимыми профилями:
+mmet=menu('Select interpolation method for gorisontal planes nearest recommended - Выберите метод интерполяции  концентрации на секущие горизонтальные плоскости. Рекомендуется nearest ',...
+   'linear','cubic','nearest','v4');
+switch mmet
+case 1, method2='linear';
+case 2, method2='cubic';
+case 3, method2='nearest';
+case 4, method2='v4';
+end
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+if madd==1
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+% Составление объёмной матрицы концентрациий
+% Интерполяция концентрации на секущие горизонтальные плоскости
+% С учётом добавлённых мнимых краевых профилей
+qw=0;hw=waitbar(0,['Interpolation of concentration on slice gorizontal planes with image(nonreal) wells by method - Интерполяция концентрации на секущие горизонтальные плоскости с учётом мнимых скважин методом ' method2]);
+lnya=length(ya);lnxa=length(xa);
+[XIa,YIa]=meshgrid(xa,ya);
+Ydra=[Ydril;Yadd'];
+Xdra=[Xdril;Xadd'];
+Cza=[Cz; Czad];
+for qq=1:length(z)
+   ndra=[Cz(:,qq); Czad(:,qq)];nfinit=find(isfinite(ndra));%length(nfinit)
+   if ~isempty(nfinit) & length(nfinit)>3
+      VI = griddata([Xdra(nfinit)],[Ydra(nfinit)],[ndra(nfinit) ],xa,ya',method2);
+   elseif isempty(nfinit)
+      VI = NaN*ones(lnya,lnxa);
+   elseif ~isempty(nfinit) & (length(nfinit)==1)% | length(nfinit)==2 | length(nfinit)==3)
+      VI = NaN*ones(lnya,lnxa);
+      for jj=1:length(nfinit)
+         VI(find(abs((Xdra(nfinit(jj))-XIa)/dx)<1 & abs((Ydra(nfinit(jj))-YIa)/dy)<1))=ndra(nfinit(jj));
+      end
+   elseif ~isempty(nfinit) & (length(nfinit)==2 | length(nfinit)==3)
+      VI = NaN*ones(lny,lnx);
+      for jj=1:length(nfinit)
+         VI(find(abs((Xdra(nfinit(jj))-XIa)/dx)<1 & abs((Ydra(nfinit(jj))-YIa)/dy)<1))=ndra(nfinit(jj));
+      end
+   end
+   VI(find(z(qq)>Altdayadd))=NaN;
+   if mlog1==1
+      VI(find(VI<log10mindetc & isfinite(VI)))=log10mindetc;
+   elseif mlog1==2
+      VI(find(VI<logmindetc & isfinite(VI)))=logmindetc;
+   elseif mlog1==3
+      VI(find(VI<mindetc & isfinite(VI)))=mindetc;
+   end
+   Va(:,:,qq)=VI;
+   qw=qw+1;waitbar(qw/length(z),hw);
+end
+close(hw);clear ndra nfinit VI
+% Обрезание искусственно добавленных мнимых скважин
+dln=(lnya-lny)/2;
+V=Va(1+dln:end-dln,1+dln:end-dln,:);
+clear Va;
+
+maxV=max(max(max(V)));
+disp(['Интерполяция концентрации на секущие горизонтальные плоскости с учётом мнимых скважин методом ' method2]);
+disp(['Макс.значение в интерп.данных по объёму ' num2str(maxV)]);
+minV=min(min(min(V)));
+disp(['Мин.значение в интерп.данных по объёму ' num2str(minV)]);
+disp(' ');
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+elseif madd==2
+   
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   
+   % Составление объёмной матрицы концентрациий
+   % Интерполяция концентрации на секущие горизонтальные плоскости
+   % Без добавления мнимых скважин
+qw=0;hw=waitbar(0,['Interpolation of concentration on slice gorizontal planes by method - Интерполяция концентрации на секущие горизонтальные плоскости методом ' method2]);
+lny=length(y);lnx=length(x);
+[XI,YI]=meshgrid(x,y);
+for qq=1:length(z)
+   ndr=Cz(:,qq);nfinit=find(isfinite(ndr));%length(nfinit)
+   if ~isempty(nfinit) & length(nfinit)>3
+      VI = griddata(Xdril(nfinit),Ydril(nfinit),ndr(nfinit),x,y',method2);
+   elseif isempty(nfinit)
+      VI = NaN*ones(lny,lnx);
+   elseif ~isempty(nfinit) & (length(nfinit)==1)% | length(nfinit)==2 | length(nfinit)==3)
+      VI = NaN*ones(lny,lnx);
+      for jj=1:length(nfinit)
+         VI(find(abs((Xdril(nfinit(jj))-XI)/dx)<1 & abs((Ydril(nfinit(jj))-YI)/dy)<1))=ndr(nfinit(jj));
+      end
+   elseif ~isempty(nfinit) & (length(nfinit)==2 | length(nfinit)==3)
+      VI = NaN*ones(lny,lnx);
+      for jj=1:length(nfinit)
+         VI(find(abs((Xdril(nfinit(jj))-XI)/dx)<1 & abs((Ydril(nfinit(jj))-YI)/dy)<1))=ndr(nfinit(jj));
+      end
+   end
+   VI(find(z(qq)>Altday))=NaN;
+%    if mlog1==1
+%       VI(find(VI<log10mindetc & isfinite(VI)))=log10mindetc;
+%    elseif mlog1==2
+%       VI(find(VI<logmindetc & isfinite(VI)))=logmindetc;
+%    elseif mlog1==3
+%       VI(find(VI<mindetc & isfinite(VI)))=mindetc;
+%    end
+   V(:,:,qq)=VI;
+   qw=qw+1;waitbar(qw/length(z),hw);
+end
+close(hw);clear ndr nfinit VI
+maxV=max(max(max(V)));
+disp(['Интерполяция концентрации на секущие горизонтальные плоскости методом ' method2]);
+disp(['Макс.значение в интерп.данных по объёму ' num2str(maxV)]);
+minV=min(min(min(V)));
+disp(['Мин.значение в интерп.данных по объёму ' num2str(minV)]);
+disp(' ');
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+end %if madd==1
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@  КОНЕЦ ПОДБЛОКА ИНТЕРПОЛЯЦИИ ОТДЕЛЬНО  @@@@@@@@@@@@@
+%@@@@@@@@@@  ПО СКВАЖИНАМ ОТДЕЛЬНО ПО ГОРИЗОНТАЛИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+end % if mm==2
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+mm2=menu('Use again interpolation with interp2 method nearest? Применить повторную интерполяции  концентрации функцией ''interp2'' методом ''nearest''',...
+   'Yes with the same step Да с тем же шагом интерполяции',...
+   'Yes with other step Да с другим шагом интерполяции',...
+   'No Нет');
+if mm2==1
+   % Составление объёмной матрицы концентрациий
+   % Повторная интерполяция концентрации на секущие горизонтальные 
+   % плоскости методом ''nearest'' '
+qw=0;hw=waitbar(0,['Again Interpolation of concentration on slice gorizontal planes by method Повторная интерполяция концентрации на секущие горизонтальные плоскости методом ''nearest'' ']);
+[XI,YI]=meshgrid(x,y);
+for qq=1:length(z)
+   M=V(:,:,qq);[nfy,nfx]=find(isfinite(M));
+   if ~isempty(nfx) & length(nfx)>3
+   VI=interp2(XI,YI,M,XI,YI,'nearest');
+   elseif isempty(nfx)
+      VI = NaN*ones(lny,lnx);
+   elseif ~isempty(nfx) & (length(nfx)==1)
+      VI = NaN*ones(lny,lnx);
+      for jj=1:length(nfx)
+         VI(find(abs((M(nfx(jj))-XI)/dx)<1 & abs((M(nfy(jj))-YI)/dy)<1))=M(nfy(jj),nfx(jj));
+      end
+   elseif ~isempty(nfx) & (length(nfx)==2 | length(nfx)==3)
+      VI = NaN*ones(lny,lnx);
+      for jj=1:length(nfx)
+         VI(find(abs((M(nfx(jj))-XI)/dx)<1 & abs((M(nfy(jj))-YI)/dy)<1))=M(nfy(jj),nfx(jj));
+      end
+   end
+   VI(find(z(qq)>Altday))=NaN;
+   if mlog1==1
+      VI(find(VI<log10mindetc & isfinite(VI)))=log10mindetc;
+   elseif mlog1==2
+      VI(find(VI<logmindetc & isfinite(VI)))=logmindetc;
+   elseif mlog1==3
+      VI(find(VI<mindetc & isfinite(VI)))=mindetc;
+   end
+   V(:,:,qq)=VI;
+   qw=qw+1;waitbar(qw/length(z),hw);
+end
+close(hw);clear ndr nfinit VI
+maxV=max(max(max(V)));
+disp(['Повторная интерполяция концентрации на секущие горизонтальные плоскости методом ''nearest'' ']);
+disp(['Макс.значение в интерп.данных по объёму ' num2str(maxV)]);
+minV=min(min(min(V)));
+disp(['Мин.значение в интерп.данных по объёму ' num2str(minV)]);
+disp(' ');
+end
+
+mm3=menu('Use again interpolation with interp3 method nearest? Применить повторную интерполяции  концентрации функцией ''interp3'' методом ''nearest''',...
+   'Yes with the same step Да с тем же шагом интерполяции',...
+   'Yes with other step Да с другим шагом интерполяции',...
+   'No Нет');
+if mm3==1
+   % Повторная интерполяция на объём функцией ''interp3'' методом ''nearest'''
+   [XI,YI,ZI]=meshgrid(x,y,z);
+   V=interp3(XI,YI,ZI,V,XI,YI,ZI,'nearest');
+   clear XI YI ZI;
+maxV=max(max(max(V)));
+disp(['Повторная интерполяция на объём функцией ''interp3'' методом ''nearest''']);
+disp(['Макс.значение в интерп.данных по объёму ' num2str(maxV)]);
+minV=min(min(min(V)));
+disp(['Мин.значение в интерп.данных по объёму ' num2str(minV)]);
+disp('  ');
+end
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@  КОНЕЦ БЛОКА ИНТЕРПОЛЯЦИИ  @@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@  БЛОК ФИЛЬТРАЦИИ И СГЛАЖИВАНИЯ @@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Проверка значений в интерполированной трёхмерной матрице на соответствие анализам в скважинах:
+% Checkout(mlog1,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+% Фильтрация
+V=filtracion(mlog1,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+% Подсчёт суммарной массы ртути
+% M=calculi_M(mlog1,V,dx,dy,dz,rho);
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Проверка значений в интерполированной трёхмерной матрице на соответствие анализам в скважинах:
+%  Checkout(mlog1,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if mlog1==3
+mlog2=menu('Use log for the interpolated data? Применить логарифмирование интерполированных данных ?',...
+   'log10 Десятичный логарифм',...
+   'log Натуральный логарифм','Do not use Не применять');
+if mlog2==1
+   ll=log10(V);ll(find(~isfinite(ll)))=NaN;V=ll;
+   Canaliz=log10(Canaliz);
+   disp('Применено логарифмирование интерполированных данных десятичным логарифмом');
+elseif mlog2==2
+   ll=log(V);ll(find(~isfinite(ll)))=NaN;V=ll;
+   Canaliz=log(Canaliz);
+   disp('Применено логарифмирование интерполированных данных натуральным логарифмом');
+elseif mlog2==3
+   V=V;%clear V;
+   disp('Логарифмирование интерполированных данных не применено');
+end
+clear ll;
+maxV=max(max(max(V)));
+disp(['Макс.значение в логар.интерпол.данных по объёму ' num2str(maxV)]);
+minV=min(min(min(V)));
+disp(['Мин.значение в логар.интерпол.данных по объёму ' num2str(minV)]);
+disp(' ');
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Подсчёт суммарной массы ртути
+M=calculi_M(mlog2,V,dx,dy,dz,rho);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Проверка значений в интерполированной трёхмерной матрице на соответствие анализам в скважинах:
+%    Checkout(mlog2,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+% Фильтрация
+V=filtracion(mlog2,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+% Подсчёт суммарной массы ртути
+M=calculi_M(mlog2,V,dx,dy,dz,rho);
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Проверка значений в интерполированной трёхмерной матрице на соответствие анализам в скважинах:
+%   Checkout(mlog2,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+end %if mlog1==3
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@  КОНЕЦ БЛОКА ФИЛЬТРАЦИИ И СГЛАЖИВАНИЯ @@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@  БЛОК ФОРМИРОВАНИЯ ПЕРЕМЕННОЙ  @@@@@@@@@@@@@@@@
+%@@@@@@@@@@@  ДЛЯ ФУНКЦИИ ТРЁХМЕРНОЙ ВИЗУАЛИЗАЦИИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Формирование переменных, запрашиваемых функцией viz3Dgeo
+ud.dx=dx;%clear dx;
+ud.dy=dy;%clear dy;
+ud.dz=dz;%clear dz;
+ud.x=x;  %clear x;
+ud.y=y;  %clear y;
+ud.z=z;  %clear z;
+%ud.zs=zs;%clear z;
+ud.Altday=Altday;
+ud.V=V;  %clear V;
+size(V)
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@  КОНЕЦ БЛОКА ФОРМИРОВАНИЯ ПЕРЕМЕННОЙ  @@@@@@@@@@@@@
+%@@@@@@@@@@@  ДЛЯ ФУНКЦИИ ТРЁХМЕРНОЙ ВИЗУАЛИЗАЦИИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+elseif mgeoelektr==4
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@ Обработка информации   @@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@  об электромагнитном ЕИЭМПЗ сигнале  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+M(1,:)=[];% Обрезание первой строки,содержащей шапку таблицы
+% x,y -координаты измерений ЕИЭМПЗ сигнала
+Xizm=M(:,1)*20;
+Yizm=M(:,2)*20;
+%Коэффициент перевода из юнитов сёрфера в метры
+k=1.729828;
+Xizm=Xizm/k;Yizm=Yizm/k;
+
+% Проверка координат измерений ЕИЭМПЗ сигнала на дублирование
+dupl=[]; ndupl=[]; ons1=ones(size(Xizm));
+for nizm=1:length(Xizm)
+   ons2=ons1;ons2(nizm)=0;
+   fdupl = find( Xizm(nizm)==Xizm & Yizm(nizm)==Yizm & ons2 );
+   if ~isempty(fdupl)
+      ndupl=[ndupl nizm];
+   end
+end
+if ~isempty(ndupl)
+   errordlg(['Координаты  измерений ЕИЭМПЗ сигнала №№ ' num2str(ndupl) ' дублируются'],'ERROR','CREATEMODE');
+end
+%Построение карты измерений ЕИЭМПЗ сигнала
+plot(Xizm,Yizm,'.');title('Карта  измерений ЕИЭМПЗ сигнала');
+
+xmax=floor(max(Xizm));   % xmax=ceil(max(Xizm));
+xmin=ceil(min(Xizm));   % xmin=floor(min(Xizm));
+
+ymax=floor(max(Yizm));   % ymax=ceil(max(Yizm));
+ymin=ceil(min(Yizm));   % ymin=floor(min(Yizm));
+
+Azim=M(:,3);
+Maxv=M(:,4);
+Minv=M(:,5);
+Gorv=M(:,6);
+
+% Минимальное расстояние между пикетами измерений ЕИЭМПЗ сигнала
+minr=[];
+for jj=1:length(Xizm)
+   Xd=Xizm;Xd(jj)=[];
+   Yd=Yizm;Yd(jj)=[];
+   r=sqrt((Xizm(jj)-Xd).^2+(Yizm(jj)-Yd).^2);
+   minr=min([r; minr]);
+end
+disp(['Минимальное расстояние между пикетами измерений ЕИЭМПЗ сигнала  = ' num2str(minr)]);
+dx=minr/2;dy=minr/2;
+% Шаг интерполяции
+mstep=menu('Step of interpolation Шаг интерполяции',...
+   ['Использовать по умолчанию dx=dy=половине расстояния между пикетами измерений ЕИЭМПЗ сигнала = ' num2str(dx) ' м'],...
+   'dx=dy=10 м',...
+   'dx=dy=25 м',...
+   'dx=dy=50 м',...
+   'Ввести с клавиатуры');
+if mstep==2,dx=10;dy=10;
+elseif mstep==3,dx=25;dy=25;
+elseif mstep==4,dx=50;dy=50;
+elseif mstep==5
+dxdy=inputdlg('Введите [dx dy],м =');dxdy=(str2num(dxdy{:}));
+dx=dxdy(1);dy=dxdy(2);
+end
+x=xmin:dx:xmax; %clear xmin xmax;
+y=ymin:dy:ymax; %clear ymin ymax;
+
+% lny=length(y);lnx=length(x);
+ 
+
+mmet=menu('Выберите метод интерполяции результатов измерений ЕИЭМПЗ сигнала.Рекомендуется v4',...
+   'linear','cubic','nearest','v4');
+switch mmet
+case 1, method3='linear';
+case 2, method3='cubic';
+case 3, method3='nearest';
+case 4, method3='v4';
+end
+
+% Построение поверхностей интерполяции результатов измерений ЕИЭМПЗ сигнала.
+gridMax = griddata(Xizm,Yizm,Maxv,x,y',method3);
+figure;surf(x,y,gridMax);title('Карта поверхности gridMax');xlabel('X');ylabel('Y');
+gridMin = griddata(Xizm,Yizm,Minv,x,y',method3);
+figure;surf(x,y,gridMin);title('Карта поверхности gridMin');xlabel('X');ylabel('Y');
+gridGor = griddata(Xizm,Yizm,Gorv,x,y',method3);
+figure;surf(x,y,gridGor);title('Карта поверхности gridGor');xlabel('X');ylabel('Y');
+gridAzim = griddata(Xizm,Yizm,Azim,x,y',method3);
+figure;surf(x,y,gridAzim);title('Карта поверхности gridAzim ');xlabel('X');ylabel('Y');
+[X,Y]=meshgrid(x,y);
+% Построение поверхностей интерполяции результатов измерений ЕИЭМПЗ сигнала.
+gridMax = exp(-0.00001*sqrt(X.^2+Y.^2));
+figure;surf(x,y,gridMax);title('Карта поверхности gridMax');xlabel('X');ylabel('Y');
+gridMin = exp(-0.00001*sqrt(X.^2+Y.^2)).*cos(X.^2+Y.^2);
+figure;surf(x,y,gridMin);title('Карта поверхности gridMin');xlabel('X');ylabel('Y');
+gridAzim = 90*sin(sqrt(X.^2+Y.^2));
+figure;surf(x,y,gridAzim);title('Карта поверхности gridAzim ');xlabel('X');ylabel('Y');
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@  БЛОК ФОРМИРОВАНИЯ ПЕРЕМЕННОЙ  @@@@@@@@@@@@@@@@
+%@@@@@@@@@@@  ДЛЯ ФУНКЦИИ ТРЁХМЕРНОЙ ВИЗУАЛИЗАЦИИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Формирование переменных, запрашиваемых функцией viz3Dgeo
+ude.dx=dx;%clear dx;
+ude.dy=dy;%clear dy;
+ude.x=x;%clear x;
+ude.y=y;%clear y;
+ude.Max=gridMax;
+ude.Min=gridMin;
+ude.Gor=gridGor;
+ude.Azim=gridAzim;
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@  КОНЕЦ БЛОКА ФОРМИРОВАНИЯ ПЕРЕМЕННОЙ  @@@@@@@@@@@@@
+%@@@@@@@@@@@  ДЛЯ ФУНКЦИИ ТРЁХМЕРНОЙ ВИЗУАЛИЗАЦИИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+end % if mgeoelektr
+end %if way==1
+
+elseif mwork==2 %& way==1
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@  БЛОК СОХРАНЕНИЯ ПЕРЕМЕННОЙ  @@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@  ДЛЯ ФУНКЦИИ ТРЁХМЕРНОЙ ВИЗУАЛИЗАЦИИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+if mgeoelektr==1, nam=' ud';elseif mgeoelektr==4, nam=' ude';end
+sav=menu('save in format:','wk1','mat','txt', 'grid4', 'raw', 'vtk');
+if sav==1 
+   pa1='*.wk1';
+elseif sav==2 
+   pa1='*.mat'; 
+elseif sav==3 
+   pa1='*.txt';
+elseif sav==4 
+   pa1='*.cub';
+elseif sav==5 
+   pa1='*.raw';
+elseif sav==6 
+   pa1='*.vtk';
+end;
+[FILENAME, PATHNAME] = uiputfile(pa1, ['save variable' nam ' in format: ' pa1]);
+cd(PATHNAME);
+if all(FILENAME~=0)
+if sav==1 
+ wk1write([PATHNAME FILENAME],ud);
+elseif sav==2
+   eval(['save ' [PATHNAME FILENAME] nam]);
+elseif sav==3  
+   dlmwrite([PATHNAME FILENAME],ud,' ');
+elseif sav==4  
+   SaveAs3DGrid([PATHNAME FILENAME],ud);
+elseif sav==5  
+   SaveAsRaw([PATHNAME FILENAME],ud);
+elseif sav==6  
+   SaveAsVtk([PATHNAME FILENAME],ud);
+end; 
+end;
+ud.FILENAME=FILENAME;
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@  КОНЕЦ БЛОКА СОХРАНЕНИЯ ПЕРЕМЕННОЙ  @@@@@@@@@@@@@@
+%@@@@@@@@@@@  ДЛЯ ФУНКЦИИ ТРЁХМЕРНОЙ ВИЗУАЛИЗАЦИИ  @@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+elseif mwork==3
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ud
+ude
+close all;
+viz3Dgeo([],[],ud,ude,18);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+end % if mwork==1
+end % while mwork<4
+
+
+
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@   Вспомагательные функции   @@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@   Функция фильтрации   @@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+function V=filtracion(mlog,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+
+mf=menu('Use filtration of 3D matrix? Использовать фильтрацию трёхмерной матрицы?',...
+   'методом vertical с пространственно независимыми долей фильтрации и фильтром',...
+   'методом volume с пространственно независимыми долей фильтрации и фильтром',...
+   'Доля фильтрац.пропорц.КОРНЮ ИЗ СУММЫ квадратов расстояний от точки до коорд.всех анализов методом volume.Фильтр простр.независим.',...
+   'Доля фильт.пропорц.ОБРАТН.ВЕЛИЧИНЕ ОТ КОРНЯ СУММЫ обратн.квадр.расст.от точки до коорд.всех анализ.методом volume.Фильтр простр.независим.',...
+   'Доля фильтрац.пропорц.СУММЕ квадратов расстояний от точки до коорд.всех анализов методом volume.Фильтр простр.независим.',...
+   'Доля фильт.пропорц.ОБРАТН.ВЕЛИЧИНЕ ОТ СУММЫ обратн.квадр.расст.от точки до коорд.всех анализ.методом volume.Фильтр простр.независим.',...
+   'Доля фильтрац.пропорц.КОРНЮ ИЗ СУММЫ квадратов расстояний от точки до коорд.всех анализов=[1-(вес кажд.элемента при фильтрации)]',...
+   'Доля фильт.пропорц.ОБРАТН.ВЕЛИЧИНЕ ОТ КОРНЯ СУММЫ обратн.квадр.расст.от точки до коорд.всех анализ.=[1-(вес кажд.элемента при фильтрации)]',...
+   'Использовать функцию smooth3 - Сглаживание встроенной в Матлаб функцией',...
+   'No Нет');
+if mf==1|mf==2
+   mcvf=menu('центральным значением фильтра =',...
+   'Использовать 0',...
+   'Использовать 1',...
+   'Использовать 2',...
+   'Ввести с клавиатуры');
+   switch mcvf
+   case 1, cvf=0;
+   case 2, cvf=1;
+   case 3, cvf=2;
+   case 4
+      cvf=inputdlg('Введите центральное значение фильтра');cvf=(str2num(cvf{:}));
+   end
+   switch mf
+   case 1, type='vertical';
+   case 2, type='volume';
+   end
+end
+if mf==1 |mf==2 |mf==3 | mf==4 | mf==5 | mf==6 | mf==7 | mf==8 
+   mstr=menu('Число слоёв фильтра =',...
+   'Использовать 1',...
+   'Использовать 2',...
+   'Использовать 3',...
+   'Ввести с клавиатуры');
+   switch mstr
+   case 1, nstr=1;
+   case 2, nstr=2;
+   case 3, nstr=3;
+   case 4
+      nstr=inputdlg('Введите центральное значение фильтра');
+      nstr=round(str2num(nstr{:}));
+   end
+   mcikl=menu('Число циклов фильтрации =',...
+   'Использовать 1',...
+   'Использовать 2',...
+   'Использовать 3',...
+   'Ввести с клавиатуры');
+   switch mcikl
+   case 1, ncikl=1;
+   case 2, ncikl=2;
+   case 3, ncikl=3;
+   case 4
+      nstr=inputdlg('Введите центральное значение фильтра');
+      nstr=round(str2num(nstr{:}));
+   end
+end
+%Формирование матрицы ALFA - пространственной зависимости доли фильтрации
+if mf==3 | mf==5
+   [X,Y,Z]=meshgrid(x,y,z);
+   ALFA=zeros(size(V));
+   hw=waitbar(0,'Подсчёт корня из суммы квадратов расстояний');
+   for ii=1:Nanaliz
+      ALFA=ALFA+(X-Xanaliz(ii)).^2+(Y-Yanaliz(ii)).^2+(Z-Zanaliz(ii)).^2;
+      waitbar(ii/Nanaliz,hw);
+   end
+   clear X Y Z;
+   close(hw);
+   maxALFA=max(max(max(ALFA)));
+   ALFA=sqrt(ALFA/maxALFA);
+end
+%Формирование матрицы ALFA - пространственной зависимости доли фильтрации
+if mf==4 | mf==8
+   [X,Y,Z]=meshgrid(x,y,z);
+   ALFA=zeros(size(V));
+   hw=waitbar(0,'Подсчёт обратной величины от корня суммы обратных квадратов расстояний');
+   for ii=1:Nanaliz
+      ALFA=ALFA+1./((X-Xanaliz(ii)).^2+(Y-Yanaliz(ii)).^2+(Z-Zanaliz(ii)).^2);
+      waitbar(ii/Nanaliz,hw);
+   end
+   clear X Y Z;
+   close(hw);
+   ALFA=1./ALFA;
+   maxALFA=max(max(max(ALFA)));
+   ALFA=sqrt(ALFA/maxALFA);
+   minALFA=min(min(min(ALFA)));
+end
+%Формирование матрицы ALFA - пространственной зависимости доли фильтрации
+if mf==5
+   [X,Y,Z]=meshgrid(x,y,z);
+   ALFA=zeros(size(V));
+   hw=waitbar(0,'Подсчёт суммы квадратов расстояний');
+   for ii=1:Nanaliz
+      ALFA=ALFA+(X-Xanaliz(ii)).^2+(Y-Yanaliz(ii)).^2+(Z-Zanaliz(ii)).^2;
+      waitbar(ii/Nanaliz,hw);
+   end
+   clear X Y Z;
+   close(hw);
+   maxALFA=max(max(max(ALFA)));
+   ALFA=(ALFA/maxALFA);
+end
+%Формирование матрицы ALFA - пространственной зависимости доли фильтрации
+if mf==6
+   [X,Y,Z]=meshgrid(x,y,z);
+   ALFA=zeros(size(V));
+   hw=waitbar(0,'Подсчёт обратной величины от суммы обратных квадратов расстояний');
+   for ii=1:Nanaliz
+      ALFA=ALFA+1./((X-Xanaliz(ii)).^2+(Y-Yanaliz(ii)).^2+(Z-Zanaliz(ii)).^2);
+      waitbar(ii/Nanaliz,hw);
+   end
+   clear X Y Z;
+   close(hw);
+   ALFA=1./ALFA;
+   maxALFA=max(max(max(ALFA)));
+   ALFA=(ALFA/maxALFA);
+   minALFA=min(min(min(ALFA)));
+end
+%fff=figure;plot(sort(ALFA(:)));title('plot ALFA');
+if mf==3 | mf==4 | mf==5 | mf==6 
+   %Заполнение ячеек матрицы V,ближ.к эксперимент.точкам,фактич.значениями в этих точках
+   % и заполнение аналогичных ячеек матрицы ALFA нулями 
+   %для защиты этих значений от изменений при фильтрации
+   mreplaceV=menu('Заполнить ячееки матрицы V, ближайшие к экспериментальным точкам,фактич.значениями в этих точках','Да','Нет');
+   mreplaceALFA=menu('Заполнить ячееки матрицы ALFA, ближайшие к экспериментальным точкам,фактич.значениями в этих точках','Да','Нет');
+   
+   hw=waitbar(0,'Заполнение ячеек матрицы ALFA, ближ.к эксперимент.точкам нулями для защиты от изменений фактич.значений в этих точках');
+   for ii=1:Nanaliz
+      nxanaliz=find(abs(x-Xanaliz(ii))<=.5*dx);
+      nyanaliz=find(abs(y-Yanaliz(ii))<=.5*dy);
+      nzanaliz=find(abs(z-Zanaliz(ii))<=.5*dz);
+      for yj=1:length(nyanaliz)
+         for xj=1:length(nxanaliz)
+            for zj=1:length(nzanaliz)
+               if mreplaceV==1,V(nyanaliz(yj),nxanaliz(xj),nzanaliz(zj))=Canaliz(ii);end;
+               if mreplaceALFA==1,ALFA(nyanaliz(yj),nxanaliz(xj),nzanaliz(zj))=0;end;
+            end
+         end
+      end
+      waitbar(ii/Nanaliz,hw);
+   end
+   close(hw);
+   disp(['Число неконечных элементов в матрице ALFA = ' num2str(length(find(~isfinite(ALFA))))]);
+   fff=figure;plot(sort(ALFA(:)));title('plot ALFA')
+end
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Проверка значений в матрице V на соответствие анализам в скважинах:
+%  Checkout(mlog,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+if mf==1|mf==2
+   V=Laplase_filter3(V,cvf,nstr,ncikl,type);
+   disp(['Использ.фильтрац.методом ' type ' c центр.знач.фильтра = ' num2str(cvf)]);
+   maxV=max(max(max(V)));
+   disp(['Макс.значение в фильтр.данных по объёму ' num2str(maxV)]);
+   minV=min(min(min(V)));
+   disp(['Мин.значение в фильтр.данных по объёму ' num2str(minV)]);
+   disp(' ');
+end
+
+
+if mf==3 | mf==4 | mf==5 | mf==6
+   % Фильтрац.методом ''volume'' с матрично заданной (ALFA) долей фильтрации
+   V=Lapl_part_filter3(V,ALFA,nstr,ncikl,'volume');
+   clear ALFA;
+   disp(['Использ.фильтрац.методом ''volume'' с матрично заданной долей фильтрации']);
+   maxV=max(max(max(V)));
+   disp(['Макс.значение в фильтр.данных по объёму ' num2str(maxV)]);
+   minV=min(min(min(V)));
+   disp(['Мин.значение в фильтр.данных по объёму ' num2str(minV)]);
+   disp(' ');
+end
+
+if mf==7 | mf==8
+   %  Фильтрация матрицы V весовым фильтром с использованием весовой матрицы ALFA
+   %   nstr -  число слоёв фильтра 
+   %   q    -  показатель степени, корректирующий веса соседних элементов при фильтрации 
+   % если q больше 1 то влияние на фильтр точек, удалённых от экспериментальных, уменьшается
+   % ncikl - количество циклов фильтрации
+   q=1;
+   V=Weight_filter3(V,ALFA,nstr,q,ncikl);
+   disp(['Использ.фильтрац.методом: Доля фильт.-обратн.велич. от корня суммы обратн.квадратов расстояний = 1 - (вес каждого элемента при фильтрации)']);
+   maxV=max(max(max(V)));
+   disp(['Макс.значение в фильтр.данных по объёму ' num2str(maxV)]);
+   minV=min(min(min(V)));
+   disp(['Мин.значение в фильтр.данных по объёму ' num2str(minV)]);
+   disp(' ');
+end
+if mf==9
+   mtypefiltr=menu('Тип фильтра:','''gaussian''','''box''' );
+   switch mtypefiltr
+   case 1, filt='gaussian';
+   case 2, filt='box';
+   end
+   msz=menu('Размер фильтра:','3*3*3','4*4*1','5*5*5','6*6*6','7*7*7','8*8*8');
+   switch msz
+   case 1, sz=3;
+   case 2, sz=4;
+   case 3, sz=5;
+   case 4, sz=6;
+   case 5, sz=7;
+   case 6, sz=8;
+   end
+   % Сглаживание встроенной в Матлаб функцией
+   V = smooth3(V, filt, sz);
+end
+
+if mf==10
+   disp(['Фильтрация не использована']);disp(' ');
+end
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@  Конец Функции фильтрации   @@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@   Функция подсчёта суммарной массы   @@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+function M=calculi_M(mlog,V,dx,dy,dz,rho)
+% Подсчёт суммарной массы ртути
+if  mlog==1
+   M=Int3(10.^V,dx,dy,dz,'withoutNaN')*rho*0.01;
+elseif  mlog==2
+   M=Int3(exp(V),dx,dy,dz,'withoutNaN')*rho*0.01;
+elseif  mlog==3
+   M=Int3(V,dx,dy,dz,'withoutNaN')*rho*0.01;
+end
+disp(['Суммарная масса ртути ' num2str(M) ' кг']);
+disp(' ');
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@  Конец Функции подсчёта суммарной массы   @@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@   Функция Проверки значений   @@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+function Checkout(mlog,V,x,y,z,dx,dy,dz,Xanaliz,Yanaliz,Zanaliz,Canaliz,Nanaliz)
+% Проверка значений в интерполированной трёхмерной матрице на соответствие анализам в скважинах:
+dd=.5;
+for ii=1:Nanaliz
+   nxanaliz=find(abs(x-Xanaliz(ii))<=dd*dx);
+   nyanaliz=find(abs(y-Yanaliz(ii))<=dd*dy);
+   nzanaliz=find(abs(z-Zanaliz(ii))<=dd*dz);
+   CV=[];
+   for yj=1:length(nyanaliz)
+      for xj=1:length(nxanaliz)
+         for zj=1:length(nzanaliz)
+            CV=[CV V(nyanaliz(yj),nxanaliz(xj),nzanaliz(zj))];
+         end
+      end
+   end
+   if mlog==1
+      DeltaC(ii)=min((10.^CV)-(10.^Canaliz(ii)));
+   elseif mlog==2
+      DeltaC(ii)=min(exp(CV)-exp(Canaliz(ii)));
+   elseif mlog==3
+      DeltaC(ii)=min(CV-Canaliz(ii));
+   end
+end
+sqe=DeltaC(find(isfinite(DeltaC)));
+nnan=length(find(~isfinite(DeltaC)));
+disp(['Сумма квадратов отклонений = ' num2str(sqe*sqe') ]);
+disp(['Число случаев замены данных анализов на NaN = ' num2str(nnan) ]);
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@  Конец Функции Проверки значений   @@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

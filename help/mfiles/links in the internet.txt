@@ -1,0 +1,10 @@
+Исходники.Ру - Портал программиста 
+Тема: Изолинии на регулярной сетке 
+http://www.forum.ishodniki.ru/index.php?topic=1721.msg5123
+
+Изоповерхности (isosurfases) в 3D, Поверхности одинакового уровня в 3D
+http://forum.sources.ru/index.php?showtopic=126477
+
+Геоинформационные системы 
+Тема: Построение линий водоразделов 
+http://www.dataplus.ru/forum/forum_posts.asp?TID=2771&PN=2

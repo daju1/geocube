@@ -1,0 +1,73 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>meuse</s-topic>
+</s-topics>
+
+<s-title>
+Meuse river data set
+</s-title>
+
+<s-description>
+This data set gives locations and top soil heavy metal concentrations
+(ppm), along with a number of soil and landscape variables, collected in
+a flood plain of the river Meuse, near the village Stein. Heavy metal
+concentrations are bulk sampled from an area of approximately 15 m
+x 15 m.
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+data(meuse)
+</s-old-style-usage>
+</s-usage>
+
+<s-section name="FORMAT">
+This data frame contains the following columns:
+<descrip>
+<tag/Sample/original sample number
+<tag/x/a numeric vector; x-coordinate (m)
+in RDM (Dutch topographical map coordinates) 
+<tag/y/a numeric vector; y-coordinate (m)
+in RDM (Dutch topographical map coordinates)
+<tag/cadmium/topsoil cadmium concentration, ppm.; note that zero cadmium
+values in the original data set have been shifted to 0.2 (half the lowest 
+non-zero value) 
+<tag/copper/topsoil copper concentration, ppm. 
+<tag/lead/topsoil lead concentration, ppm. 
+<tag/zinc/topsoil zinc concentration, ppm.  
+<tag/elev/relative elevation
+<tag/dist/distance to river Meuse (m)
+<tag/om/organic matter, as percentage 
+<tag/ffreq/flooding frequency class
+<tag/soil/soil type
+<tag/lime/lime class
+<tag/landuse/landuse class
+</descrip>
+
+</s-section>
+
+<s-section name="AUTHOR(S)">
+
+</s-section>
+
+<s-section name="REFERENCES">
+P.A. Burrough, R.A. McDonnell, 1998. Principles of Geographical Information
+Systems. Oxford University Press.
+<p>
+<url url ="http:/www.gstat.org/">
+</s-section>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+summary(meuse)
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

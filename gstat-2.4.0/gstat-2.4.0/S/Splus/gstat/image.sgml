@@ -1,0 +1,108 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>image</s-topic>
+</s-topics>
+
+<s-title>
+Image Gridded Coordinates in Data Frame
+</s-title>
+
+<s-description>
+Image gridded data, held in a data frame, keeping the
+right aspect ratio for axes, and the right cell shape
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+image.data.frame(x, zcol = 3, xcol = 1, ycol = 2, ...)
+xyz2img(xyz, zcol = 3, xcol = 1, ycol = 2)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="x">
+data frame (or matrix) with x-coordinate,
+y-coordinate, and z-coordinate in its columns </s-arg>
+<s-arg name="zcol">
+column number of z-variable </s-arg>
+<s-arg name="xcol">
+column number of x-coordinate </s-arg>
+<s-arg name="ycol">
+column number of y-coordinate </s-arg>
+<s-arg name="...">
+arguments, passed to image.default </s-arg>
+<s-arg name="xyz">
+same as <s-expression>x</s-expression></s-arg>
+</s-args>
+
+<s-value>
+<s-function name="image.data.frame">image.data.frame</s-function> plots an image from gridded data, organized
+in arbritrary order, in a data frame. It uses <s-function name="xyz2img">xyz2img</s-function> and
+<s-function name="image.default">image.default</s-function> for this. <s-function name="xyz2img">xyz2img</s-function> tries to make an equal
+aspect ratio.
+<p>
+<s-function name="xyz2img">xyz2img</s-function> returns a list with components: <s-expression>z</s-expression>, a matrix
+containing the z-values; <s-expression>x</s-expression>, the increasing coordinates of the
+rows of <s-expression>z</s-expression>; <s-expression>y</s-expression>, the increasing coordinates of the columns
+of <s-expression>z</s-expression>. This list is suitable input to <s-function name="image.default">image.default</s-function>.
+</s-value>
+
+<s-section name="NOTE">
+It is hard (if not impossible) to get exactly right cell shapes (e.g.,
+square for a square grid) without altering the size of the plotting
+region, but this function tries hard to do so by extending the image
+to plot in either x- or y-direction.  The larger the grid, the better
+the approximation. Geographically correct images can be obtained by
+modifiying <s-expression>par("pin")</s-expression>. Read the examples, image a 2 x 2 grid,
+and play with <s-expression>par("pin")</s-expression> if you want to learn more about this.
+<p>
+It seems (R &gt;= 1.6.1) that resizing the plotting window destroys the
+aspect ratio, unless par(pin) has been set explicitly.
+<p>
+I wrote this function before I found out about <s-expression>levelplot</s-expression>, a
+Lattice/Trellis function that lets you control the aspect ratio by an
+<s-expression>aspect</s-expression> argument. It automatically draws a legend, and therefore
+I now prefer it over <s-expression>image</s-expression>. Plotting points on a levelplots
+is probably done with providing a panel function and using <s-expression>lpoints</s-expression>.
+</s-section>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+
+</s-section>
+
+<s-see>
+
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+data(meuse.grid)
+g &lt;- gstat(formula=log(zinc)~1,locations=~x+y,data=meuse,model=vgm(1,"Exp",300))
+x &lt;- predict(g, meuse.grid)
+image(x, 4, main="kriging variance and data points")
+points(meuse$x, meuse$y, pch = "+")
+# non-square cell test:
+image(x[((x$y - 20) %% 80) == 0,], main = "40 x 80 cells")
+image(x[((x$x - 20) %% 80) == 0,], main = "80 x 40 cells")
+# the following works for square cells only:
+oldpin &lt;- par("pin")
+ratio &lt;- length(unique(x$x))/length(unique(x$y))
+par(pin = c(oldpin[2]*ratio,oldpin[2]))
+image(x, main="Exactly square cells, using par(pin)")
+par(pin = oldpin)
+levelplot(var1.var~x+y, x, aspect = mapasp(x), main = "kriging variance")
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

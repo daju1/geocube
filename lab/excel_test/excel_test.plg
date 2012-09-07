@@ -1,0 +1,183 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: excel_test - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP1C5.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_AFXDLL" /FR"Debug/" /Fp"Debug/excel_test.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\C++\Lag\Win32\Win32_90.16\lab\excel_test\MyDialog.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP1C5.tmp" 
+Creating temporary file "C:\DOCUME~1\User\LOCALS~1\Temp\RSP1C6.tmp" with contents
+[
+excel_connect.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/excel_test.pdb" /debug /machine:I386 /out:"Debug/excel_test.exe" /pdbtype:sept /libpath:"../../lib" 
+".\Debug\excel.obj"
+".\Debug\excel_test.obj"
+".\Debug\MyDialog.obj"
+".\Debug\segmentinexcel.obj"
+".\Debug\StdAfx.obj"
+".\Debug\excel_test.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\User\LOCALS~1\Temp\RSP1C6.tmp"
+<h3>Output Window</h3>
+Compiling...
+MyDialog.cpp
+Linking...
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::GetApplication(void)" (?GetApplication@Shapes10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shapes10::GetCreator(void)" (?GetCreator@Shapes10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::GetParent(void)" (?GetParent@Shapes10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shapes10::GetCount(void)" (?GetCount@Shapes10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::Item(struct tagVARIANT const &)" (?Item@Shapes10@@QAEPAUIDispatch@@ABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::_Default(struct tagVARIANT const &)" (?_Default@Shapes10@@QAEPAUIDispatch@@ABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IUnknown * __thiscall Shapes10::Get_NewEnum(void)" (?Get_NewEnum@Shapes10@@QAEPAUIUnknown@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddCallout(long,float,float,float,float)" (?AddCallout@Shapes10@@QAEPAUIDispatch@@JMMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddConnector(long,float,float,float,float)" (?AddConnector@Shapes10@@QAEPAUIDispatch@@JMMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddCurve(struct tagVARIANT const &)" (?AddCurve@Shapes10@@QAEPAUIDispatch@@ABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddLabel(long,float,float,float,float)" (?AddLabel@Shapes10@@QAEPAUIDispatch@@JMMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddLine(float,float,float,float)" (?AddLine@Shapes10@@QAEPAUIDispatch@@MMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddPicture(char const *,long,long,float,float,float,float)" (?AddPicture@Shapes10@@QAEPAUIDispatch@@PBDJJMMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddPolyline(struct tagVARIANT const &)" (?AddPolyline@Shapes10@@QAEPAUIDispatch@@ABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddShape(long,float,float,float,float)" (?AddShape@Shapes10@@QAEPAUIDispatch@@JMMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddTextEffect(long,char const *,char const *,float,long,long,float,float)" (?AddTextEffect@Shapes10@@QAEPAUIDispatch@@JPBD0MJJMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddTextbox(long,float,float,float,float)" (?AddTextbox@Shapes10@@QAEPAUIDispatch@@JMMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::BuildFreeform(long,float,float)" (?BuildFreeform@Shapes10@@QAEPAUIDispatch@@JMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::GetRange(struct tagVARIANT const &)" (?GetRange@Shapes10@@QAEPAUIDispatch@@ABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shapes10::SelectAll(void)" (?SelectAll@Shapes10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddFormControl(long,long,long,long,long)" (?AddFormControl@Shapes10@@QAEPAUIDispatch@@JJJJJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddOLEObject(struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &,struct tagVARIANT const &)" (?AddOLEObject@Shapes10@@QAEPAUIDispatch@@ABUtagVARIANT@@0000000000@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shapes10::AddDiagram(long,float,float,float,float)" (?AddDiagram@Shapes10@@QAEPAUIDispatch@@JMMMM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetApplication(void)" (?GetApplication@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetCreator(void)" (?GetCreator@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetParent(void)" (?GetParent@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::Apply(void)" (?Apply@Shape10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::Delete(void)" (?Delete@Shape10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::Duplicate(void)" (?Duplicate@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::Flip(long)" (?Flip@Shape10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::IncrementLeft(float)" (?IncrementLeft@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::IncrementRotation(float)" (?IncrementRotation@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::IncrementTop(float)" (?IncrementTop@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::PickUp(void)" (?PickUp@Shape10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::RerouteConnections(void)" (?RerouteConnections@Shape10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::ScaleHeight(float,long,struct tagVARIANT const &)" (?ScaleHeight@Shape10@@QAEXMJABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::ScaleWidth(float,long,struct tagVARIANT const &)" (?ScaleWidth@Shape10@@QAEXMJABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::Select(struct tagVARIANT const &)" (?Select@Shape10@@QAEXABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetShapesDefaultProperties(void)" (?SetShapesDefaultProperties@Shape10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::Ungroup(void)" (?Ungroup@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::ZOrder(long)" (?ZOrder@Shape10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetAdjustments(void)" (?GetAdjustments@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetTextFrame(void)" (?GetTextFrame@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetAutoShapeType(void)" (?GetAutoShapeType@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetAutoShapeType(long)" (?SetAutoShapeType@Shape10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetCallout(void)" (?GetCallout@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetConnectionSiteCount(void)" (?GetConnectionSiteCount@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetConnector(void)" (?GetConnector@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetConnectorFormat(void)" (?GetConnectorFormat@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetFill(void)" (?GetFill@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetGroupItems(void)" (?GetGroupItems@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: float __thiscall Shape10::GetHeight(void)" (?GetHeight@Shape10@@QAEMXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetHeight(float)" (?SetHeight@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetHorizontalFlip(void)" (?GetHorizontalFlip@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: float __thiscall Shape10::GetLeft(void)" (?GetLeft@Shape10@@QAEMXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetLeft(float)" (?SetLeft@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetLine(void)" (?GetLine@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetLockAspectRatio(void)" (?GetLockAspectRatio@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetLockAspectRatio(long)" (?SetLockAspectRatio@Shape10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetName(char const *)" (?SetName@Shape10@@QAEXPBD@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetNodes(void)" (?GetNodes@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: float __thiscall Shape10::GetRotation(void)" (?GetRotation@Shape10@@QAEMXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetRotation(float)" (?SetRotation@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetPictureFormat(void)" (?GetPictureFormat@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetShadow(void)" (?GetShadow@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetTextEffect(void)" (?GetTextEffect@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetThreeD(void)" (?GetThreeD@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: float __thiscall Shape10::GetTop(void)" (?GetTop@Shape10@@QAEMXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetTop(float)" (?SetTop@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetType(void)" (?GetType@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetVerticalFlip(void)" (?GetVerticalFlip@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct tagVARIANT __thiscall Shape10::GetVertices(void)" (?GetVertices@Shape10@@QAE?AUtagVARIANT@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetVisible(void)" (?GetVisible@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetVisible(long)" (?SetVisible@Shape10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: float __thiscall Shape10::GetWidth(void)" (?GetWidth@Shape10@@QAEMXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetWidth(float)" (?SetWidth@Shape10@@QAEXM@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetZOrderPosition(void)" (?GetZOrderPosition@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetHyperlink(void)" (?GetHyperlink@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetBlackWhiteMode(void)" (?GetBlackWhiteMode@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetBlackWhiteMode(long)" (?SetBlackWhiteMode@Shape10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetOnAction(char const *)" (?SetOnAction@Shape10@@QAEXPBD@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: int __thiscall Shape10::GetLocked(void)" (?GetLocked@Shape10@@QAEHXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetLocked(int)" (?SetLocked@Shape10@@QAEXH@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetTopLeftCell(void)" (?GetTopLeftCell@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetBottomRightCell(void)" (?GetBottomRightCell@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetPlacement(void)" (?GetPlacement@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetPlacement(long)" (?SetPlacement@Shape10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::Copy(void)" (?Copy@Shape10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::Cut(void)" (?Cut@Shape10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::CopyPicture(struct tagVARIANT const &,struct tagVARIANT const &)" (?CopyPicture@Shape10@@QAEXABUtagVARIANT@@0@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetControlFormat(void)" (?GetControlFormat@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetLinkFormat(void)" (?GetLinkFormat@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetOLEFormat(void)" (?GetOLEFormat@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetFormControlType(void)" (?GetFormControlType@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Shape10::SetAlternativeText(char const *)" (?SetAlternativeText@Shape10@@QAEXPBD@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetScript(void)" (?GetScript@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetDiagramNode(void)" (?GetDiagramNode@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetHasDiagramNode(void)" (?GetHasDiagramNode@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetDiagram(void)" (?GetDiagram@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetHasDiagram(void)" (?GetHasDiagram@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetChild(void)" (?GetChild@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Shape10::GetParentGroup(void)" (?GetParentGroup@Shape10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Shape10::GetId(void)" (?GetId@Shape10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Diagram10::GetApplication(void)" (?GetApplication@Diagram10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Diagram10::GetCreator(void)" (?GetCreator@Diagram10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Diagram10::GetParent(void)" (?GetParent@Diagram10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall Diagram10::GetNodes(void)" (?GetNodes@Diagram10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Diagram10::GetType(void)" (?GetType@Diagram10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Diagram10::GetAutoLayout(void)" (?GetAutoLayout@Diagram10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Diagram10::SetAutoLayout(long)" (?SetAutoLayout@Diagram10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Diagram10::GetReverse(void)" (?GetReverse@Diagram10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Diagram10::SetReverse(long)" (?SetReverse@Diagram10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall Diagram10::GetAutoFormat(void)" (?GetAutoFormat@Diagram10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Diagram10::SetAutoFormat(long)" (?SetAutoFormat@Diagram10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall Diagram10::Convert(long)" (?Convert@Diagram10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNodes10::GetApplication(void)" (?GetApplication@DiagramNodes10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall DiagramNodes10::GetCreator(void)" (?GetCreator@DiagramNodes10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IUnknown * __thiscall DiagramNodes10::Get_NewEnum(void)" (?Get_NewEnum@DiagramNodes10@@QAEPAUIUnknown@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNodes10::Item(struct tagVARIANT const &)" (?Item@DiagramNodes10@@QAEPAUIDispatch@@ABUtagVARIANT@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall DiagramNodes10::SelectAll(void)" (?SelectAll@DiagramNodes10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNodes10::GetParent(void)" (?GetParent@DiagramNodes10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall DiagramNodes10::GetCount(void)" (?GetCount@DiagramNodes10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::GetApplication(void)" (?GetApplication@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall DiagramNode10::GetCreator(void)" (?GetCreator@DiagramNode10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::AddNode(long,long)" (?AddNode@DiagramNode10@@QAEPAUIDispatch@@JJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall DiagramNode10::Delete(void)" (?Delete@DiagramNode10@@QAEXXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall DiagramNode10::MoveNode(struct IDispatch *,long)" (?MoveNode@DiagramNode10@@QAEXPAUIDispatch@@J@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall DiagramNode10::ReplaceNode(struct IDispatch *)" (?ReplaceNode@DiagramNode10@@QAEXPAUIDispatch@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall DiagramNode10::SwapNode(struct IDispatch *,int)" (?SwapNode@DiagramNode10@@QAEXPAUIDispatch@@H@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::CloneNode(int,struct IDispatch *,long)" (?CloneNode@DiagramNode10@@QAEPAUIDispatch@@HPAU2@J@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall DiagramNode10::TransferChildren(struct IDispatch *)" (?TransferChildren@DiagramNode10@@QAEXPAUIDispatch@@@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::NextNode(void)" (?NextNode@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::PrevNode(void)" (?PrevNode@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::GetParent(void)" (?GetParent@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::GetChildren(void)" (?GetChildren@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::GetShape(void)" (?GetShape@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::GetRoot(void)" (?GetRoot@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::GetDiagram(void)" (?GetDiagram@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: long __thiscall DiagramNode10::GetLayout(void)" (?GetLayout@DiagramNode10@@QAEJXZ) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: void __thiscall DiagramNode10::SetLayout(long)" (?SetLayout@DiagramNode10@@QAEXJ@Z) already defined in excel.obj
+excel_connect.lib(excel.obj) : error LNK2005: "public: struct IDispatch * __thiscall DiagramNode10::GetTextShape(void)" (?GetTextShape@DiagramNode10@@QAEPAUIDispatch@@XZ) already defined in excel.obj
+LINK : fatal error LNK1104: cannot open file "mfc71d.lib"
+Error executing link.exe.
+Creating command line "bscmake.exe /nologo /o"Debug/excel_test.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\excel.sbr" ".\Debug\excel_test.sbr" ".\Debug\MyDialog.sbr" ".\Debug\segmentinexcel.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+excel_test.exe - 142 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

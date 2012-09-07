@@ -1,0 +1,93 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>vgm</s-topic>
+</s-topics>
+
+<s-title>
+Generate, or Add to Variogram Model
+</s-title>
+
+<s-description>
+Generates a variogram model, or adds to an existing model. 
+<s-expression>print.variogram.model</s-expression> prints the essence of a variogram  model.
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+vgm(psill, model, range, nugget, add.to, anis, kappa = 0.5)
+print.variogram.model(x, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="psill">
+(partial) sill of the variogram model component </s-arg>
+<s-arg name="model">
+model type, e.g. "Exp", "Sph", "Gau", "Mat". Calling vgm() without
+a model argument returns the list with available models. </s-arg>
+<s-arg name="range">
+range of the variogram model component </s-arg>
+<s-arg name="kappa">
+smoothness parameter for the Matern class of variogram 
+models </s-arg>
+<s-arg name="nugget">
+nugget component of the variogram (this basically adds a nugget
+compontent to the model) </s-arg>
+<s-arg name="add.to">
+a variogram model to which we want to add a component </s-arg>
+<s-arg name="anis">
+anisotropy parameters: </s-arg>
+<s-arg name="x">
+a variogram model to print </s-arg>
+<s-arg name="...">
+arguments that will be passed to <s-expression>print</s-expression>, e.g. <s-expression>digits</s-expression>
+(see examples) </s-arg>
+</s-args>
+
+<s-value>
+an object of class variogram.model, which extends data.frame Calling 
+<s-expression>vgm</s-expression> without a model argument returns the list with available models.
+</s-value>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+
+</s-section>
+
+<s-see>
+<s-function name="print.variogram.model">print.variogram.model</s-function>, 
+<s-function name="fit.variogram">fit.variogram</s-function>, 
+<s-function name="variogram.line">variogram.line</s-function>, 
+link{variogram} for the sample variogram.
+</s-see>
+
+<s-examples>
+<s-example type = text>
+vgm(10, "Exp", 300)
+x &lt;- vgm(10, "Exp", 300)
+vgm(10, "Nug", 0)
+vgm(10, "Exp", 300, 4.5)
+vgm(10, "Mat", 300, 4.5, kappa = 0.7)
+vgm( 5, "Exp", 300, add.to = vgm(5, "Exp", 60, nugget = 2.5))
+vgm(10, "Exp", 300, anis = c(30, 0.5))
+vgm(10, "Exp", 300, anis = c(30, 10, 0, 0.5, 0.3))
+# Matern variogram model:
+vgm(1, "Mat", 1, kappa=.3)
+x &lt;- vgm(0.39527463, "Sph", 953.8942, nugget = 0.06105141)
+x
+print(x, digits = 3);
+# to see all components, do
+print.data.frame(x)
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>

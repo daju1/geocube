@@ -1,0 +1,13 @@
+REGEDIT
+; This .REG file may be used by your SETUP program.
+;   If a SETUP program is not available, the entries below will be
+;   registered in your InitInstance automatically with a call to
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+
+HKEY_CLASSES_ROOT\Consumebiblio.Application = Consumebiblio Application
+HKEY_CLASSES_ROOT\Consumebiblio.Application\CLSID = {486A1B83-0D94-11D2-8CAA-DF2C53524146}
+
+HKEY_CLASSES_ROOT\CLSID\{486A1B83-0D94-11D2-8CAA-DF2C53524146} = Consumebiblio Application
+HKEY_CLASSES_ROOT\CLSID\{486A1B83-0D94-11D2-8CAA-DF2C53524146}\ProgId = Consumebiblio.Application
+HKEY_CLASSES_ROOT\CLSID\{486A1B83-0D94-11D2-8CAA-DF2C53524146}\LocalServer32 = CONSUMEBIBLIO.EXE

@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		{486A1B97-0D94-11D2-8CAA-DF2C53524146} = s 'Consumebiblio'
+		'Consumebiblio.EXE'
+		{
+			val AppID = s {486A1B97-0D94-11D2-8CAA-DF2C53524146}
+		}
+	}
+}

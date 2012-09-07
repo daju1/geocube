@@ -1,0 +1,96 @@
+<!doctype s-function-doc system "s-function-doc.dtd" [
+<!entity % S-OLD "INCLUDE">
+]
+>
+<s-function-doc>
+<s-topics>
+  <s-topic>plot.variogram</s-topic>
+</s-topics>
+
+<s-title>
+Plot a Sample Variogram
+</s-title>
+
+<s-description>
+Creates a variogram plot
+</s-description>
+
+<s-usage>
+<s-old-style-usage>
+plot.variogram(x, ylim, xlim, xlab = "distance", ylab = "semivariance", 
+    multipanel = TRUE, plot.numbers = FALSE, ids = x$id, ...)
+</s-old-style-usage>
+</s-usage>
+
+<s-args>
+<s-arg name="x">
+object of class "variogram", obtained from the function 
+<s-function name="variogram">variogram</s-function>, possibly containing directional or cross variograms </s-arg>
+<s-arg name="ylim">
+numeric vector of length 2, limits of the y-axis</s-arg>
+<s-arg name="xlim">
+numeric vector of length 2, limits of the x-axis</s-arg>
+<s-arg name="xlab">
+x-axis label </s-arg>
+<s-arg name="ylab">
+y-axis label </s-arg>
+<s-arg name="model">
+in case of a single variogram: a variogram model, as 
+obtained from <s-function name="vgm">vgm</s-function> or <s-function name="fit.variogram">fit.variogram</s-function>, to be drawn as 
+a line in the variogram plot; in case of a set of variograms and
+cross variograms: a list with variogram models </s-arg>
+<s-arg name="multipanel">
+logical; if TRUE, directional variograms are plotted in
+different panels, if FALSE, directional variograms are plotted in the same
+graph, using color, colored lines and symbols to distinguish them </s-arg>
+<s-arg name="plot.numbers">
+logical; if TRUE, plot number of point pairs next to
+each plotted semivariance symbol </s-arg>
+<s-arg name="scales">
+optional argument that will be passed to <s-expression>xyplot</s-expression> in
+case of the plotting of variograms and cross variograms </s-arg>
+<s-arg name="ids">
+ids of the data variables and variable pairs </s-arg>
+<s-arg name="...">
+any arguments that will be passed to the panel plotting functions
+</s-arg>
+</s-args>
+
+<s-value>
+returns (or plots) the variogram plot
+</s-value>
+
+<s-section name="AUTHOR(S)">
+Edzer J. Pebesma
+</s-section>
+
+<s-section name="REFERENCES">
+<url url ="http://www.gstat.org">
+</s-section>
+
+<s-see>
+<s-function name="variogram">variogram</s-function>,
+<s-function name="fit.variogram">fit.variogram</s-function>, 
+<s-function name="vgm">vgm</s-function>
+<s-function name="variogram.line">variogram.line</s-function>,
+</s-see>
+
+<s-examples>
+<s-example type = text>
+data(meuse)
+vgm1 &lt;- variogram(log(zinc)~1, ~x+y, meuse)
+plot(vgm1)
+model.1 &lt;- fit.variogram(vgm1,vgm(1,"Sph",300,1))
+plot(vgm1, model=model.1)
+plot(vgm1, plot.numbers = TRUE, pch = "+")
+vgm2 &lt;- variogram(log(zinc)~1, ~x+y, meuse, alpha=c(0,45,90,135))
+plot(vgm2)
+# the following is only to show that directional models also work:
+model.2 &lt;- vgm(.59,"Sph",926,.06,anis=c(0,0.3))
+plot(vgm2, model=model.2)
+</s-example>
+</s-examples>
+<s-docclass>
+function
+</s-docclass>
+</s-function-doc>
