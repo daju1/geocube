@@ -2351,6 +2351,9 @@ long CLabDoc::AddNewRozriz(long ID_OBJ, CString NOMER, CString fn_dxf,
 			long NPP = i + 1;
 			long ID_KT = (*it);
 
+			if (ID_KT < 0) 
+				continue;
+
 			if (dxf_x_defined && v_xProfile && i < v_xProfile->size())
 			{
 				double dxf_x = v_xProfile->operator [](i);
