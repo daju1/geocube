@@ -6118,7 +6118,6 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 						CPoint3(pt_center.x-tsh, pt_center.y-tsh, z), 
 						Height_podvh, color, param.v_scale, param.g_scale);
 				}
-	
 
 			}
 
@@ -6155,7 +6154,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 						Well_3D * well = this->m_pSurfDoc->FindWell(ID_KT);
 						if (well)
 						{
-							double w = 0.25 * param.init_g_scale / param.g_scale;
+							double w = 0.95 * BrokenPlane3D::m_w ;// * param.init_g_scale / param.g_scale;
 							CPoint3 pt3;
 
 							if (param.draw_wells)
@@ -6211,7 +6210,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 							{
 								to_close = true;
 
-								double g = w * param.init_g_scale/param.g_scale;
+								double g = w ;//* param.init_g_scale/param.g_scale;
 
 
 								vpt2.clear();
@@ -6456,7 +6455,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 									{
 										WellColomn * wc = well->FindWellColomn((*it)->id);
 										double Height_lin = 0.50;
-										if (wc)	wc->DrawAcad(m_acad, xProfile, w,Height_lin, color, param.v_scale, param.g_scale, well);
+										if (wc)	wc->DrawAcad(m_acad, xProfile, w, Height_lin, color, param.v_scale, param.g_scale, well);
 									}
 								}
 							}
@@ -6622,12 +6621,12 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 					double xProfile = 0.0;
 					for (n_cut = 0; n_cut < m_nCuts; n_cut++)
 					{						
-				// here we will put 2D points
-				vector<CPoint2> vpt2;
-				vpt2.resize(0);
-				// here we will put 3D points
-				vector<CPoint3> vpt3;
-				vpt3.resize(0);
+						// here we will put 2D points
+						vector<CPoint2> vpt2;
+						vpt2.resize(0);
+						// here we will put 3D points
+						vector<CPoint3> vpt3;
+						vpt3.resize(0);
 
 						//color = this->m_broken_lines[n_surf].m_lines[n_cut].GetColor();
 						color = 0;

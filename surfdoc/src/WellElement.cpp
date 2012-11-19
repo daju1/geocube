@@ -29,6 +29,8 @@ void AddHatchPolyLine(MyAcad & m_acad, vector<CPoint2> & vpt2, COLORREF color, s
 void AddHatchPolyLine(MyAcad & m_acad, short export_coordinate_type, vector<CPoint3> & vpt3, COLORREF color, string hatchacad, double angle, double scale, double v_scale, double g_scale);
 
 
+
+
 Well_Laboratory_Analize::label_type Well_Laboratory_Analize::s_label_type = Well_Laboratory_Analize::label_type::lab_number_id;
 
 CString GetIGEName(CDatabase * database, long id_obj, long id_ige);
@@ -1407,7 +1409,7 @@ void WellColomn::DrawGDIplus_IGE(Graphics ** select_buffer, Graphics& graphics, 
 void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli)
 {
 	double init_g_scale = 1.0;
-	double g = w * init_g_scale/g_scale;
+	double g = w ;//* init_g_scale/g_scale;
 
 	double z_pre;
 	CPoint3 ustje, pt3;
@@ -1424,11 +1426,6 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 				if (wegep)
 				{
 					COLORREF color = wegep->GetColor();
-					//color = 0;
-					//printf("z_pre = %f wegep->GetZ() = %f color = %d\n", z_pre, wegep->GetZ(), color);
-
-					//Color gdi_color(255, GetRValue(color),GetGValue(color),GetBValue(color));
-#if 1
 
 					// here we will put 2D points
 					vector<CPoint2> vpt2;
@@ -1461,119 +1458,175 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 					vpt3.push_back(CPoint3(pt3.x+g, pt3.y+g, pt3.z));
 
 					//AddPolyLine(m_acad, vpt2, vpt3, to_close, color, param.v_scale, param.g_scale);
+					enum Typ_Strihovki
+					{
+						ts_unknown = 0,
+						ts_4_1,
+						ts_4_2,
+						ts_4_3,
+						ts_4_4,
+						ts_4_5,
+						ts_4_6,
+						ts_4_7
+					};
 					
+					Typ_Strihovki m_ts = ts_unknown;
 
-					// TODO это не та штриховка - дл€ скважин должна быть штриховка в соответствии с консистенцией
-					string hatchacad = "";
-					double angle = 0.0;
-					double scale = 0.0;
-					
-					long id_umpoz = wegep->id_umpoz;
-					map<long, umpoz_data>::iterator found_umpoz = this->m_pSurfDoc->m_db_umpoz.data1.find(id_umpoz);
-					if (found_umpoz != this->m_pSurfDoc->m_db_umpoz.data1.end())
+					EngineerGeoElement * eng = this->m_pSurfDoc->FindEngineerGeoElement(wegep->GetKey());
+					if(eng)
 					{
-						//(*found_umpoz).second.id_umpoz;
-						//(*found_umpoz).second.umpoz;
-						hatchacad	= (*found_umpoz).second.hatchacad;
-						angle		= (*found_umpoz).second.angle;
-						scale		= (*found_umpoz).second.scale;
-					}	
-					//AddHatchPolyLine(m_acad, vpt2, color, hatchacad, angle, scale, v_scale, g_scale);
-					bool to_close = true;
-					color = 0;
-					AddPolyLine(m_acad, vpt2, vpt3, to_close, color, v_scale, g_scale);
-#else
-					//Convert3D_To_2D
-					pt3.z = wegep->GetZp();
+						CGround::ground_type _ground_type = eng->GetGroungType();
 
-					bool to_close = false;
-					// here we will put 2D points
-					vector<CPoint2> vpt2;
-					// here we will put 3D points
-					vector<CPoint3> vpt3;
-
-					vpt2.clear();
-					vpt3.clear();
-					vpt2.push_back(CPoint2(xProfile+w, pt3.z));
-					vpt3.push_back(CPoint3(pt3.x+w, pt3.y+w, pt3.z));
-					vpt2.push_back(CPoint2(xProfile-w, pt3.z));
-					vpt3.push_back(CPoint3(pt3.x-w, pt3.y-w, pt3.z));
-					AddPolyLine(m_acad, vpt2, vpt3, to_close, color, v_scale, g_scale);
-#endif
-
-
-					//Pen   pen(gdi_color);
-					//double x_sloj_name = x2;
-						
-					if (!wdli)
-					{
-						//pen.SetWidth(width);
-						//graphics.DrawLine(&pen, x1, y1, x2, y2);
-						//x_sloj_name = x2;
-					}
-					else
-					{
-/*#if 0	
-						Color border_color(255, GetRValue(wdli->border_color),GetGValue(wdli->border_color),GetBValue(wdli->border_color));
-						//Pen   pen_border(border_color);
-						switch(wdli->m_draw_mode_2d)
+						// показатель текучести
+						double fluidity_index; bool ws = false; 
+						bool fluidity_index_defined = false;
+						if (eng->GetNormativeFluidityIndex(ws, fluidity_index))
 						{
-						case wells_draw_list_item::left:
+							fluidity_index_defined = true;
+						}
+
+						// степень влажности 
+						double degree_of_moisture;
+						bool degree_of_moisture_defined = false;
+						if (eng->GetNormativeDegreeOfMoisture(degree_of_moisture))
+						{
+							degree_of_moisture_defined = true;
+						}
+
+						switch (_ground_type)
+						{
+						case CGround::ground_type::Sand:
 							{
-
-								pen.SetWidth(0.5*width);	
-								graphics.DrawLine(&pen, x1-0.25*width, y1, x2-0.25*width, y2);	
-								if(wdli->draw2d_border)
+								if (degree_of_moisture_defined)
 								{
-									graphics.DrawLine(&pen_border, x1-0.5*width, y1, x2-0.5*width, y2);	
-									graphics.DrawLine(&pen_border, x1-0.5*width, y1, x1, y1);	
+									if (degree_of_moisture >= 0.0 && degree_of_moisture < 0.5)//маловлажный
+									{
+										m_ts = ts_4_1;
+									}
+									else if (degree_of_moisture >= 0.5 && degree_of_moisture < 0.8) //влажный
+									{
+										m_ts = ts_4_4;
+									}
+									else if (degree_of_moisture >= 0.8 && degree_of_moisture < 1.0) //насыщенный водой
+									{
+										m_ts = ts_4_7;
+									}
 								}
-								x_sloj_name = x2-width;
-
 							}
 							break;
-						case wells_draw_list_item::draw_mode_2d::right:
+						case CGround::ground_type::Clay://глина
+						case CGround::ground_type::Loam://суглинок
 							{
-								pen.SetWidth(0.5*width);	
-								graphics.DrawLine(&pen, x1+0.25*width, y1, x2+0.25*width, y2);	
-								if(wdli->draw2d_border)
+								if (fluidity_index_defined)
 								{
-									graphics.DrawLine(&pen_border, x1+0.5*width, y1, x2+0.5*width, y2);	
-									graphics.DrawLine(&pen_border, x1+0.5*width, y1, x1, y1);	
+									if (fluidity_index < 0.0)//твЄрдый
+									{
+										m_ts = ts_4_1;
+									}
+									else if (fluidity_index >= 0.0 && fluidity_index < 0.25)//полутвЄрдый
+									{
+										m_ts = ts_4_2;
+									}
+									else if (fluidity_index >= 0.25 && fluidity_index < 0.5)//тугопластичный
+									{
+										m_ts = ts_4_3;
+									}								
+									else if (fluidity_index >= 0.5 && fluidity_index < 0.75)//м€гкопластичный
+									{
+										m_ts = ts_4_5;
+									}
+									else if (fluidity_index >= 0.75 && fluidity_index < 1.0)//текучепластичный
+									{
+										m_ts = ts_4_6;
+									}
+									else if (fluidity_index >= 1.0)//текучий
+									{
+										m_ts = ts_4_7;
+									}
 								}
-								x_sloj_name = x2+0.5*width;
 							}
 							break;
-						case wells_draw_list_item::draw_mode_2d::both:
+						case CGround::ground_type::SandyLoam:// супесь
 							{
-								pen.SetWidth(width);	
-								graphics.DrawLine(&pen, x1, y1, x2, y2);	
-								if(wdli->draw2d_border)
+								if (fluidity_index_defined)
 								{
-									graphics.DrawLine(&pen_border, x1-0.5*width, y1, x2-0.5*width, y2);	
-									graphics.DrawLine(&pen_border, x1+0.5*width, y1, x2+0.5*width, y2);	
-									graphics.DrawLine(&pen_border, x1+0.5*width, y1, x1-0.5*width, y1);	
+									if (fluidity_index < 0)//твЄрдый
+									{
+										m_ts = ts_4_1;
+									}
+									else if (fluidity_index >= 0 && fluidity_index < 1.0)//пластичный
+									{
+										m_ts = ts_4_4;
+									}
+									else if (fluidity_index >= 1.0)//текучий
+									{
+										m_ts = ts_4_7;
+									}
 								}
-								x_sloj_name = x2+0.5*width;
 							}
 							break;
 						}
-#endif*/
+					}					
+
+					// TODO это не та штриховка - дл€ скважин должна быть штриховка в соответствии с консистенцией
+					string hatchacad = "LINE";
+					double angle = 0.0;
+					double scale = 0.0;
+					switch (m_ts)
+					{
+					case ts_4_1:
+						{
+							angle = 0.0;
+							scale = 1.5;
+						}
+						break;
+					case ts_4_2:
+						{
+							angle = 0.0;
+							scale = 3.0;
+						}
+						break;
+					case ts_4_3:
+						{
+							angle = 90;
+							scale = 1.0;
+						}
+						break;
+					case ts_4_4:
+						{
+							angle = 45;
+							scale = 1.5;
+						}
+						break;
+					case ts_4_5:
+						{
+							angle = 135;
+							scale = 3.0;
+						}
+						break;
+					case ts_4_6:
+						{
+							angle = 135;
+							scale = 1.5;
+						}
+						break;
+					case ts_4_7:
+						{
+							hatchacad = "SOLID";
+							color = RGB(50,50,50);
+						}
+						break;
+					}
+					
+		
+					if (m_ts != ts_unknown)
+						AddHatchPolyLine(m_acad, vpt2, color, hatchacad, angle, scale, v_scale, g_scale);
+					else
+					{
+						bool to_close = true;
+						AddPolyLine(m_acad, vpt2, vpt3, to_close, color, v_scale, g_scale);
 					}
 
-
-					//if (//i_sphere == Well_3D::s_sloj_number_to_save || 
-					//	Well_3D::s_show_all_sloi)// или если показываем все слои
-					//{
-					//	//отметим слой дл€ сохранени€ в виде шариков
-//
-					//	COLORREF sphereColor = color;
-					//	Color sphere_color(255, GetRValue(sphereColor),GetGValue(sphereColor),GetBValue(sphereColor));
-					//	Pen      sphere_pen(gdi_color);								
-
-					//	FillCircle(&graphics, x2, y2, r, sphere_color);							
-					//	DrawCircle(&graphics, x2, y2, r, Color(255, 0,0,0));							
-					//}
 
 					if (Well_3D::s_use_sloj_names && wdli->draw2d_label)
 					{									
