@@ -5440,7 +5440,7 @@ void BrokenPlane3D::AutoCADColomn(AutoCADRazrezParam param)
 									{
 										string hatchacad = setUmPoz.m_HATCHACAD;
 										double angle = setUmPoz.m_Angle;
-										double scale = setUmPoz.m_Scale * param.hatch_scale;
+										double scale = setUmPoz.m_Scale * param.sloi_hatch_scale;
 
 										vector<CPoint2> vpt2;
 										for (int i = 0; i < 4; i++)
@@ -5512,7 +5512,8 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 
 			param.init_v_scale = 1.0;
 			param.init_g_scale = 1.0;
-			param.init_hatch_scale = 0.1;
+			param.init_sloi_hatch_scale = 0.1;
+			param.init_wells_hatch_scale = 0.02;
 
 			char str[1024];
 
@@ -5524,9 +5525,13 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 			DeleteEndZeros(str);
 			SetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_G_SCALE, str);
 
-			sprintf(str, "%f", param.init_hatch_scale);
+			sprintf(str, "%f", param.init_sloi_hatch_scale);
 			DeleteEndZeros(str);
-			SetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_HATCH_SCALE, str);			
+			SetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_SLOI_HATCH_SCALE, str);			
+
+			sprintf(str, "%f", param.init_wells_hatch_scale);
+			DeleteEndZeros(str);
+			SetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE, str);			
 		}
 		break;
 	case WM_COMMAND :
@@ -5537,11 +5542,14 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 
 				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_V_SCALE, str, 127);
 				param.v_scale = atof(str);
-				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_HATCH_SCALE, str, 127);
+				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_G_SCALE, str, 127);
 				param.g_scale = atof(str);
 
-				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_HATCH_SCALE, str, 127);
-				param.hatch_scale = atof(str);
+				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_SLOI_HATCH_SCALE, str, 127);
+				param.sloi_hatch_scale = atof(str);
+
+				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE, str, 127);
+				param.wells_hatch_scale = atof(str);
 
 				lpBrokenPlane3D->AutoCADColomn(param);
 			}
@@ -5572,8 +5580,11 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_G_SCALE, str, 127);
 				param.g_scale = atof(str);
 
-				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_HATCH_SCALE, str, 127);
-				param.hatch_scale = atof(str);
+				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_SLOI_HATCH_SCALE, str, 127);
+				param.sloi_hatch_scale = atof(str);
+
+				GetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE, str, 127);
+				param.wells_hatch_scale = atof(str);
 
 				lpBrokenPlane3D->AutoCADRazres(param);	
 			}
@@ -5848,7 +5859,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 						scale		= (*found_umpoz).second.scale;
 					}	
 
-					scale *= param.hatch_scale;
+					scale *= param.sloi_hatch_scale;
 
 					/*char str[4096];
 					sprintf(str, "hatchacad = %d %s", n_sloi, hatchacad.c_str());
@@ -6455,7 +6466,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 									{
 										WellColomn * wc = well->FindWellColomn((*it)->id);
 										double Height_lin = 0.50;
-										if (wc)	wc->DrawAcad(m_acad, xProfile, w, Height_lin, color, param.v_scale, param.g_scale, well);
+										if (wc)	wc->DrawAcad(m_acad, xProfile, w, Height_lin, color, param.v_scale, param.g_scale, param.wells_hatch_scale, well);
 									}
 								}
 							}
@@ -6610,7 +6621,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 						scale		= (*found_umpoz).second.scale;
 					}
 
-					scale *= param.hatch_scale;
+					scale *= param.sloi_hatch_scale;
 
 					COLORREF color = 0;
 					bool use_color_from_id_umpoz = false;
@@ -7042,7 +7053,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 											{
 												string hatchacad = setUmPoz.m_HATCHACAD;
 												double angle = setUmPoz.m_Angle;
-												double scale = setUmPoz.m_Scale * param.hatch_scale;
+												double scale = setUmPoz.m_Scale * param.sloi_hatch_scale;
 
 												vector<CPoint2> vpt2;
 												for (int i = 0; i < 4; i++)

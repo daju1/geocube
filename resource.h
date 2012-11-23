@@ -844,8 +844,9 @@
 #define IDC_CHECK_to_povorot            1609
 #define IDC_CHECK_AUTOCAD_DRAW_SCALE_LINE 1609
 #define IDC_CHECK_need_crd_projection   1610
-#define IDC_EDIT_AUTOCAD_HATCH_SCALE    1610
+#define IDC_EDIT_AUTOCAD_SLOI_HATCH_SCALE 1610
 #define IDC_RADIO_TYPE_1                1611
+#define IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE 1611
 #define IDC_RADIO_TYPE_2                1612
 #define IDC_EDIT_Altitude_z0            1613
 #define IDC_EDIT_Altitude_z_min         1614

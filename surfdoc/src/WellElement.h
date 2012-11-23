@@ -448,13 +448,13 @@ public:
 	void DrawGDIplus_LaboratoryAnalizes(Graphics ** select_buffer, Graphics& graphics, map_view * v, Profile3D * on, Well_3D * well, wells_draw_list_item * wdli);
 #endif
 
-	void DrawAcad(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well);
+	void DrawAcad                   (MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well);
 
-	void DrawAcad_Litho(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli);
-	void DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli);
-	void DrawAcad_Hydro(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli);
-	void DrawAcad_IsSand(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli);
-	void DrawAcad_LaboratoryAnalizes(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli);
+	void DrawAcad_Litho             (MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli);
+	void DrawAcad_IGE               (MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli);
+	void DrawAcad_Hydro             (MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli);
+	void DrawAcad_IsSand            (MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli);
+	void DrawAcad_LaboratoryAnalizes(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli);
 
 	void SetWellElementsIGEkeys();
 	void SetColorFromIGE();

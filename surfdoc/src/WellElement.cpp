@@ -1229,7 +1229,7 @@ void WellColomn::DrawGDIplus_Litho(Graphics ** select_buffer, Graphics& graphics
 
 
 
-void WellColomn::DrawAcad_Litho(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli)
+void WellColomn::DrawAcad_Litho(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli)
 {
 }
 	
@@ -1406,7 +1406,7 @@ void WellColomn::DrawGDIplus_IGE(Graphics ** select_buffer, Graphics& graphics, 
 		}
 	}
 }
-void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli)
+void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli)
 {
 	double init_g_scale = 1.0;
 	double g = w ;//* init_g_scale/g_scale;
@@ -1471,6 +1471,7 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 					};
 					
 					Typ_Strihovki m_ts = ts_unknown;
+
 
 					EngineerGeoElement * eng = this->m_pSurfDoc->FindEngineerGeoElement(wegep->GetKey());
 					if(eng)
@@ -1617,6 +1618,8 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 						}
 						break;
 					}
+
+					scale *= well_hatch_scale;
 					
 		
 					if (m_ts != ts_unknown)
@@ -1626,6 +1629,15 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 						bool to_close = true;
 						AddPolyLine(m_acad, vpt2, vpt3, to_close, color, v_scale, g_scale);
 					}
+
+
+
+							char str[128];
+							sprintf(str, "4.%d", m_ts);
+							AddText(m_acad, str, 
+								CPoint2(xProfile, pt3.z), 
+								Height_lin, color, v_scale, g_scale);
+
 
 
 					if (Well_3D::s_use_sloj_names && wdli->draw2d_label)
@@ -1784,7 +1796,7 @@ void WellColomn::DrawGDIplus_Hydro(Graphics ** select_buffer, Graphics& graphics
 
 
 
-void WellColomn::DrawAcad_Hydro(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli)
+void WellColomn::DrawAcad_Hydro(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli)
 {
 }
 
@@ -1918,7 +1930,7 @@ void WellColomn::DrawGDIplus_IsSand(Graphics ** select_buffer, Graphics& graphic
 
 
 
-void WellColomn::DrawAcad_IsSand(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli)
+void WellColomn::DrawAcad_IsSand(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli)
 {
 }
 
@@ -2151,7 +2163,7 @@ void WellColomn::DrawGDIplus_LaboratoryAnalizes(Graphics ** select_buffer, Graph
 
 
 
-void WellColomn::DrawAcad_LaboratoryAnalizes(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well, wells_draw_list_item * wdli)
+void WellColomn::DrawAcad_LaboratoryAnalizes(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well, wells_draw_list_item * wdli)
 {
 
 	w /= 4.0;
@@ -2985,7 +2997,7 @@ void WellColomn::DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_
 
 
 
-void WellColomn::DrawAcad(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, Well_3D * well)
+void WellColomn::DrawAcad(MyAcad & m_acad, double xProfile, double w, double Height_lin, COLORREF color, double v_scale, double g_scale, double well_hatch_scale, Well_3D * well)
 {
 	if (this->m_wdli && this->m_wdli->check_draw)
 	{
@@ -2996,19 +3008,19 @@ void WellColomn::DrawAcad(MyAcad & m_acad, double xProfile, double w, double Hei
 //			well->DrawAcad_Primitive(select_buffer, graphics, v, on, this->m_wdli);
 			break;
 		case WellElement::type::litho_podoshva:
-			this->DrawAcad_Litho(m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well, this->m_wdli);
+			this->DrawAcad_Litho             (m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well_hatch_scale, well, this->m_wdli);
 			break;
 		case WellElement::type::IGE_podoshva:
-			this->DrawAcad_IGE(m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well, this->m_wdli);
+			this->DrawAcad_IGE               (m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well_hatch_scale, well, this->m_wdli);
 			break;
 		case WellElement::type::isSand_podoshva:
-			this->DrawAcad_IsSand(m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well, this->m_wdli);
+			this->DrawAcad_IsSand            (m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well_hatch_scale, well, this->m_wdli);
 			break;
 		case WellElement::type::hydro_projavlenie:
-			this->DrawAcad_Hydro(m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well, this->m_wdli);
+			this->DrawAcad_Hydro             (m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well_hatch_scale, well, this->m_wdli);
 			break;
 		case WellElement::type::laboratory_analizes:
-			this->DrawAcad_LaboratoryAnalizes(m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well, this->m_wdli);
+			this->DrawAcad_LaboratoryAnalizes(m_acad, xProfile, w, Height_lin, color, v_scale, g_scale, well_hatch_scale, well, this->m_wdli);
 			break;
 		}
 #else

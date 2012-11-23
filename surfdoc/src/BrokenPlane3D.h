@@ -26,7 +26,8 @@ struct AutoCADRazrezParam
 {
 	double init_v_scale;
 	double init_g_scale;
-	double init_hatch_scale;
+	double init_sloi_hatch_scale;
+	double init_wells_hatch_scale;
 
 	bool insert_dxf;
 
@@ -47,7 +48,8 @@ struct AutoCADRazrezParam
 
 	double v_scale;
 	double g_scale;
-	double hatch_scale;
+	double sloi_hatch_scale;
+	double wells_hatch_scale;
 };
 
 struct SurfLineIntersectPoint 
