@@ -987,6 +987,8 @@ void WellColomn::PrintfProperties()
 	}
 }
 
+
+
 HTREEITEM WellColomn::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
     char szItemText[1024]; // label text of tree-view item 
@@ -1000,6 +1002,8 @@ HTREEITEM WellColomn::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 	//=============================================================
 	return h2;
 }
+
+
 
 void FillRectWithImage(Graphics& graphics, Image &image, RectF &rectf)
 {
@@ -1425,7 +1429,7 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 				Well_IGE_Podoshva * wegep = dynamic_cast<Well_IGE_Podoshva *>((*it));
 				if (wegep)
 				{
-					COLORREF color = wegep->GetColor();
+					//COLORREF color = wegep->GetColor();
 
 					// here we will put 2D points
 					vector<CPoint2> vpt2;
@@ -1458,116 +1462,15 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 					vpt3.push_back(CPoint3(pt3.x+g, pt3.y+g, pt3.z));
 
 					//AddPolyLine(m_acad, vpt2, vpt3, to_close, color, param.v_scale, param.g_scale);
-					enum Typ_Strihovki
-					{
-						ts_unknown = 0,
-						ts_4_1,
-						ts_4_2,
-						ts_4_3,
-						ts_4_4,
-						ts_4_5,
-						ts_4_6,
-						ts_4_7
-					};
+					COLORREF color = 0;//wegep->GetColor();
 					
-					Typ_Strihovki m_ts = ts_unknown;
-
+					EngineerGeoElement::Typ_Shtrihovki m_ts = EngineerGeoElement::Typ_Shtrihovki::ts_unknown;
 
 					EngineerGeoElement * eng = this->m_pSurfDoc->FindEngineerGeoElement(wegep->GetKey());
-					if(eng)
-					{
-						CGround::ground_type _ground_type = eng->GetGroungType();
-
-						// показатель текучести
-						double fluidity_index; bool ws = false; 
-						bool fluidity_index_defined = false;
-						if (eng->GetNormativeFluidityIndex(ws, fluidity_index))
-						{
-							fluidity_index_defined = true;
-						}
-
-						// степень влажности 
-						double degree_of_moisture;
-						bool degree_of_moisture_defined = false;
-						if (eng->GetNormativeDegreeOfMoisture(degree_of_moisture))
-						{
-							degree_of_moisture_defined = true;
-						}
-
-						switch (_ground_type)
-						{
-						case CGround::ground_type::Sand:
-							{
-								if (degree_of_moisture_defined)
-								{
-									if (degree_of_moisture >= 0.0 && degree_of_moisture < 0.5)//маловлажный
-									{
-										m_ts = ts_4_1;
-									}
-									else if (degree_of_moisture >= 0.5 && degree_of_moisture < 0.8) //влажный
-									{
-										m_ts = ts_4_4;
-									}
-									else if (degree_of_moisture >= 0.8 && degree_of_moisture < 1.0) //насыщенный водой
-									{
-										m_ts = ts_4_7;
-									}
-								}
-							}
-							break;
-						case CGround::ground_type::Clay://глина
-						case CGround::ground_type::Loam://суглинок
-							{
-								if (fluidity_index_defined)
-								{
-									if (fluidity_index < 0.0)//твЄрдый
-									{
-										m_ts = ts_4_1;
-									}
-									else if (fluidity_index >= 0.0 && fluidity_index < 0.25)//полутвЄрдый
-									{
-										m_ts = ts_4_2;
-									}
-									else if (fluidity_index >= 0.25 && fluidity_index < 0.5)//тугопластичный
-									{
-										m_ts = ts_4_3;
-									}								
-									else if (fluidity_index >= 0.5 && fluidity_index < 0.75)//м€гкопластичный
-									{
-										m_ts = ts_4_5;
-									}
-									else if (fluidity_index >= 0.75 && fluidity_index < 1.0)//текучепластичный
-									{
-										m_ts = ts_4_6;
-									}
-									else if (fluidity_index >= 1.0)//текучий
-									{
-										m_ts = ts_4_7;
-									}
-								}
-							}
-							break;
-						case CGround::ground_type::SandyLoam:// супесь
-							{
-								if (fluidity_index_defined)
-								{
-									if (fluidity_index < 0)//твЄрдый
-									{
-										m_ts = ts_4_1;
-									}
-									else if (fluidity_index >= 0 && fluidity_index < 1.0)//пластичный
-									{
-										m_ts = ts_4_4;
-									}
-									else if (fluidity_index >= 1.0)//текучий
-									{
-										m_ts = ts_4_7;
-									}
-								}
-							}
-							break;
-						}
-					}					
+					if(eng){
+						m_ts  = eng->Get_Typ_Shtrihovki();
+						//color = eng->GetColor();
+					}
 
 					// TODO это не та штриховка - дл€ скважин должна быть штриховка в соответствии с консистенцией
 					string hatchacad = "LINE";
@@ -1575,43 +1478,43 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 					double scale = 0.0;
 					switch (m_ts)
 					{
-					case ts_4_1:
+					case EngineerGeoElement::Typ_Shtrihovki::ts_4_1:
 						{
 							angle = 0.0;
 							scale = 1.5;
 						}
 						break;
-					case ts_4_2:
+					case EngineerGeoElement::Typ_Shtrihovki::ts_4_2:
 						{
 							angle = 0.0;
 							scale = 3.0;
 						}
 						break;
-					case ts_4_3:
+					case EngineerGeoElement::Typ_Shtrihovki::ts_4_3:
 						{
 							angle = 90;
 							scale = 1.0;
 						}
 						break;
-					case ts_4_4:
+					case EngineerGeoElement::Typ_Shtrihovki::ts_4_4:
 						{
 							angle = 45;
 							scale = 1.5;
 						}
 						break;
-					case ts_4_5:
+					case EngineerGeoElement::Typ_Shtrihovki::ts_4_5:
 						{
 							angle = 135;
 							scale = 3.0;
 						}
 						break;
-					case ts_4_6:
+					case EngineerGeoElement::Typ_Shtrihovki::ts_4_6:
 						{
 							angle = 135;
 							scale = 1.5;
 						}
 						break;
-					case ts_4_7:
+					case EngineerGeoElement::Typ_Shtrihovki::ts_4_7:
 						{
 							hatchacad = "SOLID";
 							color = RGB(50,50,50);
@@ -1622,7 +1525,7 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 					scale *= well_hatch_scale;
 					
 		
-					if (m_ts != ts_unknown)
+					if (m_ts != EngineerGeoElement::Typ_Shtrihovki::ts_unknown)
 						AddHatchPolyLine(m_acad, vpt2, color, hatchacad, angle, scale, v_scale, g_scale);
 					else
 					{
@@ -1631,14 +1534,12 @@ void WellColomn::DrawAcad_IGE(MyAcad & m_acad, double xProfile, double w, double
 					}
 
 
-
-							char str[128];
-							sprintf(str, "4.%d", m_ts);
-							AddText(m_acad, str, 
-								CPoint2(xProfile, pt3.z), 
-								Height_lin, color, v_scale, g_scale);
-
-
+					if (false)
+					{
+						//Debug
+						char str[128];	sprintf(str, "4.%d", m_ts);
+						AddText(m_acad, str, CPoint2(xProfile, pt3.z), Height_lin, color, v_scale, g_scale);
+					}
 
 					if (Well_3D::s_use_sloj_names && wdli->draw2d_label)
 					{									

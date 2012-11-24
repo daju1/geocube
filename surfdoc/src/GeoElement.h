@@ -268,6 +268,19 @@ public:
 	bool SaveGroundAsDat(const char * fn);
 
 
+	enum Typ_Shtrihovki
+	{
+		ts_unknown = 0,
+		ts_4_1,
+		ts_4_2,
+		ts_4_3,
+		ts_4_4,
+		ts_4_5,
+		ts_4_6,
+		ts_4_7
+	};
+
+	Typ_Shtrihovki Get_Typ_Shtrihovki();
 };
 // Define a postfix increment operator
 inline EngineerGeoElement::ValueType operator++( EngineerGeoElement::ValueType &rs, int )

@@ -1825,20 +1825,50 @@ void EngineerGeoElement_PrintfProperties(EngineerGeoElement * ob, vector<fmtstr>
 	char str[4098];
 
 	sprintf(str, "EngineerGeoElement");
-	text.push_back(fmtstr(str, NULL, false, true));
+	text.push_back(fmtstr(str, NULL, true, true));
 
 	sprintf(str, "id_umpoz = %d", ob->id_umpoz);
-	text.push_back(fmtstr(str, NULL, false, true));
+	text.push_back(fmtstr(str, NULL, true, true));
 
 	sprintf(str, "my_id_key = %d", ob->GetKeyID());
-	text.push_back(fmtstr(str, NULL, false, true));
+	text.push_back(fmtstr(str, NULL, true, true));
 
 	sprintf(str, "my_key = %s", ob->GetKey().c_str());
-	text.push_back(fmtstr(str, NULL, false, true));
+	text.push_back(fmtstr(str, NULL, true, true));
 
 	sprintf(str, "\"%s\"", ob->GetName().c_str());
 	text.push_back(fmtstr(str, NULL, true, true));
 
+	sprintf(str, "Typ_Shtrihovki = 4.%d", ob->Get_Typ_Shtrihovki());
+	text.push_back(fmtstr(str, NULL, true, true));
+
+	CGround::ground_type _ground_type = ob->GetGroungType();
+	sprintf(str, "_ground_type = %d", _ground_type);
+	text.push_back(fmtstr(str, NULL, true, true));
+
+	// показатель текучести
+	double fluidity_index; bool ws = false; 
+	bool fluidity_index_defined = false;
+	if (ob->GetNormativeFluidityIndex(ws, fluidity_index))
+	{
+		fluidity_index_defined = true;
+	}
+
+	sprintf(str, "показатель текучести fluidity_index_defined = %d fluidity_index = %f", 
+		fluidity_index_defined, fluidity_index);
+	text.push_back(fmtstr(str, NULL, true, true));
+
+	// степень влажности 
+	double degree_of_moisture;
+	bool degree_of_moisture_defined = false;
+	if (ob->GetNormativeDegreeOfMoisture(degree_of_moisture))
+	{
+		degree_of_moisture_defined = true;
+	}
+
+	sprintf(str, "степень влажности degree_of_moisture_defined = %d degree_of_moisture = %f", 
+		degree_of_moisture_defined, degree_of_moisture);
+	text.push_back(fmtstr(str, NULL, true, true));
 }
 
 void EngineerGeoElement::PrintfProperties(vector<fmtstr> & text)
@@ -2954,6 +2984,7 @@ bool EngineerGeoElement::SetValue(EngineerGeoElement::ValueType value_type,
 }
 
 
+
 bool EngineerGeoElement::ReadKey(char *szBuff)
 {
 	// ключ - им€ инж-гео элемента
@@ -2971,6 +3002,107 @@ bool EngineerGeoElement::ReadKey(char *szBuff)
 	}
 	return false;
 }
+
+
+
+EngineerGeoElement::Typ_Shtrihovki EngineerGeoElement::Get_Typ_Shtrihovki()
+{
+	Typ_Shtrihovki m_ts = ts_unknown;
+
+	CGround::ground_type _ground_type = this->GetGroungType();
+
+	// показатель текучести
+	double fluidity_index; bool ws = false; 
+	bool fluidity_index_defined = false;
+	if (this->GetNormativeFluidityIndex(ws, fluidity_index))
+	{
+		fluidity_index_defined = true;
+	}
+
+	// степень влажности 
+	double degree_of_moisture;
+	bool degree_of_moisture_defined = false;
+	if (this->GetNormativeDegreeOfMoisture(degree_of_moisture))
+	{
+		degree_of_moisture_defined = true;
+	}
+
+	switch (_ground_type)
+	{
+	case CGround::ground_type::Sand:
+		{
+			if (degree_of_moisture_defined)
+			{
+				if (degree_of_moisture >= 0.0 && degree_of_moisture < 0.5)//маловлажный
+				{
+					m_ts = ts_4_1;
+				}
+				else if (degree_of_moisture >= 0.5 && degree_of_moisture < 0.8) //влажный
+				{
+					m_ts = ts_4_4;
+				}
+				else if (degree_of_moisture >= 0.8 && degree_of_moisture < 1.0) //насыщенный водой
+				{
+					m_ts = ts_4_7;
+				}
+			}
+		}
+		break;
+	case CGround::ground_type::Clay://глина
+	case CGround::ground_type::Loam://суглинок
+		{
+			if (fluidity_index_defined)
+			{
+				if (fluidity_index < 0.0)//твЄрдый
+				{
+					m_ts = ts_4_1;
+				}
+				else if (fluidity_index >= 0.0 && fluidity_index < 0.25)//полутвЄрдый
+				{
+					m_ts = ts_4_2;
+				}
+				else if (fluidity_index >= 0.25 && fluidity_index < 0.5)//тугопластичный
+				{
+					m_ts = ts_4_3;
+				}								
+				else if (fluidity_index >= 0.5 && fluidity_index < 0.75)//м€гкопластичный
+				{
+					m_ts = ts_4_5;
+				}
+				else if (fluidity_index >= 0.75 && fluidity_index < 1.0)//текучепластичный
+				{
+					m_ts = ts_4_6;
+				}
+				else if (fluidity_index >= 1.0)//текучий
+				{
+					m_ts = ts_4_7;
+				}
+			}
+		}
+		break;
+	case CGround::ground_type::SandyLoam:// супесь
+		{
+			if (fluidity_index_defined)
+			{
+				if (fluidity_index < 0)//твЄрдый
+				{
+					m_ts = ts_4_1;
+				}
+				else if (fluidity_index >= 0 && fluidity_index < 1.0)//пластичный
+				{
+					m_ts = ts_4_4;
+				}
+				else if (fluidity_index >= 1.0)//текучий
+				{
+					m_ts = ts_4_7;
+				}
+			}
+		}
+		break;
+	}
+	return m_ts;
+}
+
 
 
 int EngineerGeoElement::ParseFileLine(char* szBuff, int type_line)
@@ -3201,10 +3333,7 @@ bool EngineerGeoElement::ReadFile(const char *file)
 		while(res == 2);
 	}
 
-
 	printf("EngineerGeoElement::ReadFile() end res = %d\n", res);
-
-
 
 	fclose(stream);
 	HeapFree( GetProcessHeap(), 0, szBuff );

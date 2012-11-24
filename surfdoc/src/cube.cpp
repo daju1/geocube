@@ -951,7 +951,7 @@ bool Cube4D::SaveAs()
 }
 void Cube4D::Produce3DSurferGrid7_XY(long pp, SURFER7GRIDSECTION & grid)
 {
-	long p,r,c,R,C;
+	long r,c,R,C;
 	grid.BlankValue = BLANK_VALUE;
 	grid.Rotation = 0.0;
 	//if (fabs(plane[2]) >= fabs(plane[0]) && fabs(plane[2]) >= fabs(plane[1]))
@@ -990,7 +990,7 @@ void Cube4D::Produce3DSurferGrid7_XY(long pp, SURFER7GRIDSECTION & grid)
 }
 void Cube4D::Produce3DSurferGrid7_XZ(long rr, SURFER7GRIDSECTION & grid)
 {
-	long p,r,c,R,C;
+	long p,c,R,C;
 	grid.BlankValue = BLANK_VALUE;
 	grid.Rotation = 0.0;
 	//else if (fabs(plane[1]) >= fabs(plane[0]) && fabs(plane[1]) >= fabs(plane[2]))
@@ -1029,7 +1029,7 @@ void Cube4D::Produce3DSurferGrid7_XZ(long rr, SURFER7GRIDSECTION & grid)
 }
 void Cube4D::Produce3DSurferGrid7_YZ(long cc, SURFER7GRIDSECTION & grid)
 {
-	long p,r,c,R,C;
+	long p,r,R,C;
 	grid.BlankValue = BLANK_VALUE;
 	grid.Rotation = 0.0;
 	//else if (fabs(plane[0]) >= fabs(plane[1]) && fabs(plane[0]) >= fabs(plane[2]))

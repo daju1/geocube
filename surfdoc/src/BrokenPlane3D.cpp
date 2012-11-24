@@ -309,27 +309,27 @@ void BrokenPlane3D::Cutting()
 				double x2 = m_vMapBlnProfiles[i2].x;
 				double y2 = m_vMapBlnProfiles[i2].y;
 
-				double dist = sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+				double dist         = sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
 				double part_1_right = BrokenPlane3D::m_w / dist;
 				double part_2_left  = (dist - BrokenPlane3D::m_w) / dist;
 
 				double x1_right = x1 + part_1_right * (x2 - x1);
 				double y1_right = y1 + part_1_right * (y2 - y1);
 
-				double x2_left = x1 + part_2_left * (x2 - x1);
-				double y2_left = y1 + part_2_left * (y2 - y1);
+				double x2_left  = x1 + part_2_left  * (x2 - x1);
+				double y2_left  = y1 + part_2_left  * (y2 - y1);
 
 				this->m_drills_line_right[i1].PushBack(CPoint3(x1_right, y1_right, z_min));
 				this->m_drills_line_right[i1].PushBack(CPoint3(x1_right, y1_right, z_max));
 
-				this->m_drills_line_left[i2].PushBack(CPoint3(x2_left, y2_left, z_min));
-				this->m_drills_line_left[i2].PushBack(CPoint3(x2_left, y2_left, z_max));
+				this->m_drills_line_left [i2].PushBack(CPoint3(x2_left,  y2_left,  z_min));
+				this->m_drills_line_left [i2].PushBack(CPoint3(x2_left,  y2_left,  z_max));
 
 
 
 				for(int n_surf = 0; n_surf < m_nSurfs; n_surf++)
 				{
-					m_pointsDrillSloi_left[i2][n_surf].InitDoc(this->m_pSurfDoc);
+					m_pointsDrillSloi_left [i2][n_surf].InitDoc(this->m_pSurfDoc);
 					m_pointsDrillSloi_right[i2][n_surf].InitDoc(this->m_pSurfDoc);
 				}
 
@@ -883,8 +883,7 @@ int BrokenPlane3D::AddLineToPoligon_Back(bool reverse,
 
 bool BrokenPlane3D::AddLineToPoligon_Back(int n_cut_line, int n_surf_line, 
 									 int i1, bool nearest_part_from_the_point, CPoint3 pt,
-									 int n_cut_poligon, int n_surf_poligon
-									, int i_poligon
+									 int n_cut_poligon, int n_surf_poligon, int i_poligon
 									 )
 {
 	CPoint3
@@ -1026,9 +1025,7 @@ bool BrokenPlane3D::AddLineToPoligon_Back(int n_cut_line, int n_surf_line,
 #if USE_UNVISIBLE_CUTTING
 int BrokenPlane3D::AddLineToPoligon_Front(int n_cut_line, int n_surf_line, 
 									 int i1_1, int i1_2,
-									 int n_cut_poligon, int n_surf_poligon
-									, int i_poligon
-									, int & added
+									 int n_cut_poligon, int n_surf_poligon, int i_poligon, int & added
 									 )
 {
 	added = 0;
@@ -1101,12 +1098,9 @@ int BrokenPlane3D::AddLineToPoligon_Front(int n_cut_line, int n_surf_line,
 	return reverse;
 }
 
-int BrokenPlane3D::AddLineToPoligon_Front(bool reverse, 
-														int n_cut_line, int n_surf_line, 
+int BrokenPlane3D::AddLineToPoligon_Front(bool reverse, int n_cut_line, int n_surf_line, 
 									 int i1_1, int i1_2,
-									 int n_cut_poligon, int n_surf_poligon
-									, int i_poligon
-									, int & added
+									 int n_cut_poligon, int n_surf_poligon, int i_poligon, int & added
 									 )
 {
 	added = 0;
@@ -1159,8 +1153,7 @@ int BrokenPlane3D::AddLineToPoligon_Front(bool reverse,
 
 bool BrokenPlane3D::AddLineToPoligon_Front(int n_cut_line, int n_surf_line, 
 									 int i1, bool nearest_part_from_the_point, CPoint3 pt,
-									 int n_cut_poligon, int n_surf_poligon
-									, int i_poligon
+									 int n_cut_poligon, int n_surf_poligon, int i_poligon
 									 )
 {
 	CPoint3 
@@ -1246,8 +1239,7 @@ void BrokenPlane3D::AddLineToPoligon_Front(int n_cut_line, int n_surf_line,
 			pt = m_broken_lines[n_surf_line].m_lines[n_cut_line].m_vdPoints[i];
 			if (pt.bVisible) 
 			{
-				m_polySloi[n_surf_poligon].m_poligones[n_cut_poligon]
-																				.Insert(0, pt);
+				m_polySloi[n_surf_poligon].m_poligones[n_cut_poligon].Insert(0, pt);
 			}
 		}
 	}
@@ -1258,8 +1250,7 @@ void BrokenPlane3D::AddLineToPoligon_Front(int n_cut_line, int n_surf_line,
 			pt = m_broken_lines[n_surf_line].m_lines[n_cut_line].m_vdPoints[i];
 			if (pt.bVisible) 
 			{
-				m_polySloi[n_surf_poligon].m_poligones[n_cut_poligon]
-																				.Insert(0, pt);
+				m_polySloi[n_surf_poligon].m_poligones[n_cut_poligon].Insert(0, pt);
 			}
 		}
 	}
@@ -2165,6 +2156,8 @@ void BrokenPlane3D::MiddleWalk(int i1_1, int i1_2,
 	}
 }
 
+
+
 int calc_n_slips(std::map<int,int> & slips)
 {
 	int cnt = 0;
@@ -2178,6 +2171,7 @@ int calc_n_slips(std::map<int,int> & slips)
 	}
 	return cnt;
 }
+
 
 
 bool BrokenPlane3D::FindIntersection(bool back, int i1_1, int i2_1,
@@ -2390,27 +2384,26 @@ void BrokenPlane3D::Build()
 
 								if (InBorders(pt_1, pt_2, pti))
 								{			
-									double distance_pt_1 = Distance(pt_1, pti);
-									double distance_pt_2 = Distance(pt_2, pti);
+									double distance_pt_1     = Distance(pt_1, pti);
+									double distance_pt_2     = Distance(pt_2, pti);
 
 									vslip.push_back(SurfLineIntersectPoint());
 
-									vslip.back().i_surf1 = n_surf1;
-									vslip.back().i1_1 = i1_1;
-									vslip.back().i2_1 = i2_1;
+									vslip.back().i_surf1     = n_surf1;
+									vslip.back().i1_1        = i1_1;
+									vslip.back().i2_1        = i2_1;
 
-//									vslip.back().back = back;
+									//vslip.back().back      = back;
 									vslip.back().dist_to_end = min( distance_pt_1, distance_pt_2 );
 
-									vslip.back().i_surf2 = n_surf2;
-									vslip.back().i1_2 = i1_2;
-									vslip.back().i2_2 = i2_2;
-									vslip.back().unvisibles = unvisibles;
-									vslip.back().dst_to_vis = dst_to_vis;
+									vslip.back().i_surf2     = n_surf2;
+									vslip.back().i1_2        = i1_2;
+									vslip.back().i2_2        = i2_2;
+									vslip.back().unvisibles  = unvisibles;
+									vslip.back().dst_to_vis  = dst_to_vis;
 
 									vslip.back().point.Init(this->m_pSurfDoc, pti);
 								}
-
 							}
 						}
 
@@ -2536,18 +2529,18 @@ void BrokenPlane3D::Build()
 
 								vslip.push_back(SurfLineIntersectPoint());
 
-								vslip.back().i_surf1 = n_surf1;
-								vslip.back().i1_1 = i1_1;
-								vslip.back().i2_1 = i2_1;
+								vslip.back().i_surf1     = n_surf1;
+								vslip.back().i1_1        = i1_1;
+								vslip.back().i2_1        = i2_1;
 
-								vslip.back().back = back;
+								vslip.back().back        = back;
 								vslip.back().dist_to_end = back ? distance_pt_1 : distance_pt_2;
 
-								vslip.back().i_surf2 = n_surf2;
-								vslip.back().i1_2 = i1_2;
-								vslip.back().i2_2 = i2_2;
-								vslip.back().unvisibles = unvisibles;
-								vslip.back().dst_to_vis = dst_to_vis;
+								vslip.back().i_surf2     = n_surf2;
+								vslip.back().i1_2        = i1_2;
+								vslip.back().i2_2        = i2_2;
+								vslip.back().unvisibles  = unvisibles;
+								vslip.back().dst_to_vis  = dst_to_vis;
 
 								vslip.back().point.Init(this->m_pSurfDoc, pti);								
 							}
@@ -2574,19 +2567,19 @@ void BrokenPlane3D::Build()
 							}
 							this->m_SurfLineIntersectPoints[n_cut].push_back(SurfLineIntersectPoint());
 
-							this->m_SurfLineIntersectPoints[n_cut].back().i_surf1     = vslip[0].i_surf1;
-							this->m_SurfLineIntersectPoints[n_cut].back().i1_1        = vslip[0].i1_1;
-							this->m_SurfLineIntersectPoints[n_cut].back().i2_1        = vslip[0].i2_1;
+							this->m_SurfLineIntersectPoints[n_cut].back().i_surf1      = vslip[0].i_surf1;
+							this->m_SurfLineIntersectPoints[n_cut].back().i1_1         = vslip[0].i1_1;
+							this->m_SurfLineIntersectPoints[n_cut].back().i2_1         = vslip[0].i2_1;
 
-							this->m_SurfLineIntersectPoints[n_cut].back().back        = vslip[0].back;
-							this->m_SurfLineIntersectPoints[n_cut].back().dist_to_end = vslip[0].dist_to_end;
+							this->m_SurfLineIntersectPoints[n_cut].back().back         = vslip[0].back;
+							this->m_SurfLineIntersectPoints[n_cut].back().dist_to_end  = vslip[0].dist_to_end;
 
-							this->m_SurfLineIntersectPoints[n_cut].back().i_surf2     = vslip[0].i_surf2;
-							this->m_SurfLineIntersectPoints[n_cut].back().i1_2        = vslip[0].i1_2;
-							this->m_SurfLineIntersectPoints[n_cut].back().i2_2        = vslip[0].i2_2;
+							this->m_SurfLineIntersectPoints[n_cut].back().i_surf2      = vslip[0].i_surf2;
+							this->m_SurfLineIntersectPoints[n_cut].back().i1_2         = vslip[0].i1_2;
+							this->m_SurfLineIntersectPoints[n_cut].back().i2_2         = vslip[0].i2_2;
 
-							this->m_SurfLineIntersectPoints[n_cut].back().unvisibles  = vslip[0].unvisibles;
-							this->m_SurfLineIntersectPoints[n_cut].back().dst_to_vis  = vslip[0].dst_to_vis;
+							this->m_SurfLineIntersectPoints[n_cut].back().unvisibles   = vslip[0].unvisibles;
+							this->m_SurfLineIntersectPoints[n_cut].back().dst_to_vis   = vslip[0].dst_to_vis;
 
 							BYTE _podoshva = this->m_broken_lines[vslip[0].i_surf2].podoshva;
 							this->m_SurfLineIntersectPoints[n_cut].back().with_krovlja = _podoshva == 2;
@@ -5531,7 +5524,11 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 
 			sprintf(str, "%f", param.init_wells_hatch_scale);
 			DeleteEndZeros(str);
-			SetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE, str);			
+			SetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE, str);
+
+			sprintf(str, "%f", BrokenPlane3D::m_w);
+			DeleteEndZeros(str);
+			SetDlgItemText(hDlg, IDC_EDIT_BROKEN_PLANES3D_M_W, str);			
 		}
 		break;
 	case WM_COMMAND :
@@ -5558,6 +5555,7 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 			{
 
 				param.insert_dxf      = IsDlgButtonChecked( hDlg, IDC_CHECK_AUTOCAD_INSERT_DXF) == BST_CHECKED;
+				param.template_dwt    = IsDlgButtonChecked( hDlg, IDC_CHECK_AUTOCAD_TEMPLATE_DWT) == BST_CHECKED;
 				param.draw_poligones  = IsDlgButtonChecked( hDlg, IDC_CHECK_AUTOCAD_DRAW_POLIGONES) == BST_CHECKED;
 				param.poligones_fill  = IsDlgButtonChecked( hDlg, IDC_CHECK_AUTOCAD_POLIGONES_FILL) == BST_CHECKED;
 
@@ -5589,6 +5587,15 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 				lpBrokenPlane3D->AutoCADRazres(param);	
 			}
 			break;
+
+		case IDC_BUTTON_REBUILD_PROFILES:
+			{
+				GetDlgItemText(hDlg, IDC_EDIT_BROKEN_PLANES3D_M_W, str, 127);
+				BrokenPlane3D::m_w = atof(str);
+				lpBrokenPlane3D->Cutting();
+			}
+			break;
+
 		case IDCANCEL :
 			EndDialog( hDlg, IDCANCEL );
 			break;
@@ -5601,8 +5608,6 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 	}
 	return( TRUE );
 }
-
-
 
 
 
@@ -5768,6 +5773,26 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 
 
 
+			char * memenv;
+			char pat_file[2048];pat_file[0] = '\0';
+			if ((memenv = getenv("APPDATA")) != NULL) 
+			{
+				sprintf(pat_file, "%s\\Autodesk\\", memenv);
+			}
+
+			//if (OpenFileDlg(hWnd,"Autocad Pattern fale (*.pat)\0*.pat\0", pat_file) == S_OK)
+			//{
+
+			//char lpstrFile_dwt[1024];
+			//if (param.template_dwt && OpenFileDlg(0, "AutoCAD DWT (*.dwt)\0*.dwt\0All files \0*.*\0", lpstrFile_dwt) == S_OK)
+			//{
+			//	m_acad.AcadOleExecute(lpstrFile_dwt);
+			//}
+			//else
+			//	m_acad.AcadOleExecute(NULL);
+
+
+
 			long n_layouts = m_acad.m_layouts.GetCount();
 
 			if (n_layouts)
@@ -5777,7 +5802,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 				{
 					VERIFY(pLayout);
 					IAcadLayout m_layout;
-					m_layout.AttachDispatch(pLayout);
+					m_layout.AttachDispatch(pLayout);//long GetStandardScale();void SetStandardScale(long nNewValue);
 					m_layout.ReleaseDispatch();
 				}
 			}
@@ -6729,86 +6754,86 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 						//координату начальной скважины в координатах профиля 
 						xProfile += Distance(m_vMapBlnProfiles[n_cut], m_vMapBlnProfiles[n_cut+1]);
 
-				//add last point
-				if(m_pointsDrillSloi[n_cut+1][n_surf].GetPointsNumber() > 0)
-				{
-					pt3 = m_pointsDrillSloi[n_cut+1][n_surf].m_vdPoints[0];
-					if (pt3.bVisible)
-					{
-						vpt2.push_back(CPoint2(xProfile, pt3.z));
-						vpt3.push_back(pt3);
-					}
-				}
-
-				if (use_color_from_id_umpoz)
-				{
-					switch (id_umpoz_for_color)
-					{
-					case -2:
+						//add last point
+						if(m_pointsDrillSloi[n_cut+1][n_surf].GetPointsNumber() > 0)
 						{
-							color = RGB(0,0,255);
-						}
-						break;
-					}
-				}
-				switch(BrokenPlane3D::sprData.export_coordinate_type)
-				{
-				case SAVE_PROFILE_WITH_PROFILE_LEN:
-					{
-						if (vpt2.size())
-						{		
-							//fprintf(bln, "%d,%d \"%s\"\n", vpt2.size(), 0, name);
-							//vector<CPoint2>::iterator itr;
-							//for (itr = vpt2.begin(); itr != vpt2.end(); itr++)
-							//{
-							//	fprintf(bln, "%lf,%lf\n", itr->x, itr->y);
-							//}
-
-							//if (hatchacad.size())
-							//	AddHatchPolyLine(m_acad, vpt2, color, hatchacad, angle, scale);
-							//else
-								AddPolyLine(m_acad, vpt2, to_close, color, param.v_scale, param.g_scale);	
-						}
-
-					}
-					break;
-				case SAVE_PROFILE_WITH_NORTH_PROJECTION:
-					{
-						if (vpt3.size())
-						{		
-							/*fprintf(bln, "%d,%d \"%s\"\n", vpt3.size(), 0, name);
-							vector<CPoint3>::iterator itr;
-							for (itr = vpt3.begin(); itr != vpt3.end(); itr++)
+							pt3 = m_pointsDrillSloi[n_cut+1][n_surf].m_vdPoints[0];
+							if (pt3.bVisible)
 							{
-								fprintf(bln, "%lf,%lf\n", itr->y, itr->z);
-							}*/
-
-							//if (hatchacad.size())
-							//	AddHatchPolyLine(m_acad, SAVE_PROFILE_WITH_NORTH_PROJECTION, vpt3, color, hatchacad, angle, scale);
-							//else
-								AddPolyLine(m_acad, SAVE_PROFILE_WITH_NORTH_PROJECTION, vpt3, to_close, color, param.v_scale, param.g_scale);	
+								vpt2.push_back(CPoint2(xProfile, pt3.z));
+								vpt3.push_back(pt3);
+							}
 						}
-					}
-					break;
-				case SAVE_PROFILE_WITH_EAST_PROJECTION:
-					{
-						if (vpt3.size())
-						{		
-							/*fprintf(bln, "%d,%d \"%s\"\n", vpt3.size(), 0, name);
-							vector<CPoint3>::iterator itr;
-							for (itr = vpt3.begin(); itr != vpt3.end(); itr++)
+
+						if (use_color_from_id_umpoz)
+						{
+							switch (id_umpoz_for_color)
 							{
-								fprintf(bln, "%lf,%lf\n", itr->x, itr->z);
-							}*/
-
-							//if (hatchacad.size())
-							//	AddHatchPolyLine(m_acad, SAVE_PROFILE_WITH_EAST_PROJECTION, vpt3, color, hatchacad, angle, scale);
-							//else
-								AddPolyLine(m_acad, SAVE_PROFILE_WITH_EAST_PROJECTION, vpt3, to_close, color, param.v_scale, param.g_scale);	
+							case -2:
+								{
+									color = RGB(0,0,255);
+								}
+								break;
+							}
 						}
-					}
-					break;
-				}
+						switch(BrokenPlane3D::sprData.export_coordinate_type)
+						{
+						case SAVE_PROFILE_WITH_PROFILE_LEN:
+							{
+								if (vpt2.size())
+								{		
+									//fprintf(bln, "%d,%d \"%s\"\n", vpt2.size(), 0, name);
+									//vector<CPoint2>::iterator itr;
+									//for (itr = vpt2.begin(); itr != vpt2.end(); itr++)
+									//{
+									//	fprintf(bln, "%lf,%lf\n", itr->x, itr->y);
+									//}
+
+									//if (hatchacad.size())
+									//	AddHatchPolyLine(m_acad, vpt2, color, hatchacad, angle, scale);
+									//else
+										AddPolyLine(m_acad, vpt2, to_close, color, param.v_scale, param.g_scale);	
+								}
+
+							}
+							break;
+						case SAVE_PROFILE_WITH_NORTH_PROJECTION:
+							{
+								if (vpt3.size())
+								{		
+									/*fprintf(bln, "%d,%d \"%s\"\n", vpt3.size(), 0, name);
+									vector<CPoint3>::iterator itr;
+									for (itr = vpt3.begin(); itr != vpt3.end(); itr++)
+									{
+										fprintf(bln, "%lf,%lf\n", itr->y, itr->z);
+									}*/
+
+									//if (hatchacad.size())
+									//	AddHatchPolyLine(m_acad, SAVE_PROFILE_WITH_NORTH_PROJECTION, vpt3, color, hatchacad, angle, scale);
+									//else
+										AddPolyLine(m_acad, SAVE_PROFILE_WITH_NORTH_PROJECTION, vpt3, to_close, color, param.v_scale, param.g_scale);	
+								}
+							}
+							break;
+						case SAVE_PROFILE_WITH_EAST_PROJECTION:
+							{
+								if (vpt3.size())
+								{		
+									/*fprintf(bln, "%d,%d \"%s\"\n", vpt3.size(), 0, name);
+									vector<CPoint3>::iterator itr;
+									for (itr = vpt3.begin(); itr != vpt3.end(); itr++)
+									{
+										fprintf(bln, "%lf,%lf\n", itr->x, itr->z);
+									}*/
+
+									//if (hatchacad.size())
+									//	AddHatchPolyLine(m_acad, SAVE_PROFILE_WITH_EAST_PROJECTION, vpt3, color, hatchacad, angle, scale);
+									//else
+										AddPolyLine(m_acad, SAVE_PROFILE_WITH_EAST_PROJECTION, vpt3, to_close, color, param.v_scale, param.g_scale);	
+								}
+							}
+							break;
+						}
 					}
 				}
 			}

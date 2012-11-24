@@ -343,7 +343,7 @@ HTREEITEM GeoCatch::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
     char szItemText[1024]; // label text of tree-view item 
 	//====== Размеры изображаемого объекта
-	UINT	
+	size_t	
 		n_surfs = this->m_surfaces.msgSize(),
 		n_faults = this->m_faults.msgSize(),
 		n_gorizs = this->m_gorizont_planes.msgSize(),	

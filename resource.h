@@ -848,6 +848,7 @@
 #define IDC_RADIO_TYPE_1                1611
 #define IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE 1611
 #define IDC_RADIO_TYPE_2                1612
+#define IDC_CHECK_AUTOCAD_TEMPLATE_DWT  1612
 #define IDC_EDIT_Altitude_z0            1613
 #define IDC_EDIT_Altitude_z_min         1614
 #define IDC_RADIO_LAMP                  1615
@@ -874,7 +875,9 @@
 #define IDC_RADIO_NEWTON_MODIFIED       1636
 #define IDC_RADIO_PODOSHVA_1            1638
 #define IDC_RADIO_PODOSHVA_2            1639
+#define IDC_BUTTON_REBUILD_PROFILES     1639
 #define IDC_RADIO_PODOSHVA_3            1640
+#define IDC_EDIT_BROKEN_PLANES3D_M_W    1640
 #define IDT_TIMER_GEOID                 4000
 #define IDT_TIMER_SURF                  4001
 #define IDT_TIMER_MOLS                  4002
@@ -1377,6 +1380,7 @@
 #define ID_FILE_AUTOBUILDPROFILE1       40524
 #define ID_TREE_LINE_SHOWUNVISIBLE      40525
 #define ID_TREE_LINE_HIDEUNVISIBLE      40526
+#define ID_EXPORT_TOAUTOCAD             40527
 #define ID_FILE_IMPORT_EARTHQUAKES_NEIC2 41109
 #define ID_FILE_IMPORT_EXCEL_COMMON_FILE 41110
 #define ID_INIT_GEOCOORDINATE_CONTROLS  41111
@@ -1434,8 +1438,8 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        208
-#define _APS_NEXT_COMMAND_VALUE         40527
-#define _APS_NEXT_CONTROL_VALUE         1639
+#define _APS_NEXT_COMMAND_VALUE         40528
+#define _APS_NEXT_CONTROL_VALUE         1642
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

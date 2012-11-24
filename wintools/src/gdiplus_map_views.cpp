@@ -573,6 +573,18 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 			}
 			break;
 
+		case ID_EXPORT_TOAUTOCAD:
+			{
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				Object * obj; if (wgrv) obj = wgrv->GetObject(); else return -1;
+				BlnProfile3D * bln_profile = dynamic_cast<BlnProfile3D *>(obj);
+				if (bln_profile)
+				{					
+					bln_profile->AutoCADRazres();					
+				}
+			}
+			break;
+
 
 		case ID_TREE_LAB_WELLELEMENTPROP:
 			{
