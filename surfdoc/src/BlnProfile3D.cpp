@@ -2174,8 +2174,6 @@ void BlnProfile3D::Cutting()
 						this->m_pSurfDoc->m_zd_zoom_center);
 
 	this->m_broken_plane.AddItem_ToTree(this->m_pSurfDoc->hwndTV, this->myTreeItem);
-
-
 }
 
 void BlnProfile3D::ProduceGDIMap()

@@ -964,6 +964,8 @@ public:
 	wells_draw_list_item * m_wdli_primitive;
 	void UpdateWellColomnsByWellsDraw();
 
+	void   SetWellW(double w);
+	double GetWellW();
 	
 	Well_3D * FindWell(long id_kt);
 	Well_3D * FindWell(const char * name);

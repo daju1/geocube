@@ -30,6 +30,7 @@ struct AutoCADRazrezParam
 	double init_wells_hatch_scale;
 
 	bool insert_dxf;
+	bool template_dwt;
 
 	bool draw_poligones;
 	bool poligones_fill;
@@ -152,6 +153,8 @@ class BrokenPlane3D : public Object
 	BlnProfile3D * m_profile3D;
 public:
 	void InitPrifile3D(BlnProfile3D * on){m_profile3D = on;}
+	BlnProfile3D * GetBlnProfile() {return m_profile3D;}
+
 
 	void clear();
 
@@ -190,7 +193,8 @@ public:
 	std::vector<std::vector<SurfLineIntersectPoint> >		m_SurfLineIntersectPoints;
 	ObjectList													m_SurfLineIntersectPoints_ObjectList;
 
-	static double m_w;// расстояние на котором надо рисовать m_drills_line_left и m_drills_line_right от m_drills
+	//static double m_w;// расстояние на котором надо рисовать m_drills_line_left и m_drills_line_right от m_drills
+	// перемещено в класс скважины
 
 
 

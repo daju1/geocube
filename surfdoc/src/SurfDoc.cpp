@@ -2937,6 +2937,8 @@ surface_blank_functions_list_item * SurfDoc::AddSurfaceBlankFunction(long id_sur
 	return wdli;
 }
 
+
+
 void SurfDoc::DeleteSurfaceBlankFunction(long r)
 {
 	if (r > -1 && r < GeoSurface::surface_blank_functions_list.size())
@@ -2961,7 +2963,6 @@ void SurfDoc::DeleteSurfaceBlankFunction(long r)
 
 			if (IDYES == MessageBox(this->hSurfWnd, str, "Удаление функций бланкования", MB_YESNO))
 			{
-
 				BYTE id_blank_fun = (*to_erase)->id_blank_fun;
 				long id_surf_obj = (*to_erase)->id_surf_obj;
 				long id_surf_param = (*to_erase)->id_surf_param;
@@ -2980,6 +2981,7 @@ void SurfDoc::DeleteSurfaceBlankFunction(long r)
 }
 
 
+
 int SurfDoc::AddKarotazh(const char * name, COLORREF color, bool if_exist_add_new)
 {
 	int kar_index = Well_3D::GetKarotazhIndex(name);
@@ -2993,16 +2995,45 @@ int SurfDoc::AddKarotazh(const char * name, COLORREF color, bool if_exist_add_ne
 	return kar_index;
 }
 
+
+
+double SurfDoc::GetWellW()
+{
+	double w = 1.0;
+	if (this->m_drills.SetCurrentMsgOnFirst())
+	{
+		do
+		{
+			w = this->m_drills.GetCurrentMsg().GetW();
+		}
+		while(this->m_drills.IncrementCurrentMsg());
+	}
+	return w;
+}
+
+
+
+void SurfDoc::SetWellW(double w)
+{
+	if (this->m_drills.SetCurrentMsgOnFirst())
+	{
+		do
+		{
+			this->m_drills.GetCurrentMsg().SetW(w);
+		}
+		while(this->m_drills.IncrementCurrentMsg());
+	}
+}
+
+
+
 Well_3D * SurfDoc::FindWell(long id_kt)
 {
-	//printf("SurfDoc::FindWell const char * name = %s)\n", name);
-	
 	Well_3D * found  = NULL;
 	if (this->m_drills.SetCurrentMsgOnFirst())
 	{
 		do
 		{
-	//printf("this->m_drills.GetCurrentMsg().GetName().c_str() = %s)\n",this->m_drills.GetCurrentMsg().GetName().c_str());
 			if ( this->m_drills.GetCurrentMsg().GetIdKt() == id_kt)
 			{
 				found = &this->m_drills.GetCurrentMsg();
@@ -3014,16 +3045,16 @@ Well_3D * SurfDoc::FindWell(long id_kt)
 
 	return found;
 }
+
+
+
 Well_3D * SurfDoc::FindWell(const char * well_id)
 {
-	//printf("SurfDoc::FindWell const char * name = %s)\n", name);
-	
 	Well_3D * found  = NULL;
 	if (this->m_drills.SetCurrentMsgOnFirst())
 	{
 		do
 		{
-	//printf("this->m_drills.GetCurrentMsg().GetName().c_str() = %s)\n",this->m_drills.GetCurrentMsg().GetName().c_str());
 			if ( strcmp(this->m_drills.GetCurrentMsg().GetIDString(), well_id)  == 0)
 			{
 				found = &this->m_drills.GetCurrentMsg();
@@ -3035,6 +3066,9 @@ Well_3D * SurfDoc::FindWell(const char * well_id)
 
 	return found;
 }
+
+
+
 void SurfDoc::WellsSaveToDB()
 {
 	if (this->Get_ID_OBJ() == -1)
@@ -3051,6 +3085,9 @@ void SurfDoc::WellsSaveToDB()
 		while(this->m_drills.IncrementCurrentMsg());
 	}
 }
+
+
+
 void SurfDoc::TestSvai()
 {
 	printf("SurfDoc::TestSvai()\n");
@@ -3078,6 +3115,9 @@ void SurfDoc::TestSvai()
 		while(this->m_drills.IncrementCurrentMsg());
 	}
 }
+
+
+
 void SurfDoc::DetermineDeformationModul()
 {
 	printf("SurfDoc::DetermineDeformationModul()\n");

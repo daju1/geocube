@@ -41,7 +41,7 @@ extern HINSTANCE hInst;								// current instance
 
 CString GetIGEName(CDatabase * database, long id_obj, long id_ige);
 
-double BrokenPlane3D::m_w = 1.0;
+//double BrokenPlane3D::m_w = 2.0;
 BrokenPlane3D::BrokenPlane3D()
 {
 	m_pSurfDoc = NULL;
@@ -309,9 +309,18 @@ void BrokenPlane3D::Cutting()
 				double x2 = m_vMapBlnProfiles[i2].x;
 				double y2 = m_vMapBlnProfiles[i2].y;
 
+
+				Well_3D * well_1 = this->m_pSurfDoc->FindWell(this->m_drills[i1].GetIdKt());
+				Well_3D * well_2 = this->m_pSurfDoc->FindWell(this->m_drills[i2].GetIdKt());
+
+				double w_1 = well_1 ? well_1->GetW() : 0.5;
+				double w_2 = well_2 ? well_2->GetW() : 0.5;
+
 				double dist         = sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
-				double part_1_right = BrokenPlane3D::m_w / dist;
-				double part_2_left  = (dist - BrokenPlane3D::m_w) / dist;
+				//double part_1_right = BrokenPlane3D::m_w / dist;
+				//double part_2_left  = (dist - BrokenPlane3D::m_w) / dist;
+				double part_1_right = w_1 / dist;
+				double part_2_left  = (dist - w_2) / dist;
 
 				double x1_right = x1 + part_1_right * (x2 - x1);
 				double y1_right = y1 + part_1_right * (y2 - y1);
@@ -324,7 +333,6 @@ void BrokenPlane3D::Cutting()
 
 				this->m_drills_line_left [i2].PushBack(CPoint3(x2_left,  y2_left,  z_min));
 				this->m_drills_line_left [i2].PushBack(CPoint3(x2_left,  y2_left,  z_max));
-
 
 
 				for(int n_surf = 0; n_surf < m_nSurfs; n_surf++)
@@ -5526,9 +5534,15 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 			DeleteEndZeros(str);
 			SetDlgItemText(hDlg, IDC_EDIT_AUTOCAD_WELLS_HATCH_SCALE, str);
 
-			sprintf(str, "%f", BrokenPlane3D::m_w);
-			DeleteEndZeros(str);
-			SetDlgItemText(hDlg, IDC_EDIT_BROKEN_PLANES3D_M_W, str);			
+			SurfDoc * doc = const_cast<SurfDoc *>( lpBrokenPlane3D->GetDoc() );
+			if (doc)
+			{			
+				double w = doc->GetWellW();
+				//sprintf(str, "%f", BrokenPlane3D::m_w);
+				sprintf(str, "%f", w);
+				DeleteEndZeros(str);
+				SetDlgItemText(hDlg, IDC_EDIT_BROKEN_PLANES3D_M_W, str);
+			}
 		}
 		break;
 	case WM_COMMAND :
@@ -5591,8 +5605,35 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 		case IDC_BUTTON_REBUILD_PROFILES:
 			{
 				GetDlgItemText(hDlg, IDC_EDIT_BROKEN_PLANES3D_M_W, str, 127);
-				BrokenPlane3D::m_w = atof(str);
-				lpBrokenPlane3D->Cutting();
+				//BrokenPlane3D::m_w = atof(str);
+				double w = atof(str);
+
+				//if (lpBrokenPlane3D->GetBlnProfile()) 
+				//	lpBrokenPlane3D->GetBlnProfile()->Cutting();
+
+				SurfDoc * doc = const_cast<SurfDoc *>( lpBrokenPlane3D->GetDoc() );
+				if (doc)
+				{
+					doc->SetWellW(w);
+
+
+					//doc->RebuildByGridData_IfNeed();
+
+					//doc->NoBlank(false);
+					//doc->SurfacesAutoBlank();
+
+					doc->ZoomView();
+					doc->Draw();
+
+					doc->Cutting();
+
+					//bln_profile->Cutting();
+					doc->UpdateAllViews();	
+
+
+					//doc->Draw();
+					//doc->UpdateAllViews();
+				}
 			}
 			break;
 
@@ -5762,34 +5803,24 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 	{
 		try
 		{
+			char * memenv;
+			char dwt_file[2048];dwt_file[0] = '\0';
+			if ((memenv = getenv("APPDATA")) != NULL) 
+			{
+				sprintf(dwt_file, "%s\\Autodesk\\", memenv);
+			}
 
 			char lpstrFile_dxf[1024];
-			if (param.insert_dxf && OpenFileDlg(0, "AutoCAD DXF (*.dxf)\0*.dxf\0All files \0*.*\0", lpstrFile_dxf) == S_OK)
+			if (param.template_dwt && OpenFileDlg(0, "AutoCAD DWT (*.dwt)\0*.dwt\0All files \0*.*\0", dwt_file) == S_OK)
+			{
+				m_acad.AcadOleExecute(dwt_file);
+			}
+			else if (param.insert_dxf && OpenFileDlg(0, "AutoCAD DXF (*.dxf)\0*.dxf\0All files \0*.*\0", lpstrFile_dxf) == S_OK)
 			{
 				m_acad.AcadOleExecute(lpstrFile_dxf);
 			}
 			else
 				m_acad.AcadOleExecute(NULL);
-
-
-
-			char * memenv;
-			char pat_file[2048];pat_file[0] = '\0';
-			if ((memenv = getenv("APPDATA")) != NULL) 
-			{
-				sprintf(pat_file, "%s\\Autodesk\\", memenv);
-			}
-
-			//if (OpenFileDlg(hWnd,"Autocad Pattern fale (*.pat)\0*.pat\0", pat_file) == S_OK)
-			//{
-
-			//char lpstrFile_dwt[1024];
-			//if (param.template_dwt && OpenFileDlg(0, "AutoCAD DWT (*.dwt)\0*.dwt\0All files \0*.*\0", lpstrFile_dwt) == S_OK)
-			//{
-			//	m_acad.AcadOleExecute(lpstrFile_dwt);
-			//}
-			//else
-			//	m_acad.AcadOleExecute(NULL);
 
 
 
@@ -6190,7 +6221,8 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 						Well_3D * well = this->m_pSurfDoc->FindWell(ID_KT);
 						if (well)
 						{
-							double w = 0.95 * BrokenPlane3D::m_w ;// * param.init_g_scale / param.g_scale;
+							//double w = 0.95 * BrokenPlane3D::m_w ;// * param.init_g_scale / param.g_scale;
+							double w = 0.95 * well->GetW() ;// * param.init_g_scale / param.g_scale;
 							CPoint3 pt3;
 
 							if (param.draw_wells)

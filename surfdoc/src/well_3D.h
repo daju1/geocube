@@ -471,11 +471,13 @@ friend class BrokenPlane3D;
 		double glubina_rostverka,
 		long id_snip, bool razbivka_na_tolschi, long typ_grunt_1_zond_type, long id_method_FindMeanPCK, double step);
 
-	long m_id_kt; // ID комплексной точки
-	long m_kt_idtyp; //тип комплексной точки
-	long m_id_bur_type; // способ бурения
-	long m_d_bur; // диаметр бурения
-	string m_data_bur; // дата бурения
+	long   m_id_kt;       // ID комплексной точки
+	long   m_kt_idtyp;    //тип комплексной точки
+	long   m_id_bur_type; // способ бурения
+	long   m_d_bur;       // диаметр бурения
+	string m_data_bur;    // дата бурения
+
+	double m_w;           // ширина колодца скважины
 public:
 	long GetIdKt(){return m_id_kt;}
 
@@ -515,7 +517,7 @@ public:
 	DB_Lito m_db_lito0;
 	DB_Lito m_db_lito;
 	void Lito0(long id_ige, double h0, double h1);
-	void Lito(long id_ige, double h0, double h1);
+	void Lito (long id_ige, double h0, double h1);
 	
 	void Apply_Lito0();
 
@@ -527,6 +529,9 @@ public:
 		double hv_z, double hv_v,
 		SYSTEMTIME dv);
 	void ApplyVoda();
+
+	double GetW()        {return m_w;}
+	void   SetW(double w){m_w = w;}
 };
 
 #define DYNAMOMETR_KAR_NAME "dynamometr"

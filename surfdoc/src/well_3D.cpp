@@ -754,6 +754,8 @@ void Well_3D::OnCreate(void)
 	this->m_d_bur = 0;
 	this->m_data_bur = "";
 
+	this->m_w                   = 1.0; 
+
 
 }
 	
