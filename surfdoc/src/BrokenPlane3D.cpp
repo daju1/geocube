@@ -2533,7 +2533,28 @@ void BrokenPlane3D::Build()
 									}
 								}
 
-					
+								//проверяем не находится ли точка пересечения внутри колодца
+								CPoint3 ustje_1, ustje_2;
+								if (
+									this->m_drills[n_cut  ].GetUstje(ustje_1) &&
+									this->m_drills[n_cut+1].GetUstje(ustje_2))
+								{
+								
+									Well_3D * well_1 = this->m_pSurfDoc->FindWell(this->m_drills[n_cut  ].GetIdKt());
+									Well_3D * well_2 = this->m_pSurfDoc->FindWell(this->m_drills[n_cut+1].GetIdKt());
+
+									double w_1 = well_1 ? well_1->GetW() : 0.5;
+									double w_2 = well_2 ? well_2->GetW() : 0.5;
+
+									double distance_w_1 = Distance_xy(ustje_1, pti);
+									double distance_w_2 = Distance_xy(ustje_2, pti);
+
+									if (distance_w_1 < w_1)
+										continue;
+
+									if (distance_w_2 < w_2)
+										continue;
+								}
 
 								vslip.push_back(SurfLineIntersectPoint());
 
