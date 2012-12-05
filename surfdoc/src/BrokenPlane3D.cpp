@@ -3955,6 +3955,16 @@ void BrokenPlane3D::clear()
 	m_polySloi.clear();
 
 //	m_drills.clear();
+
+	for (n_drill = 0; n_drill < m_drills_line_left.Size(); ++n_drill)
+	{
+		m_drills_line_left[n_drill].Free();
+	}
+
+	for (n_drill = 0; n_drill < m_drills_line_right.Size(); ++n_drill)
+	{
+		m_drills_line_right[n_drill].Free();
+	}
 }
 void BrokenPlane3D::EnumObjects(WPARAM wParam, LPARAM lParam, void * p,
 		bool (Object::* condition_fun)(),
@@ -5608,9 +5618,6 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 				//BrokenPlane3D::m_w = atof(str);
 				double w = atof(str);
 
-				//if (lpBrokenPlane3D->GetBlnProfile()) 
-				//	lpBrokenPlane3D->GetBlnProfile()->Cutting();
-
 				SurfDoc * doc = const_cast<SurfDoc *>( lpBrokenPlane3D->GetDoc() );
 				if (doc)
 				{
@@ -5622,10 +5629,14 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 					//doc->NoBlank(false);
 					//doc->SurfacesAutoBlank();
 
+					doc->Cutting();
+
 					doc->ZoomView();
 					doc->Draw();
 
-					doc->Cutting();
+
+				if (lpBrokenPlane3D->GetBlnProfile()) 
+					lpBrokenPlane3D->GetBlnProfile()->Cutting();
 
 					//bln_profile->Cutting();
 					doc->UpdateAllViews();	
