@@ -2232,6 +2232,27 @@ bool BrokenPlane3D::FindIntersection(bool back, int i1_1, int i2_1,
 				}
 
 
+				//проверяем не находится ли точка пересечения внутри колодца
+				Well_3D * well_1 = this->m_pSurfDoc->FindWell(this->m_drills[n_cut  ].GetIdKt());
+				Well_3D * well_2 = this->m_pSurfDoc->FindWell(this->m_drills[n_cut+1].GetIdKt());
+				
+				CPoint3 ustje_1, ustje_2;
+				if (well_1 && well_1->GetUstje(ustje_1))
+				{	
+					double w_1          = well_1->GetW();
+					double distance_w_1 = Distance_xy(ustje_1, pti);
+					if (distance_w_1 < w_1)
+						continue;
+				}				
+				
+				if (well_2 && well_2->GetUstje(ustje_2))                                        
+				{	
+					double w_2          = well_2->GetW();
+					double distance_w_2 = Distance_xy(ustje_2, pti);
+					if (distance_w_2 < w_2)
+						continue;
+				}
+				
 
 				vslip.push_back(SurfLineIntersectPoint());
 
@@ -2347,123 +2368,8 @@ void BrokenPlane3D::Build()
 		}
 		this->m_broken_lines[n_surf].m_lines_ObjectList.Init1(m_broken_lines[n_surf].m_lines, &this->m_broken_lines[n_surf]);
 	}
-#if HAVE_EXTRA_VISIBLE_BLN_PROFILE_LINES
-	//***********************************************************************
-	for (n_cut = 0; n_cut < m_nCuts; n_cut++)
-	{
-		for (int n_surf1 = 0; n_surf1 < m_nSurfs; n_surf1++)
-		{
-			if (this->m_broken_lines[n_surf1].m_lines[n_cut].GetPointsNumber() > 0)
-			{
-				for (size_t i2_1 = 1;  i2_1 < this->m_broken_lines[n_surf1].m_lines[n_cut].GetPointsNumber(); i2_1++)
-				{
-					size_t i1_1 = i2_1-1;
 
-					bool b1 = this->m_broken_lines[n_surf1].m_lines[n_cut].GetDocumentPoint(i1_1).bVisible;
-					bool b2 = this->m_broken_lines[n_surf1].m_lines[n_cut].GetDocumentPoint(i2_1).bVisible;
 
-					bool to_find_intersection = false;
-					if (b1 || b2)						
-					{
-						to_find_intersection = true;
-					}
-
-					if (to_find_intersection)
-					{
-						bool found_intersection = false;
-
-						CPoint3 pt_1 = this->m_broken_lines[n_surf1].m_lines[n_cut].GetDocumentPoint(i1_1);
-						CPoint3 pt_2 = this->m_broken_lines[n_surf1].m_lines[n_cut].GetDocumentPoint(i2_1);
-
-						// сюда складываем все точки пересечения
-						std::vector<SurfLineIntersectPoint> vslip;
-						vslip.clear();
-
-						for (int n_surf2 = n_surf1-1; n_surf2 >= 0; n_surf2--)
-						{
-							CPoint3 pti; int i1_2, i2_2; int unvisibles, dst_to_vis;
-							if (this->m_broken_lines[n_surf2].m_lines[n_cut].FindIntersection(this->m_profile3D, 
-								pt_1, pt_2, pti, i1_2, i2_2, unvisibles, dst_to_vis)
-								//(unvisibles < 2) - with this works as first version of FindIntersection() function
-								///&& ((unvisibles < 2) || (unvisibles == 2 && dst_to_vis < 24))
-								&& (unvisibles < 2)
-								)
-							{								
-
-								if (InBorders(pt_1, pt_2, pti))
-								{			
-									double distance_pt_1     = Distance(pt_1, pti);
-									double distance_pt_2     = Distance(pt_2, pti);
-
-									vslip.push_back(SurfLineIntersectPoint());
-
-									vslip.back().i_surf1     = n_surf1;
-									vslip.back().i1_1        = i1_1;
-									vslip.back().i2_1        = i2_1;
-
-									//vslip.back().back      = back;
-									vslip.back().dist_to_end = min( distance_pt_1, distance_pt_2 );
-
-									vslip.back().i_surf2     = n_surf2;
-									vslip.back().i1_2        = i1_2;
-									vslip.back().i2_2        = i2_2;
-									vslip.back().unvisibles  = unvisibles;
-									vslip.back().dst_to_vis  = dst_to_vis;
-
-									vslip.back().point.Init(this->m_pSurfDoc, pti);
-								}
-							}
-						}
-
-						if (vslip.size() > 1)
-						{
-							// сортируем их в соответствии с правилом, заложенном в операторе меньше:
-							// при сортировке по возрастанию в начале отсортированного вектора должен оказаться объект 
-							// с наименьшим dist_to_end, но если dist_to_end одинаково то с наибольшим i_surf2
-
-							std::sort(vslip.begin(), vslip.end());
-						}
-
-						// берём первый элемент списка
-						if (vslip.size() > 0)
-						{
-							if (!(n_cut < this->m_SurfLineIntersectPoints.size()))
-							{
-								char str[1024];
-								sprintf(str, "m_SurfLineIntersectPoints.size()=%d n_cut=%d", m_SurfLineIntersectPoints.size(), n_cut);
-								MessageBox(0,str,"",0);
-							}
-							this->m_SurfLineIntersectPoints[n_cut].push_back(SurfLineIntersectPoint());
-
-							this->m_SurfLineIntersectPoints[n_cut].back().i_surf1     = vslip[0].i_surf1;
-							this->m_SurfLineIntersectPoints[n_cut].back().i1_1        = vslip[0].i1_1;
-							this->m_SurfLineIntersectPoints[n_cut].back().i2_1        = vslip[0].i2_1;
-
-							this->m_SurfLineIntersectPoints[n_cut].back().back        = vslip[0].back;
-							this->m_SurfLineIntersectPoints[n_cut].back().dist_to_end = vslip[0].dist_to_end;
-
-							this->m_SurfLineIntersectPoints[n_cut].back().i_surf2     = vslip[0].i_surf2;
-							this->m_SurfLineIntersectPoints[n_cut].back().i1_2        = vslip[0].i1_2;
-							this->m_SurfLineIntersectPoints[n_cut].back().i2_2        = vslip[0].i2_2;
-
-							this->m_SurfLineIntersectPoints[n_cut].back().unvisibles  = vslip[0].unvisibles;
-							this->m_SurfLineIntersectPoints[n_cut].back().dst_to_vis  = vslip[0].dst_to_vis;
-
-							BYTE _podoshva = this->m_broken_lines[vslip[0].i_surf2].podoshva;
-							this->m_SurfLineIntersectPoints[n_cut].back().with_krovlja = _podoshva == 2;
-
-							this->m_SurfLineIntersectPoints[n_cut].back().point.Init(this->m_pSurfDoc, vslip[0].point.m_vdPoints[0]);
-
-							found_intersection = true;
-						}
-						vslip.clear();
-					}
-				}
-			}
-		}
-	}
-	//***********************************************************************
-#else
 	//***********************************************************************
 	for (n_cut = 0; n_cut < m_nCuts; n_cut++)
 	{
@@ -2502,78 +2408,7 @@ void BrokenPlane3D::Build()
 
 						for (int n_surf2 = n_surf1-1; n_surf2 >= 0; n_surf2--)
 						{
-#if 1
 							this->FindIntersection(back, i1_1, i2_1, n_cut, n_surf1, n_surf2, vslip);
-#else
-							CPoint3 pt_1 = this->m_broken_lines[n_surf1].m_lines[n_cut].GetDocumentPoint(i1_1);
-							CPoint3 pt_2 = this->m_broken_lines[n_surf1].m_lines[n_cut].GetDocumentPoint(i2_1);
-
-							CPoint3 pti; int i1_2, i2_2; int unvisibles, dst_to_vis;
-							if (this->m_broken_lines[n_surf2].m_lines[n_cut].FindIntersection(this->m_profile3D, 
-								pt_1, pt_2, pti, i1_2, i2_2, unvisibles, dst_to_vis)
-								//(unvisibles < 2) - with this works as first version of FindIntersection() function
-								&& ((unvisibles < 2) || (unvisibles == 2 && dst_to_vis < 24))
-								)
-							{								
-								double distance_pt_1 = Distance(pt_1, pti);
-								double distance_pt_2 = Distance(pt_2, pti);
-								bool in_borders = InBorders(pt_1, pt_2, pti);
-
-								if (!in_borders)
-								{
-									if (back)
-									{
-										if (distance_pt_1 > distance_pt_2)
-											continue;
-									}
-									else
-									{
-										if (distance_pt_1 < distance_pt_2)
-											continue;
-									}
-								}
-
-								//проверяем не находится ли точка пересечения внутри колодца
-								CPoint3 ustje_1, ustje_2;
-								if (
-									this->m_drills[n_cut  ].GetUstje(ustje_1) &&
-									this->m_drills[n_cut+1].GetUstje(ustje_2))
-								{
-								
-									Well_3D * well_1 = this->m_pSurfDoc->FindWell(this->m_drills[n_cut  ].GetIdKt());
-									Well_3D * well_2 = this->m_pSurfDoc->FindWell(this->m_drills[n_cut+1].GetIdKt());
-
-									double w_1 = well_1 ? well_1->GetW() : 0.5;
-									double w_2 = well_2 ? well_2->GetW() : 0.5;
-
-									double distance_w_1 = Distance_xy(ustje_1, pti);
-									double distance_w_2 = Distance_xy(ustje_2, pti);
-
-									if (distance_w_1 < w_1)
-										continue;
-
-									if (distance_w_2 < w_2)
-										continue;
-								}
-
-								vslip.push_back(SurfLineIntersectPoint());
-
-								vslip.back().i_surf1     = n_surf1;
-								vslip.back().i1_1        = i1_1;
-								vslip.back().i2_1        = i2_1;
-
-								vslip.back().back        = back;
-								vslip.back().dist_to_end = back ? distance_pt_1 : distance_pt_2;
-
-								vslip.back().i_surf2     = n_surf2;
-								vslip.back().i1_2        = i1_2;
-								vslip.back().i2_2        = i2_2;
-								vslip.back().unvisibles  = unvisibles;
-								vslip.back().dst_to_vis  = dst_to_vis;
-
-								vslip.back().point.Init(this->m_pSurfDoc, pti);								
-							}
-#endif
 						}
 
 						if (vslip.size() > 1)
@@ -2696,7 +2531,7 @@ void BrokenPlane3D::Build()
 		}
 	}
 	//***********************************************************************
-#endif
+
 
 	for (n_surf = 0; n_surf < m_nSurfs; n_surf++)
 	{
@@ -3986,6 +3821,11 @@ void BrokenPlane3D::clear()
 	{
 		m_drills_line_right[n_drill].Free();
 	}
+
+	for (n_cut = 0; n_cut < this->m_SurfLineIntersectPoints.size(); n_cut++)
+	{
+		this->m_SurfLineIntersectPoints[n_cut].clear();
+	}
 }
 void BrokenPlane3D::EnumObjects(WPARAM wParam, LPARAM lParam, void * p,
 		bool (Object::* condition_fun)(),
@@ -4172,6 +4012,7 @@ HTREEITEM BrokenPlane3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * 
 
 		sprintf(szItemText, "Points");
 		pObject = dynamic_cast<Object *> (&this->m_pointsDrillSloi_ObjectList);
+		pObject->m_bChecked = false;
 		HTREEITEM h3 = AddItemToTree(hwndTV, szItemText, pObject, h2);
 		//
 		for (n_point = 0; n_point < this->m_pointsDrillSloi.PLANE_MEMBERS_VECTOR_SIZE(); n_point++)
@@ -4185,6 +4026,7 @@ HTREEITEM BrokenPlane3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * 
 
 		sprintf(szItemText, "Points_left");
 		pObject = dynamic_cast<Object *> (&this->m_pointsDrillSloi_left_ObjectList);
+		pObject->m_bChecked = false;
 		h3 = AddItemToTree(hwndTV, szItemText, pObject, h2);
 		//
 		for (n_point = 0; n_point < this->m_pointsDrillSloi_left.PLANE_MEMBERS_VECTOR_SIZE(); n_point++)
@@ -4198,6 +4040,7 @@ HTREEITEM BrokenPlane3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * 
 
 		sprintf(szItemText, "Points_right");
 		pObject = dynamic_cast<Object *> (&this->m_pointsDrillSloi_right_ObjectList);
+		pObject->m_bChecked = false;
 		h3 = AddItemToTree(hwndTV, szItemText, pObject, h2);
 		//
 		for (n_point = 0; n_point < this->m_pointsDrillSloi_right.PLANE_MEMBERS_VECTOR_SIZE(); n_point++)
@@ -4211,6 +4054,7 @@ HTREEITEM BrokenPlane3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * 
 
 		sprintf(szItemText, "SurfLineIntersectPoint");
 		pObject = dynamic_cast<Object *> (&this->m_SurfLineIntersectPoints_ObjectList);
+		pObject->m_bChecked = false;
 		h3 = AddItemToTree(hwndTV, szItemText, pObject, h2);
 		//
 		for (n_cut = 0; n_cut < this->m_SurfLineIntersectPoints.size(); n_cut++)
@@ -5639,32 +5483,21 @@ BOOL CALLBACK DlgProcAutoCADRazres( HWND hDlg, UINT uMsg,
 				//BrokenPlane3D::m_w = atof(str);
 				double w = atof(str);
 
+
 				SurfDoc * doc = const_cast<SurfDoc *>( lpBrokenPlane3D->GetDoc() );
 				if (doc)
 				{
 					doc->SetWellW(w);
 
-
-					//doc->RebuildByGridData_IfNeed();
-
-					//doc->NoBlank(false);
-					//doc->SurfacesAutoBlank();
-
+					//if (lpBrokenPlane3D->GetBlnProfile()) 
+					//	lpBrokenPlane3D->GetBlnProfile()->Cutting();					
+					
 					doc->Cutting();
 
 					doc->ZoomView();
 					doc->Draw();
 
-
-				if (lpBrokenPlane3D->GetBlnProfile()) 
-					lpBrokenPlane3D->GetBlnProfile()->Cutting();
-
-					//bln_profile->Cutting();
-					doc->UpdateAllViews();	
-
-
-					//doc->Draw();
-					//doc->UpdateAllViews();
+					doc->UpdateAllViews();
 				}
 			}
 			break;
