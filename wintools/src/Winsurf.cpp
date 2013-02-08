@@ -11728,10 +11728,13 @@ LRESULT CALLBACK DlgProcSurfProp( HWND hDlg, UINT uMsg,
 				//====== Синхронизируем параметр lp и
 				//====== устанавливаем его в положение nPos
 				lpSurfPropDlgMem->pSurfDoc->m_LightParam[num] = m_Pos[num];
-
+/*
+// управление этими источниками света
+// вращающимися вместе со сценой
+// перенести в другой диалог
 				project * prj;
 				prj = dynamic_cast<project *>(lpSurfPropDlgMem->pSurfDoc);
-				if (num > 0 && num < 3)
+				if (num >= 0 && num < 3)
 				{
 					for (i32u n1 = 0;n1 < prj->light_vector.size();n1++)
 					{
@@ -11742,7 +11745,7 @@ LRESULT CALLBACK DlgProcSurfProp( HWND hDlg, UINT uMsg,
 						prj->light_vector[n1]->GetLocData()->zdir[num] = m_Pos[num];
 					}
 				}
-
+*/
 				//====== Перерисовываем Вид с учетом изменений
 				RECT rect;
 				GetClientRect(lpSurfPropDlgMem->hWnd,&rect);

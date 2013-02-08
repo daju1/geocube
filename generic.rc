@@ -3270,6 +3270,7 @@ BEGIN
     POPUP "Свет"
     BEGIN
         MENUITEM "Свойства",                    ID_SURF_LIGHT_PROP
+        MENUITEM SEPARATOR
         POPUP "Добавить свет"
         BEGIN
             MENUITEM "light ...",                   ID_LIGHTS_ADDLIGHT_LIGHT
@@ -3282,8 +3283,12 @@ BEGIN
             MENUITEM "Global Spotlight",            ID_LIGHTS_ADDLIGHT_GLOBALSPOTLIGHT
 
         END
+        MENUITEM SEPARATOR
         MENUITEM "Enable Local Lights",         ID_LIGHTS_ENABLELOCALLIGHTS
         MENUITEM "Enable Global Lights",        ID_LIGHTS_ENABLEGLOBALLIGHTS
+        MENUITEM SEPARATOR
+        MENUITEM "Move Local Lights",           ID_LIGHTS_MOVELOCALLIGHTS
+        MENUITEM "Move Global Lights",          ID_LIGHTS_MOVEGLOBALLIGHTS
     END
     POPUP "Выделить"
     BEGIN

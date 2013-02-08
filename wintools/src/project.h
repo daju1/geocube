@@ -480,9 +480,12 @@ class project : public SurfDoc
 	
 	void DoDeleteCurrentObject(void);
 	
-	void DoSwitchLocalLights(camera *, bool);
-	void DoSwitchGlobalLights(camera *, bool);
-	
+	bool DoSwitchLocalLights(camera *, bool);
+	bool DoSwitchGlobalLights(camera *, bool);
+
+	bool DoSwitchMovingLocalLights(camera *, bool);
+	bool DoSwitchMovingGlobalLights(camera *, bool);
+
 //	bool TestAtom(atom *, rmode);
 //	bool TestBond(bond *, rmode);
 	

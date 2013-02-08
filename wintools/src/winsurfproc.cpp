@@ -444,7 +444,10 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
-						wgrv->popup_LightsSwitchLoc(hWnd, NULL);
+						if (wgrv->popup_LightsSwitchLoc(hWnd, NULL))
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
+						else							
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_UNCHECKED);
 					}
 					//######################################################
 				}
@@ -456,11 +459,47 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
-						wgrv->popup_LightsSwitchGlob(hWnd, NULL);
+						if (wgrv->popup_LightsSwitchGlob(hWnd, NULL))
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
+						else
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_UNCHECKED);
 					}
 					//######################################################
 				}
 				break;
+
+			case ID_LIGHTS_MOVELOCALLIGHTS:
+				{
+					//######################################################
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
+					if (wgrv)
+					{
+						if (wgrv->popup_LightsSwitchMovingLoc(hWnd, NULL))
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
+						else							
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_UNCHECKED);
+					}
+					//######################################################
+				}
+				break;
+
+			case ID_LIGHTS_MOVEGLOBALLIGHTS:
+				{
+					//######################################################
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
+					if (wgrv)
+					{
+						if (wgrv->popup_LightsSwitchMovingGlob(hWnd, NULL))
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
+						else
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_UNCHECKED);
+					}
+					//######################################################
+				}
+				break;
+
 			case ID_SELECT_SELECTALL:
 				{
 					//######################################################
@@ -1085,8 +1124,11 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 				  SendMessage(hWnd, WM_COMMAND, ID_FILE_INITOG, 0);
 				  
 				  //##################################################
-				  CheckMenuItem(GetMenu( GetParent(hWnd) ), 
-					  ID_MOUSE_ORBITXY,
+				  CheckMenuItem(GetMenu( GetParent(hWnd) ), ID_MOUSE_ORBITXY,
+					  MF_BYCOMMAND | MF_CHECKED);
+				  CheckMenuItem(GetMenu( GetParent(hWnd)  ), ID_LIGHTS_ENABLELOCALLIGHTS,                        
+					  MF_BYCOMMAND | MF_CHECKED);
+				  CheckMenuItem(GetMenu( GetParent(hWnd)  ), ID_LIGHTS_ENABLEGLOBALLIGHTS,                        
 					  MF_BYCOMMAND | MF_CHECKED);
 				  //##################################################
 				  WinSurfProc(hWnd, message, wParam, lParam);

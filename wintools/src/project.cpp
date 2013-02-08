@@ -1902,7 +1902,7 @@ iGLs project::CountLocalLights(camera * p1)
 
 bool project::SetupLights(camera * p1)
 {
-//printf("project::SetupLights(camera * p1)\n\n");
+printf("project::SetupLights(camera * p1 = %x)\n\n", p1);
 
 	if (p1->prj != this) return false;
 	
@@ -1935,17 +1935,21 @@ bool project::SetupLights(camera * p1)
 			if (test1 && test2) continue;
 			
 			light_vector[n2]->SetupProperties(); bool test = false;
-			if (light_vector[n2]->owner == NULL && p1->use_global_lights) test = true;
-			if (light_vector[n2]->owner == p1 && p1->use_local_lights) test = true;
+			if (light_vector[n2]->owner == NULL && p1->use_global_lights)
+			{
+				printf("light_vector[n2]->number = %d global_light\n", light_vector[n2]->number);
+				test = true;
+			}
+			if (light_vector[n2]->owner == p1 && p1->use_local_lights)
+			{
+				printf("light_vector[n2]->number = %d local_light\n", light_vector[n2]->number);
+				test = true;
+			}
 			if (test)
 			{
-				//printf("test == true glEnable((GLenum) light_vector[n2]->number = %d\n", 	
-				//	light_vector[n2]->number);
+				printf("glEnable((GLenum) light_vector[n2]->number = %d\n", light_vector[n2]->number);
 				glEnable((GLenum) light_vector[n2]->number);
 			}
-			///else
-			//	printf("test == false !glEnable((GLenum) light_vector[n2]->number = %d\n", 
-			//	light_vector[n2]->number);
 		}
 		}
 	}
@@ -2116,7 +2120,7 @@ graphics_view * project::AddGraphicsView(camera * p1, bool detached)
 		
 		SetupLights(cam);
 	}
-	this->SetLight();
+	//this->SetLight();
 #endif
 	UpdateAllWindowTitles();
 	return graphics_view_vector.back();
@@ -2662,14 +2666,19 @@ void project::ProcessCommandString(graphics_view * gv, const char * command)
 
 		return;
 	}
+
+
+
 	if (!strcmp("lights", kw1))
 	{
+e_lights:
 		for (i32u n1 = 0;n1 < this->light_vector.size();n1++)
 		{
-			printf("light %d\n",n1);
+			printf("light %d number %d owner %x \n",
+				n1, this->light_vector[n1]->number,  this->light_vector[n1]->owner);
 			const obj_loc_data * ol = this->light_vector[n1]->GetLocData();
 			printf("crd[%f %f %f %f] lock_count = %d\n"
-				"ydir[%f %f %f] zdir[%f %f %f]\n",	
+				"ydir[%f %f %f] zdir[%f %f %f]\n\n",	
 				ol->crd[0],
 				ol->crd[1],
 				ol->crd[2],
@@ -2685,6 +2694,58 @@ void project::ProcessCommandString(graphics_view * gv, const char * command)
 			
 			
 		}
+
+		return;
+	}
+
+	if (!strcmp("light", kw1))
+	{
+		char kw2[32]; istr >> kw2;	
+		int i = atoi(kw2);
+		if (i < 0 || i >= this->light_vector.size())
+			return;
+
+		obj_loc_data * ol = const_cast<obj_loc_data *>(this->light_vector[i]->GetLocData());
+
+		char kw3[32]; istr >> kw3;
+		char kw4[32]; istr >> kw4;
+		int j = atoi(kw4);
+
+		char kw5[32]; istr >> kw5;
+		float v = atof(kw5);
+
+		if (!strcmp("c", kw3))
+		{
+			if (j < 0 || j >= 4)
+				return;
+
+			ol->crd[j] = v;
+		}
+
+		if (!strcmp("y", kw3))
+		{
+			if (j < 0 || j >= 3)
+				return;
+
+			ol->ydir[j] = v;
+		}
+
+		if (!strcmp("z", kw3))
+		{
+			if (j < 0 || j >= 3)
+				return;
+
+			ol->zdir[j] = v;
+
+		}
+		for (i32u n1 = 0;n1 < graphics_view_vector.size();n1++)
+		{
+			SetupLights(graphics_view_vector[n1]->cam);
+		}
+		UpdateAllGraphicsViews();
+
+		goto e_lights;
+
 
 		return;
 	}
@@ -3783,19 +3844,36 @@ void project::DoDeleteCurrentObject(void)
 	}
 }
 
-void project::DoSwitchLocalLights(camera * cam, bool report)
+bool project::DoSwitchLocalLights(camera * cam, bool report)
 {
 	cam->use_local_lights = !cam->use_local_lights;
 	if (report) cout << "local lights = " << (cam->use_local_lights ? "on" : "off") << endl;
 	SetupLights(cam); UpdateGraphicsViews(cam);
+	return cam->use_local_lights;
 }
 
-void project::DoSwitchGlobalLights(camera * cam, bool report)
+bool project::DoSwitchGlobalLights(camera * cam, bool report)
 {
 	cam->use_global_lights = !cam->use_global_lights;
 	if (report) cout << "global lights = " << (cam->use_global_lights ? "on" : "off") << endl;
 	SetupLights(cam); UpdateGraphicsViews(cam);
+	return cam->use_global_lights;
 }
+
+bool project::DoSwitchMovingLocalLights(camera * cam, bool report)
+{
+	cam->move_local_lights = !cam->move_local_lights;
+	if (report) cout << "move local lights = " << (cam->move_local_lights ? "on" : "off") << endl;
+	return cam->move_local_lights;
+}
+
+bool project::DoSwitchMovingGlobalLights(camera * cam, bool report)
+{
+	cam->move_global_lights = !cam->move_global_lights;
+	if (report) cout << "move global lights = " << (cam->move_global_lights ? "on" : "off") << endl;
+	return cam->move_global_lights;
+}
+
 
 
 void project::InitGL(void)
@@ -3855,7 +3933,7 @@ glSelectBuffer(SB_SIZE, select_buffer);
 	// also setup the lights, just to make sure it always happens...
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #if 1
-SetLight();
+	//SetLight();
 //#else
 	for (i32u n1 = 0;n1 < camera_vector.size();n1++)
 	{
@@ -4479,7 +4557,7 @@ glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	if (!pSurfDoc->m_bDrawGeoid)
 	{
-		pSurfDoc->SetLight();
+		//pSurfDoc->SetLight();
 	}
 
 

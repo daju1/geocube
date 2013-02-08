@@ -696,16 +696,28 @@ void win_graphics_view::popup_LightsNewLightGlobSpot(HWND widget, void * data)
 	new command_dialog(gv->prj, gv, command);
 }
 
-void win_graphics_view::popup_LightsSwitchLoc(HWND widget, void * data)
+bool win_graphics_view::popup_LightsSwitchLoc(HWND widget, void * data)
 {
 	win_graphics_view * gv = GetGV(widget);
-	gv->prj->DoSwitchLocalLights(gv->cam, false);
+	return gv->prj->DoSwitchLocalLights(gv->cam, true);
 }
 
-void win_graphics_view::popup_LightsSwitchGlob(HWND widget, void * data)
+bool win_graphics_view::popup_LightsSwitchGlob(HWND widget, void * data)
 {
 	win_graphics_view * gv = GetGV(widget);
-	gv->prj->DoSwitchGlobalLights(gv->cam, false);
+	return gv->prj->DoSwitchGlobalLights(gv->cam, true);
+}
+
+bool win_graphics_view::popup_LightsSwitchMovingLoc(HWND widget, void * data)
+{
+	win_graphics_view * gv = GetGV(widget);
+	return gv->prj->DoSwitchMovingLocalLights(gv->cam, true);
+}
+
+bool win_graphics_view::popup_LightsSwitchMovingGlob(HWND widget, void * data)
+{
+	win_graphics_view * gv = GetGV(widget);
+	return gv->prj->DoSwitchMovingGlobalLights(gv->cam, true);
 }
 /*################################################################################################*/
 

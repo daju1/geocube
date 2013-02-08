@@ -59,7 +59,10 @@ class camera : public dummy_object
 	
 	bool use_local_lights;
 	bool use_global_lights;
-	
+
+	bool move_local_lights;
+	bool move_global_lights;
+
 	bool ortho;
 	bool stereo_mode;	// this is true if any stereo mode; relaxed-eye or color-based.
 	bool stereo_relaxed;	// this is true if relaxed_eye stereo mode.

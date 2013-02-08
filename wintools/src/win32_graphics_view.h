@@ -84,8 +84,11 @@ class win_graphics_view : public win_ogl_view, public graphics_view
 	static void popup_LightsNewLightLocSpot(HWND widget, void * data);
 	static void popup_LightsNewLightGlobDir(HWND widget, void * data);
 	static void popup_LightsNewLightGlobSpot(HWND widget, void * data);
-	static void popup_LightsSwitchLoc(HWND, void*);
-	static void popup_LightsSwitchGlob(HWND, void*);
+	static bool popup_LightsSwitchLoc(HWND, void*);
+	static bool popup_LightsSwitchGlob(HWND, void*);
+
+	static bool popup_LightsSwitchMovingLoc(HWND, void*);
+	static bool popup_LightsSwitchMovingGlob(HWND, void*);
 };
 
 /*################################################################################################*/

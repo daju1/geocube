@@ -40,7 +40,10 @@ camera::camera(const object_location & p1, fGL p2, project * p3) : dummy_object(
 	
 	use_local_lights = true;
 	use_global_lights = true;
-	
+
+	move_local_lights = false;
+	move_global_lights = false;
+
 	ortho = false;
 	stereo_mode = false;
 	stereo_relaxed = false;
@@ -89,19 +92,27 @@ bool camera::CopySettings(const camera * p1)
 void camera::OrbitObject(const fGL * ang, const camera & cam, int type)
 {
 	fGL tmp_ang[3];
-	for (i32s n1 = 0;n1 < 3;n1++)
+	for (i32u n1 = 0;n1 < 3;n1++)
 	{
 		tmp_ang[n1] = -ang[n1];
 	}
-	{
-	for (i32u n1 = 0;n1 < prj->light_vector.size();n1++)
-	{
-		if (prj->light_vector[n1]->owner != this) continue;
-		prj->light_vector[n1]->OrbitObject(tmp_ang, cam, type);
-	}
-	}
 	
-	dummy_object::OrbitObject(tmp_ang, cam, type);
+	for (n1 = 0;n1 < prj->light_vector.size();n1++)
+	{
+		if (prj->light_vector[n1]->owner != this)// global light
+		{
+			if (!cam.move_global_lights)
+				continue;
+		}
+		else //local light
+		{
+
+		}
+		prj->light_vector[n1]->OrbitObject(tmp_ang, cam, type);
+	}	
+
+	if ((!cam.move_global_lights) && (!cam.move_local_lights))
+		dummy_object::OrbitObject(tmp_ang, cam, type);
 	
 	DoCameraEvents();
 }
@@ -113,20 +124,21 @@ void camera::OrbitObject(const fGL * ang, const camera & cam, int type)
 void camera::RotateObject(const fGL * ang, const camera & cam)
 {
 	fGL tmp_ang[3];
-	for (i32s n1 = 0;n1 < 3;n1++)
+	for (i32u n1 = 0;n1 < 3;n1++)
 	{
 		tmp_ang[n1] = -ang[n1];
 	}
 	
-	camera tmp_cam = cam; tmp_cam.focus = 0.0;{
-	for (i32u n1 = 0;n1 < prj->light_vector.size();n1++)
+	camera tmp_cam = cam; tmp_cam.focus = 0.0;
+	for (n1 = 0;n1 < prj->light_vector.size();n1++)
 	{
-		if (prj->light_vector[n1]->owner != this) continue;
-		prj->light_vector[n1]->OrbitObject(tmp_ang, tmp_cam, 0);
-	}
+		if (prj->light_vector[n1]->owner != this && (!cam.move_global_lights)) continue;
+		prj->light_vector[n1]->RotateObject(tmp_ang, tmp_cam);
 	}
 	
-	dummy_object::RotateObject(tmp_ang, cam);
+	
+	if ((!cam.move_global_lights) && (!cam.move_local_lights))
+		dummy_object::RotateObject(tmp_ang, cam);
 	
 	DoCameraEvents();
 }
@@ -134,19 +146,20 @@ void camera::RotateObject(const fGL * ang, const camera & cam)
 void camera::TranslateObject(const fGL * dst, const obj_loc_data * data)
 {
 	fGL tmp_dst[3];
-	for (i32s n1 = 0;n1 < 3;n1++)
+	for (i32u n1 = 0;n1 < 3;n1++)
 	{
 		tmp_dst[n1] = -dst[n1];
 	}
-	{
+	
 	for (i32u n1 = 0;n1 < prj->light_vector.size();n1++)
 	{
-		if (prj->light_vector[n1]->owner != this) continue;
+		if (prj->light_vector[n1]->owner != this && (!move_global_lights)) continue;
 		prj->light_vector[n1]->TranslateObject(tmp_dst, data);
 	}
-	}
 	
-	dummy_object::TranslateObject(tmp_dst, data);
+	
+	if ((!move_global_lights) && (!move_local_lights))
+		dummy_object::TranslateObject(tmp_dst, data);
 	
 	DoCameraEvents();
 }
@@ -312,14 +325,13 @@ void camera::RenderWindow(graphics_view * gv, rmode rm, int x, int y)
 //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,1);
 		
 		// now, it's time to set up the lights...
-//printf("camera::RenderWindow pre gv->GetProject()->light_vector[n1]->SetupLocation()\n")		;
 		for (i32u n1 = 0;n1 < gv->GetProject()->light_vector.size();n1++)
 		{
 			camera * owner = gv->GetProject()->light_vector[n1]->owner;
 			if (owner != NULL && owner != this) continue;
 			gv->GetProject()->light_vector[n1]->SetupLocation();
 		}
-		gv->GetProject()->SetLight();//my test
+		//gv->GetProject()->SetLight();//my test
 		
 		// here, we are finally ready to actually render the view. for simple non-stereo views, just erase the background
 		// by calling glClear(), and then call prj->Render() to render the view. For relaxed-eye stereo views, two viewports
