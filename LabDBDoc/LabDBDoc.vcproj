@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="LabDBDoc"
 	ProjectGUID="{7FF05D5D-011C-4BA4-B712-B2BC796DCE48}"
-	SccProjectName=""
-	SccLocalPath=""
-	Keyword="MFCProj">
+	RootNamespace="LabDBDoc"
+	Keyword="MFCProj"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory=".\Debug"
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="4"
-			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="./../include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				UsePrecompiledHeader="3"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="stdafx.h"
 				PrecompiledHeaderFile=".\Debug/LabDBDoc.pch"
 				AssemblerListingLocation=".\Debug/"
@@ -35,86 +56,115 @@
 				ProgramDataBaseFileName=".\Debug/"
 				BrowseInformation="1"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"/>
+				SuppressStartupBanner="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\lib\labdbdoc_d.lib"
-				SuppressStartupBanner="TRUE"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLibrarianTool"
+				OutputFile="..\lib\labdbdoc_d.lib"
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\Release"
 			IntermediateDirectory=".\Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="./../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
-				StringPooling="TRUE"
+				StringPooling="true"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="TRUE"
-				UsePrecompiledHeader="3"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="stdafx.h"
 				PrecompiledHeaderFile=".\Release/LabDBDoc.pch"
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"/>
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\lib\labdbdoc.lib"
-				SuppressStartupBanner="TRUE"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLibrarianTool"
+				OutputFile="..\lib\labdbdoc.lib"
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -122,422 +172,559 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+			>
 			<File
-				RelativePath="..\lab\lab\labDoc.cpp">
+				RelativePath="..\lab\lab\labDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\MyListCtrl.cpp">
+				RelativePath="..\lab\lab\MyListCtrl.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetBlankLines.cpp">
+				RelativePath="..\lab\lab\SetBlankLines.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetChemVD.cpp">
+				RelativePath="..\lab\lab\SetChemVD.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetChemVD_tbl.cpp">
+				RelativePath="..\lab\lab\SetChemVD_tbl.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCilce.cpp">
+				RelativePath="..\lab\lab\SetCilce.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCilce0.cpp">
+				RelativePath="..\lab\lab\SetCilce0.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCompress.cpp">
+				RelativePath="..\lab\lab\SetCompress.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetConsObj.cpp">
+				RelativePath="..\lab\lab\SetConsObj.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCubeSize.cpp">
+				RelativePath="..\lab\lab\SetCubeSize.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFizMeh.cpp">
+				RelativePath="..\lab\lab\SetFizMeh.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFizMehAllParam.cpp">
+				RelativePath="..\lab\lab\SetFizMehAllParam.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFizMehParam.cpp">
+				RelativePath="..\lab\lab\SetFizMehParam.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFundament.cpp">
+				RelativePath="..\lab\lab\SetFundament.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFundament_tbl.cpp">
+				RelativePath="..\lab\lab\SetFundament_tbl.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGenezis.cpp">
+				RelativePath="..\lab\lab\SetGenezis.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGeoTables.cpp">
+				RelativePath="..\lab\lab\SetGeoTables.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGranular.cpp">
+				RelativePath="..\lab\lab\SetGranular.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGranularAll_2.cpp">
+				RelativePath="..\lab\lab\SetGranularAll_2.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGridData.cpp">
+				RelativePath="..\lab\lab\SetGridData.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGriddataSurfaces.cpp">
+				RelativePath="..\lab\lab\SetGriddataSurfaces.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGridDataUsedAlgorothms.cpp">
+				RelativePath="..\lab\lab\SetGridDataUsedAlgorothms.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGrMain.cpp">
+				RelativePath="..\lab\lab\SetGrMain.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGrunty.cpp">
+				RelativePath="..\lab\lab\SetGrunty.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetIGE.cpp">
+				RelativePath="..\lab\lab\SetIGE.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetKT.cpp">
+				RelativePath="..\lab\lab\SetKT.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetLito.cpp">
+				RelativePath="..\lab\lab\SetLito.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetObject.cpp">
+				RelativePath="..\lab\lab\SetObject.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPalja1.cpp">
+				RelativePath="..\lab\lab\SetPalja1.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2Fiz_CalcMode.cpp">
+				RelativePath="..\lab\lab\SetPCK2Fiz_CalcMode.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2Fiz_CalcModes.cpp">
+				RelativePath="..\lab\lab\SetPCK2Fiz_CalcModes.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2Fiz_CalcParams.cpp">
+				RelativePath="..\lab\lab\SetPCK2Fiz_CalcParams.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2FizResults.cpp">
+				RelativePath="..\lab\lab\SetPCK2FizResults.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2FizTable.cpp">
+				RelativePath="..\lab\lab\SetPCK2FizTable.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPodTypyGr.cpp">
+				RelativePath="..\lab\lab\SetPodTypyGr.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPodTypyGrUserDef.cpp">
+				RelativePath="..\lab\lab\SetPodTypyGrUserDef.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPolygons.cpp">
+				RelativePath="..\lab\lab\SetPolygons.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPres.cpp">
+				RelativePath="..\lab\lab\SetPres.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPress.cpp">
+				RelativePath="..\lab\lab\SetPress.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPress_tbl.cpp">
+				RelativePath="..\lab\lab\SetPress_tbl.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetProbGr.cpp">
+				RelativePath="..\lab\lab\SetProbGr.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetProbGr2.cpp">
+				RelativePath="..\lab\lab\SetProbGr2.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPtPalja.cpp">
+				RelativePath="..\lab\lab\SetPtPalja.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPtStZond.cpp">
+				RelativePath="..\lab\lab\SetPtStZond.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetRozriz.cpp">
+				RelativePath="..\lab\lab\SetRozriz.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetRozrizy1.cpp">
+				RelativePath="..\lab\lab\SetRozrizy1.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetShtamp.cpp">
+				RelativePath="..\lab\lab\SetShtamp.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetShtamp_detail.cpp">
+				RelativePath="..\lab\lab\SetShtamp_detail.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetStZond.cpp">
+				RelativePath="..\lab\lab\SetStZond.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfacesBlankFunctions.cpp">
+				RelativePath="..\lab\lab\SetSurfacesBlankFunctions.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfacesBlankOrder1.cpp">
+				RelativePath="..\lab\lab\SetSurfacesBlankOrder1.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfacesOrder.cpp">
+				RelativePath="..\lab\lab\SetSurfacesOrder.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfIgeMapping.cpp">
+				RelativePath="..\lab\lab\SetSurfIgeMapping.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfLitoMapping.cpp">
+				RelativePath="..\lab\lab\SetSurfLitoMapping.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetT_P.cpp">
+				RelativePath="..\lab\lab\SetT_P.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetT_V.cpp">
+				RelativePath="..\lab\lab\SetT_V.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetUmPoz.cpp">
+				RelativePath="..\lab\lab\SetUmPoz.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetUstanovka.cpp">
+				RelativePath="..\lab\lab\SetUstanovka.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetVoda.cpp">
+				RelativePath="..\lab\lab\SetVoda.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetWopt.cpp">
+				RelativePath="..\lab\lab\SetWopt.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetWopt_tbl.cpp">
+				RelativePath="..\lab\lab\SetWopt_tbl.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetZriz.cpp">
+				RelativePath="..\lab\lab\SetZriz.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetZriz0.cpp">
+				RelativePath="..\lab\lab\SetZriz0.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetZriz_tbl.cpp">
+				RelativePath="..\lab\lab\SetZriz_tbl.cpp"
+				>
 			</File>
 			<File
-				RelativePath="StdAfx.cpp">
+				RelativePath="StdAfx.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
 						UsePrecompiledHeader="1"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
 						PreprocessorDefinitions=""
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl">
+			Filter="h;hpp;hxx;hm;inl"
+			>
 			<File
-				RelativePath="..\lab\lab\3DDoc.cpp">
+				RelativePath="..\lab\lab\3DDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\labDoc.h">
+				RelativePath="..\lab\lab\labDoc.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetBlankLines.h">
+				RelativePath="..\lab\lab\SetBlankLines.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetChemVD.h">
+				RelativePath="..\lab\lab\SetChemVD.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetChemVD_tbl.h">
+				RelativePath="..\lab\lab\SetChemVD_tbl.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCilce.h">
+				RelativePath="..\lab\lab\SetCilce.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCilce0.h">
+				RelativePath="..\lab\lab\SetCilce0.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCompress.h">
+				RelativePath="..\lab\lab\SetCompress.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetConsObj.h">
+				RelativePath="..\lab\lab\SetConsObj.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetCubeSize.h">
+				RelativePath="..\lab\lab\SetCubeSize.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFizMeh.h">
+				RelativePath="..\lab\lab\SetFizMeh.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFizMehAllParam.h">
+				RelativePath="..\lab\lab\SetFizMehAllParam.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFizMehParam.h">
+				RelativePath="..\lab\lab\SetFizMehParam.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFundament.h">
+				RelativePath="..\lab\lab\SetFundament.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetFundament_tbl.h">
+				RelativePath="..\lab\lab\SetFundament_tbl.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGenezis.h">
+				RelativePath="..\lab\lab\SetGenezis.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGeoTables.h">
+				RelativePath="..\lab\lab\SetGeoTables.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGranular.h">
+				RelativePath="..\lab\lab\SetGranular.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGranularAll_2.h">
+				RelativePath="..\lab\lab\SetGranularAll_2.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGridData.h">
+				RelativePath="..\lab\lab\SetGridData.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGriddataSurfaces.h">
+				RelativePath="..\lab\lab\SetGriddataSurfaces.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGridDataUsedAlgorothms.h">
+				RelativePath="..\lab\lab\SetGridDataUsedAlgorothms.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGrMain.h">
+				RelativePath="..\lab\lab\SetGrMain.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetGrunty.h">
+				RelativePath="..\lab\lab\SetGrunty.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetIGE.h">
+				RelativePath="..\lab\lab\SetIGE.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetKT.h">
+				RelativePath="..\lab\lab\SetKT.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetLito.h">
+				RelativePath="..\lab\lab\SetLito.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetObject.h">
+				RelativePath="..\lab\lab\SetObject.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPalja1.h">
+				RelativePath="..\lab\lab\SetPalja1.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2Fiz_CalcMode.h">
+				RelativePath="..\lab\lab\SetPCK2Fiz_CalcMode.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2Fiz_CalcModes.h">
+				RelativePath="..\lab\lab\SetPCK2Fiz_CalcModes.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2Fiz_CalcParams.h">
+				RelativePath="..\lab\lab\SetPCK2Fiz_CalcParams.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2FizResults.h">
+				RelativePath="..\lab\lab\SetPCK2FizResults.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPCK2FizTable.h">
+				RelativePath="..\lab\lab\SetPCK2FizTable.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPodTypyGr.h">
+				RelativePath="..\lab\lab\SetPodTypyGr.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPodTypyGrUserDef.h">
+				RelativePath="..\lab\lab\SetPodTypyGrUserDef.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPolygons.h">
+				RelativePath="..\lab\lab\SetPolygons.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPres.h">
+				RelativePath="..\lab\lab\SetPres.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPress.h">
+				RelativePath="..\lab\lab\SetPress.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPress_tbl.h">
+				RelativePath="..\lab\lab\SetPress_tbl.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetProbGr.h">
+				RelativePath="..\lab\lab\SetProbGr.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetProbGr2.h">
+				RelativePath="..\lab\lab\SetProbGr2.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPtPalja.h">
+				RelativePath="..\lab\lab\SetPtPalja.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetPtStZond.h">
+				RelativePath="..\lab\lab\SetPtStZond.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetRozriz.h">
+				RelativePath="..\lab\lab\SetRozriz.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetRozrizy1.h">
+				RelativePath="..\lab\lab\SetRozrizy1.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetShtamp.h">
+				RelativePath="..\lab\lab\SetShtamp.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetShtamp_detail.h">
+				RelativePath="..\lab\lab\SetShtamp_detail.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetStZond.h">
+				RelativePath="..\lab\lab\SetStZond.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfacesBlankFunctions.h">
+				RelativePath="..\lab\lab\SetSurfacesBlankFunctions.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfacesBlankOrder1.h">
+				RelativePath="..\lab\lab\SetSurfacesBlankOrder1.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfacesOrder.h">
+				RelativePath="..\lab\lab\SetSurfacesOrder.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfIgeMapping.h">
+				RelativePath="..\lab\lab\SetSurfIgeMapping.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetSurfLitoMapping.h">
+				RelativePath="..\lab\lab\SetSurfLitoMapping.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetT_P.h">
+				RelativePath="..\lab\lab\SetT_P.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetT_V.h">
+				RelativePath="..\lab\lab\SetT_V.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetUmPoz.h">
+				RelativePath="..\lab\lab\SetUmPoz.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetUstanovka.h">
+				RelativePath="..\lab\lab\SetUstanovka.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetVoda.h">
+				RelativePath="..\lab\lab\SetVoda.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetWopt.h">
+				RelativePath="..\lab\lab\SetWopt.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetWopt_tbl.h">
+				RelativePath="..\lab\lab\SetWopt_tbl.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetZriz.h">
+				RelativePath="..\lab\lab\SetZriz.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetZriz0.h">
+				RelativePath="..\lab\lab\SetZriz0.h"
+				>
 			</File>
 			<File
-				RelativePath="..\lab\lab\SetZriz_tbl.h">
+				RelativePath="..\lab\lab\SetZriz_tbl.h"
+				>
 			</File>
 			<File
-				RelativePath="StdAfx.h">
+				RelativePath="StdAfx.h"
+				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="Readme.txt">
+			RelativePath="Readme.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

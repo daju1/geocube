@@ -1,118 +1,180 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="tezey"
 	ProjectGUID="{60BE3DDF-06AE-40B8-9044-067AB9ACF6A5}"
-	Keyword="Win32Proj">
+	RootNamespace="tezey"
+	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="1"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib  jpeg.lib  opengl32.lib glu32.lib glaux.lib gdiplus.lib "
+				AdditionalDependencies="array_d.lib alglib_d.lib laboratory_d.lib excel_connect_d.lib acad_connect_d.lib surfer_connect_d.lib labdbdoc_d.lib geometry2D_d.lib kohonen_d.lib surfdoc_d.lib wintools_d.lib winplot_d.lib dime_d.lib tools_d.lib dct_d.lib geoid_d.lib comctl32.lib jpeg_d.lib opengl32.lib glu32.lib glaux.lib gdiplus.lib"
 				OutputFile="$(OutDir)/../../../bin/tezey.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(IntDir)/../../lib"
-				GenerateDebugInformation="TRUE"
+				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/tezey.pdb"
 				SubSystem="1"
-				TargetMachine="1"/>
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCAppVerifierTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="1"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="0"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="3"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib  jpeg.lib  opengl32.lib glu32.lib glaux.lib gdiplus.lib "
+				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib glaux.lib gdiplus.lib"
 				OutputFile="$(OutDir)/../../../bin/tezey.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(IntDir)/../../lib"
-				GenerateDebugInformation="TRUE"
+				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				TargetMachine="1"/>
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCAppVerifierTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -121,143 +183,192 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
 			<File
-				RelativePath=".\src\CommonMeanFileDialog.cpp">
+				RelativePath=".\src\CommonMeanFileDialog.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ComPort.cpp">
+				RelativePath=".\src\ComPort.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\FileFormat.cpp">
+				RelativePath=".\src\FileFormat.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Generic.cpp">
+				RelativePath=".\src\Generic.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\generic.rc">
+				RelativePath="..\generic.rc"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Graph.cpp">
+				RelativePath=".\src\Graph.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GraphsDoc.cpp">
+				RelativePath=".\src\GraphsDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GraphsView.cpp">
+				RelativePath=".\src\GraphsView.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\MessageItem.cpp">
+				RelativePath=".\src\MessageItem.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\mylicense.cpp">
+				RelativePath="..\mylicense.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ParseTimeString.cpp">
+				RelativePath=".\src\ParseTimeString.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\PolyotyNnetDlg.cpp">
+				RelativePath=".\src\PolyotyNnetDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\raporto.cpp">
+				RelativePath=".\src\raporto.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\RoomQueueItem.cpp">
+				RelativePath=".\src\RoomQueueItem.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp">
+				RelativePath=".\stdafx.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\src\systemnnet.cpp">
+				RelativePath=".\src\systemnnet.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\TezeyCon2003.cpp">
+				RelativePath=".\src\TezeyCon2003.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\winmap.cpp">
+				RelativePath=".\src\winmap.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\XYZBuffer.cpp">
+				RelativePath=".\src\XYZBuffer.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
 			<File
-				RelativePath=".\src\CommonMeanFileDialog.h">
+				RelativePath=".\src\CommonMeanFileDialog.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ComPort.h">
+				RelativePath=".\src\ComPort.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\FileFormat.h">
+				RelativePath=".\src\FileFormat.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Generic.h">
+				RelativePath=".\src\Generic.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Graph.h">
+				RelativePath=".\src\Graph.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GraphsDoc.h">
+				RelativePath=".\src\GraphsDoc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GraphsView.h">
+				RelativePath=".\src\GraphsView.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\map.h">
+				RelativePath=".\src\map.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\MessageItem.h">
+				RelativePath=".\src\MessageItem.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ParseTimeString.h">
+				RelativePath=".\src\ParseTimeString.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\PolyotyNnetDlg.h">
+				RelativePath=".\src\PolyotyNnetDlg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\RoomQueueItem.h">
+				RelativePath="..\resource.h"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.h">
+				RelativePath=".\src\RoomQueueItem.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\systemnnet.h">
+				RelativePath=".\stdafx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\winmap.h">
+				RelativePath=".\src\systemnnet.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\XYZBuffer.h">
+				RelativePath=".\src\winmap.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ymacrofun.h">
+				RelativePath=".\src\XYZBuffer.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ymacroses.h">
+				RelativePath=".\src\ymacrofun.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ymacroses.h"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
 		</Filter>
 		<File
-			RelativePath=".\ReadMe.txt">
+			RelativePath=".\ReadMe.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

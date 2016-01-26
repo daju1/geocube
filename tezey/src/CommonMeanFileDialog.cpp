@@ -737,7 +737,7 @@ BOOL CALLBACK DlgProc2(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 				}
 				(*lpCommonMeanFileDialog->pcells).clear();
 
-				for(i1 = 0; i1 < (*lpCommonMeanFileDialog->pnames_of_colomns).size(); i1++)
+				for(int i1 = 0; i1 < (*lpCommonMeanFileDialog->pnames_of_colomns).size(); i1++)
 				{
 					//(*lpCommonMeanFileDialog->pnames_of_colomns)[i1].clear();
 				}
@@ -802,8 +802,8 @@ BOOL CALLBACK DlgProc2(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 					GWLP_WNDPROC, (LONG_PTR) HeaderWndSubclassProc); 
 				SetWindowLongPtr(hwndHD, GWLP_USERDATA,(LONG_PTR)cols);
 
-
-				for (int c = 0; c < cols; c++)
+				int c = 0;
+				for (; c < cols; c++)
 				{
 					headers->push_back(string());
 					headers->back().resize(32);
@@ -7882,7 +7882,7 @@ bool CommonMeanFileDialog::TestAndStartHandlingOfInputFiles(HWND hDlg, bool toCo
 		CreateDirectory(directory_out,NULL);
 	}
 
-	for (iFile = 0; iFile < this->cmfd.nFilesInDirectory; iFile++)
+	for (int iFile = 0; iFile < this->cmfd.nFilesInDirectory; iFile++)
 	{
 		sprintf(szPath_in, "%s\\%s", directory, this->cmfd.vFileNames[iFile]);
 

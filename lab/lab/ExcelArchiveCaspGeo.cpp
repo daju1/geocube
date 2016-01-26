@@ -160,7 +160,7 @@ bool ExcelArchiveCaspGeo::virFill()
 				for (long igran = 0; igran < ngran; igran++)
 				{
 					long ID_GRAN = id_grans[igran];
-					size_t letter_col_gran   = this->letter_cols_grans[ipar];
+					size_t letter_col_gran   = this->letter_cols_grans[0];
 
 					ExcelColChar ecc(first_letter);
 					sprintf(S, "%s%d",  ecc.Get(letter_col_gran), r);

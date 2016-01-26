@@ -97,7 +97,7 @@ void camera::OrbitObject(const fGL * ang, const camera & cam, int type)
 		tmp_ang[n1] = -ang[n1];
 	}
 	
-	for (n1 = 0;n1 < prj->light_vector.size();n1++)
+	for (i32u n1 = 0;n1 < prj->light_vector.size();n1++)
 	{
 		if (prj->light_vector[n1]->owner != this)// global light
 		{
@@ -130,7 +130,7 @@ void camera::RotateObject(const fGL * ang, const camera & cam)
 	}
 	
 	camera tmp_cam = cam; tmp_cam.focus = 0.0;
-	for (n1 = 0;n1 < prj->light_vector.size();n1++)
+	for (i32u n1 = 0;n1 < prj->light_vector.size();n1++)
 	{
 		if (prj->light_vector[n1]->owner != this && (!cam.move_global_lights)) continue;
 		prj->light_vector[n1]->RotateObject(tmp_ang, tmp_cam);

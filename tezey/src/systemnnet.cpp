@@ -264,7 +264,7 @@ SystemNnet::SimulNnet()
 		m_YPredict += (m_h[q] * (pbm->m_yPredict));//суммирование
 	}
 	PLM plm;
-	for(q=0;q<m_nLagerCount;q++)
+	for(int q=0;q<m_nLagerCount;q++)
 	{
 		plm = &(m_vLagerModel[q]);
 		(plm->*plm->m_pLagerSignal)();//генерация сигнала каждой модели
@@ -282,7 +282,8 @@ SystemNnet::SimulNnet1(int _LagerNumber)
 	m_YPredict.Resetting();//  обнуление выхода системы
 	PBM pbm;
 
-	for(int q=0;q<m_nModelCount;q++)
+	int q=0;
+	for(;q<m_nModelCount;q++)
 	{
 		pbm = &(m_vModel[q]);
 		pbm ->ModelSignal();//генерация сигнала каждой модели
@@ -293,7 +294,7 @@ SystemNnet::SimulNnet1(int _LagerNumber)
 	PLM plm;
 	plm = &(m_vLagerModel[q]);
 		(plm->*plm->m_pLagerSignal)();//генерация сигнала модели
-	for(q=0;q<m_nLagerCount;q++)
+	for(int q=0;q<m_nLagerCount;q++)
 	{
 		plm = &(m_vLagerModel[q]);
 		m_Y.SummingFrom(plm->m_i0, m_l[q] * (plm->m_y));//суммирование
@@ -504,7 +505,7 @@ void SystemNnet::DeleteModels(Vector<bool>& vbl)
 	m_ModelGradient.DeleteElements(vbl);
 	m_ModelEffect.DeleteElements(vbl);
 	// номер создаваемого объекта модели в сети
-	for (q = 0; q < m_nModelCount; q++)
+	for (int q = 0; q < m_nModelCount; q++)
 		m_vModel[q].m_q = q;
 	return;
 }
@@ -523,7 +524,7 @@ void SystemNnet::DeleteAll()
 	m_LagerGradient.DeleteAll();
 	m_LagerEffect.DeleteAll();
 
-	for (q = 0; q < m_nModelCount; q++)
+	for (int q = 0; q < m_nModelCount; q++)
 			m_vModel[q].~BaseModel();
 	m_nModelCount = 0;
 
@@ -559,7 +560,7 @@ void SystemNnet::DeleteLagers(Vector<bool>& vbl)
 	m_LagerGradient.DeleteElements(vbl);
 	m_LagerEffect.DeleteElements(vbl);
 	// номер создаваемого объекта модели в сети
-	for (q = 0; q < m_nLagerCount; q++)
+	for (int q = 0; q < m_nLagerCount; q++)
 		m_vLagerModel[q].m_q = q;
 	return;
 }
@@ -1565,7 +1566,7 @@ void LagerModel::LagerSignal1()
 		ti = m_pt[i];
 		*(m_py + i) = exp( par * ti);
 	}
-	for( i = 0; i < m_lenPredict; i++)
+	for(int i = 0; i < m_lenPredict; i++)
 	{ 
 		ti = m_ptPredict[i];
 		*(m_pyPredict + i) = exp( par * ti);
@@ -1583,7 +1584,7 @@ void LagerModel::LagerSignal3()
 		ti = m_t[i];
 		*(m_py + i) = exp( par0 * ti) * sin(par1 * ti + par2);
 	}
-	for( i = 0; i < m_lenPredict; i++)
+	for(int i = 0; i < m_lenPredict; i++)
 	{ 
 		ti = m_tPredict[i];
 		*(m_pyPredict + i) = exp( par0 * ti) * sin(par1 * ti + par2);

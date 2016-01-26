@@ -5910,7 +5910,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 
 					}	
 
-					z = z_ceil;
+					double z = z_ceil;
 					sprintf(sz, "%f", z);
 					DeleteEndZeros(sz);
 					AddText(m_acad, sz, CPoint2(xProfile-tsh, z-0.5*Height_lin), CPoint3(pt2_start.x-tsh, pt2_start.y-tsh, z), Height_lin, color, param.v_scale, param.g_scale);
@@ -5950,7 +5950,7 @@ void BrokenPlane3D::AutoCADRazres(AutoCADRazrezParam param)
 
 
 					
-					double z = z_floor;
+					z = z_floor;
 					double left = max_len * Height_podvh;
 
 					// gorizontal lines

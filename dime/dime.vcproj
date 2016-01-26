@@ -1,101 +1,150 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="dime"
 	ProjectGUID="{FB75E28E-CF3C-4716-A28D-EBA3FD81BCC3}"
-	Keyword="Win32Proj">
+	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/../../lib/dime_d.lib"/>
+				OutputFile="$(OutDir)/../../lib/dime_d.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="3"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/../../lib/dime.lib"/>
+				OutputFile="$(OutDir)/../../lib/dime.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -104,467 +153,620 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
 			<File
-				RelativePath=".\src\Base.cpp">
+				RelativePath=".\src\Base.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Basic.cpp">
+				RelativePath=".\src\Basic.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\dxfwriter.cpp">
+				RelativePath=".\src\dxfwriter.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Input.cpp">
+				RelativePath=".\src\Input.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Layer.cpp">
+				RelativePath=".\src\Layer.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Model.cpp">
+				RelativePath=".\src\Model.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Output.cpp">
+				RelativePath=".\src\Output.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\RecordHolder.cpp">
+				RelativePath=".\src\RecordHolder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\State.cpp">
+				RelativePath=".\src\State.cpp"
+				>
 			</File>
 			<Filter
-				Name="util">
+				Name="util"
+				>
 				<File
-					RelativePath=".\src\util\Array.cpp">
+					RelativePath=".\src\util\Array.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\util\Box.cpp">
+					RelativePath=".\src\util\Box.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\util\BSPTree.cpp">
+					RelativePath=".\src\util\BSPTree.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\util\Dict.cpp">
+					RelativePath=".\src\util\Dict.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\util\Linear.cpp">
+					RelativePath=".\src\util\Linear.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\util\MemHandler.cpp">
+					RelativePath=".\src\util\MemHandler.cpp"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="classes">
+				Name="classes"
+				>
 				<File
-					RelativePath=".\src\classes\Class.cpp">
+					RelativePath=".\src\classes\Class.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\classes\UnknownClass.cpp">
-				</File>
-			</Filter>
-			<Filter
-				Name="convert">
-				<File
-					RelativePath=".\src\convert\3dfaceconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\arcconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\circleconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\convert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\convert_funcs.h">
-				</File>
-				<File
-					RelativePath=".\src\convert\ellipseconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\layerdata.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\lineconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\linesegment.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\linesegment.h">
-				</File>
-				<File
-					RelativePath=".\src\convert\lwpolylineconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\pointconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\polylineconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\solidconvert.cpp">
-				</File>
-				<File
-					RelativePath=".\src\convert\traceconvert.cpp">
+					RelativePath=".\src\classes\UnknownClass.cpp"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="entities">
+				Name="convert"
+				>
 				<File
-					RelativePath=".\src\entities\3DFace.cpp">
+					RelativePath=".\src\convert\3dfaceconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Arc.cpp">
+					RelativePath=".\src\convert\arcconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Block.cpp">
+					RelativePath=".\src\convert\circleconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Circle.cpp">
+					RelativePath=".\src\convert\convert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Ellipse.cpp">
+					RelativePath=".\src\convert\convert_funcs.h"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Entity.cpp">
+					RelativePath=".\src\convert\ellipseconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\ExtrusionEntity.cpp">
+					RelativePath=".\src\convert\layerdata.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\FaceEntity.cpp">
+					RelativePath=".\src\convert\lineconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Insert.cpp">
+					RelativePath=".\src\convert\linesegment.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Line.cpp">
+					RelativePath=".\src\convert\linesegment.h"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\LWPolyline.cpp">
+					RelativePath=".\src\convert\lwpolylineconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Point.cpp">
+					RelativePath=".\src\convert\pointconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Polyline.cpp">
+					RelativePath=".\src\convert\polylineconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Solid.cpp">
+					RelativePath=".\src\convert\solidconvert.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\entities\Spline.cpp">
-				</File>
-				<File
-					RelativePath=".\src\entities\Trace.cpp">
-				</File>
-				<File
-					RelativePath=".\src\entities\UnknownEntity.cpp">
-				</File>
-				<File
-					RelativePath=".\src\entities\Vertex.cpp">
-				</File>
-			</Filter>
-			<Filter
-				Name="objects">
-				<File
-					RelativePath=".\src\objects\Object.cpp">
-				</File>
-				<File
-					RelativePath=".\src\objects\UnknownObject.cpp">
+					RelativePath=".\src\convert\traceconvert.cpp"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="records">
+				Name="entities"
+				>
 				<File
-					RelativePath=".\src\records\DoubleRecord.cpp">
+					RelativePath=".\src\entities\3DFace.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\records\FloatRecord.cpp">
+					RelativePath=".\src\entities\Arc.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\records\HexRecord.cpp">
+					RelativePath=".\src\entities\Block.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\records\Int16Record.cpp">
+					RelativePath=".\src\entities\Circle.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\records\Int32Record.cpp">
+					RelativePath=".\src\entities\Ellipse.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\records\Int8Record.cpp">
+					RelativePath=".\src\entities\Entity.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\records\Record.cpp">
+					RelativePath=".\src\entities\ExtrusionEntity.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\records\StringRecord.cpp">
+					RelativePath=".\src\entities\FaceEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Insert.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Line.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\LWPolyline.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Point.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Polyline.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Solid.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Spline.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Trace.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\UnknownEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\entities\Vertex.cpp"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="sections">
+				Name="objects"
+				>
 				<File
-					RelativePath=".\src\sections\BlocksSection.cpp">
+					RelativePath=".\src\objects\Object.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\sections\ClassesSection.cpp">
-				</File>
-				<File
-					RelativePath=".\src\sections\EntitiesSection.cpp">
-				</File>
-				<File
-					RelativePath=".\src\sections\HeaderSection.cpp">
-				</File>
-				<File
-					RelativePath=".\src\sections\ObjectsSection.cpp">
-				</File>
-				<File
-					RelativePath=".\src\sections\Section.cpp">
-				</File>
-				<File
-					RelativePath=".\src\sections\TablesSection.cpp">
-				</File>
-				<File
-					RelativePath=".\src\sections\UnknownSection.cpp">
+					RelativePath=".\src\objects\UnknownObject.cpp"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="tables">
+				Name="records"
+				>
 				<File
-					RelativePath=".\src\tables\LayerTable.cpp">
+					RelativePath=".\src\records\DoubleRecord.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\tables\Table.cpp">
+					RelativePath=".\src\records\FloatRecord.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\tables\TableEntry.cpp">
+					RelativePath=".\src\records\HexRecord.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\tables\UCSTable.cpp">
+					RelativePath=".\src\records\Int16Record.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\src\tables\UnknownTable.cpp">
+					RelativePath=".\src\records\Int32Record.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\records\Int8Record.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\records\Record.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\records\StringRecord.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="sections"
+				>
+				<File
+					RelativePath=".\src\sections\BlocksSection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\sections\ClassesSection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\sections\EntitiesSection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\sections\HeaderSection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\sections\ObjectsSection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\sections\Section.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\sections\TablesSection.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\sections\UnknownSection.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="tables"
+				>
+				<File
+					RelativePath=".\src\tables\LayerTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\tables\Table.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\tables\TableEntry.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\tables\UCSTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\tables\UnknownTable.cpp"
+					>
 				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
 			<File
-				RelativePath="..\include\dime\Base.h">
+				RelativePath="..\include\dime\Base.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\Basic.h">
+				RelativePath="..\include\dime\Basic.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\dxfwriter.h">
+				RelativePath="..\include\dime\dxfwriter.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\Input.h">
+				RelativePath="..\include\dime\Input.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\Layer.h">
+				RelativePath="..\include\dime\Layer.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\Model.h">
+				RelativePath="..\include\dime\Model.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\Output.h">
+				RelativePath="..\include\dime\Output.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\RecordHolder.h">
+				RelativePath="..\include\dime\RecordHolder.h"
+				>
 			</File>
 			<File
-				RelativePath="..\include\dime\State.h">
+				RelativePath="..\include\dime\State.h"
+				>
 			</File>
 			<Filter
-				Name="util_h">
+				Name="util_h"
+				>
 				<File
-					RelativePath="..\include\dime\util\Array.h">
+					RelativePath="..\include\dime\util\Array.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\util\Box.h">
+					RelativePath="..\include\dime\util\Box.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\util\BSPTree.h">
+					RelativePath="..\include\dime\util\BSPTree.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\util\Dict.h">
+					RelativePath="..\include\dime\util\Dict.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\util\Linear.h">
+					RelativePath="..\include\dime\util\Linear.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\util\MemHandler.h">
+					RelativePath="..\include\dime\util\MemHandler.h"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="classes_h">
+				Name="classes_h"
+				>
 				<File
-					RelativePath="..\include\dime\classes\Class.h">
+					RelativePath="..\include\dime\classes\Class.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\classes\UnknownClass.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="convert_h">
-				<File
-					RelativePath="..\include\dime\convert\convert.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\convert\layerdata.h">
+					RelativePath="..\include\dime\classes\UnknownClass.h"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="entities_h">
+				Name="convert_h"
+				>
 				<File
-					RelativePath="..\include\dime\entities\3DFace.h">
+					RelativePath="..\include\dime\convert\convert.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\entities\Arc.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Block.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Circle.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Ellipse.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Entity.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\ExtrusionEntity.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\FaceEntity.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Insert.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Line.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\LWPolyline.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Point.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Polyline.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Solid.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Spline.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Trace.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\UnknownEntity.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\entities\Vertex.h">
+					RelativePath="..\include\dime\convert\layerdata.h"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="objects_h">
+				Name="entities_h"
+				>
 				<File
-					RelativePath="..\include\dime\objects\Object.h">
+					RelativePath="..\include\dime\entities\3DFace.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\objects\UnknownObject.h">
+					RelativePath="..\include\dime\entities\Arc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Block.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Circle.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Ellipse.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Entity.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\ExtrusionEntity.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\FaceEntity.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Insert.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Line.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\LWPolyline.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Point.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Polyline.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Solid.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Spline.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Trace.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\UnknownEntity.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\entities\Vertex.h"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="records_h">
+				Name="objects_h"
+				>
 				<File
-					RelativePath="..\include\dime\records\DoubleRecord.h">
+					RelativePath="..\include\dime\objects\Object.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\records\FloatRecord.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\records\HexRecord.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\records\Int16Record.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\records\Int32Record.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\records\Int8Record.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\records\Record.h">
-				</File>
-				<File
-					RelativePath="..\include\dime\records\StringRecord.h">
+					RelativePath="..\include\dime\objects\UnknownObject.h"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="sections_h">
+				Name="records_h"
+				>
 				<File
-					RelativePath="..\include\dime\sections\BlocksSection.h">
+					RelativePath="..\include\dime\records\DoubleRecord.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\sections\ClassesSection.h">
+					RelativePath="..\include\dime\records\FloatRecord.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\sections\EntitiesSection.h">
+					RelativePath="..\include\dime\records\HexRecord.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\sections\HeaderSection.h">
+					RelativePath="..\include\dime\records\Int16Record.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\sections\ObjectsSection.h">
+					RelativePath="..\include\dime\records\Int32Record.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\sections\Section.h">
+					RelativePath="..\include\dime\records\Int8Record.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\sections\TablesSection.h">
+					RelativePath="..\include\dime\records\Record.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\sections\UnknownSection.h">
+					RelativePath="..\include\dime\records\StringRecord.h"
+					>
 				</File>
 			</Filter>
 			<Filter
-				Name="tables_h">
+				Name="sections_h"
+				>
 				<File
-					RelativePath="..\include\dime\tables\LayerTable.h">
+					RelativePath="..\include\dime\sections\BlocksSection.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\tables\Table.h">
+					RelativePath="..\include\dime\sections\ClassesSection.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\tables\TableEntry.h">
+					RelativePath="..\include\dime\sections\EntitiesSection.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\tables\UCSTable.h">
+					RelativePath="..\include\dime\sections\HeaderSection.h"
+					>
 				</File>
 				<File
-					RelativePath="..\include\dime\tables\UnknownTable.h">
+					RelativePath="..\include\dime\sections\ObjectsSection.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\sections\Section.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\sections\TablesSection.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\sections\UnknownSection.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="tables_h"
+				>
+				<File
+					RelativePath="..\include\dime\tables\LayerTable.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\tables\Table.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\tables\TableEntry.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\tables\UCSTable.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\dime\tables\UnknownTable.h"
+					>
 				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
 		</Filter>
 		<File
-			RelativePath=".\ReadMe.txt">
+			RelativePath=".\ReadMe.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

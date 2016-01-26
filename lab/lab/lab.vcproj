@@ -1,24 +1,51 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="lab"
-	SccProjectName=""
-	SccLocalPath=""
-	Keyword="MFCProj">
+	ProjectGUID="{4BB62AEF-45E3-4862-A436-C184E719EC8E}"
+	Keyword="MFCProj"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory=".\Debug"
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName=".\Debug/lab.tlb"
+				HeaderFileName=""
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
@@ -26,10 +53,10 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				BufferSecurityCheck="FALSE"
-				EnableFunctionLevelLinking="FALSE"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
+				BufferSecurityCheck="false"
+				EnableFunctionLevelLinking="false"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="stdafx.h"
 				PrecompiledHeaderFile=".\Debug/lab.pch"
 				AssemblerListingLocation=".\Debug/"
@@ -37,118 +64,153 @@
 				ProgramDataBaseFileName=".\Debug/"
 				BrowseInformation="1"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"/>
+				SuppressStartupBanner="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib_d.lib labdbdoc_d.lib Psapi.lib surfer_connect_d.lib acad_connect_d.lib excel_connect_d.lib geocube_module_d.lib tools_d.lib laboratory_d.lib surfdoc_d.lib geometry2d_d.lib kohonen_d.lib wintools_d.lib dime_d.lib tools_d.lib array_d.lib dct_d.lib winplot_d.lib geoid_d.lib comctl32.lib  jpeg_d.lib  opengl32.lib glu32.lib glaux.lib gdiplus.lib"
-				OutputFile="../../../bin/lab_d.exe"
-				LinkIncremental="1"
-				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="$(IntDir)/../../../lib"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile=".\Debug/lab.pdb"
-				SubSystem="2"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="TRUE"
-				SuppressStartupBanner="TRUE"
-				TargetEnvironment="1"
-				TypeLibraryName=".\Debug/lab.tlb"
-				HeaderFileName=""/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLinkerTool"
+				AdditionalOptions="/FORCE:MULTIPLE "
+				AdditionalDependencies="alglib_d.lib labdbdoc_d.lib Psapi.lib surfer_connect_d.lib acad_connect_d.lib excel_connect_d.lib geocube_module_d.lib tools_d.lib laboratory_d.lib surfdoc_d.lib geometry2d_d.lib kohonen_d.lib wintools_d.lib dime_d.lib array_d.lib dct_d.lib winplot_d.lib geoid_d.lib comctl32.lib jpeg_d.lib opengl32.lib glu32.lib glaux.lib gdiplus.lib"
+				OutputFile="../../../bin/lab_d.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="$(IntDir)/../../../lib"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\Debug/lab.pdb"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\Release"
 			IntermediateDirectory=".\Release"
 			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName=".\Release/lab.tlb"
+				HeaderFileName=""
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="$(IntDir)/../../../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
-				StringPooling="TRUE"
+				StringPooling="true"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="TRUE"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
+				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="stdafx.h"
 				PrecompiledHeaderFile=".\Release/lab.pch"
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"/>
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib  jpeg.lib  opengl32.lib glu32.lib glaux.lib gdiplus.lib"
-				OutputFile="../../../bin/lab.exe"
-				LinkIncremental="1"
-				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="$(IntDir)/../../../lib"
-				ProgramDatabaseFile=".\Release/lab.pdb"
-				SubSystem="2"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="TRUE"
-				SuppressStartupBanner="TRUE"
-				TargetEnvironment="1"
-				TypeLibraryName=".\Release/lab.tlb"
-				HeaderFileName=""/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLinkerTool"
+				AdditionalOptions="/FORCE:MULTIPLE "
+				AdditionalDependencies="alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib glaux.lib gdiplus.lib"
+				OutputFile="../../../bin/lab.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="$(IntDir)/../../../lib"
+				ProgramDatabaseFile=".\Release/lab.pdb"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -156,1315 +218,1659 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+			>
 			<File
-				RelativePath="3DDoc.cpp">
+				RelativePath="3DDoc.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="3DFrame.cpp">
+				RelativePath="3DFrame.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="3DView.cpp">
+				RelativePath="3DView.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\BaseExcel.cpp">
+				RelativePath=".\BaseExcel.cpp"
+				>
 			</File>
 			<File
-				RelativePath="ChildFrm.cpp">
+				RelativePath="ChildFrm.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\ComboProbGrKT.cpp">
+				RelativePath=".\ComboProbGrKT.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\CompressList.cpp">
+				RelativePath=".\CompressList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\CompressListLab.cpp">
+				RelativePath=".\CompressListLab.cpp"
+				>
 			</File>
 			<File
-				RelativePath="DataBaseTalblesList.cpp">
+				RelativePath="DataBaseTalblesList.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\DBTable.cpp">
+				RelativePath=".\DBTable.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCilce.cpp">
+				RelativePath=".\DBTableCilce.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCilce0.cpp">
+				RelativePath=".\DBTableCilce0.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCompress.cpp">
+				RelativePath=".\DBTableCompress.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCubeSize.cpp">
+				RelativePath=".\DBTableCubeSize.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGenezis.cpp">
+				RelativePath=".\DBTableGenezis.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGranular.cpp">
+				RelativePath=".\DBTableGranular.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGridData.cpp">
+				RelativePath=".\DBTableGridData.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGriddataSurfaces.cpp">
+				RelativePath=".\DBTableGriddataSurfaces.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGridDataUsedAlg.cpp">
+				RelativePath=".\DBTableGridDataUsedAlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGrunty.cpp">
+				RelativePath=".\DBTableGrunty.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableIGE.cpp">
+				RelativePath=".\DBTableIGE.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableIGE0.cpp">
+				RelativePath=".\DBTableIGE0.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableKT.cpp">
+				RelativePath=".\DBTableKT.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableLito.cpp">
+				RelativePath=".\DBTableLito.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableLito0.cpp">
+				RelativePath=".\DBTableLito0.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePalja.cpp">
+				RelativePath=".\DBTablePalja.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePCK2Fiz_Params.cpp">
+				RelativePath=".\DBTablePCK2Fiz_Params.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePCK2Fiz_Results.cpp">
+				RelativePath=".\DBTablePCK2Fiz_Results.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableProp.cpp">
+				RelativePath=".\DBTableProp.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePtPalja.cpp">
+				RelativePath=".\DBTablePtPalja.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePtStZond.cpp">
+				RelativePath=".\DBTablePtStZond.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableRozriz.cpp">
+				RelativePath=".\DBTableRozriz.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableRozrizy.cpp">
+				RelativePath=".\DBTableRozrizy.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSoils.cpp">
+				RelativePath=".\DBTableSoils.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableStZond.cpp">
+				RelativePath=".\DBTableStZond.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfacesBlankFunctions.cpp">
+				RelativePath=".\DBTableSurfacesBlankFunctions.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfacesBlankOrder.cpp">
+				RelativePath=".\DBTableSurfacesBlankOrder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfacesOrder.cpp">
+				RelativePath=".\DBTableSurfacesOrder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfIgeMapping.cpp">
+				RelativePath=".\DBTableSurfIgeMapping.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfLitoMapping.cpp">
+				RelativePath=".\DBTableSurfLitoMapping.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableUmPoz.cpp">
+				RelativePath=".\DBTableUmPoz.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableVoda.cpp">
+				RelativePath=".\DBTableVoda.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableZriz.cpp">
+				RelativePath=".\DBTableZriz.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableZriz0.cpp">
+				RelativePath=".\DBTableZriz0.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableZriz_tbl.cpp">
+				RelativePath=".\DBTableZriz_tbl.cpp"
+				>
 			</File>
 			<File
-				RelativePath="DBViewList.cpp">
+				RelativePath="DBViewList.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\DlgCopyGrunty.cpp">
+				RelativePath=".\DlgCopyGrunty.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgIGEList.cpp">
+				RelativePath=".\DlgIGEList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgLabElements.cpp">
+				RelativePath=".\DlgLabElements.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgLanguage.cpp">
+				RelativePath=".\DlgLanguage.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgNaborGruntovSetting.cpp">
+				RelativePath=".\DlgNaborGruntovSetting.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgNRows.cpp">
+				RelativePath=".\DlgNRows.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgPalja.cpp">
+				RelativePath=".\DlgPalja.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgPCK2Fiz.cpp">
+				RelativePath=".\DlgPCK2Fiz.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgProbGr_DblClickMode.cpp">
+				RelativePath=".\DlgProbGr_DblClickMode.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgProbGrunt.cpp">
+				RelativePath=".\DlgProbGrunt.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgRepeatings.cpp">
+				RelativePath=".\DlgRepeatings.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgSoilName.cpp">
+				RelativePath=".\DlgSoilName.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgStatZond.cpp">
+				RelativePath=".\DlgStatZond.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgZondUstParam.cpp">
+				RelativePath=".\DlgZondUstParam.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeoFrame.cpp">
+				RelativePath=".\EnGeoFrame.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeoListCtrl.cpp">
+				RelativePath=".\EnGeoListCtrl.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeologyDoc.cpp">
+				RelativePath=".\EnGeologyDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeologyView.cpp">
+				RelativePath=".\EnGeologyView.cpp"
+				>
 			</File>
 			<File
-				RelativePath="EnGeoObjectsList.cpp">
+				RelativePath="EnGeoObjectsList.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveCaspGeo.cpp">
+				RelativePath=".\ExcelArchiveCaspGeo.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveCompression.cpp">
+				RelativePath=".\ExcelArchiveCompression.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveCut.cpp">
+				RelativePath=".\ExcelArchiveCut.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveData.cpp">
+				RelativePath=".\ExcelArchiveData.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveGran.cpp">
+				RelativePath=".\ExcelArchiveGran.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelAreometrGranular.cpp">
+				RelativePath=".\ExcelAreometrGranular.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelCompression.cpp">
+				RelativePath=".\ExcelCompression.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelCut.cpp">
+				RelativePath=".\ExcelCut.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelDxfRozrizList.cpp">
+				RelativePath=".\ExcelDxfRozrizList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelHydroList.cpp">
+				RelativePath=".\ExcelHydroList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelKTEnGeoList.cpp">
+				RelativePath=".\ExcelKTEnGeoList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelKTLabList.cpp">
+				RelativePath=".\ExcelKTLabList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelLabNIGEList.cpp">
+				RelativePath=".\ExcelLabNIGEList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelLabNList.cpp">
+				RelativePath=".\ExcelLabNList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPaljaList.cpp">
+				RelativePath=".\ExcelPaljaList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPlotnostChastic.cpp">
+				RelativePath=".\ExcelPlotnostChastic.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPlotnostChastic1.cpp">
+				RelativePath=".\ExcelPlotnostChastic1.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPlotnostGrunta.cpp">
+				RelativePath=".\ExcelPlotnostGrunta.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelRozrizList.cpp">
+				RelativePath=".\ExcelRozrizList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelSandGranular.cpp">
+				RelativePath=".\ExcelSandGranular.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelStatZondList.cpp">
+				RelativePath=".\ExcelStatZondList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelTSZList.cpp">
+				RelativePath=".\ExcelTSZList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelVegetableRemains.cpp">
+				RelativePath=".\ExcelVegetableRemains.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelWL.cpp">
+				RelativePath=".\ExcelWL.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelWlazhnost.cpp">
+				RelativePath=".\ExcelWlazhnost.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelWlp.cpp">
+				RelativePath=".\ExcelWlp.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FizMehList.cpp">
+				RelativePath=".\FizMehList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FizMehListLab.cpp">
+				RelativePath=".\FizMehListLab.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GranularList.cpp">
+				RelativePath=".\GranularList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GranularListLab.cpp">
+				RelativePath=".\GranularListLab.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\IGE2List.cpp">
+				RelativePath=".\IGE2List.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\IGEList.cpp">
+				RelativePath=".\IGEList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\KTLabList.cpp">
+				RelativePath=".\KTLabList.cpp"
+				>
 			</File>
 			<File
-				RelativePath="KTListCtrl.cpp">
+				RelativePath="KTListCtrl.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="lab.cpp">
+				RelativePath="lab.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="hlp\lab.hpj">
+				RelativePath="hlp\lab.hpj"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Making help file..."
-						CommandLine="start /wait hcw /C /E /M &quot;hlp\$(InputName).hpj&quot;
-if errorlevel 1 goto :Error
-if not exist &quot;hlp\$(InputName).hlp&quot; goto :Error
-copy &quot;hlp\$(InputName).hlp&quot; &quot;$(OutDir)&quot;
-goto :done
-:Error
-echo hlp\&quot;$(InputName)&quot;.hpj(1) : error:
-type &quot;hlp\$(InputName).log&quot;
-:done
-"
+						CommandLine="start /wait hcw /C /E /M &quot;hlp\$(InputName).hpj&quot;&#x0D;&#x0A;if errorlevel 1 goto :Error&#x0D;&#x0A;if not exist &quot;hlp\$(InputName).hlp&quot; goto :Error&#x0D;&#x0A;copy &quot;hlp\$(InputName).hlp&quot; &quot;$(OutDir)&quot;&#x0D;&#x0A;goto :done&#x0D;&#x0A;:Error&#x0D;&#x0A;echo hlp\&quot;$(InputName)&quot;.hpj(1) : error:&#x0D;&#x0A;type &quot;hlp\$(InputName).log&quot;&#x0D;&#x0A;:done&#x0D;&#x0A;"
 						AdditionalDependencies="hlp\AfxCore.rtf;hlp\AfxPrint.rtf;hlp\$(TargetName).hm;"
-						Outputs="$(OutDir)\$(InputName).hlp"/>
+						Outputs="$(OutDir)\$(InputName).hlp"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Making help file..."
-						CommandLine="start /wait hcw /C /E /M &quot;hlp\$(InputName).hpj&quot;
-if errorlevel 1 goto :Error
-if not exist &quot;hlp\$(InputName).hlp&quot; goto :Error
-copy &quot;hlp\$(InputName).hlp&quot; &quot;$(OutDir)&quot;
-goto :done
-:Error
-echo hlp\&quot;$(InputName)&quot;.hpj(1) : error:
-type &quot;hlp\$(InputName).log&quot;
-:done
-"
+						CommandLine="start /wait hcw /C /E /M &quot;hlp\$(InputName).hpj&quot;&#x0D;&#x0A;if errorlevel 1 goto :Error&#x0D;&#x0A;if not exist &quot;hlp\$(InputName).hlp&quot; goto :Error&#x0D;&#x0A;copy &quot;hlp\$(InputName).hlp&quot; &quot;$(OutDir)&quot;&#x0D;&#x0A;goto :done&#x0D;&#x0A;:Error&#x0D;&#x0A;echo hlp\&quot;$(InputName)&quot;.hpj(1) : error:&#x0D;&#x0A;type &quot;hlp\$(InputName).log&quot;&#x0D;&#x0A;:done&#x0D;&#x0A;"
 						AdditionalDependencies="hlp\AfxCore.rtf;hlp\AfxPrint.rtf;hlp\$(TargetName).hm;"
-						Outputs="$(OutDir)\$(InputName).hlp"/>
+						Outputs="$(OutDir)\$(InputName).hlp"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="lab.odl">
+				RelativePath="lab.odl"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCMIDLTool"
 						PreprocessorDefinitions=""
-						TargetEnvironment="1"/>
+						TargetEnvironment="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCMIDLTool"
 						PreprocessorDefinitions=""
-						TargetEnvironment="1"/>
+						TargetEnvironment="1"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="lab.rc">
+				RelativePath="lab.rc"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCResourceCompilerTool"
 						PreprocessorDefinitions=""
-						AdditionalIncludeDirectories="$(OUTDIR)"/>
+						AdditionalIncludeDirectories="$(OUTDIR)"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCResourceCompilerTool"
 						PreprocessorDefinitions=""
-						AdditionalIncludeDirectories="$(OUTDIR)"/>
+						AdditionalIncludeDirectories="$(OUTDIR)"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\LabElementList.cpp">
+				RelativePath=".\LabElementList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LabElementsList.cpp">
+				RelativePath=".\LabElementsList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LabListCtrl.cpp">
+				RelativePath=".\LabListCtrl.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LabListView.cpp">
+				RelativePath=".\LabListView.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LabObjectsList.cpp">
+				RelativePath=".\LabObjectsList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LaboratoryDoc.cpp">
+				RelativePath=".\LaboratoryDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LaboratoryView.cpp">
+				RelativePath=".\LaboratoryView.cpp"
+				>
 			</File>
 			<File
-				RelativePath="labView.cpp">
+				RelativePath="labView.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\ListGenezis.cpp">
+				RelativePath=".\ListGenezis.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ListGruntGran.cpp">
+				RelativePath=".\ListGruntGran.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ListGrunty.cpp">
+				RelativePath=".\ListGrunty.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ListNaborGruntov.cpp">
+				RelativePath=".\ListNaborGruntov.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ListPCK2Fiz.cpp">
+				RelativePath=".\ListPCK2Fiz.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ListRaschetSvai.cpp">
+				RelativePath=".\ListRaschetSvai.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LithoList.cpp">
+				RelativePath=".\LithoList.cpp"
+				>
 			</File>
 			<File
-				RelativePath="MainFrm.cpp">
+				RelativePath="MainFrm.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\mylicense.cpp">
+				RelativePath="..\..\mylicense.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MyPalja.cpp">
+				RelativePath=".\MyPalja.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ObjectDialog.cpp">
+				RelativePath=".\ObjectDialog.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\PaljaList.cpp">
+				RelativePath=".\PaljaList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\PropList.cpp">
+				RelativePath=".\PropList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\SetGranSklad.cpp">
+				RelativePath=".\SetGranSklad.cpp"
+				>
 			</File>
 			<File
-				RelativePath="SoilsList.cpp">
+				RelativePath="SoilsList.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\SoilsListLab.cpp">
+				RelativePath=".\SoilsListLab.cpp"
+				>
 			</File>
 			<File
-				RelativePath="StdAfx.cpp">
+				RelativePath="StdAfx.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
 						UsePrecompiledHeader="1"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
 						PreprocessorDefinitions=""
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\tableDoc.cpp">
+				RelativePath=".\tableDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\TableFrm.cpp">
+				RelativePath=".\TableFrm.cpp"
+				>
 			</File>
 			<File
-				RelativePath="TableSet.cpp">
+				RelativePath="TableSet.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="0"
 						PreprocessorDefinitions=""
 						BasicRuntimeChecks="3"
-						BrowseInformation="1"/>
+						BrowseInformation="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
 						Optimization="2"
-						PreprocessorDefinitions=""/>
+						PreprocessorDefinitions=""
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\tableView.cpp">
+				RelativePath=".\tableView.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\TSZList.cpp">
+				RelativePath=".\TSZList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\UstList.cpp">
+				RelativePath=".\UstList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\VodaList.cpp">
+				RelativePath=".\VodaList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ZrizList.cpp">
+				RelativePath=".\ZrizList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ZrizListLab.cpp">
+				RelativePath=".\ZrizListLab.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl">
+			Filter="h;hpp;hxx;hm;inl"
+			>
 			<File
-				RelativePath="3DDoc.h">
+				RelativePath="3DDoc.h"
+				>
 			</File>
 			<File
-				RelativePath="3DFrame.h">
+				RelativePath="3DFrame.h"
+				>
 			</File>
 			<File
-				RelativePath="3DView.h">
+				RelativePath="3DView.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BaseExcel.h">
+				RelativePath=".\BaseExcel.h"
+				>
 			</File>
 			<File
-				RelativePath="ChildFrm.h">
+				RelativePath="ChildFrm.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ComboProbGrKT.h">
+				RelativePath=".\ComboProbGrKT.h"
+				>
 			</File>
 			<File
-				RelativePath=".\CompressList.h">
+				RelativePath=".\CompressList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\CompressListLab.h">
+				RelativePath=".\CompressListLab.h"
+				>
 			</File>
 			<File
-				RelativePath="DataBaseTalblesList.h">
+				RelativePath="DataBaseTalblesList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTable.h">
+				RelativePath=".\DBTable.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCilce.h">
+				RelativePath=".\DBTableCilce.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCilce0.h">
+				RelativePath=".\DBTableCilce0.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCompress.h">
+				RelativePath=".\DBTableCompress.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableCubeSize.h">
+				RelativePath=".\DBTableCubeSize.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGenezis.h">
+				RelativePath=".\DBTableGenezis.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGranular.h">
+				RelativePath=".\DBTableGranular.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGridData.h">
+				RelativePath=".\DBTableGridData.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGriddataSurfaces.h">
+				RelativePath=".\DBTableGriddataSurfaces.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGridDataUsedAlg.h">
+				RelativePath=".\DBTableGridDataUsedAlg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableGrunty.h">
+				RelativePath=".\DBTableGrunty.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableIGE.h">
+				RelativePath=".\DBTableIGE.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableIGE0.h">
+				RelativePath=".\DBTableIGE0.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableKT.h">
+				RelativePath=".\DBTableKT.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableLito.h">
+				RelativePath=".\DBTableLito.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableLito0.h">
+				RelativePath=".\DBTableLito0.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePalja.h">
+				RelativePath=".\DBTablePalja.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePCK2Fiz_Params.h">
+				RelativePath=".\DBTablePCK2Fiz_Params.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePCK2Fiz_Results.h">
+				RelativePath=".\DBTablePCK2Fiz_Results.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableProp.h">
+				RelativePath=".\DBTableProp.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePtPalja.h">
+				RelativePath=".\DBTablePtPalja.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTablePtStZond.h">
+				RelativePath=".\DBTablePtStZond.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableRozriz.h">
+				RelativePath=".\DBTableRozriz.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableRozrizy.h">
+				RelativePath=".\DBTableRozrizy.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSoils.h">
+				RelativePath=".\DBTableSoils.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableStZond.h">
+				RelativePath=".\DBTableStZond.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfacesBlankFunctions.h">
+				RelativePath=".\DBTableSurfacesBlankFunctions.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfacesBlankOrder.h">
+				RelativePath=".\DBTableSurfacesBlankOrder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfacesOrder.h">
+				RelativePath=".\DBTableSurfacesOrder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfIgeMapping.h">
+				RelativePath=".\DBTableSurfIgeMapping.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableSurfLitoMapping.h">
+				RelativePath=".\DBTableSurfLitoMapping.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableUmPoz.h">
+				RelativePath=".\DBTableUmPoz.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableVoda.h">
+				RelativePath=".\DBTableVoda.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableZriz.h">
+				RelativePath=".\DBTableZriz.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableZriz0.h">
+				RelativePath=".\DBTableZriz0.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DBTableZriz_tbl.h">
+				RelativePath=".\DBTableZriz_tbl.h"
+				>
 			</File>
 			<File
-				RelativePath="DBViewList.h">
+				RelativePath="DBViewList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgCopyGrunty.h">
+				RelativePath=".\DlgCopyGrunty.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgIGEList.h">
+				RelativePath=".\DlgIGEList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgLabElements.h">
+				RelativePath=".\DlgLabElements.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgLanguage.h">
+				RelativePath=".\DlgLanguage.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgNaborGruntovSetting.h">
+				RelativePath=".\DlgNaborGruntovSetting.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgNRows.h">
+				RelativePath=".\DlgNRows.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgPalja.h">
+				RelativePath=".\DlgPalja.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgPCK2Fiz.h">
+				RelativePath=".\DlgPCK2Fiz.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgProbGr_DblClickMode.h">
+				RelativePath=".\DlgProbGr_DblClickMode.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgProbGrunt.h">
+				RelativePath=".\DlgProbGrunt.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgRepeatings.h">
+				RelativePath=".\DlgRepeatings.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgSoilName.h">
+				RelativePath=".\DlgSoilName.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgStatZond.h">
+				RelativePath=".\DlgStatZond.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DlgZondUstParam.h">
+				RelativePath=".\DlgZondUstParam.h"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeoFrame.h">
+				RelativePath=".\EnGeoFrame.h"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeoListCtrl.h">
+				RelativePath=".\EnGeoListCtrl.h"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeologyDoc.h">
+				RelativePath=".\EnGeologyDoc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\EnGeologyView.h">
+				RelativePath=".\EnGeologyView.h"
+				>
 			</File>
 			<File
-				RelativePath="EnGeoObjectsList.h">
+				RelativePath="EnGeoObjectsList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveCaspGeo.h">
+				RelativePath=".\ExcelArchiveCaspGeo.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveCompression.h">
+				RelativePath=".\ExcelArchiveCompression.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveCut.h">
+				RelativePath=".\ExcelArchiveCut.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveData.h">
+				RelativePath=".\ExcelArchiveData.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelArchiveGran.h">
+				RelativePath=".\ExcelArchiveGran.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelAreometrGranular.h">
+				RelativePath=".\ExcelAreometrGranular.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelCompression.h">
+				RelativePath=".\ExcelCompression.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelCut.h">
+				RelativePath=".\ExcelCut.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelDxfRozrizList.h">
+				RelativePath=".\ExcelDxfRozrizList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelHydroList.h">
+				RelativePath=".\ExcelHydroList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelKTEnGeoList.h">
+				RelativePath=".\ExcelKTEnGeoList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelKTLabList.h">
+				RelativePath=".\ExcelKTLabList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelLabNIGEList.h">
+				RelativePath=".\ExcelLabNIGEList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelLabNList.h">
+				RelativePath=".\ExcelLabNList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPaljaList.h">
+				RelativePath=".\ExcelPaljaList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPlotnostChastic.h">
+				RelativePath=".\ExcelPlotnostChastic.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPlotnostChastic1.h">
+				RelativePath=".\ExcelPlotnostChastic1.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelPlotnostGrunta.h">
+				RelativePath=".\ExcelPlotnostGrunta.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelRozrizList.h">
+				RelativePath=".\ExcelRozrizList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelSandGranular.h">
+				RelativePath=".\ExcelSandGranular.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelStatZondList.h">
+				RelativePath=".\ExcelStatZondList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelTSZList.h">
+				RelativePath=".\ExcelTSZList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelVegetableRemains.h">
+				RelativePath=".\ExcelVegetableRemains.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelWL.h">
+				RelativePath=".\ExcelWL.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelWlazhnost.h">
+				RelativePath=".\ExcelWlazhnost.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ExcelWlp.h">
+				RelativePath=".\ExcelWlp.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FizMehList.h">
+				RelativePath=".\FizMehList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FizMehListLab.h">
+				RelativePath=".\FizMehListLab.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GranularList.h">
+				RelativePath=".\GranularList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GranularListLab.h">
+				RelativePath=".\GranularListLab.h"
+				>
 			</File>
 			<File
-				RelativePath=".\IGE2List.h">
+				RelativePath=".\IGE2List.h"
+				>
 			</File>
 			<File
-				RelativePath=".\IGEList.h">
+				RelativePath=".\IGEList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\KTLabList.h">
+				RelativePath=".\KTLabList.h"
+				>
 			</File>
 			<File
-				RelativePath="KTListCtrl.h">
+				RelativePath="KTListCtrl.h"
+				>
 			</File>
 			<File
-				RelativePath="lab.h">
+				RelativePath="lab.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LabElementList.h">
+				RelativePath=".\LabElementList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LabElementsList.h">
+				RelativePath=".\LabElementsList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LabListCtrl.h">
+				RelativePath=".\LabListCtrl.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LabListView.h">
+				RelativePath=".\LabListView.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LabObjectsList.h">
+				RelativePath=".\LabObjectsList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LaboratoryDoc.h">
+				RelativePath=".\LaboratoryDoc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LaboratoryView.h">
+				RelativePath=".\LaboratoryView.h"
+				>
 			</File>
 			<File
-				RelativePath="labView.h">
+				RelativePath="labView.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ListGenezis.h">
+				RelativePath=".\ListGenezis.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ListGruntGran.h">
+				RelativePath=".\ListGruntGran.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ListGrunty.h">
+				RelativePath=".\ListGrunty.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ListNaborGruntov.h">
+				RelativePath=".\ListNaborGruntov.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ListPCK2Fiz.h">
+				RelativePath=".\ListPCK2Fiz.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ListRaschetSvai.h">
+				RelativePath=".\ListRaschetSvai.h"
+				>
 			</File>
 			<File
-				RelativePath="listvwex.h">
+				RelativePath="listvwex.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LithoList.h">
+				RelativePath=".\LithoList.h"
+				>
 			</File>
 			<File
-				RelativePath="MainFrm.h">
+				RelativePath="MainFrm.h"
+				>
 			</File>
 			<File
-				RelativePath="..\..\mylicense.h">
+				RelativePath="..\..\mylicense.h"
+				>
 			</File>
 			<File
-				RelativePath="MyList.h">
+				RelativePath="MyList.h"
+				>
 			</File>
 			<File
-				RelativePath="MyListCtrl.h">
+				RelativePath="MyListCtrl.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MyPalja.h">
+				RelativePath=".\MyPalja.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ObjectDialog.h">
+				RelativePath=".\ObjectDialog.h"
+				>
 			</File>
 			<File
-				RelativePath=".\PaljaList.h">
+				RelativePath=".\PaljaList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\PropList.h">
+				RelativePath=".\PropList.h"
+				>
 			</File>
 			<File
-				RelativePath="Resource.h">
+				RelativePath="Resource.h"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Making help include file..."
-						CommandLine="echo. &gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Commands (ID_* and IDM_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm ID_,HID_,0x10000 IDM_,HIDM_,0x10000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Prompts (IDP_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDP_,HIDP_,0x30000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Resources (IDR_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDR_,HIDR_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Dialogs (IDD_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDD_,HIDD_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Frame Controls (IDW_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-"
-						Outputs="hlp\$(TargetName).hm"/>
+						CommandLine="echo. &gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Commands (ID_* and IDM_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm ID_,HID_,0x10000 IDM_,HIDM_,0x10000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Prompts (IDP_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDP_,HIDP_,0x30000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Resources (IDR_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDR_,HIDR_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Dialogs (IDD_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDD_,HIDD_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Frame Controls (IDW_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;"
+						Outputs="hlp\$(TargetName).hm"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Making help include file..."
-						CommandLine="echo. &gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Commands (ID_* and IDM_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm ID_,HID_,0x10000 IDM_,HIDM_,0x10000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Prompts (IDP_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDP_,HIDP_,0x30000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Resources (IDR_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDR_,HIDR_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Dialogs (IDD_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDD_,HIDD_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-echo // Frame Controls (IDW_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;
-"
-						Outputs="hlp\$(TargetName).hm"/>
+						CommandLine="echo. &gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Commands (ID_* and IDM_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm ID_,HID_,0x10000 IDM_,HIDM_,0x10000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Prompts (IDP_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDP_,HIDP_,0x30000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Resources (IDR_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDR_,HIDR_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Dialogs (IDD_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDD_,HIDD_,0x20000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo. &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;echo // Frame Controls (IDW_*) &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;&quot;hlp\$(TargetName).hm&quot;&#x0D;&#x0A;"
+						Outputs="hlp\$(TargetName).hm"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\SandGranularExcel.h">
+				RelativePath=".\SandGranularExcel.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SetGranSklad.h">
+				RelativePath=".\SetGranSklad.h"
+				>
 			</File>
 			<File
-				RelativePath="SoilsList.h">
+				RelativePath="SoilsList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SoilsListLab.h">
+				RelativePath=".\SoilsListLab.h"
+				>
 			</File>
 			<File
-				RelativePath="StdAfx.h">
+				RelativePath="StdAfx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\tableDoc.h">
+				RelativePath=".\tableDoc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\TableFrm.h">
+				RelativePath=".\TableFrm.h"
+				>
 			</File>
 			<File
-				RelativePath="TableSet.h">
+				RelativePath="TableSet.h"
+				>
 			</File>
 			<File
-				RelativePath=".\tableView.h">
+				RelativePath=".\tableView.h"
+				>
 			</File>
 			<File
-				RelativePath=".\TSZList.h">
+				RelativePath=".\TSZList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\UstList.h">
+				RelativePath=".\UstList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VodaList.h">
+				RelativePath=".\VodaList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ZrizList.h">
+				RelativePath=".\ZrizList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ZrizListLab.h">
+				RelativePath=".\ZrizListLab.h"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
-			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+			>
 			<File
-				RelativePath="cursor1.cur">
+				RelativePath="cursor1.cur"
+				>
 			</File>
 			<File
-				RelativePath="hdricon1.ico">
+				RelativePath="hdricon1.ico"
+				>
 			</File>
 			<File
-				RelativePath="hdricon2.ico">
+				RelativePath="hdricon2.ico"
+				>
 			</File>
 			<File
-				RelativePath="iconlist1.ico">
+				RelativePath="iconlist1.ico"
+				>
 			</File>
 			<File
-				RelativePath="iconlist2.ico">
+				RelativePath="iconlist2.ico"
+				>
 			</File>
 			<File
-				RelativePath="iconlist3.ico">
+				RelativePath="iconlist3.ico"
+				>
 			</File>
 			<File
-				RelativePath="iconlist4.ico">
+				RelativePath="iconlist4.ico"
+				>
 			</File>
 			<File
-				RelativePath="res\lab.ico">
+				RelativePath="res\lab.ico"
+				>
 			</File>
 			<File
-				RelativePath="res\lab.rc2">
+				RelativePath="res\lab.rc2"
+				>
 			</File>
 			<File
-				RelativePath="res\labDoc.ico">
+				RelativePath="res\labDoc.ico"
+				>
 			</File>
 			<File
-				RelativePath="res\Toolbar.bmp">
+				RelativePath="res\Toolbar.bmp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Help Files"
-			Filter="cnt;rtf">
+			Filter="cnt;rtf"
+			>
 			<File
-				RelativePath="hlp\AfxCore.rtf">
+				RelativePath="hlp\AfxCore.rtf"
+				>
 			</File>
 			<File
-				RelativePath="hlp\AfxPrint.rtf">
+				RelativePath="hlp\AfxPrint.rtf"
+				>
 			</File>
 			<File
-				RelativePath="hlp\AppExit.bmp">
+				RelativePath="hlp\AppExit.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\Bullet.bmp">
+				RelativePath="hlp\Bullet.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\CurArw2.bmp">
+				RelativePath="hlp\CurArw2.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\CurArw4.bmp">
+				RelativePath="hlp\CurArw4.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\CurHelp.bmp">
+				RelativePath="hlp\CurHelp.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\EditCopy.bmp">
+				RelativePath="hlp\EditCopy.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\EditCut.bmp">
+				RelativePath="hlp\EditCut.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\EditPast.bmp">
+				RelativePath="hlp\EditPast.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\EditUndo.bmp">
+				RelativePath="hlp\EditUndo.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\FileNew.bmp">
+				RelativePath="hlp\FileNew.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\FileOpen.bmp">
+				RelativePath="hlp\FileOpen.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\FilePrnt.bmp">
+				RelativePath="hlp\FilePrnt.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\FileSave.bmp">
+				RelativePath="hlp\FileSave.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\HlpSBar.bmp">
+				RelativePath="hlp\HlpSBar.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\HlpTBar.bmp">
+				RelativePath="hlp\HlpTBar.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\lab.cnt">
+				RelativePath="hlp\lab.cnt"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Copying contents file..."
-						CommandLine="copy &quot;hlp\$(InputName).cnt&quot; &quot;$(OutDir)&quot;
-"
-						Outputs="$(OutDir)\$(InputName).cnt"/>
+						CommandLine="copy &quot;hlp\$(InputName).cnt&quot; &quot;$(OutDir)&quot;&#x0D;&#x0A;"
+						Outputs="$(OutDir)\$(InputName).cnt"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Copying contents file..."
-						CommandLine="copy &quot;hlp\$(InputName).cnt&quot; &quot;$(OutDir)&quot;
-"
-						Outputs="$(OutDir)\$(InputName).cnt"/>
+						CommandLine="copy &quot;hlp\$(InputName).cnt&quot; &quot;$(OutDir)&quot;&#x0D;&#x0A;"
+						Outputs="$(OutDir)\$(InputName).cnt"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="hlp\RecFirst.bmp">
+				RelativePath="hlp\RecFirst.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\RecLast.bmp">
+				RelativePath="hlp\RecLast.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\RecNext.bmp">
+				RelativePath="hlp\RecNext.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\RecPrev.bmp">
+				RelativePath="hlp\RecPrev.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\Scmax.bmp">
+				RelativePath="hlp\Scmax.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\ScMenu.bmp">
+				RelativePath="hlp\ScMenu.bmp"
+				>
 			</File>
 			<File
-				RelativePath="hlp\Scmin.bmp">
+				RelativePath="hlp\Scmin.bmp"
+				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="lab.reg">
+			RelativePath="lab.reg"
+			>
 		</File>
 		<File
-			RelativePath="ReadMe.txt">
+			RelativePath="ReadMe.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

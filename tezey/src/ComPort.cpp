@@ -213,7 +213,7 @@ WriteRaporto("Handling while pThis->m_queue.Copy\n");
 				GetClientRect(vhWndChild[i+3],&rect);
 				InvalidateRect(vhWndChild[i+3],&rect, true);
 			}
-			for (i = 0; i < 3; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				vDoc[i+6].Covariation(&vDoc[i], &vDoc[i], g_btoReverseCovariation);
 				RECT rect;

@@ -192,7 +192,7 @@ static char         szMsg[128];
 					 int max = pReliefValues[0];
 					 int min = pReliefValues[0];
 					 int data;
-					 for(r = 0; r<Rows; r++)
+					 for(int r = 0; r<Rows; r++)
 					 {
 						 for(int c=0;c<Cols;c++)
 						 {
@@ -213,7 +213,7 @@ static char         szMsg[128];
 					 BYTE *pBits = (BYTE*)HeapAlloc(GetProcessHeap(),
 						 HEAP_ZERO_MEMORY,Rows*Cols);
 					 //заполняем пиксельные данные
-					 for(r = 0; r<Rows; r++)
+					 for(int r = 0; r<Rows; r++)
 					 {
 						 for(int c=0;c<Cols;c++)
 						 {
@@ -281,7 +281,7 @@ static char         szMsg[128];
 
 					   LPBITMAPINFO lpBi = (LPBITMAPINFO)lpbi;
 
-					  for(r = 0; r<RowsP; r++)
+					  for(int r = 0; r<RowsP; r++)
 						{
 							lpBi->bmiColors[r].rgbRed = BYTE(pPaletteValues[ColsP*r+0]);
 							lpBi->bmiColors[r].rgbGreen = BYTE(pPaletteValues[ColsP*r+1]);

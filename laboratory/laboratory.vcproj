@@ -1,34 +1,55 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="laboratory"
 	ProjectGUID="{396E807F-09AA-48E7-9A57-363AF89125E9}"
-	SccProjectName=""
-	SccLocalPath="">
+	RootNamespace="laboratory"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\Release"
 			IntermediateDirectory=".\Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				StringPooling="TRUE"
+				StringPooling="true"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="TRUE"
-				RuntimeTypeInfo="TRUE"
+				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough="stdafx.h"
 				PrecompiledHeaderFile=".\Release/laboratory.pch"
@@ -36,50 +57,73 @@
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"/>
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\lib\laboratory.lib"
-				SuppressStartupBanner="TRUE"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLibrarianTool"
+				OutputFile="..\lib\laboratory.lib"
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory=".\Debug"
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="4"
-			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="TRUE"
+				RuntimeLibrary="1"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough="stdafx.h"
 				PrecompiledHeaderFile=".\Debug/laboratory.pch"
@@ -87,34 +131,40 @@
 				ObjectFile=".\Debug/"
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"/>
+				SuppressStartupBanner="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\lib\laboratory_d.lib"
-				SuppressStartupBanner="TRUE"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLibrarianTool"
+				OutputFile="..\lib\laboratory_d.lib"
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -122,83 +172,109 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+			>
 			<File
-				RelativePath=".\src\BaseLab.cpp">
+				RelativePath=".\src\BaseLab.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\lab.cpp">
+				RelativePath=".\src\lab.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\lab_cmd_dlg.cpp">
+				RelativePath=".\src\lab_cmd_dlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabElement.cpp">
+				RelativePath=".\src\LabElement.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabParamTree.cpp">
+				RelativePath=".\src\LabParamTree.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabPlotData.cpp">
+				RelativePath=".\src\LabPlotData.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\labtrial.cpp">
+				RelativePath=".\src\labtrial.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabTrialsTree.cpp">
+				RelativePath=".\src\LabTrialsTree.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\prop_value.cpp">
+				RelativePath=".\src\prop_value.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\SoilDescriptionPtr.cpp">
+				RelativePath=".\src\SoilDescriptionPtr.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\StdAfx.cpp">
+				RelativePath=".\src\StdAfx.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl">
+			Filter="h;hpp;hxx;hm;inl"
+			>
 			<File
-				RelativePath=".\src\BaseLab.h">
+				RelativePath=".\src\BaseLab.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Lab.h">
+				RelativePath=".\src\Lab.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\lab_cmd_dlg.h">
+				RelativePath=".\src\lab_cmd_dlg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabElement.h">
+				RelativePath=".\src\LabElement.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabParamTree.h">
+				RelativePath=".\src\LabParamTree.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabPlotData.h">
+				RelativePath=".\src\LabPlotData.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabTrialsTree.h">
+				RelativePath=".\src\LabTrialsTree.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LabTrialValueType.h">
+				RelativePath=".\src\LabTrialValueType.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\prop_value.h">
+				RelativePath=".\src\prop_value.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\SoilDescriptionPtr.h">
+				RelativePath=".\src\SoilDescriptionPtr.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\StdAfx.h">
+				RelativePath=".\src\StdAfx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\TrialDataDef.h">
+				RelativePath=".\src\TrialDataDef.h"
+				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="Readme.txt">
+			RelativePath="Readme.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

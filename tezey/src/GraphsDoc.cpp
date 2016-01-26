@@ -589,7 +589,8 @@ void CGraphsDoc::SetTimeEnd()
 {
 	int len = m_Len + m_LenPredict;
 	vdouble t(len), T(len);
-	for (int i = 0; i < m_Len; i++)
+	int i = 0;
+	for (; i < m_Len; i++)
 	{
 		t[i] = m_t[i];
 		T[i] = m_T[i];
@@ -2388,7 +2389,7 @@ void CGraphsDoc::LagerResultPlot()
 	
 	m_vtCommonParams.GetLastVect().AddMsg(&v);
 	m_vtCommonParams.GetLastVect().GetLastMsg().resize(len);
-	for (i = 1; i < len; i++)
+	for (int i = 1; i < len; i++)
 	{
 		m_vtCommonParams.GetLastVect().GetLastMsg()[i] = m_Nnet.m_t[i];
 		m_vvCommonParams.GetLastVect().GetLastMsg()[i] = m_Nnet.m_Y[i];
@@ -2767,7 +2768,7 @@ void CGraphsDoc::SetEarthQuakesSkale(short skaleModeX, double B0, double L0, dou
 
 	double az = m_eqLargestAzimut[days-1];
 
-	for (i = days-1; i >=0 ; i--)
+	for (int i = days-1; i >=0 ; i--)
 	{
 		if (m_eqMaxMagnitude[i] >= 5.8)
 		{
@@ -3016,7 +3017,7 @@ WriteRaporto("LogariphmOfDispersion()\n");
 	double log10_nonZeroMin = log10(nonZeroMin);
 	m_LogDisp.resize(m_Disp.Length());
 
-	for(i = 0; i < m_Disp.Length(); i++)
+	for(int i = 0; i < m_Disp.Length(); i++)
 	{
 		if(m_Disp[i] > 0)
 		{
@@ -3075,7 +3076,7 @@ WriteRaporto("LogariphmOfSignal()\n");
 	double log10_nonZeroMin = log10(nonZeroMin);
 	m_LogT.resize(m_T.Length());
 
-	for(i = 0; i< m_T.Length(); i++)
+	for(int i = 0; i< m_T.Length(); i++)
 	{
 		if(m_T[i] > 0)
 		{
@@ -3150,7 +3151,7 @@ WriteRaporto("LogariphmOfFiltredSignal()\n");
 	double log10_nonZeroMin = log10(nonZeroMin);
 	m_LogTFiltred.resize(m_TFiltred.Length());
 
-	for(i = 0; i< m_TFiltred.Length(); i++)
+	for(int i = 0; i< m_TFiltred.Length(); i++)
 	{
 		if(m_TFiltred[i] > 0)
 		{
@@ -3561,7 +3562,7 @@ void CGraphsDoc::HistOfSignal_old()
 
 	m_LogT.resize(m_T.Length());
 
-	for (i = 0; i < m_T.Length(); i++)
+	for (int i = 0; i < m_T.Length(); i++)
 	{
 		if (m_T[i] == 0)
 			m_LogT[i] = 1.0;
@@ -3790,7 +3791,7 @@ void CGraphsDoc::SaveNearEarthQuakes(HWND hWnd, double B0, double L0, double nea
 	fprintf(stream,"\t\"Depth\"\n");
 
 	indexes = Find(m_Req <= near_r*1000 && m_Meq >= this->m_magnitudeBorder);
-	for (i = 0; i < indexes.Size(); i++)
+	for (int i = 0; i < indexes.Size(); i++)
 	{
 		fprintf(stream,
 			"%lf\t %lf\t%lf\t%lf\t%lf\n",
@@ -3829,7 +3830,7 @@ void CGraphsDoc::SaveNearEarthQuakes(HWND hWnd, double B0, double L0, double nea
 		&& m_Heq >= this->m_depthIntervalMin
 		&& m_Heq <= this->m_depthIntervalMax
 		);
-	for (i = 0; i < indexes.Size(); i++)
+	for (int i = 0; i < indexes.Size(); i++)
 	{
 		fprintf(stream,
 			"%lf\t %lf\t%lf\t%lf\t%lf\n",

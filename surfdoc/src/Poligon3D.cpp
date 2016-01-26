@@ -278,9 +278,9 @@ void Poligon3D::Drawing( )
 		gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_NONZERO);
 
 	    //glNewList(id, GL_COMPILE);
-		if (m_pSurface)
+		if (m_pSurface && m_vdPoints.size())
 		{
-			COLORREF color = m_pSurface->GetColor(m_vdPoints[i].z);
+			COLORREF color = m_pSurface->GetColor(m_vdPoints[0].z);
 			glColor4ub (GetRValue(color), GetGValue(color), GetBValue(color), (GLubyte)m_pSurface->m_alpha); 
 		}
 		else

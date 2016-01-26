@@ -210,7 +210,7 @@ void PolyotyNnetDlg::OnInitDialog()
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			
 			SendDlgItemMessage( hDlg, IDC_COMBO_POLYOTY_COLS_NAMES, CB_RESETCONTENT, 0,0);
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			for ( j = 0; j < pnames->size(); j++)
+			for (size_t j = 0; j < pnames->size(); j++)
 			{
 				SendDlgItemMessage( hDlg, IDC_COMBO_POLYOTY_COLS_NAMES, CB_ADDSTRING, 0,
 					(LPARAM)(LPCTSTR)pnames->operator [](j).c_str());
@@ -297,7 +297,7 @@ void PolyotyNnetDlg::OnButtonMovingAverange(WPARAM wParam, LPARAM lParam)
 					}
 					//##############################						
 				}
-				for ( C = iy + 1; C < Cols; C++)
+				for (int C = iy + 1; C < Cols; C++)
 				{
 					WinSurf( 
 						vvv[ix],  
@@ -325,7 +325,7 @@ void PolyotyNnetDlg::OnButtonMovingAverange(WPARAM wParam, LPARAM lParam)
 							{
 								fprintf(stream, "%d\t",	int(vvv[C][j][i]));
 							}
-							for(  C = 2; C < Cols; C++)
+							for(int C = 2; C < Cols; C++)
 							{
 								fprintf(stream, "%f\t",	vvv[C][j][i]);
 							}
@@ -371,7 +371,8 @@ void PolyotyNnetDlg::SortProfiles()
 				{
 					u = int((*pvectors)[0][0]);
 					prof = int((*pvectors)[1][0]);
-					for (int i = 0; i < (*pvectors)[0].size(); i++)
+					int i = 0;
+					for (; i < (*pvectors)[0].size(); i++)
 					{
 						if (					
 							u != int((*pvectors)[0][i]) ||
@@ -452,7 +453,7 @@ void PolyotyNnetDlg::SortProfiles()
 				qsort( (void *)ifs, (size_t)n_profiles, sizeof(index_for_sort), compare_index_for_sort );
 				//###########################################################
 				pline_cutting_vector_sorted->resize(0);
-				for (j = 0; j < n_profiles; j++)
+				for (int j = 0; j < n_profiles; j++)
 				{
 					pline_cutting_vector_sorted->push_back(line_cutting_vector[ifs[j].i]);
 				}
@@ -702,7 +703,7 @@ void PolyotyNnetDlg::OnButtonKohonen2(int type)
 	int nnetParameters = points_per_image;
 	double **M = AllocDoubleMat(nImages, nnetParameters);
 
-	for ( j = 0; j < nImages; j++)
+	for (int j = 0; j < nImages; j++)
 	{
 		//###################################################################
 		int len = vv_line_cutting[c][j].i_finish - vv_line_cutting[c][j].i_start;
@@ -726,7 +727,7 @@ void PolyotyNnetDlg::OnButtonKohonen2(int type)
 		double sum = 0;
 		double sumX = 0;
 		double sumY = 0;
-		for ( i0 = 0; i0 < len; i0++)
+		for (int i0 = 0; i0 < len; i0++)
 		{
 			sum  += v[i0];
 			sumX += X[i0];
@@ -855,7 +856,7 @@ void PolyotyNnetDlg::OnButtonKohonen(int type)
 
 	string name;
 
-	for ( j = 0; j < nImages; j++)
+	for (int j = 0; j < nImages; j++)
 	{
 		//###################################################################
 //					int col = iy + 1 + 3;
@@ -882,7 +883,7 @@ void PolyotyNnetDlg::OnButtonKohonen(int type)
 			double sum = 0;
 			double sumX = 0;
 			double sumY = 0;
-			for ( i0 = 0; i0 < len; i0++)
+			for (int i0 = 0; i0 < len; i0++)
 			{
 				sum  += v[i0];
 				sumX += X[i0];
@@ -952,7 +953,7 @@ void PolyotyNnetDlg::Test()
 						C[c][par] = Rand(0,1);
 					}
 				}
-				for ( c = 0; c < clusters; c++)
+				for (int c = 0; c < clusters; c++)
 				{
 					for ( int par = 0; par < nnetParameters; par++)
 					{
@@ -1055,13 +1056,14 @@ void PolyotyNnetDlg::OnButtonProfileSumming(WPARAM wParam, LPARAM lParam)
 						else
 						{
 							vv[J].resize( SumLen );
-							for (int I = 0; I < SumLen; I++)
+							int I = 0;
+							for (; I < SumLen; I++)
 							{
 								vv[J][I].resize( Cols );
 							}
 							//##############################
 							I = 0;
-							for ( j = J, n = 0; j < J+N; j++, n++)
+							for (int j = J, n = 0; j < J+N; j++, n++)
 							{
 								int len = (*pline_cutting_vector_sorted)[j].i_finish 
 									- (*pline_cutting_vector_sorted)[j].i_start;
@@ -1103,11 +1105,12 @@ void PolyotyNnetDlg::OnButtonProfileSumming(WPARAM wParam, LPARAM lParam)
 						FILE *stream;
 						stream = fopen(lpstrFile,"wt");
 
-						for ( J = 0; J < n_profiles-N+1; J++)
+						for (int J = 0; J < n_profiles-N+1; J++)
 						{
 							int length = vv[J].Size();
 							index_for_sort * ifs = new index_for_sort[length];
-							for (int I = 0; I < length; I++)
+							int I = 0;
+							for (; I < length; I++)
 							{
 								ifs[I].i		= I;
 								ifs[I].sort_val	= vv[J][I][iy];
@@ -1119,7 +1122,7 @@ void PolyotyNnetDlg::OnButtonProfileSumming(WPARAM wParam, LPARAM lParam)
 								{
 									fprintf(stream, "%d\t",	int(vv[J][ifs[I].i][C]));
 								}
-								for(  C = 2; C < Cols; C++)
+								for(int C = 2; C < Cols; C++)
 								{
 									fprintf(stream, "%f\t",	vv[J][ifs[I].i][C]);
 								}
@@ -1465,7 +1468,7 @@ void PolyotyNnetDlg::OnButtonOK()
 						//qsort( (void *)pxyz, (size_t)fact_len, sizeof(COORDINATES), compare_X );
 
 						//заполняем точки измерения внутри квадрата
-						for (i = 0; i < fact_len; i++)
+						for (int i = 0; i < fact_len; i++)
 						{
 							xx[i] = pxyz[i].x;
 							yy[i] = pxyz[i].y;

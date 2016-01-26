@@ -25,7 +25,7 @@ WriteRaportoB("WriteRaportoA 1\n");
 	// открываем бинарный файл для записи
 	static char filename[200];
 	/////////////////////////////////////////////////
-	char *p1, *p2, *p;
+	const char *p1, *p2, *p;
 	size_t pos_of_flash = 0;
 	p1 = strrchr(file,'\\');
 	p2 = strrchr(file,'/');

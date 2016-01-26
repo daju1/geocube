@@ -87,7 +87,7 @@ CGraph::CGraph (
 		}
 	}
 	m_vWidth.resize(nGraphs);
-	for ( n = 0; n < nGraphs; n++)
+	for (int n = 0; n < nGraphs; n++)
 	{
 		switch(n)
 		{
@@ -673,7 +673,7 @@ WriteRaporto("Scale (!data.bX) \n");
 			//===== то мы восстанавливаем значение порядка
 			data.Power = int(floor(power)) - 2;
 		//===== Реальный множитель
-		data.Factor = pow(10,data.Power);	
+		data.Factor = pow(10.0, data.Power);	
 
 		//===== Диапазон изменения мантиссы
 		double span = (data.Max - data.Min)/data.Factor;

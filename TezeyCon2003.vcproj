@@ -1,116 +1,179 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="TezeyCon2003"
 	ProjectGUID="{427392D6-C266-4CC7-BEE6-268AED0509FC}"
-	Keyword="Win32Proj">
+	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="1"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(IntDir)/../include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="5"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
+				RuntimeLibrary="1"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="opengl32.lib glu32.lib glaux.lib comctl32.lib jpeg.lib dime.lib"
 				OutputFile="$(OutDir)/../bin/TezeyCon2003.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(IntDir)/../lib"
-				GenerateDebugInformation="TRUE"
+				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/TezeyCon2003.pdb"
 				SubSystem="1"
-				TargetMachine="1"/>
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCAppVerifierTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="1"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="$(IntDir)/../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="4"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
+				RuntimeLibrary="0"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="3"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="opengl32.lib glu32.lib glaux.lib comctl32.lib jpeg.lib dime.lib"
 				OutputFile="$(OutDir)/../bin/TezeyCon2003.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(IntDir)/../lib"
-				GenerateDebugInformation="TRUE"
+				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				TargetMachine="1"/>
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCAppVerifierTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -119,787 +182,1044 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
 			<File
-				RelativePath=".\abortPrint.cpp">
+				RelativePath=".\abortPrint.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\AFile.cpp">
+				RelativePath=".\AFile.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Archive.cpp">
+				RelativePath=".\Archive.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\BlnProfile3D.cpp">
+				RelativePath=".\BlnProfile3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\BlnProfilePlane3D.cpp">
+				RelativePath=".\BlnProfilePlane3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Bmp3D.cpp">
+				RelativePath=".\Bmp3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\BmpProfile3D.cpp">
+				RelativePath=".\BmpProfile3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenLine3D.cpp">
+				RelativePath=".\BrokenLine3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenPlane3D.cpp">
+				RelativePath=".\BrokenPlane3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenPoligon3D.cpp">
+				RelativePath=".\BrokenPoligon3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenPoligon_3D.cpp">
+				RelativePath=".\BrokenPoligon_3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\camera.cpp">
+				RelativePath=".\camera.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\checkListBox.cpp">
+				RelativePath=".\checkListBox.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\colormap.cpp">
+				RelativePath=".\colormap.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\CommandLineParser.cpp">
+				RelativePath=".\CommandLineParser.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\CommonMeanFileDialog.cpp">
+				RelativePath=".\CommonMeanFileDialog.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ComPort.cpp">
+				RelativePath=".\ComPort.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\conjgrad.cpp">
+				RelativePath=".\conjgrad.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\datenum.cpp">
+				RelativePath=".\datenum.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\distance3d.cpp">
+				RelativePath=".\distance3d.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DrawListArray.cpp">
+				RelativePath=".\DrawListArray.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\DrawScene.cpp">
+				RelativePath=".\DrawScene.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\error.cpp">
+				RelativePath=".\error.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\filedlg.cpp">
+				RelativePath=".\filedlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FileFormat.cpp">
+				RelativePath=".\FileFormat.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Generic.cpp">
+				RelativePath=".\Generic.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GeoCatch.cpp">
+				RelativePath=".\GeoCatch.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GeoSurface.cpp">
+				RelativePath=".\GeoSurface.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\glade_dialog.cpp">
+				RelativePath=".\glade_dialog.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GLMan.cpp">
+				RelativePath=".\GLMan.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GLPrintMan.cpp">
+				RelativePath=".\GLPrintMan.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Graph.cpp">
+				RelativePath=".\Graph.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Graph2.cpp">
+				RelativePath=".\Graph2.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GraphsDoc.cpp">
+				RelativePath=".\GraphsDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GraphsView.cpp">
+				RelativePath=".\GraphsView.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Grid.cpp">
+				RelativePath=".\Grid.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GridProfile3D.cpp">
+				RelativePath=".\GridProfile3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\interp.cpp">
+				RelativePath=".\interp.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\InterWellsLine3D.cpp">
+				RelativePath=".\InterWellsLine3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\iso.cpp">
+				RelativePath=".\iso.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Line3D.cpp">
+				RelativePath=".\Line3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\listfun.cpp">
+				RelativePath=".\listfun.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\matrixes.cpp">
+				RelativePath=".\matrixes.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\memory_track.cpp">
+				RelativePath=".\memory_track.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MessageItem.cpp">
+				RelativePath=".\MessageItem.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\mtools.cpp">
+				RelativePath=".\mtools.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\mylicense.cpp">
+				RelativePath=".\mylicense.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Object.cpp">
+				RelativePath=".\Object.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ObjectList.cpp">
+				RelativePath=".\ObjectList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\objects.cpp">
+				RelativePath=".\objects.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\palette.cpp">
+				RelativePath=".\palette.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ParseTimeString.cpp">
+				RelativePath=".\ParseTimeString.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Poligon3D.cpp">
+				RelativePath=".\Poligon3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\PolyotyNnetDlg.cpp">
+				RelativePath=".\PolyotyNnetDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\print.cpp">
+				RelativePath=".\print.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\PrintDlgBox.cpp">
+				RelativePath=".\PrintDlgBox.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\project.cpp">
+				RelativePath=".\project.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\raporto.cpp">
+				RelativePath=".\raporto.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\readfile.cpp">
+				RelativePath=".\readfile.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\RoomQueueItem.cpp">
+				RelativePath=".\RoomQueueItem.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\SelectLine.cpp">
+				RelativePath=".\SelectLine.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\sorting.cpp">
+				RelativePath=".\sorting.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Sphere3D.cpp">
+				RelativePath=".\Sphere3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp">
+				RelativePath=".\stdafx.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\String3D.cpp">
+				RelativePath=".\String3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Surface3D.cpp">
+				RelativePath=".\Surface3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\SurfDoc.cpp">
+				RelativePath=".\SurfDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\systemnnet.cpp">
+				RelativePath=".\systemnnet.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\texture.cpp">
+				RelativePath=".\texture.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\TezeyCon2003.cpp">
+				RelativePath=".\TezeyCon2003.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\tga.cpp">
+				RelativePath=".\tga.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ThePoint3D.cpp">
+				RelativePath=".\ThePoint3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Triangle3D.cpp">
+				RelativePath=".\Triangle3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\TriangulatedGrid3D.cpp">
+				RelativePath=".\TriangulatedGrid3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\utility.cpp">
+				RelativePath=".\utility.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Vdouble.cpp">
+				RelativePath=".\Vdouble.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\vect.cpp">
+				RelativePath=".\vect.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\VectItem.cpp">
+				RelativePath=".\VectItem.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Vector.cpp">
+				RelativePath=".\Vector.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\views.cpp">
+				RelativePath=".\views.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\wav.cpp">
+				RelativePath=".\wav.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\well_3D.cpp">
+				RelativePath=".\well_3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_app.cpp">
+				RelativePath=".\win32_app.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_dialog.cpp">
+				RelativePath=".\win32_dialog.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_graphics_view.cpp">
+				RelativePath=".\win32_graphics_view.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_plot_views.cpp">
+				RelativePath=".\win32_plot_views.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_project.cpp">
+				RelativePath=".\win32_project.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_project_view.cpp">
+				RelativePath=".\win32_project_view.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_views.cpp">
+				RelativePath=".\win32_views.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Wingeoid.cpp">
+				RelativePath=".\Wingeoid.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\winmap.cpp">
+				RelativePath=".\winmap.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\winplot.cpp">
+				RelativePath=".\winplot.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Winsurf.cpp">
+				RelativePath=".\Winsurf.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\winsurfproc.cpp">
+				RelativePath=".\winsurfproc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\winsurftree.cpp">
+				RelativePath=".\winsurftree.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\XYZBuffer.cpp">
+				RelativePath=".\XYZBuffer.cpp"
+				>
 			</File>
 			<Filter
 				Name="dct"
-				Filter="">
+				>
 				<File
-					RelativePath=".\dct\DelaunayTriangulation.cpp">
+					RelativePath=".\dct\DelaunayTriangulation.cpp"
+					>
 				</File>
 			</Filter>
 			<Filter
 				Name="kohonen"
-				Filter="">
+				>
 				<File
-					RelativePath=".\kohonen\KohonenDlg.cpp">
+					RelativePath=".\kohonen\KohonenDlg.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\kohonen\KohonenMapWnd.cpp">
+					RelativePath=".\kohonen\KohonenMapWnd.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\kohonen\Layer.cpp">
+					RelativePath=".\kohonen\Layer.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\kohonen\LayerKohonen.cpp">
+					RelativePath=".\kohonen\LayerKohonen.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\kohonen\Net.cpp">
+					RelativePath=".\kohonen\Net.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\kohonen\NetKohonen.cpp">
+					RelativePath=".\kohonen\NetKohonen.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\kohonen\Neuron.cpp">
+					RelativePath=".\kohonen\Neuron.cpp"
+					>
 				</File>
 				<File
-					RelativePath=".\kohonen\NeuronKohonen.cpp">
+					RelativePath=".\kohonen\NeuronKohonen.cpp"
+					>
 				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
 			<File
-				RelativePath=".\abortPrint.h">
+				RelativePath=".\abortPrint.h"
+				>
 			</File>
 			<File
-				RelativePath=".\AFile.h">
+				RelativePath=".\AFile.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Archive.h">
+				RelativePath=".\Archive.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BlnProfile3D.h">
+				RelativePath=".\BlnProfile3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BlnProfilePlane3D.h">
+				RelativePath=".\BlnProfilePlane3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Bmp3D.h">
+				RelativePath=".\Bmp3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BmpProfile3D.h">
+				RelativePath=".\BmpProfile3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenLine3D.h">
+				RelativePath=".\BrokenLine3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenPlane3D.h">
+				RelativePath=".\BrokenPlane3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenPoligon3D.h">
+				RelativePath=".\BrokenPoligon3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\BrokenPoligon_3D.h">
+				RelativePath=".\BrokenPoligon_3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\camera.h">
+				RelativePath=".\camera.h"
+				>
 			</File>
 			<File
-				RelativePath=".\checkListBox.h">
+				RelativePath=".\checkListBox.h"
+				>
 			</File>
 			<File
-				RelativePath=".\color.h">
+				RelativePath=".\color.h"
+				>
 			</File>
 			<File
-				RelativePath=".\colormap.h">
+				RelativePath=".\colormap.h"
+				>
 			</File>
 			<File
-				RelativePath=".\CommandLineParser.h">
+				RelativePath=".\CommandLineParser.h"
+				>
 			</File>
 			<File
-				RelativePath=".\CommonMeanFileDialog.h">
+				RelativePath=".\CommonMeanFileDialog.h"
+				>
 			</File>
 			<File
-				RelativePath=".\commonOG.h">
+				RelativePath=".\commonOG.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Complex.h">
+				RelativePath=".\Complex.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ComPort.h">
+				RelativePath=".\ComPort.h"
+				>
 			</File>
 			<File
-				RelativePath=".\conjgrad.h">
+				RelativePath=".\conjgrad.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Datenum.h">
+				RelativePath=".\Datenum.h"
+				>
 			</File>
 			<File
-				RelativePath=".\dct\DelaunayTriangulation.h">
+				RelativePath=".\dct\DelaunayTriangulation.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DPoint.h">
+				RelativePath=".\DPoint.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DrawListArray.h">
+				RelativePath=".\DrawListArray.h"
+				>
 			</File>
 			<File
-				RelativePath=".\DrawScene.h">
+				RelativePath=".\DrawScene.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Drill_3D.h">
+				RelativePath=".\Drill_3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\error.h">
+				RelativePath=".\error.h"
+				>
 			</File>
 			<File
-				RelativePath=".\factorial.h">
+				RelativePath=".\factorial.h"
+				>
 			</File>
 			<File
-				RelativePath=".\filedlg.h">
+				RelativePath=".\filedlg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FileFormat.h">
+				RelativePath=".\FileFormat.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Generic.h">
+				RelativePath=".\Generic.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GeoCatch.h">
+				RelativePath=".\GeoCatch.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GeoSurface.h">
+				RelativePath=".\GeoSurface.h"
+				>
 			</File>
 			<File
-				RelativePath=".\glade_dialog.h">
+				RelativePath=".\glade_dialog.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GLMan.h">
+				RelativePath=".\GLMan.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GLPrintMan.h">
+				RelativePath=".\GLPrintMan.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Graph.h">
+				RelativePath=".\Graph.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Graph2.h">
+				RelativePath=".\Graph2.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GraphsDoc.h">
+				RelativePath=".\GraphsDoc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GraphsView.h">
+				RelativePath=".\GraphsView.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Grid.h">
+				RelativePath=".\Grid.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GridProfile3D.h">
+				RelativePath=".\GridProfile3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\interp.h">
+				RelativePath=".\interp.h"
+				>
 			</File>
 			<File
-				RelativePath=".\InterWellsLine3D.h">
+				RelativePath=".\InterWellsLine3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Lagerfun.h">
+				RelativePath=".\Lagerfun.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Line3D.h">
+				RelativePath=".\Line3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\listfun.h">
+				RelativePath=".\listfun.h"
+				>
 			</File>
 			<File
-				RelativePath=".\map.h">
+				RelativePath=".\map.h"
+				>
 			</File>
 			<File
-				RelativePath=".\matrixes.h">
+				RelativePath=".\matrixes.h"
+				>
 			</File>
 			<File
-				RelativePath=".\memory_track.h">
+				RelativePath=".\memory_track.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MessageItem.h">
+				RelativePath=".\MessageItem.h"
+				>
 			</File>
 			<File
-				RelativePath=".\mtools.h">
+				RelativePath=".\mtools.h"
+				>
 			</File>
 			<File
-				RelativePath=".\mylicense.h">
+				RelativePath=".\mylicense.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Object.h">
+				RelativePath=".\Object.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ObjectList.h">
+				RelativePath=".\ObjectList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\objects.h">
+				RelativePath=".\objects.h"
+				>
 			</File>
 			<File
-				RelativePath=".\palette.h">
+				RelativePath=".\palette.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ParseTimeString.h">
+				RelativePath=".\ParseTimeString.h"
+				>
 			</File>
 			<File
-				RelativePath=".\plane.h">
+				RelativePath=".\plane.h"
+				>
 			</File>
 			<File
-				RelativePath=".\points.h">
+				RelativePath=".\points.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Poligon3D.h">
+				RelativePath=".\Poligon3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\PolyotyNnetDlg.h">
+				RelativePath=".\PolyotyNnetDlg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Primitive3D.h">
+				RelativePath=".\Primitive3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\print.h">
+				RelativePath=".\print.h"
+				>
 			</File>
 			<File
-				RelativePath=".\PrintDlgBox.h">
+				RelativePath=".\PrintDlgBox.h"
+				>
 			</File>
 			<File
-				RelativePath=".\project.h">
+				RelativePath=".\project.h"
+				>
 			</File>
 			<File
-				RelativePath=".\raporto.h">
+				RelativePath=".\raporto.h"
+				>
 			</File>
 			<File
-				RelativePath=".\readfile.h">
+				RelativePath=".\readfile.h"
+				>
 			</File>
 			<File
-				RelativePath=".\resource.h">
+				RelativePath=".\resource.h"
+				>
 			</File>
 			<File
-				RelativePath=".\RoomQueueItem.h">
+				RelativePath=".\RoomQueueItem.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SelectLine.h">
+				RelativePath=".\SelectLine.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Sequence.h">
+				RelativePath=".\Sequence.h"
+				>
 			</File>
 			<File
-				RelativePath=".\sorting.h">
+				RelativePath=".\sorting.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Sphere3D.h">
+				RelativePath=".\Sphere3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.h">
+				RelativePath=".\stdafx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\String3D.h">
+				RelativePath=".\String3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\surface.h">
+				RelativePath=".\surface.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Surface3D.h">
+				RelativePath=".\Surface3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\surfdefs.h">
+				RelativePath=".\surfdefs.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SurfDoc.h">
+				RelativePath=".\SurfDoc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\systemnnet.h">
+				RelativePath=".\systemnnet.h"
+				>
 			</File>
 			<File
-				RelativePath=".\tabfun.h">
+				RelativePath=".\tabfun.h"
+				>
 			</File>
 			<File
-				RelativePath=".\texture.h">
+				RelativePath=".\texture.h"
+				>
 			</File>
 			<File
-				RelativePath=".\tga.h">
+				RelativePath=".\tga.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ThePoint3D.h">
+				RelativePath=".\ThePoint3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Triangle3D.h">
+				RelativePath=".\Triangle3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\TriangulatedGrid3D.h">
+				RelativePath=".\TriangulatedGrid3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\typedef.h">
+				RelativePath=".\typedef.h"
+				>
 			</File>
 			<File
-				RelativePath=".\utility.h">
+				RelativePath=".\utility.h"
+				>
 			</File>
 			<File
-				RelativePath=".\v3d.h">
+				RelativePath=".\v3d.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Vdouble.h">
+				RelativePath=".\Vdouble.h"
+				>
 			</File>
 			<File
-				RelativePath=".\vect.h">
+				RelativePath=".\vect.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VectItem.h">
+				RelativePath=".\VectItem.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Vector.h">
+				RelativePath=".\Vector.h"
+				>
 			</File>
 			<File
-				RelativePath=".\views.h">
+				RelativePath=".\views.h"
+				>
 			</File>
 			<File
-				RelativePath=".\wav.h">
+				RelativePath=".\wav.h"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_app.h">
+				RelativePath=".\win32_app.h"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_dialog.h">
+				RelativePath=".\win32_dialog.h"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_graphics_view.h">
+				RelativePath=".\win32_graphics_view.h"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_plot_views.h">
+				RelativePath=".\win32_plot_views.h"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_project.h">
+				RelativePath=".\win32_project.h"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_project_view.h">
+				RelativePath=".\win32_project_view.h"
+				>
 			</File>
 			<File
-				RelativePath=".\win32_views.h">
+				RelativePath=".\win32_views.h"
+				>
 			</File>
 			<File
-				RelativePath=".\wingeoid.h">
+				RelativePath=".\wingeoid.h"
+				>
 			</File>
 			<File
-				RelativePath=".\winmap.h">
+				RelativePath=".\winmap.h"
+				>
 			</File>
 			<File
-				RelativePath=".\winplot.h">
+				RelativePath=".\winplot.h"
+				>
 			</File>
 			<File
-				RelativePath=".\winsurf.h">
+				RelativePath=".\winsurf.h"
+				>
 			</File>
 			<File
-				RelativePath=".\winsurfproc.h">
+				RelativePath=".\winsurfproc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\winsurftree.h">
+				RelativePath=".\winsurftree.h"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
 			<File
-				RelativePath=".\bitmap1.bmp">
+				RelativePath=".\bitmap1.bmp"
+				>
 			</File>
 			<File
-				RelativePath=".\bitmap_c.bmp">
+				RelativePath=".\bitmap_c.bmp"
+				>
 			</File>
 			<File
-				RelativePath=".\bmp00001.bmp">
+				RelativePath=".\bmp00001.bmp"
+				>
 			</File>
 			<File
-				RelativePath=".\bmp00002.bmp">
+				RelativePath=".\bmp00002.bmp"
+				>
 			</File>
 			<File
-				RelativePath=".\bmp00003.bmp">
+				RelativePath=".\bmp00003.bmp"
+				>
 			</File>
 			<File
-				RelativePath=".\Generic.ico">
+				RelativePath=".\Generic.ico"
+				>
 			</File>
 			<File
-				RelativePath=".\generic.rc">
+				RelativePath=".\generic.rc"
+				>
 			</File>
 			<File
-				RelativePath=".\ico00001.ico">
+				RelativePath=".\ico00001.ico"
+				>
 			</File>
 			<File
-				RelativePath=".\icon1.ico">
+				RelativePath=".\icon1.ico"
+				>
 			</File>
 			<File
-				RelativePath=".\politic_map.bmp">
+				RelativePath=".\politic_map.bmp"
+				>
 			</File>
 			<File
-				RelativePath=".\psheetsm.ico">
+				RelativePath=".\psheetsm.ico"
+				>
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\palette\clrmap.dat">
+			RelativePath=".\palette\clrmap.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_autumn.dat">
+			RelativePath=".\palette\colormap_autumn.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_bone.dat">
+			RelativePath=".\palette\colormap_bone.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_colorcube.dat">
+			RelativePath=".\palette\colormap_colorcube.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_cool.dat">
+			RelativePath=".\palette\colormap_cool.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_copper.dat">
+			RelativePath=".\palette\colormap_copper.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_flag.dat">
+			RelativePath=".\palette\colormap_flag.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_gray.dat">
+			RelativePath=".\palette\colormap_gray.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_hot.dat">
+			RelativePath=".\palette\colormap_hot.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_hsv.dat">
+			RelativePath=".\palette\colormap_hsv.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_jet.dat">
+			RelativePath=".\palette\colormap_jet.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_lines.dat">
+			RelativePath=".\palette\colormap_lines.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_pink.dat">
+			RelativePath=".\palette\colormap_pink.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_prism.dat">
+			RelativePath=".\palette\colormap_prism.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_spring.dat">
+			RelativePath=".\palette\colormap_spring.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_summer.dat">
+			RelativePath=".\palette\colormap_summer.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_surfer.dat">
+			RelativePath=".\palette\colormap_surfer.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_vga.dat">
+			RelativePath=".\palette\colormap_vga.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_white.dat">
+			RelativePath=".\palette\colormap_white.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\colormap_winter.dat">
+			RelativePath=".\palette\colormap_winter.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\ReadMe.txt">
+			RelativePath=".\ReadMe.txt"
+			>
 		</File>
 		<File
-			RelativePath=".\topo.dat">
+			RelativePath=".\topo.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\topomap1.dat">
+			RelativePath=".\palette\topomap1.dat"
+			>
 		</File>
 		<File
-			RelativePath=".\palette\topomap2.dat">
+			RelativePath=".\palette\topomap2.dat"
+			>
 		</File>
 	</Files>
 	<Globals>

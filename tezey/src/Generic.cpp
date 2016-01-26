@@ -16,8 +16,24 @@
 #include "XYZBuffer.h"
 #include "ComPort.h"
 #include "../../wintools/src/checkListBox.h"
+#include "../../resource.h"
 
+
+#define ID_FILE_CLOSE     1000001
+#define ID_FILE_NEW       1000002
+#define ID_FILE_OPEN      1000003
+#define ID_FILE_PRINT     1000004
+#define ID_FILE_SAVE_AS   1000005
+#define ID_WINDOW_ARRANGE 1000006
+#define ID_WINDOW_CASCADE 1000007
+#define ID_FILE_PRINT_SETUP 1000008
+
+
+#define USE_WINSURF 0
+#if USE_WINSURF
 #include "../../wintools/src/winsurf.h"
+#endif
+
 #include "../../winplot/src/winplot.h"
 #include "../../array/src/interp.h"
 #include "winmap.h"
@@ -794,7 +810,7 @@ LRESULT CALLBACK DlgProcWaveletParam( HWND hDlg, UINT uMsg,
 			SendDlgItemMessage( hDlg, IDC_COMBO_WAV_INPUT_SIGNAL_TYPE, CB_SETCURSEL,
 				vDoc[0].m_wInputSigalType,(LPARAM)0 );
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			for (int i = 0; i < lpWaveletDlgMem->waveletDataSize; i++)
+			for (short i = 0; i < lpWaveletDlgMem->waveletDataSize; i++)
 			{
 				SendDlgItemMessage( hDlg, IDC_COMBO_WAV_TYPE, CB_ADDSTRING, 0,
 					(LPARAM)(LPCTSTR)lpWaveletDlgMem->lpWaveletData[i].szWaveletName);
@@ -806,7 +822,7 @@ LRESULT CALLBACK DlgProcWaveletParam( HWND hDlg, UINT uMsg,
 			int ind = SendDlgItemMessage( hDlg, IDC_COMBO_WAV_TYPE, CB_GETCURSEL,
 						0,(LPARAM)0 );
 			char s[1024];
-			for (i = lpWaveletDlgMem->lpWaveletData[ind].minOrder; 
+			for (short i = lpWaveletDlgMem->lpWaveletData[ind].minOrder; 
 			i <= lpWaveletDlgMem->lpWaveletData[ind].maxOrder; i++)
 			{
 				sprintf(s,"%d",i);
@@ -817,7 +833,7 @@ LRESULT CALLBACK DlgProcWaveletParam( HWND hDlg, UINT uMsg,
 				vDoc[0].m_wOrder-1,(LPARAM)0 );
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			for (i = 1; i <= 10; i++)
+			for (short i = 1; i <= 10; i++)
 			{
 				sprintf(s,"%d",i);
 				SendDlgItemMessage( hDlg, IDC_COMBO_WAV_MAXLEVEL, CB_ADDSTRING, 0,
@@ -2081,7 +2097,7 @@ double CorrelationCoefficient(int len,  double *pv1, double *pv2)
 		sigma2 = 0.0,
 		Cov = 0.0;
 
-	for (i = 0; i < len; i++)
+	for (int i = 0; i < len; i++)
 	{
 		sigma1 += (pv1[i] - mean1)*(pv1[i] - mean1);
 		sigma2 += (pv2[i] - mean2)*(pv2[i] - mean2);
@@ -3349,7 +3365,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			
 			SendDlgItemMessage( hDlg, IDC_COMBO_POLYOTY_COLS_NAMES, CB_RESETCONTENT, 0,0);
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			for ( j = 0; j < pnames->size(); j++)
+			for (size_t j = 0; j < pnames->size(); j++)
 			{
 				SendDlgItemMessage( hDlg, IDC_COMBO_POLYOTY_COLS_NAMES, CB_ADDSTRING, 0,
 					(LPARAM)(LPCTSTR)pnames->operator [](j).c_str());
@@ -3438,13 +3454,16 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 					}
 					//##############################						
 				}
-				for ( C = iy + 1; C < Cols; C++)
+#if USE_WINSURF
+				for ( int C = iy + 1; C < Cols; C++)
 				{
 					WinSurf( 
 						vvv[ix],  
 						vvv[iy],  
 						vvv[C]);
 				}
+#endif
+
 				//==============================================
 				TCHAR filter[] =     TEXT("Text database file (*.dat)\0*.dat\0")
 									 TEXT("Text database file (*.txt)\0*.txt\0")
@@ -3466,7 +3485,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 							{
 								fprintf(stream, "%d\t",	int(vvv[C][j][i]));
 							}
-							for(  C = 2; C < Cols; C++)
+							for(int C = 2; C < Cols; C++)
 							{
 								fprintf(stream, "%f\t",	vvv[C][j][i]);
 							}
@@ -3484,14 +3503,17 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 			break;
 		case IDC_BUTTON_VISUALISATION_OF_PROFILES3:
 			{
+#if USE_WINSURF
 				WinSurf(*pline_cutting_vector_sorted, 
 					ix,  
 					iy,  
 					(*pvectors));
+#endif
 			}
 			break;
 		case IDC_BUTTON_VISUALISATION_OF_PROFILES:
 			{
+#if USE_WINSURF
 				for (int col = iy + 1; col < pvectors->size(); col++)
 				{
 					WinSurf(*pline_cutting_vector_sorted, 
@@ -3499,6 +3521,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 						(*pvectors)[iy],  
 						(*pvectors)[col]);
 				}
+#endif
 			}
 			break;
 		case IDC_BUTTON_SORT_PROFILES:
@@ -3514,7 +3537,8 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 				{
 					u = int((*pvectors)[0][0]);
 					prof = int((*pvectors)[1][0]);
-					for (int i = 0; i < (*pvectors)[0].size(); i++)
+					int i = 0;
+					for (; i < (*pvectors)[0].size(); i++)
 					{
 						if (					
 							u != int((*pvectors)[0][i]) ||
@@ -3595,7 +3619,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 				qsort( (void *)ifs, (size_t)n_profiles, sizeof(index_for_sort), compare_index_for_sort );
 				//###########################################################
 				pline_cutting_vector_sorted->resize(0);
-				for (j = 0; j < n_profiles; j++)
+				for (int j = 0; j < n_profiles; j++)
 				{
 					pline_cutting_vector_sorted->push_back(line_cutting_vector[ifs[j].i]);
 				}
@@ -3675,7 +3699,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 					int nnetParameters = points_per_image;
 					double **M = AllocDoubleMat(nImages, nnetParameters);
 
-					for ( j = 0; j < nImages; j++)
+					for (int j = 0; j < nImages; j++)
 					{
 						//###################################################################
 						int len = vv_line_cutting[c][j].i_finish - vv_line_cutting[c][j].i_start;
@@ -3699,7 +3723,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 						double sum = 0;
 						double sumX = 0;
 						double sumY = 0;
-						for ( i0 = 0; i0 < len; i0++)
+						for (int i0 = 0; i0 < len; i0++)
 						{
 							sum  += v[i0];
 							sumX += X[i0];
@@ -3819,7 +3843,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 
 				string name;
 
-				for ( j = 0; j < nImages; j++)
+				for (int j = 0; j < nImages; j++)
 				{
 					//###################################################################
 //					int col = iy + 1 + 3;
@@ -3846,7 +3870,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 						double sum = 0;
 						double sumX = 0;
 						double sumY = 0;
-						for ( i0 = 0; i0 < len; i0++)
+						for (int i0 = 0; i0 < len; i0++)
 						{
 							sum  += v[i0];
 							sumX += X[i0];
@@ -3909,7 +3933,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 						C[c][par] = Rand(0,1);
 					}
 				}
-				for ( c = 0; c < clusters; c++)
+				for (int c = 0; c < clusters; c++)
 				{
 					for ( int par = 0; par < nnetParameters; par++)
 					{
@@ -4012,13 +4036,14 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 						else
 						{
 							vv[J].resize( SumLen );
-							for (int I = 0; I < SumLen; I++)
+							int I = 0;
+							for (; I < SumLen; I++)
 							{
 								vv[J][I].resize( Cols );
 							}
 							//##############################
 							I = 0;
-							for ( j = J, n = 0; j < J+N; j++, n++)
+							for (int j = J, n = 0; j < J+N; j++, n++)
 							{
 								int len = (*pline_cutting_vector_sorted)[j].i_finish 
 									- (*pline_cutting_vector_sorted)[j].i_start;
@@ -4060,7 +4085,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 						FILE *stream;
 						stream = fopen(lpstrFile,"wt");
 
-						for ( J = 0; J < n_profiles-N+1; J++)
+						for (int J = 0; J < n_profiles-N+1; J++)
 						{
 							int length = vv[J].Size();
 							index_for_sort * ifs = new index_for_sort[length];
@@ -4070,13 +4095,13 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 								ifs[I].sort_val	= vv[J][I][iy];
 							}					
 							qsort( (void *)ifs, (size_t)length, sizeof(index_for_sort), compare_index_for_sort );
-							for ( I = 0; I < length; I++)
+							for (int I = 0; I < length; I++)
 							{
 								for( int C = 0; C < 2; C++)
 								{
 									fprintf(stream, "%d\t",	int(vv[J][ifs[I].i][C]));
 								}
-								for(  C = 2; C < Cols; C++)
+								for( int C = 2; C < Cols; C++)
 								{
 									fprintf(stream, "%f\t",	vv[J][ifs[I].i][C]);
 								}
@@ -4421,7 +4446,7 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 						//qsort( (void *)pxyz, (size_t)fact_len, sizeof(COORDINATES), compare_X );
 
 						//заполняем точки измерения внутри квадрата
-						for (i = 0; i < fact_len; i++)
+						for (int i = 0; i < fact_len; i++)
 						{
 							xx[i] = pxyz[i].x;
 							yy[i] = pxyz[i].y;
@@ -11335,7 +11360,7 @@ e_AgainScanTheFile:
 
 					// определяем, что текущий профиль ранее ещё не обрабатывался
 					bool CurrentIsnotPreviuusProfil = true;
-					for( j = 0; j < n_pre; j++)
+					for(int j = 0; j < n_pre; j++)
 					{
 						CurrentIsnotPreviuusProfil &= !(u == preU[j]  && prof == preProf[j]);
 					}
@@ -11344,7 +11369,7 @@ e_AgainScanTheFile:
 						if (i_profile_point == 0)
 						{
 							// запоминаем текущий профиль в список номеров предыдущих профилей
-							for (j = n_pre-1; j > 0; j--)
+							for (int j = n_pre-1; j > 0; j--)
 							{
 								preU[j] = preU[j-1];
 								preProf[j] = preProf[j-1];
@@ -11430,7 +11455,7 @@ e_AgainScanTheFile:
 			mean_px = 0.0,
 			mean_py = 0.0,
 			mean_pz = 0.0;
-		for (i = 0; i < i_profile_point; i++)
+		for (int i = 0; i < i_profile_point; i++)
 		{
 			pX[i] /= razmah_x; mean_px += pX[i];
 			pY[i] /= razmah_y; mean_py += pY[i];
@@ -11440,7 +11465,7 @@ e_AgainScanTheFile:
 		mean_py /= i_profile_point;
 		mean_pz /= i_profile_point;
 		// центрируем
-		for (i = 0; i < i_profile_point; i++)
+		for (int i = 0; i < i_profile_point; i++)
 		{
 			pX[i] -= mean_px;
 			pY[i] -= mean_py;
@@ -11453,7 +11478,7 @@ e_AgainScanTheFile:
 			delta_y = 0.0,
 			delta_z = 0.0;
 
-		for (i = 0; i < i_profile_point; i++)
+		for (int i = 0; i < i_profile_point; i++)
 		{
 			delta_x += pow( (pX[i] - pnX[i]), 2.0);
 			delta_y += pow( (pY[i] - pnY[i]), 2.0);
@@ -11471,7 +11496,7 @@ e_AgainScanTheFile:
 		double mediana_Z = Median(vZ, i_profile_point);
 
 		// делим варации, соответствующие каждому профилю на медиану
-		for (i = 0; i < i_profile_point; i++)
+		for (int i = 0; i < i_profile_point; i++)
 		{
 			vX[i] /= mediana_X;
 			vY[i] /= mediana_Y;
@@ -11483,7 +11508,7 @@ e_AgainScanTheFile:
 		double razmah_Z = Quantil(0.9,vZ,i_profile_point) - Quantil(0.1,vZ,i_profile_point);
 
 		// делим варации, соответствующие каждому  на размах
-		for (i = 0; i < i_profile_point; i++)
+		for (int i = 0; i < i_profile_point; i++)
 		{
 			vX[i] /= razmah_X;
 			vY[i] /= razmah_Y;
@@ -15948,7 +15973,7 @@ WriteRaporto("wnd WM_CREATE end\n");
 						}
 
 					}
-					for (r = 0; r < nyi; r++)
+					for (int r = 0; r < nyi; r++)
 					{
 						for (int c = 0; c < nxi; c++)
 						{
@@ -16033,8 +16058,9 @@ WriteRaporto("wnd WM_CREATE end\n");
 					y.Write("D:\\_.log","at","y");
 					yy.Write("D:\\_.log","at","yy");
 					z.Write("D:\\_.log","at","z");*/
-
+#if USE_WINSURF
 					WinSurf(xx,yy,z);
+#endif
 				}
 				break;
 			case ID_TEST_SURF3 :
@@ -16167,8 +16193,11 @@ WriteRaporto("wnd WM_CREATE end\n");
 					vdouble XXI,YYI;
 					meshgrid(XI,YI,XXI,YYI);
 
+#if USE_WINSURF
 
 					WinSurf(XXI,YYI,ZZI);
+
+#endif
 				}
 				break;
 			case ID_TEST_MAP :
@@ -16256,7 +16285,7 @@ WriteRaporto("wnd WM_CREATE end\n");
 					// Создаём ещё один новый вектор как внутренний член вектора v
 					v.CreateNewVect();
 					// Заполняем только что созданный внутренний вектор значениями
-					for(k = 0; k < 3; k++)
+					for(int k = 0; k < 3; k++)
 						v.AddMsgToLastVect(&k);
 
 					// Объявляем переменную для приёма значений 
@@ -16303,12 +16332,12 @@ WriteRaporto("wnd WM_CREATE end\n");
 					v.CreateNewVect();
 					v.GetLastVect().CreateNewVect();
 					// Заполняем только что созданный внутренний вектор значениями
-					for(k = 10; k < 15; k++)
+					for(int k = 10; k < 15; k++)
 						v.GetLastVect().AddMsgToLastVect(&k);
 					// Создаём ещё один новый вектор как внутренний член вектора v
 					v.GetLastVect().CreateNewVect();
 					// Заполняем только что созданный внутренний вектор значениями
-					for(k = 20; k < 23; k++)
+					for(int k = 20; k < 23; k++)
 						v.GetLastVect().AddMsgToLastVect(&k);
 
 					// Объявляем переменную для приёма значений 

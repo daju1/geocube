@@ -1,129 +1,177 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="surfdoc"
 	ProjectGUID="{B1E70CB6-4C53-47E9-9E01-39310886454D}"
-	SccProjectName=""
-	SccLocalPath="">
+	RootNamespace="surfdoc"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\surfdoc_win___Win32_Release"
 			IntermediateDirectory=".\surfdoc_win___Win32_Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="0"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				StringPooling="TRUE"
+				StringPooling="true"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="TRUE"
-				RuntimeTypeInfo="TRUE"
+				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=".\surfdoc_win___Win32_Release/surfdoc_win.pch"
 				AssemblerListingLocation=".\surfdoc_win___Win32_Release/"
 				ObjectFile=".\surfdoc_win___Win32_Release/"
 				ProgramDataBaseFileName=".\surfdoc_win___Win32_Release/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"
-				Detect64BitPortabilityProblems="TRUE"
-				CallingConvention="0"/>
+				SuppressStartupBanner="true"
+				Detect64BitPortabilityProblems="true"
+				CallingConvention="0"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\lib\surfdoc.lib"
-				SuppressStartupBanner="FALSE"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLibrarianTool"
+				OutputFile="..\lib\surfdoc.lib"
+				SuppressStartupBanner="false"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory=".\surfdoc_win___Win32_Debug"
 			IntermediateDirectory=".\surfdoc_win___Win32_Debug"
 			ConfigurationType="4"
-			UseOfMFC="2"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				InlineFunctionExpansion="0"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				StructMemberAlignment="5"
-				BufferSecurityCheck="TRUE"
-				EnableFunctionLevelLinking="TRUE"
-				RuntimeTypeInfo="TRUE"
+				BufferSecurityCheck="true"
+				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				AssemblerListingLocation=".\surfdoc_win___Win32_Debug/"
 				ObjectFile=".\surfdoc_win___Win32_Debug/"
 				ProgramDataBaseFileName=".\surfdoc_win___Win32_Debug/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				SuppressStartupBanner="true"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\lib\surfdoc_d.lib"
-				SuppressStartupBanner="FALSE"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLibrarianTool"
+				OutputFile="..\lib\surfdoc_d.lib"
+				SuppressStartupBanner="false"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -131,355 +179,472 @@
 	<Files>
 		<Filter
 			Name="Source Files surf_doc"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+			>
 			<File
-				RelativePath=".\src\AFile.cpp">
+				RelativePath=".\src\AFile.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Archive.cpp">
+				RelativePath=".\src\Archive.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\AutoBuildProfileDlg.cpp">
+				RelativePath=".\src\AutoBuildProfileDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\AutoBuildProfileWnd.cpp">
+				RelativePath=".\src\AutoBuildProfileWnd.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\AutoProfileBuilding.cpp">
+				RelativePath=".\src\AutoProfileBuilding.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BlnProfile3D.cpp">
+				RelativePath=".\src\BlnProfile3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BlnProfilePlane3D.cpp">
+				RelativePath=".\src\BlnProfilePlane3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Bmp3D.cpp">
+				RelativePath=".\src\Bmp3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BmpProfile3D.cpp">
+				RelativePath=".\src\BmpProfile3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenLine3D.cpp">
+				RelativePath=".\src\BrokenLine3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenPlane3D.cpp">
+				RelativePath=".\src\BrokenPlane3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenPoligon3D.cpp">
+				RelativePath=".\src\BrokenPoligon3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenPoligon_3D.cpp">
+				RelativePath=".\src\BrokenPoligon_3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BuroNabivSvaj.cpp">
+				RelativePath=".\src\BuroNabivSvaj.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Collection.cpp">
+				RelativePath=".\src\Collection.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\colormap.cpp">
+				RelativePath=".\src\colormap.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\CrdTranslator.cpp">
+				RelativePath=".\src\CrdTranslator.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\cube.cpp">
+				RelativePath=".\src\cube.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\distance3d.cpp">
+				RelativePath=".\src\distance3d.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\DlgAddingGeoCube.cpp">
+				RelativePath=".\src\DlgAddingGeoCube.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\DrawListArray.cpp">
+				RelativePath=".\src\DrawListArray.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\DrawScene.cpp">
+				RelativePath=".\src\DrawScene.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\FastCollection.cpp">
+				RelativePath=".\src\FastCollection.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GeoCatch.cpp">
+				RelativePath=".\src\GeoCatch.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GeoElement.cpp">
+				RelativePath=".\src\GeoElement.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GeoSurface.cpp">
+				RelativePath=".\src\GeoSurface.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Grid.cpp">
+				RelativePath=".\src\Grid.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GridData.cpp">
+				RelativePath=".\src\GridData.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GridProfile3D.cpp">
+				RelativePath=".\src\GridProfile3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Ground.cpp">
+				RelativePath=".\src\Ground.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\InterWellsLine3D.cpp">
+				RelativePath=".\src\InterWellsLine3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\iso.cpp">
+				RelativePath=".\src\iso.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Layer.cpp">
+				RelativePath=".\src\Layer.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Line3D.cpp">
+				RelativePath=".\src\Line3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Object.cpp">
+				RelativePath=".\src\Object.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ObjectList.cpp">
+				RelativePath=".\src\ObjectList.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\palette.cpp">
+				RelativePath=".\src\palette.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Poligon3D.cpp">
+				RelativePath=".\src\Poligon3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Primitive3D.cpp">
+				RelativePath=".\src\Primitive3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Profile3D.cpp">
+				RelativePath=".\src\Profile3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ProfileAttachPoint.cpp">
+				RelativePath=".\src\ProfileAttachPoint.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Sphere3D.cpp">
+				RelativePath=".\src\Sphere3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\String3D.cpp">
+				RelativePath=".\src\String3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Surface3D.cpp">
+				RelativePath=".\src\Surface3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\SurfDoc.cpp">
+				RelativePath=".\src\SurfDoc.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\texture.cpp">
+				RelativePath=".\src\texture.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ThePoint3D.cpp">
+				RelativePath=".\src\ThePoint3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Triangle3D.cpp">
+				RelativePath=".\src\Triangle3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\TriangulatedGrid3D.cpp">
+				RelativePath=".\src\TriangulatedGrid3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\well_3D.cpp">
+				RelativePath=".\src\well_3D.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\WellElement.cpp">
+				RelativePath=".\src\WellElement.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\WhatSelected.cpp">
+				RelativePath=".\src\WhatSelected.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\winsurftree.cpp">
+				RelativePath=".\src\winsurftree.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files surf_doc"
-			Filter="h;hpp;hxx;hm;inl">
+			Filter="h;hpp;hxx;hm;inl"
+			>
 			<File
-				RelativePath=".\src\AFile.h">
+				RelativePath=".\src\AFile.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Archive.h">
+				RelativePath=".\src\Archive.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\AutoBuildProfileDlg.h">
+				RelativePath=".\src\AutoBuildProfileDlg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\AutoBuildProfileWnd.h">
+				RelativePath=".\src\AutoBuildProfileWnd.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\AutoProfileBuilding.h">
+				RelativePath=".\src\AutoProfileBuilding.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BlnProfile3D.h">
+				RelativePath=".\src\BlnProfile3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BlnProfilePlane3D.h">
+				RelativePath=".\src\BlnProfilePlane3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Bmp3D.h">
+				RelativePath=".\src\Bmp3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BmpProfile3D.h">
+				RelativePath=".\src\BmpProfile3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenLine3D.h">
+				RelativePath=".\src\BrokenLine3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenPlane3D.h">
+				RelativePath=".\src\BrokenPlane3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenPoligon3D.h">
+				RelativePath=".\src\BrokenPoligon3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BrokenPoligon_3D.h">
+				RelativePath=".\src\BrokenPoligon_3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\BuroNabivSvaj.h">
+				RelativePath=".\src\BuroNabivSvaj.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Collection.h">
+				RelativePath=".\src\Collection.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\colormap.h">
+				RelativePath=".\src\colormap.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\CrdTranslator.h">
+				RelativePath=".\src\CrdTranslator.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\cube.h">
+				RelativePath=".\src\cube.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\distance3D.h">
+				RelativePath=".\src\distance3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\DrawListArray.h">
+				RelativePath=".\src\DrawListArray.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\DrawScene.h">
+				RelativePath=".\src\DrawScene.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\FastCollection.h">
+				RelativePath=".\src\FastCollection.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GeoCatch.h">
+				RelativePath=".\src\GeoCatch.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GeoElement.h">
+				RelativePath=".\src\GeoElement.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GeoObject.h">
+				RelativePath=".\src\GeoObject.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GeoSurface.h">
+				RelativePath=".\src\GeoSurface.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Grid.h">
+				RelativePath=".\src\Grid.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GridData.h">
+				RelativePath=".\src\GridData.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GriddataAddLine.h">
+				RelativePath=".\src\GriddataAddLine.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GridProfile3D.h">
+				RelativePath=".\src\GridProfile3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Ground.h">
+				RelativePath=".\src\Ground.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\InterWellsLine3D.h">
+				RelativePath=".\src\InterWellsLine3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\iso.h">
+				RelativePath=".\src\iso.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\jpglib.h">
+				RelativePath=".\src\jpglib.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Layer.h">
+				RelativePath=".\src\Layer.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Line3D.h">
+				RelativePath=".\src\Line3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Object.h">
+				RelativePath=".\src\Object.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ObjectList.h">
+				RelativePath=".\src\ObjectList.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\palette.h">
+				RelativePath=".\src\palette.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\points.h">
+				RelativePath=".\src\points.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Poligon3D.h">
+				RelativePath=".\src\Poligon3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Primitive3D.h">
+				RelativePath=".\src\Primitive3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Primitive3D_members.h">
+				RelativePath=".\src\Primitive3D_members.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Profile3D.h">
+				RelativePath=".\src\Profile3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Profile_Projection.h">
+				RelativePath=".\src\Profile_Projection.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ProfileAttachPoint.h">
+				RelativePath=".\src\ProfileAttachPoint.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Sphere3D.h">
+				RelativePath=".\src\Sphere3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\srf.h">
+				RelativePath=".\src\srf.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\StdAfx.h">
+				RelativePath=".\src\StdAfx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\String3D.h">
+				RelativePath=".\src\String3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Surface3D.h">
+				RelativePath=".\src\Surface3D.h"
+				>
 			</File>
 			<File
-				RelativePath="..\surfdefs.h">
+				RelativePath="..\surfdefs.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\SurfDoc.h">
+				RelativePath=".\src\SurfDoc.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\texture.h">
+				RelativePath=".\src\texture.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\ThePoint3D.h">
+				RelativePath=".\src\ThePoint3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Triangle3D.h">
+				RelativePath=".\src\Triangle3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\TriangulatedGrid3D.h">
+				RelativePath=".\src\TriangulatedGrid3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\utils.h">
+				RelativePath=".\src\utils.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\well_3D.h">
+				RelativePath=".\src\well_3D.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\WellElement.h">
+				RelativePath=".\src\WellElement.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\WhatSelected.h">
+				RelativePath=".\src\WhatSelected.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\winsurftree.h">
+				RelativePath=".\src\winsurftree.h"
+				>
 			</File>
 		</Filter>
 	</Files>

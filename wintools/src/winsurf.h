@@ -1,6 +1,6 @@
 #ifndef WINSURF_H_INCLUDED
 #define WINSURF_H_INCLUDED
-#include "..\resource.h"
+//#include "..\resource.h"
 #include "..\..\array\src\sorting.h"
 #include "..\..\array\src\vdouble.h"
 class SurfDoc;

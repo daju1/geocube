@@ -1,121 +1,170 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
-	Name="wintools"
+	Version="9,00"
+	Name="wintools_lib"
 	ProjectGUID="{D835F4B6-CD90-4334-BBC3-D2BE821A88C4}"
-	SccProjectName=""
-	SccLocalPath="">
+	RootNamespace="wintools_lib"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory=".\Debug"
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="5"
-				RuntimeTypeInfo="TRUE"
+				RuntimeLibrary="1"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=".\Debug/wintools_lib.pch"
 				AssemblerListingLocation=".\Debug/"
 				ObjectFile=".\Debug/"
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"/>
+				SuppressStartupBanner="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"
-				AdditionalDependencies="surfdoc.lib"
-				OutputFile="..\lib\wintools.lib"
-				AdditionalLibraryDirectories="$(IntDir)/../../lib"
-				SuppressStartupBanner="TRUE"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
-				Culture="1049"/>
+				Culture="1049"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLibrarianTool"
+				OutputFile="..\lib\wintools_d.lib"
+				AdditionalLibraryDirectories="$(IntDir)/../../lib"
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\Release"
 			IntermediateDirectory=".\Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="2">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="$(IntDir)/../../include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				StringPooling="TRUE"
-				RuntimeLibrary="4"
-				EnableFunctionLevelLinking="TRUE"
-				RuntimeTypeInfo="TRUE"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=".\Release/wintools_lib.pch"
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"
 				WarningLevel="3"
-				SuppressStartupBanner="TRUE"/>
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1049"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
 				OutputFile="..\lib\wintools.lib"
 				AdditionalLibraryDirectories="$(IntDir)/../../lib"
-				SuppressStartupBanner="TRUE"/>
+				SuppressStartupBanner="true"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="NDEBUG"
-				Culture="1049"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -123,184 +172,272 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+			>
 			<File
-				RelativePath=".\src\abortPrint.cpp">
+				RelativePath=".\src\abortPrint.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\camera.cpp">
+				RelativePath=".\src\camera.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\checkListBox.cpp">
+				RelativePath=".\src\checkListBox.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\CommandLineParser.cpp">
+				RelativePath=".\src\CommandLineParser.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\conjgrad.cpp">
+				RelativePath=".\src\conjgrad.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GLMan.cpp">
+				RelativePath=".\src\gdiplus_map_views.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GLPrintMan.cpp">
+				RelativePath=".\src\gdiplus_mtools.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\listfun.cpp">
+				RelativePath=".\src\glade_dialog.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\mtools.cpp">
+				RelativePath=".\src\GLMan.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\objects.cpp">
+				RelativePath=".\src\GLPrintMan.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\print.cpp">
+				RelativePath=".\src\listfun.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\PrintDlgBox.cpp">
+				RelativePath=".\src\map_view.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\project.cpp">
+				RelativePath=".\src\mtools.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\SelectLine.cpp">
+				RelativePath=".\src\objects.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\StdAfx.CPP">
+				RelativePath=".\src\print.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\utility.cpp">
+				RelativePath=".\src\PrintDlgBox.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\views.cpp">
+				RelativePath=".\src\project.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_app.cpp">
+				RelativePath=".\src\SelectLayerDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_dialog.cpp">
+				RelativePath=".\src\SelectLine.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_graphics_view.cpp">
+				RelativePath=".\src\StdAfx.CPP"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_plot_views.cpp">
+				RelativePath=".\src\utility.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_project.cpp">
+				RelativePath=".\src\views.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_project_view.cpp">
+				RelativePath=".\src\win32_app.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_views.cpp">
+				RelativePath=".\src\win32_dialog.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Winsurf.cpp">
+				RelativePath=".\src\win32_graphics_view.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\winsurfproc.cpp">
+				RelativePath=".\src\win32_map_views.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\win32_plot_views.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\win32_project.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\win32_project_view.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\win32_views.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\win_gdiplus_views.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Winsurf.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\winsurfproc.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl">
+			Filter="h;hpp;hxx;hm;inl"
+			>
 			<File
-				RelativePath=".\src\abortPrint.h">
+				RelativePath=".\src\abortPrint.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\appdefine.h">
+				RelativePath=".\src\appdefine.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\camera.h">
+				RelativePath=".\src\camera.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\checkListBox.h">
+				RelativePath=".\src\checkListBox.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\color.h">
+				RelativePath=".\src\color.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\CommandLineParser.h">
+				RelativePath=".\src\CommandLineParser.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\conjgrad.h">
+				RelativePath=".\src\conjgrad.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\filedlg.h">
+				RelativePath=".\src\filedlg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GLMan.h">
+				RelativePath=".\src\GLMan.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\GLPrintMan.h">
+				RelativePath=".\src\GLPrintMan.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\listfun.h">
+				RelativePath=".\src\listfun.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\mtools.h">
+				RelativePath=".\src\mtools.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\objects.h">
+				RelativePath=".\src\objects.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\plane.h">
+				RelativePath=".\src\plane.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\print.h">
+				RelativePath=".\src\print.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\PrintDlgBox.h">
+				RelativePath=".\src\PrintDlgBox.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\project.h">
+				RelativePath=".\src\project.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\SelectLine.h">
+				RelativePath=".\src\SelectLine.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\StdAfx.h">
+				RelativePath=".\src\StdAfx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\typedef.h">
+				RelativePath=".\src\typedef.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\utility.h">
+				RelativePath=".\src\utility.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\v3d.h">
+				RelativePath=".\src\v3d.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\views.h">
+				RelativePath=".\src\views.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_app.h">
+				RelativePath=".\src\win32_app.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_dialog.h">
+				RelativePath=".\src\win32_dialog.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_graphics_view.h">
+				RelativePath=".\src\win32_graphics_view.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_plot_views.h">
+				RelativePath=".\src\win32_plot_views.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_project.h">
+				RelativePath=".\src\win32_project.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_project_view.h">
+				RelativePath=".\src\win32_project_view.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\win32_views.h">
+				RelativePath=".\src\win32_views.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\winsurf.h">
+				RelativePath=".\src\winsurf.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\winsurfproc.h">
+				RelativePath=".\src\winsurfproc.h"
+				>
 			</File>
 		</Filter>
 	</Files>

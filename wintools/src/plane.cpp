@@ -41,7 +41,7 @@ color_plane::color_plane(cp_param & p1)
 	// we must do these settings...
 	// we must do these settings...
 	
-	ref = p1.ref;
+//	ref = p1.ref;
 	GetValue = p1.vf;
 	GetColor = p1.cf;
 	
@@ -251,7 +251,7 @@ color_plane_object::color_plane_object(const object_location & p1, cp_param & p2
 	ostrstream str(buffer, sizeof(buffer));
 	str << p3 << "plane" << ends;
 	
-	copy_of_ref = p2.ref;
+//	copy_of_ref = p2.ref;
 	
 	object_name = new char[strlen(buffer) + 1];
 	strcpy(object_name, buffer);
@@ -311,7 +311,7 @@ volume_rendering_object::volume_rendering_object(const object_location & p1,
 	ostrstream str(buffer, sizeof(buffer));
 	str << p6 << "VR" << ends;
 	
-	copy_of_ref = p2.ref;
+//	copy_of_ref = p2.ref;
 	
 	object_name = new char[strlen(buffer) + 1];
 	strcpy(object_name, buffer);

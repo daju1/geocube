@@ -1,99 +1,149 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9,00"
 	Name="array"
 	ProjectGUID="{FD900514-A342-4278-9E59-73EE00EA4B13}"
-	Keyword="Win32Proj">
+	RootNamespace="array"
+	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="4"
-			UseOfMFC="2"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="0"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/../../lib/array_d.lib"/>
+				OutputFile="$(OutDir)/../../lib/array_d.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableFiberSafeOptimizations="TRUE"
-				OptimizeForProcessor="3"
+				EnableFiberSafeOptimizations="true"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="3"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/../../lib/array.lib"/>
+				OutputFile="$(OutDir)/../../lib/array.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -102,122 +152,160 @@
 		<Filter
 			Name="Source Files array"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
 			<File
-				RelativePath=".\src\fft.cpp">
+				RelativePath=".\src\fft.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\interp.cpp">
+				RelativePath=".\src\interp.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\korrelation.cpp">
+				RelativePath=".\src\korrelation.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LocalExtremumsFiltering.cpp">
+				RelativePath=".\src\LocalExtremumsFiltering.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\matrixes.cpp">
+				RelativePath=".\src\matrixes.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\slau.cpp">
+				RelativePath=".\src\slau.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\sorting.cpp">
+				RelativePath=".\src\sorting.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\spline3.cpp">
+				RelativePath=".\src\spline3.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Vdouble.cpp">
+				RelativePath=".\src\Vdouble.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\vect.cpp">
+				RelativePath=".\src\vect.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\VectItem.cpp">
+				RelativePath=".\src\VectItem.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Vector.cpp">
+				RelativePath=".\src\Vector.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\src\wav.cpp">
+				RelativePath=".\src\wav.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files array"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
 			<File
-				RelativePath=".\src\ap.h">
+				RelativePath=".\src\ap.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Complex.h">
+				RelativePath=".\src\Complex.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\factorial.h">
+				RelativePath=".\src\factorial.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\fft.h">
+				RelativePath=".\src\fft.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\fill_grid.h">
+				RelativePath=".\src\fill_grid.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\interp.h">
+				RelativePath=".\src\interp.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\korrelation.h">
+				RelativePath=".\src\korrelation.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Lagerfun.h">
+				RelativePath=".\src\Lagerfun.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\LocalExtremumsFiltering.h">
+				RelativePath=".\src\LocalExtremumsFiltering.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\matrixes.h">
+				RelativePath=".\src\matrixes.h"
+				>
 			</File>
 			<File
-				RelativePath=".\resource.h">
+				RelativePath=".\resource.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Sequence.h">
+				RelativePath=".\src\Sequence.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\slau.h">
+				RelativePath=".\src\slau.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\sorting.h">
+				RelativePath=".\src\sorting.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\spline3.h">
+				RelativePath=".\src\spline3.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Vdouble.h">
+				RelativePath=".\src\Vdouble.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\vect.h">
+				RelativePath=".\src\vect.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\VectItem.h">
+				RelativePath=".\src\VectItem.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\Vector.h">
+				RelativePath=".\src\Vector.h"
+				>
 			</File>
 			<File
-				RelativePath=".\src\wav.h">
+				RelativePath=".\src\wav.h"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
 			<File
-				RelativePath=".\array.rc">
+				RelativePath=".\array.rc"
+				>
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\ReadMe.txt">
+			RelativePath=".\ReadMe.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

@@ -125,6 +125,6 @@ typedef struct
 #include <io.h>
 #include <commctrl.h>
 
-#include "resource.h"
+#include "../resource.h"
 
 //#endif
