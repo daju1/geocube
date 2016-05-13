@@ -27,7 +27,7 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <GL/glut.h>
+#include "../../glut37/glut-3.7/include/GL/glut.h"
 
 #include <strstream>
 #include <algorithm>

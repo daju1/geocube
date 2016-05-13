@@ -16,8 +16,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\Release"
-			IntermediateDirectory=".\Release"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="./../include"
+				AdditionalIncludeDirectories="$(SolutionDir)/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -73,10 +73,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="geocube_module.lib odbc32.lib odbccp32.lib"
-				OutputFile="../../bin/geocube.exe"
+				OutputFile="$(OutDir)/bin/geocube.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				ProgramDatabaseFile=".\Release/geocube.pdb"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
@@ -107,8 +107,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
-			IntermediateDirectory=".\Debug"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -135,7 +135,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="./../include"
+				AdditionalIncludeDirectories="$(SolutionDir)/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -162,11 +162,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="geocube_module_d.lib odbc32.lib odbccp32.lib"
-				OutputFile="../../bin/geocube_d.exe"
+				AdditionalDependencies="geocube_module.lib odbc32.lib odbccp32.lib"
+				OutputFile="$(OutDir)/bin/geocube.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/geocube.pdb"
 				SubSystem="1"

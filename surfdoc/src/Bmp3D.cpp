@@ -18,7 +18,7 @@
 
 extern GLuint	texture[];			// Storage For One Texture ( NEW )
 
-AUX_RGBImageRec * Bmp3D::LoadBMP(char *Filename)				// Loads A Bitmap Image
+/*AUX_RGBImageRec * Bmp3D::LoadBMP(char *Filename)				// Loads A Bitmap Image
 {
 	FILE *File=NULL;									// File Handle
 
@@ -36,7 +36,7 @@ AUX_RGBImageRec * Bmp3D::LoadBMP(char *Filename)				// Loads A Bitmap Image
 	}
 
 	return NULL;										// If Load Failed Return NULL
-}
+}*/
 bool Bmp3D::LoadGLTexture()									// Load Bitmaps And Convert To Textures
 {
 	bool Status=false;									// Status Indicator

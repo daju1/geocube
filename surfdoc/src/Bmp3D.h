@@ -11,7 +11,6 @@
 
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
-#include <gl\glaux.h>		// Header File For The Glaux Library
 
 #include "Primitive3D.h"
 
@@ -36,7 +35,7 @@ class Bmp3D  : public Primitive3D <CPoint3>
 	GLuint	texture[1];			// Storage For One Texture
 	virtual void Drawing();
 public:
-	AUX_RGBImageRec *LoadBMP(char *Filename);				// Loads A Bitmap Image
+	//AUX_RGBImageRec *LoadBMP(char *Filename);				// Loads A Bitmap Image
 	bool LoadGLTexture();
 	bool LoadGLTexture(char * filename, vector<double> &xMap, vector<double> &yMap, vector<double> &zProfile);
 	bool LoadGLTexture(char * filename, vector<double> &xMap, vector<double> &yMap, double z);// Load Bitmaps And Convert To Textures;

@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
-			IntermediateDirectory=".\Debug"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -76,11 +76,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="excel_connect_d.lib"
-				OutputFile=".\Debug/GPS_CRD.exe"
+				AdditionalDependencies="excel_connect.lib"
+				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(IntDir)/../../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/GPS_CRD.pdb"
 				SubSystem="2"
@@ -112,8 +112,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\Release"
-			IntermediateDirectory=".\Release"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -172,10 +172,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="excel_connect.lib"
-				OutputFile=".\Release/GPS_CRD.exe"
+				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(IntDir)/../../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				ProgramDatabaseFile=".\Release/GPS_CRD.pdb"
 				SubSystem="2"
 				RandomizedBaseAddress="1"

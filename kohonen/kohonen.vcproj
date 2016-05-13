@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="0"
@@ -44,7 +44,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="$(IntDir)/../../include"
+				AdditionalIncludeDirectories="$(SolutionDir)/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/../../lib/kohonen_d.lib"
+				OutputFile="$(OutDir)/lib/$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -85,8 +85,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -110,7 +110,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="$(IntDir)/../../include"
+				AdditionalIncludeDirectories="$(SolutionDir)/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -129,7 +129,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/../../lib/kohonen.lib"
+				OutputFile="$(OutDir)/lib/$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"

@@ -10,7 +10,6 @@
 #endif // _MSC_VER > 1000
 #include <gl\gl.h>
 #include <gl\glu.h>
-#include <gl\glaux.h>
 //#include "glut.h"
 
 class  CGLMan  

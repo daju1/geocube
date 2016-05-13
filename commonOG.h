@@ -4,7 +4,7 @@
 
 #include <gl\gl.h>
 #include <gl\glu.h>
-#include <gl\glaux.h>
+
 
 #include "surfdefs.h" //for define OG_DOUBLE_PRECISION
 

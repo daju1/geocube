@@ -16,8 +16,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\surfdoc_win___Win32_Release"
-			IntermediateDirectory=".\surfdoc_win___Win32_Release"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -44,7 +44,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="$(IntDir)/../../include"
+				AdditionalIncludeDirectories="$(SolutionDir)/include;$(SolutionDir)/glut37/glut-3.7/include&quot;;&quot;$(SolutionDir)/glut37\glut-3.7\lib\glut"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -73,7 +73,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\lib\wintools.lib"
+				OutputFile="$(OutDir)/lib/$(ProjectName).lib"
 				SuppressStartupBanner="false"
 			/>
 			<Tool
@@ -94,8 +94,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\surfdoc_win___Win32_Debug"
-			IntermediateDirectory=".\surfdoc_win___Win32_Debug"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -122,7 +122,7 @@
 				Optimization="0"
 				InlineFunctionExpansion="0"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="$(IntDir)/../../include"
+				AdditionalIncludeDirectories="$(SolutionDir)/include;$(SolutionDir)/glut37/glut-3.7/include&quot;;&quot;$(SolutionDir)/glut37\glut-3.7\lib\glut"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -154,7 +154,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\lib\wintools_d.lib"
+				OutputFile="$(OutDir)/lib/$(ProjectName).lib"
 				SuppressStartupBanner="false"
 			/>
 			<Tool

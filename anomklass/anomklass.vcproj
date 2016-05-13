@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -63,9 +63,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc_win.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib glaux.lib"
-				OutputFile="$(OutDir)/anomklass_d.exe"
+				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(IntDir)/../../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/anomklass.pdb"
 				SubSystem="1"
@@ -97,8 +97,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -140,9 +140,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc_win.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib glaux.lib"
-				OutputFile="$(OutDir)/anomklass.exe"
+				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(IntDir)/../../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"

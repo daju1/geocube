@@ -16,8 +16,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\Release"
-			IntermediateDirectory=".\Release"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -73,10 +73,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="array.lib"
-				OutputFile=".\Release/wavelet.exe"
+				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(IntDir)../../../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				ProgramDatabaseFile=".\Release/wavelet.pdb"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
@@ -107,8 +107,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
-			IntermediateDirectory=".\Debug"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -164,10 +164,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="array.lib"
-				OutputFile=".\Debug/wavelet_d.exe"
+				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(IntDir)../../../lib"
+				AdditionalLibraryDirectories="$(OutDir)/lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/wavelet.pdb"
 				SubSystem="1"
