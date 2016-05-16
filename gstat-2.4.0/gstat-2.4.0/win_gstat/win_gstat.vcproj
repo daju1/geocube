@@ -47,7 +47,7 @@
 				AdditionalIncludeDirectories="..\libcsf\include,..\meschach"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=".\Debug/win_gstat.pch"
 				AssemblerListingLocation=".\Debug/"

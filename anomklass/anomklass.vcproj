@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc_win.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib glaux.lib"
+				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(OutDir)/lib"
@@ -139,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc_win.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib glaux.lib"
+				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(OutDir)/lib"

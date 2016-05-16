@@ -18,7 +18,7 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
-string BaseExcel::s_xl_forms_dir = "C:\\Laboratory\\LabForms";
+string BaseExcel::s_xl_forms_dir = CLabDoc::GetWorkDir() + "LabForms";
 bool BaseExcel::to_disconnect_exels_when_load_form = true;
 bool BaseExcel::to_automatic_save_when_disconnect = true;
 

@@ -21,7 +21,7 @@
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="1"
+			UseOfMFC="2"
 			CharacterSet="2"
 			>
 			<Tool
@@ -47,7 +47,7 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				StructMemberAlignment="0"
 				BufferSecurityCheck="false"
 				EnableFunctionLevelLinking="false"
@@ -71,7 +71,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="false"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib_d.lib geocube_module_d.lib labdbdoc_d.lib surfer_connect_d.lib acad_connect_d.lib excel_connect_d.lib laboratory_d.lib geometry2d_d.lib kohonen_d.lib surfdoc_d.lib wintools_d.lib dime_d.lib tools_d.lib array_d.lib dct_d.lib winplot_d.lib geoid_d.lib comctl32.lib jpeg_d.lib opengl32.lib glu32.lib glaux.lib gdiplus.lib"
+				AdditionalDependencies="alglib.lib geocube_module.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
 				OutputFile="$(OutDir)/bin/GeoCubeConsole2003.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="false"

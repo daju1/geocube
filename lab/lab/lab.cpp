@@ -101,7 +101,7 @@ void Registry()
 		toRegSetValue = true;
 		break;
 	case REG_OPENED_EXISTING_KEY:
-		toRegSetValue = false;
+		toRegSetValue = true;
 		break;
 	}
 

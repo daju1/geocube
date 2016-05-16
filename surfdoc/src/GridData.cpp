@@ -175,7 +175,7 @@ griddata_dialog::griddata_dialog(bool & to_allocate, SurfDoc * p1, GridData * p2
 griddata_dialog::~griddata_dialog(void)
 {
 }
-string griddata_dialog::temp_directory = "C:\\Laboratory\\Temp";
+string griddata_dialog::temp_directory = CLabDoc::GetWorkDir() + "Temp";
 void griddata_dialog::InitGriddataDialog(HWND hDlg, bool first_time)
 {
 	if (this->m_pGridData)

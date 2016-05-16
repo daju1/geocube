@@ -15,6 +15,8 @@ using namespace Gdiplus;
 #include "../../wintools/src/project.h"
 #endif
 #include "../../wintools/src/win32_dialog.h"
+#include <afxdb.h>
+#include "../../lab/lab/labdoc.h"
 
 #include "LabTrialsTree.h"
 #include "LabParamTree.h"
@@ -23352,7 +23354,7 @@ const char * _GetKodProbyGrunta(long val) //id_kodprob
 }
 
 BaseLab::language BaseLab::PassportLanguage = BaseLab::language::russian;
-string Laboratory::FormsDir = "C:\\Laboratory\\Forms";
+string Laboratory::FormsDir = CLabDoc::GetWorkDir() + "Forms";
 
 void FractionsLabTrial::FillZhurnal(MyExcel & m_excel, int i16, int i17)
 {

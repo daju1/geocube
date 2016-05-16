@@ -55,6 +55,32 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+class StringHelper
+{
+public:
+	static LPTSTR ReverseFindOneOf(LPTSTR p1, LPCTSTR p2) throw()
+	{
+		LPTSTR _p1 = p1;
+		while (_p1 != NULL && *_p1 != NULL)
+		{
+			_p1 = CharNext(_p1);
+		}
+
+		while (_p1 != NULL)
+		{
+			LPCTSTR p = p2;
+			while (p != NULL && *p != NULL)
+			{
+				if (*_p1 == *p)
+					return CharNext(_p1);
+				p = CharNext(p);
+			}
+			_p1 = CharPrev(p1, _p1);
+		}
+		return NULL;
+	}
+};
+
 // global helper function to display an error message
 void DaoErrorMsg(CDaoException* e)
 {
@@ -69,9 +95,271 @@ void DaoErrorMsg(CDaoException* e)
 // CLabDoc
 CString CLabDoc::s_strConnect = "ODBC;DSN=Wen Geo DB";
 //CString CLabDoc::s_strDatabase = "C:\\Program Files\\Mathematical Center\\WenGeo\\WenGeo";
-CString CLabDoc::s_strDatabase = "C:\\Laboratory\\WenGeo";
+CString CLabDoc::GetWorkDir(bool write_registry)
+{
+	// Get the executable file path
+	const size_t FilePathSize = MAX_PATH + 2;
+	TCHAR szDir[FilePathSize];
+	TCHAR szExeFilePath[FilePathSize];
+	TCHAR szExeFileName[FilePathSize];
+	TCHAR szIniFilePath[FilePathSize];
+	TCHAR szIniFileName[FilePathSize];
+
+	DWORD dwFLen = ::GetModuleFileName(NULL, szExeFilePath, MAX_PATH);
+	if( dwFLen == 0 || dwFLen == MAX_PATH )
+		return _T("");
+
+	{
+		TCHAR szTokens[] = _T("/\\");
+		LPTSTR lpszToken = StringHelper::ReverseFindOneOf(szExeFilePath, szTokens);
+		strcpy(szExeFileName, lpszToken);
+		strcpy(szIniFileName, lpszToken);
+		if ( NULL != lpszToken)
+		{
+			(*lpszToken) = 0;
+		}
+	}
+
+	{
+		TCHAR szTokens[] = _T(".");
+		LPTSTR lpszToken = StringHelper::ReverseFindOneOf(szIniFileName, szTokens);
+		if ( NULL != lpszToken)
+		{
+			(*lpszToken) = 0;
+		}
+		strcat(szIniFileName, _T("ini"));
+	}
+
+	strcpy(szDir, szExeFilePath);
+	strcpy(szIniFilePath, szExeFilePath);
+	strcat(szIniFilePath, szIniFileName);
+
+	CString work_dir(szDir);
+
+	if (false)
+	{
+		// create and write ini file
+		WritePrivateProfileSection(_T("Lab"), _T(""), szIniFilePath); 
+
+		// Write added values 
+		work_dir += _T("..\\..\\..\\lab\\disk_C\\Laboratory");
+		WritePrivateProfileString (TEXT("Lab"), 
+			TEXT("WorkDir"), 
+			work_dir, 
+			szIniFilePath);
+	}
+
+	// Test 
+	TCHAR   inBuf[4096]; 
+	GetPrivateProfileString (TEXT("Lab"), 
+		TEXT("WorkDir"), 
+		work_dir, 
+		inBuf, 
+		4096, 
+		szIniFilePath); 
+	work_dir = inBuf; 
+
+	if (write_registry)
+	{
+		TCHAR   inBuf[1024]; 
+		HKEY   hKey1, hKey2, hKey3, hKey4; 
+		DWORD  dwDisposition; 
+		LONG   lRetCode; 
+		TCHAR   szData[1024] = TEXT("Microsoft Access Driver (*.mdb)");
+
+		// Create the .ini file key. 
+		lRetCode = RegOpenKeyEx ( HKEY_LOCAL_MACHINE, 
+			TEXT("SOFTWARE\\Wow6432Node\\ODBC\\ODBC.INI\\ODBC Data Sources"), 
+			0, KEY_ALL_ACCESS, &hKey1); 
+
+		if (lRetCode != ERROR_SUCCESS)
+		{ 
+			printf ("Error in creating ODBC.INI\Wen Geo DB key (%d).\n", lRetCode); 
+			return work_dir; 
+		} 
+
+		// Set a section value 
+		lRetCode = RegSetValueEx ( hKey1, 
+			TEXT("Wen Geo DB"), 
+			0, REG_SZ, (BYTE *)szData, sizeof(szData));
+
+		if (lRetCode != ERROR_SUCCESS) 
+		{ 
+			printf ("Error in setting Wen Geo DB value\n"); 
+			// Close the key
+			lRetCode = RegCloseKey( hKey1 );
+			if( lRetCode != ERROR_SUCCESS )
+			{
+				printf("Error in RegCloseKey (%d).\n", lRetCode);
+				return work_dir;
+			}
+		}
+
+		// Create an App Name key 
+		lRetCode = RegCreateKeyEx ( HKEY_LOCAL_MACHINE, 
+			TEXT("SOFTWARE\\Wow6432Node\\ODBC\\ODBC.INI\\Wen Geo DB"), 
+			0, 
+			NULL, 
+			REG_OPTION_NON_VOLATILE,
+			KEY_WRITE, 
+			NULL, 
+			&hKey2, 
+			&dwDisposition); 
+
+		if (lRetCode != ERROR_SUCCESS) 
+		{ 
+			printf ("Error in creating Wen Geo DB key (%d).\n", lRetCode); 
+
+			// Close the key
+			lRetCode = RegCloseKey( hKey2 );
+			if( lRetCode != ERROR_SUCCESS )
+			{
+				printf("Error in RegCloseKey (%d).\n", lRetCode);
+				return work_dir; 
+			}
+		} 
+
+		// Set a section values 
+		sprintf(szData, _T("C:\\Windows\\system32\\odbcjt32.dll"));
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("Driver"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+		sprintf(szData, _T("%s\\WenGeo.mdb"), work_dir.GetBuffer());
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("DBQ"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+		sprintf(szData, _T("Geocube bd"));
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("Description"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+		DWORD value = 0x00000019;
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("DriverId"), 0, REG_DWORD, (const BYTE*)&value, sizeof(value));
+
+		sprintf(szData, _T("MS Access;"));
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("FIL"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+		value = 0x00000000;
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("SafeTransactions"), 0, REG_DWORD, (const BYTE*)&value, sizeof(value));
+
+		sprintf(szData, _T("admin"));
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("UID"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+		sprintf(szData, _T("%s"), CLabDoc::s_strDBPassword);
+		lRetCode = RegSetValueEx ( hKey2, 
+			TEXT("PWD"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+
+		// Create an App Name key 
+		lRetCode = RegCreateKeyEx ( HKEY_LOCAL_MACHINE, 
+			TEXT("SOFTWARE\\Wow6432Node\\ODBC\\ODBC.INI\\Wen Geo DB\\Engines"), 
+			0, 
+			NULL, 
+			REG_OPTION_NON_VOLATILE,
+			KEY_WRITE, 
+			NULL, 
+			&hKey3, 
+			&dwDisposition); 
+
+		if (lRetCode != ERROR_SUCCESS) 
+		{ 
+			printf ("Error in creating Wen Geo DB key (%d).\n", lRetCode); 
+
+			// Close the key
+			lRetCode = RegCloseKey( hKey3 );
+			if( lRetCode != ERROR_SUCCESS )
+			{
+				printf("Error in RegCloseKey (%d).\n", lRetCode);
+				return work_dir; 
+			}
+		} 
+
+
+		// Create an App Name key 
+		lRetCode = RegCreateKeyEx ( HKEY_LOCAL_MACHINE, 
+			TEXT("SOFTWARE\\Wow6432Node\\ODBC\\ODBC.INI\\Wen Geo DB\\Engines\\Jet"), 
+			0, 
+			NULL, 
+			REG_OPTION_NON_VOLATILE,
+			KEY_WRITE, 
+			NULL, 
+			&hKey4, 
+			&dwDisposition); 
+
+		if (lRetCode != ERROR_SUCCESS) 
+		{ 
+			printf ("Error in creating Wen Geo DB key (%d).\n", lRetCode); 
+
+			// Close the key
+			lRetCode = RegCloseKey( hKey4 );
+			if( lRetCode != ERROR_SUCCESS )
+			{
+				printf("Error in RegCloseKey (%d).\n", lRetCode);
+				return work_dir; 
+			}
+		} 
+
+		sprintf(szData, _T(""));
+		lRetCode = RegSetValueEx ( hKey4, 
+			TEXT("ImplicitCommitSync"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+		value = 0x00000800;
+		lRetCode = RegSetValueEx ( hKey4, 
+			TEXT("MaxBufferSize"), 0, REG_DWORD, (const BYTE*)&value, sizeof(value));
+
+		value = 0x00000005;
+		lRetCode = RegSetValueEx ( hKey4, 
+			TEXT("PageTimeout"), 0, REG_DWORD, (const BYTE*)&value, sizeof(value));
+
+		value = 0x00000003;
+		lRetCode = RegSetValueEx ( hKey4, 
+			TEXT("Threads"), 0, REG_DWORD, (const BYTE*)&value, sizeof(value));
+
+		sprintf(szData, _T("Yes"));
+		lRetCode = RegSetValueEx ( hKey4, 
+			TEXT("ImplicitCommitSync"), 0, REG_SZ, (BYTE *)szData, sizeof(TCHAR) * strlen(szData));
+
+		// Close the keys
+		lRetCode = RegCloseKey( hKey1 );
+		if( lRetCode != ERROR_SUCCESS )
+		{
+			printf("Error in RegCloseKey (%d).\n", lRetCode);
+			return work_dir;
+		}
+
+		lRetCode = RegCloseKey( hKey2 );
+		if( lRetCode != ERROR_SUCCESS )
+		{
+			printf("Error in RegCloseKey (%d).\n", lRetCode);
+			return work_dir;
+		}
+
+		lRetCode = RegCloseKey( hKey3 );
+		if( lRetCode != ERROR_SUCCESS )
+		{
+			printf("Error in RegCloseKey (%d).\n", lRetCode);
+			return work_dir;
+		}
+
+		lRetCode = RegCloseKey( hKey4 );
+		if( lRetCode != ERROR_SUCCESS )
+		{
+			printf("Error in RegCloseKey (%d).\n", lRetCode);
+			return work_dir;
+		}
+	}
+
+	return work_dir;
+}
+
+
 CString CLabDoc::s_strDBPassword = "madzima";
-CString CLabDoc::s_strExportDatabaseTemplate = "C:\\Laboratory\\Export\\Export.mdb";
+CString CLabDoc::s_strWorkDir = GetWorkDir(true);
+CString CLabDoc::s_strDatabase = CLabDoc::s_strWorkDir + "WenGeo";
+CString CLabDoc::s_strExportDatabaseTemplate = CLabDoc::s_strWorkDir + "Export\\Export.mdb";
 
 #if USE_GET_LAB_DOC
 IMPLEMENT_DYNCREATE(CLabDoc, CDocument)

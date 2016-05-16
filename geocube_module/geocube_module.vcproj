@@ -173,7 +173,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib_d.lib labdbdoc_d.lib surfer_connect_d.lib acad_connect_d.lib excel_connect_d.lib laboratory_d.lib geometry2d_d.lib kohonen_d.lib surfdoc_d.lib wintools_d.lib dime_d.lib tools_d.lib array_d.lib dct_d.lib winplot_d.lib geoid_d.lib comctl32.lib jpeg_d.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="alglib.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
 				OutputFile="$(OutDir)/bin/geocube_module.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"

@@ -1104,7 +1104,7 @@ void WellColomn::DrawGDIplus_Litho(Graphics ** select_buffer, Graphics& graphics
 					}
 					else
 					{
-						string fn = string("C:\\Laboratory\\Img\\") + wegep->umpoz;
+						string fn = string(CLabDoc::GetWorkDir() + "Img\\") + wegep->umpoz;
 
 						const int wlen = 2 + 2 * (int)strlen(fn.c_str());
 						WCHAR * wfn = new WCHAR[wlen];

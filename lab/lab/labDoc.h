@@ -83,9 +83,10 @@ public:
 
 	static CString s_strConnect;
 	static CString s_strDatabase;
+	static CString s_strWorkDir;
 	static CString s_strDBPassword;
 	static CString s_strExportDatabaseTemplate;
-
+	static CString GetWorkDir(bool write_registry = false);
 	//void GetQuery();
 	//void PutQuery();
 	virtual void EnumTables(bool to_rewrite_list) = 0;
