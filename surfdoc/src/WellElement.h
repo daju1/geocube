@@ -111,7 +111,7 @@ public:
 	Well_IGE_Podoshva();
 	virtual ~Well_IGE_Podoshva();
 
-	virtual void PrintfProperties();		
+	virtual void PrintfProperties();
 	virtual void PrintfProperties(vector<fmtstr> & text);
 
 
@@ -384,6 +384,10 @@ public:
 		this->well_elements.clear();
 	}
 
+	size_t GetWellElementSize()
+	{
+		return this->well_elements.size();
+	}
 
 
 	void Init(const WellColomn &wc)

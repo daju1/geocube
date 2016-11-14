@@ -43,6 +43,7 @@ vector<wells_draw_list_item *> Well_3D::wells_draw_list;
 
 
 bool Well_3D::draw2d_center = true;
+bool Well_3D::s_drawIdKt = false;
 COLORREF Well_3D::center_color = RGB(0,0,0);
 DashStyle Well_3D::dashStyle = DashStyleDashDot;
 float Well_3D::dashOffset = 20;
@@ -827,8 +828,69 @@ int Well_3D::AddNewWellColomn(WellElement::type t, wells_draw_list_item * wdli)
 	return this->well_colomns.size()-1;
 	//return &well_colomns[this->well_colomns.size()-1];
 }
+
+void Well_3D::UpdateSloj(UINT icol,
+                         size_t slen, 
+                         CPoint3& pt, 
+                         double& zk, 
+                         WellColomn* &w_colomn_podoshva,
+                         vector<COLORREF>* &colors_of_sloi,
+                         vector<string>* &pnames_of_colomns)
+{
+	if (w_colomn_podoshva)
+	{
+		printf("w_colomn_podoshva->GetWellElementType() = %d\n",(int)w_colomn_podoshva->GetWellElementType());
+		if (slen > 0)
+		{
+			char str[512];
+			strcpy(str,pnames_of_colomns->operator [](icol).c_str());
+			// deleting ""
+			char * p = str;
+			while ( (*p) == '"') p++;
+			while (p[strlen(p)-1] == '"') p[strlen(p)-1] = '\0';
+			WellElement * w_elem = w_colomn_podoshva->AddNewWellElement(p);
+			if (w_elem)
+			{
+				Well_Litho_Podoshva * wlitp = dynamic_cast<Well_Litho_Podoshva *>(w_elem);
+				if (wlitp)
+				{
+					wlitp->color = icol < colors_of_sloi->size() ? colors_of_sloi->operator [](icol) : RGB(255,255,255);
+					wlitp->zk = zk;
+					wlitp->zp = pt.z;
+				}
+
+				Well_IGE_Podoshva * wigep = dynamic_cast<Well_IGE_Podoshva *>(w_elem);
+				if (wigep)
+				{
+					wigep->color = icol < colors_of_sloi->size() ? colors_of_sloi->operator [](icol) : RGB(255,255,255);
+					wigep->zk = zk;
+					wigep->zp = pt.z;
+
+               if (this->m_pSurfDoc)
+               {
+                  string out_key;
+                  string podoshva_surfname = wigep->GetNameID();
+                  if (this->m_pSurfDoc->GetIGEkey(podoshva_surfname, out_key))
+                  {
+                     wigep->key = out_key;
+                  }
+               }
+
+					//printf("wigep->z = %f\n", wigep->z);
+					//printf("wigep->GetNameID() = %s\n", wigep->GetNameID().c_str());
+				}
+			}
+		}
+	}
+	else
+	{
+		this->PushBack(pt);
+		this->m_vstrSloiNames.push_back(pnames_of_colomns->operator [](icol) );
+		this->m_vColor.push_back(colors_of_sloi->operator [](icol) );
+	}
+}
 bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
-				   vector<cell> * karotazh_glubin,
+					vector<cell> * karotazh_glubin,
 					vector<int> * types_of_colomns,
 					vector<string> * pnames_of_colomns,
 					vector<COLORREF> * colors_of_sloi,
@@ -877,7 +939,7 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 	if (karotazh_glubin)
 	{
 		m_karotazhy.AddMsg(&Karotazh(this->m_pSurfDoc, filename));
-		kar_index = Well_3D::karotazh_list.size()-1;					
+		kar_index = Well_3D::karotazh_list.size()-1;
 		m_karotazhy.GetLastMsg().m_index = kar_index;
 	}
 
@@ -903,11 +965,11 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 
 
 	double zk = DBL_MAX;//кровля
-	
-			
+
+
 	if (karotazh_glubin) iter_karotazh_glubin = karotazh_glubin->begin(); 
 
-	for( 
+	for(
 		iter_types_col = types_of_colomns->begin(), 
 			icol = 0, 
 			iter_cell = pdrill->begin();
@@ -916,21 +978,21 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 			iter_cell != pdrill->end() &&
 			(karotazh_glubin ? iter_karotazh_glubin != karotazh_glubin->end() : true); 
 
-		iter_types_col++, 
-			icol++, 
-			iter_cell++ 
+		iter_types_col++,
+			icol++,
+			iter_cell++
 		)
 	{
 
 		cell temp = *iter_cell;
 		switch (*iter_types_col)
 		{
-		case 0:
+		case WELL_COLOMN_TYPE_NOT_USED:
 			{
 				// this colomn not used
 			}
 			break;
-		case 1:
+		case WELL_COLOMN_TYPE_WELL_ID:
 			{
 				// this colomn have well ID value
 				// ncol_well_id = icol;
@@ -945,7 +1007,7 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 #endif
 			}
 			break;
-		case 2://X
+		case WELL_COLOMN_TYPE_X://X
 			{
 				X = temp.value;
 				m_vdPoints[0].x = temp.value;
@@ -954,7 +1016,7 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 				m_vvPoints[1].x = temp.value;
 			}
 			break;
-		case 3://Y
+		case WELL_COLOMN_TYPE_Y://Y
 			{
 				Y = temp.value;
 				m_vdPoints[0].y = temp.value;
@@ -963,7 +1025,7 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 				m_vvPoints[1].y = temp.value;
 			}
 			break;
-		case 4://ustje altitude
+		case WELL_COLOMN_TYPE_USTJE_ALT://ustje altitude
 			{
 				m_vdPoints[1].z = temp.value;
 				m_vvPoints[1].z = temp.value;
@@ -977,7 +1039,7 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 				ustje_is_determined = true;
 			}
 			break;
-		case 5://sloi podoshva altitude
+		case WELL_COLOMN_TYPE_SLOI_PODOSHVA_ALT://sloi podoshva altitude
 			{
 				CPoint3 pt;
 #if USE_STRING_IN_THE_CELL
@@ -1001,53 +1063,14 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 					//this cell is empty
 					pt.bVisible = false;
 				}
-				if (w_colomn_podoshva)
-				{
-					printf("w_colomn_ige_podoshva->GetWellElementType() = %d\n",(int)w_colomn_podoshva->GetWellElementType());
-					if (slen > 0)
-					{
-						char str[512];
-						strcpy(str,pnames_of_colomns->operator [](icol).c_str());
-						// deleting ""
-						char * p = str;
-						while ( (*p) == '"') p++;
-						while (p[strlen(p)-1] == '"') p[strlen(p)-1] = '\0';
-						WellElement * w_elem = w_colomn_podoshva->AddNewWellElement(p);
-						if (w_elem)
-						{
-							Well_Litho_Podoshva * wlitp = dynamic_cast<Well_Litho_Podoshva *>(w_elem);
-							if (wlitp)
-							{
-								wlitp->color = icol < colors_of_sloi->size() ? colors_of_sloi->operator [](icol) : RGB(255,255,255);
-								wlitp->zk = zk;
-								wlitp->zp = pt.z;
-							}
-
-							Well_IGE_Podoshva * wigep = dynamic_cast<Well_IGE_Podoshva *>(w_elem);
-							if (wigep)
-							{
-								wigep->color = icol < colors_of_sloi->size() ? colors_of_sloi->operator [](icol) : RGB(255,255,255);
-								wigep->zk = zk;
-								wigep->zp = pt.z;
-							}
-						}
-					}
-				}
-				else
-				{
-					this->PushBack(pt);
-					this->m_vstrSloiNames.push_back(pnames_of_colomns->operator [](icol) );
-	printf("pnames_of_colomns->operator [](icol) = %s this->m_vstrSloiNames.size() = %d\n", pnames_of_colomns->operator [](icol).c_str(), this->m_vstrSloiNames.size());
-					this->m_vColor.push_back(colors_of_sloi->operator [](icol) );
-
-				}
+				UpdateSloj(icol, slen, pt, zk, w_colomn_podoshva, colors_of_sloi, pnames_of_colomns);
 				if (slen > 0)
-				{	
+				{
 					zk = temp.value;
 				}
 			}
 			break;
-		case 6://sloi podoshva glubina
+		case WELL_COLOMN_TYPE_SLOI_PODOSHVA_GLUBINA://sloi podoshva glubina
 			{
 				if (!ustje_is_determined)
 				{
@@ -1076,54 +1099,54 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 					//this cell is empty
 					pt.bVisible = false;
 				}
-				if (w_colomn_podoshva)
-				{
-					printf("w_colomn_podoshva->GetWellElementType() = %d\n",(int)w_colomn_podoshva->GetWellElementType());
-					if (slen > 0)
-					{
-						char str[512];
-						strcpy(str,pnames_of_colomns->operator [](icol).c_str());
-						// deleting ""
-						char * p = str;
-						while ( (*p) == '"') p++;
-						while (p[strlen(p)-1] == '"') p[strlen(p)-1] = '\0';
-						WellElement * w_elem = w_colomn_podoshva->AddNewWellElement(p);
-						if (w_elem)
-						{
-							Well_Litho_Podoshva * wlitp = dynamic_cast<Well_Litho_Podoshva *>(w_elem);
-							if (wlitp)
-							{
-								wlitp->color = icol < colors_of_sloi->size() ? colors_of_sloi->operator [](icol) : RGB(255,255,255);
-								wlitp->zk = zk;
-								wlitp->zp = pt.z;
-							}
+				UpdateSloj(icol, slen, pt, zk, w_colomn_podoshva, colors_of_sloi, pnames_of_colomns);
 
-							Well_IGE_Podoshva * wigep = dynamic_cast<Well_IGE_Podoshva *>(w_elem);
-							if (wigep)
-							{
-								wigep->color = icol < colors_of_sloi->size() ? colors_of_sloi->operator [](icol) : RGB(255,255,255);
-								wigep->zk = zk;
-								wigep->zp = pt.z;
-
-								//printf("wigep->z = %f\n", wigep->z);
-								//printf("wigep->GetNameID() = %s\n", wigep->GetNameID().c_str());
-							}
-						}
-					}
-				}
-				else
-				{
-					this->PushBack(pt);
-					this->m_vstrSloiNames.push_back(pnames_of_colomns->operator [](icol) );
-					this->m_vColor.push_back(colors_of_sloi->operator [](icol) );
-				}
 				if (slen > 0)
-				{	
+				{
 					zk = m_vdPoints[1].z - temp.value;
 				}
 			}
 			break;
-		case 7://zaboj altitude
+
+		case WELL_COLOMN_TYPE_SLOI_MOSCHNOST:
+			{
+				if (!ustje_is_determined)
+				{
+					MessageBox(0, "ustje is not determined!!!\nDetermine ustje first!", "Well_3D::Init",0);
+					return false;
+				}
+				CPoint3 pt;
+#if USE_STRING_IN_THE_CELL
+				size_t slen = strlen(temp.str.c_str());
+#else
+				size_t slen = strlen(temp.s);
+#endif
+				if (slen > 0)
+				{
+					//this cell not empty
+					pt.bVisible = true;
+					pt.z		= zk - temp.value;
+					pt.x		= X;
+					pt.y		= Y;
+
+					if (m_vdPoints[0].z > pt.z)
+						m_vdPoints[0].z = pt.z;
+				}
+				else
+				{
+					//this cell is empty
+					pt.bVisible = false;
+				}
+				UpdateSloj(icol, slen, pt, zk, w_colomn_podoshva, colors_of_sloi, pnames_of_colomns);
+
+				if (slen > 0)
+				{
+					zk = zk - temp.value;
+				}
+			}
+			break;
+
+		case WELL_COLOMN_TYPE_ZABOJ_ALTITUDE://zaboj altitude
 			{
 				to_init_zaboj_as_ustje = false;
 				m_vdPoints[0].z = temp.value;
@@ -1131,20 +1154,20 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 				this->m_vColor[0] = colors_of_sloi->operator [](icol);
 			}
 			break;
-		case 8://zaboj glubina
+		case WELL_COLOMN_TYPE_ZABOJ_GLUBINA://zaboj glubina
 			{
 				if (!ustje_is_determined)
 				{
 					MessageBox(0, "ustje is not determined!!!\nDetermine ustje first!", "Well_3D::Init",0);
 					return false;
-				}				
+				}
 				to_init_zaboj_as_ustje = false;
 				m_vdPoints[0].z = m_vdPoints[1].z - temp.value;
 				m_vvPoints[0].z = m_vdPoints[1].z - temp.value;
 				this->m_vColor[0] = colors_of_sloi->operator [](icol);
 			}
 			break;
-		case 9:// karotazh
+		case WELL_COLOMN_TYPE_KAROTAZH:// karotazh
 			{
 				if (!ustje_is_determined)
 				{
@@ -1155,7 +1178,7 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 				{
 					MessageBox(0, "karotazh_glubin is not determined!!!\nDetermine karotazh_glubin first!", "Well_3D::Init",0);
 					return false;
-				}					
+				}
 				
 #if USE_STRING_IN_THE_CELL
 				size_t slen = strlen(temp.str.c_str());
@@ -1189,8 +1212,8 @@ bool Well_3D::WellInit2(vector<vector<cell> >::iterator pdrill,
 
 			}
 			break;
-		case 10:
-		case 11:
+		case WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_UST:
+		case WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_POJAV:
 			{
 #if USE_STRING_IN_THE_CELL
 				size_t slen = strlen(temp.str.c_str());
@@ -3401,11 +3424,12 @@ void Well_3D::WellInit(long id_kt,
 
 HTREEITEM Well_3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
-    char szItemText[1024]; // label text of tree-view item 
-	sprintf(szItemText, "ID_KT = %d name = %s len = %d color = %u", 
-		m_id_kt, 
-		this->GetName().c_str(), 
-		GetPointsNumber(), 
+	char szItemText[1024]; // label text of tree-view item 
+	sprintf(szItemText, "id = %s ID_KT = %d name = %s len = %d color = %u", 
+		this->GetIDString(),
+		m_id_kt,
+		this->GetName().c_str(),
+		GetPointsNumber(),
 		m_color);
 	Object * pObject = dynamic_cast<Object *> (this);
 	//=============================================================
@@ -4052,6 +4076,113 @@ void Well_3D::UstjaToReliefGriddata(GridData * pData, COLORREF color)
 		pData->AddInput(ustje, color);
 	}
 }
+bool Well_3D::IsSelected(CPoint3 selected_view_pt, 
+		double search_radius,
+		WhatSelected& ws)
+{
+	if (!this->IsCheckedEx()) return false;
+	search_radius = fabs(search_radius);
+	if (ws.m_what_to_select == WhatSelected::selected_objects_element_type::sel_point
+		||
+		ws.m_what_to_select == WhatSelected::selected_objects_element_type::sel_no_element)
+	{
+		for ( size_t i = 0; i < this->GetPointsNumber(); i++)
+		{
+			bool select = Distance(selected_view_pt, this->GetViewPoint(i) )
+				<= 
+				search_radius;
+			if (select)
+			{
+				ws.Init(dynamic_cast<Object*>(this), 
+					WhatSelected::sel_well,
+					i,-1,
+					selected_view_pt
+					//,	this->GetDocumentPoint(i)
+					);
+
+				return true;
+			}
+		}
+	}
+	if (ws.m_what_to_select == WhatSelected::selected_objects_element_type::sel_line
+		||
+		ws.m_what_to_select == WhatSelected::selected_objects_element_type::sel_no_element)
+	{
+		double a = selected_view_pt.x;
+		double b = selected_view_pt.y;
+		double c = selected_view_pt.z;
+		
+		for ( size_t i2 = 1;  i2 < this->GetPointsNumber(); i2++)
+		{
+			size_t i1 = i2-1;
+
+			double x1 = this->GetViewPoint(i1).x;
+			double y1 = this->GetViewPoint(i1).y;
+			double z1 = this->GetViewPoint(i1).z;
+
+			double x2 = this->GetViewPoint(i2).x;
+			double y2 = this->GetViewPoint(i2).y;
+			double z2 = this->GetViewPoint(i2).z;
+
+			double l = x2-x1;
+			double m = y2-y1;
+			double n = z2-z1;
+
+			double dist_to_line = sqrt(
+				pow( (a-x1)*m - (b-y1)*l, 2.) + 
+				pow( (b-y1)*n - (c-z1)*m, 2.) + 
+				pow( (c-z1)*l - (a-x1)*n, 2.) 
+				) / (
+				pow( l, 2.) + 
+				pow( m, 2.) + 
+				pow( n, 2.) 
+				);
+
+			//double dist1 = Distance(selected_view_pt, this->GetViewPoint(i1) );
+			//double dist2 = Distance(selected_view_pt, this->GetViewPoint(i2) );
+
+			double minx = min(x1,x2);
+			double maxx = max(x1,x2);
+
+			double miny = min(y1,y2);
+			double maxy = max(y1,y2);
+
+			double minz = min(z1,z2);
+			double maxz = max(z1,z2);
+#if 1
+			bool in_borders = 
+				a > minx - search_radius && a < maxx + search_radius &&
+				b > miny - search_radius && b < maxy + search_radius &&
+				c > minz - search_radius && c < maxz + search_radius;
+#else
+			bool in_borders = 
+				a >= minx && a <= maxx &&
+				b >= miny && b <= maxy &&
+				c >= minz && c <= maxz;
+#endif
+
+			bool selected = dist_to_line < 3*search_radius && 
+				//dist1 > search_radius && 
+				//dist2 > search_radius &&  
+				in_borders;
+
+			if (selected)
+			{
+				ws.Init(
+					dynamic_cast<Object*>(this), 
+					WhatSelected::sel_well,
+					i1,i2,
+					selected_view_pt
+					//, this->GetDocumentPoint(i1)
+					);
+
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 
 void Well_3D::Drawing_Primitive(wells_draw_list_item * wdli)
 {
@@ -4065,8 +4196,10 @@ void Well_3D::Drawing_Primitive(wells_draw_list_item * wdli)
 
 			if (GetPointsNumber() > 0 && m_vvPoints[0].bVisible)
 			{
-
-				glColor3ub (GetRValue(m_color),GetGValue(m_color),GetBValue(m_color)); 
+				if (this->m_lParam & OBJECT_FLAG_SELECTED_BIT)
+					::glColor3ub(0, 255, 0);
+				else
+					glColor3ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color)); 
 /*
 				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -4176,7 +4309,10 @@ void Well_3D::Drawing_Primitive(wells_draw_list_item * wdli)
 						if(m_vvPoints[i1].bVisible && m_vvPoints[i2].bVisible)
 						{
 							COLORREF color = this->m_vColor[i2];
-							::glColor3ub(GetRValue(color),GetGValue(color),GetBValue(color));
+							if (this->m_lParam & OBJECT_FLAG_SELECTED_BIT)
+								::glColor3ub(0, 255, 0);
+							else
+								::glColor3ub(GetRValue(color), GetGValue(color), GetBValue(color));
 							
 							glLineWidth(2.0);
 							Line3(
@@ -4195,13 +4331,12 @@ void Well_3D::Drawing_Primitive(wells_draw_list_item * wdli)
 								//отметим слой для сохранения в виде шариков
 
 								COLORREF sphereColor = this->m_vColor[i_sphere];
-							
 								glColor3ub (GetRValue(sphereColor),GetGValue(sphereColor),GetBValue(sphereColor)); 
 
 								GLUquadricObj* pSphere = gluNewQuadric();
 								gluQuadricDrawStyle(pSphere, GLU_FILL);
 								glPushMatrix();//перейдём к новым координатам, сохранив старые
-								
+
 								glTranslated(
 									m_vvPoints[i_sphere].x, 
 									m_vvPoints[i_sphere].y, 
@@ -4225,7 +4360,10 @@ void Well_3D::Drawing_Primitive(wells_draw_list_item * wdli)
 								{
 									// label color
 									COLORREF color = RGB(0,0,255);
-									::glColor3ub(GetRValue(color),GetGValue(color),GetBValue(color));
+									if (this->m_lParam & OBJECT_FLAG_SELECTED_BIT)
+										::glColor3ub(0, 255, 0);
+									else
+										::glColor3ub(GetRValue(color),GetGValue(color),GetBValue(color));
 									//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 									//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 									//====== Наносим цифровую метку устья
@@ -5123,7 +5261,10 @@ void Well_3D::Drawing()
 		{
 			// label color
 			COLORREF color = RGB(0,0,255);
-			::glColor3ub(GetRValue(color),GetGValue(color),GetBValue(color));
+			if (this->m_lParam & OBJECT_FLAG_SELECTED_BIT)
+				::glColor3ub(0, 255, 0);
+			else
+				::glColor3ub(GetRValue(color),GetGValue(color),GetBValue(color));
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			//====== Наносим цифровую метку устья
@@ -5134,11 +5275,20 @@ void Well_3D::Drawing()
 			// Display a string 
 			glListBase(FIRST_FONT_LIST_BITMAPS); // Indicates the start of display lists for the glyphs 
 			// Draw the characters in a string 
+         if (Well_3D::s_drawIdKt)
+         {
+            char str[128];
+            sprintf(str, "%d", this->m_id_kt);
+				glCallLists(strlen(str), GL_UNSIGNED_BYTE, str); 
+         }
+         else
+         {
 			#if USE_STRING_IN_THE_CELL
 				glCallLists(strlen(this->sID.c_str()), GL_UNSIGNED_BYTE, this->sID.c_str()); 
 			#else
 				glCallLists(strlen(this->sID), GL_UNSIGNED_BYTE, this->sID); 
 			#endif
+         }
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		}

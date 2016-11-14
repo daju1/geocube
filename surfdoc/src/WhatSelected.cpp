@@ -28,7 +28,7 @@ WhatSelected::~WhatSelected(void)
 	this->m_ob_list							= ob_list;
 }*/
 void WhatSelected::Init(
-	Object * ob, 	 
+	Object * ob,
 	WhatSelected::selected_objects_element_type selected_element_t,
 	int i_selected_element,
 	int i_selected_element2,
@@ -67,6 +67,15 @@ void WhatSelected::PrintInfo()
 		this->m_pt_view.y,
 		this->m_pt_view.z
 		);
+
+   vector<fmtstr> text;
+   this->m_ob->PrintfProperties(text);
+   vector<fmtstr>::iterator it = text.begin();
+   vector<fmtstr>::iterator end = text.end();
+   for (; it != end;++it)
+   {
+      printf("%s\n", (*it).String().c_str());
+   }
 }
 void WhatSelected::AddSelectedObject(Object * ob)
 {

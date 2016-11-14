@@ -140,7 +140,9 @@ friend class win_eld_view;
 	static void popup_FileSaveAs(HWND, void*);
 	static void popup_FileExtra1(HWND, void*);
 	static void popup_FileExtra2(HWND, void*);
-	
+
+	static void popup_SelectAllEmptyWells(HWND, void*);
+
 	static void popup_SelectAll(HWND, void*);
 	static void popup_SelectNone(HWND, void*);
 	static void popup_InvertSelection(HWND, void*);

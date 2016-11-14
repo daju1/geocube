@@ -2609,6 +2609,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Draw Sloj Names",             ID_WELLS_DRAWSLOJNAMES
         MENUITEM "Show All Sloi",               ID_WELLS_SHOWALLSLOI
+        MENUITEM "Draw ID KT",                  ID_WELLS_DRAW_ID_KT
         MENUITEM SEPARATOR
         MENUITEM "Оттображение каротажей",      ID_WELLS_KAROTAZHSCALE
         MENUITEM "Отображение скважин и список каротажей", ID_WELLS_KAROTAZHLIST
@@ -2675,6 +2676,8 @@ BEGIN
         MENUITEM "Uncheck Unselection",         ID_SELECT_UNCHECKUNSELECTION
         MENUITEM "Check Selection",             ID_SELECT_CHECKSELECTION
         MENUITEM "Check Unselection",           ID_SELECT_CHECKUNSELECTION
+        MENUITEM SEPARATOR
+        MENUITEM "Select All Empty Wells",      ID_SELECT_SELECTALL_EMPTY_WELLS
         MENUITEM SEPARATOR
         MENUITEM "Выделенным объектам присвоить цвет", ID_SELECT_SELECTIONSETCOLOR
         MENUITEM "Выделенным объектам присвоить цвет из текущего Wells Sloj", ID_SELECT_SELECTIONSETCOLORFROMCURRENTWELLSSLOJ

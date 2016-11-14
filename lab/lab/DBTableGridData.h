@@ -11,7 +11,7 @@
 
 #include "DBTable.h"
 
-class DBTableGridData : public DBTable  
+class DBTableGridData : public DBTable
 {
 public:
 	DBTableGridData(const char * tbnm);

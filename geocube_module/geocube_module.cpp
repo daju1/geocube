@@ -674,14 +674,14 @@ void dll_win_project::UmPoz(long id_umpoz,
 	{
 		this->w_project->UmPoz(id_umpoz,
 			umpoz, hatchacad,
-			angle, scale);	
+			angle, scale);
 	}
 }
 void dll_win_project::ApplyLito()
 {
 	if (this->w_project)
 	{
-		this->w_project->ApplyLito();	
+		this->w_project->ApplyLito();
 	}
 }
 void dll_win_project::Rozrizy(
@@ -702,14 +702,14 @@ void dll_win_project::Rozriz(
 {
 	if (this->w_project)
 	{
-		this->w_project->Rozriz(id_rozriz, npp, id_kt, dxf_x);	
+		this->w_project->Rozriz(id_rozriz, npp, id_kt, dxf_x);
 	}
 }
 void dll_win_project::ApplyRozriz()
 {
 	if (this->w_project)
 	{
-		this->w_project->ApplyRozriz();	
+		this->w_project->ApplyRozriz();
 	}
 }
 
@@ -726,7 +726,7 @@ void dll_win_project::ApplyVoda()
 {
 	if (this->w_project)
 	{
-		this->w_project->ApplyVoda();	
+		this->w_project->ApplyVoda();
 	}
 }
 void dll_win_project::GridDataSurfaces(long id_surf, const char * nazva,
@@ -734,7 +734,7 @@ void dll_win_project::GridDataSurfaces(long id_surf, const char * nazva,
 {
 	if (this->w_project)
 	{
-		this->w_project->GridDataSurfaces(id_surf, nazva, podoshva, r, g, b, z_flag, id_umpoz, id_ige);	
+		this->w_project->GridDataSurfaces(id_surf, nazva, podoshva, r, g, b, z_flag, id_umpoz, id_ige);
 	}
 }
 
@@ -774,35 +774,35 @@ void dll_win_project::ApplyGridData()
 {
 	if (this->w_project)
 	{
-		this->w_project->ApplyDBGridData();	
+		this->w_project->ApplyDBGridData();
 	}
 }
 void dll_win_project::SurfLitoMapping(long id_surf, long id_ige)
 {
 	if (this->w_project)
 	{
-		this->w_project->SurfLitoMapping(id_surf, id_ige);	
+		this->w_project->SurfLitoMapping(id_surf, id_ige);
 	}
 }
 void dll_win_project::SurfIgeMapping(long id_surf, long id_ige)
 {
 	if (this->w_project)
 	{
-		this->w_project->SurfIgeMapping(id_surf, id_ige);	
+		this->w_project->SurfIgeMapping(id_surf, id_ige);
 	}
 }
 void dll_win_project::SurfacesOrder(long npp, BYTE check, long id_surf, BYTE podoshva, BYTE check2)
 {
 	if (this->w_project)
 	{
-		this->w_project->SurfacesOrder(npp, check, id_surf, podoshva, check2);	
+		this->w_project->SurfacesOrder(npp, check, id_surf, podoshva, check2);
 	}
 }
-void dll_win_project::SurfacesBlankOrder(long npp, long id_surf, BYTE podoshva, 
+void dll_win_project::SurfacesBlankOrder(long npp, long id_surf, BYTE podoshva,
 		BYTE check_blank_me,
 		BYTE check_blank_me_up,
 		BYTE check_blank_me_up_above,
-		BYTE check_blank_me_down, 
+		BYTE check_blank_me_down,
 		BYTE check_blank_me_down_above,
 		BYTE check_blank_by_me_up,
 		BYTE check_blank_by_me_down
@@ -810,14 +810,14 @@ void dll_win_project::SurfacesBlankOrder(long npp, long id_surf, BYTE podoshva,
 {
 	if (this->w_project)
 	{
-		this->w_project->SurfacesBlankOrder(npp, id_surf, podoshva, 
+		this->w_project->SurfacesBlankOrder(npp, id_surf, podoshva,
 			check_blank_me,
 			check_blank_me_up,
 			check_blank_me_up_above,
-			check_blank_me_down, 
+			check_blank_me_down,
 			check_blank_me_down_above,
 			check_blank_by_me_up,
-			check_blank_by_me_down);	
+			check_blank_by_me_down);
 	}
 }
 

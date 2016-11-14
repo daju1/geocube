@@ -767,29 +767,29 @@ void CEnGeologyView::ObjectsInsertto3d()
 				{
 					switch (*iter_types_col)
 					{
-					case 0:// this colomn not used
+					case WELL_COLOMN_TYPE_0:// this colomn not used
 						break;
-					case 1: //well ID value
+					case WELL_COLOMN_TYPE_1: //well ID value
 						break;
-					case 2://X
+					case WELL_COLOMN_TYPE_X://X
 						break;
-					case 3://Y
+					case WELL_COLOMN_TYPE_Y://Y
 						break;
-					case 4://ustje altitude
+					case WELL_COLOMN_TYPE_4://ustje altitude
 						break;
-					case 5://sloi podoshva altitude WellColomn * w_colomn = this->AddWellColomn(WellElement::type::IGE_podoshva);w_colomn->check_draw = true;w_colomn->draw_width = 4.f;
-					case 6://sloi podoshva glubina
-						podoshva = true;				
+					case WELL_COLOMN_TYPE_5://sloi podoshva altitude WellColomn * w_colomn = this->AddWellColomn(WellElement::type::IGE_podoshva);w_colomn->check_draw = true;w_colomn->draw_width = 4.f;
+					case WELL_COLOMN_TYPE_6://sloi podoshva glubina
+						podoshva = true;
 						break;
-					case 7://zaboj altitude
+					case WELL_COLOMN_TYPE_7://zaboj altitude
 						break;
-					case 8://zaboj glubina
+					case WELL_COLOMN_TYPE_8://zaboj glubina
 						break;
-					case 9:// karotazh
+					case WELL_COLOMN_TYPE_9:// karotazh
 						break;
-					case 10: //WellElement::type::hydro_projavlenie
-					case 11: //WellElement::type::hydro_projavlenie
-						hydro = true;				
+					case WELL_COLOMN_TYPE_10: //WellElement::type::hydro_projavlenie
+					case WELL_COLOMN_TYPE_11: //WellElement::type::hydro_projavlenie
+						hydro = true;
 						break;
 					}
 				}
@@ -820,7 +820,7 @@ void CEnGeologyView::ObjectsInsertto3d()
 					id_obj = var.m_lVal;
 
 					DefineZoom(id_obj);
-					
+
 					where.Format("%s = %d", fi.m_strName, id_obj);
 					where.Format("ID_OBJ = %d", id_obj);
 
@@ -828,9 +828,6 @@ void CEnGeologyView::ObjectsInsertto3d()
 					GetObjectName(&this->GetDocument()->m_database, id_obj, contract, object_name);
 
 
-
-
-					
 					CString order_by;
 					order_by.Format("ID_TYP, ID_KT, DTBUR");
 					order_by.Format("NAZVA");

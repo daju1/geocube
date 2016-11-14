@@ -271,6 +271,7 @@ class Well_3D : public Primitive3D <CPoint3>
 public:
 
 	static bool draw2d_center;
+	static bool s_drawIdKt;
 	static COLORREF center_color;
 	static DashStyle dashStyle;
 	static float dashOffset;
@@ -317,6 +318,14 @@ public:
 		wells_draw_list_item * wdli_podoshva, bool is_ige,
 		wells_draw_list_item * wdli_hydro,
 		bool to_realloc);
+	void UpdateSloj(
+		UINT icol,
+		size_t slen, 
+		CPoint3& pt,
+		double& zk,
+		WellColomn* &w_colomn_podoshva,
+		vector<COLORREF>* &colors_of_sloi,
+		vector<string>* &pnames_of_colomns);
 
 	void Insert(size_t i_where, CPoint3 pt);
 	void ErasePoint(size_t i);
@@ -375,11 +384,7 @@ public:
 	void OnCreate(void);
 	virtual bool IsSelected(CPoint3 selected_view_pt, 
 			double search_radius,
-			WhatSelected& ws)
-	{
-		//search_radius = fabs(search_radius);
-		return false;
-	}
+			WhatSelected& ws);
 
 	virtual HTREEITEM AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s = "");
 

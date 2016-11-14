@@ -1588,14 +1588,14 @@ bool GeoSurface::BlankAbove(GeoSurface & geo_surf)
 
 	int cutting_number = 0;
 	int surf_number = 0;
-	bool toDrawPolygon = true;
+	bool toDrawPolygon = false;
 	
 	bool positive = true;
 
 	this->m_surface.Cutting(&geo_surf.m_surface, type_of_cutline, cutting_number, surf_number, toDrawPolygon, positive, 
 		this, 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-		&this->m_blank_polygon_matrix_ObjectList, &this->m_blank_polygon_matrix
+		&this->m_blank_polygon_matrix_ObjectList, 0 //&this->m_blank_polygon_matrix
 #else
 		&this->m_blank_polygones_ObjectList, &this->m_blank_polygones
 #endif
@@ -1612,14 +1612,14 @@ bool GeoSurface::BlankUnder(GeoSurface & geo_surf)
 
 	int cutting_number = 0;
 	int surf_number = 0;
-	bool toDrawPolygon = true;
+	bool toDrawPolygon = false;
 	
 	bool positive = false;
 
 	this->m_surface.Cutting(&geo_surf.m_surface, type_of_cutline, cutting_number, surf_number, toDrawPolygon, positive, 
 		this, 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-		&this->m_blank_polygon_matrix_ObjectList, &this->m_blank_polygon_matrix
+		&this->m_blank_polygon_matrix_ObjectList, 0 //&this->m_blank_polygon_matrix
 #else
 		&this->m_blank_polygones_ObjectList, &this->m_blank_polygones
 #endif

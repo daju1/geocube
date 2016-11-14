@@ -4072,15 +4072,48 @@ void Select_None(Object * pOb, WPARAM, LPARAM, void * )
 		}
 	}
 }
+
+void Select_All_Empty_Wells(Object * pOb, WPARAM, LPARAM, void * )
+{
+   if (pOb)
+   {
+      Well_3D * pwell = dynamic_cast<Well_3D *>(pOb);
+      if (pwell)
+      {
+         WellColomn * pwell_colomn = pwell->FindWellColomn(WellElement::type::IGE_podoshva);
+         if (pwell_colomn && pwell_colomn->GetWellElementSize() == 0)
+         {
+            // SELECT OBJECT - включаем 2-й бит 
+            // в пользовательских данных объекта
+            pwell->m_lParam |= OBJECT_FLAG_SELECTED_BIT;
+            pwell->ReDraw();
+         }
+      }
+   }
+}
+
+void project::SelectAllEmptyWells(void)
+{
+	if (selected_object != NULL)
+	{
+		selected_object = NULL;
+	}
+
+	this->EnumObjects(0, 0, NULL, 
+		&Object::ReturnTrue,
+		Select_All_Empty_Wells);
+
+	UpdateAllViews();
+}
+
+
 void project::SelectAll(void)
 {
 	if (selected_object != NULL)
 	{
 		selected_object = NULL;
 	}
-	
-//	iter_al it1 = atom_list.begin();
-//	while (it1 != atom_list.end()) (* it1++).flags |= ATOMFLAG_SELECTED;
+
 	this->EnumObjects(0, 0, NULL, 
 		&Object::ReturnTrue,
 		Select_All);
@@ -6181,9 +6214,9 @@ void project::EraseEvent(graphics_view * gv, vector<iGLu> & names)
 							ThePoint3D * point = dynamic_cast<ThePoint3D *>(ogl_view::what_selected.GetObject());
 							if (point && pGridData)
 							{
-								//Object * parent = point->GetObjectList()->GetParent();							
-								long id_surf = pGridData->id_surf;										
-								long id_point = point->id_point;						
+								//Object * parent = point->GetObjectList()->GetParent();
+								long id_surf = pGridData->id_surf;
+								long id_point = point->id_point;
 								this->m_pLabDoc->ClearGridDataPoint(id_obj, id_surf, id_point);
 
 								if (pGridData->built)
@@ -6220,7 +6253,7 @@ void project::EraseEvent(graphics_view * gv, vector<iGLu> & names)
 			if (ogl_view::what_to_erase == erase_tool::Line)
 			{
 				ogl_view::what_selected.m_what_to_select = 
-					WhatSelected::selected_objects_element_type::sel_no_element;	
+					WhatSelected::selected_objects_element_type::sel_no_element;
 				CPoint3 pt3;
 				if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 						pt3))
@@ -10344,6 +10377,7 @@ void project::SelectEvent(graphics_view * gv)
 				}
 			}
 		}
+
 		if (ogl_view::select_mode == select_tool::select_mode::Objects_with_the_same_ID)
 		{
 //printf("if (ogl_view::select_mode == select_tool::select_mode::Objects_with_the_same_ID)\n");
@@ -10378,6 +10412,7 @@ void project::SelectEvent(graphics_view * gv)
 				}
 			}
 		}
+
 		if (ogl_view::select_mode == select_tool::select_mode::Objects_with_the_same_name)
 		{
 			ogl_view::what_selected.m_what_to_select = 
@@ -10404,6 +10439,7 @@ void project::SelectEvent(graphics_view * gv)
 				}
 			}
 		}
+
 		if (ogl_view::select_mode == select_tool::select_mode::point_of_primitive)
 		{
 			ogl_view::what_selected.m_what_to_select = 

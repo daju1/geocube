@@ -379,9 +379,12 @@ Surface3D::~Surface3D()
 
 HTREEITEM Surface3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
-printf("Surface3D::AddItem_ToTree(HTREEITEM h1 = 0x%08x)\n", h1);
-   char szItemText[1024]; // label text of tree-view item 
-	sprintf(szItemText, "zflag = %d nx = %d ny = %d color = %u", m_zflag, m_lenx, m_leny, m_color);
+	char szItemText[1024]; // label text of tree-view item 
+	sprintf(szItemText, "zflag = %d nx = %d ny = %d color = %u %u %u ", m_zflag, m_lenx, m_leny
+		, GetRValue(m_color)
+		, GetGValue(m_color)
+		, GetBValue(m_color)
+	);
 	Object * pObject = dynamic_cast<Object *> (this);
 	//=============================================================
 	// Add the item to the tree-view control. 
@@ -1108,6 +1111,81 @@ void Surface3D::Drawing()
 	}
 }
 
+double Surface3D::GridVolume()
+{
+	double volume = 0.0;
+	//====== Размеры изображаемого объекта
+	UINT	nx = m_lenx-1,
+			ny = m_leny-1;
+
+/*	CPoint3 *ptv;
+	CPoint3 *ptd;
+	ptv = m_vvPoints;
+	ptd = m_vdPoints;*/
+
+	double xSize = this->GetDocumentPoint(1).x - this->GetDocumentPoint(0).x;
+	double ySize = this->GetDocumentPoint(m_lenx).y - this->GetDocumentPoint(0).y;
+
+
+	PRIMITIVE_POINTS_PTR(CPoint3) ptv;
+	PRIMITIVE_POINTS_PTR(CPoint3) ptd;
+
+	ptv = m_vvPoints PRIMITIVE_POINTS_PTR_BEGIN;
+	ptd = m_vdPoints PRIMITIVE_POINTS_PTR_BEGIN;
+
+
+	//====== Цикл прохода по слоям изображения (ось Z)
+	for (UINT y=0, i=0;  y<ny;  y++, i++)
+	{
+		//====== Цикл прохода вдоль оси X
+		for (UINT x=0;  x<nx;  x++, i++)
+		{
+			// i, j, k, n - 4 индекса вершин примитива при
+			// обходе в направлении против часовой стрелки
+
+			int	j = i + 
+				nx + 1,	// Индекс узла с большим Z
+
+				k = j+1,			// Индекс узла по диагонали
+				n = i+1; 			// Индекс узла справа
+
+			//=== Выбор координат 4-х вершин из контейнера
+
+			bool 
+				bi = ptv[i].bVisible,
+				bj = ptv[j].bVisible,
+				bk = ptv[k].bVisible,
+				bn = ptv[n].bVisible;
+
+			int nb = int(bi) + int(bj) + int(bk) + int(bn);
+
+			CPoint3 pt3;
+
+			pt3.x = (ptd[i].x + ptd[j].x + ptd[k].x + ptd[n].x ) / 4;
+			pt3.y = (ptd[i].y + ptd[j].y + ptd[k].y + ptd[n].y ) / 4;
+			pt3.z = (ptd[i].z + ptd[j].z + ptd[k].z + ptd[n].z ) / 4;
+
+			if (bi && bj && bk && bn)
+			{
+				volume += xSize * ySize * pt3.z;
+			}
+			else if (3 == nb)
+			{
+				volume += 0.75 * xSize * ySize * pt3.z;
+			}
+			else if (2 == nb)
+			{
+				volume += 0.5 * xSize * ySize * pt3.z;
+			}
+			else if (1 == nb)
+			{
+				volume += 0.25 * xSize * ySize * pt3.z;
+			}
+		}
+	}
+	return volume;
+}
+
 void Surface3D::DrawQuadsNumbers()
 {
 	//====== Размеры изображаемого объекта
@@ -1149,7 +1227,7 @@ void Surface3D::DrawQuadsNumbers()
 				bk = ptv[k].bVisible,
 				bn = ptv[n].bVisible;
 
-			if (bi || bj || bk | bn)
+			if (bi || bj || bk || bn)
 //			if (bi && bj && bk && bn)
 			{
 				// подписываем номера клеток

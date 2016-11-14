@@ -358,8 +358,8 @@ CString CLabDoc::GetWorkDir(bool write_registry)
 
 CString CLabDoc::s_strDBPassword = "madzima";
 CString CLabDoc::s_strWorkDir = GetWorkDir(true);
-CString CLabDoc::s_strDatabase = CLabDoc::s_strWorkDir + "WenGeo";
-CString CLabDoc::s_strExportDatabaseTemplate = CLabDoc::s_strWorkDir + "Export\\Export.mdb";
+CString CLabDoc::s_strDatabase = CLabDoc::s_strWorkDir + "\\WenGeo";
+CString CLabDoc::s_strExportDatabaseTemplate = CLabDoc::s_strWorkDir + "\\Export\\Export.mdb";
 
 #if USE_GET_LAB_DOC
 IMPLEMENT_DYNCREATE(CLabDoc, CDocument)
@@ -1717,6 +1717,32 @@ bool CLabDoc::EditLito(long ID_OBJ, long ID_KT, double key_H0, double H0, double
 	}
 	return false;
 }
+bool CLabDoc::EditLito(bool bUnEdited, long ID_OBJ, long ID_KT, CString IGE, double H0, double H1)
+{
+	long ID_IGE = GetID_IGE(bUnEdited, &this->m_database, ID_OBJ, IGE);
+
+	SetLito setLito(bUnEdited, &this->m_database);
+	setLito.m_strFilter.Format("ID_OBJ = %d and ID_KT = %d and ID_IGE = %d", ID_OBJ, ID_KT, ID_IGE);
+	if ( !setLito.Open(CRecordset::dynaset) )
+		return false;
+
+	if (!setLito.IsBOF())
+	{
+		setLito.MoveFirst( );
+		while(!setLito.IsEOF()) 
+		{
+			setLito.Edit();
+			setLito.m_H0 = H0;
+			setLito.m_H1 = H1;
+			setLito.Update();
+			return true;
+
+			setLito.MoveNext(); // to validate record count
+		}
+	}
+	return false;
+
+}
 bool CLabDoc::AddLito(bool bUnEdited, long ID_OBJ, long ID_KT, CString IGE, double H0, double H1)
 {
 	long ID_IGE = GetID_IGE(bUnEdited, &this->m_database, ID_OBJ, IGE);
@@ -1734,7 +1760,7 @@ bool CLabDoc::AddLito(bool bUnEdited, long ID_OBJ, long ID_KT, CString IGE, doub
 	setLito.m_H0 = H0;
 	setLito.m_H1 = H1;
 
-	setLito.Update();	
+	setLito.Update();
 
 	return true;
 }

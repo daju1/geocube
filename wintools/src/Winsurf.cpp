@@ -15890,6 +15890,32 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  InvalidateRect(hWnd,&rect, true);
 				  }
 				  break;
+			  case ID_WELLS_DRAW_ID_KT:
+				  {
+					  if (Well_3D::s_drawIdKt)
+					  {
+						  Well_3D::s_drawIdKt = false;
+						  CheckMenuItem(GetMenu( GetParent( hWnd ) ), 
+							  ID_WELLS_DRAW_ID_KT,
+							  MF_BYCOMMAND | MF_UNCHECKED);	
+					  }
+					  else
+					  {
+						  Well_3D::s_drawIdKt = true;
+						  CheckMenuItem(GetMenu( GetParent( hWnd ) ), 
+							  ID_WELLS_DRAW_ID_KT,
+							  MF_BYCOMMAND | MF_CHECKED);	
+					  }
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
+					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
+					  pSurfDoc->Draw();
+					  //====== Перерисовываем Вид с учетом изменений
+					  RECT rect;
+					  GetClientRect(hWnd,&rect);
+					  InvalidateRect(hWnd,&rect, true);
+				  }
+				  break;
 			  case ID_SURFVIEW_PERSPECTIVE:
 				  {
 					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
@@ -16753,7 +16779,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						long id_surf = pSurfDoc->GetIDSurfForNewGridDataOrSurface();
 						BYTE podoshva = 0; long id_ige = -1;
 #if FAST_GRID_LOADING
-						pSurfDoc->AddSurf(id_surf, podoshva, zflag, id_ige, pGrid, color);
+						pSurfDoc->AddSurf(id_surf, podoshva, id_ige, zflag, pGrid, color);
 #else
 						pSurfDoc->AddSurf(id_surf, podoshva, zflag, id_ige, pCGrid, color);
 #endif

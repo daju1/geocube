@@ -31,6 +31,7 @@
 #include "../../array/src/matrixes.h"
 #include "../../wintools/src/project.h"
 #include "../../lab/lab/labdoc.h"
+#include "../../wintools/src/listfun.h"
 
 
 #include "../surfer_connect/mysurfer.h"
@@ -441,7 +442,7 @@ void SurfDoc::LoadSurfEngGeoElementMappingFile()
 				kgs.push_back(key_grid("0", "0")); //relief
 				*/
 			}
-		}					  
+		}
 	}
 }
 /*void SurfDoc::PrintSurfEngGeoElementMapping()
@@ -2073,11 +2074,9 @@ void SurfDoc::AddCutLine(CPoint3* pts, int len, COLORREF color )
 
 size_t SurfDoc::AddSurf(long id_surf, BYTE podoshva, int zflag, vdouble &x, vdouble &y, vdouble &z)
 {
-printf("SurfDoc::AddSurf(int zflag, vdouble &x, vdouble &y, vdouble &z)\n");
 	vdouble visible;
 	visible.resize(x.Length(),1.0);
 	return AddSurf(id_surf, podoshva, zflag, x,y,z,visible );
-printf("SurfDoc::AddSurf(int zflag, vdouble &x, vdouble &y, vdouble &z) end\n");
 }
 size_t SurfDoc::AddSurf(long id_surf, BYTE podoshva, int zflag, vdouble &x, vdouble &y, vdouble &z, vdouble& visible )
 {
@@ -2111,29 +2110,30 @@ bool FindWellID(LPDRILLSDLGDATA lpDrillsDlgMem, vector<vector<cell> >::iterator 
 		cell temp = *iter_cell;
 		switch (*iter_types_col)
 		{
-		case 0:// this colomn not used
+		case WELL_COLOMN_TYPE_NOT_USED:// this colomn not used
 			break;
-		case 1: //well ID value
+		case WELL_COLOMN_TYPE_WELL_ID: //well ID value
 			well_id = temp.str;
 			well_id_found = true;
 			break;
-		case 2://X
+		case WELL_COLOMN_TYPE_X://X
 			break;
-		case 3://Y
+		case WELL_COLOMN_TYPE_Y://Y
 			break;
-		case 4://ustje altitude
+		case WELL_COLOMN_TYPE_USTJE_ALT://ustje altitude
 			break;
-		case 5://sloi podoshva altitude WellColomn * w_colomn = this->AddWellColomn(WellElement::type::IGE_podoshva);w_colomn->check_draw = true;w_colomn->draw_width = 4.f;
-		case 6://sloi podoshva glubina
+		case WELL_COLOMN_TYPE_SLOI_PODOSHVA_ALT://sloi podoshva altitude WellColomn * w_colomn = this->AddWellColomn(WellElement::type::IGE_podoshva);w_colomn->check_draw = true;w_colomn->draw_width = 4.f;
+		case WELL_COLOMN_TYPE_SLOI_PODOSHVA_GLUBINA://sloi podoshva glubina
+		case WELL_COLOMN_TYPE_SLOI_MOSCHNOST:
 			break;
-		case 7://zaboj altitude
+		case WELL_COLOMN_TYPE_ZABOJ_ALTITUDE://zaboj altitude
 			break;
-		case 8://zaboj glubina
+		case WELL_COLOMN_TYPE_ZABOJ_GLUBINA://zaboj glubina
 			break;
-		case 9:// karotazh
+		case WELL_COLOMN_TYPE_KAROTAZH:// karotazh
 			break;
-		case 10: //WellElement::type::hydro_projavlenie
-		case 11: //WellElement::type::hydro_projavlenie
+		case WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_UST: //WellElement::type::hydro_projavlenie
+		case WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_POJAV: //WellElement::type::hydro_projavlenie
 			break;
 		}
 	}
@@ -2157,29 +2157,30 @@ void SurfDoc::AddWells(LPDRILLSDLGDATA lpDrillsDlgMem, bool fill_well_colomn, bo
 		{
 			switch (*iter_types_col)
 			{
-			case 0:// this colomn not used
+			case WELL_COLOMN_TYPE_NOT_USED:// this colomn not used
 				break;
-			case 1: //well ID value
+			case WELL_COLOMN_TYPE_WELL_ID: //well ID value
 				break;
-			case 2://X
+			case WELL_COLOMN_TYPE_X://X
 				break;
-			case 3://Y
+			case WELL_COLOMN_TYPE_Y://Y
 				break;
-			case 4://ustje altitude
+			case WELL_COLOMN_TYPE_USTJE_ALT://ustje altitude
 				break;
-			case 5://sloi podoshva altitude WellColomn * w_colomn = this->AddWellColomn(WellElement::type::IGE_podoshva);w_colomn->check_draw = true;w_colomn->draw_width = 4.f;
-			case 6://sloi podoshva glubina
-				podoshva = true;				
+			case WELL_COLOMN_TYPE_SLOI_PODOSHVA_ALT://sloi podoshva altitude WellColomn * w_colomn = this->AddWellColomn(WellElement::type::IGE_podoshva);w_colomn->check_draw = true;w_colomn->draw_width = 4.f;
+			case WELL_COLOMN_TYPE_SLOI_PODOSHVA_GLUBINA://sloi podoshva glubina
+			case WELL_COLOMN_TYPE_SLOI_MOSCHNOST:
+				podoshva = true;
 				break;
-			case 7://zaboj altitude
+			case WELL_COLOMN_TYPE_ZABOJ_ALTITUDE://zaboj altitude
 				break;
-			case 8://zaboj glubina
+			case WELL_COLOMN_TYPE_ZABOJ_GLUBINA://zaboj glubina
 				break;
-			case 9:// karotazh
+			case WELL_COLOMN_TYPE_KAROTAZH:// karotazh
 				break;
-			case 10: //WellElement::type::hydro_projavlenie
-			case 11: //WellElement::type::hydro_projavlenie
-				hydro = true;				
+			case WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_UST: //WellElement::type::hydro_projavlenie
+			case WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_POJAV: //WellElement::type::hydro_projavlenie
+				hydro = true;
 				break;
 			}
 		}
@@ -2193,7 +2194,7 @@ void SurfDoc::AddWells(LPDRILLSDLGDATA lpDrillsDlgMem, bool fill_well_colomn, bo
 		if (hydro) wdli_hydro = AddWellsDraw(WellElement::type::hydro_projavlenie, true, 60.f, true, wells_draw_list_item::draw_mode_2d::both);
 	}
 
-	for ( 
+	for (
 		Iter_vect_cell = lpDrillsDlgMem->pdrills->begin(), check_iter = lpDrillsDlgMem->checking_of_rows->begin(); 
 		Iter_vect_cell != lpDrillsDlgMem->pdrills->end() && check_iter != lpDrillsDlgMem->checking_of_rows->end(); 
 	Iter_vect_cell++, check_iter++)
@@ -3055,7 +3056,22 @@ Well_3D * SurfDoc::FindWell(const char * well_id)
 	{
 		do
 		{
-			if ( strcmp(this->m_drills.GetCurrentMsg().GetIDString(), well_id)  == 0)
+			const char * id = this->m_drills.GetCurrentMsg().GetIDString();
+			const char * p = id;
+			size_t m = strlen(well_id);
+			size_t n = strlen(id);
+			const char * p0 = strchr (id, '\"');
+			const char * p1 = strrchr (id, '\"');
+			if (p0)
+			{
+				++p;
+				--n;
+			}
+			if (p1)
+			{
+				--n;
+			}
+			if ( m == n && strncmp(p, well_id, n)  == 0)
 			{
 				found = &this->m_drills.GetCurrentMsg();
 				break;
@@ -14778,7 +14794,7 @@ void SurfDoc::NoBlank(bool toClearBlankLines)
 		do
 		{
 			if (m_surfaces.GetCurrentMsg().m_bChecked)
-			{	                
+			{
 				m_surfaces.GetCurrentMsg().NoBlank();
 			}
 		}
@@ -14789,7 +14805,7 @@ void SurfDoc::NoBlank(bool toClearBlankLines)
 		do
 		{
 			if (m_faults.GetCurrentMsg().m_bChecked)
-			{	                
+			{
 				m_faults.GetCurrentMsg().NoBlank();
 			}
 		}

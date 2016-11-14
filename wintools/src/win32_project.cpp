@@ -585,6 +585,11 @@ prj->Message("sorry, this is under construction now...");
 	}
 }
 #endif
+void win_project::popup_SelectAllEmptyWells(HWND widget, void * data)
+{
+	win_graphics_view::GetGV(widget)->prj->SelectAllEmptyWells();
+}
+
 void win_project::popup_SelectAll(HWND widget, void * data)
 {
 	win_graphics_view::GetGV(widget)->prj->SelectAll();

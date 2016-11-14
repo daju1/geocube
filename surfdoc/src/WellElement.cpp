@@ -963,6 +963,10 @@ void WellColomn::PrintfProperties(vector<fmtstr> & text)
 	text.push_back(fmtstr(str, NULL, false, true));
 	sprintf(str, "\"%s\"", WellElement::WellElementTypeToString(this->w_type));
 	text.push_back(fmtstr(str, NULL, true, true));
+
+	sprintf(str, "GetWellElementSize() %d", this->GetWellElementSize());
+	text.push_back(fmtstr(str, NULL, false, true));
+
 	
 	for (vector<WellElement*>::iterator it = this->well_elements.begin();
 		it != this->well_elements.end(); it++)
@@ -3631,10 +3635,23 @@ void WellColomn::SaveIGEToDB(long ID_KT, double ustje_z)
 					{
 						CString s;
 						s.Format("Warning H0 %f == H1 %f\nID_KT = %d IGE = %s", H0, H1, ID_KT, IGE);
-						MessageBox(0, s, "SaveIGEToDB", 0);
+						//MessageBox(0, s, "SaveIGEToDB", 0);
 					}
-					bool bUnEdited = false;
-					this->m_pSurfDoc->GetLabDoc()->AddLito(bUnEdited, this->m_pSurfDoc->Get_ID_OBJ(), ID_KT, IGE, H0, H1);
+               else
+               {
+                  bool bUnEdited = false;
+                  try
+                  {
+                     if (!this->m_pSurfDoc->GetLabDoc()->EditLito(bUnEdited, this->m_pSurfDoc->Get_ID_OBJ(), ID_KT, IGE, H0, H1))
+                        this->m_pSurfDoc->GetLabDoc()->AddLito(bUnEdited, this->m_pSurfDoc->Get_ID_OBJ(), ID_KT, IGE, H0, H1);
+                  }
+                  catch(...)
+                  {
+                     CString s;
+                     s.Format("Exception H0 %f == H1 %f\nID_KT = %d IGE = %s", H0, H1, ID_KT, IGE);
+                     MessageBox(0, s, "SaveIGEToDB", 0);
+                  }
+               }
 				}
 			}
 		}
@@ -3663,8 +3680,21 @@ void WellColomn::SaveLitoToDB(long ID_KT, double ustje_z)
 						s.Format("Warning H0 %f == H1 %f\nID_KT = %d IGE = %s", H0, H1, ID_KT, IGE);
 						MessageBox(0, s, "SaveLitoToDB", 0);
 					}
-					bool bUnEdited = true;
-					this->m_pSurfDoc->GetLabDoc()->AddLito(bUnEdited, this->m_pSurfDoc->Get_ID_OBJ(), ID_KT, IGE, H0, H1);
+               else
+               {
+                  bool bUnEdited = true;
+                  try
+                  {
+                     if (!this->m_pSurfDoc->GetLabDoc()->EditLito(bUnEdited, this->m_pSurfDoc->Get_ID_OBJ(), ID_KT, IGE, H0, H1))
+                        this->m_pSurfDoc->GetLabDoc()->AddLito(bUnEdited, this->m_pSurfDoc->Get_ID_OBJ(), ID_KT, IGE, H0, H1);
+                  }
+                  catch(...)
+                  {
+                     CString s;
+                     s.Format("Exception H0 %f == H1 %f\nID_KT = %d IGE = %s", H0, H1, ID_KT, IGE);
+                     MessageBox(0, s, "SaveIGEToDB", 0);
+                  }
+               }
 				}
 			}
 		}

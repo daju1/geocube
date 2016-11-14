@@ -109,6 +109,7 @@ public:
 
 	long AddKT(long ID_OBJ, long ID_TYP, const char * nazva, double X, double Y, double Z);
 	bool ClearLito(bool bUnEdited, long ID_OBJ, long ID_KT);
+	bool EditLito(bool bUnEdited, long ID_OBJ, long ID_KT, CString IGE, double H0, double H1);
 	bool AddLito(bool bUnEdited, long ID_OBJ, long ID_KT, CString IGE, double H0, double H1);
 	bool EditLito(long ID_OBJ, long ID_KT, double key_H0, double H0, double H1, bool edit_H0, bool edit_H1);
 

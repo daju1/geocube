@@ -1429,7 +1429,7 @@ bool BlnProfile3D::IsSelected(CPoint3 selected_view_pt,
 
 	if(this->m_plane.IsSelected(
 		selected_view_pt, search_radius, ws	))
-	{				
+	{
 		return true;
 	}
 
@@ -2277,7 +2277,7 @@ char * SelectNameFromPath(const char * path, char * name)
 	char * p1 = strrchr(name,'\\');
 	char * p2 = strrchr(name,'/');
 	if (p1 && !p2)
-		p = p1+1;			
+		p = p1+1;
 	else if (!p1 && p2)
 		p = p2+1;
 	else if (p1 && p2)
@@ -2299,7 +2299,7 @@ void ReplaceSymbols(const char * name, const char in, const char out)
 
 void PrintDoProfileScript(FILE * bas)
 {
-	if (bas)	
+	if (bas)
 	{
 		fprintf(bas, "Sub DoProfile( directory As String, profilename As String, filename_lvl As String,  filenames_grd() As String, useXLimits As Boolean, xMin As Double, xMax As Double)\n");
 		fprintf(bas, "\t'Declares SurferApp as an object\n");
@@ -2409,7 +2409,7 @@ void PrintProfileScript(FILE * bas, const char * outdir, char * _prof, vector<st
 
 	//sprintf(script_fn, "%s\\%s.bas\0", script_dir, _prof);
 	//FILE * bas = fopen(script_fn, "wt");
-	if (bas)	
+	if (bas)
 	{
 		fprintf(bas, "Sub Do_%s (filename_lvl As String)\n", prof_name_in_fun);
 

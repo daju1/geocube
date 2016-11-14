@@ -913,6 +913,7 @@ void griddata_dialog::WriteTempDat()
 					{
 					case 0:
 					case 3:
+					default:
 						{
 							X = this->m_pGridData->m_input_points.GetCurrentMsg().GetFirstDocumentPoint().x;
 							Y = this->m_pGridData->m_input_points.GetCurrentMsg().GetFirstDocumentPoint().y;
@@ -1942,6 +1943,11 @@ bool griddata_dialog::SurferGridData(HWND hDlg, short zflag)
 	VARIANT LocalPolyPower;
 	// TriangleFileName  Variant  optional, name of the file to contain the triangulation - the format is determined by the file name extension
 	VARIANT TriangleFileName;
+
+   // http://www.goldensoftware.com/forum/viewtopic.php?f=23&p=103651
+   //Surf.GridData(OutputFile$, xCol=0, yCol=(ColumnArray(8)-1), 
+   //zCol=SpeciesVar, xMin=0, xMax=16.1, yMin=-6.5, yMax=0, 
+   //GridMethod=1, VarioType1=4,VarioRatio1=4)
 
 	bool res = false;
 
@@ -3210,7 +3216,7 @@ bool GridData::GrDtSaveToDB(BYTE podosva)
 				double Y = this->m_input_points.GetCurrentMsg().GetFirstDocumentPoint().y;
 				double Z = this->m_input_points.GetCurrentMsg().GetFirstDocumentPoint().z;
 				
-				this->m_pSurfDoc->GetLabDoc()->AddGridData(id_obj, id_surf, id_point, X, Y, Z);		
+				this->m_pSurfDoc->GetLabDoc()->AddGridData(id_obj, id_surf, id_point, X, Y, Z);
 			}
 			while(this->m_input_points.IncrementCurrentMsg());
 		}

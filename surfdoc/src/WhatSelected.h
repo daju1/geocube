@@ -33,7 +33,9 @@ public:
 		sel_line, 
 		sel_tria_plane, 
 		sel_quad_plane, 
-		sel_poly_pane};
+		sel_poly_pane,
+		sel_well, 
+	};
 
 	selected_objects_element_type m_selected_objects_element_type;
 	selected_objects_element_type m_what_to_select;

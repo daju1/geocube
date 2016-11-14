@@ -1830,6 +1830,13 @@ void EngineerGeoElement_PrintfProperties(EngineerGeoElement * ob, vector<fmtstr>
 	sprintf(str, "id_umpoz = %d", ob->id_umpoz);
 	text.push_back(fmtstr(str, NULL, true, true));
 
+	sprintf(str, "lith_color = %d %d %d"
+		, GetRValue(ob->GetColor())
+		, GetGValue(ob->GetColor())
+		, GetBValue(ob->GetColor())
+		);
+	text.push_back(fmtstr(str, NULL, true, true));
+
 	sprintf(str, "my_id_key = %d", ob->GetKeyID());
 	text.push_back(fmtstr(str, NULL, true, true));
 

@@ -215,6 +215,7 @@ public:
 	Surface3D (const Surface3D& ob);
 	virtual void PropertiesDialog();
 	COLORREF GetColor(double z);
+	double GridVolume();
 	void DrawQuadsNumbers();
 	Surface3D::Surface3D();
 	Surface3D(SurfDoc * pSurfDoc);
@@ -376,7 +377,7 @@ public:
 	size_t m_N_quad; // число точек для интерполяции по клетке
 	void Cutting(double a, double b, double c, double d, 
 		bool toDrawPoligones, bool positive, 
-		short type_of_cutline, int cutting_number, int surf_number,					  
+		short type_of_cutline, int cutting_number, int surf_number,
 		CPoint2* pt1, CPoint2* pt2 //две точки, 
 		//ограничивающие линию прамолинейного участка ломанного разреза
 		, void * pBrokenPlane, GeoSurface * pGeoSurface, std::vector<std::vector<Poligon3D *> > * blank_polygon_matrix,
@@ -417,7 +418,7 @@ public:
 							double minimum_z,
 							double maximum_z,
 							CPoint3* start_point_of_line,
-							CPoint3* finish_point_of_line,							
+							CPoint3* finish_point_of_line,
 							bool toDrawPolygon, 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
 							Poligon3D * & blank_polygon
@@ -441,7 +442,7 @@ public:
 						std::vector<std::vector<Poligon3D *> > * blank_polygon_matrix
 #else
 						ObjectList * blank_polygones_ObjectList,
-						vect<Poligon3D> * blank_polygones	
+						vect<Poligon3D> * blank_polygones
 #endif
 						);
 	void NoBlank(void);

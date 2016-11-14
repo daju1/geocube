@@ -706,6 +706,7 @@ BOOL CALLBACK DlgProcDrillsList(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
 
 				if (sel == 9 || sel == 5 || sel == 6)
 				{
+#if 0
 					for (unsigned int c = icol+1; c < cols; c++)
 					{	
 						HDITEM hdm; 
@@ -722,6 +723,7 @@ BOOL CALLBACK DlgProcDrillsList(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
 
 						SendMessage(hwndComboBox, CB_SETCURSEL, sel, 0);
 					}
+#endif
 				}
 			}
 			break; 
@@ -992,7 +994,7 @@ BOOL CALLBACK DlgProcDrillsList(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
 				//Получаем дескриптор заголовка
 				HWND hwndHD = ListView_GetHeader(hList); 
 				for (int c = 0; c < cols; c++)
-				{	
+				{
 					HDITEM hdm; 
 					hdm.mask=HDI_LPARAM; 
 					
@@ -1122,7 +1124,7 @@ BOOL CALLBACK DlgProcDrillsList(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
 							lpDrillsDlgMem->types_of_colomns->operator [](c) = sel;
 
 							coldata->color = color;
-							lpDrillsDlgMem->colors_of_sloi->operator [](c) = coldata->color;						
+							lpDrillsDlgMem->colors_of_sloi->operator [](c) = coldata->color;
 
 						}
 					}
@@ -1365,10 +1367,10 @@ BOOL InitListViewColumns(HWND hWndListView, vector<string> * headers, bool add_c
 
 			HWND hWndComboBox = CreateWindow ("COMBOBOX", "", 
 				WS_CHILD | WS_TABSTOP | WS_VISIBLE | CBS_DROPDOWNLIST, 
-				ComboBoxRect.left, 
-				ComboBoxRect.top, 
-				ComboBoxRect.right, 
-				ComboBoxRect.bottom,			
+				ComboBoxRect.left,
+				ComboBoxRect.top,
+				ComboBoxRect.right,
+				ComboBoxRect.bottom,
 				hwndHD, 
 				(HMENU)iCol, //IDCOMBO,
 				hInst, NULL); 
@@ -1388,6 +1390,7 @@ BOOL InitListViewColumns(HWND hWndListView, vector<string> * headers, bool add_c
 			SendMessage(hWndComboBox, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)"Karotazh");
 			SendMessage(hWndComboBox, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)"hydro ust");
 			SendMessage(hWndComboBox, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)"hydro pojavl");
+			SendMessage(hWndComboBox, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)"sloi moschn");
 			SendMessage(hWndComboBox, CB_SETCURSEL, 0, 0);
 
 			coldata->hwndComboBox = hWndComboBox;

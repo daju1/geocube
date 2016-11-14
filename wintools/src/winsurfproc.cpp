@@ -517,6 +517,26 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 					//######################################################
 				}
 				break;
+
+
+			case ID_SELECT_SELECTALL_EMPTY_WELLS:
+				{
+					//######################################################
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					if (woglv)
+					{
+						//woglv->RealizeHandler(hWnd, NULL);
+						project * prj = woglv->GetProject();
+						win_project * w_prj = dynamic_cast<win_project *>(prj);
+						if (w_prj)
+						{
+							w_prj->popup_SelectAllEmptyWells(hWnd, NULL);
+						}
+					}
+					//######################################################
+				}
+				break;
+
 			case ID_SELECT_SELECTNONE:
 				{
 					//######################################################

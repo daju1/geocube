@@ -60,6 +60,22 @@ typedef struct
 	COLORREF color;
 } COLOMNDATA, *LPCOLOMNDATA;
 
+enum
+{
+   WELL_COLOMN_TYPE_NOT_USED = 0,// this colomn not used
+   WELL_COLOMN_TYPE_WELL_ID = 1, //well ID value
+   WELL_COLOMN_TYPE_X = 2, //X
+   WELL_COLOMN_TYPE_Y = 3, //Y
+   WELL_COLOMN_TYPE_USTJE_ALT = 4, //ustje altitude
+   WELL_COLOMN_TYPE_SLOI_PODOSHVA_ALT = 5, //sloi podoshva altitude
+   WELL_COLOMN_TYPE_SLOI_PODOSHVA_GLUBINA = 6, //sloi podoshva glubina
+   WELL_COLOMN_TYPE_SLOI_MOSCHNOST = 12, //sloi podoshva glubina
+   WELL_COLOMN_TYPE_ZABOJ_ALTITUDE = 7, //zaboj altitude
+   WELL_COLOMN_TYPE_ZABOJ_GLUBINA = 8, //zaboj glubina
+   WELL_COLOMN_TYPE_KAROTAZH = 9, //karotazh
+   WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_UST = 10,//WellElement::type::hydro_projavlenie
+   WELL_COLOMN_TYPE_HYDRO_PROJAVLENIE_POJAV = 11,//WellElement::type::hydro_projavlenie
+};
 
 #define XBITMAP 16 
 #define YBITMAP 16 

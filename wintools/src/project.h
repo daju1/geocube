@@ -265,6 +265,8 @@ class project : public SurfDoc
 	const char * GetType(void);
 	color_mode * GetDefaultColorMode(void);
 	
+	void SelectAllEmptyWells(void);
+
 	void SelectAll(void);
 	void SelectNone(void);
 	void InvertSelection(void);
