@@ -12234,6 +12234,30 @@ static HTREEITEM hCurrentTreeItem;
 				}
 				break;
 
+			case ID_TREE_OBJECTLISTDELETECHECKED:
+				{
+					if(hCurrentTreeItem)
+					{
+						LPARAM lParam2 = TreeView_GetLParam(hwndTV, hCurrentTreeItem);
+						Object * pObject = reinterpret_cast<Object *> (lParam2);
+						ObjectList * pObjectList = dynamic_cast<ObjectList *>(pObject);
+						if(pObjectList && pObjectList->DeleteChecked())
+						{
+							/*LONG_PTR userdata = GetWindowLongPtr(hWnd,GWLP_USERDATA);
+							win_project* pwin_project = (win_project*)userdata;
+							
+							SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(pwin_project); // from win_graphics_view::GetProject()
+							pSurfDoc->ZoomView();
+							pSurfDoc->Draw();*/
+
+							RECT rect;
+							GetClientRect(hSurfWnd,&rect);
+							InvalidateRect(hSurfWnd,&rect, true);
+						}
+					}
+				}
+				break;
+
 			case ID_TREE_COLORDIALOG:
 				{
 					if(hCurrentTreeItem)

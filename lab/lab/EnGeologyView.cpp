@@ -68,6 +68,7 @@
 
 
 #include "../../surfdoc/src/wellelement.h"
+#include "logger/Logger.h"
 
 
 #ifdef _DEBUG
@@ -731,6 +732,7 @@ bool CEnGeologyView::DefineZoom(long ID_OBJ)
 void CEnGeologyView::ObjectsInsertto3d() 
 {
 	int nItem = this->GetObjectItem();
+   INFOFMT("CEnGeologyView::ObjectsInsertto3d nItem = %d", % nItem);
 
 	if (nItem > -1)
 	{
@@ -804,6 +806,7 @@ void CEnGeologyView::ObjectsInsertto3d()
 				if (hydro) wdli_hydro = this->GetDocument()->dll_w_project->AddWellsDraw(WellElement::type::hydro_projavlenie, true, 60.f, true, draw_mode_2d_both);
 			}
 
+         INFO("load wells");
 
 			//Загрузка скважин
 			ATable * ObjectsTable = this->GetDocument()->m_tables[table_key_Objects];
@@ -823,6 +826,7 @@ void CEnGeologyView::ObjectsInsertto3d()
 
 					where.Format("%s = %d", fi.m_strName, id_obj);
 					where.Format("ID_OBJ = %d", id_obj);
+               INFOFMT("where = %s", % (const char *)where);
 
 					//AfxMessageBox(where); // "ID_OBJ = 2"
 					GetObjectName(&this->GetDocument()->m_database, id_obj, contract, object_name);
@@ -831,25 +835,30 @@ void CEnGeologyView::ObjectsInsertto3d()
 					CString order_by;
 					order_by.Format("ID_TYP, ID_KT, DTBUR");
 					order_by.Format("NAZVA");
+               INFOFMT("order_by = %s", % (const char *)order_by);
 
 					this->m_DBTableKT.m_wdli_podoshva_lito = wdli_podoshva_lito;
 					this->m_DBTableKT.m_wdli_podoshva_ige = wdli_podoshva_ige;
 					this->m_DBTableKT.m_wdli_hydro = wdli_hydro;
 					
-				
+               INFO("loading KT");
 					this->m_DBTableKT.Enum(where, order_by); 
 					//this->lab_doc->dll_w_project->AddWell(id_kt, nazva, kt_idtyp, X, Y, Z, Z, id_bur, d_bur, dtbur.GetBuffer(dtbur.GetLength()));
 
 
 					if (this->GetDocument()->dll_w_project)
 					{
+                  INFO("pre DrawWells");
 						if(to_draw) this->GetDocument()->dll_w_project->DrawWells();
+                  INFO("post DrawWells");
 					}
 				}
 			}
 
+
 			if (this->GetDocument()->dll_w_project)
 			{
+            INFO("pre load id_obj");
 				this->GetDocument()->dll_w_project->Set_ID_OBJ(id_obj);
 			}
 
@@ -864,7 +873,9 @@ void CEnGeologyView::ObjectsInsertto3d()
 
 				if (this->GetDocument()->dll_w_project)
 				{
+               INFO("pre ApplyGridData()");
 					this->GetDocument()->dll_w_project->ApplyGridData();
+               INFO("post ApplyGridData()");
 				}
 
 				//гриддату мы загрузили перед лито колонкой,
@@ -893,7 +904,9 @@ void CEnGeologyView::ObjectsInsertto3d()
 
 			if (this->GetDocument()->dll_w_project)
 			{
+            INFO("pre ApplyLito()");
 				this->GetDocument()->dll_w_project->ApplyLito();
+            INFO("post ApplyLito()");
 			}
 
 			this->m_DBTableVoda.Enum(where, order_by);
@@ -929,17 +942,22 @@ void CEnGeologyView::ObjectsInsertto3d()
 				{
 					//имена поверхностей прописываем в списках перечисления поверхностей
 					//ищем по построенным поверхностям
+               INFO("pre ApplySurfacesOrder()");
 					this->GetDocument()->dll_w_project->ApplySurfacesOrder();
+               INFO("post ApplySurfacesOrder()");
 				}
 
 				// обрезаем поверхности в соответствие с пордком автобланкования
 				if (this->GetDocument()->dll_w_project)
 				{
+               INFO("pre SurfacesAutoBlank()");
 					this->GetDocument()->dll_w_project->SurfacesAutoBlank();
+               INFO("post SurfacesAutoBlank()");
 				}
 			}
 			// загрузка колонки лабораторных анализов
 
+         INFO("LaboratoryAnalizes_FromDB");
 
 			if (this->GetDocument()->dll_w_project)
 			{
@@ -1063,12 +1081,15 @@ void CEnGeologyView::ObjectsInsertto3d()
 
 			if (this->GetDocument()->dll_w_project)
 			{
+            INFO("pre AfterExportFromDB()");
 				this->GetDocument()->dll_w_project->AfterExportFromDB(_pressure_interval_01_02_0);
+            INFO("post AfterExportFromDB()");
 			}
 
 			m_nObjectItem = nItem;
 		}
 	}
+   INFO("end of ObjectsInsertto3d()");
 }
 
 void CEnGeologyView::OnFileNewObject() 
@@ -2425,7 +2446,7 @@ bool PrintProcessNameAndID_and_TerminateExcel( DWORD processID )
     printf( "%s (Process ID: %u)\n", szProcessName, processID );
 
 	bool res = false;
-	if (!strnicmp(szProcessName, "Excel.exe", 9))
+	if (!_strnicmp(szProcessName, "Excel.exe", 9))
 	{
 		TerminateProcess(hProcess, 0);
 		res = true;

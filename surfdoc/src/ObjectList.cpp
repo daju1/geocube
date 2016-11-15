@@ -176,6 +176,206 @@ bool ObjectList::SaveAs()
 	}
 	return status;
 }
+bool ObjectList::DeleteChecked()
+{
+	Object * parent = this->GetParent();
+	void * pContainer;
+	Object::container_type type_of_container;
+
+	pContainer = this->GetContainer();
+	type_of_container = this->GetContainerType();
+	vector<Object*>::iterator it = oblist.begin();
+
+
+	if (it != oblist.end() && (*it))
+	{
+		Object::object_type ob_object_type = (*it)->GetObjectType();
+		char str[1024];
+		sprintf(str, "Вы действительно хотите удалить включенные объекты %s у родителя %s \"%s\"?", 
+			Object::ObjectTypeToString(ob_object_type),
+			parent != NULL ? Object::ObjectTypeToString(parent->GetObjectType()) : "",
+			parent != NULL ? parent->GetName().c_str() : "");
+
+		if (IDNO == MessageBox(0, str, "ObjectList::DeleteChecked()", MB_YESNO))
+		{
+			return false;
+		}
+		if(type_of_container == Object::container_type::container_vect)
+		{
+			switch(ob_object_type)
+			{
+			case object_type::object_list:
+				DeletingChecked_from_vect<ObjectList>(
+					reinterpret_cast<vect<ObjectList>*>(pContainer), 
+					parent);
+				return true;
+
+			case object_type::thepoint3d:
+				DeletingChecked_from_vect<ThePoint3D>(
+					reinterpret_cast<vect<ThePoint3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::line3d:
+				if(this->m_pSurfDoc) this->m_pSurfDoc->SetLineForDraw(NULL); 
+				DeletingChecked_from_vect<Line3D>(
+					reinterpret_cast<vect<Line3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::inter_wells_line_3d:
+				DeletingChecked_from_vect<InterWellsLine3D>(
+					reinterpret_cast<vect<InterWellsLine3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::surface3d:
+				DeletingChecked_from_vect<Surface3D>(
+					reinterpret_cast<vect<Surface3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::cube4d:
+				DeletingChecked_from_vect<Cube4D>(
+					reinterpret_cast<vect<Cube4D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::triangle3d:
+				DeletingChecked_from_vect<Triangle3D>(
+					reinterpret_cast<vect<Triangle3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::poligon3d:
+				DeletingChecked_from_vect<Poligon3D>(
+					reinterpret_cast<vect<Poligon3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::sphere3d:
+				DeletingChecked_from_vect<Sphere3D>(
+					reinterpret_cast<vect<Sphere3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::string3d:
+				DeletingChecked_from_vect<String3D>(
+					reinterpret_cast<vect<String3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::well_3d:
+				DeletingChecked_from_vect<Well_3D>(
+					reinterpret_cast<vect<Well_3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::karotazh:
+				DeletingChecked_from_vect<Karotazh>(
+					reinterpret_cast<vect<Karotazh>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::bmp3d:
+				DeletingChecked_from_vect<Bmp3D>(
+					reinterpret_cast<vect<Bmp3D>*>(pContainer), 
+					parent);
+				return true;
+
+			case object_type::bln_profile3d:
+				DeletingChecked_from_vect<BlnProfile3D>(
+					reinterpret_cast<vect<BlnProfile3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::bln_profile_plane3d:
+				DeletingChecked_from_vect<BlnProfilePlane3D>(
+					reinterpret_cast<vect<BlnProfilePlane3D>*>(pContainer), 
+					parent);
+				return true;
+
+			case object_type::broken_plane3d:
+				DeletingChecked_from_vect<BrokenPlane3D>(
+					reinterpret_cast<vect<BrokenPlane3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::broken_line3d:
+				DeletingChecked_from_vect<BrokenLine3D>(
+					reinterpret_cast<vect<BrokenLine3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::broken_poligon3d:
+				DeletingChecked_from_vect<BrokenPoligon3D>(
+					reinterpret_cast<vect<BrokenPoligon3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::broken_poligon_3d:
+				DeletingChecked_from_vect<BrokenPoligon_3D>(
+					reinterpret_cast<vect<BrokenPoligon_3D>*>(pContainer), 
+					parent);
+				return true;
+
+			case object_type::grid_profile3d:
+				DeletingChecked_from_vect<GridProfile3D>(
+					reinterpret_cast<vect<GridProfile3D>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::triangulated_grid3d:
+				DeletingChecked_from_vect<TriangulatedGrid3D>(
+					reinterpret_cast<vect<TriangulatedGrid3D>*>(pContainer), 
+					parent);
+				return true;
+
+			case object_type::geo_surface:
+				DeletingChecked_from_vect<GeoSurface>(
+					reinterpret_cast<vect<GeoSurface>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::geo_catch:
+				DeletingChecked_from_vect<GeoCatch>(
+					reinterpret_cast<vect<GeoCatch>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::grid_data:
+				if(this->m_pSurfDoc) this->m_pSurfDoc->SetGridDataForDraw(NULL); 
+				DeletingChecked_from_vect<GridData>(
+					reinterpret_cast<vect<GridData>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::collection:
+				DeletingChecked_from_vect<Collection>(
+					reinterpret_cast<vect<Collection>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::auto_profile_building:
+				DeletingChecked_from_vect<AutoBuildProfile>(
+					reinterpret_cast<vect<AutoBuildProfile>*>(pContainer), 
+					parent);
+				return true;
+#if DFX_LAYER_FROM_OBJECT
+			case object_type::dfx_layerdata:
+				DeletingChecked_from_vect<dxfLayerData>(
+					reinterpret_cast<vect<dxfLayerData>*>(pContainer), 
+					parent);
+				return true;
+			case object_type::dfx_converter:
+				DeletingChecked_from_vect<dxfConverter>(
+					reinterpret_cast<vect<dxfConverter>*>(pContainer), 
+					parent);
+				return true;
+#endif
+			case object_type::fast_collection:
+				DeletingChecked_from_vect<FastCollection>(
+					reinterpret_cast<vect<FastCollection>*>(pContainer), 
+					parent);
+				return true;
+			/*case object_type::surf_doc:
+				DeletingChecked_from_vect<T>(
+					reinterpret_cast<vect<T>*>(pContainer), 
+					dynamic_cast<T*>(This));
+				pObjectList->Init(*reinterpret_cast<vect<T>*>(pContainer), parent);		
+				return true;*/
+
+			default:
+				{
+					return false;
+				}
+
+			}
+		}
+	}
+	return false;
+}
+
 
 bool ObjectList::DeleteUnchecked()
 {
@@ -380,6 +580,7 @@ bool ObjectList::DeleteUnchecked()
 void ObjectList::FillContextMenu(HMENU& hMenu)
 {
 #if !VIEW_ONLY_VERSION
+	AppendMenu( hMenu, MFT_STRING, ID_TREE_OBJECTLISTDELETECHECKED, "&Delete Checked" );
 	AppendMenu( hMenu, MFT_STRING, ID_TREE_OBJECTLISTDELETEUNCHECKED, "&Delete Unchecked" );
 	AppendMenu( hMenu, MFT_SEPARATOR, 0, NULL );
 #endif /*#if !VIEW_ONLY_VERSION*/

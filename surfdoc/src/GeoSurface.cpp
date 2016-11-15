@@ -7,6 +7,7 @@
 #include ".\geosurface.h"
 #include ".\surfdoc.h"
 #include "winsurftree.h"
+#include "logger/Logger.h"
 
 extern HINSTANCE hInst;								// current instance
 
@@ -1584,6 +1585,7 @@ bool GeoSurface::LoadBlankBln(void)
 }
 bool GeoSurface::BlankAbove(GeoSurface & geo_surf)
 {
+	INFO("BlankAbove()");
 	short type_of_cutline = 4;
 
 	int cutting_number = 0;
@@ -1595,19 +1597,36 @@ bool GeoSurface::BlankAbove(GeoSurface & geo_surf)
 	this->m_surface.Cutting(&geo_surf.m_surface, type_of_cutline, cutting_number, surf_number, toDrawPolygon, positive, 
 		this, 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-		&this->m_blank_polygon_matrix_ObjectList, 0 //&this->m_blank_polygon_matrix
+		&this->m_blank_polygon_matrix_ObjectList
+#if ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+      , 0
+#else
+      , &this->m_blank_polygon_matrix
+#endif
 #else
 		&this->m_blank_polygones_ObjectList, &this->m_blank_polygones
 #endif
 		);
+
 	this->m_surface.CutLine(type_of_cutline, 0, (void *) NULL, *this, surf_number );
 
-	bool result = this->m_surface.BlankAbove(geo_surf.m_surface, &this->m_blank_polygon_matrix);
+	bool result = this->m_surface.BlankAbove(geo_surf.m_surface
+#if ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+      , 0
+#else
+      , &this->m_blank_polygon_matrix
+#endif
+      );
+#if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 	this->m_blank_polygon_matrix_ObjectList.Init2_std_vector_std_vector_ptr(this->m_blank_polygon_matrix, this);
+#endif
+#endif
 	return result;
 }
 bool GeoSurface::BlankUnder(GeoSurface & geo_surf)
 {
+	INFO("BlankUnder()");
 	short type_of_cutline = 4;
 
 	int cutting_number = 0;
@@ -1617,17 +1636,32 @@ bool GeoSurface::BlankUnder(GeoSurface & geo_surf)
 	bool positive = false;
 
 	this->m_surface.Cutting(&geo_surf.m_surface, type_of_cutline, cutting_number, surf_number, toDrawPolygon, positive, 
-		this, 
+		this,
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-		&this->m_blank_polygon_matrix_ObjectList, 0 //&this->m_blank_polygon_matrix
+		&this->m_blank_polygon_matrix_ObjectList
+#if ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+      , 0
+#else
+      , &this->m_blank_polygon_matrix
+#endif
 #else
 		&this->m_blank_polygones_ObjectList, &this->m_blank_polygones
 #endif
 		);
 	this->m_surface.CutLine(type_of_cutline, 0, (void *) NULL, *this, surf_number );
 
-    bool result = this->m_surface.BlankUnder(geo_surf.m_surface, &this->m_blank_polygon_matrix);
+    bool result = this->m_surface.BlankUnder(geo_surf.m_surface
+#if ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+      , 0
+#else
+      , &this->m_blank_polygon_matrix
+#endif
+       );
+#if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 	this->m_blank_polygon_matrix_ObjectList.Init2_std_vector_std_vector_ptr(this->m_blank_polygon_matrix, this);
+#endif
+#endif
 	return result;
 }
 bool GeoSurface::Blank()

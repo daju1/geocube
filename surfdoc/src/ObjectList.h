@@ -289,6 +289,7 @@ public:
 	virtual void CutXYZandDisvisible(int subcube_number, double X, double Y, double Z){}
 	
 	void FillContextMenu(HMENU& hMenu);
+	bool DeleteChecked();
 	bool DeleteUnchecked();
 
 	friend Archive& operator <<(Archive& ar, ObjectList& ob);
@@ -298,10 +299,34 @@ public:
 
 	static SSaveProfData sprData;
 
+template <class T> void DeletingChecked_from_vect(vect<T> * v, Object* parent); 
 template <class T> void DeletingUnchecked_from_vect(vect<T> * v, Object* parent); 
 
 };
 #include "winsurftree.h"
+
+template <class T> void ObjectList::DeletingChecked_from_vect(vect<T> * v, Object* parent) 
+{
+	// удаляем все отключенные и пустые объекты линий бланкования
+	if (v->SetCurrentMsgOnFirst())
+	{
+		do
+		{
+e_start_of_objectlist_cicle:
+			//if (!v->CheckCurrentMsg()) break; // may be continue;??? if will not erase all
+			if (v->GetCurrentMsg().m_bChecked)
+			{
+				if (this->m_pSurfDoc)
+					TreeView_DeleteMyItem(this->m_pSurfDoc->hwndTV, 
+					v->GetCurrentMsg().myTreeItem);
+				if (v->EraseCurrentMsg())
+						goto e_start_of_objectlist_cicle;
+			}
+		}
+		while(v->IncrementCurrentMsg());
+		this->Init(*v, parent);
+	}
+}
 
 template <class T> void ObjectList::DeletingUnchecked_from_vect(vect<T> * v, Object* parent) 
 {
@@ -322,7 +347,7 @@ e_start_of_objectlist_cicle:
 			}
 		}
 		while(v->IncrementCurrentMsg());
-		this->Init(*v, parent);		
+		this->Init(*v, parent);
 	}
 }
 

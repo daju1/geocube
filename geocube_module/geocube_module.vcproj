@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="geocube_module"
 	ProjectGUID="{F945E76B-4C49-4DF8-AC9F-45E945FDA9B9}"
+	RootNamespace="geocube_module"
 	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
@@ -77,11 +78,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="alglib.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib"
 				OutputFile="$(OutDir)/bin/geocube_module.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(OutDir)/lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
 				ProgramDatabaseFile=".\Release/geocube_module.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -173,11 +174,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="alglib.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib"
 				OutputFile="$(OutDir)/bin/geocube_module.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(OutDir)/lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/geocube_module_d.pdb"
 				RandomizedBaseAddress="1"

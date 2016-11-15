@@ -35,6 +35,7 @@
 
 
 #include "../surfer_connect/mysurfer.h"
+#include "logger/Logger.h"
 
 extern int ChooseSurfColor(HWND hwndOwner, COLORREF& color);
 extern void sortrows21(vdouble& x, vdouble& y, vdouble& z);
@@ -14423,7 +14424,7 @@ void SurfDoc::SurfacesFaultsCutlines(void)
 								type_of_cutline, fault_number, surf_number, toDrawPolygon, positive,
 								&m_surfaces.GetCurrentMsg(), 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-								&m_surfaces.GetCurrentMsg().m_blank_polygon_matrix_ObjectList, 
+								&m_surfaces.GetCurrentMsg().m_blank_polygon_matrix_ObjectList,
 								&m_surfaces.GetCurrentMsg().m_blank_polygon_matrix
 #else
 								&m_surfaces.GetCurrentMsg().m_blank_polygones_ObjectList,
@@ -14445,6 +14446,7 @@ void SurfDoc::SurfacesFaultsCutlines(void)
 
 void SurfDoc::SurfacesAutoBlank(void)
 {
+   INFO("SurfacesAutoBlank()");
 	if (!this->m_cube_size.Defined())
 	{
 		MessageBox(0, "Размер куба не был определён в базе\nПоэтому автобланкование поверхностей не было выполнено\nОпределите размерность куба", "SurfDoc::SurfacesAutoBlank", 0);
@@ -14453,6 +14455,7 @@ void SurfDoc::SurfacesAutoBlank(void)
 	{
 		this->NoBlank(false);
 		//this->LoadBlankBln();
+      //INFOFMT("order_by = %s", % (const char *)order_by);
 
 
 
@@ -14515,6 +14518,7 @@ void SurfDoc::SurfacesAutoBlank(void)
 
 
 
+      INFO("SurfacesAutoBlank() return;");
 
 		return;
 

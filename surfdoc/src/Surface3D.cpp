@@ -7010,10 +7010,10 @@ bool Surface3D::Cutting(Surface3D *psurface,
 					  short type_of_cutline, int cutting_number, int surf_number, 
 					  bool toDrawPolygon, bool positive, GeoSurface * pGeoSurface,
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-					  ObjectList * blank_polygon_matrix_ObjectList, 
+					  ObjectList * blank_polygon_matrix_ObjectList,
 					  std::vector<std::vector<Poligon3D *> > * blank_polygon_matrix
 #else
-					  ObjectList * blank_polygones_ObjectList, 
+					  ObjectList * blank_polygones_ObjectList,
 					  vect<Poligon3D> * blank_polygones	
 #endif
 					  )
@@ -8718,7 +8718,7 @@ void Surface3D::CutTheQuad(
 		vxyz.GetLastVect().GetLastMsg()[quad][i] = vpt3[i];
 #if USE_UNVISIBLE_CUTTING
 		vxyz.GetLastVect().GetLastMsg()[quad][i].bVisible = bvisible;
-#endif		
+#endif
 	}
 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING

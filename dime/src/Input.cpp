@@ -161,7 +161,7 @@ dimeInput::relativePosition()
 {
   assert(this->didOpenFile);
   if (!this->filesize) return 0.0f;
-  return (((float)(lseek(this->fd, 0, SEEK_CUR)-(readbufLen-readbufIndex)))/
+  return (((float)(_lseek(this->fd, 0, SEEK_CUR)-(readbufLen-readbufIndex)))/
 	  ((float)(this->filesize)));
 }
 
@@ -174,9 +174,9 @@ bool
 dimeInput::setFile(const char * const filename)
 {
 #ifdef _WIN32
-  int fd = open(filename, O_RDONLY | O_BINARY);
+  int fd = _open(filename, O_RDONLY | O_BINARY);
 #else
-  int fd = open(filename, O_RDONLY);
+  int fd = _open(filename, O_RDONLY);
 #endif
   //printf("dimeInput::setFile(const char * const filename = %s) fd = %d\n", filename, fd);
   if (fd < 0 || fd <= 3) {
@@ -219,15 +219,15 @@ dimeInput::setFilePointer(const int newfd)
   this->gzfp = gzdopen(this->fd, "rb");
   this->gzeof = false; 
 #else
-  this->fp = fdopen(this->fd, "rb");
+  this->fp = _fdopen(this->fd, "rb");
   ///printf("dimeInput::setFilePointer(const int newfd) fd = %d this->fp = %d \n", this->fd, this->fp);
   if (!this->fp) return false;
   this->didOpenFile = true;
   this->fpeof = false;
 #endif
-  long startpos = lseek(fd, 0, SEEK_CUR);
-  this->filesize = lseek(fd, 0, SEEK_END);
-  lseek(fd, startpos, SEEK_SET);
+  long startpos = _lseek(fd, 0, SEEK_CUR);
+  this->filesize = _lseek(fd, 0, SEEK_END);
+  _lseek(fd, startpos, SEEK_SET);
 
   this->binary = this->checkBinary();
 

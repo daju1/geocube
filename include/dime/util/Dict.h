@@ -39,7 +39,7 @@ class DIME_DLL_API dimeDictEntry
 
 private:
   dimeDictEntry *next;
-  dimeDictEntry(const char * const k, void *v) {key = strdup(k); value = v; };
+  dimeDictEntry(const char * const k, void *v) {key = _strdup(k); value = v; };
   ~dimeDictEntry() {free(key);} 
   char *key;
   void *value;

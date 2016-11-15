@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="lab"
 	ProjectGUID="{4BB62AEF-45E3-4862-A436-C184E719EC8E}"
+	RootNamespace="lab"
 	Keyword="MFCProj"
 	TargetFrameworkVersion="131072"
 	>
@@ -49,7 +50,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -81,11 +82,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib $(NOINHERIT)"
 				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(OutDir)/lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\Debug/lab.pdb"
 				SubSystem="2"
@@ -150,7 +151,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="$(SolutionDir)/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -179,11 +180,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="alglib.lib labdbdoc.lib Psapi.lib surfer_connect.lib acad_connect.lib excel_connect.lib geocube_module.lib tools.lib laboratory.lib surfdoc.lib geometry2d.lib kohonen.lib wintools.lib dime.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib $(NOINHERIT)"
 				OutputFile="$(OutDir)/bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="$(OutDir)/lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
 				ProgramDatabaseFile=".\Release/lab.pdb"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -801,32 +802,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="hlp\lab.hpj"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Making help file..."
-						CommandLine="start /wait hcw /C /E /M &quot;hlp\$(InputName).hpj&quot;&#x0D;&#x0A;if errorlevel 1 goto :Error&#x0D;&#x0A;if not exist &quot;hlp\$(InputName).hlp&quot; goto :Error&#x0D;&#x0A;copy &quot;hlp\$(InputName).hlp&quot; &quot;$(OutDir)&quot;&#x0D;&#x0A;goto :done&#x0D;&#x0A;:Error&#x0D;&#x0A;echo hlp\&quot;$(InputName)&quot;.hpj(1) : error:&#x0D;&#x0A;type &quot;hlp\$(InputName).log&quot;&#x0D;&#x0A;:done&#x0D;&#x0A;"
-						AdditionalDependencies="hlp\AfxCore.rtf;hlp\AfxPrint.rtf;hlp\$(TargetName).hm;"
-						Outputs="$(OutDir)\$(InputName).hlp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Making help file..."
-						CommandLine="start /wait hcw /C /E /M &quot;hlp\$(InputName).hpj&quot;&#x0D;&#x0A;if errorlevel 1 goto :Error&#x0D;&#x0A;if not exist &quot;hlp\$(InputName).hlp&quot; goto :Error&#x0D;&#x0A;copy &quot;hlp\$(InputName).hlp&quot; &quot;$(OutDir)&quot;&#x0D;&#x0A;goto :done&#x0D;&#x0A;:Error&#x0D;&#x0A;echo hlp\&quot;$(InputName)&quot;.hpj(1) : error:&#x0D;&#x0A;type &quot;hlp\$(InputName).log&quot;&#x0D;&#x0A;:done&#x0D;&#x0A;"
-						AdditionalDependencies="hlp\AfxCore.rtf;hlp\AfxPrint.rtf;hlp\$(TargetName).hm;"
-						Outputs="$(OutDir)\$(InputName).hlp"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath="lab.odl"
 				>
 				<FileConfiguration
@@ -1051,6 +1026,10 @@
 						UsePrecompiledHeader="1"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\SysLogManager.cpp"
+				>
 			</File>
 			<File
 				RelativePath=".\tableDoc.cpp"
