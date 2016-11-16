@@ -44,7 +44,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="$(SolutionDir)/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -139,7 +139,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="$(SolutionDir)/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
@@ -212,6 +212,10 @@
 			</File>
 			<File
 				RelativePath=".\SurfCube.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\lab\lab\SysLogManager.cpp"
 				>
 			</File>
 		</Filter>

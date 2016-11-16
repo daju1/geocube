@@ -2589,6 +2589,7 @@ void SurfDoc::ApplySurfacesOrder()
 {
 	//имена поверхностей прописываем в списках перечисления поверхностей
 	//ищем по построенным поверхностям
+   INFO("SurfDoc::ApplySurfacesOrder()");
 
 	
 	for (vector<surface_blank_functions_list_item *>::iterator 
@@ -2628,7 +2629,7 @@ void SurfDoc::ApplySurfacesOrder()
 //			FindIGE((*it)->id_surf);
 		}
 	}
-
+   INFO("SurfDoc::ApplySurfacesOrder() end");
 }
 
 void SurfDoc::SurfaceOrderList_UpdateCheckings()
@@ -14422,13 +14423,15 @@ void SurfDoc::SurfacesFaultsCutlines(void)
 
 							m_surfaces.GetCurrentMsg().m_surface.Cutting(&this->m_faults.GetCurrentMsg().m_surface, 
 								type_of_cutline, fault_number, surf_number, toDrawPolygon, positive,
-								&m_surfaces.GetCurrentMsg(), 
+								&m_surfaces.GetCurrentMsg()
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-								&m_surfaces.GetCurrentMsg().m_blank_polygon_matrix_ObjectList,
-								&m_surfaces.GetCurrentMsg().m_blank_polygon_matrix
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+								, &m_surfaces.GetCurrentMsg().m_blank_polygon_matrix_ObjectList
+								, &m_surfaces.GetCurrentMsg().m_blank_polygon_matrix
+#endif
 #else
-								&m_surfaces.GetCurrentMsg().m_blank_polygones_ObjectList,
-								&m_surfaces.GetCurrentMsg().m_blank_polygones
+								, &m_surfaces.GetCurrentMsg().m_blank_polygones_ObjectList
+								, &m_surfaces.GetCurrentMsg().m_blank_polygones
 #endif								
 								);
 							fault_number++;

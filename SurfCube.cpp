@@ -43,8 +43,61 @@ void test_min_sq_holesski();
 #endif
 #if 1
 
+#include "logger/CrashDumper.h"
+#include "logger/Logger.h"
+#include "logger/ThreadName.h"
+#include "logger/DispatcherFile.h"
+#include "logger/DispatcherConsole.h"
+#include "../../lab/lab/SysLogManager.h"
+
+//#include "SvnRevision.h"
+#define SVN_REVISION_LAST 35
+#define SVN_REVISION_LAST_STR "1.0.0.35 modified"
+#define SVN_REVISION_LOCAL_MODIFICATION 1
+
+void run_log()
+{
+   INFO("SurfCube Running");
+}
+
+void init_logger()
+{
+   // Инициализация имени главного потока
+   Logger::ThreadName  thread_name("Main");
+
+   // Инициализация менеджера папок и имен файлов
+   sys::LogManager::instance();
+
+   // Установка краш-дамппера
+   Logger::CrashDumper crash_dumper(Logger::MINI_DUMP_FULL, SVN_REVISION_LAST, SVN_REVISION_LOCAL_MODIFICATION);
+
+   // Начальная инициализация логера
+   using namespace Logger;
+   Journal::instance().register_dispatcher(DispatcherPtr( new DispatcherFile( sys::LogManager::instance().get_log_file_name().string())));
+
+   //if (TRUE != m_bService)
+      Journal::instance().register_dispatcher(DispatcherPtr( new DispatcherConsole()));
+
+   Journal::instance().set_log_level(Logger::LL_INFO);
+   Journal::instance().start();
+
+   do
+   {
+      //ConfigManager::instance().init(sys::LogManager::instance().get_root_directory() / "config\\dbproxy.ini");
+      //unsigned int log_level = ConfigManager::instance().get_value_int("Debug", "LogLevel", Logger::LL_INFO);
+
+      // Переинициализация логгера
+      //Journal::instance().set_log_level((Logger::LogLevel)log_level);
+
+   } while (0);
+
+   run_log();
+}
+
 int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 {
+	init_logger();
+
 	int nRetCode = 0;
 
 	// initialize MFC and print and error on failure

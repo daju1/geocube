@@ -26,6 +26,58 @@
 #include "./../wintools/src/win32_app.h"
 #include "./../wintools/src/win32_project.h"
 
+#include "logger/CrashDumper.h"
+#include "logger/Logger.h"
+#include "logger/ThreadName.h"
+#include "logger/DispatcherFile.h"
+#include "logger/DispatcherConsole.h"
+#include "../../lab/lab/SysLogManager.h"
+
+//#include "SvnRevision.h"
+#define SVN_REVISION_LAST 35
+#define SVN_REVISION_LAST_STR "1.0.0.35 modified"
+#define SVN_REVISION_LOCAL_MODIFICATION 1
+
+
+void run_log()
+{
+   INFO("Geocube_module Running");
+}
+
+void init_logger()
+{
+   // Инициализация имени главного потока
+   Logger::ThreadName  thread_name("Main");
+
+   // Инициализация менеджера папок и имен файлов
+   sys::LogManager::instance();
+
+   // Установка краш-дамппера
+   Logger::CrashDumper crash_dumper(Logger::MINI_DUMP_FULL, SVN_REVISION_LAST, SVN_REVISION_LOCAL_MODIFICATION);
+
+   // Начальная инициализация логера
+   using namespace Logger;
+   Journal::instance().register_dispatcher(DispatcherPtr( new DispatcherFile( sys::LogManager::instance().get_log_file_name().string())));
+
+   //if (TRUE != m_bService)
+      Journal::instance().register_dispatcher(DispatcherPtr( new DispatcherConsole()));
+
+   Journal::instance().set_log_level(Logger::LL_INFO);
+   Journal::instance().start();
+
+   do
+   {
+      //ConfigManager::instance().init(sys::LogManager::instance().get_root_directory() / "config\\dbproxy.ini");
+      //unsigned int log_level = ConfigManager::instance().get_value_int("Debug", "LogLevel", Logger::LL_INFO);
+
+      // Переинициализация логгера
+      //Journal::instance().set_log_level((Logger::LogLevel)log_level);
+
+   } while (0);
+
+   run_log();
+}
+
 
 // Обеспечить общий доступ к данным для всех приложений, использующих DLL. 
 //....................................
@@ -50,6 +102,7 @@ DllMain(HINSTANCE hInstDLL,
 			  //..................................................
 			  hInst = hInstDLL;
 			  nProcessCount++;
+			  init_logger();
 			  return( TRUE );
 		  }
 		  break;
@@ -832,10 +885,12 @@ void dll_win_project::SurfacesBlankFuntions(/*long id_item, */long id_surf_obj, 
 
 void dll_win_project::ApplySurfacesOrder()
 {
+   INFO("dll_win_project::ApplySurfacesOrder()");
 	if (this->w_project)
 	{
-		this->w_project->ApplySurfacesOrder();	
+		this->w_project->ApplySurfacesOrder();
 	}
+   INFO("post dll_win_project::ApplySurfacesOrder()");
 }
 void dll_win_project::DefineCubeSize(CubeSize & cube_size)
 {
@@ -853,10 +908,12 @@ void dll_win_project::DefineZoom(double zoomCoefXYZ, double zoomCoefXY)
 }
 void dll_win_project::SurfacesAutoBlank()
 {
+   INFO("dll_win_project::SurfacesAutoBlank()");
 	if (this->w_project)
 	{
-		this->w_project->SurfacesAutoBlank();	
+		this->w_project->SurfacesAutoBlank();
 	}
+   INFO("dll_win_project::SurfacesAutoBlank() end");
 }
 void dll_win_project::OnViewPropertywindowwithPlot()
 {

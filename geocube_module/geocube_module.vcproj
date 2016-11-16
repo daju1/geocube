@@ -21,7 +21,7 @@
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			UseOfMFC="0"
+			UseOfMFC="2"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
 			>
@@ -50,7 +50,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="$(SolutionDir)/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GEOCUBE_MODULE_EXPORTS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -83,7 +83,7 @@
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
-				ProgramDatabaseFile=".\Release/geocube_module.pdb"
+				ProgramDatabaseFile="$(OutDir)/bin/geocube_module.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				ImportLibrary="$(OutDir)/lib/geocube_module.lib"
@@ -145,7 +145,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)/include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GEOCUBE_MODULE_EXPORTS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -180,7 +180,7 @@
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile=".\Debug/geocube_module_d.pdb"
+				ProgramDatabaseFile="$(OutDir)/bin/geocube_module.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				ImportLibrary="$(OutDir)/lib/geocube_module.lib"
@@ -267,6 +267,10 @@
 						UsePrecompiledHeader="1"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\lab\lab\SysLogManager.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter

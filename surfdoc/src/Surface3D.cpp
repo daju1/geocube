@@ -17,6 +17,8 @@
 #include <algorithm>
 #include <functional>      // For greater<int>( )
 
+#include "logger/Logger.h"
+
 extern void getNorm(double v1[3], double v2[3], double out[3]);
 //Surface3D * Surface3D::me = NULL;
 //////////////////////////////////////////////////////////////////////
@@ -7008,16 +7010,19 @@ void Surface3D::CutXYZandDisvisible(int subcube_number, double X, double Y, doub
 
 bool Surface3D::Cutting(Surface3D *psurface, 
 					  short type_of_cutline, int cutting_number, int surf_number, 
-					  bool toDrawPolygon, bool positive, GeoSurface * pGeoSurface,
+					  bool toDrawPolygon, bool positive, GeoSurface * pGeoSurface
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-					  ObjectList * blank_polygon_matrix_ObjectList,
-					  std::vector<std::vector<Poligon3D *> > * blank_polygon_matrix
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+					, ObjectList * blank_polygon_matrix_ObjectList
+					, std::vector<std::vector<Poligon3D *> > * blank_polygon_matrix
+#endif
 #else
-					  ObjectList * blank_polygones_ObjectList,
-					  vect<Poligon3D> * blank_polygones	
+					,  ObjectList * blank_polygones_ObjectList
+					,  vect<Poligon3D> * blank_polygones	
 #endif
 					  )
 {
+   INFO("Surface3D::Cutting()");
 	this->m_N_quad = 2;
 	if (!psurface)	
 	{
@@ -7031,7 +7036,9 @@ bool Surface3D::Cutting(Surface3D *psurface,
 	UINT	nx2 = psurface->m_lenx-1,
 			ny2 = psurface->m_leny-1;
 
-	if ( blank_polygon_matrix )
+#if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+if ( blank_polygon_matrix )
 	{
 		(*blank_polygon_matrix).resize(ny);
 		for (int iy = 0; iy < ny; ++iy)
@@ -7039,7 +7046,10 @@ bool Surface3D::Cutting(Surface3D *psurface,
 			(*blank_polygon_matrix)[iy].resize(nx, NULL);
 		}
 	}
+#endif
+#endif
 
+   INFO("Surface3D::Cutting() 1");
 
 	PRIMITIVE_POINTS_PTR(CPoint3) ptd;
 	ptd = this->m_vdPoints PRIMITIVE_POINTS_PTR_BEGIN;
@@ -7110,6 +7120,7 @@ bool Surface3D::Cutting(Surface3D *psurface,
 		iy_finish = ny;
 		ix_finish = nx;
 	}
+   INFO("Surface3D::Cutting() 2");
 
 	//==========================================================
 	//==========================================================
@@ -7156,6 +7167,7 @@ bool Surface3D::Cutting(Surface3D *psurface,
 	temp_surface.m_leny = temp_leny;
 
 	temp_surface.m_zflag = this->m_zflag;
+   INFO("Surface3D::Cutting() 3");
 
 	//====== Цикл прохода по слоям изображения (ось Z)
 	for (UINT row_quad=iy_start;  row_quad<=min(iy_finish+1, ny);  row_quad++)
@@ -7205,7 +7217,7 @@ bool Surface3D::Cutting(Surface3D *psurface,
 						ptk,
 						ptn,
 						A, B, C, D))// output koefficints of square intepolation
-					{								
+					{
 						double X,Y,Z;
 						double r;
 						switch(psurface->m_zflag)
@@ -7218,13 +7230,13 @@ bool Surface3D::Cutting(Surface3D *psurface,
 								r = zi-Z;
 								switch(this->m_zflag)
 								{
-								case 0:                                    
+								case 0:
 									temp_surface.m_vdPoints[it].z = r;
 									break;
-								case 1:                                    
+								case 1:
 									temp_surface.m_vdPoints[it].x = r;
 									break;
-								case 2:                                    
+								case 2:
 									temp_surface.m_vdPoints[it].y = r;
 									break;
 								}
@@ -7238,13 +7250,13 @@ bool Surface3D::Cutting(Surface3D *psurface,
 								r = xi-X;
 								switch(this->m_zflag)
 								{
-								case 0:                                    
+								case 0:
 									temp_surface.m_vdPoints[it].z = r;
 									break;
-								case 1:                                    
+								case 1:
 									temp_surface.m_vdPoints[it].x = r;
 									break;
-								case 2:                                    
+								case 2:
 									temp_surface.m_vdPoints[it].y = r;
 									break;
 								}
@@ -7258,27 +7270,28 @@ bool Surface3D::Cutting(Surface3D *psurface,
 								r = yi-Y;
 								switch(this->m_zflag)
 								{
-								case 0:                                    
+								case 0:
 									temp_surface.m_vdPoints[it].z = r;
 									break;
-								case 1:                                    
+								case 1:
 									temp_surface.m_vdPoints[it].x = r;
 									break;
-								case 2:                                    
+								case 2:
 									temp_surface.m_vdPoints[it].y = r;
 									break;
 								}
 							}
 							break;
-						}				
+						}
 						temp_surface.m_vdPoints[it].bVisible = true;
 					}
 				}
-			}			
+			}
 		}
 	}
 	bool result = false;
 	printf("Cutting temp_surface was built\n");
+   INFO("Surface3D::Cutting() 4");
 
 #if 0
 {	
@@ -8005,11 +8018,14 @@ this->m_pSurfDoc->m_surfaces_ObjectList.Init(this->m_pSurfDoc->m_surfaces,this->
 									minimum_z,
 									maximum_z,
 									start_point_of_line, finish_point_of_line,
-									toDrawPolygon, 
+									toDrawPolygon
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-									(*blank_polygon_matrix)[row_quad][col_quad]
+#if ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 #else
-									blank_polygones
+									, (*blank_polygon_matrix)[row_quad][col_quad]
+#endif
+#else
+									, blank_polygones
 #endif
 									);
 						}
@@ -8025,6 +8041,8 @@ this->m_pSurfDoc->m_surfaces_ObjectList.Init(this->m_pSurfDoc->m_surfaces,this->
 	if (toDrawPolygon && blank_polygones_ObjectList && blank_polygones)
 		blank_polygones_ObjectList->Init(*blank_polygones, pGeoSurface);
 #endif
+   INFO("Surface3D::Cutting() end");
+
 	return result;
 }
 
@@ -8046,11 +8064,13 @@ void Surface3D::CutTheQuad(
 						 double maximum_z,
 						 CPoint3* start_point_of_line,
 						 CPoint3* finish_point_of_line,
-						 bool toDrawPolygon, 
+						 bool toDrawPolygon
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-						 Poligon3D * & blank_polygon
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+						, Poligon3D * & blank_polygon
+#endif
 #else
-						 vect<Poligon3D> * blank_polygones
+						, vect<Poligon3D> * blank_polygones
 #endif
 						 )
 {
@@ -8074,7 +8094,7 @@ void Surface3D::CutTheQuad(
 	}
 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 	if (toDrawPolygon)
 	{
 		blank_polygon = new Poligon3D(this->m_pSurfDoc);
@@ -8114,6 +8134,7 @@ void Surface3D::CutTheQuad(
 			break;
 		}
 	}
+#endif
 #else
 	if (toDrawPolygon && blank_polygones)
 	{
@@ -8195,11 +8216,13 @@ void Surface3D::CutTheQuad(
 					vpt3.push_back(pt);
 					//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 					if (fill_polygon && toDrawPolygon && blank_polygon)
 					{
 						// interpolated points of polygon	
 						blank_polygon->PushBack(pt);
 					}
+#endif
 #else
 					if (fill_polygon && toDrawPolygon && blank_polygones)
 					{
@@ -8238,11 +8261,13 @@ void Surface3D::CutTheQuad(
 					vpt3.push_back(pt);
 					//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 					if (fill_polygon && toDrawPolygon && blank_polygon)
 					{
 						// interpolated points of polygon	
 						blank_polygon->PushBack(pt);
 					}
+#endif
 #else
 					if (fill_polygon && toDrawPolygon && blank_polygones)
 					{
@@ -8284,11 +8309,13 @@ void Surface3D::CutTheQuad(
 				vpt3.push_back(pt);
 				//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 				if (fill_polygon && toDrawPolygon && blank_polygon)
 				{
 					// interpolated points of polygon	
 					blank_polygon->PushBack(pt);
 				}
+#endif
 #else
 				if (fill_polygon && toDrawPolygon && blank_polygones)
 				{
@@ -8329,11 +8356,13 @@ void Surface3D::CutTheQuad(
 				vpt3.push_back(pt);
 				//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 				if (fill_polygon && toDrawPolygon && blank_polygon)
 				{
 					// interpolated points of polygon	
 					blank_polygon->PushBack(pt);
 				}
+#endif
 #else
 				if (fill_polygon && toDrawPolygon && blank_polygones)
 				{
@@ -8373,11 +8402,13 @@ void Surface3D::CutTheQuad(
 				vpt3.push_back(pt);
 				//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 				if (fill_polygon && toDrawPolygon && blank_polygon)
 				{
 					// interpolated points of polygon	
 					blank_polygon->PushBack(pt);
 				}
+#endif
 #else
 				if (fill_polygon && toDrawPolygon && blank_polygones)
 				{
@@ -8422,11 +8453,13 @@ void Surface3D::CutTheQuad(
 					vpt3.push_back(pt);
 					//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 					if (fill_polygon && toDrawPolygon && blank_polygon)
 					{
 						// interpolated points of polygon	
 						blank_polygon->PushBack(pt);
 					}
+#endif
 #else
 					if (fill_polygon && toDrawPolygon && blank_polygones)
 					{
@@ -8465,11 +8498,13 @@ void Surface3D::CutTheQuad(
 					vpt3.push_back(pt);
 					//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 					if (fill_polygon && toDrawPolygon && blank_polygon)
 					{
 						// interpolated points of polygon	
 						blank_polygon->PushBack(pt);
 					}
+#endif
 #else
 					if (fill_polygon && toDrawPolygon && blank_polygones)
 					{
@@ -8511,11 +8546,13 @@ void Surface3D::CutTheQuad(
 				vpt3.push_back(pt);
 				//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 				if (fill_polygon && toDrawPolygon && blank_polygon)
 				{
 					// interpolated points of polygon	
 					blank_polygon->PushBack(pt);
 				}
+#endif
 #else
 				if (fill_polygon && toDrawPolygon && blank_polygones)
 				{
@@ -8556,11 +8593,13 @@ void Surface3D::CutTheQuad(
 				vpt3.push_back(pt);
 				//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 				if (fill_polygon && toDrawPolygon && blank_polygon)
 				{
 					// interpolated points of polygon	
 					blank_polygon->PushBack(pt);
 				}
+#endif
 #else
 				if (fill_polygon && toDrawPolygon && blank_polygones)
 				{
@@ -8601,11 +8640,13 @@ void Surface3D::CutTheQuad(
 				vpt3.push_back(pt);
 				//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 				if (fill_polygon && toDrawPolygon && blank_polygon)
 				{
 					// interpolated points of polygon	
 					blank_polygon->PushBack(pt);
 				}
+#endif
 #else
 				if (fill_polygon && toDrawPolygon && blank_polygones)
 				{
@@ -8651,11 +8692,13 @@ void Surface3D::CutTheQuad(
 					vpt3.push_back(pt);
 					//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 					if (fill_polygon && toDrawPolygon && blank_polygon)
 					{
 						// interpolated points of polygon	
 						blank_polygon->PushBack(pt);
 					}
+#endif
 #else
 					if (fill_polygon && toDrawPolygon && blank_polygones)
 					{
@@ -8694,11 +8737,13 @@ void Surface3D::CutTheQuad(
 					vpt3.push_back(pt);
 					//AddSphere(X,Y,Z,RGB(0,255,0));
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 					if (fill_polygon && toDrawPolygon && blank_polygon)
 					{
 						// interpolated points of polygon	
 						blank_polygon->PushBack(pt);
 					}
+#endif
 #else
 					if (fill_polygon && toDrawPolygon && blank_polygones)
 					{
@@ -8722,6 +8767,7 @@ void Surface3D::CutTheQuad(
 	}
 
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
 	if (toDrawPolygon && blank_polygon)
 	{
 		switch(len)
@@ -8752,6 +8798,7 @@ void Surface3D::CutTheQuad(
 			break;
 		}
 	}
+#endif
 #else
 	if (toDrawPolygon && blank_polygones)
 	{

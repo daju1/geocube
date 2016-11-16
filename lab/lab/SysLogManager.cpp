@@ -8,7 +8,7 @@ namespace sys
    namespace data
    {
       const std::string LOG_DIRECTORY           = "log";
-      const std::string LOG_FILE_NAME           = "stl_filler_log";
+      const std::string LOG_FILE_NAME           = "geo_cube_log";
    }
 
 

@@ -1595,18 +1595,19 @@ bool GeoSurface::BlankAbove(GeoSurface & geo_surf)
 	bool positive = true;
 
 	this->m_surface.Cutting(&geo_surf.m_surface, type_of_cutline, cutting_number, surf_number, toDrawPolygon, positive, 
-		this, 
+		this
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-		&this->m_blank_polygon_matrix_ObjectList
 #if ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
-      , 0
 #else
+		, &this->m_blank_polygon_matrix_ObjectList
       , &this->m_blank_polygon_matrix
 #endif
 #else
-		&this->m_blank_polygones_ObjectList, &this->m_blank_polygones
+		, &this->m_blank_polygones_ObjectList
+		, &this->m_blank_polygones
 #endif
 		);
+	INFO("BlankAbove() pre CutLine()");
 
 	this->m_surface.CutLine(type_of_cutline, 0, (void *) NULL, *this, surf_number );
 
@@ -1622,6 +1623,7 @@ bool GeoSurface::BlankAbove(GeoSurface & geo_surf)
 	this->m_blank_polygon_matrix_ObjectList.Init2_std_vector_std_vector_ptr(this->m_blank_polygon_matrix, this);
 #endif
 #endif
+	INFO("BlankAbove() end");
 	return result;
 }
 bool GeoSurface::BlankUnder(GeoSurface & geo_surf)
@@ -1636,12 +1638,11 @@ bool GeoSurface::BlankUnder(GeoSurface & geo_surf)
 	bool positive = false;
 
 	this->m_surface.Cutting(&geo_surf.m_surface, type_of_cutline, cutting_number, surf_number, toDrawPolygon, positive, 
-		this,
+		this
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-		&this->m_blank_polygon_matrix_ObjectList
 #if ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
-      , 0
 #else
+		, &this->m_blank_polygon_matrix_ObjectList
       , &this->m_blank_polygon_matrix
 #endif
 #else
@@ -2098,11 +2099,13 @@ void GeoSurface::BuildSurfacesCutlines(void)
 
 					this->m_surface.Cutting(&this->m_pSurfDoc->m_faults.GetCurrentMsg().m_surface, 
 						type_of_cutline, fault_number, surf_number, toDrawPolygon, positive,
-						this, 
+						this
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-						&this->m_blank_polygon_matrix_ObjectList, &this->m_blank_polygon_matrix
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+						, &this->m_blank_polygon_matrix_ObjectList, &this->m_blank_polygon_matrix
+#endif
 #else
-						&this->m_blank_polygones_ObjectList, &this->m_blank_polygones
+						, &this->m_blank_polygones_ObjectList, &this->m_blank_polygones
 #endif
 						);
 					fault_number++;
@@ -2123,11 +2126,13 @@ void GeoSurface::BuildSurfacesCutlines(void)
 				{
 					this->m_surface.Cutting(&this->m_pSurfDoc->m_surfaces.GetCurrentMsg().m_surface, 
 						type_of_cutline, fault_number, surf_number, toDrawPolygon, positive,
-						this, 
+						this
 #if USE_BLANK_POLYGON_MATRIX_ON_CUTTING
-						&this->m_blank_polygon_matrix_ObjectList, &this->m_blank_polygon_matrix
+#if !ZERO_BLANK_POLYGON_MATRIX_ON_CUTTING
+						, &this->m_blank_polygon_matrix_ObjectList, &this->m_blank_polygon_matrix
+#endif
 #else
-						&this->m_blank_polygones_ObjectList, &this->m_blank_polygones
+						, &this->m_blank_polygones_ObjectList, &this->m_blank_polygones
 #endif
 						);
 					fault_number++;
