@@ -682,7 +682,7 @@ void SurfDoc::UstjaToReliefGriddata()
 	pGridData->id_umpoz = -1;
 
 	char sname [32];
-	sprintf(sname, "Рельеф");
+	sprintf(sname, "Рельеф из отметок устья скважин");
 
 	pGridData->SetName(sname);
 
@@ -711,7 +711,7 @@ void SurfDoc::LoadReliefGriddata()
 	pGridData->id_umpoz = -1;
 
 	char sname [32];
-	sprintf(sname, "Рельеф");
+	sprintf(sname, "Рельеф загруженный из дат файла");
 
 	pGridData->SetName(sname);
 

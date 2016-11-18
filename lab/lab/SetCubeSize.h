@@ -31,7 +31,8 @@ public:
 	double	m_zSize;
 	//}}AFX_FIELD
 
-	void Init(CubeSize & cube_size);
+	void Init(const CubeSize & cube_size);
+	void InitStruct(CubeSize & cube_size);
 
 
 // Overrides

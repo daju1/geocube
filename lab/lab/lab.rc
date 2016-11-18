@@ -468,6 +468,8 @@ BEGIN
                     WS_VSCROLL | WS_TABSTOP
     CONTROL         "А также набор ИГЭ",IDC_CHECK_ALSO_IGE,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,95,60,81,10
+    CONTROL         "А также CubeSize",IDC_CHECK_ALSO_IGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,95,80,81,10
 END
 
 IDD_DIALOG_PCK2FIZ DIALOG DISCARDABLE  0, 0, 650, 315

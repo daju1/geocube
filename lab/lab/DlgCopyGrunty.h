@@ -30,6 +30,7 @@ public:
 	enum { IDD = IDD_DIALOG_COPY_GRUNTY };
 	CComboBox	m_combo_dest_object;
 	BOOL	m_check_also_ige;
+	BOOL	m_check_also_cube_size;
 	CString	m_edit_source_object;
 	//}}AFX_DATA
 

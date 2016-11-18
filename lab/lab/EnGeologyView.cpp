@@ -2621,93 +2621,93 @@ void CEnGeologyView::OnUpdateKtStatzondSavetodb(CCmdUI* pCmdUI)
 
 void CEnGeologyView::OnKtStatzondDisconnectexcel() 
 {
-	m_excel_stat_zond.DisconnectExcel();	
+	m_excel_stat_zond.DisconnectExcel();
 }
 
 void CEnGeologyView::OnUpdateKtStatzondDisconnectexcel(CCmdUI* pCmdUI) 
 {
-	m_excel_stat_zond.UpdateDisconnectExcel(pCmdUI);	
+	m_excel_stat_zond.UpdateDisconnectExcel(pCmdUI);
 }
 
-void CEnGeologyView::OnKtPaljaLoadformNew() 
+void CEnGeologyView::OnKtPaljaLoadformNew()
 {
-	m_excel_palja.LoadFormNew(m_ObjectNazva);	
-	m_excel_palja.Fill();	
+	m_excel_palja.LoadFormNew(m_ObjectNazva);
+	m_excel_palja.Fill();
 }
 
 void CEnGeologyView::OnUpdateKtPaljaLoadformNew(CCmdUI* pCmdUI) 
 {
-	m_excel_palja.UpdateLoadFormNew(pCmdUI);	
+	m_excel_palja.UpdateLoadFormNew(pCmdUI);
 }
 
-void CEnGeologyView::OnKtPaljaLoadformExisting() 
+void CEnGeologyView::OnKtPaljaLoadformExisting()
 {
-	m_excel_palja.LoadFormExisting();	
+	m_excel_palja.LoadFormExisting();
 }
 
 void CEnGeologyView::OnUpdateKtPaljaLoadformExisting(CCmdUI* pCmdUI) 
 {
-	m_excel_palja.UpdateLoadFormExisting(pCmdUI);	
+	m_excel_palja.UpdateLoadFormExisting(pCmdUI);
 }
 
 void CEnGeologyView::OnKtPaljaFill() 
 {
-	//m_excel_palja.Fill();	
+	//m_excel_palja.Fill();
 }
 
 void CEnGeologyView::OnUpdateKtPaljaFill(CCmdUI* pCmdUI) 
 {
-	m_excel_palja.UpdateFill(pCmdUI, false);	
+	m_excel_palja.UpdateFill(pCmdUI, false);
 }
 
-void CEnGeologyView::OnKtPaljaCompute() 
+void CEnGeologyView::OnKtPaljaCompute()
 {
-	m_excel_palja.Compute();	
+	m_excel_palja.Compute();
 }
 
-void CEnGeologyView::OnUpdateKtPaljaCompute(CCmdUI* pCmdUI) 
+void CEnGeologyView::OnUpdateKtPaljaCompute(CCmdUI* pCmdUI)
 {
-	m_excel_palja.UpdateCompute(pCmdUI);	
+	m_excel_palja.UpdateCompute(pCmdUI);
 }
 
-void CEnGeologyView::OnKtPaljaSavetodb() 
+void CEnGeologyView::OnKtPaljaSavetodb()
 {
-	m_excel_palja.SaveToDB();	
+	m_excel_palja.SaveToDB();
 }
 
-void CEnGeologyView::OnUpdateKtPaljaSavetodb(CCmdUI* pCmdUI) 
+void CEnGeologyView::OnUpdateKtPaljaSavetodb(CCmdUI* pCmdUI)
 {
-	m_excel_palja.UpdateSaveToDB(pCmdUI);	
+	m_excel_palja.UpdateSaveToDB(pCmdUI);
 }
 
-void CEnGeologyView::OnKtPaljaDisconnectexcel() 
+void CEnGeologyView::OnKtPaljaDisconnectexcel()
 {
-	m_excel_palja.DisconnectExcel();	
+	m_excel_palja.DisconnectExcel();
 }
 
-void CEnGeologyView::OnUpdateKtPaljaDisconnectexcel(CCmdUI* pCmdUI) 
+void CEnGeologyView::OnUpdateKtPaljaDisconnectexcel(CCmdUI* pCmdUI)
 {
-	m_excel_palja.UpdateDisconnectExcel(pCmdUI);	
+	m_excel_palja.UpdateDisconnectExcel(pCmdUI);
 }
 
 
-void CEnGeologyView::OnKtZondustparam() 
+void CEnGeologyView::OnKtZondustparam()
 {
 	CDlgZondUstParam dialog(this, this->GetLabDoc(), &this->GetLabDoc()->m_database);
-	dialog.DoModal();		
+	dialog.DoModal();
 	
 }
 
-void CEnGeologyView::OnObjectsCopygrunty() 
+void CEnGeologyView::OnObjectsCopygrunty()
 {
 	DlgCopyGrunty dialog(this, this->GetLabDoc(), &this->GetLabDoc()->m_database);
-	dialog.DoModal();		
+	dialog.DoModal();
 }
 
-void CEnGeologyView::OnKtAllpalja() 
+void CEnGeologyView::OnKtAllpalja()
 {
 	CDlgPalja dialog(this, this->GetLabDoc(), &this->GetLabDoc()->m_database, true);
-	dialog.DoModal();		
+	dialog.DoModal();
 	
 }
 bool g_OnFileDeleteCompressions(int nItem, CDatabase * database) 
@@ -2785,7 +2785,7 @@ bool g_OnFileDeleteCuts(int nItem, CDatabase * database)
 					ID_OBJ, 
 					setObject.m_CONTRACT, 
 					setObject.m_NAZVA);
-	            
+
 				if (IDYES != MessageBox(0, str, "DeleteObjectRelatedDataFrom", MB_YESNO))
 					return false;
 

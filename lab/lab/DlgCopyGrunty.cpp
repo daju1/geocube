@@ -9,6 +9,8 @@
 #include "SetObject.h"
 #include "SetGrunty.h"
 #include "SetIGE.h"
+#include "SetCubeSize.h"
+#include "../../surfdoc/src/grid.h"
 
 
 #ifdef _DEBUG
@@ -26,6 +28,7 @@ DlgCopyGrunty::DlgCopyGrunty(CLabView * lab_view, CLabDoc *	lab_doc, CDatabase *
 {
 	//{{AFX_DATA_INIT(DlgCopyGrunty)
 	m_check_also_ige = FALSE;
+	m_check_also_cube_size = FALSE;
 	m_edit_source_object = _T("");
 	//}}AFX_DATA_INIT
 	this->m_lab_view = lab_view;
@@ -42,6 +45,7 @@ void DlgCopyGrunty::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(DlgCopyGrunty)
 	DDX_Control(pDX, IDC_COMBO_DEST_OBJECT, m_combo_dest_object);
 	DDX_Check(pDX, IDC_CHECK_ALSO_IGE, m_check_also_ige);
+	DDX_Check(pDX, IDC_CHECK_ALSO_CUBE_SIZE, m_check_also_cube_size);
 	DDX_Text(pDX, IDC_EDIT_SOURCE_OBJECT, m_edit_source_object);
 	//}}AFX_DATA_MAP
 }
@@ -144,6 +148,47 @@ void CopyIGE(bool bUnEdited, CDatabase * database, long ID_OBJ, long id_dest_obj
 		}
 	}
 }
+
+void CopyCubeSize(CDatabase * database, long ID_OBJ, long id_dest_obj)
+{
+	SetCubeSize setCubeSize_dest(database);
+	setCubeSize_dest.m_strFilter.Format("ID_OBJ = %d", id_dest_obj);
+	setCubeSize_dest.m_strSort.Format("");
+	if ( !setCubeSize_dest.Open(CRecordset::dynaset) )
+		return;
+	if (!setCubeSize_dest.IsBOF()) 
+	{
+		setCubeSize_dest.MoveFirst( );
+		while(!setCubeSize_dest.IsEOF()) 
+		{
+			setCubeSize_dest.Delete();
+			setCubeSize_dest.MoveNext();
+		}
+	}
+
+	SetCubeSize setCubeSize(database);
+	setCubeSize.m_strFilter.Format("ID_OBJ = %d", ID_OBJ);
+	setCubeSize.m_strSort.Format("");
+	if ( !setCubeSize.Open(CRecordset::dynaset) )
+		return;
+
+	if (!setCubeSize.IsBOF()) 
+	{
+		setCubeSize.MoveFirst( );
+		while(!setCubeSize.IsEOF()) 
+		{
+			CubeSize cube_size;
+			setCubeSize.InitStruct(cube_size);
+
+			setCubeSize_dest.AddNew();
+			setCubeSize_dest.m_ID_OBJ = ID_OBJ;
+			setCubeSize_dest.Init(cube_size);
+			setCubeSize_dest.Update();
+			setCubeSize.MoveNext();
+		}
+	}
+}
+
 void DlgCopyGrunty::OnOK() 
 {
 	this->UpdateData(true);
@@ -186,6 +231,10 @@ void DlgCopyGrunty::OnOK()
 		CopyIGE(false, this->p_database, ID_OBJ, id_dest_obj);
 	}
 
+	if (this->m_check_also_cube_size)
+	{
+		CopyCubeSize(this->p_database, ID_OBJ, id_dest_obj);
+	}
 
 	CDialog::OnOK();
 }

@@ -80,7 +80,7 @@ void SetCubeSize::Dump(CDumpContext& dc) const
 }
 #endif //_DEBUG
 
-void SetCubeSize::Init(CubeSize & cube_size)
+void SetCubeSize::Init(const CubeSize & cube_size)
 {
 	m_nPag = cube_size.nPag;
 	m_nRow = cube_size.nRow;
@@ -91,4 +91,17 @@ void SetCubeSize::Init(CubeSize & cube_size)
 	m_xSize = cube_size.xSize;
 	m_ySize = cube_size.ySize;
 	m_zSize = cube_size.zSize;
+}
+
+void SetCubeSize::InitStruct(CubeSize & cube_size)
+{
+	cube_size.nPag = m_nPag;
+	cube_size.nRow = m_nRow;
+	cube_size.nCol = m_nCol;
+	cube_size.xLL = m_xLL;
+	cube_size.yLL = m_yLL;
+	cube_size.zLL = m_zLL;
+	cube_size.xSize = m_xSize;
+	cube_size.ySize = m_ySize;
+	cube_size.zSize = m_zSize;
 }

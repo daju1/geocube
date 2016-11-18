@@ -97,6 +97,7 @@
 #define IDC_EDIT_SOURCE_OBJECT          1061
 #define IDC_COMBO_DEST_OBJECT           1062
 #define IDC_CHECK_ALSO_IGE              1063
+#define IDC_CHECK_ALSO_CUBE_SIZE        1064
 #define IDC_RADIO_SVAI_SECHENIE_1       1068
 #define IDC_RADIO_SVAI_SECHENIE_2       1069
 #define IDC_RADIO_SVAI_SECHENIE_3       1070
