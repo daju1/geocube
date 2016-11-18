@@ -698,7 +698,35 @@ void SurfDoc::UstjaToReliefGriddata()
 	ReDrawGridData(this);
 	this->UpdateAllViews();
 }
+void SurfDoc::LoadReliefGriddata()
+{
+	COLORREF color = RGB(0,0,0);
 
+	GridData * pGridData = this->CreateNewGridData();
+	long id_surf = pGridData->id_surf;
+
+	pGridData->AddDataFromDatFile();
+
+	pGridData->SetColor(color);
+	pGridData->id_umpoz = -1;
+
+	char sname [32];
+	sprintf(sname, "Πελόετ");
+
+	pGridData->SetName(sname);
+
+	BYTE podoshva = 0;
+	string ige_key = "0";
+
+	this->AddSurfIgeMappingItem(id_surf, podoshva, sname, ige_key.c_str());
+	this->AddSurfIgeMappingItemToDB(id_surf, ige_key.c_str());
+
+	pGridData->GrDtSaveToDB(0);
+
+	this->Zoom<GridData>(this->m_grid_data);
+	ReDrawGridData(this);
+	this->UpdateAllViews();
+}
 void SurfDoc::LithoPodoshvaToGridData(int isurf, BYTE podoshva, string geo_element_key, GridData * pData, bool reverse)
 {
 	if (this->m_drills.SetCurrentMsgOnFirst())

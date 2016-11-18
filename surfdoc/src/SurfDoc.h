@@ -235,6 +235,7 @@ public:
 	//void PrintSurfLithoGeoElementMapping();
 
 	void UstjaToReliefGriddata();
+	void LoadReliefGriddata();
 
 
 

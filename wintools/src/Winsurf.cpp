@@ -13218,10 +13218,19 @@ static HTREEITEM hCurrentTreeItem;
 			case ID_WELLS_USTJATORELIEFGRIDDATA:
 				{
 					LONG_PTR userdata = GetWindowLongPtr(hWnd,GWLP_USERDATA);
-					win_project* pwin_project = (win_project*)userdata;							
+					win_project* pwin_project = (win_project*)userdata;
 					SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(pwin_project); // from win_graphics_view::GetProject()
 					if (pSurfDoc) 
 						pSurfDoc->UstjaToReliefGriddata();
+				}
+				break;
+			case ID_LOAD_RELIEF_GRIDDATA:
+				{
+					LONG_PTR userdata = GetWindowLongPtr(hWnd,GWLP_USERDATA);
+					win_project* pwin_project = (win_project*)userdata;
+					SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(pwin_project); // from win_graphics_view::GetProject()
+					if (pSurfDoc) 
+						pSurfDoc->LoadReliefGriddata();
 				}
 				break;
 			case ID_TREE_BLNPROFILE_SAVEASCUBEPROJECTIONGRIDS:

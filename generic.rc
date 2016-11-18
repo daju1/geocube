@@ -2625,6 +2625,7 @@ BEGIN
         MENUITEM "Режим отображения лабораторных анализов", ID_WELLS_LABDRAWMODE
         MENUITEM "Сохранить в базу",            ID_WELLS_SAVETODB
         MENUITEM "Устья скважин в GridDatу рельефа", ID_WELLS_USTJATORELIEFGRIDDATA
+        MENUITEM "Загрузить GridDatу рельефа", ID_LOAD_RELIEF_GRIDDATA
     END
     POPUP "Профили"
     BEGIN
