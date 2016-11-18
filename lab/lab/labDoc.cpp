@@ -2449,7 +2449,7 @@ bool CLabDoc::DefineZoom(long ID_OBJ, double zoomCoefXYZ, double zoomCoefXY)
 	return true;
 }
 
-bool CLabDoc::DefineCubeSize(long ID_OBJ, CubeSize & cube_size)
+bool CLabDoc::DefineCubeSize(long ID_OBJ, const CubeSize & cube_size)
 {
 	try
 	{

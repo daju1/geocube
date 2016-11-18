@@ -149,22 +149,10 @@ void CopyIGE(bool bUnEdited, CDatabase * database, long ID_OBJ, long id_dest_obj
 	}
 }
 
-void CopyCubeSize(CDatabase * database, long ID_OBJ, long id_dest_obj)
+void CopyCubeSize(CDatabase * database, long ID_OBJ, long id_dest_obj, CLabDoc * lab_doc)
 {
-	SetCubeSize setCubeSize_dest(database);
-	setCubeSize_dest.m_strFilter.Format("ID_OBJ = %d", id_dest_obj);
-	setCubeSize_dest.m_strSort.Format("");
-	if ( !setCubeSize_dest.Open(CRecordset::dynaset) )
-		return;
-	if (!setCubeSize_dest.IsBOF()) 
-	{
-		setCubeSize_dest.MoveFirst( );
-		while(!setCubeSize_dest.IsEOF()) 
-		{
-			setCubeSize_dest.Delete();
-			setCubeSize_dest.MoveNext();
-		}
-	}
+	CubeSize cube_size;
+	bool inited = false;
 
 	SetCubeSize setCubeSize(database);
 	setCubeSize.m_strFilter.Format("ID_OBJ = %d", ID_OBJ);
@@ -175,18 +163,17 @@ void CopyCubeSize(CDatabase * database, long ID_OBJ, long id_dest_obj)
 	if (!setCubeSize.IsBOF()) 
 	{
 		setCubeSize.MoveFirst( );
-		while(!setCubeSize.IsEOF()) 
+		if(!setCubeSize.IsEOF())
 		{
-			CubeSize cube_size;
 			setCubeSize.InitStruct(cube_size);
-
-			setCubeSize_dest.AddNew();
-			setCubeSize_dest.m_ID_OBJ = ID_OBJ;
-			setCubeSize_dest.Init(cube_size);
-			setCubeSize_dest.Update();
-			setCubeSize.MoveNext();
+			inited = true;
 		}
 	}
+
+	if (!inited)
+		return;
+
+	lab_doc->DefineCubeSize(id_dest_obj, cube_size);
 }
 
 void DlgCopyGrunty::OnOK() 
@@ -233,7 +220,7 @@ void DlgCopyGrunty::OnOK()
 
 	if (this->m_check_also_cube_size)
 	{
-		CopyCubeSize(this->p_database, ID_OBJ, id_dest_obj);
+		CopyCubeSize(this->p_database, ID_OBJ, id_dest_obj, this->m_lab_doc);
 	}
 
 	CDialog::OnOK();

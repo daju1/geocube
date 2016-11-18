@@ -145,7 +145,7 @@ public:
 
 	bool DefineZoom(long ID_OBJ, double zoomCoefXYZ, double zoomCoefXY);
 	bool UnDefineCubeSize(long ID_OBJ);
-	bool DefineCubeSize(long ID_OBJ, CubeSize & cube_size);
+	bool DefineCubeSize(long ID_OBJ, const CubeSize & cube_size);
 	bool DefineGridDataUsedAlgorothm(long ID_OBJ, long ID_SURF, BYTE /*USE_SURFER*/ DRIDDATA_APP, long ID_ALG);
 	bool DefineGridDataZflag(long ID_OBJ, long ID_SURF, short zflag);
 
