@@ -3202,10 +3202,8 @@ bool GridData::GrDtSaveToDB(BYTE podosva)
 
 		CString nazva = this->GetName().c_str();
 
-		;
+		this->m_pSurfDoc->GetLabDoc()->AddGridDataSurface(id_obj, id_surf, nazva, podosva, this->GetColor(), this->id_umpoz, this->id_ige);
 
-		this->m_pSurfDoc->GetLabDoc()->AddGridDataSurface(id_obj, id_surf, nazva, podosva, this->GetColor(), this->id_umpoz);
-		
 
 		if(this->m_input_points.SetCurrentMsgOnFirst())
 		{
@@ -3264,4 +3262,24 @@ int GridData::ClearPointFromDB(bool msg, long id_point)
 		}
 	}
 	return ans;
+}
+
+void GridData::SetColorFromIGE()
+{
+	if (!this->m_pSurfDoc)
+		return;
+
+	EngineerGeoElement * eng = this->m_pSurfDoc->FindEngineerGeoElement(this->id_ige);
+	if(!eng)
+		return;
+
+	COLORREF color = eng->GetColor();
+	this->SetColor(color);
+
+	if (this->m_pSurfDoc && this->m_pSurfDoc->GetLabDoc())
+	{
+		long id_obj = this->m_pSurfDoc->Get_ID_OBJ();
+		this->m_pSurfDoc->GetLabDoc()->ReColorGridDataSurface(id_obj, id_surf, color);
+	}
+
 }

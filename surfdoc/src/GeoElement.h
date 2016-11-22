@@ -377,6 +377,7 @@ public:
 	GeoElement * CreateNewGeoElement(GeoElement::type t, long id_key);
 	GeoElement * AddNewGeoElement(string key, GeoElement * geo_element);
 	GeoElement * FindGeoElement(string key);
+	GeoElement * FindGeoElement(long id_key);
 	void AddNewGeoElement();
 	void AddEmptyGeoElement();
 	GeoElement * AddEmptyGeoElement(const char * key, CGround::ground_type gt, long id_key);

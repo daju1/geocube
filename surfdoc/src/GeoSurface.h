@@ -381,6 +381,7 @@ public:
 	void FillContextMenu(HMENU& hMenu);
 
 	bool SetColorFromCurrentWellsSloj();
+	void SetColorFromIGE();
 
 
 	bool BlankAbove(GeoSurface & geo_surf);

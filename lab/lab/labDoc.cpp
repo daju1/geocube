@@ -1343,7 +1343,43 @@ bool CLabDoc::ReNameGridDataSurface(long ID_OBJ, long ID_SURF, CString NAZVA)
 	return true;
 }
 
-bool CLabDoc::AddGridDataSurface(long ID_OBJ, long ID_SURF, CString	NAZVA, BYTE PODOSHVA, COLORREF rgb, long ID_UMPOZ)
+bool CLabDoc::ReColorGridDataSurface(long ID_OBJ, long ID_SURF, COLORREF color)
+{
+	try
+	{
+		SetGriddataSurfaces setGridDataSurfaces(&this->m_database);
+		setGridDataSurfaces.m_strFilter.Format("ID_OBJ = %d and ID_SURF = %d", ID_OBJ, ID_SURF);
+		if ( !setGridDataSurfaces.Open(CRecordset::dynaset) )
+			return false;
+
+		if (!setGridDataSurfaces.IsBOF()) 
+		{
+			setGridDataSurfaces.MoveFirst();
+			if(!setGridDataSurfaces.IsEOF()) 
+			{
+				setGridDataSurfaces.Edit();
+				setGridDataSurfaces.m_r = GetRValue(color);
+				setGridDataSurfaces.m_g = GetGValue(color);
+				setGridDataSurfaces.m_b = GetBValue(color);
+				setGridDataSurfaces.Update();
+			}
+		}
+
+
+	}
+	catch (CDBException* pe) 
+	{
+		AfxMessageBox(pe->m_strError);
+		pe->Delete();
+		return false;
+	}
+
+
+	return true;
+}
+
+
+bool CLabDoc::AddGridDataSurface(long ID_OBJ, long ID_SURF, CString	NAZVA, BYTE PODOSHVA, COLORREF rgb, long ID_UMPOZ, long ID_IGE)
 {
 	try
 	{
@@ -1364,6 +1400,7 @@ bool CLabDoc::AddGridDataSurface(long ID_OBJ, long ID_SURF, CString	NAZVA, BYTE 
 		setGridDataSurfaces.m_b = GetBValue(rgb);
 
 		setGridDataSurfaces.m_ID_UMPOZ = ID_UMPOZ;
+		setGridDataSurfaces.m_ID_IGE = ID_IGE;
 
 		setGridDataSurfaces.Update();
 	}

@@ -128,7 +128,7 @@ public:
 	virtual void SetName(string s);
 
 	short DetermineRazlomZflag();
-
+	void SetColorFromIGE();
 
 };
 struct Grid;
@@ -140,7 +140,7 @@ public:
 		unknown = 0,
 		gstat_dll = 1,
 		surfer_ole,
-		this_app		
+		this_app
 	};
 	bool may_quit_surfer;
 

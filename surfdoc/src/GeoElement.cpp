@@ -126,7 +126,7 @@ void LithoGeoElement::Init(long id_key)
 	this->m_max_object_version = 1;
 
 
-	this->lith_color = RGB(255,255,255);
+	this->lith_color = RGB(128, 128, 128);
 
 	this->m_ground_type			= CGround::ground_type::Undefined_ground;
 //	this->m_sand_type			= sand_type::undefined_sand_type;
@@ -144,7 +144,7 @@ void EngineerGeoElement::Init(long id_key)
 	this->m_object_version = ENG_GEO_ELEMENT_VERSION;
 	this->m_max_object_version = ENG_GEO_ELEMENT_VERSION;
 
-	this->lith_color = RGB(255,255,255);
+	this->lith_color = RGB(128, 128, 128);
 
 	to_print_if_any = false;
 	this->m_lablayer = NULL;
@@ -268,6 +268,23 @@ GeoElement * GeoColomn::FindGeoElement(string key)
 
 	return NULL;
 }
+
+GeoElement * GeoColomn::FindGeoElement(long id_key)
+{
+	map<string, GeoElement*>::const_iterator it = this->geo_elements.begin();
+	map<string, GeoElement*>::const_iterator end = this->geo_elements.end();
+	for (; it != end; ++it)
+	{
+		if (!(*it).second)
+			continue;
+
+		if ((*it).second->GetKeyID() == id_key)
+			return (*it).second;
+	}
+
+	return NULL;
+}
+
 GeoElement * GeoColomn::AddNewGeoElement(string key, GeoElement * geo_element)
 {
 	if(this->geo_elements.find(key) != this->geo_elements.end())

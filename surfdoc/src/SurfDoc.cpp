@@ -503,14 +503,25 @@ bool SurfDoc::GetIGEkey(string podoshva_surfname, string & out_key)
 EngineerGeoElement * SurfDoc::FindEngineerGeoElement(string key)
 {
 	GeoColomn * colomn = FindGeoColomn(GeoElement::type::engineer_geological);
-	if (colomn) 
-	{
-		GeoElement * elem = colomn->FindGeoElement(key);
-		EngineerGeoElement * eng = dynamic_cast<EngineerGeoElement *>(elem);
-		return eng;
-	}
-	return NULL;
+	if (!colomn) 
+		return NULL;
+
+	GeoElement * elem = colomn->FindGeoElement(key);
+	EngineerGeoElement * eng = dynamic_cast<EngineerGeoElement *>(elem);
+	return eng;
 }
+
+EngineerGeoElement * SurfDoc::FindEngineerGeoElement(long id_ige)
+{
+	GeoColomn * colomn = FindGeoColomn(GeoElement::type::engineer_geological);
+	if (!colomn) 
+		return NULL;
+
+	GeoElement * elem = colomn->FindGeoElement(id_ige);
+	EngineerGeoElement * eng = dynamic_cast<EngineerGeoElement *>(elem);
+	return eng;
+}
+
 void SurfDoc::SetColorFromIGE()
 {
 	if (this->m_drills.SetCurrentMsgOnFirst())
@@ -520,6 +531,24 @@ void SurfDoc::SetColorFromIGE()
 			this->m_drills.GetCurrentMsg().SetColorFromIGE();
 		}
 		while(this->m_drills.IncrementCurrentMsg());
+	}
+
+	if (this->m_grid_data.SetCurrentMsgOnFirst())
+	{
+		do
+		{
+			this->m_grid_data.GetCurrentMsg().SetColorFromIGE();
+		}
+		while(this->m_grid_data.IncrementCurrentMsg());
+	}
+
+	if (this->m_surfaces.SetCurrentMsgOnFirst())
+	{
+		do
+		{
+			this->m_surfaces.GetCurrentMsg().SetColorFromIGE();
+		}
+		while(this->m_surfaces.IncrementCurrentMsg());
 	}
 }
 void SurfDoc::SetWellElementsIGEkeys()
@@ -664,7 +693,7 @@ int SurfDoc::LithoPodoshvaHowMany(string geo_element_key)
 }
 void SurfDoc::UstjaToReliefGriddata()
 {
-	COLORREF color = RGB(0,0,0);
+	COLORREF color = RGB(0, 255, 0);
 
 	GridData * pGridData = this->CreateNewGridData();
 	long id_surf = pGridData->id_surf;
@@ -700,7 +729,7 @@ void SurfDoc::UstjaToReliefGriddata()
 }
 void SurfDoc::LoadReliefGriddata()
 {
-	COLORREF color = RGB(0,0,0);
+	COLORREF color = RGB(0, 255, 0);
 
 	GridData * pGridData = this->CreateNewGridData();
 	long id_surf = pGridData->id_surf;

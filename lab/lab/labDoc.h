@@ -102,7 +102,8 @@ public:
 	bool ClearGridData(long ID_OBJ, long ID_SURF);
 	bool ClearGridDataPoint(long ID_OBJ, long ID_SURF, long ID_POINT);
 	bool ReNameGridDataSurface(long ID_OBJ, long ID_SURF, CString NAZVA);
-	bool AddGridDataSurface(long ID_OBJ, long ID_SURF, CString	NAZVA, BYTE PODOSHVA, COLORREF rgb, long ID_UMPOZ);
+	bool ReColorGridDataSurface(long ID_OBJ, long ID_SURF, COLORREF color);
+	bool AddGridDataSurface(long ID_OBJ, long ID_SURF, CString	NAZVA, BYTE PODOSHVA, COLORREF rgb, long ID_UMPOZ, long ID_IGE);
 	bool AddGridData(long ID_OBJ, long ID_SURF, long ID_POINT, double X, double Y, double Z);
 	bool EditGridData(long ID_OBJ, long ID_SURF, long ID_POINT, double X, double Y, double Z);
 	void ProbgrIGEautoFill(bool to_msg_box, long ID_OBJ, long ID_KT);

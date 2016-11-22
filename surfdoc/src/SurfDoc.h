@@ -255,6 +255,7 @@ public:
 	void IGEPodoshvaToGridData(int isurf, BYTE podoshva, string geo_element_key, GridData * pData, bool reverse);
 	int IGEPodoshvaHowMany(string geo_element_key);
 	EngineerGeoElement * FindEngineerGeoElement(string key);
+	EngineerGeoElement * FindEngineerGeoElement(long id_ige);
 
 	bool set_well_elements_ige_keys_show_error_message_box;
 	bool set_well_elements_litho_keys_show_error_message_box;

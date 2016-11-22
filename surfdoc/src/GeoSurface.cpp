@@ -2146,6 +2146,7 @@ void GeoSurface::BuildSurfacesCutlines(void)
 		this->ReDraw();
 	}
 }
+
 bool GeoSurface::SetColorFromCurrentWellsSloj()
 {
 	if (this->m_surface.SetColorFromCurrentWellsSloj())
@@ -2154,6 +2155,19 @@ bool GeoSurface::SetColorFromCurrentWellsSloj()
 		return true;
 	}
 	return false;
+}
+
+void GeoSurface::SetColorFromIGE()
+{
+	if (!this->m_pSurfDoc)
+		return;
+
+	EngineerGeoElement * eng = this->m_pSurfDoc->FindEngineerGeoElement(this->id_ige);
+	if(!eng)
+		return;
+
+	COLORREF color = eng->GetColor();
+	this->m_surface.SetColor(color);
 }
 
 void GeoSurface::FillContextMenu(HMENU& hMenu)
