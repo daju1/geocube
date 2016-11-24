@@ -2052,6 +2052,13 @@ void GeoSurface::SaveAsSurfer7Grid()
 		}
 	}
 }
+
+void GeoSurface::GridVolume()
+{
+	double volume = this->m_surface.GridVolume();
+	printf ("GridVolume of \"%s\" is %f m^3\n", this->GetName().c_str(), volume);
+}
+
 void GeoSurface::Init(long _id_surf, BYTE _podoshva, long _id_ige, short zflag, Grid * pgrid, COLORREF color)
 {
 	this->id_ige = _id_ige;
@@ -2178,6 +2185,7 @@ void GeoSurface::FillContextMenu(HMENU& hMenu)
 	AppendMenu( hMenu, MFT_STRING, ID_TREE_GEOSURFACESAVEASSURFER7GRID, "&Save As Surfer 7 grid" );
 	AppendMenu( hMenu, MFT_STRING, ID_TREE_GEOSURFASE_GEOSURFACESAVEBLANKLINES, "&Save Blank Lines" );
 	AppendMenu( hMenu, MFT_STRING, ID_TREE_GEOSURFASE_GEOSURFACEIZOLINES, "&IzoLines" );
+	AppendMenu( hMenu, MFT_STRING, ID_TREE_GEOSURFASE_GRIDVOLUME, "&Grid Volume" );
 	
 #if !VIEW_ONLY_VERSION
 	AppendMenu( hMenu, MFT_SEPARATOR, 0, NULL );

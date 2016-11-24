@@ -413,6 +413,7 @@ public:
 	void BuildSurfacesCutlines(void);
 	void SaveAsSurfer7Grid();
 	bool SaveBlankLines();
+	void GridVolume();
 
 	static vector<surface_order_list_item *> surface_order_list;
 	static vector<surface_blank_order_list_item *> surface_blank_order_list;

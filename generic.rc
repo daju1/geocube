@@ -2816,6 +2816,7 @@ BEGIN
         MENUITEM SEPARATOR
         POPUP "Geo Surface"
         BEGIN
+            MENUITEM "Geo Surface Grid Volume", ID_TREE_GEOSURFASE_GRIDVOLUME
             MENUITEM "Geo Surface Save As Surfer 7 grid", ID_TREE_GEOSURFACESAVEASSURFER7GRID
             MENUITEM "Geo Surface Save Blanklines", ID_TREE_GEOSURFASE_GEOSURFACESAVEBLANKLINES
             MENUITEM "Geo Surface Build Cutlines",  ID_TREE_GEOSURFACEBUILDCUTLINES

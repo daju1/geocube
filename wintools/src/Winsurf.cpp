@@ -12745,8 +12745,25 @@ static HTREEITEM hCurrentTreeItem;
 						}
 					}
 				}
-				break;		
-			
+				break;
+
+
+			case ID_TREE_GEOSURFASE_GRIDVOLUME:
+				{
+					if(hCurrentTreeItem)
+					{
+						LPARAM lParam2 = TreeView_GetLParam(hwndTV, hCurrentTreeItem);
+						Object * pObject = reinterpret_cast<Object *> (lParam2);
+						GeoSurface * pGeoSurface = dynamic_cast<GeoSurface *>(pObject);
+
+						if(pGeoSurface)
+						{
+							pGeoSurface->GridVolume();
+						}
+					}
+				}
+				break;
+
 			case ID_TREE_WELL_SAVEZONDINPUT:
 				{
 					if(hCurrentTreeItem)
@@ -12761,7 +12778,7 @@ static HTREEITEM hCurrentTreeItem;
 						}
 					}
 				}
-				break;	
+				break;
 
 			case ID_TREE_CUBE_SAVEAS3DGRID:
 				{
