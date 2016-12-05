@@ -488,6 +488,8 @@ class project : public SurfDoc
 	bool DoSwitchMovingLocalLights(camera *, bool);
 	bool DoSwitchMovingGlobalLights(camera *, bool);
 
+	bool DoSwitchFixingLocalAndGlobalLights(camera *, bool);
+
 //	bool TestAtom(atom *, rmode);
 //	bool TestBond(bond *, rmode);
 	

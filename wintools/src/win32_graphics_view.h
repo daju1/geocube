@@ -89,6 +89,9 @@ class win_graphics_view : public win_ogl_view, public graphics_view
 
 	static bool popup_LightsSwitchMovingLoc(HWND, void*);
 	static bool popup_LightsSwitchMovingGlob(HWND, void*);
+
+	static bool popup_LightsSwitchFixingLocGlob(HWND, void*);
+
 };
 
 /*################################################################################################*/

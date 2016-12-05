@@ -719,6 +719,13 @@ bool win_graphics_view::popup_LightsSwitchMovingGlob(HWND widget, void * data)
 	win_graphics_view * gv = GetGV(widget);
 	return gv->prj->DoSwitchMovingGlobalLights(gv->cam, true);
 }
+
+bool win_graphics_view::popup_LightsSwitchFixingLocGlob(HWND widget, void * data)
+{
+	win_graphics_view * gv = GetGV(widget);
+	return gv->prj->DoSwitchFixingLocalAndGlobalLights(gv->cam, true);
+}
+
 /*################################################################################################*/
 
 // eof

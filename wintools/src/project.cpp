@@ -3874,7 +3874,12 @@ bool project::DoSwitchMovingGlobalLights(camera * cam, bool report)
 	return cam->move_global_lights;
 }
 
-
+bool project::DoSwitchFixingLocalAndGlobalLights(camera * cam, bool report)
+{
+   cam->fix_local_and_global_lights = !cam->fix_local_and_global_lights;
+   if (report) cout << "fix_local_and_global_lights = " << (cam->fix_local_and_global_lights ? "on" : "off") << endl;
+   return cam->fix_local_and_global_lights;
+}
 
 void project::InitGL(void)
 {

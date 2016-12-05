@@ -500,6 +500,22 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 				}
 				break;
 
+			case ID_LIGHTS_FIXLOCALANDGLOBALLIGHTS:
+				{
+					//######################################################
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
+					if (wgrv)
+					{
+						if (wgrv->popup_LightsSwitchFixingLocGlob(hWnd, NULL))
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
+						else
+							CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_UNCHECKED);
+					}
+					//######################################################
+				}
+				break;
+
 			case ID_SELECT_SELECTALL:
 				{
 					//######################################################

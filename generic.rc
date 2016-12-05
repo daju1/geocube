@@ -2657,6 +2657,9 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Move Local Lights",           ID_LIGHTS_MOVELOCALLIGHTS
         MENUITEM "Move Global Lights",          ID_LIGHTS_MOVEGLOBALLIGHTS
+        MENUITEM SEPARATOR
+        MENUITEM "Light Fix Local and Global Lights", 
+                                                ID_LIGHTS_FIXLOCALANDGLOBALLIGHTS
     END
     POPUP "Выделить"
     BEGIN
