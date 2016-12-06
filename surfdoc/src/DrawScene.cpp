@@ -799,26 +799,91 @@ int Scale(double v[3])
 	v[0] /= d; v[1] /= d; v[2] /= d;
 	return 1;
 }
-void getNorm(double v1[3], double v2[3], double out[3])
+
+bool getNorm(double v1[3], double v2[3], double out[3])
 {
+	double tmp[3];
 	//вычисляем координаты вектора нормали по формулам векторного произведения
-	out[0] = v1[1]*v2[2] - v1[2]*v2[1];
-	out[1] = v1[2]*v2[0] - v1[0]*v2[2];
-	out[2] = v1[0]*v2[1] - v1[1]*v2[0];
-#if 0
-	Scale(out);
-#else
-	double d = sqrt(out[0]*out[0] + out[1]*out[1] + out[2]*out[2]);
+	tmp[0] = v1[1]*v2[2] - v1[2]*v2[1];
+	tmp[1] = v1[2]*v2[0] - v1[0]*v2[2];
+	tmp[2] = v1[0]*v2[1] - v1[1]*v2[0];
+
+
+	double d = sqrt(tmp[0]*tmp[0] + tmp[1]*tmp[1] + tmp[2]*tmp[2]);
 	if (d == 0.0)
 	{
 		char str[1024];
-		sprintf(str,"v1[0] =%lf, v1[1] =%lf, v1[2] =%lf, \nv2[0] =%lf, v2[1] =%lf, v2[2] =%lf \nout[0] =%lf,out[1] =%lf,out[2] =%lf",
-			v1[0], v1[1], v1[2], v2[0], v2[1], v2[2], out[0], out[1], out[2]);
+		sprintf(str,"v1[0] =%lf, v1[1] =%lf, v1[2] =%lf, \nv2[0] =%lf, v2[1] =%lf, v2[2] =%lf \ntmp[0] =%lf,tmp[1] =%lf,tmp[2] =%lf",
+			v1[0], v1[1], v1[2], v2[0], v2[1], v2[2], tmp[0], tmp[1], tmp[2]);
 		//MessageBox(0,str, "Zero length vector Scale(double v[3])",0);
-		return;
+		return false;
 	}
-	out[0] /= d; out[1] /= d; out[2] /= d;
-#endif
+	tmp[0] /= d; tmp[1] /= d; tmp[2] /= d;
+
+	out[0] = tmp[0];
+	out[1] = tmp[1];
+	out[2] = tmp[2];
+
+	double epsilon = 1e-2;
+
+	if (fabs(out [2]) > epsilon )
+		return true;
+
+	// profiles
+	if (fabs(out[0]) > epsilon && fabs(out[1]) > epsilon)
+	{
+		if (out[0] > 0 && out[1] > 0)
+		{
+
+		}
+		else if (out[0] < 0 && out[1] < 0)
+		{
+			out [0] *= -1;
+			out [1] *= -1;
+			out [2] *= -1;
+		}
+		else 
+		{
+			if (fabs(out[1]) > fabs(out[0]))
+			{
+				if (out[1] < 0)
+				{
+					out [0] *= -1;
+					out [1] *= -1;
+					out [2] *= -1;
+				}
+			}
+			else
+			{
+				if (out[0] < 0)
+				{
+					out [0] *= -1;
+					out [1] *= -1;
+					out [2] *= -1;
+				}
+			}
+		}
+	}
+	else if (fabs(out[0]) < epsilon)
+	{
+		if (out[1] < 0)
+		{
+			out [0] *= -1;
+			out [1] *= -1;
+			out [2] *= -1;
+		}
+	}
+	else if (fabs(out[1]) < epsilon)
+	{
+		if (out[0] < 0)
+		{
+			out [0] *= -1;
+			out [1] *= -1;
+			out [2] *= -1;
+		}
+	}
+
+	return true;
 }
 
 void DrawPolygones(SurfDoc* pSurfDoc/*, GLenum FillMode*/ )

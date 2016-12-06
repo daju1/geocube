@@ -491,7 +491,7 @@ HTREEITEM BlnProfilePlane3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const cha
 	return AddItemToTree(hwndTV, szItemText, pObject, h1);
 }
 
-extern void getNorm(double v1[3], double v2[3], double out[3]);
+extern bool getNorm(double v1[3], double v2[3], double out[3]);
 void BlnProfilePlane3D::Draw()
 {
 	m_nglListNumber = DrawListArray::glNewList();

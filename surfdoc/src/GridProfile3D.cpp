@@ -442,7 +442,7 @@ HTREEITEM GridProfile3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * 
 	//=============================================================
 }
 
-extern void getNorm(double v1[3], double v2[3], double out[3]);
+extern bool getNorm(double v1[3], double v2[3], double out[3]);
 void GridProfile3D::Draw()
 {
 	m_nglListNumber = DrawListArray::glNewList();

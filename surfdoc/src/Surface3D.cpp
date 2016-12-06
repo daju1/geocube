@@ -19,7 +19,7 @@
 
 #include "logger/Logger.h"
 
-extern void getNorm(double v1[3], double v2[3], double out[3]);
+extern bool getNorm(double v1[3], double v2[3], double out[3]);
 //Surface3D * Surface3D::me = NULL;
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction

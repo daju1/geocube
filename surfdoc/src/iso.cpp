@@ -3,7 +3,7 @@
 #include "..\..\commonOG.h"
 #include "../../array/src/matrixes.h"
 
-void getNorm(double v1[3], double v2[3], double out[3]);
+bool getNorm(double v1[3], double v2[3], double out[3]);
 // пример marching cubes algorithm
 // это лишь фрагмент кода, демонстрирующий собственно алгоритм
 // этот фрагмент НЕ скомпилируется самостоятельно

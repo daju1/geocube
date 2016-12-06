@@ -20,7 +20,7 @@
 #include <algorithm>
 #include <functional>      // For greater<int>( )
 
-extern void getNorm(double v1[3], double v2[3], double out[3]);
+extern bool getNorm(double v1[3], double v2[3], double out[3]);
 //Cube4D * Cube4D::me = NULL;
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
