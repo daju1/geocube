@@ -1567,7 +1567,7 @@ void CLabDoc::ProbgrIGEautoFill(bool to_msg_box, long ID_OBJ, long ID_KT)
 		if (IDYES == AfxMessageBox(str, nType))
 		{
 			TCHAR filter[4098];
-			wsprintf(filter, TEXT("txt"));
+			sprintf_s(filter, 4098, TEXT("txt"));
 			CFileDialog dlg(FALSE, filter);
 			if (dlg.DoModal() == IDCANCEL) return;
 			CString path = dlg.GetPathName();

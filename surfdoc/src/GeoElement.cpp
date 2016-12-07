@@ -548,7 +548,7 @@ bool GetReverse(int nsurf, string my_key, const char * s)
 	if (nsurf > 1)
 	{
 		char str[2048];
-		sprintf(str, "В %s-геологическом элементе %s\n"
+		sprintf_s(str, 2048, "В %s-геологическом элементе %s\n"
 			"насчитывается как минимум %d наслаиваний\n"
 			"Програма предпримет попытку их разделения\n"
 			"путём отнесения подошв этого элемента\n"
@@ -583,7 +583,7 @@ void EngineerGeoElement::ToGridData(BYTE podoshva)
 
 				
 
-				sprintf(sname, "забой ИГЭ %s", this->GetKey().c_str());
+				sprintf_s(sname, 512, "забой ИГЭ %s", this->GetKey().c_str());
 				pGridData->SetName(sname);
 
 
@@ -606,8 +606,8 @@ void EngineerGeoElement::ToGridData(BYTE podoshva)
 				pGridData->id_umpoz = this->id_umpoz;
 				pGridData->id_ige = this->my_id_key;
 
-				sprintf(ssurf, " %d", isurf + 1);			
-				sprintf(sname, "%s%s ИГЭ %s", podoshva == 2 ? "кровля" : "подошва", nsurf > 1 ? ssurf : "", this->GetKey().c_str());
+				sprintf_s(ssurf, 32, " %d", isurf + 1);			
+				sprintf_s(sname, 512, "%s%s ИГЭ %s", podoshva == 2 ? "кровля" : "подошва", nsurf > 1 ? ssurf : "", this->GetKey().c_str());
 				pGridData->SetName(sname);
 
 

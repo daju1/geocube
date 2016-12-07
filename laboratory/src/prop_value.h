@@ -26,7 +26,7 @@ struct GranVyprobData1
 	void CalcMinMaxD()
 	{
 		char s[64];
-		sprintf(s, gran_name.c_str());
+		sprintf_s(s, 64, gran_name.c_str());
 		char * p_ = strchr(s, '-');
 		char * pl = strchr(s, '<');
 
@@ -111,7 +111,7 @@ struct GranVyprob
 			it != data1.end(); it++)
 		{
 			char s[64];
-			sprintf(s, "%s\t%f\n", (*it).gran_name.c_str(), (*it).val);
+			sprintf_s(s, 64, "%s\t%f\n", (*it).gran_name.c_str(), (*it).val);
 			str += s;
 		}
 		return str;

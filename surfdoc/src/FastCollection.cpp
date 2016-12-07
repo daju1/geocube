@@ -106,7 +106,7 @@ HTREEITEM FastCollection::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char *
 	//====== Размеры изображаемого объекта
 	UINT n_objects = this->m_objects.msgSize();	
 
-	sprintf(szItemText, "\"%s\" FastCollection of %d objects",this->GetName().c_str(), n_objects );
+	sprintf_s(szItemText, 1024, "\"%s\" FastCollection of %d objects",this->GetName().c_str(), n_objects );
 	Object * pObject = dynamic_cast<Object *> (this);
 	//=============================================================
 	// Add the item to the tree-view control. 
@@ -224,8 +224,8 @@ bool FastCollection::SaveAs()
 		TEXT("Golden Software Blanking (*.bln)\0*.bln\0")
 		TEXT("All Files (*.*)\0*.*\0");
 
-	sprintf(lpstrFile, "%s\\%s", directory, this->GetName().c_str());
-	sprintf(lpstrFile, "\0");
+	sprintf_s(lpstrFile, 256, "%s\\%s", directory, this->GetName().c_str());
+	sprintf_s(lpstrFile, 256, "\0");
 	DWORD nFilterIndex = 0;
 	if (SaveFileDlg(0, lpstrFile, filter, nFilterIndex) != S_OK)
 		return status;

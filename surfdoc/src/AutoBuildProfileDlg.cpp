@@ -356,7 +356,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 					if (auto_build_dlg->m_ab.use_num_col)
 					{
 						char str[4096];
-						sprintf(str, "%s", auto_build_dlg->m_ab.num_col_filename);
+						sprintf_s(str, 4096, "%s", auto_build_dlg->m_ab.num_col_filename);
 						SetDlgItemText(auto_build_dlg->hDlg, IDC_EDIT_NUM_COLOMNS, str);
 					}
 						
@@ -562,7 +562,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 					if (auto_build_dlg->m_ab.use_num_col)
 					{
 						char str[4096];
-						sprintf(str, "%s", auto_build_dlg->m_ab.num_col_filename);
+						sprintf_s(str, 4096, "%s", auto_build_dlg->m_ab.num_col_filename);
 						SetDlgItemText(auto_build_dlg->hDlg, IDC_EDIT_NUM_COLOMNS, str);
 					}
 						

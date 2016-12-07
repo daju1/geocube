@@ -265,7 +265,7 @@ void date_test()
 		if( t!=dn)
 		{
 			char err[255];
-			wsprintf(err, "t (%g) != dn(%g)\n %d:%d:%d %d:%d:%d\0", t,dn, y,mo,d,h,mi,s);
+			sprintf_s(err, 255, "t (%g) != dn(%g)\n %d:%d:%d %d:%d:%d\0", t,dn, y,mo,d,h,mi,s);
 			MessageBox(0,err,"date test",0);
 		}
 	}

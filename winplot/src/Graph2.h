@@ -93,7 +93,7 @@ public:
 	void DrawLine(HDC hDC, UINT flag, bool useDiffColors = false);
 	void DrawPoints(HDC hDC, UINT flag, bool useDiffColors = false);
 	//===== Подготовка цифровой метки на оси
-	void MakeLabel(bool bX, double& v, char* s);
+	void MakeLabel(bool bX, double& v, char* s, size_t len);
 };
 
 #endif // !defined(AFX_GRAPH2_H__7D09E6C6_48C5_4678_9151_FCF46A1B2C47__INCLUDED_)

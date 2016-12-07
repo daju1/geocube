@@ -53,7 +53,7 @@ public:
 		{
 			size = 0;
 			char str[200];
-			wsprintf(str,"Vector<T>::Alloc(%d) - Not enough memory", size);
+			sprintf_s(str, 200, "Vector<T>::Alloc(%d) - Not enough memory", size);
 			MessageBox(0, str, "Vector", 0);
 			return;
 		}
@@ -114,7 +114,7 @@ public:
 		/*if (i < 0 || i >= size_t(size))
 		{
 			char strerr[200];;
-			wsprintf(strerr,"Index = %i Error using Vector<size = %i>::Operator[]", i, size);
+			sprintf_s(strerr, 200, "Index = %i Error using Vector<size = %i>::Operator[]", i, size);
 			MessageBox(0,strerr, "", 0);
 			return data[i];
 		}*/
@@ -156,7 +156,7 @@ public:
 		{
 			size--;
 			char s[200];
-			wsprintf(s,"Vector <T>::push_back(const T &a) - Not enough memory\nsize = %d, sizeof(T) = %d",
+			sprintf_s(s, 200, "Vector <T>::push_back(const T &a) - Not enough memory\nsize = %d, sizeof(T) = %d",
 				size, sizeof(T));
 			MessageBox(0,s,"Vector",0);
 			return;
@@ -187,7 +187,7 @@ public:
 		{
 			size--;
 			char s[200];
-			wsprintf(s,"Vector <T>::push_back(const T &a) - Not enough memory\nsize = %d, sizeof(T) = %d",
+			sprintf_s(s, 200, "Vector <T>::push_back(const T &a) - Not enough memory\nsize = %d, sizeof(T) = %d",
 				size, sizeof(T));
 			MessageBox(0,s,"Vector",0);
 			return;

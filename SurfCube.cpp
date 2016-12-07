@@ -273,14 +273,14 @@ printf("2\n");
 
 
 	char filename[512];
-	sprintf(filename, "d://test.dat");
+	sprintf_s(filename, 512, "d://test.dat");
 	char buff[BUFF_SIZE];
 
 	double m1[10];
 	double m2[10];
 	char str1[256];
 	char str2[256];
-	sprintf(str1, "Test string for file saving\t\yes!!!");
+	sprintf_s(str1, 256, "Test string for file saving\t\yes!!!");
 	printf(str1);
 	printf("\n");
 	for(size_t i = 0; i < sizeof(m1)/sizeof(double); i++)
@@ -593,21 +593,22 @@ bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed,
 
 bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, const char * fn_U, const char * fn_P, const char * dir, double alpha);
 
-	char dir_out[4098];
-	char common_directory[1024];
-	sprintf(common_directory, "C://LABORO", common_directory);
-	
-	char fn_min_sq_mat[4098];
-	char fn_Lt[4098];
-	char fn_L[4098];
-	char fn_U[4098];
-	char fn_P[4098];
+	const size_t s_len = 4096;
+	char dir_out[s_len];
+	char common_directory[s_len];
+	sprintf_s(common_directory, s_len, "C://LABORO");
+
+	char fn_min_sq_mat[s_len];
+	char fn_Lt[s_len];
+	char fn_L[s_len];
+	char fn_U[s_len];
+	char fn_P[s_len];
 
 	int n = 0;
-	sprintf(dir_out, "%s\\test_min_sq", common_directory);
+	sprintf_s(dir_out, s_len, "%s\\test_min_sq", common_directory);
 	while (!CreateDirectory(dir_out, NULL))
 	{
-		sprintf(dir_out, "%s\\test_min_sq(%d)", common_directory, ++n);
+		sprintf_s(dir_out, s_len, "%s\\test_min_sq(%d)", common_directory, ++n);
 	}
 
 	double alpha_min_sq = 1e-3;
@@ -625,10 +626,10 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	//DoMyMethod3W(type, granicy_kak_glubina, description, mmd3, w3, ab,X,Y,Z, to_fill_matrix);
 	//if (/*to_fill_matrix*/true)
 	//{
-		sprintf(fn_operator, "%s\\operator.spm", dir_out);
+		sprintf_s(fn_operator, s_len, "%s\\operator.spm", dir_out);
 
-	char fn_operator_transponed[4098];
-		sprintf(fn_operator_transponed, "%s\\operator_transponed.spm", dir_out);
+	char fn_operator_transponed[s_len];
+		sprintf_s(fn_operator_transponed, s_len, "%s\\operator_transponed.spm", dir_out);
 
 		//int smoof_power = 1024;
 		//int smoof_power = 4096;
@@ -708,8 +709,8 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	StoreMatrix(fn_operator_transponed, at, transponed_cols);
 
 	/*Grid4 * cube = ShowCube(mmd);
-		char fn[1024]; 
-		sprintf(fn, "%s\\cube.cub", 
+		char fn[s_len]; 
+		sprintf_s(fn, s_len, "%s\\cube.cub", 
 			dir_out);
 		SaveAsSurfer7Grid4(fn, cube);*/
 
@@ -724,7 +725,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		SparseStructureToMetafile(fn_operator, "operator_struct.emf");
 
 		//sprintf(mmd3.fn_min_sq_mat, "%s\\op_wav_min_sq_%f.spm", dir_out, mmd3.alpha_min_sq);					
-		sprintf(fn_min_sq_mat, "%s\\op_min_sq_%f.spm", dir_out, 
+		sprintf_s(fn_min_sq_mat, s_len, "%s\\op_min_sq_%f.spm", dir_out, 
 			alpha_to_holesski ? 0.0 : alpha_min_sq);					
 		//if (!FormMinSquareMatrix(mmd3.fn_operator_wav, mmd3.fn_min_sq_mat, mmd3.alpha_min_sq))
 		if (!FormMinSquareMatrix(fn_operator_transponed, fn_min_sq_mat, 

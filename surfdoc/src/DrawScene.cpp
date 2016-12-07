@@ -5,9 +5,16 @@
 #include "winsurftree.h"
 extern void InitSphere(int nlist, int alpha);
 
+
+
+
+#define LEN_S 512
+#define LEN_S_POWER 256
+
 void DrawCube(SurfDoc* pSurfDoc)
 {
-	char str[32], spower[32];
+	char str[LEN_S], spower[LEN_S_POWER];
+	sprintf_s(spower, LEN_S_POWER, "\0");
 	// отриовка куба и осей
 	glNewList(FIRST_HARD_LIST+1, GL_COMPILE);
 	//====== Вычисляем атрибуты координатных осей
@@ -110,7 +117,7 @@ void DrawCube(SurfDoc* pSurfDoc)
 		glColor3f (0.0f, 0.0f, 0.0f);			
 		Line3(xv, min_yv, min_zv, xv, min_yv - step_yv / 4., min_zv - step_zv / 4.);
 		//====== Наносим цифровую метку
-		pSurfDoc->MakeLabel(0,x / pSurfDoc->m_DataX.Factor, str, spower);
+		pSurfDoc->MakeLabel(0,x / pSurfDoc->m_DataX.Factor, str, LEN_S, spower, LEN_S_POWER);
 		// move 
 		glRasterPos3d(xv, min_yv - step_yv / 2., min_zv - step_zv / 2.); 
 		// set up for a string-drawing display List call 
@@ -128,7 +135,7 @@ void DrawCube(SurfDoc* pSurfDoc)
 	}
 
 	//====== Наносим цифровую метку
-	sprintf(str, "X %s", spower);
+	sprintf_s(str, LEN_S, "X %s", spower);
 	// move 
 	glRasterPos3d((max_xv+min_xv)/2., min_yv - step_yv, min_zv - step_zv ); 
 	// set up for a string-drawing display List call 
@@ -176,7 +183,7 @@ void DrawCube(SurfDoc* pSurfDoc)
 		glColor3f (0.0f, 0.0f, 0.0f);
 		Line3(min_xv, yv, min_zv, min_xv - step_xv / 4., yv, min_zv - step_zv / 4.);
 		//====== Наносим цифровую метку
-		pSurfDoc->MakeLabel(1, y / pSurfDoc->m_DataY.Factor, str, spower);
+		pSurfDoc->MakeLabel(1, y / pSurfDoc->m_DataY.Factor, str, LEN_S, spower, LEN_S_POWER);
 		// move 
 		glRasterPos3d(min_xv - step_xv / 2., yv, min_zv - step_zv / 2.); 
 		// set up for a string-drawing display List call 
@@ -189,7 +196,7 @@ void DrawCube(SurfDoc* pSurfDoc)
 #endif
 	}
 	//====== Наносим цифровую метку
-	sprintf(str, "Y %s", spower);
+	sprintf_s(str, LEN_S, "Y %s", spower);
 	// move 
 	glRasterPos3d(min_xv - step_xv , (max_yv+min_yv)/2., min_zv - step_zv ); 
 	// set up for a string-drawing display List call 
@@ -236,7 +243,7 @@ void DrawCube(SurfDoc* pSurfDoc)
 		glColor3f (0.0f, 0.0f, 0.0f);			
 		Line3(min_xv, max_yv, zv, min_xv - step_xv / 4., max_yv + step_yv / 4., zv);
 		//====== Наносим цифровую метку
-		pSurfDoc->MakeLabel(2,z / pSurfDoc->m_DataZ.Factor, str, spower);
+		pSurfDoc->MakeLabel(2,z / pSurfDoc->m_DataZ.Factor, str, LEN_S, spower, LEN_S_POWER);
 		// move 
 		glRasterPos3d(min_xv - step_xv / 2., max_yv + step_yv / 2., zv); 
 		// set up for a string-drawing display List call 
@@ -249,7 +256,7 @@ void DrawCube(SurfDoc* pSurfDoc)
 #endif
 	}
 	//====== Наносим цифровую метку
-	sprintf(str, "Z %s", spower);
+	sprintf_s(str, LEN_S, "Z %s", spower);
 	// move 
 	glRasterPos3d(min_xv - step_xv, max_yv + step_yv, (max_zv+min_zv)/2.); 
 	// set up for a string-drawing display List call 
@@ -491,19 +498,19 @@ void DrawCutPlane(SurfDoc* pSurfDoc)
 			Line3(xv1, yv1, zv1, xv2, yv2, zv2);
 
 			char str[4096];
-			sprintf(str, "iz\nxd[0] = %lf, yd[0] = %lf, zd[0] = %lf, xv1 = %lf, yv1 = %lf, zv1 = %lf\nxd[1] = %lf, yd[1] = %lf, zd[1] = %lf, xv2 = %lf, yv2 = %lf, zv2 = %lf\n", 
+			sprintf_s(str, 4096, "iz\nxd[0] = %lf, yd[0] = %lf, zd[0] = %lf, xv1 = %lf, yv1 = %lf, zv1 = %lf\nxd[1] = %lf, yd[1] = %lf, zd[1] = %lf, xv2 = %lf, yv2 = %lf, zv2 = %lf\n", 
 				xd[0], yd[0], zd[0], xv1, yv1, zv1, xd[1], yd[1], zd[1], xv2, yv2, zv2);
 			if(np>=3)
 			{
 				char str1[1024];
-				sprintf(str1,"xd[2] = %lf, yd[2] = %lf, zd[2] = %lf\n", 
+				sprintf_s(str1, 1024, "xd[2] = %lf, yd[2] = %lf, zd[2] = %lf\n", 
 					xd[2], yd[2], zd[2]);
 				strcat(str, str1);
 			}
 			if(np>=4)
 			{
 				char str1[1024];
-				sprintf(str1,"xd[3] = %lf, yd[3] = %lf, zd[3] = %lf\n", 
+				sprintf_s(str1, 1024, "xd[3] = %lf, yd[3] = %lf, zd[3] = %lf\n", 
 					xd[3], yd[3], zd[3]);
 				strcat(str, str1);
 			}
@@ -618,19 +625,19 @@ void DrawCutPlane(SurfDoc* pSurfDoc)
 			Line3(xv1, yv1, zv1, xv2, yv2, zv2);
 
 			char str[4096];
-			sprintf(str, "ix\nxd[0] = %lf, yd[0] = %lf, zd[0] = %lf, xv1 = %lf, yv1 = %lf, zv1 = %lf\nxd[1] = %lf, yd[1] = %lf, zd[1] = %lf, xv2 = %lf, yv2 = %lf, zv2 = %lf\n", 
+			sprintf_s(str, 4096, "ix\nxd[0] = %lf, yd[0] = %lf, zd[0] = %lf, xv1 = %lf, yv1 = %lf, zv1 = %lf\nxd[1] = %lf, yd[1] = %lf, zd[1] = %lf, xv2 = %lf, yv2 = %lf, zv2 = %lf\n", 
 				xd[0], yd[0], zd[0], xv1, yv1, zv1, xd[1], yd[1], zd[1], xv2, yv2, zv2);
 			if(np>=3)
 			{
 				char str1[1024];
-				sprintf(str1,"xd[2] = %lf, yd[2] = %lf, zd[2] = %lf\n", 
+				sprintf_s(str1, 1024, "xd[2] = %lf, yd[2] = %lf, zd[2] = %lf\n", 
 					xd[2], yd[2], zd[2]);
 				strcat(str, str1);
 			}
 			if(np>=4)
 			{
 				char str1[1024];
-				sprintf(str1,"xd[3] = %lf, yd[3] = %lf, zd[3] = %lf\n", 
+				sprintf_s(str1, 1024, "xd[3] = %lf, yd[3] = %lf, zd[3] = %lf\n", 
 					xd[3], yd[3], zd[3]);
 				strcat(str, str1);
 			}
@@ -752,14 +759,14 @@ void DrawCutPlane(SurfDoc* pSurfDoc)
 			if(np>=3)
 			{
 				char str1[1024];
-				sprintf(str1,"xd[2] = %lf, yd[2] = %lf, zd[2] = %lf\n", 
+				sprintf_s(str1, 1024, "xd[2] = %lf, yd[2] = %lf, zd[2] = %lf\n", 
 					xd[2], yd[2], zd[2]);
 				strcat(str, str1);
 			}
 			if(np>=4)
 			{
 				char str1[1024];
-				sprintf(str1,"xd[3] = %lf, yd[3] = %lf, zd[3] = %lf\n", 
+				sprintf_s(str1, 1024, "xd[3] = %lf, yd[3] = %lf, zd[3] = %lf\n", 
 					xd[3], yd[3], zd[3]);
 				strcat(str, str1);
 			}
@@ -813,7 +820,7 @@ bool getNorm(double v1[3], double v2[3], double out[3])
 	if (d == 0.0)
 	{
 		char str[1024];
-		sprintf(str,"v1[0] =%lf, v1[1] =%lf, v1[2] =%lf, \nv2[0] =%lf, v2[1] =%lf, v2[2] =%lf \ntmp[0] =%lf,tmp[1] =%lf,tmp[2] =%lf",
+		sprintf_s(str, 1024, "v1[0] =%lf, v1[1] =%lf, v1[2] =%lf, \nv2[0] =%lf, v2[1] =%lf, v2[2] =%lf \ntmp[0] =%lf,tmp[1] =%lf,tmp[2] =%lf",
 			v1[0], v1[1], v1[2], v2[0], v2[1], v2[2], tmp[0], tmp[1], tmp[2]);
 		//MessageBox(0,str, "Zero length vector Scale(double v[3])",0);
 		return false;

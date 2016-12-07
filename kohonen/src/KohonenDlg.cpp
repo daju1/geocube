@@ -625,7 +625,7 @@ BOOL KohonenDlg::OnInitDialog()
 	for (j = 0; j < m_nParameters; j++)
 	{
 		char str[16];
-		sprintf(str, "%d", j);
+		sprintf_s(str, 16, "%d", j);
 		SendDlgItemMessage( hDlg, IDC_COMBO_KOHONEN_MAP_J0, CB_ADDSTRING, 0,
 			(LPARAM)(LPCTSTR)str);
 	}
@@ -638,7 +638,7 @@ BOOL KohonenDlg::OnInitDialog()
 	for ( j = 0; j < m_nParameters; j++)
 	{
 		char str[16];
-		sprintf(str, "%d", j);
+		sprintf_s(str, 16, "%d", j);
 		SendDlgItemMessage( hDlg, IDC_COMBO_KOHONEN_MAP_J1, CB_ADDSTRING, 0,
 			(LPARAM)(LPCTSTR)str);
 	}

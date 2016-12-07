@@ -151,7 +151,7 @@ DWORD Archive::Read(unsigned char * to, DWORD count)
 	if (remained > 0)
 	{
 		char str_error[1024];
-		sprintf(str_error, "DWORD Archive::Read(unsigned char * to, DWORD count = %d) error: remained = %d\n", count, remained);
+		sprintf_s(str_error, 1024, "DWORD Archive::Read(unsigned char * to, DWORD count = %d) error: remained = %d\n", count, remained);
 		printf (str_error);
 		printf("remainedToReadFromBuffer = %d\n", remainedToReadFromBuffer);
 		printf("readFromBuffer = %d\n", readFromBuffer);

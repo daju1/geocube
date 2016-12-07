@@ -20,7 +20,7 @@ using namespace Gdiplus;
 
 #include "LabTrialsTree.h"
 #include "LabParamTree.h"
-char * SelectNameFromPath(const char * path, char * name);
+char * SelectNameFromPath(const char * path, char * name, size_t len);
 bool MinSqLinear(int min_n, vector<x_compression> & x, vector<trial_got_value> & y, int i0, int n, bool donot_shift, trial_value & a0, trial_value & a1, int & m, trial_value & Sy, bool to_printf = false);
 
 bool linterp(int n, double* vx, double* vy, double x, double &y);
@@ -38195,8 +38195,8 @@ bool Laboratory::ReadLabInputFile(char *file)
 	
 	int type_line = 1;
 
-	char name[1024];
-	char * fn = SelectNameFromPath(file, name);
+	char name[4096];
+	char * fn = SelectNameFromPath(file, name, 4096);
 
 
 	while (!feof(stream))

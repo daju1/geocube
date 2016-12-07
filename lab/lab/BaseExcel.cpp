@@ -67,7 +67,7 @@ CString BaseExcel::LoadFormNew(const char * initial_fn)
 	can_save_to_db = false;
 
 	TCHAR filter[4098];
-	wsprintf(filter, TEXT("%s Excel files (*.%s.xls)%%*.%s.xls%%All Files (*.*)%%*.*%%\0"),
+	sprintf_s(filter, 4098, TEXT("%s Excel files (*.%s.xls)%%*.%s.xls%%All Files (*.*)%%*.*%%\0"),
 		xl_filter_name.c_str(),	ext.c_str(), ext.c_str());
 
 	// Replace occurrences of '%' string separator 
@@ -274,7 +274,7 @@ void BaseExcel::LoadFormExisting(const char * fn)
 		sprintf(fn_xls, "\0");
 
 		TCHAR filter[4098];
-		wsprintf(filter, TEXT("%s Excel files (*.%s.xls)%%*.%s.xls%%All Files (*.*)%%*.*%%\0"),
+		sprintf_s(filter, 4098, TEXT("%s Excel files (*.%s.xls)%%*.%s.xls%%All Files (*.*)%%*.*%%\0"),
 			xl_filter_name.c_str(),	ext.c_str(), ext.c_str());
 
 		// Replace occurrences of '%' string separator 

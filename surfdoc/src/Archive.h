@@ -349,7 +349,7 @@ public:
 		s += " of version ";
 		string sv;
 		sv.resize(32);
-		sprintf((char *)sv.data(), "%d", m_version);
+		sprintf_s((char *)sv.data(), 32, "%d", m_version);
 		s += sv;
 		return s;
 	}

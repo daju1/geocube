@@ -15,6 +15,7 @@
 #include "winsurftree.h"
 #include "../mylicense.h"
 #include "../../lab/lab/labdoc.h"
+#define TEXT_LEN 1024
 
 extern HINSTANCE hInst;   // текущий экземпляр
 
@@ -1529,17 +1530,17 @@ bool BlnProfile3D::IsSelectedWell(gdiplus_map_view * gv, int mouse_x, int mouse_
 
 HTREEITEM BlnProfile3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
-    char szItemText[1024]; // label text of tree-view item 
+    char szItemText[TEXT_LEN]; // label text of tree-view item 
 	Object * pObject = dynamic_cast<Object *> (this);
 	//====== Размеры изображаемого объекта
-	sprintf(szItemText, "BlnProfile \"%s\"", GetName().c_str());
+	sprintf_s(szItemText, TEXT_LEN, "BlnProfile \"%s\"", GetName().c_str());
 	//=============================================================
 	// Add the item to the tree-view control. 
 	HTREEITEM h2 = AddItemToTree(hwndTV, szItemText, pObject, h1); 
 	//=============================================================
 	{
 		// Add the item to the tree-view control
-		sprintf(szItemText, "Lines");
+		sprintf_s(szItemText, TEXT_LEN, "Lines");
 		pObject = dynamic_cast<Object *> (&this->m_bln_lines_ObjectList);
 		HTREEITEM h3 = AddItemToTree(hwndTV, szItemText, pObject, h2);
 		//
@@ -1553,7 +1554,7 @@ HTREEITEM BlnProfile3D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s
 		}
 
 		// Add the item to the tree-view control
-		sprintf(szItemText, "Broken Polygones");
+		sprintf_s(szItemText, TEXT_LEN, "Broken Polygones");
 		pObject = dynamic_cast<Object *> (&this->m_brkn_poligons_ObjectList);
 		h3 = AddItemToTree(hwndTV, szItemText, pObject, h2);
 		//
@@ -2269,9 +2270,9 @@ void SaveAsDat(const char *fn, vector<CPoint3> v)
 	}
 }
 
-char * SelectNameFromPath(const char * path, char * name)
+char * SelectNameFromPath(const char * path, char * name, size_t len)
 {
-	sprintf(name, "%s\0", path);
+	sprintf_s(name, len, "%s\0", path);
 	char * p = strrchr(name,'.');
 	if (p) (*p) = '\0';
 	char * p1 = strrchr(name,'\\');
@@ -2394,10 +2395,10 @@ void PrintDoProfileScript(FILE * bas)
 		fprintf(bas, "End Sub\n");
 	}
 }
-void PrintProfileScript(FILE * bas, const char * outdir, char * _prof, vector<string> & names, char * prof_name_in_fun, bool useXLimits, double xMin, double xMax )
+void PrintProfileScript(FILE * bas, const char * outdir, char * _prof, vector<string> & names, char * prof_name_in_fun, size_t prof_name_len, bool useXLimits, double xMin, double xMax )
 {
 
-	sprintf(prof_name_in_fun, "%s\0", _prof);
+	sprintf_s(prof_name_in_fun, prof_name_len, "%s\0", _prof);
 	ReplaceSymbols(prof_name_in_fun, '-', '_');
 	ReplaceSymbols(prof_name_in_fun, '+', '_');
 	ReplaceSymbols(prof_name_in_fun, '*', '_');
@@ -2470,33 +2471,34 @@ void PrintMainProfilesScript(FILE * bas, vector<string> & prof_names_in_fun)
 }
 void BlnProfile3D::SavingOfCubeProjectionGrid(const char * outdir, int index_cub, int make_grids_vnahljost, bool convert_to_acad_yscale, bool non_stretched_xscale)
 {
-	char out_dir[4098];
-	sprintf(out_dir, "%s\\scripts\0", outdir);
+	const size_t slen = 4096;
+	char out_dir[slen];
+	sprintf_s(out_dir, slen, "%s\\scripts\0", outdir);
 
-	char script_dir[4098];
-	char script_fn[4098];
-	char srf_dir[4098];
-	char dxf_dir[4098];
+	char script_dir[slen];
+	char script_fn[slen];
+	char srf_dir[slen];
+	char dxf_dir[slen];
 
-	sprintf(script_dir, "%s\\scripts\0", outdir);
+	sprintf_s(script_dir, slen, "%s\\scripts\0", outdir);
 	if (CheckMyLicense()) CreateDirectory(script_dir,NULL);
 
-	sprintf(srf_dir, "%s\\srf\0", outdir);
+	sprintf_s(srf_dir, slen, "%s\\srf\0", outdir);
 	if (CheckMyLicense()) CreateDirectory(srf_dir,NULL);
 
-	sprintf(dxf_dir, "%s\\dxf\0", outdir);
+	sprintf_s(dxf_dir, slen, "%s\\dxf\0", outdir);
 	if (CheckMyLicense()) CreateDirectory(dxf_dir,NULL);
 
 
-	char profname[4096];
-	char * _prof = SelectNameFromPath(this->GetName().c_str(), profname);
+	char profname[slen];
+	char * _prof = SelectNameFromPath(this->GetName().c_str(), profname, slen);
 	
 	sprintf(script_fn, "%s\\%s.bas\0", script_dir, _prof);
 
 	FILE * bas = fopen(script_fn, "wt");				
 	PrintDoProfileScript(bas);
-	char prof_name_in_fun[1024];
-	this->SavingOfCubeProjectionGrid(bas, outdir, index_cub, make_grids_vnahljost, convert_to_acad_yscale, non_stretched_xscale, prof_name_in_fun);
+	char prof_name_in_fun[slen];
+	this->SavingOfCubeProjectionGrid(bas, outdir, index_cub, make_grids_vnahljost, convert_to_acad_yscale, non_stretched_xscale, prof_name_in_fun, slen);
 	PrintMainProfileScript(bas, prof_name_in_fun);
 	if (bas) fclose(bas);
 }
@@ -2647,7 +2649,7 @@ void BlnProfile3D::DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, ma
 	}
 }
 
-void BlnProfile3D::SavingOfCubeProjectionGrid(FILE * bas, const char * outdir, int index_cub, int make_grids_vnahljost, bool convert_to_acad_yscale, bool non_stretched_xscale, char * prof_name_in_fun)
+void BlnProfile3D::SavingOfCubeProjectionGrid(FILE * bas, const char * outdir, int index_cub, int make_grids_vnahljost, bool convert_to_acad_yscale, bool non_stretched_xscale, char * prof_name_in_fun, size_t prof_name_len)
 {
 	if (index_cub < 0) return;
 	if (!this->m_pSurfDoc) return;
@@ -2677,7 +2679,7 @@ void BlnProfile3D::SavingOfCubeProjectionGrid(FILE * bas, const char * outdir, i
 	//vector<CPoint3> dat;
 
 	char profname[4096];
-	char * _prof = SelectNameFromPath(this->GetName().c_str(), profname);
+	char * _prof = SelectNameFromPath(this->GetName().c_str(), profname, 4096);
 	char prof_dir[4096];
 	sprintf(prof_dir, "%s\\%s\0", outdir, _prof);
 	if (CheckMyLicense())
@@ -2879,7 +2881,7 @@ void BlnProfile3D::SavingOfCubeProjectionGrid(FILE * bas, const char * outdir, i
 			if (grid2.gridSection.zMin != DBL_MAX && grid2.gridSection.zMax != -DBL_MAX)
 			{
 				char cubename[4096];
-				char * pcub = SelectNameFromPath(cube->GetName().c_str(), cubename);
+				char * pcub = SelectNameFromPath(cube->GetName().c_str(), cubename, 4096);
 
 				char filename[4096];
 				if (convert_to_acad_yscale)
@@ -2913,7 +2915,7 @@ void BlnProfile3D::SavingOfCubeProjectionGrid(FILE * bas, const char * outdir, i
 		xMax = m_xMax_CubeProjection;
 	}
 
-	PrintProfileScript(bas, outdir, _prof, names, prof_name_in_fun, useXLimits, xMin, xMax);
+	PrintProfileScript(bas, outdir, _prof, names, prof_name_in_fun, prof_name_len, useXLimits, xMin, xMax);
 }
 
 
@@ -3142,7 +3144,7 @@ BOOL CALLBACK BlnProfile3D::DlgProcSavingOfCubeProjectionGrid( HWND hDlg, UINT u
 				if(cube)
 				{
 					char cubename[4096];
-					char * pcub = SelectNameFromPath(cube->GetName().c_str(), cubename);
+					char * pcub = SelectNameFromPath(cube->GetName().c_str(), cubename, 4096);
 
 					GetDlgItemText(hDlg, IDC_EDIT_DIRECTORY, dir, 4097);
 

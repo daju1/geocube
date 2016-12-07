@@ -2,8 +2,9 @@
 #include "errorexit.h"
 
 void ErrorExit(LPTSTR lpszFunction, bool toExitProcess) 
-{ 
-    TCHAR szBuf[200]; 
+{
+#define BUF_LEN 200
+    TCHAR szBuf[BUF_LEN]; 
     LPVOID lpMsgBuf;
     DWORD dw = GetLastError(); 
 
@@ -16,7 +17,7 @@ void ErrorExit(LPTSTR lpszFunction, bool toExitProcess)
         (LPTSTR) &lpMsgBuf,
         0, NULL );
 
-    wsprintf(szBuf, 
+    sprintf_s(szBuf, BUF_LEN,
         "%s failed with error %d: %s", 
         lpszFunction, dw, lpMsgBuf); 
  
@@ -30,7 +31,7 @@ void ErrorExit(LPTSTR lpszFunction, bool toExitProcess)
 
 void ErrorPrint(LPTSTR lpszFunction) 
 { 
-    TCHAR szBuf[200]; 
+    TCHAR szBuf[BUF_LEN]; 
     LPVOID lpMsgBuf;
     DWORD dw = GetLastError(); 
 
@@ -43,7 +44,7 @@ void ErrorPrint(LPTSTR lpszFunction)
         (LPTSTR) &lpMsgBuf,
         0, NULL );
 
-    wsprintf(szBuf, 
+    sprintf_s(szBuf, BUF_LEN,
 		"Error: %s failed with error %d: %s\n", 
         lpszFunction, dw, lpMsgBuf); 
  
@@ -55,7 +56,7 @@ void ErrorPrint(LPTSTR lpszFunction)
 
 void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess) 
 { 
-    TCHAR szBuf[200]; 
+    TCHAR szBuf[BUF_LEN]; 
     LPVOID lpMsgBuf;
     
 
@@ -68,7 +69,7 @@ void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess)
         (LPTSTR) &lpMsgBuf,
         0, NULL );
 
-    wsprintf(szBuf, 
+    sprintf_s(szBuf, BUF_LEN,
         "%s failed with error %d: %s", 
         lpszFunction, dwLastError, lpMsgBuf); 
  

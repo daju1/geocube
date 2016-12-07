@@ -256,13 +256,13 @@ bool win_ogl_view::InitOG(HWND hWnd)
 					//====== ѕытаемс€ создать контекст передачи OpenGL
 					if ( !(m_hRC = wglCreateContext (m_hdc)))
 					{
-
-						char MsgBuf[4098];
+						const size_t s_len = 4096;
+						char MsgBuf[s_len];
 						DWORD dw = GetLastError(); 
-						sprintf(MsgBuf, " 2 wglCreateContext::Error = %d", dw);
+						sprintf_s(MsgBuf, s_len, " 2 wglCreateContext::Error = %d", dw);
 						MessageBox(hWnd, MsgBuf,"On Create",0);
 						// сообщение об ошибке
-						TCHAR szBuf[200]; 
+						TCHAR szBuf[s_len]; 
 						LPVOID lpMsgBuf;
 
 						FormatMessage(
@@ -274,7 +274,7 @@ bool win_ogl_view::InitOG(HWND hWnd)
 							(LPTSTR) &lpMsgBuf,
 							0, NULL );
 
-						wsprintf(szBuf, 
+						sprintf_s(szBuf, s_len,
 							"wglCreateContext failed with error %d: %s", 
 							dw, lpMsgBuf); 
 					 

@@ -581,7 +581,7 @@ void CDlgNaborGruntovSetting::SetCell(HWND hWnd1,
         CString value, int nRow, int nCol)
 {
     TCHAR     szString [256];
-    wsprintf(szString,value ,0);
+    sprintf_s(szString, 256, value ,0);
 
     //Fill the LVITEM structure with the 
 

@@ -122,7 +122,7 @@ BOOL /*__fastcall*/ CheckMyLicense()
 			{
 				RegCloseKey( hKeyResult );
 				char str[200];
-				wsprintf(str, "Системное время компьютера нарушено\n");
+				sprintf_s(str, 200, "Системное время компьютера нарушено\n");
 				MessageBox(0, str, "Временные вариации показаний прибора \"Tезей\"", 0);
 				return FALSE;
 			}
@@ -140,7 +140,7 @@ BOOL /*__fastcall*/ CheckMyLicense()
 
 	//compilation time
 	char date[255];
-	sprintf(date,"%s", __DATE__);
+	sprintf_s(date, 255, "%s", __DATE__);
 	char mon[32];
 	sscanf(date, "%s %d %d", mon, &d, &y);
 
@@ -186,7 +186,7 @@ BOOL /*__fastcall*/ CheckMyLicense()
 	{
 		//char str[200];
 		char str[200];
-		sprintf(str, "trial soon will be off!!!\n remaine_days = %d\n", remaine_days);
+		sprintf_s(str, 200, "trial soon will be off!!!\n remaine_days = %d\n", remaine_days);
 		//printf(str);
 		//wsprintf(str, "Срок использования программы\n"
 		//	"истекает через %i дней", remaine_days);
@@ -195,7 +195,7 @@ BOOL /*__fastcall*/ CheckMyLicense()
 	if (remaine_days < 0)
 	{
 		char str[200];
-		sprintf(str, "trial off!!! days ago = %d\n", - remaine_days);
+		sprintf_s(str, 200, "trial off!!! days ago = %d\n", - remaine_days);
 		//printf(str);
 		//wsprintf(str, "Срок использования программы\n"
 		//	"\tистёк");

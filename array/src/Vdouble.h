@@ -1993,14 +1993,14 @@ vdouble inline linterp(vdouble& x, vdouble& y, vdouble& xx)
 	if (xx[0] < x[0])
 	{
 		char errstr[255];
-		sprintf(errstr, "You must have min(x = %f) <= min(xx = %f)..", x[0], xx[0]);
+		sprintf_s(errstr, 255, "You must have min(x = %f) <= min(xx = %f)..", x[0], xx[0]);
 		MessageBox(0,errstr,"linterp",0);
 		return vdouble();
 	}	
 	if (xx[nxx-1] > x[nx-1])
 	{
 		char errstr[255];
-		sprintf(errstr, "You must have max(xx = %f) <= max(x = %f)..", xx[nxx-1], x[nx-1]);
+		sprintf_s(errstr, 255, "You must have max(xx = %f) <= max(x = %f)..", xx[nxx-1], x[nx-1]);
 		MessageBox(0,errstr,"linterp",0);
 		return vdouble();
 	}
@@ -2470,7 +2470,7 @@ bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x)
 	if (x.m_length != N)
 	{
 		char str[250];
-		sprintf( str, "x1.m_length%d ~= N%d",x.m_length, N);
+		sprintf_s( str, 250, "x1.m_length%d ~= N%d",x.m_length, N);
 		MessageBox(0, str,"hist2",0);
 		return false;
 	}
@@ -2510,14 +2510,14 @@ bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble&
 	if (x1.m_length != n1)
 	{
 		char str[250];
-		sprintf( str, "x1.m_length%d ~= n1%d",x1.m_length, n1);
+		sprintf_s( str, 250, "x1.m_length%d ~= n1%d",x1.m_length, n1);
 		MessageBox(0, str,"hist2",0);
 		return false;
 	}
 	if (x2.m_length != n2)
 	{
 		char str[250];
-		sprintf( str, "x2.m_length%d ~= n2%d",x2.m_length, n2);
+		sprintf_s( str, 250, "x2.m_length%d ~= n2%d",x2.m_length, n2);
 		MessageBox(0, str,"hist2",0);
 		return false;
 	}

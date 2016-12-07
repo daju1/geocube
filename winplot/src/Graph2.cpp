@@ -12,7 +12,7 @@ using namespace Gdiplus;
 //===== Доля окна, занимаемая графиком
 #define SCALE_X 0.6
 #define SCALE_Y 0.6
-
+#define S_LEN 256
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -34,8 +34,8 @@ CGraph2::CGraph2 (vector<vector<double> > &vx, vector<vector<double> > &vy, LPST
 	size_t iv;
 	if (vx.size() != vy.size())
 	{
-		char s[63];
-		sprintf(s, "vx.size(%d) != vy.size(%d)", vx.size(), vy.size() );
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "vx.size(%d) != vy.size(%d)", vx.size(), vy.size() );
 		MessageBox(0,s, "CGraph2", 0);
 		return;
 	}
@@ -44,8 +44,8 @@ CGraph2::CGraph2 (vector<vector<double> > &vx, vector<vector<double> > &vy, LPST
 	{
 		if( vx[iv].size() != vx[iv].size())
 		{
-			char s[63];
-			sprintf(s, "vx[%d].size(%d) != vx[%d].size(%d)", iv, vx[iv].size(), iv, vx[iv].size() );
+			char s[S_LEN];
+			sprintf_s(s, S_LEN, "vx[%d].size(%d) != vx[%d].size(%d)", iv, vx[iv].size(), iv, vx[iv].size() );
 			MessageBox(0,s, "CGraph2", 0);
 			return;
 		}
@@ -83,8 +83,8 @@ CGraph2::CGraph2 (Vector<vdouble> &vx, Vector<vdouble> &vy, LPSTR sTitle, LPSTR 
 	int iv;
 	if (vx.Size() != vy.Size())
 	{
-		char s[63];
-		sprintf(s, "vx.Size(%d) != vy.Size(%d)", vx.Size(), vy.Size() );
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "vx.Size(%d) != vy.Size(%d)", vx.Size(), vy.Size() );
 		MessageBox(0,s, "CGraph2", 0);
 		return;
 	}
@@ -93,8 +93,8 @@ CGraph2::CGraph2 (Vector<vdouble> &vx, Vector<vdouble> &vy, LPSTR sTitle, LPSTR 
 	{
 		if( vx[iv].Length() != vx[iv].Length())
 		{
-			char s[63];
-			sprintf(s, "vx[%d].Length(%d) != vx[%d].Length(%d)", iv, vx[iv].Length(), iv, vx[iv].Length() );
+			char s[S_LEN];
+			sprintf_s(s, S_LEN, "vx[%d].Length(%d) != vx[%d].Length(%d)", iv, vx[iv].Length(), iv, vx[iv].Length() );
 			MessageBox(0,s, "CGraph2", 0);
 			return;
 		}
@@ -131,8 +131,8 @@ CGraph2::CGraph2 (vector<double> &x, vector<double> &y, LPSTR sTitle, LPSTR sX, 
 {
 	if( x.size() != y.size())
 	{
-		char s[63];
-		sprintf(s, "x.size(%d) != y.size(%d)", x.size(), y.size() );
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "x.size(%d) != y.size(%d)", x.size(), y.size() );
 		MessageBox(0,s, "CGraph2", 0);
 		return;
 	}
@@ -168,8 +168,8 @@ CGraph2::CGraph2 (vector<double> &x, vector<double> &y, size_t i1, size_t i2, LP
 {
 	if( x.size() != y.size())
 	{
-		char s[63];
-		sprintf(s, "x.size(%d) != y.size(%d)", x.size(), y.size() );
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "x.size(%d) != y.size(%d)", x.size(), y.size() );
 		MessageBox(0,s, "CGraph2", 0);
 		return;
 	}
@@ -246,8 +246,8 @@ CGraph2::CGraph2 (vdouble &x, vdouble &y, LPSTR sTitle, LPSTR sX, LPSTR sY)
 {
 	if( x.Length() != y.Length())
 	{
-		char s[63];
-		sprintf(s, "x.Length(%d) != y.Length(%d)", x.Length(), y.Length() );
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "x.Length(%d) != y.Length(%d)", x.Length(), y.Length() );
 		MessageBox(0,s, "CGraph2", 0);
 		return;
 	}
@@ -661,16 +661,17 @@ void CGraph2::Draw(HDC hDC,	tagRECT r, UINT flag)
 	Scale(m_DataX);
 	Scale(m_DataY);
 #endif
-	//====== Выводим экстремумы функции	
-	char str[32];
-	wsprintf(str,"Min = %c%d.%d\0",
+	//====== Выводим экстремумы функции
+#define STR_LEN 32
+	char str[STR_LEN];
+	sprintf_s(str, STR_LEN, "Min = %c%d.%d\0",
 	 m_DataY.Min<0.0?'-':' ', 
 	 int(fabs(m_DataY.Min)), 
 	 int(pow(10.,3)*(fabs(m_DataY.Min)-double(int(fabs(m_DataY.Min)))))
 	 );
 	TextOut(hDC, rt+m_LH, tp+m_LH, str, (int)strlen(str));
 
-	wsprintf(str,"Max = %c%d.%d\0",
+	sprintf_s(str, STR_LEN, "Max = %c%d.%d\0",
 	 m_DataY.Max<0.0?'-':' ', 
 	 int(fabs(m_DataY.Max)), 
 	 int(pow(10.,3)*(fabs(m_DataY.Max)-double(int(fabs(m_DataY.Max)))))
@@ -701,7 +702,7 @@ void CGraph2::Draw(HDC hDC,	tagRECT r, UINT flag)
 			LineTo(hDC, xi, tp);
 		}
 		//====== Наносим цифровую метку
-		MakeLabel(true,x, str);
+		MakeLabel(true,x, str, STR_LEN);
 		TextOut(hDC, xi, bm+3*m_LH/2, str,(int)strlen(str));
 	}
 
@@ -727,7 +728,7 @@ void CGraph2::Draw(HDC hDC,	tagRECT r, UINT flag)
 		}
 		if (y >= m_DataY.Start && y <= m_DataY.End)
 		{
-			MakeLabel(false, y, str);
+			MakeLabel(false, y, str, STR_LEN);
 
 			if (flag == SCALE_FLAG_RIGHT)
 				TextOut(hDC, rt+m_LH/2, yi, str, (int)strlen(str));
@@ -914,18 +915,18 @@ void CGraph2::DrawLine(HDC hDC, UINT flag, bool useDiffColos)
 						if (m_bLineWrite)
 						{
 
-							char s[31];
+							char s[S_LEN];
 							if ( i == 0 && m_vPoints.GetCurrentVect().msgSize() > 2)
 							{
 								if (m_vPoints.GetCurrentVect().GetFirstMsg().y > m_vPoints.GetCurrentVect().GetSecondMsg().y)
 								{
-									sprintf(s,"%.2lf", m_vPoints.GetCurrentVect().GetFirstMsg().y);
+									sprintf_s(s, S_LEN,"%.2lf", m_vPoints.GetCurrentVect().GetFirstMsg().y);
 									TextOut(hDC, xi, yi - m_LH/2, 
 										s, (int)strlen(s));//)
 								}
 								else
 								{
-									sprintf(s,"%.2lf", m_vPoints.GetCurrentVect().GetFirstMsg().y);
+									sprintf_s(s, S_LEN, "%.2lf", m_vPoints.GetCurrentVect().GetFirstMsg().y);
 									TextOut(hDC, xi, yi + m_LH, 
 										s, (int)strlen(s));//)
 								}
@@ -934,13 +935,13 @@ void CGraph2::DrawLine(HDC hDC, UINT flag, bool useDiffColos)
 							{
 								if (m_vPoints.GetCurrentVect().GetLastMsg().y > m_vPoints.GetCurrentVect().GetPreLastMsg().y)
 								{
-									sprintf(s,"%.2lf", m_vPoints.GetCurrentVect().GetLastMsg().y);
+									sprintf_s(s, S_LEN, "%.2lf", m_vPoints.GetCurrentVect().GetLastMsg().y);
 									TextOut(hDC, xi, yi - m_LH/2, 
 										s, (int)strlen(s));//)
 								}
 								else
 								{
-									sprintf(s,"%.2lf", m_vPoints.GetCurrentVect().GetLastMsg().y);
+									sprintf_s(s, S_LEN, "%.2lf", m_vPoints.GetCurrentVect().GetLastMsg().y);
 									TextOut(hDC, xi, yi + m_LH, 
 										s, (int)strlen(s));//)
 								}
@@ -950,14 +951,14 @@ void CGraph2::DrawLine(HDC hDC, UINT flag, bool useDiffColos)
 								if (m_vPoints.GetCurrentVect().GetPreCurrentMsg().y <= m_vPoints.GetCurrentVect().GetCurrentMsg().y 
 									&& m_vPoints.GetCurrentVect().GetCurrentMsg().y >= m_vPoints.GetCurrentVect().GetNextCurrentMsg().y)
 								{
-									sprintf(s,"%.2lf", m_vPoints.GetCurrentVect().GetCurrentMsg().y);
+									sprintf_s(s, S_LEN, "%.2lf", m_vPoints.GetCurrentVect().GetCurrentMsg().y);
 									TextOut(hDC, xi, yi - m_LH/2, 
 										s, (int)strlen(s));//)
 								}
 								if (m_vPoints.GetCurrentVect().GetPreCurrentMsg().y >= m_vPoints.GetCurrentVect().GetCurrentMsg().y 
 									&& m_vPoints.GetCurrentVect().GetCurrentMsg().y <= m_vPoints.GetCurrentVect().GetNextCurrentMsg().y)
 								{
-									sprintf(s,"%.2lf", m_vPoints.GetCurrentVect().GetCurrentMsg().y);
+									sprintf_s(s, S_LEN, "%.2lf", m_vPoints.GetCurrentVect().GetCurrentMsg().y);
 									TextOut(hDC, xi, yi + m_LH, 
 										s, (int)strlen(s));//)
 								}
@@ -983,7 +984,7 @@ void CGraph2::DrawLine(HDC hDC, UINT flag, bool useDiffColos)
 
 
 
-void CGraph2::MakeLabel(bool bX, double& v, char* s)
+void CGraph2::MakeLabel(bool bX, double& v, char* s, size_t len)
 {
 	//====== Сначала делаем грубую прикидку
 	//====== Пробуем поместиться в 20 позиций
@@ -1003,14 +1004,14 @@ void CGraph2::MakeLabel(bool bX, double& v, char* s)
 
 	if (nDigits <= 0)
 	{
-		wsprintf(s,"%c%d\0",
+		sprintf_s(s, len, "%c%d\0",
 			 v<0.0?'-':' ', 
 			 int(fabs(v)) 
 			);
 	}
 	else
 	{
-		wsprintf(s,"%c%d.%d\0",
+		sprintf_s(s, len,"%c%d.%d\0",
 			 v<0.0?'-':' ', 
 			 int(fabs(v)), 
 			 int(pow(10.,nDigits)*(fabs(v)-double(int(fabs(v)))))
@@ -1028,9 +1029,10 @@ void CGraph2::MakeLabel(bool bX, double& v, char* s)
 	if (iPower != 0)
 	{
 		//====== Нужен, если не поместились в (10^-3, 10^+4)
-		char add[32];
-		wsprintf (add, "·e%d\0",iPower);
-		strcat(s, add);
+		const size_t s_add_len = 64;
+		char add[s_add_len];
+		sprintf_s (add, s_add_len, "·e%d\0",iPower);
+		strcat(s, len, add);
 	}
 }
 

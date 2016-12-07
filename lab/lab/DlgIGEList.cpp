@@ -172,7 +172,7 @@ void DlgIGEList::OnKillfocusCombo1()
     //    str,nItem,nSubItem);
     TCHAR     szString [256];
 
-    wsprintf(szString, str, 0);
+    sprintf_s(szString, 256, str, 0);
 
     //Fill the LVITEM structure with the 
 
@@ -455,7 +455,7 @@ void DlgIGEList::SetCell(HWND hWnd1,
         CString value, int nRow, int nCol)
 {
     TCHAR     szString [256];
-    wsprintf(szString,value ,0);
+    sprintf_s(szString, 256, value ,0);
 
     //Fill the LVITEM structure with the 
 

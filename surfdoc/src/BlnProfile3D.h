@@ -188,7 +188,7 @@ public:
 
 	void SavingOfCubeProjectionGrid();
 	void SavingOfCubeProjectionGrid(const char * outdir, int index_cub, int make_grids_vnahljost, bool convert_to_acad_yscale, bool non_stretched_xscale);
-	void SavingOfCubeProjectionGrid(FILE * bas, const char * outdir, int index_cub, int make_grids_vnahljost, bool convert_to_acad_yscale, bool non_stretched_xscale, char * prof_name_in_fun);
+	void SavingOfCubeProjectionGrid(FILE * bas, const char * outdir, int index_cub, int make_grids_vnahljost, bool convert_to_acad_yscale, bool non_stretched_xscale, char * prof_name_in_fun, size_t prof_name_len);
 	static BOOL CALLBACK BlnProfile3D::DlgProcSavingOfCubeProjectionGrid( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam );
 

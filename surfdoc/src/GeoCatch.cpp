@@ -349,7 +349,7 @@ HTREEITEM GeoCatch::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 		n_gorizs = this->m_gorizont_planes.msgSize(),	
 		n_points = this->m_base_points.msgSize();	
 
-	sprintf(szItemText, "Geo Catch n_surfs = %d n_faults = %d n_gorizs = %d points = %d", n_surfs, n_faults, n_gorizs, n_points);
+	sprintf_s(szItemText, 1024, "Geo Catch n_surfs = %d n_faults = %d n_gorizs = %d points = %d", n_surfs, n_faults, n_gorizs, n_points);
 	Object * pObject = dynamic_cast<Object *> (this);
 	//=============================================================
 	// Add the item to the tree-view control. 

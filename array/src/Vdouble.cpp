@@ -13,6 +13,7 @@ unsigned int vdouble::m_nDestructions = 0;
 
 #define TEST_VDOUBLE_MSG_MEMORY 0
 size_t vdouble::m_szMemory = 0;
+#define S_LEN 256
 //
 vdouble::vdouble()
 {
@@ -295,8 +296,8 @@ vdouble::resize(int _length)
 		{
 //WriteRaporto("vdouble::resize 6 ret\n");
 			m_length = 0;
-			char err[200];
-			wsprintf(err,"vdouble::resize(int _length) - Not enough memory\n_length = %i",
+			char err[S_LEN];
+			sprintf_s(err, S_LEN, "vdouble::resize(int _length) - Not enough memory\n_length = %i",
 				_length);
 			MessageBox(0,err,"",0);
 			m_length = 0;
@@ -880,8 +881,8 @@ double& vdouble::operator[](int index)
 	}
 	catch (int& i)
 	{
-		char s[200];
-		wsprintf(s,"Error using vdouble::operator[](int index): \n index = %i go away from massive of length = %i \n",i, m_length);
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "Error using vdouble::operator[](int index): \n index = %i go away from massive of length = %i \n",i, m_length);
 		MessageBox(0,s,"",0);
 		static double iErr=NULL;
 		return iErr;
@@ -1104,8 +1105,8 @@ vdouble& vdouble::operator=(const vdouble& rhs)
 //WriteRaporto("vdouble::operator= 4\n");
 		if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 		{
-			char s[200];
-			wsprintf(s,"vdouble::operator=(vdouble& rhs) - Not enough memory\n m_length = %i", m_length);
+			char s[S_LEN];
+			sprintf_s(s, S_LEN, "vdouble::operator=(vdouble& rhs) - Not enough memory\n m_length = %i", m_length);
 			MessageBox(0,s, "vdouble", 0);
 			return *this;
 		}
@@ -8497,8 +8498,8 @@ int vdouble::dwt(int J,
 {
 	if (m_length != t.Size())
 	{
-		char str[200];
-		wsprintf(str,"Error using vdouble::dwt()\n"
+		char str[S_LEN];
+		sprintf_s(str, S_LEN, "Error using vdouble::dwt()\n"
 			"m_length(%i) != t.Size(%i)",
 			m_length, t.Size());
 		MessageBox(0,str, "dwt 4",0);
@@ -8545,8 +8546,8 @@ int vdouble::dwt(int J,
 
 	if (len_s <= 0)
 	{
-		char s[200];
-		wsprintf(s,"Error using vdouble::dwt():\nlen_s(%i) < 0\n ¬ыберите меньший уровень разложени€", 
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "Error using vdouble::dwt():\nlen_s(%i) < 0\n ¬ыберите меньший уровень разложени€", 
 			len_s);
 		MessageBox(0,s, "dwt 4", 0);
 		return 0;
@@ -8678,8 +8679,8 @@ int vdouble::idwt(int J,
 
 	if (len_s != ts.Size())
 	{
-		char s[200];
-		wsprintf(s,"Error using vdouble::idwt():\nlen_s(%i) != ts.Size(%i)", 
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s(%i) != ts.Size(%i)", 
 			len_s, ts.Size());
 		MessageBox(0,s,"", 0);
 		return -1;
@@ -8693,8 +8694,8 @@ int vdouble::idwt(int J,
 
 	if (len1_2+(left+right)/2 < 0)
 	{
-		char s[200];
-		wsprintf(s,"Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n ¬ыберите меньший уровень разложени€", 
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n ¬ыберите меньший уровень разложени€", 
 			len1_2+(left+right)/2);
 		MessageBox(0,s,"",0);
 		return 0;
@@ -8885,8 +8886,8 @@ int vdouble::idwt_(
 
 	if (len1_2+(left+right)/2 < 0)
 	{
-		char s[200];
-		wsprintf(s,"Error using vdouble::idwt():\len_s - len_h/2- len_h\%2+1+(left+right)/2(%d) < 0\n ¬ыберите меньший уровень разложени€", 
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\len_s - len_h/2- len_h\%2+1+(left+right)/2(%d) < 0\n ¬ыберите меньший уровень разложени€", 
 			len1_2+(left+right)/2);
 		MessageBox(0,s,"",0);
 		return 0;
@@ -8978,8 +8979,8 @@ int vdouble::idwt(
 
 	if (len1_2+(left+right)/2 < 0)
 	{
-		char s[200];
-		wsprintf(s,"Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n ¬ыберите меньший уровень разложени€", 
+		char s[S_LEN];
+		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n ¬ыберите меньший уровень разложени€", 
 			len1_2+(left+right)/2);
 		MessageBox(0,s,"",0);
 		return 0;
@@ -9571,8 +9572,8 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 	int i, j;
 	if (pt && m_length != pt->m_length)
 	{
-		char str[200];
-		wsprintf(str,"Error using vdouble::WaveletDecomposition()\n"
+		char str[S_LEN];
+		sprintf_s(str, S_LEN, "Error using vdouble::WaveletDecomposition()\n"
 			"m_length(%i) != pt->m_length(%i)",
 			m_length, pt->m_length);
 		MessageBox(0,str,"",0);
@@ -9784,8 +9785,8 @@ int vdouble::WaveletDecomposition1(vdouble* pt,
 	int i, j;
 	if (pt && m_length != pt->m_length)
 	{
-		char str[200];
-		wsprintf(str,"Error using vdouble::WaveletDecomposition()\n"
+		char str[S_LEN];
+		sprintf_s(str, S_LEN, "Error using vdouble::WaveletDecomposition()\n"
 			"m_length(%i) != pt->m_length(%i)",
 			m_length, pt->m_length);
 		MessageBox(0,str,"",0);

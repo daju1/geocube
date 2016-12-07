@@ -70,7 +70,7 @@ extern int UseGLFont( HDC hDC,  IN CONST LOGFONTA * plf_Label);
 
 
 
-char * SelectNameFromPath(const char * path, char * name);
+char * SelectNameFromPath(const char * path, char * name, size_t len);
 
 
 
@@ -7363,7 +7363,7 @@ BOOL CALLBACK DlgProcSavingOfCubeProjectionGrid( HWND hDlg, UINT uMsg,
 				if(cube)
 				{
 					char cubename[4096];
-					char * pcub = SelectNameFromPath(cube->GetName().c_str(), cubename);
+					char * pcub = SelectNameFromPath(cube->GetName().c_str(), cubename, 4096);
 
 					GetDlgItemText(hDlg, IDC_EDIT_DIRECTORY, dir, 4097);
 

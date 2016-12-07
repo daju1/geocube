@@ -80,7 +80,7 @@ GLuint DrawListArray::GetNewListNumber()
 	if (List == FIRST_FONT_LIST_BITMAPS)
 	{
 		char str[1024];
-		sprintf(str, "Error: NewListNumber = %u over than %u ", List, FIRST_FONT_LIST_BITMAPS);
+		sprintf_s(str, 1024, "Error: NewListNumber = %u over than %u ", List, FIRST_FONT_LIST_BITMAPS);
 		MessageBox(0, str, "GetNewListNumber", 0);
 	}
 	return List;

@@ -1328,7 +1328,7 @@ void CLaboratoryView::OnExportobject()
 		
 	// TODO: Add your command handler code here
 	TCHAR filter[4098];
-	wsprintf(filter, TEXT("Acces files (*.mdb)%%*.mdb%%All Files (*.*)%%*.*%%\0"));
+	sprintf_s(filter, 4098, TEXT("Acces files (*.mdb)%%*.mdb%%All Files (*.*)%%*.*%%\0"));
 
 	// Replace occurrences of '%' string separator 
 	// with '\0'. 

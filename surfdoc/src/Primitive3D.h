@@ -388,8 +388,8 @@ public:
 			TEXT("Golden Software Data (*.dat)\0*.dat\0")
 			TEXT("All Files (*.*)\0*.*\0");
 
-		sprintf(lpstrFile, "\0");
-		sprintf(lpstrFile, "%s\0", this->GetName().c_str());
+		sprintf_s(lpstrFile, 256, "\0");
+		sprintf_s(lpstrFile, 256, "%s\0", this->GetName().c_str());
 		DWORD nFilterIndex = 0;
 		if (SaveFileDlg(0, lpstrFile, filter, nFilterIndex) != S_OK)
 			return status;

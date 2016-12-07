@@ -1009,8 +1009,8 @@ void BlnProfilePlane3D::DrawGDIplus(Graphics ** select_buffer, Graphics& graphic
 									v->ConvertingFromWorldToScreen(profile.x, profile.y, x2, y2);
 									graphics.DrawLine(&line_pen, x1, y1, x2, y2);								
 
-									char buff[256];
-									sprintf(buff, "%f\0", zd);
+									char buff[255];
+									sprintf_s(buff, 255, "%f\0", zd);
 									DeleteEndZeros(buff);
 
 									wchar_t str[256];
@@ -1131,8 +1131,8 @@ void BlnProfilePlane3D::DrawGDIplus(Graphics ** select_buffer, Graphics& graphic
 										graphics.DrawLine(&line_pen, x1, y1, x2, y2);
 
 
-										char buff[256];
-										sprintf(buff, "Y=%f\0", yd);
+										char buff[255];
+										sprintf_s(buff, 255, "Y=%f\0", yd);
 										DeleteEndZeros(buff);
 
 										wchar_t str[256];
@@ -1186,8 +1186,8 @@ void BlnProfilePlane3D::DrawGDIplus(Graphics ** select_buffer, Graphics& graphic
 										graphics.DrawLine(&line_pen, x1, y1, x2, y2);
 
 
-										char buff[256];
-										sprintf(buff, "X=%f\0", xd);
+										char buff[255];
+										sprintf_s(buff, 255, "X=%f\0", xd);
 										DeleteEndZeros(buff);
 
 										wchar_t str[256];

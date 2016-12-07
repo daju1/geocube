@@ -15,6 +15,7 @@ const char * lpszWinPlotName   = "MyWINPLOT";
 extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
 
 //#define SCALE_Y 0.6
+#define S_LEN 256
 int BeginWinPlot(MSG &msg, WNDCLASSEX &wc)
 {
 	// Регистрация класса главного окна приложения.
@@ -150,23 +151,23 @@ LRESULT CALLBACK DlgProcPlotScale( HWND hDlg, UINT uMsg,
 	{
     case WM_INITDIALOG :
 		{
-			char s[125];
+			char s[S_LEN];
 			
 			
 			lpPlotScaleDlgMem = (LPPLOTSCALEDLGDATA)lParam;
 
-			sprintf(s,"%lf",lpPlotScaleDlgMem->xMin);
+			sprintf_s(s, S_LEN, "%lf",lpPlotScaleDlgMem->xMin);
 			SetDlgItemText(hDlg, IDC_EDIT_SCALE_X_MIN,s);
-			sprintf(s,"%lf",lpPlotScaleDlgMem->xMax);
+			sprintf_s(s, S_LEN, "%lf",lpPlotScaleDlgMem->xMax);
 			SetDlgItemText(hDlg, IDC_EDIT_SCALE_X_MAX,s);
-			sprintf(s,"%lf",lpPlotScaleDlgMem->xStep);
+			sprintf_s(s, S_LEN, "%lf",lpPlotScaleDlgMem->xStep);
 			SetDlgItemText(hDlg, IDC_EDIT_SCALE_X_STEP,s);
 
-			sprintf(s,"%lf",lpPlotScaleDlgMem->yMin);
+			sprintf_s(s, S_LEN, "%lf",lpPlotScaleDlgMem->yMin);
 			SetDlgItemText(hDlg, IDC_EDIT_SCALE_Y_MIN,s);
-			sprintf(s,"%lf",lpPlotScaleDlgMem->yMax);
+			sprintf_s(s, S_LEN, "%lf",lpPlotScaleDlgMem->yMax);
 			SetDlgItemText(hDlg, IDC_EDIT_SCALE_Y_MAX,s);
-			sprintf(s,"%lf",lpPlotScaleDlgMem->yStep);
+			sprintf_s(s, S_LEN, "%lf",lpPlotScaleDlgMem->yStep);
 			SetDlgItemText(hDlg, IDC_EDIT_SCALE_Y_STEP,s);
 
 			SendMessage(hDlg, WM_COMMAND, IDC_SCALE_LEFT_RIGHT, 0);
@@ -221,7 +222,7 @@ LRESULT CALLBACK DlgProcPlotScale( HWND hDlg, UINT uMsg,
 			break;
 		case IDC_SCALE_LEFT_RIGHT :
 			{
-				char ss[125];
+				char ss[S_LEN];
 				SendDlgItemMessage( hDlg, IDC_COMBO_SCALE_LEFT_RIGHT, CB_RESETCONTENT, 0,0);
 				int iplot = 1;
 				if( lpPlotScaleDlgMem 
@@ -232,11 +233,11 @@ LRESULT CALLBACK DlgProcPlotScale( HWND hDlg, UINT uMsg,
 					{
 						if (lpPlotScaleDlgMem->pGraph2->m_vbYScale.GetCurrentMsg())
 						{
-							sprintf(ss,"plot %d right",iplot);
+							sprintf_s(ss, S_LEN, "plot %d right",iplot);
 						}
 						else
 						{
-							sprintf(ss,"plot %d left",iplot);
+							sprintf_s(ss, S_LEN, "plot %d left",iplot);
 						}
 
 						SendDlgItemMessage( hDlg, IDC_COMBO_SCALE_LEFT_RIGHT, CB_ADDSTRING, 0,
@@ -417,8 +418,8 @@ HRESULT OpenPlot(HWND hWnd, CGraph2* pGraph2)
 					}
 					else
 					{
-						char errstr[255];
-						sprintf(errstr,"Ошибка временной последовательности %s\nимя файла = %s\nразница=%lf",
+						char errstr[S_LEN];
+						sprintf_s(errstr, S_LEN, "Ошибка временной последовательности %s\nимя файла = %s\nразница=%lf",
 							szBuff, ofn.lpstrFile, (test_t0 - test_t) );
 						MessageBox(0,errstr,"import()",0);
 					//	break;
@@ -476,8 +477,8 @@ HRESULT OpenPlot(HWND hWnd, CGraph2* pGraph2)
 						}
 						else
 						{
-							char errstr[255];
-							sprintf(errstr,"Ошибка временной последовательности %s\nимя файла = %s\nразница=%lf",
+							char errstr[S_LEN];
+							sprintf_s(errstr, S_LEN, "Ошибка временной последовательности %s\nимя файла = %s\nразница=%lf",
 								szBuff, ofn.lpstrFile, (test_t0 - test_t) );
 							MessageBox(0,errstr,"import()",0);
 						//	break;

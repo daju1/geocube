@@ -127,7 +127,7 @@ void ExcelTSZList::virSaveToDB()
 #if 0
 
 		TCHAR filter[4098];
-		wsprintf(filter, TEXT(".%s.xls"),
+		sprintf_s(filter, 4098, TEXT(".%s.xls"),
 			this->m_excel_stat_zond.ext.c_str());
 
 		//CFileDialog dlg(TRUE, ".stz.xls", "*.stz.xls");
@@ -139,7 +139,7 @@ void ExcelTSZList::virSaveToDB()
 		sprintf(fn_xls, "\0");
 
 		TCHAR filter[4098];
-		wsprintf(filter, TEXT("%s Excel files (*.%s.xls)%%*.%s.xls%%All Files (*.*)%%*.*%%\0"),
+		sprintf_s(filter, 4098, TEXT("%s Excel files (*.%s.xls)%%*.%s.xls%%All Files (*.*)%%*.*%%\0"),
 			this->m_excel_stat_zond.xl_filter_name.c_str(),	
 			this->m_excel_stat_zond.ext.c_str(), 
 			this->m_excel_stat_zond.ext.c_str());

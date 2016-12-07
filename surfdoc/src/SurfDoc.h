@@ -478,7 +478,7 @@ public:
 	//===== Заполнение TData для любой из осей
 	void Scale(TData3D& data);
 	//===== Подготовка цифровой метки на оси
-	void MakeLabel(int axesFlag, double v, char* s, char *spower);
+	void MakeLabel(int axesFlag, double v, char* s, size_t len_s, char *spower, size_t len_spower);
 	void SurfDoc::InitSurfDoc(vdouble& x, vdouble& y, vdouble& z, int type = 0);
 	void SurfDoc::InitSurfDoc(vector<double>& x, vector<double>& y, vector<double>& z, int type = 0);
 	void SurfDoc::InitSurfDoc(Vector<int>& lines_break_indexes, vdouble& x, vdouble& y, vdouble& z);

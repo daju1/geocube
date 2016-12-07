@@ -5542,7 +5542,7 @@ void SurfDoc::ApplyRozriz()
 #if 0
 
 		TCHAR filter[4098];
-		wsprintf(filter, TEXT(".dxf"),
+		sprintf_s(filter, 4098, TEXT(".dxf"),
 			this->m_excel_stat_zond.ext.c_str());
 
 		//CFileDialog dlg(TRUE, ".stz.xls", "*.stz.xls");
@@ -5554,7 +5554,7 @@ void SurfDoc::ApplyRozriz()
 		sprintf(fn_dxf, "\0");
 
 		TCHAR filter[4098];
-		wsprintf(filter, TEXT("DXF files (*.dxf)%%*.dxf%%All Files (*.*)%%*.*%%\0"));
+		sprintf_s(filter, 4098, TEXT("DXF files (*.dxf)%%*.dxf%%All Files (*.*)%%*.*%%\0"));
 
 		// Replace occurrences of '%' string separator 
 		// with '\0'. 
@@ -6572,8 +6572,9 @@ void SurfDoc::SavingOfCubeProjectionGrid(const char * outdir, int index_cub, int
 	{
 		do
 		{
-			char prof_name_in_fun[1024];
-			this->m_bln_profiles.GetCurrentMsg().SavingOfCubeProjectionGrid(bas, outdir, index_cub, make_grids_vnahljost, convert_to_acad_yscale, non_stretched_xscale, prof_name_in_fun);
+			const size_t prof_name_len = 1024;
+			char prof_name_in_fun[prof_name_len];
+			this->m_bln_profiles.GetCurrentMsg().SavingOfCubeProjectionGrid(bas, outdir, index_cub, make_grids_vnahljost, convert_to_acad_yscale, non_stretched_xscale, prof_name_in_fun, prof_name_len);
 			prof_names_in_fun.push_back(prof_name_in_fun);
 		}
 		while(this->m_bln_profiles.IncrementCurrentMsg());
@@ -13457,7 +13458,7 @@ void SurfDoc::Scale (TData3D& data)
 }
 
 
-void SurfDoc::MakeLabel(int axesFlag, double v, char* s, char *spower)
+void SurfDoc::MakeLabel(int axesFlag, double v, char* s, size_t len_s, char *spower, size_t len_spower)
 {
 	double step;
 	int iPower;
@@ -13501,14 +13502,14 @@ void SurfDoc::MakeLabel(int axesFlag, double v, char* s, char *spower)
 
 	if (nDigits <= 0)
 	{
-		wsprintf(s,"%c%d\0",
+		sprintf_s(s, len_s, "%c%d\0",
 			 v<0.0?'-':' ', 
 			 int(fabs(v)) 
 			);
 	}
 	else
 	{
-		wsprintf(s,"%c%d.%d\0",
+		sprintf_s(s, len_s, "%c%d.%d\0",
 			 v<0.0?'-':' ', 
 			 int(fabs(v)), 
 			 int(pow(10.,nDigits)*(fabs(v)-double(int(fabs(v)))))
@@ -13517,13 +13518,13 @@ void SurfDoc::MakeLabel(int axesFlag, double v, char* s, char *spower)
 
 
 	//====== Справа оставляем минимум разрядов
-	sprintf (spower, "");
+	sprintf_s (spower, len_spower, "");
 
 	//====== Нужен ли порядок?
 	if (iPower != 0)
 	{
 		//====== Нужен, если не поместились в (10^-3, 10^+4)
-		sprintf (spower, "*10^%d\0",iPower);
+		sprintf_s (spower, len_spower, "*10^%d\0",iPower);
 	}
 }
 
