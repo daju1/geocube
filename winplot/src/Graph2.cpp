@@ -1032,7 +1032,7 @@ void CGraph2::MakeLabel(bool bX, double& v, char* s, size_t len)
 		const size_t s_add_len = 64;
 		char add[s_add_len];
 		sprintf_s (add, s_add_len, "·e%d\0",iPower);
-		strcat(s, len, add);
+		strcat_s(s, len, add);
 	}
 }
 
