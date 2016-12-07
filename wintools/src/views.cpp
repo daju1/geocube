@@ -512,7 +512,7 @@ bool graphics_view::calc_select_line(int mouse_x, int mouse_y,  CPoint3& p3)
   float VZ;
 
   glReadPixels(vx, vy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &VZ); 
-printf("VZ = %f\n", VZ);
+
   gluUnProject(vx, vy, VZ, modelview, projection, viewport, &wx, &wy, &wz);
   p3 = CPoint3(wx,wy,wz);
   if (VZ == 1.0 || VZ == -1.0)

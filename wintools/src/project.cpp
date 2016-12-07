@@ -7104,7 +7104,9 @@ void project::GDIplusEditEvent(gdiplus_map_view * gv/*, vector<iGLu> & names*/)
 								
 								if(gv->calc_select_line(mouse[0], mouse[1], pt3))
 								{
-									*edit_point = pt3;
+									edit_point->x = pt3.x;
+									edit_point->y = pt3.y;
+									edit_point->z = pt3.z;
 									primitive3->Zoom(gdiplus_view::what_selected.GetIndex(),
 										this->m_zoomX, this->m_zoomY, this->m_zoomZ,
 											m_xd_zoom_center,
@@ -7660,7 +7662,7 @@ void project::GDIplusEditEvent(gdiplus_map_view * gv/*, vector<iGLu> & names*/)
 									if(gv->calc_select_line(mouse[0], mouse[1], pt3))
 									{
 	//printf("calc_select_line\n");
-										(*edit_point).z = pt3.z;
+										edit_point->z = pt3.z;
 										pwell->Primitive3D<CPoint3>::Zoom(gdiplus_view::what_selected.GetIndex(),
 											this->m_zoomX, this->m_zoomY, this->m_zoomZ,
 												m_xd_zoom_center,
@@ -8546,7 +8548,7 @@ void project::GDIplusEditMotionEvent(gdiplus_map_view * gv/*, vector<iGLu> & nam
 									
 									if(gv->calc_select_line(mouse[0], mouse[1], pt3))
 									{
-										(*edit_point).z = pt3.z;
+										edit_point->z = pt3.z;
 										pwell->Primitive3D<CPoint3>::Zoom(gdiplus_view::what_selected.GetIndex(),
 											this->m_zoomX, this->m_zoomY, this->m_zoomZ,
 												m_xd_zoom_center,
@@ -8947,7 +8949,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 		CPoint3 pt3;
 		// при нажатии кнопки мыши
 		if (ogl_view::state == mouse_tool::state::Down)
-		{		
+		{
 //printf("if (ogl_view::state == mouse_tool::state::Down)\n");
 			if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 				pt3))
@@ -8967,8 +8969,8 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 						{
 							ogl_view::what_selected.GetObject()->ReDraw();
 							UpdateAllViews();
-						}					
-					}	*/	
+						}
+					}*/
 					//снова ищем точку пересечения указателя мыши с объектами Open GL
 					if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 							pt3))
@@ -8979,10 +8981,10 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 						{
 //printf("if (this->IsSelected 2\n");
 							ogl_view::what_selected.PrintInfo();
-							if( ogl_view::what_selected.m_selected_objects_element_type 
+							if(ogl_view::what_selected.m_selected_objects_element_type
 								== WhatSelected::selected_objects_element_type::sel_point
 								&& ogl_view::what_selected.GetObject())
-							{	
+							{
 //printf("if (m_selected_objects_element_type == sel_point\n");
 								if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 								{
@@ -9001,7 +9003,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 //printf("if GetIndex() CPOINT3_FLAG_HIDE\n");
 											//edit_point = &primitive3->GetViewPoint(ogl_view::what_selected.GetIndex());
 											edit_point = &primitive3->GetDocumentPoint(ogl_view::what_selected.GetIndex());
-											/*
+
 											CPoint3& ptd = primitive3->GetDocumentPoint(ogl_view::what_selected.GetIndex());
 											// HIDE POINT - включаем 3-й бит 
 											// в пользовательских данных point 
@@ -9012,7 +9014,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 //printf("pre ReDraw %s\n", Object::ObjectTypeToString(ogl_view::what_selected.GetObject()->GetObjectType()));
 
 											ogl_view::what_selected.GetObject()->ReDraw();
-											UpdateAllViews();*/
+											UpdateAllViews();
 											return;
 										}
 									}
@@ -9021,7 +9023,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 						}
 					}
 					// если режим отображения линий с шариками - то меняем этот режим 
-					/*if (old_line3d_draw_mode == Line3D::line3d_draw_mode::as_lines_with_spheres)
+					if (old_line3d_draw_mode == Line3D::line3d_draw_mode::as_lines_with_spheres)
 					{
 						Line3D::s_line3d_draw_mode = old_line3d_draw_mode;
 						// теперь мы должны перерисовать выбранный объект в новом режиме
@@ -9029,15 +9031,15 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 						{
 							ogl_view::what_selected.GetObject()->ReDraw();
 							UpdateAllViews();
-						}					
-					}	*/			
+						}
+					}
 				}
 			}
 		}
 		if (ogl_view::state == mouse_tool::state::Up)
 		{
 //printf("edit_tool::Line Up\n");
-			if( ogl_view::what_selected.m_selected_objects_element_type 
+			if(ogl_view::what_selected.m_selected_objects_element_type
 				== WhatSelected::selected_objects_element_type::sel_point
 				&& ogl_view::what_selected.GetObject())
 			{
@@ -9065,7 +9067,6 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 								if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 										pt3))
 								{
-												
 									pt3.z = m_zd_zoom_center + pt3.z / this->m_zoomZ;
 									pt3.y = m_yd_zoom_center + pt3.y / this->m_zoomY;
 									pt3.x = m_xd_zoom_center + pt3.x / this->m_zoomX;
@@ -9073,7 +9074,9 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 									if(this->CorrectDrawingPoint(ogl_view::what_selected.GetObject(), 
 										pt3))
 									{
-										*edit_point = pt3;
+										edit_point->x = pt3.x;
+										edit_point->y = pt3.y;
+										edit_point->z = pt3.z;
 										primitive3->Zoom(ogl_view::what_selected.GetIndex(),
 											this->m_zoomX, this->m_zoomY, this->m_zoomZ,
 												m_xd_zoom_center,
@@ -9081,13 +9084,13 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 												m_zd_zoom_center);
 									}
 								}
-/*
+
 								CPoint3& ptd = primitive3->GetDocumentPoint(ogl_view::what_selected.GetIndex());
 								// UN HIDE POINT - выключаем 3-й бит 
 								// в пользовательских данных point
 								ptd.flag &= ~CPOINT3_FLAG_HIDE;
 								ogl_view::what_selected.GetObject()->m_lParam &= ~OBJECT_FLAG_THING_BIT;
-*/
+
 								ogl_view::what_selected.GetObject()->ReDraw();
 
 								//Object::CanDisableDepthTest(can_disable_depth_test);
@@ -9111,15 +9114,15 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 		{
 			if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 					pt3))
-			{				
+			{
 				// если мы попали мышью по объекту
 				if (this->IsSelected(pt3,this->m_sphere_radius,ogl_view::what_selected))
 				{
 					ogl_view::what_selected.PrintInfo();
-					if( ogl_view::what_selected.m_selected_objects_element_type 
+					if(ogl_view::what_selected.m_selected_objects_element_type
 						== WhatSelected::selected_objects_element_type::sel_line
 						&& ogl_view::what_selected.GetObject())
-					{	
+					{
 						if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 						{
 							Primitive3D<CPoint3> * primitive3 
@@ -9128,8 +9131,8 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 
 							if (primitive3)
 							{
-								if (ogl_view::what_selected.GetIndex() > -1 
-									&& 
+								if (ogl_view::what_selected.GetIndex() > -1
+									&&
 									ogl_view::what_selected.GetIndex() < (int)primitive3->GetPointsNumber())
 								{
 									printf("to_edit = true\n");
@@ -9157,7 +9160,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 		}
 		if (ogl_view::state == mouse_tool::state::Up)
 		{
-			if( ogl_view::what_selected.m_selected_objects_element_type 
+			if(ogl_view::what_selected.m_selected_objects_element_type
 				== WhatSelected::selected_objects_element_type::sel_line
 				&& ogl_view::what_selected.GetObject())
 			{
@@ -9165,14 +9168,14 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 				{
 					if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 					{
-						Primitive3D<CPoint3> * primitive3 
+						Primitive3D<CPoint3> * primitive3
 							= dynamic_cast<Primitive3D<CPoint3>*>
 							(ogl_view::what_selected.GetObject());
 
 						if (primitive3)
 						{
-							if (ogl_view::what_selected.GetIndex() > -1 
-								&& 
+							if (ogl_view::what_selected.GetIndex() > -1
+								&&
 								ogl_view::what_selected.GetIndex() < (int)primitive3->GetPointsNumber())
 							{
 								bool can_disable_depth_test = Object::CanDisableDepthTest();
@@ -9187,7 +9190,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 									pt3.z = m_zd_zoom_center + pt3.z / this->m_zoomZ;
 									pt3.y = m_yd_zoom_center + pt3.y / this->m_zoomY;
 									pt3.x = m_xd_zoom_center + pt3.x / this->m_zoomX;
-									if(	this->CorrectDrawingPoint(ogl_view::what_selected.GetObject(), pt3))
+									if(this->CorrectDrawingPoint(ogl_view::what_selected.GetObject(), pt3))
 									{
 										//*edit_point = pt3;
 										primitive3->Insert(ogl_view::what_selected.GetIndex()+1,pt3);
@@ -9238,15 +9241,15 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 		{
 			if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 					pt3))
-			{				
+			{
 				// если мы попали мышью по объекту
 				if (this->IsSelected(pt3,this->m_sphere_radius,ogl_view::what_selected))
 				{
 					ogl_view::what_selected.PrintInfo();
-					if( ogl_view::what_selected.m_selected_objects_element_type 
+					if(ogl_view::what_selected.m_selected_objects_element_type
 						== WhatSelected::selected_objects_element_type::sel_line
 						&& ogl_view::what_selected.GetObject())
-					{	
+					{
 						if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 						{
 							Primitive3D<CPoint3> * primitive3 
@@ -9271,7 +9274,6 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 												if (pob->UnClose(ogl_view::what_selected.GetIndex()))
 												{
 													pob->ReDraw();
-                                                    
 													UpdateAllViews();
 													return;
 												}
@@ -9361,7 +9363,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 		{
 			if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 					pt3))
-			{				
+			{
 				// если мы попали мышью по объекту
 				if (this->IsSelected(pt3,this->m_sphere_radius,ogl_view::what_selected))
 				{
@@ -9369,7 +9371,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 					if( ogl_view::what_selected.m_selected_objects_element_type 
 						== WhatSelected::selected_objects_element_type::sel_point
 						&& ogl_view::what_selected.GetObject())
-					{	
+					{
 						if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 						{
 							Primitive3D<CPoint3> * primitive3 
@@ -9437,12 +9439,10 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 													ogl_view::what_selected.GetObject()->myTreeItem, 
 													ogl_view::what_selected.GetObject()->m_bChecked);
 
-																		
 												ogl_view::what_selected.
 													EraseSelectedObject<Line3D>
 													(hwndTV,Object::object_type::line3d);
-						
-					
+
 												UpdateAllViews();
 												return;
 											}
@@ -9463,7 +9463,7 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 	{
 		//printf("edit_tool::Line_connect\n");
 		Line3D::line3d_draw_mode old_line3d_draw_mode = Line3D::s_line3d_draw_mode;
-		ogl_view::what_selected.m_what_to_select = 
+		ogl_view::what_selected.m_what_to_select =
 			WhatSelected::selected_objects_element_type::sel_point;
 
 		CPoint3 pt3;
@@ -9477,25 +9477,25 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 
 			if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 					pt3))
-			{				
+			{
 				// если мы попали мышью по объекту
 				if (this->IsSelected(pt3,this->m_sphere_radius,ogl_view::what_selected))
 				{
 					ogl_view::what_selected.PrintInfo();
-					if( ogl_view::what_selected.m_selected_objects_element_type 
+					if(ogl_view::what_selected.m_selected_objects_element_type
 						== WhatSelected::selected_objects_element_type::sel_point
 						&& ogl_view::what_selected.GetObject())
-					{	
+					{
 						if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 						{
-							Primitive3D<CPoint3> * primitive3 
+							Primitive3D<CPoint3> * primitive3
 								= dynamic_cast<Primitive3D<CPoint3>*>
 								(ogl_view::what_selected.GetObject());
 
 							if (primitive3)
 							{
-								if (ogl_view::what_selected.GetIndex() > -1 
-									&& 
+								if (ogl_view::what_selected.GetIndex() > -1
+									&&
 									ogl_view::what_selected.GetIndex() < (int)primitive3->GetPointsNumber())
 								{
 									//printf("to_edit = true\n");
@@ -9535,15 +9535,15 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 
 			if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 					pt3))
-			{				
+			{
 				// если мы попали мышью по объекту
 				if (this->IsSelected(pt3,this->m_sphere_radius,ogl_view::what_selected))
 				{
 					ogl_view::what_selected.PrintInfo();
-					if( ogl_view::what_selected.m_selected_objects_element_type 
+					if(ogl_view::what_selected.m_selected_objects_element_type
 						== WhatSelected::selected_objects_element_type::sel_point
 						&& ogl_view::what_selected.GetObject())
-					{	
+					{
 						if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 						{
 							Primitive3D<CPoint3> * primitive3 
@@ -9552,8 +9552,8 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 
 							if (primitive3)
 							{
-								if (ogl_view::what_selected.GetIndex() > -1 
-									&& 
+								if (ogl_view::what_selected.GetIndex() > -1
+									&&
 									ogl_view::what_selected.GetIndex() < (int)primitive3->GetPointsNumber())
 								{
 									//printf("to_edit = true\n");
@@ -9570,9 +9570,6 @@ void project::EditEvent(graphics_view * gv, vector<iGLu> & names)
 												vect<Line3D> * pvect = reinterpret_cast<vect<Line3D> *>(ogl_view::what_selected.GetObject()->GetObjectList()->GetContainer());
 												this->connect_vect_lines[1] = pvect;
 												this->connect_lines_ind[1] = ogl_view::what_selected.GetIndex();
-
-
-												
 											}
 										}
 									}
@@ -9605,7 +9602,7 @@ printf("this->connect_lines[1] 0x%08x\n"
 			{
 //printf("edit_tool::Line_connect 3\n");
 				if (this->connect_lines[0] == this->connect_lines[1])
-				{		
+				{
 					if(
 						(this->connect_lines_ind[0] == 0 && this->connect_lines_ind[1] == this->connect_lines[1]->GetPointsNumber()-1)
 						||
@@ -9632,7 +9629,7 @@ printf("this->connect_lines[1] 0x%08x\n"
 //printf("edit_tool::Line_connect 5\n");
 						// нулевую линию сливаем к первой
 
-						if (this->connect_lines_ind[0] == 0 && 
+						if (this->connect_lines_ind[0] == 0 &&
 							this->connect_lines_ind[1] == this->connect_lines[1]->GetPointsNumber()-1)
 						{
 							for (int i = 0; i < (int)this->connect_lines[0]->GetPointsNumber(); i++)
@@ -9648,8 +9645,8 @@ printf("this->connect_lines[1] 0x%08x\n"
 //printf("edit_tool::Line_connect 6\n");
 							return;
 
-						}						
-						
+						}
+
 						if (this->connect_lines_ind[0] == this->connect_lines[0]->GetPointsNumber()-1 && 
 							this->connect_lines_ind[1] == this->connect_lines[1]->GetPointsNumber()-1)
 						{
@@ -9666,7 +9663,7 @@ printf("this->connect_lines[1] 0x%08x\n"
 							return;
 						}
 						// первую линию сливаем к нулевой 
-						if (this->connect_lines_ind[0] == this->connect_lines[0]->GetPointsNumber()-1 && 
+						if (this->connect_lines_ind[0] == this->connect_lines[0]->GetPointsNumber()-1 &&
 							this->connect_lines_ind[1] == 0)
 						{
 							for (int i = 0; i < (int)this->connect_lines[1]->GetPointsNumber(); i++)
@@ -9679,9 +9676,9 @@ printf("this->connect_lines[1] 0x%08x\n"
 							EraseObject<Line3D>(hwndTV, this->connect_lines[1], Object::object_type::line3d);
 //printf("edit_tool::Line_connect 8\n");
 							return;
-						}						
-						
-						if (this->connect_lines_ind[0] == 0 && 
+						}
+
+						if (this->connect_lines_ind[0] == 0 &&
 							this->connect_lines_ind[1] == 0)
 						{
 							this->connect_lines[0]->Reverse();
@@ -9733,12 +9730,11 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 		ogl_view::what_selected.m_what_to_select = 
 			WhatSelected::selected_objects_element_type::sel_point;
 
-		
 		// при нажатии кнопки мыши
 		if (ogl_view::state == mouse_tool::state::Down)
 		{
 //printf("edit_tool::Line Down\n");
-			if( ogl_view::what_selected.m_selected_objects_element_type 
+			if(ogl_view::what_selected.m_selected_objects_element_type
 				== WhatSelected::selected_objects_element_type::sel_point
 				&& ogl_view::what_selected.GetObject())
 			{
@@ -9756,8 +9752,8 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 						if (primitive3)
 						{
 //printf("primitive3\n");
-							if (ogl_view::what_selected.GetIndex() > -1 
-								&& 
+							if (ogl_view::what_selected.GetIndex() > -1
+								&&
 								ogl_view::what_selected.GetIndex() < (int)primitive3->GetPointsNumber())
 							{
 //printf("GetIndex() = %d\n", ogl_view::what_selected.GetIndex());
@@ -9771,14 +9767,18 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 								if(calc_select_line(mouse[0], mouse[1], gv->size[1], //текущая высота окна.
 										pt3))
 								{
-//printf("calc_sel_line");
+//printf("calc_sel_line\n");
 									pt3.z = m_zd_zoom_center + pt3.z / this->m_zoomZ;
 									pt3.y = m_yd_zoom_center + pt3.y / this->m_zoomY;
 									pt3.x = m_xd_zoom_center + pt3.x / this->m_zoomX;
-									if(	this->CorrectDrawingPoint(ogl_view::what_selected.GetObject(), pt3))
+									if(this->CorrectDrawingPoint(ogl_view::what_selected.GetObject(), pt3))
 									{
-//printf("CorrectDrawingPoint");
-										*edit_point = pt3;
+//printf("CorrectDrawingPoint\n");
+
+										edit_point->x = pt3.x;
+										edit_point->y = pt3.y;
+										edit_point->z = pt3.z;
+
 										primitive3->Zoom(ogl_view::what_selected.GetIndex(),
 											this->m_zoomX, this->m_zoomY, this->m_zoomZ,
 												m_xd_zoom_center,
@@ -9786,7 +9786,6 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 												m_zd_zoom_center);
 									}
 								}
-
 								/*CPoint3& ptd = primitive3->GetDocumentPoint(ogl_view::what_selected.GetIndex());
 								// UN HIDE POINT - выключаем 3-й бит 
 								// в пользовательских данных point
@@ -9807,7 +9806,7 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 		//if (ogl_view::what_to_edit == edit_tool::what_to_edit::Line_by_add_new_point)
 		//{
 		//printf("edit_tool::Line_by_add_new_point\n");
-		ogl_view::what_selected.m_what_to_select = 
+		ogl_view::what_selected.m_what_to_select =
 			WhatSelected::selected_objects_element_type::sel_line;
 
 
@@ -9815,7 +9814,7 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 		if (ogl_view::state == mouse_tool::state::Down)
 		{
 //printf("Down2\n");
-			if( ogl_view::what_selected.m_selected_objects_element_type 
+			if( ogl_view::what_selected.m_selected_objects_element_type
 				== WhatSelected::selected_objects_element_type::sel_line
 				&& ogl_view::what_selected.GetObject())
 			{
@@ -9823,14 +9822,14 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 				{
 					if(ogl_view::what_selected.GetObject()->IsPrimitive3())
 					{
-						Primitive3D<CPoint3> * primitive3 
+						Primitive3D<CPoint3> * primitive3
 							= dynamic_cast<Primitive3D<CPoint3>*>
 							(ogl_view::what_selected.GetObject());
 
 						if (primitive3)
 						{
-							if (ogl_view::what_selected.GetIndex() > -1 
-								&& 
+							if (ogl_view::what_selected.GetIndex() > -1
+								&&
 								ogl_view::what_selected.GetIndex() < (int)primitive3->GetPointsNumber())
 							{
 								/*bool can_disable_depth_test = Object::CanDisableDepthTest();
@@ -9846,7 +9845,7 @@ void project::EditMotionEvent(graphics_view * gv, vector<iGLu> & names)
 									pt3.z = m_zd_zoom_center + pt3.z / this->m_zoomZ;
 									pt3.y = m_yd_zoom_center + pt3.y / this->m_zoomY;
 									pt3.x = m_xd_zoom_center + pt3.x / this->m_zoomX;
-									if(	this->CorrectDrawingPoint(ogl_view::what_selected.GetObject(), pt3))
+									if(this->CorrectDrawingPoint(ogl_view::what_selected.GetObject(), pt3))
 									{
 										//*edit_point = pt3;
 										if(to_insert)

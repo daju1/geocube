@@ -801,7 +801,7 @@ public:
 	{
 		bool start = true;
 		for (size_t ipoint = 0; ipoint < m_nPoints; ipoint++)
-		{							
+		{
 			if (m_vdPoints[ipoint].bVisible)
 			{
 				if (start)
@@ -829,7 +829,7 @@ public:
 	void Zoom(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean)
 	{
 		for (size_t ipoint = 0; ipoint < m_nPoints; ipoint++)
-		{							
+		{
 			m_vvPoints[ipoint].bVisible = m_vdPoints[ipoint].bVisible;
 
 			m_vvPoints[ipoint].z = 
@@ -843,7 +843,7 @@ public:
 	void Zoom(size_t ipoint, double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean)
 	{
 		if (ipoint < m_nPoints && ipoint >= 0 )
-		{							
+		{
 			m_vvPoints[ipoint].bVisible = m_vdPoints[ipoint].bVisible;
 
 			m_vvPoints[ipoint].z = 
@@ -857,7 +857,7 @@ public:
 	void ZoomInv(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean)
 	{
 		for (size_t ipoint = 0; ipoint < m_nPoints; ipoint++)
-		{							
+		{
 			m_vdPoints[ipoint].bVisible = m_vvPoints[ipoint].bVisible;
 			m_vdPoints[ipoint].z = z_mean + m_vvPoints[ipoint].z / zoomZ;
 			m_vdPoints[ipoint].y = y_mean + m_vvPoints[ipoint].y / zoomY;
@@ -867,7 +867,7 @@ public:
 	void ZoomInv(size_t ipoint, double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean)
 	{
 		if (ipoint < m_nPoints && ipoint >= 0 )
-		{							
+		{
 			m_vdPoints[ipoint].bVisible = m_vvPoints[ipoint].bVisible;
 			m_vdPoints[ipoint].z = z_mean + m_vvPoints[ipoint].z / zoomZ;
 			m_vdPoints[ipoint].y = y_mean + m_vvPoints[ipoint].y / zoomY;

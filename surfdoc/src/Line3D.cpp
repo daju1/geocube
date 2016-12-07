@@ -152,11 +152,11 @@ void Line3D::Drawing(void)
 		{
 			glLineWidth(m_LineWidth);
 			Line3(
-				m_vvPoints[i0].x, 
-				m_vvPoints[i0].y, 
+				m_vvPoints[i0].x,
+				m_vvPoints[i0].y,
 				m_vvPoints[i0].z,
-				m_vvPoints[i1].x, 
-				m_vvPoints[i1].y,	
+				m_vvPoints[i1].x,
+				m_vvPoints[i1].y,
 				m_vvPoints[i1].z);
 		}
 	}
@@ -206,6 +206,10 @@ void Line3D::Drawing(void)
 						) ;//рисуем сферу 
 					glPopMatrix(); //возвращаемся к старым координатам 
 					gluDeleteQuadric(pSphere);
+				}
+				else
+				{
+					//printf("Has_hide_point i = %d\n", i);
 				}
 			}
 		}
