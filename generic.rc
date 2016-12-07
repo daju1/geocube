@@ -2570,7 +2570,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Passport Ukrainian language", ID_LAB_PASSPORTUKRAINIANLANGUAGE
     END
-    POPUP "Surfs"
+    POPUP "Поверхности"
     BEGIN
         MENUITEM "Filters",                     ID_SURF_FILTERS
         MENUITEM "Zero if blanked",             ID_SURF_ZEROIFBLANKED
@@ -2579,17 +2579,17 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Surfaces Faults Cutlines",    ID_SURF_SURFACESFAULTSCUTLINES
         MENUITEM SEPARATOR
-        MENUITEM "Surfaces Blank",              ID_SURF_SURFACESBLANK
-        MENUITEM "Faults Blank",                ID_SURF_FAULTSBLANK
+        MENUITEM "Бланкование поверхностей",    ID_SURF_SURFACESBLANK
+        MENUITEM "Бланкование разломов",        ID_SURF_FAULTSBLANK
         MENUITEM "Broken Planes Blank",         ID_SURF_BROKENPLANESBLANK
-        MENUITEM "No Blank",                    ID_SURF_NOBLANK
+        MENUITEM "Отменить бланкование",        ID_SURF_NOBLANK
         MENUITEM SEPARATOR
         MENUITEM "Fill->Line->Points (surfaces)", ID_VIEW_FILL
         MENUITEM "Fill->Line->Points (faults)", ID_VIEW_FILL_FAULTS
         MENUITEM SEPARATOR
         MENUITEM "Flat",                        ID_VIEW_FLAT_SHADING
         MENUITEM SEPARATOR
-        MENUITEM "Izo lines",                   ID_VIEW_IZOLINES
+        MENUITEM "Изолинии",                    ID_VIEW_IZOLINES
         MENUITEM "Save As Surfer 7 Grid",       ID_WINSURF_FILE_SAVEAS_SURFER7_GRID
         MENUITEM SEPARATOR
         MENUITEM "Order Lists",                 ID_SURFS_ORDERLISTS
@@ -3013,7 +3013,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Save bitmap",                 ID_VIEW_SAVEBITMAP_2
     END
-    POPUP "Surfs"
+    POPUP "Поверхности"
     BEGIN
         MENUITEM "Fill->Line->Points (surfaces)", ID_VIEW_FILL
         MENUITEM "Fill->Line->Points (faults)", ID_VIEW_FILL_FAULTS
