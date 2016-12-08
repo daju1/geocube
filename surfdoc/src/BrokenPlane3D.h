@@ -53,7 +53,7 @@ struct AutoCADRazrezParam
 	double wells_hatch_scale;
 };
 
-struct SurfLineIntersectPoint 
+struct SurfLineIntersectPoint
 {
 	int i_surf1;//номер продлеваемой линии
 	bool back;//направление продлевания линии относительно внутренней нумерации точек в линии

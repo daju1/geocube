@@ -1407,7 +1407,7 @@ void GeoSurface::BlankWithOwnBlankLines(bool toPresetAllVisible, bool to_continu
 void GeoSurface::MakeQuadBlankPolygons(
 	vector<blank_polygon_point>& blank_polygon_points)
 {
-printf("MakeQuadBlankPolygons\n" );
+/*printf("MakeQuadBlankPolygons\n" );
 printf("blank_polygon_points.size() = %u\n", blank_polygon_points.size());
 for (size_t ii = 0; ii < blank_polygon_points.size(); ii++)
 {
@@ -1417,7 +1417,8 @@ for (size_t ii = 0; ii < blank_polygon_points.size(); ii++)
 		blank_polygon_points[ii].pt.z,
 		blank_polygon_points[ii].pt.bVisible
 		);
-}	// разделение полигонов по признаку номера  линии - 
+}*/
+	// разделение полигонов по признаку номера  линии - 
 	// разделяются непересекающиеся линии, имеющие разные номера
 	vector<blank_polygon_point>::iterator iter;
 	// до тех пор пока не исчерпаем весь массив
@@ -1475,7 +1476,6 @@ for (size_t ii = 0; ii < poly.GetPointsNumber(); ii++)
 		poly.GetDocumentPoint(ii).bVisible
 		);
 }*/
-        // 
 		if(poly.GetPointsNumber()>2) 
 		{
 			//if (pGeoSurface) 
@@ -1485,7 +1485,7 @@ for (size_t ii = 0; ii < poly.GetPointsNumber(); ii++)
 			//}
 			//else
 			//	this->m_pSurfDoc->AddPoligon(poly);
-		}				
+		}
 	}
 }
 

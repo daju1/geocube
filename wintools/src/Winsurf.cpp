@@ -6715,7 +6715,7 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 {
 	static HWND hWnd;
 	static bool save_screen;
-	static long width, height; 		
+	static long width, height;
 	static double proportion;
 	static bool constant_proportions, update_edits;
 	static char str[128];
@@ -6732,8 +6732,8 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 			glReadBuffer(GL_BACK); //  designate buffer to read
 			int vp[4];
 			glGetIntegerv(GL_VIEWPORT, vp);
-			width=vp[2]; 
-			height=vp[3]; 		
+			width=vp[2];
+			height=vp[3];
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 			sprintf(str, "%d\0", width);
@@ -6794,7 +6794,7 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 			{
 				height = double (width) / proportion;
 			}
-			break;			
+			break;
 		case IDC_BUTTON_FILL_H:
 			{
 				update_edits = false;
@@ -6829,7 +6829,7 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 		case IDOK :
 			{
 				char fn[4098];	fn[0] = '\0';
-				DWORD nFilterIndex;
+				DWORD nFilterIndex = 0;
 				if (SaveFileDlg(hWnd, fn, "Bitmap (*.bmp)\0*.bmp\0All files \0*.*\0", nFilterIndex) == S_OK)
 				{
 					if (save_screen)

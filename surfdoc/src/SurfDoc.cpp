@@ -10491,9 +10491,8 @@ printf("UpdateExtremums post m_bmp_profiles\n");
 	m_yd_max = this->m_ptMax.y ;
 	m_zd_max = this->m_ptMax.z ;
 
-	return result;
-
 printf( "UpdateExtremums end\n");
+	return result;
 }
 void SurfDoc::ClearCutlinesPolygones()
 {

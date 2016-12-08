@@ -12,6 +12,7 @@ class Layer;
 class Poligon3D;
 
 struct ProfileAttachPoint;
+struct SurfLineIntersectPoint;
 struct TWO;
 struct TRIA;
 
@@ -129,6 +130,7 @@ public:
 	friend Archive& operator <<(Archive& ar, CPoint3& point);
 	friend Archive& operator <<(Archive& ar, CPoint2& point);
 	friend Archive& operator <<(Archive& ar, ProfileAttachPoint& pa);
+	friend Archive& operator <<(Archive& ar, SurfLineIntersectPoint& pa);
 	friend Archive& operator <<(Archive& ar, TWO& two);
 	friend Archive& operator <<(Archive& ar, TRIA& tria);
 
@@ -159,6 +161,7 @@ public:
 	friend Archive& operator >>(Archive& ar, CPoint3& point);
 	friend Archive& operator >>(Archive& ar, CPoint2& point);
 	friend Archive& operator >>(Archive& ar, ProfileAttachPoint& pa);
+	friend Archive& operator >>(Archive& ar, SurfLineIntersectPoint& pa);
 	friend Archive& operator >>(Archive& ar, TWO& two);
 	friend Archive& operator >>(Archive& ar, TRIA& tria);
 

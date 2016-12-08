@@ -4,6 +4,7 @@
 #include ".\layer.h"
 #include ".\grid.h"
 #include "ProfileAttachPoint.h"
+#include ".\brokenplane3d.h"
 
 bool Archive::OpenFileAsImport = false;
 
@@ -500,6 +501,29 @@ Archive& operator <<(Archive& ar, ProfileAttachPoint& pa)
 	ar << pa.yMap;
 	return ar;
 }
+
+Archive& operator <<(Archive& ar, SurfLineIntersectPoint& p)
+{
+	ar << p.i_surf1;
+	ar << p.back;
+	ar << p.dist_to_end;
+
+	ar << p.i1_1;
+	ar << p.i2_1;
+
+	ar << p.i_surf2;
+	ar << p.i1_2;
+	ar << p.i2_2;
+	ar << p.unvisibles;
+	ar << p.dst_to_vis;
+
+	ar << p.with_krovlja;
+
+	ar << p.point;
+
+	return ar;
+}
+
 Archive& operator <<(Archive& ar, TWO& two)
 {
 	ar << two.i1;
@@ -551,6 +575,27 @@ Archive& operator >>(Archive& ar, ProfileAttachPoint& pa)
 	ar >> pa.xMap;
 	ar >> pa.xProfile;
 	ar >> pa.yMap;
+	return ar;
+}
+Archive& operator >>(Archive& ar, SurfLineIntersectPoint& p)
+{
+	ar >> p.i_surf1;
+	ar >> p.back;
+	ar >> p.dist_to_end;
+
+	ar >> p.i1_1;
+	ar >> p.i2_1;
+
+	ar >> p.i_surf2;
+	ar >> p.i1_2;
+	ar >> p.i2_2;
+	ar >> p.unvisibles;
+	ar >> p.dst_to_vis;
+
+	ar >> p.with_krovlja;
+
+	ar >> p.point;
+
 	return ar;
 }
 Archive& operator >>(Archive& ar, TWO& two)

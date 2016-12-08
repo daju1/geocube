@@ -57,8 +57,8 @@ BrokenPlane3D::BrokenPlane3D(SurfDoc* pSurfDoc)
 void BrokenPlane3D::OnCreate(void)
 {
 	this->m_object_type = Object::object_type::broken_plane3d;
-	this->m_object_version = 2;
-	this->m_max_object_version = 2;
+	this->m_object_version = 3;
+	this->m_max_object_version = 3;
 
 	m_nCuts = 0;
 	m_nSurfs = 0;
@@ -7552,6 +7552,17 @@ Archive& operator <<(Archive& ar, BrokenPlane3D& ob)
 	DWORD version = ob.Object::Serialize(ar);
 	switch (version)
 	{
+	case 3:
+		{
+			ar << ob.m_SurfLineIntersectPoints; ar << ob.m_SurfLineIntersectPoints_ObjectList;
+
+			ar << ob.m_pointsDrillSloi_left;    ar << ob.m_pointsDrillSloi_left_ObjectList;
+			ar << ob.m_pointsDrillSloi_right;   ar << ob.m_pointsDrillSloi_right_ObjectList;
+
+			ar << ob.m_drills_line_left;        ar << ob.m_drills_line_left_ObjectList;
+			ar << ob.m_drills_line_right;       ar << ob.m_drills_line_right_ObjectList;
+		}
+		//do not break!!!
 	case 2:
 		{
 			ar << ob.m_nCatches;
@@ -7593,6 +7604,22 @@ Archive& operator >>(Archive& ar, BrokenPlane3D& ob)
 	ob.Object::Serialize(ar);
 	switch (ob.m_object_version)
 	{
+	case 3:
+		{
+			ar >> ob.m_SurfLineIntersectPoints; ar >> ob.m_SurfLineIntersectPoints_ObjectList;
+			ob.m_SurfLineIntersectPoints_ObjectList.Init2_SurfLineIntersectPoint(ob.m_SurfLineIntersectPoints, &ob);
+
+			ar >> ob.m_pointsDrillSloi_left;    ar >> ob.m_pointsDrillSloi_left_ObjectList;
+			ob.m_pointsDrillSloi_left_ObjectList.Init2(ob.m_pointsDrillSloi_left, &ob);
+			ar >> ob.m_pointsDrillSloi_right;   ar >> ob.m_pointsDrillSloi_right_ObjectList;
+			ob.m_pointsDrillSloi_right_ObjectList.Init2(ob.m_pointsDrillSloi_right, &ob);
+
+			ar >> ob.m_drills_line_left;        ar >> ob.m_drills_line_left_ObjectList;
+			ob.m_drills_line_left_ObjectList.Init1(ob.m_drills_line_left, &ob);
+			ar >> ob.m_drills_line_right;       ar >> ob.m_drills_line_right_ObjectList;
+			ob.m_drills_line_right_ObjectList.Init1(ob.m_drills_line_right, &ob);
+		}
+		//do not break!!!
 	case 2:
 		{
 			ar >> ob.m_nCatches;
@@ -7611,6 +7638,8 @@ Archive& operator >>(Archive& ar, BrokenPlane3D& ob)
 
 				ob.m_object_version = 2;
 			}
+
+			ob.m_object_version = 3;
 
 			ar >> ob.m_nCuts;
 			ar >> ob.m_nDrills;

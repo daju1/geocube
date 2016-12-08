@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 //#include <windows.h>
+#include <assert.h>
 
 template <class T> class Vector;
 
@@ -111,13 +112,14 @@ public:
 	}
 	T& operator [](size_t i) const 
 	{ 
-		/*if (i < 0 || i >= size_t(size))
+		if (i < 0 || i >= size_t(size))
 		{
-			char strerr[200];;
-			sprintf_s(strerr, 200, "Index = %i Error using Vector<size = %i>::Operator[]", i, size);
-			MessageBox(0,strerr, "", 0);
-			return data[i];
-		}*/
+			char strerr[1024];;
+			sprintf_s(strerr, 1024, "Index = %i Error using Vector<size = %i>::Operator[]", i, size);
+			printf("%s\n", strerr);
+			MessageBox(0, strerr, "", 0);
+			assert(false);
+		}
 		return data[i]; 
 	}
 
