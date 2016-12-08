@@ -209,267 +209,269 @@ void CALLBACK tessErrorCB(GLenum errorCode)
 
 #include "../../array/src/matrixes.h"
 
-void Poligon3D::Drawing( )
+void Poligon3D::Drawing()
 {
 	vertexIndex = 0;  
 	//http://www.songho.ca/opengl/gl_tessellation.html
 
-	if (m_pSurfDoc)
-	{
-		size_t len = this->GetPointsNumber();
-		double d1[3],d2[3],norm[3];
+	if (!m_pSurfDoc)
+		return;
+
+	size_t len = this->GetPointsNumber();
+	if (0 == len)
+		return;
+
+	double d1[3],d2[3],norm[3];
 #if 1
-		//====== Установка режима заполнения
-		//====== внутренних точек полигонов
-		GLint oldPolygonMode[2];
-		glGetIntegerv(GL_POLYGON_MODE, oldPolygonMode);
-		if (m_pSurface)
-			glPolygonMode(GL_FRONT_AND_BACK, m_pSurface->GetFillMode());
-		else
-			glPolygonMode(GL_FRONT_AND_BACK, GetFillMode());
+	//====== Установка режима заполнения
+	//====== внутренних точек полигонов
+	GLint oldPolygonMode[2];
+	glGetIntegerv(GL_POLYGON_MODE, oldPolygonMode);
+	if (m_pSurface)
+		glPolygonMode(GL_FRONT_AND_BACK, m_pSurface->GetFillMode());
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GetFillMode());
 
 
 
 
-		GLUtesselator *tess = gluNewTess(); // create a tessellator
-		if(!tess) return;  // failed to create tessellation object, return 0
+	GLUtesselator *tess = gluNewTess(); // create a tessellator
+	if(!tess) return;  // failed to create tessellation object, return 0
 
-		// define concave quad data (vertices only)
-		//  0    2
-		//  \ \/ /
-		//   \3 /
-		//    \/
-		//    1
-	    //GLdouble quad1[4][3] = { {-1,3,0}, {0,0,0}, {1,3,0}, {0,2,0} };
+	// define concave quad data (vertices only)
+	//  0    2
+	//  \ \/ /
+	//   \3 /
+	//    \/
+	//    1
+	//GLdouble quad1[4][3] = { {-1,3,0}, {0,0,0}, {1,3,0}, {0,2,0} };
 
-		GLdouble ** quad1 = Alloc2DMat<GLdouble>(len,3);
-		for (size_t i = 0; i < len; i++)
+	GLdouble ** quad1 = Alloc2DMat<GLdouble>(len,3);
+	for (size_t i = 0; i < len; i++)
+	{
+		quad1[i][0] = m_vvPoints[i].x;
+		quad1[i][1] = m_vvPoints[i].y;
+		quad1[i][2] = m_vvPoints[i].z;
+	}
+
+	// register callback functions
+	gluTessCallback(tess, GLU_TESS_BEGIN, (void (CALLBACK *)())tessBeginCB);
+	gluTessCallback(tess, GLU_TESS_END, (void (CALLBACK *)())tessEndCB);
+	gluTessCallback(tess, GLU_TESS_ERROR, (void (CALLBACK *)())tessErrorCB);
+	gluTessCallback(tess, GLU_TESS_VERTEX, (void (CALLBACK *)())tessVertexCB);
+	gluTessCallback(tess, GLU_TESS_COMBINE, (void (__stdcall*)(void))tessCombineCB);
+
+	// tessellate and compile a concave quad into display list
+	// gluTessVertex() takes 3 params: tess object, pointer to vertex coords,
+	// and pointer to vertex data to be passed to vertex callback.
+	// The second param is used only to perform tessellation, and the third
+	// param is the actual vertex data to draw. It is usually same as the second
+	// param, but It can be more than vertex coord, for example, color, normal
+	// and UV coords which are needed for actual drawing.
+	// Here, we are looking at only vertex coods, so the 2nd and 3rd params are
+	// pointing same address.
+
+
+	// Pay attention to winding rules if multiple contours are overlapped.
+	// The winding rules determine which parts of polygon will be filled(interior)
+	// or not filled(exterior). For each enclosed region partitioned by multiple
+	// contours, tessellator assigns a winding number to the region by using
+	// given winding rule. The default winding rule is GLU_TESS_WINDING_ODD,
+	// but, here we are using non-zero winding rule to fill the middle area.
+	// BTW, the middle region will not be filled with the odd winding rule.
+	gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_NONZERO);
+
+	//glNewList(id, GL_COMPILE);
+	if (m_pSurface && m_vdPoints.size())
+	{
+		COLORREF color = m_pSurface->GetColor(m_vdPoints[0].z);
+		glColor4ub (GetRValue(color), GetGValue(color), GetBValue(color), (GLubyte)m_pSurface->m_alpha); 
+	}
+	else
+	{
+		glColor4ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color), (GLubyte)m_pSurfDoc->m_alpha); 
+	}
+	gluTessBeginPolygon(tess, 0);                   // with NULL data
+	gluTessBeginContour(tess);
+
+	for (size_t i = 0; i < len; i++)
+	{
+		//====== Обход вершин осуществляется
+		//====== в направлении против часовой стрелки
+		int i_minus_1 = i-1;
+		int i_plus_1  = i+1;
+
+		if(i == 0)
 		{
-			quad1[i][0] = m_vvPoints[i].x;
-			quad1[i][1] = m_vvPoints[i].y;
-			quad1[i][2] = m_vvPoints[i].z;
+			i_minus_1 = len-1;
 		}
-
-		// register callback functions
-		gluTessCallback(tess, GLU_TESS_BEGIN, (void (CALLBACK *)())tessBeginCB);
-		gluTessCallback(tess, GLU_TESS_END, (void (CALLBACK *)())tessEndCB);
-		gluTessCallback(tess, GLU_TESS_ERROR, (void (CALLBACK *)())tessErrorCB);
-		gluTessCallback(tess, GLU_TESS_VERTEX, (void (CALLBACK *)())tessVertexCB);
-		gluTessCallback(tess, GLU_TESS_COMBINE, (void (__stdcall*)(void))tessCombineCB);
-
-		// tessellate and compile a concave quad into display list
-		// gluTessVertex() takes 3 params: tess object, pointer to vertex coords,
-		// and pointer to vertex data to be passed to vertex callback.
-		// The second param is used only to perform tessellation, and the third
-		// param is the actual vertex data to draw. It is usually same as the second
-		// param, but It can be more than vertex coord, for example, color, normal
-		// and UV coords which are needed for actual drawing.
-		// Here, we are looking at only vertex coods, so the 2nd and 3rd params are
-		// pointing same address.
-
-
-		// Pay attention to winding rules if multiple contours are overlapped.
-		// The winding rules determine which parts of polygon will be filled(interior)
-		// or not filled(exterior). For each enclosed region partitioned by multiple
-		// contours, tessellator assigns a winding number to the region by using
-		// given winding rule. The default winding rule is GLU_TESS_WINDING_ODD,
-		// but, here we are using non-zero winding rule to fill the middle area.
-		// BTW, the middle region will not be filled with the odd winding rule.
-		gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_NONZERO);
-
-	    //glNewList(id, GL_COMPILE);
-		if (m_pSurface && m_vdPoints.size())
+		if (i == len-1)
 		{
-			COLORREF color = m_pSurface->GetColor(m_vdPoints[0].z);
-			glColor4ub (GetRValue(color), GetGValue(color), GetBValue(color), (GLubyte)m_pSurface->m_alpha); 
+			i_plus_1  = 0;
 		}
-		else
+		if (!(m_vvPoints[i].flag & CPOINT3_FLAG_NONORMAL))
 		{
-			glColor4ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color), (GLubyte)m_pSurfDoc->m_alpha); 
+			d1[0] = m_vvPoints[i_minus_1].x-m_vvPoints[i].x;
+			d1[1] = m_vvPoints[i_minus_1].y-m_vvPoints[i].y;
+			d1[2] = m_vvPoints[i_minus_1].z-m_vvPoints[i].z;
+
+			d2[0] = m_vvPoints[i].x-m_vvPoints[i_plus_1].x;
+			d2[1] = m_vvPoints[i].y-m_vvPoints[i_plus_1].y;
+			d2[2] = m_vvPoints[i].z-m_vvPoints[i_plus_1].z;
+
+			getNorm(d1,d2,norm);
 		}
-		gluTessBeginPolygon(tess, 0);                   // with NULL data
-			gluTessBeginContour(tess);
-
-			for (size_t i = 0; i < len; i++)
-			{
-				//====== Обход вершин осуществляется
-				//====== в направлении против часовой стрелки
-				int i_minus_1 = i-1;
-				int i_plus_1  = i+1;
-
-				if(i == 0)
-				{
-					i_minus_1 = len-1;
-				}
-				if (i == len-1)
-				{
-					i_plus_1  = 0;
-				}
-				if (!(m_vvPoints[i].flag & CPOINT3_FLAG_NONORMAL))
-				{
-					d1[0] = m_vvPoints[i_minus_1].x-m_vvPoints[i].x;
-					d1[1] = m_vvPoints[i_minus_1].y-m_vvPoints[i].y;
-					d1[2] = m_vvPoints[i_minus_1].z-m_vvPoints[i].z;
-
-					d2[0] = m_vvPoints[i].x-m_vvPoints[i_plus_1].x;
-					d2[1] = m_vvPoints[i].y-m_vvPoints[i_plus_1].y;
-					d2[2] = m_vvPoints[i].z-m_vvPoints[i_plus_1].z;
-
-					getNorm(d1,d2,norm);
-				}
-				//if (m_vvPoints[i].bVisible)
-				//{
-					//====== Задание вектора нормали
-					glNormal3dv (norm);
-					gluTessVertex(tess, quad1[i], quad1[i]);
-
-				//}
-			}
-
-        gluTessEndContour(tess);
-		gluTessEndPolygon(tess);
-		//glEndList();
-
-		gluDeleteTess(tess);        // delete after tessellation
-
-		Free2DMat(quad1);
-#else
-		//====== Установка режима заполнения
-		//====== внутренних точек полигонов
-		GLint oldPolygonMode[2];
-		glGetIntegerv(GL_POLYGON_MODE, oldPolygonMode);
-		if (m_pSurface)
-			glPolygonMode(GL_FRONT_AND_BACK, m_pSurface->GetFillMode());
-		else
-			glPolygonMode(GL_FRONT_AND_BACK, GetFillMode());
-
-		double d1[3],d2[3],norm[3];
-		double norm_center[3];
-			
-		glBegin(GL_POLYGON);
-
-		for (size_t i = 0; i < len; i++)
-		{
-			//====== Обход вершин осуществляется
-			//====== в направлении против часовой стрелки
-			int i_minus_1 = i-1;
-			int i_plus_1  = i+1;
-
-			if(i == 0)
-			{
-				i_minus_1 = len-1;
-			}
-			if (i == len-1)
-			{
-				i_plus_1  = 0;
-			}
-			if (!(m_vvPoints[i].flag & CPOINT3_FLAG_NONORMAL))
-			{
-				d1[0] = m_vvPoints[i_minus_1].x-m_vvPoints[i].x;
-				d1[1] = m_vvPoints[i_minus_1].y-m_vvPoints[i].y;
-				d1[2] = m_vvPoints[i_minus_1].z-m_vvPoints[i].z;
-
-				d2[0] = m_vvPoints[i].x-m_vvPoints[i_plus_1].x;
-				d2[1] = m_vvPoints[i].y-m_vvPoints[i_plus_1].y;
-				d2[2] = m_vvPoints[i].z-m_vvPoints[i_plus_1].z;
-
-				getNorm(d1,d2,norm);
-			}
+		//if (m_vvPoints[i].bVisible)
+		//{
 			//====== Задание вектора нормали
+			glNormal3dv (norm);
+			gluTessVertex(tess, quad1[i], quad1[i]);
 
-			if (m_vvPoints[i].bVisible)
-			{
-				glNormal3dv (norm);
-				if (m_pSurface)
-				{
-					COLORREF color = m_pSurface->GetColor(m_vdPoints[i].z);
-					glColor4ub (GetRValue(color), GetGValue(color), GetBValue(color), (GLubyte)m_pSurface->m_alpha); 
-				}
-				else
-				{
-					glColor4ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color), (GLubyte)m_pSurfDoc->m_alpha); 
-				}
-				glVertex3d (m_vvPoints[i].x, m_vvPoints[i].y, m_vvPoints[i].z);
+		//}
+	}
 
-			}
-		}
+	gluTessEndContour(tess);
+	gluTessEndPolygon(tess);
+	//glEndList();
+
+	gluDeleteTess(tess);        // delete after tessellation
+
+	Free2DMat(quad1);
+#else
+	//====== Установка режима заполнения
+	//====== внутренних точек полигонов
+	GLint oldPolygonMode[2];
+	glGetIntegerv(GL_POLYGON_MODE, oldPolygonMode);
+	if (m_pSurface)
+		glPolygonMode(GL_FRONT_AND_BACK, m_pSurface->GetFillMode());
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GetFillMode());
+
+	double d1[3],d2[3],norm[3];
+	double norm_center[3];
 		
-		glEnd();
+	glBegin(GL_POLYGON);
 
-		glPolygonMode(GL_FRONT_AND_BACK, oldPolygonMode[1]);
+	for (size_t i = 0; i < len; i++)
+	{
+		//====== Обход вершин осуществляется
+		//====== в направлении против часовой стрелки
+		int i_minus_1 = i-1;
+		int i_plus_1  = i+1;
+
+		if(i == 0)
+		{
+			i_minus_1 = len-1;
+		}
+		if (i == len-1)
+		{
+			i_plus_1  = 0;
+		}
+		if (!(m_vvPoints[i].flag & CPOINT3_FLAG_NONORMAL))
+		{
+			d1[0] = m_vvPoints[i_minus_1].x-m_vvPoints[i].x;
+			d1[1] = m_vvPoints[i_minus_1].y-m_vvPoints[i].y;
+			d1[2] = m_vvPoints[i_minus_1].z-m_vvPoints[i].z;
+
+			d2[0] = m_vvPoints[i].x-m_vvPoints[i_plus_1].x;
+			d2[1] = m_vvPoints[i].y-m_vvPoints[i_plus_1].y;
+			d2[2] = m_vvPoints[i].z-m_vvPoints[i_plus_1].z;
+
+			getNorm(d1,d2,norm);
+		}
+		//====== Задание вектора нормали
+
+		if (m_vvPoints[i].bVisible)
+		{
+			glNormal3dv (norm);
+			if (m_pSurface)
+			{
+				COLORREF color = m_pSurface->GetColor(m_vdPoints[i].z);
+				glColor4ub (GetRValue(color), GetGValue(color), GetBValue(color), (GLubyte)m_pSurface->m_alpha); 
+			}
+			else
+			{
+				glColor4ub (GetRValue(m_color), GetGValue(m_color), GetBValue(m_color), (GLubyte)m_pSurfDoc->m_alpha); 
+			}
+			glVertex3d (m_vvPoints[i].x, m_vvPoints[i].y, m_vvPoints[i].z);
+
+		}
+	}
+	
+	glEnd();
+
+	glPolygonMode(GL_FRONT_AND_BACK, oldPolygonMode[1]);
 
 #endif
 #if 0
-		for (size_t i = 0; i < len; i++)
-		{
-			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			//====== Наносим цифровую метку
-			char str[255];
-            sprintf(str, "i = %d", i);
-			// move 
-			glRasterPos3d(m_vvPoints[i].x, m_vvPoints[i].y, m_vvPoints[i].z ); 
-			// set up for a string-drawing display List call 
-			// Display a string 
-			glListBase(FIRST_FONT_LIST_BITMAPS); // Indicates the start of display lists for the glyphs 
-			// Draw the characters in a string 
-			glCallLists(strlen(str), GL_UNSIGNED_BYTE, str); 
-			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		}
-		glListBase(0);
+	for (size_t i = 0; i < len; i++)
+	{
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//====== Наносим цифровую метку
+		char str[255];
+         sprintf(str, "i = %d", i);
+		// move 
+		glRasterPos3d(m_vvPoints[i].x, m_vvPoints[i].y, m_vvPoints[i].z ); 
+		// set up for a string-drawing display List call 
+		// Display a string 
+		glListBase(FIRST_FONT_LIST_BITMAPS); // Indicates the start of display lists for the glyphs 
+		// Draw the characters in a string 
+		glCallLists(strlen(str), GL_UNSIGNED_BYTE, str); 
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	}
+	glListBase(0);
 #endif	
 
 
-		if (Line3D::s_line3d_draw_mode == Line3D::line3d_draw_mode::as_lines_with_spheres)
+	if (Line3D::s_line3d_draw_mode == Line3D::line3d_draw_mode::as_lines_with_spheres)
+	{
+		for (UINT i = 0; i < GetPointsNumber(); i++)
 		{
-			for (UINT i = 0; i < GetPointsNumber(); i++)
+			if(m_vvPoints[i].bVisible)
 			{
-				if(m_vvPoints[i].bVisible)
+				COLORREF sphereColor;
+				double sphere_radius;
+				if (m_vdPoints[i].flag & CPOINT3_FLAG_SELECTED
+					||
+					this->m_lParam & OBJECT_FLAG_SELECTED_BIT)
 				{
-					COLORREF sphereColor;
-					double sphere_radius;
-					if (m_vdPoints[i].flag & CPOINT3_FLAG_SELECTED
-						||
-						this->m_lParam & OBJECT_FLAG_SELECTED_BIT)
-					{
-						sphere_radius = m_pSurfDoc->m_sphere_radius;
-						sphereColor = RGB(
-							(255-GetRValue(m_color))/2,
-							0/*(255-GetGValue(m_color))/2*/,
-							(255-GetBValue(m_color))/2);
-					}
-					else
-					{
-						sphere_radius = m_pSurfDoc->m_sphere_radius;
-						sphereColor = m_color;
-					}
-					if (!(m_vdPoints[i].flag & CPOINT3_FLAG_HIDE))
-					{
-						glColor3ub (GetRValue(sphereColor),GetGValue(sphereColor),GetBValue(sphereColor)); 
+					sphere_radius = m_pSurfDoc->m_sphere_radius;
+					sphereColor = RGB(
+						(255-GetRValue(m_color))/2,
+						0/*(255-GetGValue(m_color))/2*/,
+						(255-GetBValue(m_color))/2);
+				}
+				else
+				{
+					sphere_radius = m_pSurfDoc->m_sphere_radius;
+					sphereColor = m_color;
+				}
+				if (!(m_vdPoints[i].flag & CPOINT3_FLAG_HIDE))
+				{
+					glColor3ub (GetRValue(sphereColor),GetGValue(sphereColor),GetBValue(sphereColor)); 
 
-						GLUquadricObj* pSphere = gluNewQuadric();
-						gluQuadricDrawStyle(pSphere, GLU_FILL);
-						glPushMatrix();//перейдём к новым координатам, сохранив старые
-						
-						glTranslated(
-							m_vvPoints[i].x, 
-							m_vvPoints[i].y, 
-							m_vvPoints[i].z
-							);
+					GLUquadricObj* pSphere = gluNewQuadric();
+					gluQuadricDrawStyle(pSphere, GLU_FILL);
+					glPushMatrix();//перейдём к новым координатам, сохранив старые
+					
+					glTranslated(
+						m_vvPoints[i].x, 
+						m_vvPoints[i].y, 
+						m_vvPoints[i].z
+						);
 
-						gluSphere(pSphere, 
-							sphere_radius, 
-							m_pSurfDoc->m_sphere_slices, //The number of subdivisions around the z-axis (similar to lines of longitude). 					
-							m_pSurfDoc->m_sphere_stacks  //The number of subdivisions along the z-axis (similar to lines of latitude). 
-							) ;//рисуем сферу 
-						glPopMatrix(); //возвращаемся к старым координатам 
-						gluDeleteQuadric(pSphere);
-					}
+					gluSphere(pSphere, 
+						sphere_radius, 
+						m_pSurfDoc->m_sphere_slices, //The number of subdivisions around the z-axis (similar to lines of longitude). 					
+						m_pSurfDoc->m_sphere_stacks  //The number of subdivisions along the z-axis (similar to lines of latitude). 
+						) ;//рисуем сферу 
+					glPopMatrix(); //возвращаемся к старым координатам 
+					gluDeleteQuadric(pSphere);
 				}
 			}
 		}
-
 	}
 }
 
