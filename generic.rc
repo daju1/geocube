@@ -1085,14 +1085,14 @@ END
 
 IDD_DIALOG_SAVE_BITMAP DIALOG  0, 0, 186, 90
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Save Bitmap"
+CAPTION "Сохранить изображение"
 FONT 8, "MS Sans Serif"
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
     EDITTEXT        IDC_EDIT_BITMAP_WIDTH,47,28,40,14,ES_AUTOHSCROLL
-    LTEXT           "Width",IDC_STATIC,20,31,20,8
-    LTEXT           "Height",IDC_STATIC,19,54,22,8
+    LTEXT           "Ширина",IDC_STATIC,20,31,20,8
+    LTEXT           "Высота",IDC_STATIC,19,54,22,8
     EDITTEXT        IDC_EDIT_BITMAP_HEIGHT,46,51,40,14,ES_AUTOHSCROLL
     CONTROL         "Save screen",IDC_CHECK_SAVE_BITMAP_AS_SCREEN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,108,52,56,10
     CONTROL         "Constant Proportions",IDC_CHECK_CONSTANT_PROPORTIONS,
@@ -2526,7 +2526,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Angles and transes",          IDD_SURF_VIEW_ANGLES_TRANS
         MENUITEM SEPARATOR
-        MENUITEM "Save bitmap",                 ID_VIEW_SAVEBITMAP_2
+        MENUITEM "Сохранить изображение",       ID_VIEW_SAVEBITMAP_2
         MENUITEM SEPARATOR
         MENUITEM "Update All Views",            ID_VIEW_UPDATEALLVIEWS
     END
@@ -2592,7 +2592,7 @@ BEGIN
         MENUITEM "Изолинии",                    ID_VIEW_IZOLINES
         MENUITEM "Save As Surfer 7 Grid",       ID_WINSURF_FILE_SAVEAS_SURFER7_GRID
         MENUITEM SEPARATOR
-        MENUITEM "Order Lists",                 ID_SURFS_ORDERLISTS
+        MENUITEM "Очерёдность наслоения",       ID_SURFS_ORDERLISTS
         MENUITEM "Inverse order in the tree",   ID_SURFS_INVERSEORDERINTHETREE
     END
     POPUP "Catches"
@@ -3011,7 +3011,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Angles and transes",          IDD_SURF_VIEW_ANGLES_TRANS
         MENUITEM SEPARATOR
-        MENUITEM "Save bitmap",                 ID_VIEW_SAVEBITMAP_2
+        MENUITEM "Сохранить изображение",       ID_VIEW_SAVEBITMAP_2
     END
     POPUP "Поверхности"
     BEGIN
