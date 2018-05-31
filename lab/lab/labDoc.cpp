@@ -136,7 +136,16 @@ CString CLabDoc::GetWorkDir(bool write_registry)
 
 	CString work_dir(szDir);
 
-	if (false)
+
+	// Test 
+	TCHAR   inBuf[4096];
+	DWORD test = GetPrivateProfileString (TEXT("Lab"), 
+		TEXT("WorkDir"), 
+		0, 
+		inBuf, 
+		4096, 
+		szIniFilePath); 
+	if (0 == test)
 	{
 		// create and write ini file
 		WritePrivateProfileSection(_T("Lab"), _T(""), szIniFilePath); 
@@ -147,17 +156,16 @@ CString CLabDoc::GetWorkDir(bool write_registry)
 			TEXT("WorkDir"), 
 			work_dir, 
 			szIniFilePath);
-	}
 
-	// Test 
-	TCHAR   inBuf[4096]; 
-	GetPrivateProfileString (TEXT("Lab"), 
-		TEXT("WorkDir"), 
-		work_dir, 
-		inBuf, 
-		4096, 
-		szIniFilePath); 
-	work_dir = inBuf; 
+		/*DWORD res = GetPrivateProfileString (TEXT("Lab"), 
+			TEXT("WorkDir"), 
+			work_dir, 
+			inBuf, 
+			4096, 
+			szIniFilePath);*/ 
+	}
+	else
+		work_dir = inBuf; 
 
 	if (write_registry)
 	{
@@ -171,6 +179,11 @@ CString CLabDoc::GetWorkDir(bool write_registry)
 		lRetCode = RegOpenKeyEx ( HKEY_LOCAL_MACHINE, 
 			TEXT("SOFTWARE\\Wow6432Node\\ODBC\\ODBC.INI\\ODBC Data Sources"), 
 			0, KEY_ALL_ACCESS, &hKey1); 
+
+		if (ERROR_ACCESS_DENIED == lRetCode)
+		{
+			AfxMessageBox("Для записи в реестр настроек соединения с базой\nперезапустите программу с правами администратора");
+		}
 
 		if (lRetCode != ERROR_SUCCESS)
 		{ 
@@ -357,7 +370,7 @@ CString CLabDoc::GetWorkDir(bool write_registry)
 
 
 CString CLabDoc::s_strDBPassword = "madzima";
-CString CLabDoc::s_strWorkDir = GetWorkDir(true);
+CString CLabDoc::s_strWorkDir = GetWorkDir();
 CString CLabDoc::s_strDatabase = CLabDoc::s_strWorkDir + "\\WenGeo";
 CString CLabDoc::s_strExportDatabaseTemplate = CLabDoc::s_strWorkDir + "\\Export\\Export.mdb";
 
@@ -624,21 +637,24 @@ void CLabDoc::FirstOdbcConnect()
 	m_strConnect.Empty();
     m_strQuery.Empty();
 	
-	if (!OpenOdbc(CLabDoc::s_strConnect, true))
+	if (OpenOdbc(CLabDoc::s_strConnect, true))
+		return;
+
+	GetWorkDir(true);
+
+	if (OpenOdbc(CLabDoc::s_strConnect, true))
+		return;
+
+	m_strConnect.Empty();
+	m_strQuery.Empty();
+	if (OpenOdbc("ODBC;", true))
 	{
-		m_strConnect.Empty();
-		m_strQuery.Empty();
-		if (!OpenOdbc("ODBC;", true))
-		{
-		}
-		else
-		{
-			CLabDoc::s_strConnect = m_strConnect;
-			RegistryODBCConnectString();
-			CLabDoc::s_strDatabase = m_strDatabaseName;
-			RegistryODBCDatabaseName();
-		}
+		CLabDoc::s_strConnect = m_strConnect;
+		RegistryODBCConnectString();
+		CLabDoc::s_strDatabase = m_strDatabaseName;
+		RegistryODBCDatabaseName();
 	}
+
 }
 
 
