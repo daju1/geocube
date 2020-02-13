@@ -237,7 +237,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../glut37/glut-3.7/include&quot;;&quot;$(SolutionDir)/../glut37\glut-3.7\lib\glut&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/glut37/glut-3.7/include&quot;;&quot;$(SolutionDir)/glut37\glut-3.7\lib\glut&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;SUPPORT_FORTRAN"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
