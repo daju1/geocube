@@ -46,7 +46,9 @@ public:
 	void InitFileBlockHeader(long& type, long& version, DWORD size = 0);
 };
 //first was 0 !!!
+#ifndef _WIN64
 #define USE_SIZE_T_IN_ARCHIVE 1
+#endif
 class Archive
 {
 	AFile * m_pFile;

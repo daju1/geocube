@@ -5260,7 +5260,7 @@ LRESULT CALLBACK DlgProcSurfacesBlankFunctionsList(HWND hwnd, UINT message, WPAR
 
 
 
-//					Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+//					Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 //					if (selected_object)
 //						selected_object->DestroyPropertyWindow();
 				}
@@ -6843,7 +6843,7 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 					{
 
 						// ###########################################################
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						// ###########################################################
 						if (woglv) 
 						{
@@ -14022,7 +14022,7 @@ LRESULT CALLBACK WinSurfProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 			  CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
 
 				SetWindowLongPtr(hWnd,	GWLP_USERDATA,(LONG_PTR)pcs->lpCreateParams);
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -14444,7 +14444,7 @@ LRESULT CALLBACK WinSurfProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 				  {
 printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						  if ( i_eq < vDoc[0].m_Beq.Length())
@@ -14476,7 +14476,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 #endif
 		case WM_USER+2:
 			{
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -14531,7 +14531,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 #endif
 				SwapBuffers(m_hdc);
 
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 				if (pSurfDoc->m_bDrawStatusString)
@@ -14633,7 +14633,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 			  
 		case WM_LBUTTONDBLCLK:
 			{
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -15115,7 +15115,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 			  case ID_VIEW_SAVEBITMAP_2:
 				  {
 					  // ###########################################################
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  // ###########################################################
 					  if (woglv) 
 					  {		
@@ -15186,7 +15186,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						m_yTrans		= lpSurfViewDlgMem->m_yTrans;
 						m_zTrans		= lpSurfViewDlgMem->m_zTrans;
 
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						fGL ang[3] = { m_AngleX, m_AngleY, m_AngleZ };
 
@@ -15271,7 +15271,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;				  
 			  case ID_SURFVIEW_DRAWGEOID:
 				  {	
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc->m_bDrawGeoid)
@@ -15304,7 +15304,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;				  
 			  case ID_SURF_BLANKINGOFGEOCATCHBLANKLINES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15321,7 +15321,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_BLANKGEOCATCHGORIZONTPLANE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15338,7 +15338,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_CREATENEWGEOCATCH:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
 					  pSurfDoc->CreateNewGeoCatch();	
@@ -15347,7 +15347,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_INITGEOCATCHGORIZONTPLANE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15363,7 +15363,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_SURF_SURFACESFAULTSCUTLINES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15379,7 +15379,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_PROFILES_BUILD_INTERSECTIONS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15393,7 +15393,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_SURF_SURFACESBLANK:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15408,7 +15408,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_FAULTSBLANK:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15423,7 +15423,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_BROKENPLANESBLANK:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15438,7 +15438,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_NOBLANK:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15453,7 +15453,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_ADDEMPTYLINEOBJECT:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -15463,7 +15463,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;				  
 			  case ID_SURFVIEW_STATUS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc->m_bDrawStatusString)
@@ -15493,7 +15493,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 			  case ID_SURFVIEW_DRAWCUBE:
 				  {
 												
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc->m_bDrawCube)
@@ -15527,7 +15527,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_SURF_ZEROIFBLANKED:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						if (pSurfDoc->m_surfaces.SetCurrentMsgOnFirst())
@@ -15548,7 +15548,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_DRAWQUADSNUMBERS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						if (pSurfDoc->m_surfaces.SetCurrentMsgOnFirst())
@@ -15569,7 +15569,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_VIEW_FILL_FAULTS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  GLenum  m_FillMode;
@@ -15646,7 +15646,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_VIEW_FILL:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						GLenum  m_FillMode;
@@ -15723,7 +15723,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_VIEW_SURF_USE_PALETTE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						if (pSurfDoc->m_bUseColormapOnSurf)
@@ -15754,7 +15754,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_VIEW_LINES_DRAW_MODE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						if (Line3D::s_line3d_draw_mode == Line3D::line3d_draw_mode::as_thing_lines)
@@ -15785,7 +15785,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_VIEW_CANDISABLEDEPTHTEST:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -15832,7 +15832,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							  ID_SURFS_INVERSEORDERINTHETREE,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
@@ -15846,7 +15846,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_VIEW_FLAT_SHADING:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						if (pSurfDoc->m_bFlatShading)
@@ -15876,7 +15876,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_VIEW_QUAD:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -15904,7 +15904,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							  ID_WELLS_DRAWSLOJNAMES,
 							  MF_BYCOMMAND | MF_CHECKED);	
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
@@ -15930,7 +15930,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							  ID_WELLS_SHOWALLSLOI,
 							  MF_BYCOMMAND | MF_CHECKED);	
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
@@ -15956,7 +15956,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							  ID_WELLS_DRAW_ID_KT,
 							  MF_BYCOMMAND | MF_CHECKED);	
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
@@ -15968,7 +15968,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURFVIEW_PERSPECTIVE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						
@@ -16007,7 +16007,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_WINSURF_VIEW_TREE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						if (m_bTree)
@@ -16071,14 +16071,14 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_TREE_LAB_WELLELEMENTPROP:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabWellElementProp();
 				  }
 				  break;
 			  case ID_TREE_LAB_WELLELEMENTPROPSAVE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabWellElementPropSave();
 				  }
@@ -16086,7 +16086,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_TREE_LAB_PASSPORT:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabWellElementPassport();
 				  }
@@ -16104,7 +16104,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 			  case ID_TREE_LAB_WELLELEMENTCONTEXTFONT_PLOT_XAXES:
 			  case ID_TREE_LAB_WELLELEMENTCONTEXTFONT_PLOT_YAXES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabWellElementPropFont(LOWORD( wParam ));
 				  }
@@ -16112,7 +16112,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 			  
 			  case ID_TREE_LAB_GURVICH_Y_SECOND_DERIVATIVE_LIMIT:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabGurvichYSecondDerivativeLimit();
 				  }
@@ -16120,7 +16120,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 			  
 			  case ID_TREE_LAB_E_SECOND_DERIVATIVE_LIMIT:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabCompressionESecondDerivativeLimit();
 				  }
@@ -16128,35 +16128,35 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_TREE_LAB_LABLAYER_COMPRESSION_PRESSURE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabCompressionPressure();
 				  }
 				  break;
 			  case ID_TREE_LAB_LABLAYER_COMPRESSION_PRESSURE_INTERVAL:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabCompressionPressureInterval();
 				  }
 				  break;
 			  case ID_TREE_LAB_WELLELEMENTCONTEXTPLOTHEIGHT:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabWellElementPropPlotHeight();
 				  }
 				  break;
 			  case ID_TREE_LAB_WATERSATURATEDPARTOFFULLWATERCAPACITY:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  prj->LabWaterSaturatedPartOfFullWaterCapacity();
 				  }
 				  break;
 			  case ID_SURF_CLEAR:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearSurf();
@@ -16171,7 +16171,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_CLEAR_CLEARGEOCOLOMNS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearGeoColomns();
@@ -16187,7 +16187,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_CLEAR_CLEARCUBES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearCubes();
@@ -16202,7 +16202,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_CLEAR_FAULTS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearFaults();
@@ -16217,7 +16217,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;				  
 			  case ID_CLEAR_CLEARIZOLINES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearIzolines();
@@ -16230,7 +16230,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_CLEARCUTLINES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearCutLines();
@@ -16244,7 +16244,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_CLEARLINES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						
@@ -16260,7 +16260,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_CLEARSPHERES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearSpheres();
@@ -16480,7 +16480,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;				  
 			  case ID_SURF_CLEARTRIANGLES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearTriangles();
@@ -16524,7 +16524,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_SURF_CLEARPOLIGONES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearPoligones();
@@ -16539,7 +16539,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_CLEAR_CLEARKAROTAZHLIST:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearKarotazhList();
@@ -16553,7 +16553,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_CLEAR_CLEARKAROTAZHY:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearKarotazhy();
@@ -16567,7 +16567,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURF_CLEARDRILLS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						pSurfDoc->ClearDrills();
@@ -16582,7 +16582,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_SURF_CLEARSTRINGS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearStrings();
@@ -16598,7 +16598,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_CLEAR_CLEARBLNPROFILES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearBlnProfiles();
@@ -16616,7 +16616,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_CLEAR_CLEARBITMAPS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearBitmaps();
@@ -16631,7 +16631,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_CLEAR_CLEARBMPPROFILES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearBmpProfiles();
@@ -16647,7 +16647,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_CLEAR_CLEAROBJECTS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearObjects();
@@ -16662,7 +16662,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_CLEAR_CLEARCOLLECTIONS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearCollections();
@@ -16677,7 +16677,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_CLEAR_CLEARGRIDDATA:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -16695,7 +16695,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_CLEAR_CLEARGEOCATCHES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearGeoCatches();
@@ -16709,7 +16709,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_CLEAR_CLEARAUTOBUILDPROFILES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearAutoBuildProfiles();
@@ -16724,7 +16724,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_CLEAR_CLEARBLANKLINES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearBlankLines();
@@ -16740,7 +16740,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_CLEAR_CLEARCUTLINESPOLYGONES:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearCutlinesPolygones();
@@ -16756,7 +16756,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  
 			  case ID_CLEAR_CLEARPOINTS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearPoints();
@@ -16771,7 +16771,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 			  case ID_WINSURF_DRAW:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -16882,7 +16882,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_PROFILES_CUTTING:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Cutting();
@@ -17049,7 +17049,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  {
 printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						  if ( i_eq < vDoc[0].m_Beq.Length())
@@ -17103,7 +17103,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  zl.resize(chainLen);
 #endif /*LINK_MATR*/
 
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearLines();
@@ -17217,7 +17217,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 			  case ID_WINSURF_FILE_PLAY_EARTHQUAKES:
 				  {
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 											  
@@ -17280,7 +17280,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_EDGESTRIANGULATION:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -17297,7 +17297,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_INTERWELLSLINESPARAMETERS:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
@@ -17316,7 +17316,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_TRIANGULATION:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -17333,7 +17333,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 			  case ID_WINSURF_FILE_IMPORTBITMAP:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 								
@@ -17409,7 +17409,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_LAB_EXCLUDEDTRIALSLIST:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->LabExcludedList(hWnd);
@@ -17899,7 +17899,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 			  case ID_GEO_ADDGEOCOLOMN_FIELDEXPLORATION:
 			  case ID_GEO_ADDGEOCOLOMN_FAULTS:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 						
@@ -17940,7 +17940,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_SAVETODB:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -17949,7 +17949,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_TESTSVAI:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -17993,7 +17993,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_DETERMINEUDELNOESCEPLENIE:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18007,7 +18007,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_TESTPESOK1ORGLINA1:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18022,7 +18022,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 			  case ID_WELLS_DETERMINEUGOLVNUTRENNEGOTRENIA:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18036,7 +18036,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_DETERMINEDEFORMATIONMODUL:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18050,7 +18050,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_DETERMINEPESOKGLINAFROMPCK:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18065,7 +18065,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WELLS_TESTDUBLICATE:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18077,7 +18077,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  TCHAR lpstrFile[4098];
 					  if (OpenFileDlg(hWnd, "Laboratory analizes files (*)\0*.*\0All files \0*.*\0", lpstrFile) == S_OK)
 					  {
-							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 							project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 							SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18111,12 +18111,12 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_CONTEXTWITHPLOT,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCreateContextWindow();
 #else
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->OnViewPropertywindowwithPlot();
@@ -18142,12 +18142,12 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_CONTEXTWITHNORMATIVES,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCreateContextWindow();
 #else
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->OnViewPropertywindowwithNormatives();
@@ -18173,12 +18173,12 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_CONTEXTWITHNORMATIVESBYALLEXPERIENCES,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCreateContextWindow();
 #else
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->OnViewPropertywindowwithNormativesbyallexperiences();
@@ -18204,12 +18204,12 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_CONTEXTWITHKORRELATION,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCreateContextWindow();
 #else
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->OnViewPropertywindowwithCorrelation();
@@ -18234,7 +18234,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_COMPRESSIONWITHMINSQ,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCalcProperties(false,false);
@@ -18259,7 +18259,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_COMPRESSIONWITHMINSQ,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCalcProperties(false,false);
@@ -18325,12 +18325,12 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_CONTEXT_WITH_LAB_NUMBER_TRIAL_LIST,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCreateContextWindow();
 #else
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->OnViewPropertywindowwithLabnumbertriallist();
@@ -18356,12 +18356,12 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							  ID_LAB_CONTEXTWITHRESULTS,
 							  MF_BYCOMMAND | MF_CHECKED);
 					  }
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->m_laboratory.ReCreateContextWindow();
 #else
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  if (pSurfDoc) pSurfDoc->OnViewPropertywindowwithResults();
@@ -18373,7 +18373,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  TCHAR lpstrFile[4098];
 					  if (OpenFileDlg(hWnd, "zonds (*)\0*.*\0All files \0*.*\0", lpstrFile) == S_OK)
 					  {
-							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 							project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 							SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18388,7 +18388,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  TCHAR lpstrFile[4098];
 					  if (OpenFileDlg(hWnd, "zonds (*)\0*.*\0All files \0*.*\0", lpstrFile) == S_OK)
 					  {
-							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 							project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 							SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18403,7 +18403,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  TCHAR lpstrFile[4098];
 					  if (OpenFileDlg(hWnd, "zonds (*.rno)\0*.rno\0All files \0*.*\0", lpstrFile) == S_OK)
 					  {
-							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 							project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 							SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18455,7 +18455,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							{
 								// Complete the command; szItemName contains the 
 								// name of the item to delete. 
-								win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+								win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 								project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 								SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 										
@@ -18505,7 +18505,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 							ReadCellFile(hWnd, szPath, filename, pdrills, pnames, delim );
 
-							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 							project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 							SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 									
@@ -18526,7 +18526,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WINSURF_FILE_SCALE_DXF_ON_XY:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18535,7 +18535,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WINSURF_FILE_SCALE_DXF_ON_Y:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18545,7 +18545,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 #if DFX_LAYER_FROM_OBJECT
 			  case ID_WINSURF_FILE_IMPORT_DXF:
 				  {
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18571,7 +18571,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 						  vector<vector<vector<double> > > vvvd;
 						  if (0 == ReadBlnFile(lpstrFile, &vvvd, NULL))
 						  {
-							  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+							  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 							  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 							  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 							  if (pSurfDoc)
@@ -18626,7 +18626,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 			  case ID_FILE_AUTOBUILDPROFILE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 								  
@@ -18644,7 +18644,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 			  case ID_FILE_AUTOBUILDPROFILE1:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 								  
@@ -18717,7 +18717,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 				  break;
 			  case ID_WINSURF_FILE_SAVE:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18744,7 +18744,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  DWORD nFilterIndex = 0;
 					  if (SaveFileDlg(0, fileNameBuf, filter, nFilterIndex) == S_OK)
 					  {
-						  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -18765,7 +18765,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 						  if (0 == ImportSurfer7Grid4(grd_file, grid))
 						  {
 								//-----------------------------------
-								win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+								win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 								project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 								SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 								  
@@ -18803,7 +18803,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 						  if (0 == ImportSurfer7Grid4(grd_file, grid))
 						  {
 								//-----------------------------------
-								win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+								win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 								project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 								SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 								  
@@ -18962,7 +18962,7 @@ cin >> F2;
 					  //grid->faultSection.traces = NULL;
 					  //grid->faultSection.vertexes = NULL;
 					  //-----------------------------------
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  COLORREF color = RGB(255,255,0); 
@@ -19091,7 +19091,7 @@ cin >> F2;
 					  grid->faultSection.traces = NULL;
 					  grid->faultSection.vertexes = NULL;
 					  //-----------------------------------
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  COLORREF color = RGB(255,255,0); int zflag = 0;
@@ -19121,7 +19121,7 @@ cin >> F2;
 				  break;
 				case ID_GRID_GRIDDATASAVETODB:
 					{
-						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+						win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 						project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 						SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -19273,7 +19273,7 @@ max_y += y_Size/10;
 								  {
 									  SaveAsSurfer7Grid(grd_file, grid);
 									  //-----------------------------------
-									  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+									  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 									  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 									  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 									  COLORREF color = RGB(255,255,0); int zflag = 0;
@@ -19398,7 +19398,7 @@ max_y += y_Size/10;
 					else
 						break;
 
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
@@ -19443,7 +19443,7 @@ max_y += y_Size/10;
 									"All files \0*.*\0"
 									) == S_OK)
 								{	
-									win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+									win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 									project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 									SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 				
@@ -19528,7 +19528,7 @@ max_y += y_Size/10;
 #else
 			  if (pCGrid) delete pCGrid;
 #endif
-			  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+			  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 			  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 			  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 

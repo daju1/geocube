@@ -132,7 +132,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 					CheckMenuItem(GetMenu( hWnd ), wmId, MF_BYCOMMAND | MF_CHECKED);
 					//######################################################
 					gdiplus_map_view * wgrv = 
-						(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+						(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 					if (wgrv)
 					{
 						///woglv->RealizeHandler(hWnd, NULL);
@@ -361,7 +361,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 			{
 				//######################################################
 				gdiplus_map_view * wgrv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					//wgrv->RealizeHandler(hWnd, NULL);
@@ -379,7 +379,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 			{
 				//######################################################
 				gdiplus_map_view * wgrv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					wgrv->RealizeHandler(hWnd, NULL);
@@ -399,7 +399,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		case ID_FILE_INITOG:
 			{
 				gdiplus_map_view * wogv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (! wogv)
 				{
 					MessageBox(hWnd,"! gdiplus_map_view\nError","On Create",0);
@@ -411,7 +411,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		case ID_ZOOM_ZOOMIN:
 			{
 				gdiplus_map_view * wgrv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					wgrv->zoom_x *= sqrt(2.0);
@@ -428,7 +428,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		case ID_ZOOM_ZOOMOUT:
 			{
 				gdiplus_map_view * wgrv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					wgrv->zoom_x /= sqrt(2.0);
@@ -445,7 +445,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		case ID_ZOOM_ZOOMYIN:
 			{
 				gdiplus_map_view * wgrv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					//wgrv->zoom_x *= sqrt(2.0);
@@ -462,7 +462,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		case ID_ZOOM_ZOOMYOUT:
 			{
 				gdiplus_map_view * wgrv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					//wgrv->zoom_x /= sqrt(2.0);
@@ -479,7 +479,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 			
 		case ID_ZOOM_ZOOMXYEQUIVAL:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					wgrv->zoom_x = wgrv->zoom_y = max(wgrv->zoom_x, wgrv->zoom_y);						
@@ -495,7 +495,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_PROFILE_REBUILDSURFACES:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				Object * obj; if (wgrv) obj = wgrv->GetObject(); else return -1;
 				BlnProfile3D * bln_profile = dynamic_cast<BlnProfile3D *>(obj);
@@ -519,7 +519,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_PROFILE_CANCELBLANK:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				if (prj)
 				{		
@@ -534,7 +534,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_PROFILE_AUTOBLANK:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				if (prj)
 				{		
@@ -549,7 +549,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_PROFILE_CUTTING:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				Object * obj; if (wgrv) obj = wgrv->GetObject(); else return -1;
 				BlnProfile3D * bln_profile = dynamic_cast<BlnProfile3D *>(obj);
@@ -563,7 +563,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_PROFILE_CUTTINGALLPROFILES:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				if (prj)
 				{					
@@ -575,7 +575,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_EXPORT_TOAUTOCAD:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				Object * obj; if (wgrv) obj = wgrv->GetObject(); else return -1;
 				BlnProfile3D * bln_profile = dynamic_cast<BlnProfile3D *>(obj);
 				if (bln_profile)
@@ -588,14 +588,14 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_TREE_LAB_WELLELEMENTPROP:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabWellElementProp();
 			}
 			break;
 		case ID_TREE_LAB_WELLELEMENTPROPSAVE:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabWellElementPropSave();
 			}
@@ -603,7 +603,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_TREE_LAB_PASSPORT:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabWellElementPassport();
 			}
@@ -621,7 +621,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		case ID_TREE_LAB_WELLELEMENTCONTEXTFONT_PLOT_XAXES:
 		case ID_TREE_LAB_WELLELEMENTCONTEXTFONT_PLOT_YAXES:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabWellElementPropFont(wmId);
 			}
@@ -629,7 +629,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 			
 		case ID_TREE_LAB_GURVICH_Y_SECOND_DERIVATIVE_LIMIT:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabGurvichYSecondDerivativeLimit();
 			}
@@ -637,7 +637,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_TREE_LAB_E_SECOND_DERIVATIVE_LIMIT:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabCompressionESecondDerivativeLimit();
 			}
@@ -645,28 +645,28 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 
 		case ID_TREE_LAB_LABLAYER_COMPRESSION_PRESSURE:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabCompressionPressure();
 			}
 			break;	
 		case ID_TREE_LAB_LABLAYER_COMPRESSION_PRESSURE_INTERVAL:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabCompressionPressureInterval();
 			}
 			break;		
 		case ID_TREE_LAB_WELLELEMENTCONTEXTPLOTHEIGHT:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabWellElementPropPlotHeight();
 			}
 			break;
 		case ID_TREE_LAB_WATERSATURATEDPARTOFFULLWATERCAPACITY:
 			{
-				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				gdiplus_map_view * wgrv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				project * prj; if (wgrv) prj = wgrv->GetProject(); else return -1;
 				prj->LabWaterSaturatedPartOfFullWaterCapacity();
 			}
@@ -682,11 +682,11 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		  {
 			  //##################################################
 			  CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			  SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			  SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			  //##################################################
 			  //##################################################
 			  gdiplus_map_view * wogv = 
-				  (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				  (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 			  if (wogv)
 			  {
 				  wogv->SetWindow(hWnd);
@@ -705,7 +705,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 	  case WM_VSCROLL :
 		  {
 			  gdiplus_map_view * wogv = 
-				  (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				  (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 			  if (wogv)
 			  {		
 				  wogv->VScroll( hWnd, LOWORD( wParam ) );
@@ -719,7 +719,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 	  case WM_HSCROLL :
 		  {
 			  gdiplus_map_view * wogv = 
-				  (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				  (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 			  if (wogv)
 			  {		
 				  wogv->HScroll( hWnd, LOWORD( wParam ) );
@@ -739,7 +739,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		  {
 			  // ###########################################################
 			  gdiplus_map_view * woglv = 
-				  (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				  (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				
 			  buff_gdiplus_map_view * bgmv = dynamic_cast< buff_gdiplus_map_view *>(woglv);
 			  if (bgmv)
@@ -759,7 +759,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 			  hdc = BeginPaint(hWnd, &ps);
 			  // ###########################################################
               
-			  gdiplus_map_view * woglv = (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+			  gdiplus_map_view * woglv = (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
               
 			  if (woglv)
 			  {	
@@ -785,7 +785,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		  {
 			  // ###########################################################
 			  gdiplus_map_view * woglv = 
-				  (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				  (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 			  if (woglv)
 			  {
 				  if (woglv->hDigitizeCursor)
@@ -802,7 +802,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		  {
 			  // ###########################################################
 			  gdiplus_map_view * woglv =
-				  (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				  (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 			  if (woglv)
 			  {
 				  if (woglv->hDigitizeCursor)
@@ -823,7 +823,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 				ScreenToClient(hWnd, &pt);
 
 				gdiplus_map_view * wgrv = 
-					(gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (wgrv)
 				{
 					wgrv->MouseWhell(yDelta, pt.x, pt.y);
@@ -842,7 +842,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 			{
 				// ###########################################################
 				gdiplus_map_view * woglv = 
-					(gdiplus_map_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					(gdiplus_map_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					woglv->KeyButtonHandler(hWnd, message, wParam, lParam);
@@ -857,7 +857,7 @@ LRESULT CALLBACK WndProcGDIplusMapView(HWND hWnd, UINT message, WPARAM wParam, L
 		  {
 			  // ###########################################################
 			  gdiplus_map_view * woglv =
-				  (gdiplus_map_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				  (gdiplus_map_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 			  if (woglv)
 			  {
 				  woglv->GetProject()->RemoveMapView(woglv);	

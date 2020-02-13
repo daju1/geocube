@@ -175,7 +175,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 					
 					CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						///woglv->RealizeHandler(hWnd, NULL);
@@ -379,7 +379,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_ADDLIGHT_LIGHT:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 
 					if (wgrv)
@@ -392,7 +392,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_ADDLIGHT_LOCALDIRECTIONAL:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -404,7 +404,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_ADDLIGHT_LOCALSPOTLIGHT:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -416,7 +416,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_ADDLIGHT_GLOBALDIRECTIONAL:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -428,7 +428,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_ADDLIGHT_GLOBALSPOTLIGHT:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -440,7 +440,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_ENABLELOCALLIGHTS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -455,7 +455,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_ENABLEGLOBALLIGHTS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -471,7 +471,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_MOVELOCALLIGHTS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -487,7 +487,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_MOVEGLOBALLIGHTS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -503,7 +503,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_LIGHTS_FIXLOCALANDGLOBALLIGHTS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					win_graphics_view * wgrv = dynamic_cast<win_graphics_view *>(woglv);
 					if (wgrv)
 					{
@@ -519,7 +519,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTALL:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -538,7 +538,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTALL_EMPTY_WELLS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -556,7 +556,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTNONE:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -573,7 +573,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_INVERSESELECTION:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -590,7 +590,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_DELETESELECTION:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -607,7 +607,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_UNCHECKSELECTION:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -624,7 +624,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_UNCHECKUNSELECTION:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -641,7 +641,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONSETCOLOR:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -659,7 +659,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONSETCOLORFROMCURRENTWELLSSLOJ:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						project * prj = woglv->GetProject();
@@ -677,7 +677,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONTOGRIDDATA:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						project * prj = woglv->GetProject();
@@ -694,7 +694,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONWITHCURRENTWELLSSLOJTOGRIDDATA:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						project * prj = woglv->GetProject();
@@ -711,7 +711,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONTOLAYER:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -728,7 +728,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONGETNAMES_AND_ID:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -745,7 +745,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONSETIDINT:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -762,7 +762,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_SELECTIONSETNAME:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -779,7 +779,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SURFTEST_ENTERCOMMAND:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -796,7 +796,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_CHECKSELECTION:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -813,7 +813,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_SELECT_CHECKUNSELECTION:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -848,7 +848,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 					CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
 					//######################################################
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						project * prj = woglv->GetProject();
@@ -902,7 +902,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 					CheckMenuItem(GetMenu( GetParent(hWnd)  ), wmId, MF_BYCOMMAND | MF_CHECKED);
 					//######################################################
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						project * prj = woglv->GetProject();
@@ -934,7 +934,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_BUILD_CLEAR:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -951,7 +951,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_FILE_OPEN:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -968,7 +968,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_FILE_SAVEAS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -986,7 +986,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_VIEW_UPDATEALLVIEWS:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						//woglv->RealizeHandler(hWnd, NULL);
@@ -1004,7 +1004,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_FILE_INITOG2:
 				{
 					//######################################################
-					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					if (woglv)
 					{
 						woglv->RealizeHandler(hWnd, NULL);
@@ -1021,7 +1021,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case ID_FILE_INITOG:
 				{
 					win_ogl_view * wogv = 
-						(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+						(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 					if (! wogv)
 					{
 						MessageBox(hWnd,"! win_ogl_view\nError","On Create",0);
@@ -1033,7 +1033,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 
 			  case ID_SURFTEST_FONT:
 				  {
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 					  CHOOSEFONT cf;            // common dialog box structure
 					  
 					  // Initialize CHOOSEFONT
@@ -1073,7 +1073,7 @@ LRESULT CALLBACK WndSurfProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			  case ID_VIEW_SAVEBITMAP_2:
 				  {
 					  // ###########################################################
-					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+					  win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 					  // ###########################################################
 					  if (woglv) 
 					  {
@@ -1228,7 +1228,7 @@ MessageBox(0, "WM_WINDOWPOSCHANGED end", "Surf", 0);
 				else*/
 				//{
 				// ###########################################################
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 //MessageBox(0, "WM_SIZE 2", "Surf", 0);
 				if (woglv)
 				{
@@ -1250,7 +1250,7 @@ MessageBox(0, "WM_WINDOWPOSCHANGED end", "Surf", 0);
 				hdc = BeginPaint(hWnd, &ps);
 				// ###########################################################
 				win_ogl_view * woglv = 
-					(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{	
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1275,7 +1275,7 @@ MessageBox(0, "WM_WINDOWPOSCHANGED end", "Surf", 0);
 		case WM_LBUTTONUP :
 			{
 				// ###########################################################
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					if (woglv->hDigitizeCursor)
@@ -1291,7 +1291,7 @@ MessageBox(0, "WM_WINDOWPOSCHANGED end", "Surf", 0);
 		case WM_MOUSEMOVE :
 			{
 				// ###########################################################
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					if (woglv->hDigitizeCursor)
@@ -1308,7 +1308,7 @@ MessageBox(0, "WM_WINDOWPOSCHANGED end", "Surf", 0);
 		case WM_MOUSEWHEEL :
 			{
 				// ###########################################################
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					woglv->MouseWhellNotifyHandler(hWnd, wParam, lParam);	
@@ -1325,7 +1325,7 @@ MessageBox(0, "WM_WINDOWPOSCHANGED end", "Surf", 0);
 		case WM_KEYDOWN :
 			{
 				// ###########################################################
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					woglv->KeyButtonHandler(hWnd, message, wParam, lParam);

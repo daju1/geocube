@@ -22,7 +22,7 @@ unsigned int CALLBACK DlgProcSaveMesh(HWND hDlg, UINT message, WPARAM wParam, LP
     {
         case WM_INITDIALOG:
             // Save off the long pointer to the OPENFILENAME structure.
-            SetWindowLongPtr(hDlg, /*DWLP_USER*/ DWL_USER, lParam);
+            SetWindowLongPtr(hDlg, DWLP_USER /*DWL_USER*/, lParam);
 
             lpOFN = (LPOPENFILENAME)lParam;
             pspdData = (SSavePlotData *)lpOFN->lCustData;
@@ -48,7 +48,7 @@ unsigned int CALLBACK DlgProcSaveMesh(HWND hDlg, UINT message, WPARAM wParam, LP
             break;
 
         case WM_DESTROY:
-            lpOFN = (LPOPENFILENAME)GetWindowLongPtr(hDlg, /*DWLP_USER*/DWL_USER);
+            lpOFN = (LPOPENFILENAME)GetWindowLongPtr(hDlg, DWLP_USER /*DWL_USER*/);
             pspdData = (SSavePlotData *)lpOFN->lCustData;
 
 /*            
@@ -70,7 +70,7 @@ unsigned int CALLBACK DlgProcSaveMesh(HWND hDlg, UINT message, WPARAM wParam, LP
     }
     return TRUE;
 }
-unsigned int CALLBACK DlgProcSaveProf(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+UINT_PTR CALLBACK DlgProcSaveProf(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     SSaveProfData *psprData;
     LPOPENFILENAME lpOFN;

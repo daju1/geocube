@@ -996,10 +996,10 @@ LRESULT CALLBACK LabViewPropertyWndProc_1( HWND hWnd, UINT message, WPARAM wPara
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWL_USERDATA);
+			BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 			if (selected_object)
 				selected_object->PrintfProperties(text);
 			hdc = GetWindowDC(hWnd);
@@ -1033,7 +1033,7 @@ LRESULT CALLBACK LabViewPropertyWndProc_1( HWND hWnd, UINT message, WPARAM wPara
 		case WM_PAINT:
 			{
 				hdc = BeginPaint(hWnd, &ps);
-				BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWL_USERDATA);
+				BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->Paint(text, hWnd, hdc, margin, text_size, false);
 				EndPaint(hWnd, &ps);
@@ -1111,7 +1111,7 @@ LRESULT CALLBACK LabViewPropertyWndProc_1( HWND hWnd, UINT message, WPARAM wPara
 			break;
 /*		case WM_RBUTTONDOWN:
 			{
-				Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+				Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->CreateMyPopupMenu(hWnd);
 			}
@@ -1177,10 +1177,10 @@ LRESULT CALLBACK LabViewPropertyWndProc_2( HWND hWnd, UINT message, WPARAM wPara
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWL_USERDATA);
+			BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 			if (selected_object)
 				selected_object->PrintfProperties(labdata);
 
@@ -1215,7 +1215,7 @@ LRESULT CALLBACK LabViewPropertyWndProc_2( HWND hWnd, UINT message, WPARAM wPara
 		case WM_PAINT:
 			{
 				hdc = BeginPaint(hWnd, &ps);
-				BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWL_USERDATA);
+				BaseObject * selected_object = (BaseObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->Paint(labdata, hWnd, hdc, margin, text_size, false);
 				EndPaint(hWnd, &ps);
@@ -1293,7 +1293,7 @@ LRESULT CALLBACK LabViewPropertyWndProc_2( HWND hWnd, UINT message, WPARAM wPara
 
 /*		case WM_RBUTTONDOWN:
 			{
-				Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+				Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->CreateMyPopupMenu(hWnd);
 			}
@@ -1415,7 +1415,7 @@ void CLabView::ReCreatePropertyWindow(bool context_with_plot /*BaseObject * pOb*
 	RECT rect;
 	GetWindowRect(hPropertyWindow, &rect);
 			
-	BaseObject * pOb = (BaseObject *)GetWindowLong(hPropertyWindow, GWL_USERDATA);
+	BaseObject * pOb = (BaseObject *)GetWindowLong(hPropertyWindow, GWLP_USERDATA);
 
 	DestroyWindow(hPropertyWindow);
 	hPropertyWindow = CreateWindow(context_with_plot ? lpszLabViewPropertyWindow_2 : lpszLabViewPropertyWindow_1,

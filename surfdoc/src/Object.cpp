@@ -1853,10 +1853,10 @@ LRESULT CALLBACK PropertyWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPAR
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+			Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 			if (selected_object)
 				selected_object->PrintfProperties(text);
 			hdc = GetWindowDC(hWnd);
@@ -1890,7 +1890,7 @@ LRESULT CALLBACK PropertyWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPAR
 		case WM_PAINT:
 			{
 				hdc = BeginPaint(hWnd, &ps);
-				Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+				Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->Paint(text, hWnd, hdc, margin, text_size, false);
 				EndPaint(hWnd, &ps);
@@ -1968,7 +1968,7 @@ LRESULT CALLBACK PropertyWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPAR
 			break;
 /*		case WM_RBUTTONDOWN:
 			{
-				Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+				Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->CreateMyPopupMenu(hWnd);
 			}
@@ -1978,7 +1978,7 @@ LRESULT CALLBACK PropertyWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPAR
 			{
 				if (wParam == 27)//Esc
 				{
-					Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+					Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 					if (selected_object)
 						selected_object->DestroyPropertyWindow();
 				}
@@ -1990,7 +1990,7 @@ LRESULT CALLBACK PropertyWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPAR
 			{
 			case IDCANCEL :
 				{
-					Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+					Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 					if (selected_object)
 						selected_object->DestroyPropertyWindow();
 				}
@@ -2038,10 +2038,10 @@ LRESULT CALLBACK PropertyWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPAR
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+			Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 			if (selected_object)
 				selected_object->PrintfProperties(labdata);
 
@@ -2076,7 +2076,7 @@ LRESULT CALLBACK PropertyWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPAR
 		case WM_PAINT:
 			{
 				hdc = BeginPaint(hWnd, &ps);
-				Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+				Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->Paint(labdata, hWnd, hdc, margin, text_size, false);
 				EndPaint(hWnd, &ps);
@@ -2154,7 +2154,7 @@ LRESULT CALLBACK PropertyWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPAR
 
 /*		case WM_RBUTTONDOWN:
 			{
-				Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+				Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_object)
 					selected_object->CreateMyPopupMenu(hWnd);
 			}
@@ -2163,7 +2163,7 @@ LRESULT CALLBACK PropertyWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPAR
 			{
 				if (wParam == 27)//Esc
 				{
-					Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+					Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 					if (selected_object)
 						selected_object->DestroyPropertyWindow();
 				}
@@ -2175,7 +2175,7 @@ LRESULT CALLBACK PropertyWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPAR
 			{
 			case IDCANCEL :
 				{
-					Object * selected_object = (Object *)GetWindowLong(hWnd, GWL_USERDATA);
+					Object * selected_object = (Object *)GetWindowLong(hWnd, GWLP_USERDATA);
 					if (selected_object)
 						selected_object->DestroyPropertyWindow();
 				}

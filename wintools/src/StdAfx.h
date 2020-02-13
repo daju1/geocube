@@ -9,6 +9,7 @@
 
 
 #include <windows.h>
+#include <WinUser.h>
 
 //#define USE_PICK_FILTER
 #pragma warning (disable:4786)

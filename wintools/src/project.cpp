@@ -876,10 +876,10 @@ LRESULT CALLBACK ContextWndProc1( HWND hWnd, UINT message, WPARAM wParam, LPARAM
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWL_USERDATA);
+			WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWLP_USERDATA);
 
 			if (selected_well_element)
 			{
@@ -905,7 +905,7 @@ LRESULT CALLBACK ContextWndProc1( HWND hWnd, UINT message, WPARAM wParam, LPARAM
 			{
 				hdc = BeginPaint(hWnd, &ps);
 
-				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWL_USERDATA);
+				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWLP_USERDATA);
 
 				if (selected_well_element)
 				{
@@ -992,7 +992,7 @@ LRESULT CALLBACK ContextWndProc1( HWND hWnd, UINT message, WPARAM wParam, LPARAM
 			break;
 		case WM_RBUTTONDOWN:
 			{
-				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWL_USERDATA);
+				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_well_element)
 				{
 					switch(selected_well_element->w_type)
@@ -1050,10 +1050,10 @@ LRESULT CALLBACK ContextWndProc2( HWND hWnd, UINT message, WPARAM wParam, LPARAM
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWL_USERDATA);
+			WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWLP_USERDATA);
 
 			if (selected_well_element)
 			{
@@ -1078,7 +1078,7 @@ LRESULT CALLBACK ContextWndProc2( HWND hWnd, UINT message, WPARAM wParam, LPARAM
 		case WM_PAINT:
 			{
 				hdc = BeginPaint(hWnd, &ps);
-				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWL_USERDATA);
+				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWLP_USERDATA);
 
 				if (selected_well_element)
 				{
@@ -1164,7 +1164,7 @@ LRESULT CALLBACK ContextWndProc2( HWND hWnd, UINT message, WPARAM wParam, LPARAM
 			break;
 		case WM_RBUTTONDOWN:
 			{
-				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWL_USERDATA);
+				WellElement * selected_well_element = (WellElement *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_well_element)
 				{
 					switch(selected_well_element->w_type)

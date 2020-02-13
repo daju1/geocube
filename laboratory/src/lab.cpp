@@ -35712,10 +35712,10 @@ LRESULT CALLBACK ContextWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPARA
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+			LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 			if (selected_lab_object)
 				selected_lab_object->PrintfProperties(text);
 			hdc = GetWindowDC(hWnd);
@@ -35748,7 +35748,7 @@ LRESULT CALLBACK ContextWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPARA
 		case WM_PAINT:
 			{
 				hdc = BeginPaint(hWnd, &ps);
-				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_lab_object)
 					selected_lab_object->Paint(text, hWnd, hdc, margin, text_size, false);
 				EndPaint(hWnd, &ps);
@@ -35826,7 +35826,7 @@ LRESULT CALLBACK ContextWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPARA
 			break;
 		case WM_RBUTTONDOWN:
 			{
-				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_lab_object)
 					selected_lab_object->CreateMyPopupMenu(hWnd);
 			}
@@ -35835,7 +35835,7 @@ LRESULT CALLBACK ContextWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPARA
 			{
 				if (wParam == 27)//Esc
 				{
-					LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+					LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 					if (selected_lab_object)
 						selected_lab_object->DestroyContextWindow();
 				}
@@ -35847,7 +35847,7 @@ LRESULT CALLBACK ContextWndProc_1( HWND hWnd, UINT message, WPARAM wParam, LPARA
 				{
 				case IDCANCEL :
 					{
-						LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+						LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 						if (selected_lab_object)
 							selected_lab_object->DestroyContextWindow();
 					}
@@ -35894,10 +35894,10 @@ LRESULT CALLBACK ContextWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPARA
 			margin.bottom = 10;
 			//##################################################
 			CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-			SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+			SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 			//##################################################
 			//##################################################
-			LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+			LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 			if (selected_lab_object)
 				selected_lab_object->PrintfProperties(labdata);
 
@@ -35931,7 +35931,7 @@ LRESULT CALLBACK ContextWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPARA
 		case WM_PAINT:
 			{
 				hdc = BeginPaint(hWnd, &ps);
-				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_lab_object)
 					selected_lab_object->Paint(labdata, hWnd, hdc, margin, text_size, false);
 				EndPaint(hWnd, &ps);
@@ -36009,7 +36009,7 @@ LRESULT CALLBACK ContextWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPARA
 
 		case WM_RBUTTONDOWN:
 			{
-				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+				LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 				if (selected_lab_object)
 					selected_lab_object->CreateMyPopupMenu(hWnd);
 			}
@@ -36018,7 +36018,7 @@ LRESULT CALLBACK ContextWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPARA
 			{
 				if (wParam == 27)//Esc
 				{
-					LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+					LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 					if (selected_lab_object)
 						selected_lab_object->DestroyContextWindow();
 				}
@@ -36030,7 +36030,7 @@ LRESULT CALLBACK ContextWndProc_2( HWND hWnd, UINT message, WPARAM wParam, LPARA
 				{
 				case IDCANCEL :
 					{
-						LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWL_USERDATA);
+						LabObject * selected_lab_object = (LabObject *)GetWindowLong(hWnd, GWLP_USERDATA);
 						if (selected_lab_object)
 							selected_lab_object->DestroyContextWindow();
 					}

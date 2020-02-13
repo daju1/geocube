@@ -40,7 +40,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 				{			
 					//######################################################
 					win_ogl_view * wgrv = 
-						(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+						(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 					if (wgrv)
 					{
 						plot1d_view * p1dv = dynamic_cast<plot1d_view *>(wgrv);
@@ -83,7 +83,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 				{
 					//######################################################
 					win_ogl_view * wgrv = 
-						(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+						(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 					if (wgrv)
 					{
 						//wgrv->RealizeHandler(hWnd, NULL);
@@ -101,7 +101,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 				{
 					//######################################################
 					win_ogl_view * wgrv = 
-						(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+						(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 					if (wgrv)
 					{
 						wgrv->RealizeHandler(hWnd, NULL);
@@ -121,7 +121,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 			case ID_FILE_INITOG:
 				{
 					win_ogl_view * wogv = 
-						(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+						(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 					if (! wogv)
 					{
 						MessageBox(hWnd,"! win_ogl_view\nError","On Create",0);
@@ -142,7 +142,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
               {
 				  //##################################################
 				  CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
-				  SetWindowLong(hWnd,	GWL_USERDATA,(LONG)pcs->lpCreateParams);
+				  SetWindowLong(hWnd,	GWLP_USERDATA,(LONG)pcs->lpCreateParams);
 				  //##################################################
 //				  printf("WM_CREATE ");
 //				  cout << "hWnd = " << hWnd << endl << endl;
@@ -150,7 +150,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 				  //##################################################
 				  //##################################################
 				  win_ogl_view * wogv = 
-					  (win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					  (win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				  if (wogv)
 				  {
 					  wogv->SetWindow(hWnd);
@@ -177,7 +177,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 			{
 				// ###########################################################
 				win_ogl_view * woglv = 
-					(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					woglv->ConfigureHandler(hWnd);
@@ -193,7 +193,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 				hdc = BeginPaint(hWnd, &ps);
 				// ###########################################################
 
-				win_ogl_view * woglv = (win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+				win_ogl_view * woglv = (win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 
 				if (woglv)
 				{	
@@ -223,7 +223,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 			{
 				// ###########################################################
 				win_ogl_view * woglv = 
-					(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					woglv->ButtonHandler(hWnd, message, wParam, lParam);
@@ -238,7 +238,7 @@ LRESULT CALLBACK WndProcMapView(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 			{
 				// ###########################################################
 				win_ogl_view * woglv = 
-					(win_ogl_view *)GetWindowLong(hWnd,GWL_USERDATA);
+					(win_ogl_view *)GetWindowLong(hWnd,GWLP_USERDATA);
 				if (woglv)
 				{
 					woglv->MotionNotifyHandler(hWnd, wParam, lParam);	
