@@ -80,7 +80,7 @@ class draw_tool : public mouse_tool
 	draw_tool(void) : mouse_tool() { }
 	~draw_tool(void) { }
 	
-	enum what_to_draw { Griddata, Spheres, Line, Polygon, Rect, Cube, No_draw };
+	enum what_to_draw { Griddata, Spheres, Line, Polygon, Profile, Rect, Cube, No_draw };
 
 	const char * GetToolName(void) { return "Draw"; }		// virtual
 	
