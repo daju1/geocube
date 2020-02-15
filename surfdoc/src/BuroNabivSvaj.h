@@ -106,9 +106,9 @@ public:
 	// Идентификаторы страниц блокнота
 	HPROPSHEETPAGE hPage[BuroNabivSvaj_npages];
 
-	static BOOL CALLBACK DlgProcAdditionals( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcAdditionals( HWND hDlg, UINT uMsg,
 								WPARAM wParam, LPARAM lParam );
-	static BOOL CALLBACK DlgProcSvaiBuroNabivnie( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcSvaiBuroNabivnie( HWND hDlg, UINT uMsg,
 								WPARAM wParam, LPARAM lParam );
 	static int CALLBACK PropSheetProc(HWND hwndDlg,
 									UINT uMsg,

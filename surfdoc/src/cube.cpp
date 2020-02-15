@@ -2103,7 +2103,7 @@ int Cube4D::GetAlphaSliderNum(HWND hwnd, UINT& nID)
 	return 0;
 }
 
-BOOL CALLBACK Cube4D::DlgProcDrawModes( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK Cube4D::DlgProcDrawModes( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 
@@ -2264,7 +2264,7 @@ static Cube4D * me;
 	return( TRUE );
 }
 
-BOOL CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static Cube4D * me;
@@ -2727,7 +2727,7 @@ BOOL CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 	return( TRUE );
 }
 
-BOOL CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static Cube4D * me;
@@ -3001,7 +3001,7 @@ BOOL CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 }
 
  
-BOOL CALLBACK  Cube4D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK  Cube4D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 //	static LPSURFDLGDATA lpSurfDlgMem;
@@ -3378,7 +3378,7 @@ int Cube4D::GetCutsPlaneSliderNum(HWND hwnd, UINT& nID)
 	}
 	return 0;
 }
-BOOL CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	//static LPSURFCUTSPLANEDLGDATA lpSurfCutsPlaneDlgMem;

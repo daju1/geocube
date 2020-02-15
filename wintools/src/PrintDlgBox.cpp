@@ -318,7 +318,7 @@ void SurfPrintedPageSetup(HWND hwnd)   // owner window
 //The following example shows a sample PagePaintHook 
 //hook procedure that draws the margin rectangle in the sample page area:
 
-unsigned int CALLBACK PaintHook(HWND hwndDlg, UINT uMsg, WPARAM wParam,
+UINT_PTR CALLBACK PaintHook(HWND hwndDlg, UINT uMsg, WPARAM wParam,
     LPARAM lParam) 
 { 
     LPRECT lprc; 

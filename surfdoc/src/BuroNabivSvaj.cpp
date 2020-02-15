@@ -413,7 +413,7 @@ LRESULT APIENTRY WaterSaturationTabWndSubclassProc2(
    return CallWindowProc(wpOrigWaterSaturationTabWndProc2, hwnd, uMsg, 
 	   wParam, lParam); 
 } 
-BOOL CALLBACK BuroNabivSvaj::DlgProcAdditionals( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK BuroNabivSvaj::DlgProcAdditionals( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static BuroNabivSvaj * me;
@@ -553,7 +553,7 @@ BOOL CALLBACK BuroNabivSvaj::DlgProcAdditionals( HWND hDlg, UINT uMsg,
 	return( TRUE );
 }
 
-BOOL CALLBACK BuroNabivSvaj::DlgProcSvaiBuroNabivnie( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK BuroNabivSvaj::DlgProcSvaiBuroNabivnie( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static BuroNabivSvaj * me;

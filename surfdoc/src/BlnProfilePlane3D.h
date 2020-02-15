@@ -195,10 +195,10 @@ protected:
 	//====== GetDlgCtrlID по известному hwnd определяет
 	//====== и возвращает идентификатор элемента управления
 //	static Cube4D * me;
-	static BOOL CALLBACK DlgProcDrawModes( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcDrawModes( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );	
 	static int GetAlphaSliderNum(HWND hwnd, UINT& nID);	
-	static BOOL CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );
 };
 

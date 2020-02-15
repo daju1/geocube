@@ -4,7 +4,7 @@
 void Print(HWND hwnd);
 void PrintDefault(HWND hwnd);
 void DisplayPrintSurfDialogBox(HWND hwnd);
-unsigned int  CALLBACK PaintHook(HWND hwndDlg, UINT uMsg, WPARAM wParam,
+UINT_PTR CALLBACK PaintHook(HWND hwndDlg, UINT uMsg, WPARAM wParam,
     LPARAM lParam);
 void SurfPrintedPageSetup(HWND hwnd);
 void PrintPreview(HWND hwnd);

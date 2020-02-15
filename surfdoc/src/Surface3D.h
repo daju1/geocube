@@ -196,9 +196,9 @@ protected:
 	//====== и возвращает идентификатор элемента управления
 //	static Surface3D * me;
 	static int GetAlphaSliderNum(HWND hwnd, UINT& nID);	
-	static BOOL CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );
-	static BOOL CALLBACK  Surface3D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK  Surface3D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );
 
 	void Init(const Surface3D& ob);

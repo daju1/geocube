@@ -1315,7 +1315,7 @@ int Surface3D::GetAlphaSliderNum(HWND hwnd, UINT& nID)
 	return 0;
 }
 
-BOOL CALLBACK Surface3D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK Surface3D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static Surface3D * me;
@@ -1516,7 +1516,7 @@ BOOL CALLBACK Surface3D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 }
 
  
-BOOL CALLBACK  Surface3D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK  Surface3D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 //	static LPSURFDLGDATA lpSurfDlgMem;

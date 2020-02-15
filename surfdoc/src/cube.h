@@ -97,16 +97,16 @@ protected:
 	//====== и возвращает идентификатор элемента управления
 //	static Cube4D * me;
 	static int GetAlphaSliderNum(HWND hwnd, UINT& nID);	
-	static BOOL CALLBACK DlgProcDrawModes( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcDrawModes( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );	
-	static BOOL CALLBACK DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );	
-	static BOOL CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );
-	static BOOL CALLBACK  DlgProcSurfPalette( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK  DlgProcSurfPalette( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );
 	static int GetCutsPlaneSliderNum(HWND hwnd, UINT& nID);
-	static BOOL CALLBACK DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
+	static INT_PTR CALLBACK DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam );
 
 	static int CALLBACK Cube4D::PropSheetProc(HWND hwndDlg,

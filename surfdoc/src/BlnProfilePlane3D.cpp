@@ -1248,7 +1248,7 @@ int BlnProfilePlane3D::GetAlphaSliderNum(HWND hwnd, UINT& nID)
 	return 0;
 }
 
-BOOL CALLBACK BlnProfilePlane3D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK BlnProfilePlane3D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static BlnProfilePlane3D * me;
@@ -1449,7 +1449,7 @@ BOOL CALLBACK BlnProfilePlane3D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 }
 
 
-BOOL CALLBACK BlnProfilePlane3D::DlgProcDrawModes( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK BlnProfilePlane3D::DlgProcDrawModes( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static BlnProfilePlane3D * me;
