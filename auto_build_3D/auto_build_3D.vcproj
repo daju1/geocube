@@ -69,94 +69,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib wintools.lib winplot.lib labdbdoc.lib laboratory.lib excel_connect.lib surfer_connect.lib acad_connect.lib logger.lib alglib.lib geocube_module.lib"
 				OutputFile="$(OutDir)/bin/auto_build_3D.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OutDir)/lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/auto_build_3D.pdb"
 				SubSystem="1"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			CharacterSet="2"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="$(SolutionDir)/include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="2"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
-				OutputFile="$(OutDir)/bin/auto_build_3D.exe"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(OutDir/lib"
-				GenerateDebugInformation="true"
-				SubSystem="1"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
@@ -235,16 +154,97 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib wintools.lib winplot.lib labdbdoc.lib laboratory.lib excel_connect.lib surfer_connect.lib acad_connect.lib logger.lib alglib.lib geocube_module.lib"
 				OutputFile="$(OutDir)/bin/auto_build_3D.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OutDir)/lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/auto_build_3D.pdb"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				EnableFiberSafeOptimizations="true"
+				AdditionalIncludeDirectories="$(SolutionDir)/include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/FORCE:MULTIPLE "
+				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib wintools.lib winplot.lib labdbdoc.lib laboratory.lib excel_connect.lib surfer_connect.lib acad_connect.lib logger.lib alglib.lib geocube_module.lib"
+				OutputFile="$(OutDir)/bin/auto_build_3D.exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -316,10 +316,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/FORCE:MULTIPLE "
-				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib"
+				AdditionalDependencies="geometry2d.lib kohonen.lib surfdoc.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib wintools.lib winplot.lib labdbdoc.lib laboratory.lib excel_connect.lib surfer_connect.lib acad_connect.lib logger.lib alglib.lib geocube_module.lib"
 				OutputFile="$(OutDir)/bin/auto_build_3D.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(OutDir/lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"

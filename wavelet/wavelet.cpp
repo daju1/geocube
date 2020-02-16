@@ -281,7 +281,7 @@ int main(int argc, char* argv[])
 					else
 						rS_ind[c] = -1;
 				}
-				for ( c = 0; c < vtau_F_ind.Size(); c++)
+				for (int c = 0; c < vtau_F_ind.Size(); c++)
 				{
 					if (vtau_F_ind[c].Size() > 0)
 						rF_ind[c] = 0;
@@ -375,7 +375,7 @@ int main(int argc, char* argv[])
 					}
 				}
 				fprintf(stream, "%f%c", sumFast, odelim);
-				c = indexesF.Size()-1;
+				int c = indexesF.Size()-1;
 				if (indexesS[c] > -1)
 				{
 					sumFast += vSlow[c][indexesS[c]];
