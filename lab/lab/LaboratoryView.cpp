@@ -38,9 +38,9 @@ static char THIS_FILE[]=__FILE__;
 
 CString CLaboratoryView::str_kt_list_order_by = "ID_KT";
 CString CLaboratoryView::str_kt_list_where = "ID_OBJ = -1";
-
+#ifndef _WIN64
 void DaoErrorMsg(CDaoException* e);
-
+#endif
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -1308,7 +1308,11 @@ COleVariant GetOleVariant(CDBVariant & var)
 	//AfxMessageBox(s);
 	return ole_var;
 }
+#ifdef _WIN64
+#define USE_DAO_1 0
+#else
 #define USE_DAO_1 1
+#endif
 void CLaboratoryView::OnExportobject() 
 {
 
@@ -1397,6 +1401,7 @@ void CLaboratoryView::OnExportobject()
 			return;
 		}
 #endif
+#ifndef _WIN64
 		CString m_dao_strDatabase_2 = file2;
 		CDaoDatabase m_dao_database_2;
 		//BOOL m_dao_bConnected;
@@ -1411,7 +1416,7 @@ void CLaboratoryView::OnExportobject()
 			e->Delete();
 			return;
 		}
-
+#endif
 		//m_dao_strDatabase_2 = m_dao_database_2.GetName();
 
 
@@ -1502,7 +1507,7 @@ void CLaboratoryView::OnExportobject()
 
 					CString m_dao_strQuery_2;
 					m_dao_strQuery_2.Format("select * from [%s]", table_nazva);
-
+#ifndef _WIN64
 					CDaoRecordset* m_dao_pRecordset_2;					
 					m_dao_pRecordset_2 = new CDaoRecordset(&m_dao_database_2);
 					try {	
@@ -1514,7 +1519,7 @@ void CLaboratoryView::OnExportobject()
 						e->Delete();
 						return;
 					}
-
+#endif
 #if 0
 					int m_dao_nFields = (int) m_dao_pRecordset->GetFieldCount();
 					//m_dao_arrayFieldName.SetSize(m_dao_nFields);
@@ -1530,6 +1535,7 @@ void CLaboratoryView::OnExportobject()
 						//MessageBox(fi.m_strName, "field name", 0);
 					}
 #endif
+#ifndef _WIN64
 					if (!m_pRecordset_1->IsBOF())
 					{
 						m_pRecordset_1->MoveFirst();
@@ -1560,7 +1566,7 @@ void CLaboratoryView::OnExportobject()
 
 					m_dao_pRecordset_2->Close();
 					delete m_dao_pRecordset_2;
-
+#endif
 
 
 				}
@@ -1568,8 +1574,10 @@ void CLaboratoryView::OnExportobject()
 				setGeoTables.MoveNext(); // to validate record count
 			}
 		}
+#ifndef _WIN64
 		m_dao_database_1.Close();
 		m_dao_database_2.Close();
+#endif
 	}
 
 

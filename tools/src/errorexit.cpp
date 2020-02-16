@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "../StdAfx.h"
 #include "errorexit.h"
 
 void ErrorExit(LPTSTR lpszFunction, bool toExitProcess) 

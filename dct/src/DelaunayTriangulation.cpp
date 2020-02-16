@@ -4,8 +4,7 @@
 #define CONSOL 0
 
 //#if !CONSOL
-//#include "../StdAfx.h"
-#include "StdAfx.h"
+#include "../StdAfx.h"
 //#endif
 
 #include "../../array/src/vdouble.h"

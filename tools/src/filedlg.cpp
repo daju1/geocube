@@ -1,5 +1,5 @@
 //#include <stdio.h>
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "filedlg.h"
 #include "../../resource.h"
 #include "../../mylicense.h"

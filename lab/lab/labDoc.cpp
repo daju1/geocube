@@ -81,6 +81,7 @@ public:
 	}
 };
 
+#ifndef _WIN64
 // global helper function to display an error message
 void DaoErrorMsg(CDaoException* e)
 {
@@ -91,6 +92,7 @@ void DaoErrorMsg(CDaoException* e)
         (const char*) e->m_pErrorInfo ? e->m_pErrorInfo->m_strDescription : "");
    	AfxMessageBox(errorMsg);
 }
+#endif
 /////////////////////////////////////////////////////////////////////////////
 // CLabDoc
 CString CLabDoc::s_strConnect = "ODBC;DSN=Wen Geo DB";
@@ -1017,7 +1019,7 @@ void CLabDoc::ImportObject()
 	if ( !setObject.Open(CRecordset::dynaset) )
         return;
 	long id_for_new_object = setObject.GetNewKeyID();
-
+#ifndef _WIN64
  	CString m_dao_strDatabase;
 	CString m_dao_strConnect;
 	CString m_dao_strQuery;
@@ -1239,6 +1241,7 @@ void CLabDoc::ImportObject()
 
 	m_dao_database.Close();
 	m_dao_database_1.Close();
+#endif
 
 
 //	m_dao_nDatabaseType = MDB;

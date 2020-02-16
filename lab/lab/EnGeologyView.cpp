@@ -79,9 +79,9 @@ static char THIS_FILE[]=__FILE__;
 
 CString CEnGeologyView::str_kt_list_order_by = "ID_KT";
 CString CEnGeologyView::str_kt_list_where = "ID_OBJ = -1";
-
+#ifndef _WIN64
 void DaoErrorMsg(CDaoException* e);
-
+#endif
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -1224,7 +1224,7 @@ bool g_OnFileDeleteObject(int nItem, CDatabase * database)
 			}
 
 
-
+#ifndef _WIN64
 			CString m_dao_strConnect_1;
 			m_dao_strConnect_1.Format(";PWD=%s\0", CLabDoc::s_strDBPassword);
 			CDaoDatabase m_dao_database_1;
@@ -1239,7 +1239,7 @@ bool g_OnFileDeleteObject(int nItem, CDatabase * database)
 				e->Delete();
 				return false;
 			}
-
+#endif
 			SetGeoTables setGeoTables(database);
 			if (!setGeoTables.Open())
 			{
@@ -1259,7 +1259,7 @@ bool g_OnFileDeleteObject(int nItem, CDatabase * database)
 						// таблица - приёмник
 						CString m_strQuery_1;
 						m_strQuery_1.Format("select * from [%s]", table_nazva);
-
+#ifndef _WIN64
 						CDaoRecordset* m_pRecordset_1;					
 						m_pRecordset_1 = new CDaoRecordset(&m_dao_database_1);
 
@@ -1279,7 +1279,7 @@ bool g_OnFileDeleteObject(int nItem, CDatabase * database)
 						{
 							m_pRecordset_1->MoveFirst();
 							while (!m_pRecordset_1->IsEOF())
-							{      
+							{
 								// обавляем строку (запись) в таблицу приёмник
 								m_pRecordset_1->Delete();								
 								m_pRecordset_1->MoveNext();
@@ -1287,12 +1287,14 @@ bool g_OnFileDeleteObject(int nItem, CDatabase * database)
 						}
 						m_pRecordset_1->Close();
 						delete m_pRecordset_1;
-
+#endif
 					}
 					setGeoTables.MoveNext(); // to validate record count
 				}
 			}
+#ifndef _WIN64
 			m_dao_database_1.Close();
+#endif
 #else
 			// удаляем связанные с данным объектом данные из других таблиц
 			SetKT setKT(database);

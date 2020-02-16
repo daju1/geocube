@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "datenum.h"
 #include <math.h>
 double datenum(int y, int mo, int d, int h, int mi, int s, int milli)

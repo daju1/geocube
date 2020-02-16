@@ -231,6 +231,7 @@ bool CDlgPalja::InitDoc()
 	}
 
 	this->m_SurfDoc.ApplyLito();
+	return true;
 }
 
 BOOL CDlgPalja::OnInitDialog() 

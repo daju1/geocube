@@ -3675,24 +3675,6 @@ bool BlnProfile3D::BuildIntersection(BlnProfile3D * profile)
 	return false;
 }
 
-int GeoSurface::ClearFromDB(bool msg)
-{
-	int ans = IDYES;
-	if (this->m_pSurfDoc && this->m_pSurfDoc->GetLabDoc())
-	{
-		ans = MessageBox(0, "Удалить ссылку на поверхность также в списках очерёдности в базе данных?", "GeoSurface::ClearFromDB", MB_YESNOCANCEL);
-		bool to_clear = msg ? IDYES == ans : true;
-		if (to_clear)
-		{
-			long id_obj = this->m_pSurfDoc->Get_ID_OBJ();
-			this->m_pSurfDoc->GetLabDoc()->ClearSurfacesOrderItem(id_obj, id_surf);	
-			this->m_pSurfDoc->GetLabDoc()->ClearSurfacesBlankOrderItem(id_obj, id_surf);	
-			this->m_pSurfDoc->GetLabDoc()->ClearGridDataUsedAlgorothm(id_obj, id_surf);	
-		}
-	}
-	return ans;
-}
-
 int BlnProfile3D::ClearFromDB(bool msg)
 {
 	int ans = IDYES;

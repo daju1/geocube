@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include ".\listviewtab.h"
 #include "commctrl.h"
 #include "../../resource.h"

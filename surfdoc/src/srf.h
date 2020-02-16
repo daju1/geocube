@@ -42,7 +42,7 @@ inline SrfGridAlgorithm operator++( SrfGridAlgorithm &rs, int )
 {
    return rs = (SrfGridAlgorithm)(rs + 1);
 }
-const char * SrfGridAlgorithm_toStr(SrfGridAlgorithm alg)
+inline const char * SrfGridAlgorithm_toStr(SrfGridAlgorithm alg)
 {
 	switch (alg)
 	{

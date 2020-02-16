@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include <windows.h>
 #include "SysLogManager.h"
 
@@ -8,7 +8,7 @@ namespace sys
    namespace data
    {
       const std::string LOG_DIRECTORY           = "log";
-      const std::string LOG_FILE_NAME           = "geo_lab_log";
+      const std::string LOG_FILE_NAME           = "geo_cube_log";
    }
 
 

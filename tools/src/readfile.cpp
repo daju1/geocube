@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "../StdAfx.h"
 #include "readfile.h"
 //#include "../datenum.h"
 extern HINSTANCE hInst;   // текущий экземпляр
