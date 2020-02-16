@@ -331,11 +331,13 @@ DWORD InterWellsLine3D::Serialize(Archive& ar)
 	}
 	return 0;
 }
+#define NOT_OLD_VERSION_OF_TriangulatedGrid3D 1
 Archive& operator <<(Archive& ar, InterWellsLine3D& ob)
 {
 	//ar << *dynamic_cast<Object *>(&ob);
 	//dynamic_cast<Primitive3D<CPoint3> *>(&ob)->Primitive_Serialize(ar);
 	ar << *dynamic_cast<Line3D *>(&ob);
+
 	DWORD version = ob.m_object_version;
 	switch (version)
 	{
@@ -355,6 +357,7 @@ Archive& operator <<(Archive& ar, InterWellsLine3D& ob)
 		}
 		break;
 	}
+
 	return ar;
 }
 Archive& operator >>(Archive& ar, InterWellsLine3D& ob)
@@ -362,6 +365,7 @@ Archive& operator >>(Archive& ar, InterWellsLine3D& ob)
 	//ar >> *dynamic_cast<Object *>(&ob);
 	//dynamic_cast<Primitive3D<CPoint3> *>(&ob)->Primitive_Serialize(ar);
 	ar >> *dynamic_cast<Line3D *>(&ob);
+#if NOT_OLD_VERSION_OF_TriangulatedGrid3D
 	switch (ob.m_object_version)
 	{
 	case 1:
@@ -380,6 +384,7 @@ Archive& operator >>(Archive& ar, InterWellsLine3D& ob)
 		}
 		break;
 	}
+#endif
 	return ar;
 }
 
