@@ -8835,7 +8835,7 @@ bool Dipol(int use_newton,
 		omega_A[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
 		omega_B[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
 	}
-
+#if 0
 	//послойная инициализация
 	for (long rr = 0; rr < mmd3.rows; rr++)
 	{
@@ -8955,7 +8955,7 @@ bool Dipol(int use_newton,
 			}
 		}
 	}
-
+#endif
 #if 0
 	//вертикально вверх инициализация
 	for (long c = 0; c < operator_cols; c++)
