@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "..\surfdoc\src\autoprofilebuilding.h"
-//минимизировать сигнал в окне
+//РјРёРЅРёРјРёР·РёСЂРѕРІР°С‚СЊ СЃРёРіРЅР°Р» РІ РѕРєРЅРµ
 #define _USE_MIN_IN_WINDOW_ 1
 
 #include "./../array/src/LocalExtremumsFiltering.h"
@@ -34,9 +34,9 @@ public:
 	double y;
 	double z;
 
-	double korr_k;  // коэффициент горизонтальной корреляции
-	double korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-	double korr_k3; // коэффициент вертикальной автокорреляции
+	double korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+	double korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+	double korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 	korr_point()
 	{
 		korr_k  = 0.0;
@@ -44,7 +44,7 @@ public:
 		korr_k3 = 0.0;
 	}
 };
-//столбик корреляционных коэффициентов
+//СЃС‚РѕР»Р±РёРє РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 class vert_korr_points
 {
 public:
@@ -64,28 +64,28 @@ class profile_interval
 public:
 	Layer * layer;
 	int iFile;
-	size_t i1;//индекс первого элемента интервала текущего профиля
-	size_t i2;//индекс последнего элемента интервала текущего профиля
-	char dir[4096];//директория для записи результатов
+	size_t i1;//РёРЅРґРµРєСЃ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РёРЅС‚РµСЂРІР°Р»Р° С‚РµРєСѓС‰РµРіРѕ РїСЂРѕС„РёР»СЏ
+	size_t i2;//РёРЅРґРµРєСЃ РїРѕСЃР»РµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° РёРЅС‚РµСЂРІР°Р»Р° С‚РµРєСѓС‰РµРіРѕ РїСЂРѕС„РёР»СЏ
+	char dir[4096];//РґРёСЂРµРєС‚РѕСЂРёСЏ РґР»СЏ Р·Р°РїРёСЃРё СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ
 
 };
 
 struct auto_build_parametrs
 {
-	// выводить из локалов в файл
+	// РІС‹РІРѕРґРёС‚СЊ РёР· Р»РѕРєР°Р»РѕРІ РІ С„Р°Р№Р»
 	bool use_min;
 	bool use_max;
 	bool use_min_max;
 
-	// что из локалов подавать на windows_cicle
+	// С‡С‚Рѕ РёР· Р»РѕРєР°Р»РѕРІ РїРѕРґР°РІР°С‚СЊ РЅР° windows_cicle
 	bool use_min_2;
 	bool use_max_2;
 	bool use_min_max_2;
 
 	bool use_whole_directory;
-	bool use_num_col;	//использовать ли номера колонок
-	int  tcols;			// число кооординатных колонок: 2 если XY 3 если XYZ
-	bool use_time_colomn; // идёт лии за координатными колонками колонка времени
+	bool use_num_col;	//РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р»Рё РЅРѕРјРµСЂР° РєРѕР»РѕРЅРѕРє
+	int  tcols;			// С‡РёСЃР»Рѕ РєРѕРѕРѕСЂРґРёРЅР°С‚РЅС‹С… РєРѕР»РѕРЅРѕРє: 2 РµСЃР»Рё XY 3 РµСЃР»Рё XYZ
+	bool use_time_colomn; // РёРґС‘С‚ Р»РёРё Р·Р° РєРѕРѕСЂРґРёРЅР°С‚РЅС‹РјРё РєРѕР»РѕРЅРєР°РјРё РєРѕР»РѕРЅРєР° РІСЂРµРјРµРЅРё
 	char num_col_filename[1024];
 	//######################################################
 	bool use_window_cycles_algorithm_1;
@@ -104,25 +104,25 @@ struct auto_build_parametrs
 	bool use_window_cycles_algorithm_dima_after_locals;
 	//######################################################
 	//######################################################
-	//параметры алгоритмов на локалах
-	size_t start_j1;// = 1;//начальный уровень фильтрации для чистых локалов
-	size_t start_j2;// = 0;//начальный уровень фильтрации для window_cycles_after_locals
-	// квантиль отбора "локалов" по углу налона
-	// мы будем отбирать только те аномалии в "локалах",
-	// которые имеют минимальный угол наклона
-	// чем меньше квантиль, тем меньше локалов будет оторано
+	//РїР°СЂР°РјРµС‚СЂС‹ Р°Р»РіРѕСЂРёС‚РјРѕРІ РЅР° Р»РѕРєР°Р»Р°С…
+	size_t start_j1;// = 1;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ С‡РёСЃС‚С‹С… Р»РѕРєР°Р»РѕРІ
+	size_t start_j2;// = 0;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ window_cycles_after_locals
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° "Р»РѕРєР°Р»РѕРІ" РїРѕ СѓРіР»Сѓ РЅР°Р»РѕРЅР°
+	// РјС‹ Р±СѓРґРµРј РѕС‚Р±РёСЂР°С‚СЊ С‚РѕР»СЊРєРѕ С‚Рµ Р°РЅРѕРјР°Р»РёРё РІ "Р»РѕРєР°Р»Р°С…",
+	// РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓРіРѕР» РЅР°РєР»РѕРЅР°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ, С‚РµРј РјРµРЅСЊС€Рµ Р»РѕРєР°Р»РѕРІ Р±СѓРґРµС‚ РѕС‚РѕСЂР°РЅРѕ
 	double quantil_naklony;// = 0.50;
 
-	// квантиль отбора точек перегиба по их крутизне
-	// квантиль отбора локальных экстремумов второй производной
-	// если квантиль отбора равен 0,5 то мы отбираем все определяемые точки перегиба
-	// чем меньше квантиль отбора тем больше точек перегиба мы отфильтровываем,
-	// тем самым мы оставляем лишь блее крутые точки перегиба
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РїРѕ РёС… РєСЂСѓС‚РёР·РЅРµ
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° Р»РѕРєР°Р»СЊРЅС‹С… СЌРєСЃС‚СЂРµРјСѓРјРѕРІ РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	// РµСЃР»Рё РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° СЂР°РІРµРЅ 0,5 С‚Рѕ РјС‹ РѕС‚Р±РёСЂР°РµРј РІСЃРµ РѕРїСЂРµРґРµР»СЏРµРјС‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РµРј Р±РѕР»СЊС€Рµ С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РјС‹ РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РµРј,
+	// С‚РµРј СЃР°РјС‹Рј РјС‹ РѕСЃС‚Р°РІР»СЏРµРј Р»РёС€СЊ Р±Р»РµРµ РєСЂСѓС‚С‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
 	double peregib_krutizna_quantil;// = 0.40;
 	bool allow_sd_limit_quantil;// = true;
 	//######################################################
 	//######################################################
-	//параметры фильтрации аномалий для оконносдвиговых алкгоритмов аномалий
+	//РїР°СЂР°РјРµС‚СЂС‹ С„РёР»СЊС‚СЂР°С†РёРё Р°РЅРѕРјР°Р»РёР№ РґР»СЏ РѕРєРѕРЅРЅРѕСЃРґРІРёРіРѕРІС‹С… Р°Р»РєРіРѕСЂРёС‚РјРѕРІ Р°РЅРѕРјР°Р»РёР№
 	enum gradient_type
 	{
 		the_dividitial				= 0,
@@ -134,20 +134,20 @@ struct auto_build_parametrs
 	double minimum_of_signal;// = 0.1;
 				
 
-	// запрет повторного использования точек
-	bool use_repeat_points;// = false; // если истина, то мы не применяем запрет повторного использования точек, 
-	// инече - применяем запрет со следующим паратметром:
-	int n;// = 1;//плечо области запрета ( можно 0 и выше)
+	// Р·Р°РїСЂРµС‚ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє
+	bool use_repeat_points;// = false; // РµСЃР»Рё РёСЃС‚РёРЅР°, С‚Рѕ РјС‹ РЅРµ РїСЂРёРјРµРЅСЏРµРј Р·Р°РїСЂРµС‚ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє, 
+	// РёРЅРµС‡Рµ - РїСЂРёРјРµРЅСЏРµРј Р·Р°РїСЂРµС‚ СЃРѕ СЃР»РµРґСѓСЋС‰РёРј РїР°СЂР°С‚РјРµС‚СЂРѕРј:
+	int n;// = 1;//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 
-	//параметры изменения длины окна
-	// нелинейность шага
+	//РїР°СЂР°РјРµС‚СЂС‹ РёР·РјРµРЅРµРЅРёСЏ РґР»РёРЅС‹ РѕРєРЅР°
+	// РЅРµР»РёРЅРµР№РЅРѕСЃС‚СЊ С€Р°РіР°
 	double win_velonsity;// = 0.9;
 
 	//######################################################
 	//######################################################
 	double k;
 
-	//использовать алгоритм "палок" по мин-максам
+	//РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р°Р»РіРѕСЂРёС‚Рј "РїР°Р»РѕРє" РїРѕ РјРёРЅ-РјР°РєСЃР°Рј
 	bool use_min_max_sticks;
 
 
@@ -155,7 +155,7 @@ struct auto_build_parametrs
 };
 //void auto_build_parametrs_Init();
 
-// направление вектора нормали антенны
+// РЅР°РїСЂР°РІР»РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё Р°РЅС‚РµРЅРЅС‹
 struct anten_direction
 {
 	double ax, ay, az;
@@ -254,7 +254,7 @@ bool BuildingProfile2(vector<vector<vector<vector<korr_point> > > >& vvvvkp,
 void Window_Cycle(auto_build_parametrs::gradient_type m_gradient_type,
 				  double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-				  size_t icol, //номер колонки
+				  size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -270,7 +270,7 @@ void Window_Cycle(auto_build_parametrs::gradient_type m_gradient_type,
 				  //size_t step_vindow_len,
 				  double win_velonsity,
 				  
-				  bool use_repeat_points,  int n,//плечо области запрета ( можно 0 и выше)
+				  bool use_repeat_points,  int n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 				  double minimum_of_signal, 
 				   
 				  double k,	
@@ -294,7 +294,7 @@ void Window_Cycle(auto_build_parametrs::gradient_type m_gradient_type,
 #if SOURCE_COORDINATES_3D
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
 void SourcesCoordinates_Calcule_AndSave(size_t icol, size_t j1, size_t j2,
-										size_t level, // уровень разложения	
+										size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ	
 										double x1, double y1, 
 										double x2, double y2,
 										double k, FILE * stream, int delim, double r_ , double max_, 
@@ -332,8 +332,8 @@ void MakeLinePointPair(
 
 void OutputDimaAlgorithm(double limit_dima,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						 size_t icol, //номер колонки
-						 size_t level, // уровень разложения
+						 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+						 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
 						 vector<double>& X, 
@@ -360,8 +360,8 @@ void OutputDimaAlgorithm(double limit_dima,
 
 void OutputFirstAlgorithm(double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						 size_t icol, //номер колонки
-						 size_t level, // уровень разложения
+						 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+						 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
 						 vector<double>& X, 
@@ -390,7 +390,7 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 	auto_build_parametrs::gradient_type m_gradient_type,
 	double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-		size_t icol, //номер колонки
+		size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -404,7 +404,7 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 		 vector<size_t>& vi,
 		 double win_velonsity,
 		 
-		 bool use_repeat_points,  int n,//плечо области запрета ( можно 0 и выше)
+		 bool use_repeat_points,  int n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 		 double minimum_of_signal, 
 
 		 double k,	
@@ -426,8 +426,8 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 void LocalsMaker(
 				 double quantil_naklony, 
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-				 size_t icol, //номер колонки
-				 size_t level, // уровень разложения
+				 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+				 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
 				 vector<double>& X, 
@@ -452,8 +452,8 @@ void LocalsMaker(
 void SticksMaker(
 				 double quantil_naklony, 
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-				 size_t icol, //номер колонки
-				 size_t level, // уровень разложения
+				 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+				 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
 				 vector<double>& X, 
@@ -475,9 +475,9 @@ void SticksMaker(
 				 );
 
 
-void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
+void DoVerticalAutoCorrelation(int shoulder,// = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 							   int step,
-							   int wlen,// = 10;//длина окна корреляции
+							   int wlen,// = 10;//РґР»РёРЅР° РѕРєРЅР° РєРѕСЂСЂРµР»СЏС†РёРё
 							   //Collection * pcollection,
 							   vector<vert_korr_points> * vvkp, 
 							   vector<profile_interval> & profile_intervals,
@@ -486,7 +486,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 							   size_t c1, size_t c2,
 							   int reverse1, int reverse2,
 							   int delim);
-void DoVerticalCorrelation(int wlen,// = 100;//длина окна корреляции
+void DoVerticalCorrelation(int wlen,// = 100;//РґР»РёРЅР° РѕРєРЅР° РєРѕСЂСЂРµР»СЏС†РёРё
 						   Collection * pcollection,
 						   vector<vert_korr_points> * vvkp, 
 						   vector<profile_interval> & profile_intervals,
@@ -497,7 +497,7 @@ void DoVerticalCorrelation(int wlen,// = 100;//длина окна корреляции
 						   int delim);
 
 void DoGorizontalCorrilation(double k,
-							 int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
+							 int shoulder,// = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 							 int step,
 							 vector<vert_korr_points> * vvkp,
 							 vector<vector<double> >& v, 
@@ -554,7 +554,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					 char * current_directory,
 					 char * filename,
 					 bool is_reverse,
-					 int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
+					 int shoulder,// = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 					 int step, 
 					 int wlen_auto
 				  );
@@ -575,9 +575,9 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 
 void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
-			   short value_type,// 1 - korr_k;  // коэффициент горизонтальной корреляции
-								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
+			   short value_type,// 1 - korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+								// 2 - korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+								// 3 - korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 			   Collection * pcollection,
 			   vector<vert_korr_points> * vvkp,
 			   vector<profile_interval> & profile_intervals,
@@ -609,24 +609,24 @@ struct MyMethodsData
 {
 	long increaser_pw;
 	double k_oslablenie;
-	// отношение строк и столбцов
+	// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ
 	int pw_rcd;
 
 	char fn_operator_spm[4096];
     char fn_operator_wav[4098];
 	char fn_min_sq_mat[4098];
 	char fn_Lt[4098];
-	// Nr Число S коэффициентов по вертикали
-	// Nc Число S коэффициентов по горизонтали
+	// Nr Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+	// Nc Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
 	long Nr, Nc;
-	long rows; // число точек в геологической структуре по вертикали
-	long cols; // число точек в геологической структуре по горизонтали
-	double x0; double y0; // начало профиля
-	double z0;// альтитуда земной поверхности
-	// Шаг вдоль профиля по X и по Y
-	// Шаг вдоль геологической структуры по z (глубине)
+	long rows; // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+	long cols; // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	double x0; double y0; // РЅР°С‡Р°Р»Рѕ РїСЂРѕС„РёР»СЏ
+	double z0;// Р°Р»СЊС‚РёС‚СѓРґР° Р·РµРјРЅРѕР№ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
+	// РЁР°Рі РІРґРѕР»СЊ РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
+	// РЁР°Рі РІРґРѕР»СЊ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ РїРѕ z (РіР»СѓР±РёРЅРµ)
 	double delta_x; double delta_y; double delta_z; 
-	// размах профиля по X и по Y
+	// СЂР°Р·РјР°С… РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
 	double delta__x; double delta__y;
 };
 
@@ -657,18 +657,18 @@ struct MyMethodsData3
 	double ro;//Om*m
 	//===========================
 
-	// степень диаграммы направленности приёмника
+	// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double pw_dnp;// = 2;
 
-	bool use_norm_w; // инициализация куба с помощью sols_mean
+	bool use_norm_w; // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєСѓР±Р° СЃ РїРѕРјРѕС‰СЊСЋ sols_mean
 	bool use_norm_k;
 	double norm_k_part;
 	bool use_norm_k_on_every_iteration;
 	int wave_type;
 
-	double dXYZ_part;// на каждой итерации мы берём не полный остаток от реконструированного сигнала, а часть его
+	double dXYZ_part;// РЅР° РєР°Р¶РґРѕР№ РёС‚РµСЂР°С†РёРё РјС‹ Р±РµСЂС‘Рј РЅРµ РїРѕР»РЅС‹Р№ РѕСЃС‚Р°С‚РѕРє РѕС‚ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°, Р° С‡Р°СЃС‚СЊ РµРіРѕ
 
-    //минимальное значение, которое вносится в оператор прямой задачи    
+    //РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РІРЅРѕСЃРёС‚СЃСЏ РІ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё    
 	//double min_value = 0.03;
 	double min_value;// = 1e-16;
 
@@ -678,7 +678,7 @@ struct MyMethodsData3
 
 	sourse_power_model spm;
 
-	// отношение страниц и строк
+	// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂР°РЅРёС† Рё СЃС‚СЂРѕРє
 	int pw_pcd;
 
 	char fn_operator_spm[4096];
@@ -699,30 +699,30 @@ struct MyMethodsData3
 
 	int alpha_mode;
 
-	int n_alpha;// число альфа коэффициентов
+	int n_alpha;// С‡РёСЃР»Рѕ Р°Р»СЊС„Р° РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	vector<double> v_alpha;// = 0.001;
 	double alpha_min_sq;// = 0.001;
 //	double alpha_holesski;// = 0.001;
 	long j_start;// = 0;
 
-	// Nr Число S коэффициентов по вертикали
-	// Nc Число S коэффициентов по горизонтали
+	// Nr Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+	// Nc Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
 	long Nr, Nc, Np;
-	long rows; // число точек в геологической структуре по вертикали
-	long cols; // число точек в геологической структуре по горизонтали
+	long rows; // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+	long cols; // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂРµ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
 	long pages;
-	double x0; double y0; // начало профиля
-	double z0;// альтитуда земной поверхности
-	double z_min;// альтитуда нижней границы куба
-	// Шаг вдоль профиля по X и по Y
-	// Шаг вдоль геологической структуры по z (глубине)
+	double x0; double y0; // РЅР°С‡Р°Р»Рѕ РїСЂРѕС„РёР»СЏ
+	double z0;// Р°Р»СЊС‚РёС‚СѓРґР° Р·РµРјРЅРѕР№ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
+	double z_min;// Р°Р»СЊС‚РёС‚СѓРґР° РЅРёР¶РЅРµР№ РіСЂР°РЅРёС†С‹ РєСѓР±Р°
+	// РЁР°Рі РІРґРѕР»СЊ РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
+	// РЁР°Рі РІРґРѕР»СЊ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ РїРѕ z (РіР»СѓР±РёРЅРµ)
 	double delta_x; double delta_y; double delta_z; 
-	// размах профиля по X и по Y
+	// СЂР°Р·РјР°С… РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
 	double delta__x; double delta__y; double delta__z;
 
 	bool to_povorot;
 	bool need_crd_projection;
-	//  начальная точка вокруг которой происходит поворот
+	//  РЅР°С‡Р°Р»СЊРЅР°СЏ С‚РѕС‡РєР° РІРѕРєСЂСѓРі РєРѕС‚РѕСЂРѕР№ РїСЂРѕРёСЃС…РѕРґРёС‚ РїРѕРІРѕСЂРѕС‚
 	double vX0;
 	double vY0;
 	double ugol;
@@ -741,15 +741,15 @@ struct Wavelet2D
 	//WF_COIFLETS
 
 	// Selection of wavelet R
-	int wf_r;// = WF_COIFLETS; // флаг вейвлета
-	int order_r;// = 1; // порядок вейвлета
-	int orderBiorthogonalDecomposition_r;// = 0; // порядок вейвлета
+	int wf_r;// = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	int order_r;// = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	int orderBiorthogonalDecomposition_r;// = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 	vdouble dh_r, dg_r, rh_r, rg_r;
 	int left_g_r, right_g_r, left_h_r, right_h_r;
 	
-	int wf_c;// = WF_COIFLETS; // флаг вейвлета
-	int order_c;// = 1; // порядок вейвлета
-	int orderBiorthogonalDecomposition_c;// = 0; // порядок вейвлета	
+	int wf_c;// = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	int order_c;// = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	int orderBiorthogonalDecomposition_c;// = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 	vdouble dh_c, dg_c, rh_c, rg_c;	
 	int left_g_c, right_g_c, left_h_c, right_h_c;
 };
@@ -761,21 +761,21 @@ struct Wavelet3D
 	//WF_COIFLETS
 
 	// Selection of wavelet R
-	int wf_r;// = WF_COIFLETS; // флаг вейвлета
-	int order_r;// = 1; // порядок вейвлета
-	int orderBiorthogonalDecomposition_r;// = 0; // порядок вейвлета
+	int wf_r;// = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	int order_r;// = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	int orderBiorthogonalDecomposition_r;// = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 	vdouble dh_r, dg_r, rh_r, rg_r;
 	int left_g_r, right_g_r, left_h_r, right_h_r;
 	
-	int wf_c;// = WF_COIFLETS; // флаг вейвлета
-	int order_c;// = 1; // порядок вейвлета
-	int orderBiorthogonalDecomposition_c;// = 0; // порядок вейвлета	
+	int wf_c;// = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	int order_c;// = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	int orderBiorthogonalDecomposition_c;// = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 	vdouble dh_c, dg_c, rh_c, rg_c;	
 	int left_g_c, right_g_c, left_h_c, right_h_c;
 	
-	int wf_p;// = WF_COIFLETS; // флаг вейвлета
-	int order_p;// = 1; // порядок вейвлета
-	int orderBiorthogonalDecomposition_p;// = 0; // порядок вейвлета	
+	int wf_p;// = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	int order_p;// = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	int orderBiorthogonalDecomposition_p;// = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 	vdouble dh_p, dg_p, rh_p, rg_p;	
 	int left_g_p, right_g_p, left_h_p, right_h_p;
 };
@@ -785,7 +785,7 @@ void DoMyMethod2(FILE * description,
 				 auto_build_parametrs& ab,
 				 vector<double> & X,
 				 vector<double> & Y,
-				 vector<double> & Z, // альтитуда измерений - полёта самолёта
+				 vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				 vector<double> & signal,
 				 string name);
 
@@ -794,9 +794,9 @@ void DoMyMethod2(FILE * description,
 class operator_element
 {
 public:
-	//j - строка в матрице оператора, зная её можно определить сигналы антенны V,W и координату приёмника X,Y,Z
-	//i - колонка в матрице прямой задачи, зная её можно найти индексы а затем и координаты излучателя в кубе
-	// индекс в строке матрицы оператора прямой задачи
+	//j - СЃС‚СЂРѕРєР° РІ РјР°С‚СЂРёС†Рµ РѕРїРµСЂР°С‚РѕСЂР°, Р·РЅР°СЏ РµС‘ РјРѕР¶РЅРѕ РѕРїСЂРµРґРµР»РёС‚СЊ СЃРёРіРЅР°Р»С‹ Р°РЅС‚РµРЅРЅС‹ V,W Рё РєРѕРѕСЂРґРёРЅР°С‚Сѓ РїСЂРёС‘РјРЅРёРєР° X,Y,Z
+	//i - РєРѕР»РѕРЅРєР° РІ РјР°С‚СЂРёС†Рµ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё, Р·РЅР°СЏ РµС‘ РјРѕР¶РЅРѕ РЅР°Р№С‚Рё РёРЅРґРµРєСЃС‹ Р° Р·Р°С‚РµРј Рё РєРѕРѕСЂРґРёРЅР°С‚С‹ РёР·Р»СѓС‡Р°С‚РµР»СЏ РІ РєСѓР±Рµ
+	// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	// for (p = 0; p < pages; p++) 
 	//    for (r = 0; r < rows; r++) 
 	//       for (C = 0; C < cols; C++) 
@@ -804,20 +804,20 @@ public:
 	// zi = z_min + p * delta_z;
 	// yi = y0 + r * delta_y;
 	// xi = x0 + C * delta_x;
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	// double z_min = z0 - pages * delta_z;
 	static double Z0, Z_min, Pw_Dnp;
 //	double Out(double ax, double ay, double ay)
 //	{
-//		// угол между направлением на источник и нормалью к антене
+//		// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 //		double phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-//		// коэффициент выхода диаграммы направленности
+//		// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 //		double phi_k = pow(sin(phi), pw_dnp);
 //		return phi_k;
 //	}
 size_t col;
 double val;
-	double R;// расстояние от источника до приёмника
+	double R;// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° РґРѕ РїСЂРёС‘РјРЅРёРєР°
 	operator_element(size_t c, double v) : col(c), val(v){}
 	operator_element() : col(0), val(0.0){}
 	//operator_element(const operator_element & r) : col(r.col), val(r.val){}
@@ -842,7 +842,7 @@ public:
 		for(it = this->begin(); it != this->end(); it++)
 		{
 			//size_t c = (*it).col;
-			//if (c < x_size)//убрал проверку, чтобы вырубались непродуманные алгоритмы
+			//if (c < x_size)//СѓР±СЂР°Р» РїСЂРѕРІРµСЂРєСѓ, С‡С‚РѕР±С‹ РІС‹СЂСѓР±Р°Р»РёСЃСЊ РЅРµРїСЂРѕРґСѓРјР°РЅРЅС‹Рµ Р°Р»РіРѕСЂРёС‚РјС‹
 			//{
 				product += (*it).val * x[(*it).col];
 			//}
@@ -857,7 +857,7 @@ public:
 		for(it = this->begin(); it != this->end(); it++)
 		{
 			size_t c = (*it).col;
-			//if (c < x_size)//убрал проверку, чтобы вырубались непродуманные алгоритмы
+			//if (c < x_size)//СѓР±СЂР°Р» РїСЂРѕРІРµСЂРєСѓ, С‡С‚РѕР±С‹ РІС‹СЂСѓР±Р°Р»РёСЃСЊ РЅРµРїСЂРѕРґСѓРјР°РЅРЅС‹Рµ Р°Р»РіРѕСЂРёС‚РјС‹
 				b_rec[r] += (*it).val * x[c];
 			if (r != c)
 			{
@@ -914,7 +914,7 @@ public:
 			ar << cc;
 			ar << value;
 		}
-		//признак конца записи
+		//РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° Р·Р°РїРёСЃРё
 		cc = -1;
 		value = 0.0;
 		ar << cc;
@@ -929,8 +929,8 @@ void DoMyMethod3(FILE * description,
 				 auto_build_parametrs& ab,
 				 vector<double> & X,
 				 vector<double> & Y,
-				 vector<double> & Z, // альтитуда измерений - полёта самолёта
-				 double z0,// альтитуда земной поверхности
+				 vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
+				 double z0,// Р°Р»СЊС‚РёС‚СѓРґР° Р·РµРјРЅРѕР№ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
 				 vector<double> & signal,
 				 string name);
 
@@ -941,7 +941,7 @@ void DoMyMethod2W(FILE * description,
 				  auto_build_parametrs& ab,
 				  vector<double> & X,
 				  vector<double> & Y,
-				  vector<double> & Z, // альтитуда измерений - полёта самолёта
+				  vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				  //string name,
 				  bool to_fill_matrix);
 
@@ -952,7 +952,7 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 							);
 #define WITH_2D 0
 
-void UseOneOfMyMethods(int type, // тип прямой задачи
+void UseOneOfMyMethods(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   bool granicy_kak_glubina,
 #if WITH_2D
 					   bool use_only_2D,
@@ -961,7 +961,7 @@ void UseOneOfMyMethods(int type, // тип прямой задачи
 					   auto_build_parametrs& ab,
 					   vector<double> & X,
 					   vector<double> & Y,
-					   vector<double> & Z, // альтитуда измерений - полёта самолёта
+					   vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 					   vector<vector<anten_direction> > & A,
 					   vector<double> & vModul,
 					   vector<vector<double> > & v,

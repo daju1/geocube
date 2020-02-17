@@ -44,17 +44,17 @@ char dir_out[1024];
 extern HINSTANCE hInst;
 
 
-	
+
 auto_build_parametrs AutoBuildProfile::ab;
 
 void AutoBuildProfile::auto_build_parametrs_Init()
 {
-	// выводить из локалов в файл
+	// РІС‹РІРѕРґРёС‚СЊ РёР· Р»РѕРєР°Р»РѕРІ РІ С„Р°Р№Р»
 	ab.use_min			= true;
 	ab.use_max			= true;
 	ab.use_min_max		= true;
 
-	// что из локалов подавать на windows_cicle
+	// С‡С‚Рѕ РёР· Р»РѕРєР°Р»РѕРІ РїРѕРґР°РІР°С‚СЊ РЅР° windows_cicle
 	ab.use_min_2		= true;
 	ab.use_max_2		= true;
 	ab.use_min_max_2	= false;
@@ -62,8 +62,8 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 	ab.use_whole_directory = true;
 	ab.use_num_col = true;
 	ab.use_time_colomn = false;
-	//ab.tcols = 2;  //если в исходном файле X и Y
-	ab.tcols = 3;  //если в исходном файле X, Y и Z
+	//ab.tcols = 2;  //РµСЃР»Рё РІ РёСЃС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ X Рё Y
+	ab.tcols = 3;  //РµСЃР»Рё РІ РёСЃС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ X, Y Рё Z
 
 	ab.num_col_filename[0] = '\0';
 
@@ -76,7 +76,7 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 	{
 		the_simple					= 0,
 		on_the_second_derivatives	= 1
-	};*/ 
+	};*/
 	ab.locals_algorithms_type = auto_build_parametrs::locals_algorithms::on_the_second_derivatives;
 	//######################################################
 	ab.use_window_cycles_after_locals = true;
@@ -84,39 +84,39 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 	ab.use_window_cycles_algorithm_dima_after_locals = true;
 	//######################################################
 	//######################################################
-	//параметры алгоритмов на локалах
-	ab.start_j1 = 1;//начальный уровень фильтрации для чистых локалов
-	ab.start_j2 = 0;//начальный уровень фильтрации для window_cycles_after_locals
-	// квантиль отбора "локалов" по углу налона
-	// мы будем отбирать только те аномалии в "локалах",
-	// которые имеют минимальный угол наклона
-	// чем меньше квантиль, тем меньше локалов будет оторано
+	//РїР°СЂР°РјРµС‚СЂС‹ Р°Р»РіРѕСЂРёС‚РјРѕРІ РЅР° Р»РѕРєР°Р»Р°С…
+	ab.start_j1 = 1;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ С‡РёСЃС‚С‹С… Р»РѕРєР°Р»РѕРІ
+	ab.start_j2 = 0;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ window_cycles_after_locals
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° "Р»РѕРєР°Р»РѕРІ" РїРѕ СѓРіР»Сѓ РЅР°Р»РѕРЅР°
+	// РјС‹ Р±СѓРґРµРј РѕС‚Р±РёСЂР°С‚СЊ С‚РѕР»СЊРєРѕ С‚Рµ Р°РЅРѕРјР°Р»РёРё РІ "Р»РѕРєР°Р»Р°С…",
+	// РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓРіРѕР» РЅР°РєР»РѕРЅР°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ, С‚РµРј РјРµРЅСЊС€Рµ Р»РѕРєР°Р»РѕРІ Р±СѓРґРµС‚ РѕС‚РѕСЂР°РЅРѕ
 	ab.quantil_naklony = 0.50;
 
-	// квантиль отбора точек перегиба по их крутизне
-	// квантиль отбора локальных экстремумов второй производной
-	// если квантиль отбора равен 0,5 то мы отбираем все определяемые точки перегиба
-	// чем меньше квантиль отбора тем больше точек перегиба мы отфильтровываем,
-	// тем самым мы оставляем лишь блее крутые точки перегиба
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РїРѕ РёС… РєСЂСѓС‚РёР·РЅРµ
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° Р»РѕРєР°Р»СЊРЅС‹С… СЌРєСЃС‚СЂРµРјСѓРјРѕРІ РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	// РµСЃР»Рё РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° СЂР°РІРµРЅ 0,5 С‚Рѕ РјС‹ РѕС‚Р±РёСЂР°РµРј РІСЃРµ РѕРїСЂРµРґРµР»СЏРµРјС‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РµРј Р±РѕР»СЊС€Рµ С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РјС‹ РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РµРј,
+	// С‚РµРј СЃР°РјС‹Рј РјС‹ РѕСЃС‚Р°РІР»СЏРµРј Р»РёС€СЊ Р±Р»РµРµ РєСЂСѓС‚С‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
 	ab.peregib_krutizna_quantil = 0.40;
 	ab.allow_sd_limit_quantil = true;
 	//######################################################
 	//######################################################
-	//параметры фильтрации аномалий для оконносдвиговых алкгоритмов аномалий	
+	//РїР°СЂР°РјРµС‚СЂС‹ С„РёР»СЊС‚СЂР°С†РёРё Р°РЅРѕРјР°Р»РёР№ РґР»СЏ РѕРєРѕРЅРЅРѕСЃРґРІРёРіРѕРІС‹С… Р°Р»РєРіРѕСЂРёС‚РјРѕРІ Р°РЅРѕРјР°Р»РёР№
 	ab.m_gradient_type = auto_build_parametrs::gradient_type::the_dividitial;
 
-	ab.limit_dima = 0.8, 
+	ab.limit_dima = 0.8,
 	ab.limit_1 = 0.9;
 	ab.minimum_of_signal = 0.1;
-				
 
-	// запрет повторного использования точек
-	ab.use_repeat_points = false; // если истина, то мы не применяем запрет повторного использования точек, 
-	// инече - применяем запрет со следующим паратметром:
-	ab.n = 1;//плечо области запрета ( можно 0 и выше)
 
-	//параметры изменения длины окна
-	// нелинейность шага
+	// Р·Р°РїСЂРµС‚ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє
+	ab.use_repeat_points = false; // РµСЃР»Рё РёСЃС‚РёРЅР°, С‚Рѕ РјС‹ РЅРµ РїСЂРёРјРµРЅСЏРµРј Р·Р°РїСЂРµС‚ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє,
+	// РёРЅРµС‡Рµ - РїСЂРёРјРµРЅСЏРµРј Р·Р°РїСЂРµС‚ СЃРѕ СЃР»РµРґСѓСЋС‰РёРј РїР°СЂР°С‚РјРµС‚СЂРѕРј:
+	ab.n = 1;//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
+
+	//РїР°СЂР°РјРµС‚СЂС‹ РёР·РјРµРЅРµРЅРёСЏ РґР»РёРЅС‹ РѕРєРЅР°
+	// РЅРµР»РёРЅРµР№РЅРѕСЃС‚СЊ С€Р°РіР°
 	ab.win_velonsity  = 0.9;
 
 	//######################################################
@@ -124,10 +124,10 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 
 	//######################################################
 	//######################################################
-	// отношение глубины источника к полной (два плеча) длине аномалии
+	// РѕС‚РЅРѕС€РµРЅРёРµ РіР»СѓР±РёРЅС‹ РёСЃС‚РѕС‡РЅРёРєР° Рє РїРѕР»РЅРѕР№ (РґРІР° РїР»РµС‡Р°) РґР»РёРЅРµ Р°РЅРѕРјР°Р»РёРё
 	ab.k = 0.75;
 
-	//использовать алгоритм "палок" по мин-максам
+	//РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р°Р»РіРѕСЂРёС‚Рј "РїР°Р»РѕРє" РїРѕ РјРёРЅ-РјР°РєСЃР°Рј
 	ab.use_min_max_sticks = true;
 	ab.use_min_max_sticks = true;
 
@@ -136,12 +136,12 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 
 void AutoBuildProfile::auto_build_parametrs_Init1()
 {
-	// выводить из локалов в файл
+	// РІС‹РІРѕРґРёС‚СЊ РёР· Р»РѕРєР°Р»РѕРІ РІ С„Р°Р№Р»
 	ab.use_min			= true;
 	ab.use_max			= true;
 	ab.use_min_max		= true;
 
-	// что из локалов подавать на windows_cicle
+	// С‡С‚Рѕ РёР· Р»РѕРєР°Р»РѕРІ РїРѕРґР°РІР°С‚СЊ РЅР° windows_cicle
 	ab.use_min_2		= true;
 	ab.use_max_2		= true;
 	ab.use_min_max_2	= false;
@@ -149,8 +149,8 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 	ab.use_whole_directory = true;
 	ab.use_num_col = true;
 	ab.use_time_colomn = false;
-	//ab.tcols = 2;  //если в исходном файле X и Y
-	ab.tcols = 3;  //если в исходном файле X, Y и Z
+	//ab.tcols = 2;  //РµСЃР»Рё РІ РёСЃС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ X Рё Y
+	ab.tcols = 3;  //РµСЃР»Рё РІ РёСЃС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ X, Y Рё Z
 
 	ab.num_col_filename[0] = '\0';
 
@@ -163,7 +163,7 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 	{
 		the_simple					= 0,
 		on_the_second_derivatives	= 1
-	};*/ 
+	};*/
 	ab.locals_algorithms_type = auto_build_parametrs::locals_algorithms::on_the_second_derivatives;
 	//######################################################
 	ab.use_window_cycles_after_locals = true;
@@ -171,39 +171,39 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 	ab.use_window_cycles_algorithm_dima_after_locals = true;
 	//######################################################
 	//######################################################
-	//параметры алгоритмов на локалах
-	ab.start_j1 = 1;//начальный уровень фильтрации для чистых локалов
-	ab.start_j2 = 0;//начальный уровень фильтрации для window_cycles_after_locals
-	// квантиль отбора "локалов" по углу налона
-	// мы будем отбирать только те аномалии в "локалах",
-	// которые имеют минимальный угол наклона
-	// чем меньше квантиль, тем меньше локалов будет оторано
+	//РїР°СЂР°РјРµС‚СЂС‹ Р°Р»РіРѕСЂРёС‚РјРѕРІ РЅР° Р»РѕРєР°Р»Р°С…
+	ab.start_j1 = 1;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ С‡РёСЃС‚С‹С… Р»РѕРєР°Р»РѕРІ
+	ab.start_j2 = 0;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ window_cycles_after_locals
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° "Р»РѕРєР°Р»РѕРІ" РїРѕ СѓРіР»Сѓ РЅР°Р»РѕРЅР°
+	// РјС‹ Р±СѓРґРµРј РѕС‚Р±РёСЂР°С‚СЊ С‚РѕР»СЊРєРѕ С‚Рµ Р°РЅРѕРјР°Р»РёРё РІ "Р»РѕРєР°Р»Р°С…",
+	// РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓРіРѕР» РЅР°РєР»РѕРЅР°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ, С‚РµРј РјРµРЅСЊС€Рµ Р»РѕРєР°Р»РѕРІ Р±СѓРґРµС‚ РѕС‚РѕСЂР°РЅРѕ
 	ab.quantil_naklony = 0.50;
 
-	// квантиль отбора точек перегиба по их крутизне
-	// квантиль отбора локальных экстремумов второй производной
-	// если квантиль отбора равен 0,5 то мы отбираем все определяемые точки перегиба
-	// чем меньше квантиль отбора тем больше точек перегиба мы отфильтровываем,
-	// тем самым мы оставляем лишь блее крутые точки перегиба
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РїРѕ РёС… РєСЂСѓС‚РёР·РЅРµ
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° Р»РѕРєР°Р»СЊРЅС‹С… СЌРєСЃС‚СЂРµРјСѓРјРѕРІ РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	// РµСЃР»Рё РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° СЂР°РІРµРЅ 0,5 С‚Рѕ РјС‹ РѕС‚Р±РёСЂР°РµРј РІСЃРµ РѕРїСЂРµРґРµР»СЏРµРјС‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РµРј Р±РѕР»СЊС€Рµ С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РјС‹ РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РµРј,
+	// С‚РµРј СЃР°РјС‹Рј РјС‹ РѕСЃС‚Р°РІР»СЏРµРј Р»РёС€СЊ Р±Р»РµРµ РєСЂСѓС‚С‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
 	ab.peregib_krutizna_quantil = 0.40;
 	ab.allow_sd_limit_quantil = true;
 	//######################################################
 	//######################################################
-	//параметры фильтрации аномалий для оконносдвиговых алкгоритмов аномалий	
+	//РїР°СЂР°РјРµС‚СЂС‹ С„РёР»СЊС‚СЂР°С†РёРё Р°РЅРѕРјР°Р»РёР№ РґР»СЏ РѕРєРѕРЅРЅРѕСЃРґРІРёРіРѕРІС‹С… Р°Р»РєРіРѕСЂРёС‚РјРѕРІ Р°РЅРѕРјР°Р»РёР№
 	ab.m_gradient_type = auto_build_parametrs::gradient_type::the_dividitial;
 
-	ab.limit_dima = 0.8, 
+	ab.limit_dima = 0.8,
 	ab.limit_1 = 0.9;
 	ab.minimum_of_signal = 0.1;
-				
 
-	// запрет повторного использования точек
-	ab.use_repeat_points = false; // если истина, то мы не применяем запрет повторного использования точек, 
-	// инече - применяем запрет со следующим паратметром:
-	ab.n = 1;//плечо области запрета ( можно 0 и выше)
 
-	//параметры изменения длины окна
-	// нелинейность шага
+	// Р·Р°РїСЂРµС‚ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє
+	ab.use_repeat_points = false; // РµСЃР»Рё РёСЃС‚РёРЅР°, С‚Рѕ РјС‹ РЅРµ РїСЂРёРјРµРЅСЏРµРј Р·Р°РїСЂРµС‚ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє,
+	// РёРЅРµС‡Рµ - РїСЂРёРјРµРЅСЏРµРј Р·Р°РїСЂРµС‚ СЃРѕ СЃР»РµРґСѓСЋС‰РёРј РїР°СЂР°С‚РјРµС‚СЂРѕРј:
+	ab.n = 1;//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
+
+	//РїР°СЂР°РјРµС‚СЂС‹ РёР·РјРµРЅРµРЅРёСЏ РґР»РёРЅС‹ РѕРєРЅР°
+	// РЅРµР»РёРЅРµР№РЅРѕСЃС‚СЊ С€Р°РіР°
 	ab.win_velonsity  = 0.9;
 
 	//######################################################
@@ -211,10 +211,10 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 
 	//######################################################
 	//######################################################
-	// отношение глубины источника к полной (два плеча) длине аномалии
+	// РѕС‚РЅРѕС€РµРЅРёРµ РіР»СѓР±РёРЅС‹ РёСЃС‚РѕС‡РЅРёРєР° Рє РїРѕР»РЅРѕР№ (РґРІР° РїР»РµС‡Р°) РґР»РёРЅРµ Р°РЅРѕРјР°Р»РёРё
 	ab.k = 0.75;
 
-	//использовать алгоритм "палок" по мин-максам
+	//РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р°Р»РіРѕСЂРёС‚Рј "РїР°Р»РѕРє" РїРѕ РјРёРЅ-РјР°РєСЃР°Рј
 	ab.use_min_max_sticks = true;
 	ab.use_min_max_sticks = true;
 
@@ -300,13 +300,13 @@ printf("AutoBuildProfile::UpdateExtremums\n");
 
 void AutoBuildProfile::Zoom(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean)
 {
-printf("AutoBuildProfile::Zoom\n");	
+printf("AutoBuildProfile::Zoom\n");
 	if (this->m_collections.SetCurrentMsgOnFirst())
 	{
 		do
 		{
 			this->m_collections.GetCurrentMsg().Zoom(
-				zoomX,zoomY,zoomZ, 
+				zoomX,zoomY,zoomZ,
 				x_mean,
 				y_mean,
 				z_mean
@@ -317,16 +317,16 @@ printf("AutoBuildProfile::Zoom\n");
 }
 HTREEITEM AutoBuildProfile::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
-    char szItemText[1024]; // label text of tree-view item 
-	//====== Размеры изображаемого объекта
-	UINT n = this->m_collections.msgSize();	
+    char szItemText[1024]; // label text of tree-view item
+	//====== Р Р°Р·РјРµСЂС‹ РёР·РѕР±СЂР°Р¶Р°РµРјРѕРіРѕ РѕР±СЉРµРєС‚Р°
+	UINT n = this->m_collections.msgSize();
 	sprintf(szItemText, "AutoBuildProfile %d collections", n);
 	Object * pObject = dynamic_cast<Object *> (this);
 	//=============================================================
-	// Add the item to the tree-view control. 
-	//HTREEITEM h2 = AddItemToTree(hwndTV, szItemText, pObject, h1); 
+	// Add the item to the tree-view control.
+	//HTREEITEM h2 = AddItemToTree(hwndTV, szItemText, pObject, h1);
 	//=============================================================
-	//HTREEITEM h3 = AddObjectListItem(hwndTV, szItemText, &this->m_collections_ObjectList, h2); 
+	//HTREEITEM h3 = AddObjectListItem(hwndTV, szItemText, &this->m_collections_ObjectList, h2);
 	if (this->m_collections.SetCurrentMsgOnFirst())
 	{
 		do
@@ -364,13 +364,13 @@ void AutoBuildProfile::ReDraw()
 	}
 }
 
-bool AutoBuildProfile::IsSelected(CPoint3 selected_view_pt, 
+bool AutoBuildProfile::IsSelected(CPoint3 selected_view_pt,
 		double search_radius,
 		WhatSelected& ws)
 {
 	search_radius = fabs(search_radius);
 
-	
+
 	if (this->m_collections.SetCurrentMsgOnFirst())
 	{
 		do
@@ -391,7 +391,7 @@ void AutoBuildProfile::EnumObjects(WPARAM wParam, LPARAM lParam, void * p,
 		bool (Object::* condition_fun)(),
 		void (* callback_fun)(Object*, WPARAM , LPARAM, void * ) )
 {
-	
+
 	if (this->m_collections.SetCurrentMsgOnFirst())
 	{
 		do
@@ -459,9 +459,9 @@ void AutoBuildProfile::CutXYZandDisvisible(int subcube_number, double X, double 
 
 Collection* AutoBuildProfile::CreateNewCollection(void)
 {
-	// готовим объект 
+	// РіРѕС‚РѕРІРёРј РѕР±СЉРµРєС‚
 	Collection collection(this->m_pSurfDoc);
-	this->m_collections.AddMsg(&collection);		
+	this->m_collections.AddMsg(&collection);
 	this->m_collections_ObjectList.Init(this->m_collections, this);
 	return &this->m_collections.GetLastMsg();
 }
@@ -543,7 +543,7 @@ void WriteDescription(FILE* stream, auto_build_parametrs & ab)
 void SaveMyGrid(char * name, long rows, long cols, vector<double> & sol)
 {
 	long rows_cols = rows*cols;
-	// 
+	//
 	Grid grid;
 	grid.gridSection.z = AllocDoubleMat(rows,cols);
 	for (long c = 0; c < cols; c++)
@@ -594,7 +594,7 @@ struct slau_add_cond_param
 
 };
 
-// накладываем дополнительные условия на решение системы уравнений
+// РЅР°РєР»Р°РґС‹РІР°РµРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СѓСЃР»РѕРІРёСЏ РЅР° СЂРµС€РµРЅРёРµ СЃРёСЃС‚РµРјС‹ СѓСЂР°РІРЅРµРЅРёР№
 void SlauAdditionalConditions(vector<double> & x,
 							  double & add_F,
 							  vector<double> & add_dFdx,
@@ -606,7 +606,7 @@ void SlauAdditionalConditions(vector<double> & x,
 	long Nj, N0 = x.size();
 	long i, r, c, j, k;
 	//----------------------------
-	// Вычисляем "дисперсию"
+	// Р’С‹С‡РёСЃР»СЏРµРј "РґРёСЃРїРµСЂСЃРёСЋ"
 	double sum_xii = 0.0;
 	for (i = 0; i < N0; i++)
 	{
@@ -615,14 +615,13 @@ void SlauAdditionalConditions(vector<double> & x,
 	sum_xii / N0;
 	//----------------------------
 
-	// Добавка к функционалу
+	// Р”РѕР±Р°РІРєР° Рє С„СѓРЅРєС†РёРѕРЅР°Р»Сѓ
 	add_F = 0.0;
 
 	for (j = 0; j < param->cols-1; j++)
 	{
-			
 		//----------------------------
-		// Вычисляем "ковариацию"
+		// Р’С‹С‡РёСЃР»СЏРµРј "РєРѕРІР°СЂРёР°С†РёСЋ"
 		double sum_xij = 0.0;
 		Nj = param->rows * (param->cols - j);
 		for (r = 0; r < param->rows; r++)
@@ -635,23 +634,23 @@ void SlauAdditionalConditions(vector<double> & x,
 		}
 		sum_xij /= Nj;
 		//----------------------------
-		// Вычисление j-й дельты
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ j-Р№ РґРµР»СЊС‚С‹
 		double delta_j = sum_xii - sum_xij*exp(param->k_gor*j);
-		// Вычисление добавки к функционалу
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ РґРѕР±Р°РІРєРё Рє С„СѓРЅРєС†РёРѕРЅР°Р»Сѓ
 		add_F += delta_j*delta_j;
-		// Вычисляем первую и вторую производные добавки к функционалу по x[k]
+		// Р’С‹С‡РёСЃР»СЏРµРј РїРµСЂРІСѓСЋ Рё РІС‚РѕСЂСѓСЋ РїСЂРѕРёР·РІРѕРґРЅС‹Рµ РґРѕР±Р°РІРєРё Рє С„СѓРЅРєС†РёРѕРЅР°Р»Сѓ РїРѕ x[k]
 		for (r = 0; r < param->rows; r++)
 		{
 			for (c = 0; c < param->cols; c++)
 			{
 				k = r * param->cols + c;
-				// Производная j-й дельты по x[k]
-				double D_delta_j_xk = 
-					2.0*x[k] / N0 
-					- 
-					exp(param->k_gor*j) 
+				// РџСЂРѕРёР·РІРѕРґРЅР°СЏ j-Р№ РґРµР»СЊС‚С‹ РїРѕ x[k]
+				double D_delta_j_xk =
+					2.0*x[k] / N0
+					-
+					exp(param->k_gor*j)
 					* (c >= j ? x[k-j] : 0.0 + c < param->cols-j ? x[k+j] : 0.0) / Nj;
-				
+
 				add_dFdx[k] += 2.0 * delta_j * D_delta_j_xk;
 
 				add_d2Fdx2[k] += 4.0 * delta_j / N0 + 2.0 * D_delta_j_xk * D_delta_j_xk;
@@ -668,7 +667,7 @@ void SlauAdditionalConditions(vector<double> & x,
 	}
 	//printf("add_F = %e\n", add_F);
 }
-							  
+
 void SlauAdditionalConditions0(vector<double> & x,
 							  double & add_F,
 							  vector<double> & add_dFdx,
@@ -697,8 +696,8 @@ void DoMyMethod(vector<double> & X,
 	printf ( "DoMyMethod %s\n", name.c_str() );
 	char buff[BUFF_SIZE];
 
-	long cols = signal.size(); // длина сигнала 
-	long rows = cols/4;// а это глубина
+	long cols = signal.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
+	long rows = cols/4;// Р° СЌС‚Рѕ РіР»СѓР±РёРЅР°
 	cout << "cols = " << cols << endl;
 	cout << "Enter rows [" << rows << "]\n";
 	cin >> rows;
@@ -708,7 +707,7 @@ void DoMyMethod(vector<double> & X,
 
 	printf ( "DoMyMethod cols = %ld rows = %ld\n", cols,  rows);
 
-	// Простейшая формулировка прямой задачи
+	// РџСЂРѕСЃС‚РµР№С€Р°СЏ С„РѕСЂРјСѓР»РёСЂРѕРІРєР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	vector<sparse_row> m;
 	vector<double> b;
 	vector<double> sol(rows_cols, 0.0);
@@ -721,7 +720,7 @@ void DoMyMethod(vector<double> & X,
 	cout << "to_fill_matrix [0,1]\n";
 	cin >> to_fill_matrix;
 
-		
+
 	long r0 = 1;
 
 	if (to_fill_matrix)
@@ -781,15 +780,15 @@ void DoMyMethod(vector<double> & X,
 					if (C >= 0 && C < cols)
 					{
 						i = r * cols + C;
-						//row.put(i, 1.0); // или коэффициент ослабления K1 * exp ( - k2 * r )
-						row.put(i, k1 * exp ( - k2 * r )); // или коэффициент ослабления K1 * exp ( - k2 * r )
-					}			
+						//row.put(i, 1.0); // РёР»Рё РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ K1 * exp ( - k2 * r )
+						row.put(i, k1 * exp ( - k2 * r )); // РёР»Рё РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ K1 * exp ( - k2 * r )
+					}
 					C = c - r - l;
 					if (C >= 0 && C < cols)
 					{
 						i = r * cols + C;
-						//row.put(i, 1.0); // или коэффициент ослабления K1 * exp ( - k2 * r )
-						row.put(i, k1 * exp ( - k2 * r )); // или коэффициент ослабления K1 * exp ( - k2 * r )
+						//row.put(i, 1.0); // РёР»Рё РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ K1 * exp ( - k2 * r )
+						row.put(i, k1 * exp ( - k2 * r )); // РёР»Рё РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ K1 * exp ( - k2 * r )
 					}
 				}
 			}
@@ -799,7 +798,7 @@ void DoMyMethod(vector<double> & X,
 		if (to_store_matrix)
 		{
 			char filename[4096];
-			TCHAR filter[] =     
+			TCHAR filter[] =
 				TEXT("Sparse Martix File (*.smf)\0*.smf\0")
 				TEXT("All Files (*.*)\0*.*\0");
 			sprintf(filename, "\0");
@@ -826,7 +825,7 @@ void DoMyMethod(vector<double> & X,
 					MessageBox(0, "Do my method\nUnable to open file" , filename, MB_OK);
 				}
 			}
- 		}	
+ 		}
 	}
 	else
 	{
@@ -835,14 +834,14 @@ void DoMyMethod(vector<double> & X,
 		if ( to_load_matrix)
 		{
 			char filename[4096];
-			TCHAR filter[] =     
+			TCHAR filter[] =
 				TEXT("Sparse Martix File (*.smf)\0*.smf\0")
 				TEXT("All Files (*.*)\0*.*\0");
 			sprintf(filename, "\0");
 			if (OpenFileDlg(0, filter, filename) == S_OK)
 			{
 				AFile f;
-				if( f.Open( filename, GENERIC_READ, OPEN_EXISTING) ) 
+				if( f.Open( filename, GENERIC_READ, OPEN_EXISTING) )
 				{
 					Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 					try
@@ -857,7 +856,7 @@ void DoMyMethod(vector<double> & X,
 						if (cols != _cols)
 						{
 							char err[4098];
-							sprintf(err, "cols %ld != _cols %ld" , 
+							sprintf(err, "cols %ld != _cols %ld" ,
 								cols, _cols);
 							MessageBox(0, err, "Error on reading sparse matrix from file", MB_OK);
 							return;
@@ -878,9 +877,9 @@ void DoMyMethod(vector<double> & X,
 					}
 					catch (CException* pe)
 					{
-						// catch errors from WinINet 
-						TCHAR szErr[4098]; 
-						pe->GetErrorMessage(szErr, 4098); 
+						// catch errors from WinINet
+						TCHAR szErr[4098];
+						pe->GetErrorMessage(szErr, 4098);
 						AfxMessageBox(szErr);
 						pe->Delete();
 					}
@@ -888,7 +887,7 @@ void DoMyMethod(vector<double> & X,
 					{
 						MessageBox(0,"unknown error of archive read","",0);
 					}
-					
+
 					ar.Close();
 					f.Close();
 				}
@@ -906,7 +905,7 @@ void DoMyMethod(vector<double> & X,
 #define USE_SECOND_DER_OF_ADD_FUNCTIONAL 1
 	//SaveSparseMatrixAsDat(m, "m");
 	//SaveSparseMatrixAsGrid(m, rows_cols, "m");
-	// Вектор невязки
+	// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 	vector<double> E(cols);
 
 	bool slau1_echo = true;
@@ -925,10 +924,10 @@ void DoMyMethod(vector<double> & X,
 	cout << "Enter slau maxq on cycle [1000]\n";
 	cin >> slau_maxq_cycle;
 
-	// здесь по иному как регуляризация Тихонова не получается,
-	// потому что без прибавления к главной диагонали 
-	// регуляризующего коэффициента alpha матрица наименьших квадратов 
-	// оказывается не положительно определённой
+	// Р·РґРµСЃСЊ РїРѕ РёРЅРѕРјСѓ РєР°Рє СЂРµРіСѓР»СЏСЂРёР·Р°С†РёСЏ РўРёС…РѕРЅРѕРІР° РЅРµ РїРѕР»СѓС‡Р°РµС‚СЃСЏ,
+	// РїРѕС‚РѕРјСѓ С‡С‚Рѕ Р±РµР· РїСЂРёР±Р°РІР»РµРЅРёСЏ Рє РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё
+	// СЂРµРіСѓР»СЏСЂРёР·СѓСЋС‰РµРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° alpha РјР°С‚СЂРёС†Р° РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+	// РѕРєР°Р·С‹РІР°РµС‚СЃСЏ РЅРµ РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕ РѕРїСЂРµРґРµР»С‘РЅРЅРѕР№
 #if USE_SLAU_TICHONOV_1
 	if(!SLAU_Tichonov(m, rows_cols, 0.01, b, sol))
 	{
@@ -944,11 +943,11 @@ void DoMyMethod(vector<double> & X,
 	k_gor = fabs(k_gor);
 
 
-	// после того, как мы методом наименьших квадратов 
-	// получили решение с максимально минимизированной невязкой
-	// проверяем, насколько удовлетворяет наше решение 
-	// дополнительному отношению предпочтения 
-	// на множестве приближённых решений СЛАУ 
+	// РїРѕСЃР»Рµ С‚РѕРіРѕ, РєР°Рє РјС‹ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+	// РїРѕР»СѓС‡РёР»Рё СЂРµС€РµРЅРёРµ СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕ РјРёРЅРёРјРёР·РёСЂРѕРІР°РЅРЅРѕР№ РЅРµРІСЏР·РєРѕР№
+	// РїСЂРѕРІРµСЂСЏРµРј, РЅР°СЃРєРѕР»СЊРєРѕ СѓРґРѕРІР»РµС‚РІРѕСЂСЏРµС‚ РЅР°С€Рµ СЂРµС€РµРЅРёРµ
+	// РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРјСѓ РѕС‚РЅРѕС€РµРЅРёСЋ РїСЂРµРґРїРѕС‡С‚РµРЅРёСЏ
+	// РЅР° РјРЅРѕР¶РµСЃС‚РІРµ РїСЂРёР±Р»РёР¶С‘РЅРЅС‹С… СЂРµС€РµРЅРёР№ РЎР›РђРЈ
 	slau_add_cond_param param;
 
 	param.cols = cols;
@@ -965,7 +964,7 @@ void DoMyMethod(vector<double> & X,
 	double etha = 0.01;
 
 	index_for_sort * vis  = new index_for_sort[rows_cols];
-	
+
 	double add_F, sE;
 	vector<double> add_dFdx(rows_cols);
 	vector<double> add_d2Fdx2(rows_cols);
@@ -988,12 +987,12 @@ void DoMyMethod(vector<double> & X,
 
 		double old_add_F = add_F;
 		vector<double> old_sol = sol;
-		// тут мы получили функционал дополнительного отношения предпочтения 
-		// и его первую и вторую производные по вектору решения
+		// С‚СѓС‚ РјС‹ РїРѕР»СѓС‡РёР»Рё С„СѓРЅРєС†РёРѕРЅР°Р» РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРіРѕ РѕС‚РЅРѕС€РµРЅРёСЏ РїСЂРµРґРїРѕС‡С‚РµРЅРёСЏ
+		// Рё РµРіРѕ РїРµСЂРІСѓСЋ Рё РІС‚РѕСЂСѓСЋ РїСЂРѕРёР·РІРѕРґРЅС‹Рµ РїРѕ РІРµРєС‚РѕСЂСѓ СЂРµС€РµРЅРёСЏ
 
 		//printf("add_F = %e\t", add_F);
 
-		// сортируем производную дополнительного функционала по вектору решения
+		// СЃРѕСЂС‚РёСЂСѓРµРј РїСЂРѕРёР·РІРѕРґРЅСѓСЋ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРіРѕ С„СѓРЅРєС†РёРѕРЅР°Р»Р° РїРѕ РІРµРєС‚РѕСЂСѓ СЂРµС€РµРЅРёСЏ
 		for (i = 0; i < rows_cols; i++)
 		{
 #if USE_SECOND_DER_OF_ADD_FUNCTIONAL
@@ -1006,13 +1005,13 @@ void DoMyMethod(vector<double> & X,
 		qsort( (void *)vis, (size_t)rows_cols, sizeof(index_for_sort), compare_index_for_sort );
 		//qsort( (void *)vis, (size_t)rows_cols, sizeof(index_for_sort), compare_index_for_sort_decrease );
 
-		// производим обратную индексацию
+		// РїСЂРѕРёР·РІРѕРґРёРј РѕР±СЂР°С‚РЅСѓСЋ РёРЅРґРµРєСЃР°С†РёСЋ
 		vector<int> indexes(rows_cols);
 		for (i = 0; i < rows_cols; i++){indexes[vis[i].i] = i;}
 
-		// частично подстраиваемся: подстраиваем только те элементы вектора решения,
-		// которые имеют максимальный модулб первой производной дополнительного функционала и 
-		// количество которых равно число неизвестных минус число уравнений			
+		// С‡Р°СЃС‚РёС‡РЅРѕ РїРѕРґСЃС‚СЂР°РёРІР°РµРјСЃСЏ: РїРѕРґСЃС‚СЂР°РёРІР°РµРј С‚РѕР»СЊРєРѕ С‚Рµ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ,
+		// РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РјРѕРґСѓР»Р± РїРµСЂРІРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРіРѕ С„СѓРЅРєС†РёРѕРЅР°Р»Р° Рё
+		// РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕС‚РѕСЂС‹С… СЂР°РІРЅРѕ С‡РёСЃР»Рѕ РЅРµРёР·РІРµСЃС‚РЅС‹С… РјРёРЅСѓСЃ С‡РёСЃР»Рѕ СѓСЂР°РІРЅРµРЅРёР№
 		//char test[2048];sprintf(test, "%s\\test%03d_%s.dat", directory, q, name.c_str());
 		//FILE * stream = fopen(test, "wt");
 		for (i = Cols-j; i < rows_cols-j; i++)
@@ -1025,30 +1024,30 @@ void DoMyMethod(vector<double> & X,
 			//if(stream) fprintf(stream, "%d, %d, %f\n", int(vis[i].i%cols), int(rows-vis[i].i/cols-1), fabs(add_dFdx[vis[i].i]));
 		}
 		//if(stream) fclose(stream);
-		// после частичной подстройки опять проверяем дополнительный функционал
+		// РїРѕСЃР»Рµ С‡Р°СЃС‚РёС‡РЅРѕР№ РїРѕРґСЃС‚СЂРѕР№РєРё РѕРїСЏС‚СЊ РїСЂРѕРІРµСЂСЏРµРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Р№ С„СѓРЅРєС†РёРѕРЅР°Р»
 		/*SlauAdditionalConditions(sol,add_F,add_dFdx,add_d2Fdx2,&param);
-		double delta_add_F_part = add_F - old_add_F; 
+		double delta_add_F_part = add_F - old_add_F;
 		//printf("DaF1=%e ", delta_add_F_part);
-		// и рассчитываем вектор невязки  
+		// Рё СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РІРµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 		for (c = 0; c < cols; c++)
 		{
-			E[c] = - b[c]; // элемент вектора правых частей со знаком минус
+			E[c] = - b[c]; // СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ СЃРѕ Р·РЅР°РєРѕРј РјРёРЅСѓСЃ
 			E[c] += m[c].ScalarProduct(sol);
 		}
 		double sE = SquareSum(E);*/
 		//printf ("a_part_sE = %e, add_F = %e\t", sE, add_F);
 
-		// теперь формируем новую "малую" квадратную систему по следующему принципу:
-		// те элементы вектора решения, которые были только что подстроены в
-		// соответствии с производной дополнительного функционала - переносятся в правую часть
+		// С‚РµРїРµСЂСЊ С„РѕСЂРјРёСЂСѓРµРј РЅРѕРІСѓСЋ "РјР°Р»СѓСЋ" РєРІР°РґСЂР°С‚РЅСѓСЋ СЃРёСЃС‚РµРјСѓ РїРѕ СЃР»РµРґСѓСЋС‰РµРјСѓ РїСЂРёРЅС†РёРїСѓ:
+		// С‚Рµ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ, РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»Рё С‚РѕР»СЊРєРѕ С‡С‚Рѕ РїРѕРґСЃС‚СЂРѕРµРЅС‹ РІ
+		// СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃ РїСЂРѕРёР·РІРѕРґРЅРѕР№ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРіРѕ С„СѓРЅРєС†РёРѕРЅР°Р»Р° - РїРµСЂРµРЅРѕСЃСЏС‚СЃСЏ РІ РїСЂР°РІСѓСЋ С‡Р°СЃС‚СЊ
 
-		// а остальные элементы вектора решения потом уточняются посредством решения квадратной системы уравнений
+		// Р° РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ РїРѕС‚РѕРј СѓС‚РѕС‡РЅСЏСЋС‚СЃСЏ РїРѕСЃСЂРµРґСЃС‚РІРѕРј СЂРµС€РµРЅРёСЏ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹ СѓСЂР°РІРЅРµРЅРёР№
 
 		vector<sparse_row> m2(cols);
 		vector<double> b2(cols);
 		vector<double> sol2(Cols, 0.0);
 
-		// построение квадратной системы
+		// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹
 
 		for (c = 0; c < cols; c++)
 		{
@@ -1060,14 +1059,14 @@ void DoMyMethod(vector<double> & X,
 				i = ni->val.col;
 				if (indexes[i] >= Cols-j && indexes[i] < rows_cols-j)
 				{
-					// большой градиент
-					// переносим колонку в левую сторону
+					// Р±РѕР»СЊС€РѕР№ РіСЂР°РґРёРµРЅС‚
+					// РїРµСЂРµРЅРѕСЃРёРј РєРѕР»РѕРЅРєСѓ РІ Р»РµРІСѓСЋ СЃС‚РѕСЂРѕРЅСѓ
 					b2[c] -= sol[i]*ni->val.val;
 				}
 				else
 				{
-					// малый градиент
-					// формируем новую матрицу
+					// РјР°Р»С‹Р№ РіСЂР°РґРёРµРЅС‚
+					// С„РѕСЂРјРёСЂСѓРµРј РЅРѕРІСѓСЋ РјР°С‚СЂРёС†Сѓ
 					if (indexes[i] < Cols-j)
 					{
 						m2[c].put(indexes[i], ni->val.val);
@@ -1083,10 +1082,10 @@ void DoMyMethod(vector<double> & X,
 			}
 		}
 		/*double sE2;
-		// Вектор невязки для квадратной системы
+		// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё РґР»СЏ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹
 		for (c = 0; c < cols; c++)
 		{
-			E[c] = - b2[c]; // элемент вектора правых частей со знакомминус
+			E[c] = - b2[c]; // СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ СЃРѕ Р·РЅР°РєРѕРјРјРёРЅСѓСЃ
 			E[c] += m2[c].ScalarProduct(sol2);
 		}
 		sE2 = SquareSum(E);
@@ -1094,7 +1093,7 @@ void DoMyMethod(vector<double> & X,
 
 
 
-		// решение квадратной системы
+		// СЂРµС€РµРЅРёРµ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹
 
 #if USE_SLAU_TICHONOV_CYCLE
 		if (!SLAU_Tichonov(m2, Cols, 0.01, b2, sol2))
@@ -1105,25 +1104,25 @@ void DoMyMethod(vector<double> & X,
 		{
 		}
 /*
-		// Вектор невязки для квадратной системы
+		// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё РґР»СЏ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹
 		for (c = 0; c < cols; c++)
 		{
-			E[c] = - b2[c]; // элемент вектора правых частей со знакомминус
+			E[c] = - b2[c]; // СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ СЃРѕ Р·РЅР°РєРѕРјРјРёРЅСѓСЃ
 			E[c] += m2[c].ScalarProduct(sol2);
 		}
 		sE2 = SquareSum(E);
 		printf ("sE2 = %e\t", sE2);
 */
-		// построенные посредством решения квадратной системы элементы теперь вставляются в полный вектор решения 
-		for (i = 0; i < Cols-j; i++)				{sol[vis[i].i] = sol2[i];}		
+		// РїРѕСЃС‚СЂРѕРµРЅРЅС‹Рµ РїРѕСЃСЂРµРґСЃС‚РІРѕРј СЂРµС€РµРЅРёСЏ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹ СЌР»РµРјРµРЅС‚С‹ С‚РµРїРµСЂСЊ РІСЃС‚Р°РІР»СЏСЋС‚СЃСЏ РІ РїРѕР»РЅС‹Р№ РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
+		for (i = 0; i < Cols-j; i++)				{sol[vis[i].i] = sol2[i];}
 		for (i = rows_cols-j; i < rows_cols; i++)	{sol[vis[i].i] = sol2[i-rows_cols+Cols];}
 		SlauAdditionalConditions(sol,add_F,add_dFdx,add_d2Fdx2,&param);
-		double delta_add_F = add_F - old_add_F; 
+		double delta_add_F = add_F - old_add_F;
 		//printf("add_F = %e\n", add_F);
-		// Вектор невязки
+		// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 		for (c = 0; c < cols; c++)
 		{
-			E[c] = - b[c]; // элемент вектора правых частей со знакомминус
+			E[c] = - b[c]; // СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ СЃРѕ Р·РЅР°РєРѕРјРјРёРЅСѓСЃ
 			E[c] += m[c].ScalarProduct(sol);
 		}
 		sE = SquareSum(E);
@@ -1169,7 +1168,7 @@ void DoMyMethod(vector<double> & X,
 	}
 #endif
 #if 1
-	// 
+	//
 	Grid grid;
 	grid.gridSection.z = AllocDoubleMat(rows,cols);
 	for (long c = 0; c < cols; c++)
@@ -1213,7 +1212,7 @@ void DoMyMethod(vector<double> & X,
 	}
 	SaveAsSurfer7Grid(file, &grid);
 #endif
-	// удаляем корреляционную матрицу
+	// СѓРґР°Р»СЏРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 
 
 
@@ -1225,7 +1224,7 @@ GetProfileDirection(vector<double> & X,
 					vector<double> & Z,
 					double & min__x, double & min__y, double & min__z,
 					double & max__x, double & max__y, double & max__z,
-					double & delta__x, 
+					double & delta__x,
 					double & delta__y
 					)
 {
@@ -1238,7 +1237,7 @@ GetProfileDirection(vector<double> & X,
 
 	for (size_t i = 0; i < X.size(); i++)
 	{
-		double 
+		double
 			x_value = X[i],
 			y_value = Y[i],
 			z_value = Z[i];
@@ -1258,8 +1257,8 @@ GetProfileDirection(vector<double> & X,
 }
 
 bool FillingTheMatrix(double smoof_power,
-					  double k_oslablenie,// коэффициент ослабления
-					  double k, // отношение глубины источника к полной (два плеча) длине аномалии
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
+					  double k, // РѕС‚РЅРѕС€РµРЅРёРµ РіР»СѓР±РёРЅС‹ РёСЃС‚РѕС‡РЅРёРєР° Рє РїРѕР»РЅРѕР№ (РґРІР° РїР»РµС‡Р°) РґР»РёРЅРµ Р°РЅРѕРјР°Р»РёРё
 					  vector<SparseRow> * m,
 					  char * filename,
 					  long rows, long cols,
@@ -1271,20 +1270,20 @@ bool FillingTheMatrix(double smoof_power,
 {
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, phi_k, value;
 	long j,r,C,i;
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
 	double k_phi_max = (PI/2.0)/atan(1.0/2.0*k);
 
-	double k1 = 1.0;// коэффициент пропорциональности
+	double k1 = 1.0;// РєРѕСЌС„С„РёС†РёРµРЅС‚ РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚Рё
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно длине сигнала 
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
-	if (m) // если дана матрица, пишем в неё (в оперативную память)
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+	if (m) // РµСЃР»Рё РґР°РЅР° РјР°С‚СЂРёС†Р°, РїРёС€РµРј РІ РЅРµС‘ (РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ)
 	{
 		(*m).resize(signal_len);
 		for (j = 0; j < signal_len; j++)
@@ -1292,63 +1291,63 @@ bool FillingTheMatrix(double smoof_power,
 			printf("Filling of matrix %ld %ld\n", j, signal_len);
 			for (r = 0; r < rows; r++)
 			{
-				//zi = z0 - r * delta_z;// это неверно!!!
-				// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				//zi = z0 - r * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+				// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 				zi = z0 - (r+1) * delta_z;
 
 				Zj_zi = (Z[j]-zi);
 				Zj_zi2 = Zj_zi * Zj_zi;
 
-				//часть пути луча, на котором происходит затухание
+				//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 				double part_of_len = (z0 - zi) / Zj_zi;
 
 				for (C = 0; C < cols; C++)
 				{
-					// индекс в строке матрицы оператора прямой задачи
+					// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					i = r * cols + C;
-					// координата геологического источника
+					// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 					xi = x0 + C * delta_x;
 					yi = y0 + C * delta_y;
-					// расстояние от геологического источника
-					// до приёмника на профиле
+					// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+					// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 					len = sqrt(
-						(X[j]-xi)*(X[j]-xi) + 
-						(Y[j]-yi)*(Y[j]-yi) + 
-						Zj_zi2 
+						(X[j]-xi)*(X[j]-xi) +
+						(Y[j]-yi)*(Y[j]-yi) +
+						Zj_zi2
 						);
-					// угол направления на источник
+					// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 					phi = acos (Zj_zi / len);
-					// мягкое включение углового коэффициента
+					// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 					phi_k = pow(sin(k_phi_max * phi), smoof_power);
 					if (phi_k > 0.1)
-						// добавление элемента в разреженную строку
+						// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 						(*m)[j].put(i, k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k);
 				}
 			}
 		}
 	}
-	else // иначе пишем в файл
+	else // РёРЅР°С‡Рµ РїРёС€РµРј РІ С„Р°Р№Р»
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Filling the matrix\nUnable to open file" , filename, MB_OK);
 				return false;
 			}
-		}			
+		}
 		char buff[BUFF_SIZE];
 		Archive ar( &f, Archive::store, BUFF_SIZE, buff );
 
-		// записываем размерность матрицы
-		//ar << rows; 
+		// Р·Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹
+		//ar << rows;
 		//ar << cols;
 		ar << signal_len;
 		long rows_cols = rows * cols;
 		ar << rows_cols;
 
-		// а теперь саму матрицу - построчно!!
+		// Р° С‚РµРїРµСЂСЊ СЃР°РјСѓ РјР°С‚СЂРёС†Сѓ - РїРѕСЃС‚СЂРѕС‡РЅРѕ!!
 
 		/*for (long r = 0; r < rows; r++)
 		{
@@ -1359,38 +1358,38 @@ bool FillingTheMatrix(double smoof_power,
 			printf("Filling of matrix %ld %ld\n", j, signal_len);
 			for (r = 0; r < rows; r++)
 			{
-				//zi = z0 - r * delta_z;// это неверно!!!
-				// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				//zi = z0 - r * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+				// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 				zi = z0 - (r+1) * delta_z;
 
 				Zj_zi = (Z[j]-zi);
 				Zj_zi2 = Zj_zi * Zj_zi;
 
-				//часть пути луча, на котором происходит затухание
+				//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 				double part_of_len = (z0 - zi) / Zj_zi;
 
 
 				for (C = 0; C < cols; C++)
 				{
-					// индекс в строке матрицы оператора прямой задачи
+					// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					i = r * cols + C;
-					// координата геологического источника
+					// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 					xi = x0 + C * delta_x;
 					yi = y0 + C * delta_y;
-					// расстояние от геологического источника
-					// до приёмника на профиле
+					// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+					// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 					len = sqrt(
-						(X[j]-xi)*(X[j]-xi) + 
-						(Y[j]-yi)*(Y[j]-yi) + 
-						Zj_zi2 
+						(X[j]-xi)*(X[j]-xi) +
+						(Y[j]-yi)*(Y[j]-yi) +
+						Zj_zi2
 						);
-					// угол направления на источник
+					// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 					phi = acos (Zj_zi / len);
-					// мягкое включение углового коэффициента
+					// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 					phi_k = pow(sin(k_phi_max * phi), smoof_power);
 					if (phi_k > 0.1)
 					{
-						// добавление элемента в разреженную строку
+						// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 						// (*m)[j].put(i, k1 * exp ( - k2 * len) * phi_k);
 						value = k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k;
 						ar << i;
@@ -1398,7 +1397,7 @@ bool FillingTheMatrix(double smoof_power,
 					}
 				}
 			}
-			//признак конца записи строки
+			//РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° Р·Р°РїРёСЃРё СЃС‚СЂРѕРєРё
 			i = -1;
 			value = 0.0;
 			ar << i;
@@ -1416,8 +1415,8 @@ bool FillingTheMatrix(double smoof_power,
 
 
 void FillingTheMatrix_(double smoof_power,
-					  double k_oslablenie,// коэффициент ослабления
-					  double k, // отношение глубины источника к полной (два плеча) длине аномалии
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
+					  double k, // РѕС‚РЅРѕС€РµРЅРёРµ РіР»СѓР±РёРЅС‹ РёСЃС‚РѕС‡РЅРёРєР° Рє РїРѕР»РЅРѕР№ (РґРІР° РїР»РµС‡Р°) РґР»РёРЅРµ Р°РЅРѕРјР°Р»РёРё
 					  vector<sparse_row>& m,
 					  vector<double>& b,
 					  long rows, long cols,
@@ -1430,14 +1429,14 @@ void FillingTheMatrix_(double smoof_power,
 {
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, phi_k;
 	long j,r,C,i, ir, ic, iC;
-	long signal_len = signal.size(); // длина сигнала 
+	long signal_len = signal.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
 	double k_phi_max = (PI/2.0)/atan(1.0/2.0*k);
 
 	double k1 = 1.0;
 
 	vector<long> vr(rows), vc(cols);
-	
+
 	index_for_sort * vir  = new index_for_sort[rows];
 	for (ir = 0; ir < rows; ir++)
 	{
@@ -1466,13 +1465,13 @@ void FillingTheMatrix_(double smoof_power,
 
 
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно длине сигнала 
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 	m.resize(signal_len);
 	b.resize(signal_len);
 	for (j = 0; j < signal_len; j++)
@@ -1482,38 +1481,38 @@ void FillingTheMatrix_(double smoof_power,
 		{
 			r = vr[ir];
 
-			//zi = z0 - r * delta_z;// это неверно!!!
-			// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+			//zi = z0 - r * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+			// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 			zi = z0 - (r+1) * delta_z;
 
 			Zj_zi = (Z[j]-zi);
 			Zj_zi2 = Zj_zi * Zj_zi;
 
-			//часть пути луча, на котором происходит затухание
+			//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 			double part_of_len = (z0 - zi) / Zj_zi;
 
 			for (iC = 0; iC < cols; iC++)
 			{
 				C = vc[iC];
 
-				// индекс в строке матрицы оператора прямой задачи
+				// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				i = r * cols + C;
-				// координата геологического источника
+				// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 				xi = x0 + C * delta_x;
 				yi = y0 + C * delta_y;
-				// расстояние от геологического источника
-				// до приёмника на профиле
+				// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+				// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 				len = sqrt(
-					(X[j]-xi)*(X[j]-xi) + 
-					(Y[j]-yi)*(Y[j]-yi) + 
-					Zj_zi2 
+					(X[j]-xi)*(X[j]-xi) +
+					(Y[j]-yi)*(Y[j]-yi) +
+					Zj_zi2
 					);
-				// угол направления на источник
+				// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 				phi = acos (Zj_zi / len);
-				// мягкое включение углового коэффициента
+				// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 				phi_k = pow(sin(k_phi_max * phi), smoof_power);
 				if (phi_k > 0.1)
-					// добавление элемента в разреженную строку
+					// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 					m[j].put(i, k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k);
 			}
 		}
@@ -1523,7 +1522,7 @@ void FillingTheMatrix_(double smoof_power,
 double Chislitel_Integral(
 	int noise_color,
 	double a,//distance
-	double b,// коэффициент пропорциональности перед корнем из частоты в выражении для коэффициента затухания
+	double b,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚Рё РїРµСЂРµРґ РєРѕСЂРЅРµРј РёР· С‡Р°СЃС‚РѕС‚С‹ РІ РІС‹СЂР°Р¶РµРЅРёРё РґР»СЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° Р·Р°С‚СѓС…Р°РЅРёСЏ
 	double omega)
 {
 	double I = 0;
@@ -1602,7 +1601,7 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm_assume_tgdelta_much_more_th
 	vector<double> & Y,
 	vector<double> & Z,
 	vector<vector<anten_direction> > & A,
-	double pw_dnp,// степень диаграммы направленности приёмника
+	double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double min_value,
 	int wave_type,
 	sourse_power_model spm
@@ -1617,107 +1616,107 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm_assume_tgdelta_much_more_th
 
 
 	/*
-Прямая и обратная задача в УИМПЗ
+РџСЂСЏРјР°СЏ Рё РѕР±СЂР°С‚РЅР°СЏ Р·Р°РґР°С‡Р° РІ РЈРРњРџР—
 
-1)	Направления рамочных антенн X, Y и Z задаются как вектора нормали: 
-AX(1,0,0), AY(0,1,0) и AZ(0,0,1) соответственно.
-2)	Координата источника излучения xi, yi, zi
-3)	Его мощность W
-4)	Его эллипсоид поляризации зададим отношением широтной компоненты амплитуды вектора напряжённости излучаемого переменного магнитного поля к его долготной компоненте PEW/NS. 
-5)	Координата измерения излучения x, y, z
-6)	Проводим вектор луча от источника к точке измерения L (x-xi, y-yi, z-zi)
-7)	Модуль вектора луча |L| даёт расстояние, пройденное сигналом
-8)	Ослабление сигнала вычисляем через коэффициент ослабления k_oslablenie : exp ( - k_oslablenie * |L|)
+1)	РќР°РїСЂР°РІР»РµРЅРёСЏ СЂР°РјРѕС‡РЅС‹С… Р°РЅС‚РµРЅРЅ X, Y Рё Z Р·Р°РґР°СЋС‚СЃСЏ РєР°Рє РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё:
+AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1) СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ.
+2)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+3)	Р•РіРѕ РјРѕС‰РЅРѕСЃС‚СЊ W
+4)	Р•РіРѕ СЌР»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё Р·Р°РґР°РґРёРј РѕС‚РЅРѕС€РµРЅРёРµРј С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚С‹ Р°РјРїР»РёС‚СѓРґС‹ РІРµРєС‚РѕСЂР° РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°РµРјРѕРіРѕ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ Рє РµРіРѕ РґРѕР»РіРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ PEW/NS.
+5)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёР·РјРµСЂРµРЅРёСЏ РёР·Р»СѓС‡РµРЅРёСЏ x, y, z
+6)	РџСЂРѕРІРѕРґРёРј РІРµРєС‚РѕСЂ Р»СѓС‡Р° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° Рє С‚РѕС‡РєРµ РёР·РјРµСЂРµРЅРёСЏ L (x-xi, y-yi, z-zi)
+7)	РњРѕРґСѓР»СЊ РІРµРєС‚РѕСЂР° Р»СѓС‡Р° |L| РґР°С‘С‚ СЂР°СЃСЃС‚РѕСЏРЅРёРµ, РїСЂРѕР№РґРµРЅРЅРѕРµ СЃРёРіРЅР°Р»РѕРј
+8)	РћСЃР»Р°Р±Р»РµРЅРёРµ СЃРёРіРЅР°Р»Р° РІС‹С‡РёСЃР»СЏРµРј С‡РµСЂРµР· РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ k_oslablenie : exp ( - k_oslablenie * |L|)
 
-Вывод формулы для коэффициента выхода антенны, учитывая диаграмму направленности антенн и эллипсоид 
-поляризации электромагнитного луча. Эллипсоид поляризации определяем по вектору напряжённости 
-амплитуды переменного магнитного поля, образующего ЭМ волну. 
+Р’С‹РІРѕРґ С„РѕСЂРјСѓР»С‹ РґР»СЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹, СѓС‡РёС‚С‹РІР°СЏ РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё Р°РЅС‚РµРЅРЅ Рё СЌР»Р»РёРїСЃРѕРёРґ
+РїРѕР»СЏСЂРёР·Р°С†РёРё СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕРіРѕ Р»СѓС‡Р°. Р­Р»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё РѕРїСЂРµРґРµР»СЏРµРј РїРѕ РІРµРєС‚РѕСЂСѓ РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+Р°РјРїР»РёС‚СѓРґС‹ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ, РѕР±СЂР°Р·СѓСЋС‰РµРіРѕ Р­Рњ РІРѕР»РЅСѓ.
 
-Допустим, что ЭМ волна от источника излучения xi, yi, zi 
-распространяется снизу вверх вертикально, а нормаль антенны AZ(0,0,1) 
-тоже расположена вертикально. Поток электромагнитной индукции или магнитный поток 
-(проверить применение какого термина уместнее), вызванный вектором напряжённости 
-магнитного поля рассматриваемого луча в силу геометрических причин не будет 
-пересекать контур, поэтому коэффициент выхода антенны будет равен нулю. 
+Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ Р­Рњ РІРѕР»РЅР° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ СЃРЅРёР·Сѓ РІРІРµСЂС… РІРµСЂС‚РёРєР°Р»СЊРЅРѕ, Р° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ AZ(0,0,1)
+С‚РѕР¶Рµ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРµСЂС‚РёРєР°Р»СЊРЅРѕ. РџРѕС‚РѕРє СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РёР»Рё РјР°РіРЅРёС‚РЅС‹Р№ РїРѕС‚РѕРє
+(РїСЂРѕРІРµСЂРёС‚СЊ РїСЂРёРјРµРЅРµРЅРёРµ РєР°РєРѕРіРѕ С‚РµСЂРјРёРЅР° СѓРјРµСЃС‚РЅРµРµ), РІС‹Р·РІР°РЅРЅС‹Р№ РІРµРєС‚РѕСЂРѕРј РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° РІ СЃРёР»Сѓ РіРµРѕРјРµС‚СЂРёС‡РµСЃРєРёС… РїСЂРёС‡РёРЅ РЅРµ Р±СѓРґРµС‚
+РїРµСЂРµСЃРµРєР°С‚СЊ РєРѕРЅС‚СѓСЂ, РїРѕСЌС‚РѕРјСѓ РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ РЅСѓР»СЋ.
 
-Рассмотрим взаимодействие этой же волны с антенной AX(1,0,0), 
-нормаль которой расположена вдоль оси X, то есть по широте. Контур 
-этой антенны будет нормально (под прямым углом) пересечён иксовой (широтной) 
-компонентой эллипсоида поляризации рассматриваемого луча ЭМ волны. Т.о. 
-коэффициент выхода антенны будет равен широтной компоненте эллипсоида 
-поляризации, т.е. PEW/NS.
+Р Р°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЌС‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AX(1,0,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё X, С‚Рѕ РµСЃС‚СЊ РїРѕ С€РёСЂРѕС‚Рµ. РљРѕРЅС‚СѓСЂ
+СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ (РїРѕРґ РїСЂСЏРјС‹Рј СѓРіР»РѕРј) РїРµСЂРµСЃРµС‡С‘РЅ РёРєСЃРѕРІРѕР№ (С€РёСЂРѕС‚РЅРѕР№)
+РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ.
+РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ СЌР»Р»РёРїСЃРѕРёРґР°
+РїРѕР»СЏСЂРёР·Р°С†РёРё, С‚.Рµ. PEW/NS.
 
-Теперь рассмотрим взаимодействие той же волны с антенной AY(0,1,0), 
-нормаль которой расположена вдоль оси Y, то есть по долготе. Контур этой антенны 
-будет нормально пересечён игрековой (долготной) компонентой эллипсоида поляризации 
-рассматриваемого луча ЭМ волны. Т.о. коэффициент выхода антенны будет равен 1.0 / PEW/NS.
+РўРµРїРµСЂСЊ СЂР°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ С‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AY(0,1,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё Y, С‚Рѕ РµСЃС‚СЊ РїРѕ РґРѕР»РіРѕС‚Рµ. РљРѕРЅС‚СѓСЂ СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹
+Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ РїРµСЂРµСЃРµС‡С‘РЅ РёРіСЂРµРєРѕРІРѕР№ (РґРѕР»РіРѕС‚РЅРѕР№) РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё
+СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ. РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ 1.0 / PEW/NS.
 
-9)	Учитываем диаграмму направленности. При допущении, что электромагнитный луч не 
-поляризован, используя закон электромагнитной индукции для контура, вводим коэффициент 
-равный sin(phi) в степени n, где n равно 1 или 2, а phi – угол между векторами луча и 
-нормалью антенны AX, AY или AZ. Определяем сперва cos(phi) через скалярное произведение 
-AL векторов луча L и антенной нормали A (ax,ay,az). 
-Вычисляем AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi). 
-Откуда (зная, что |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
+9)	РЈС‡РёС‚С‹РІР°РµРј РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё. РџСЂРё РґРѕРїСѓС‰РµРЅРёРё, С‡С‚Рѕ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅС‹Р№ Р»СѓС‡ РЅРµ
+РїРѕР»СЏСЂРёР·РѕРІР°РЅ, РёСЃРїРѕР»СЊР·СѓСЏ Р·Р°РєРѕРЅ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РґР»СЏ РєРѕРЅС‚СѓСЂР°, РІРІРѕРґРёРј РєРѕСЌС„С„РёС†РёРµРЅС‚
+СЂР°РІРЅС‹Р№ sin(phi) РІ СЃС‚РµРїРµРЅРё n, РіРґРµ n СЂР°РІРЅРѕ 1 РёР»Рё 2, Р° phi вЂ“ СѓРіРѕР» РјРµР¶РґСѓ РІРµРєС‚РѕСЂР°РјРё Р»СѓС‡Р° Рё
+РЅРѕСЂРјР°Р»СЊСЋ Р°РЅС‚РµРЅРЅС‹ AX, AY РёР»Рё AZ. РћРїСЂРµРґРµР»СЏРµРј СЃРїРµСЂРІР° cos(phi) С‡РµСЂРµР· СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
+AL РІРµРєС‚РѕСЂРѕРІ Р»СѓС‡Р° L Рё Р°РЅС‚РµРЅРЅРѕР№ РЅРѕСЂРјР°Р»Рё A (ax,ay,az).
+Р’С‹С‡РёСЃР»СЏРµРј AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi).
+РћС‚РєСѓРґР° (Р·РЅР°СЏ, С‡С‚Рѕ |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
 
-Приближение неполяризованного луча позволяет произвести более подробную 
-реконструкцию распределения мощности излучателей в пространстве. 
-Но не даёт возможности произвести анализ анизотропии излучения горных пород.
+РџСЂРёР±Р»РёР¶РµРЅРёРµ РЅРµРїРѕР»СЏСЂРёР·РѕРІР°РЅРЅРѕРіРѕ Р»СѓС‡Р° РїРѕР·РІРѕР»СЏРµС‚ РїСЂРѕРёР·РІРµСЃС‚Рё Р±РѕР»РµРµ РїРѕРґСЂРѕР±РЅСѓСЋ
+СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЋ СЂР°СЃРїСЂРµРґРµР»РµРЅРёСЏ РјРѕС‰РЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°С‚РµР»РµР№ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ.
+РќРѕ РЅРµ РґР°С‘С‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РїСЂРѕРёР·РІРµСЃС‚Рё Р°РЅР°Р»РёР· Р°РЅРёР·РѕС‚СЂРѕРїРёРё РёР·Р»СѓС‡РµРЅРёСЏ РіРѕСЂРЅС‹С… РїРѕСЂРѕРґ.
 
 
 
-Физически правильно рассматривать кристалл излучающей горной породы 
-как комбинацию трёх взаимно-перпендикулярных излучающий диполей (IDX IDY IDZ).
+Р¤РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅРѕ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ РєСЂРёСЃС‚Р°Р»Р» РёР·Р»СѓС‡Р°СЋС‰РµР№ РіРѕСЂРЅРѕР№ РїРѕСЂРѕРґС‹
+РєР°Рє РєРѕРјР±РёРЅР°С†РёСЋ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С… РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ).
 
-Но для целей удобства анализа приёма этого излучения рамочной 
-антенной допустим, что нам известно (если нам не известно, 
-то оно наверняка известно специалистам по физике твёрдого тела) 
-математическое преобразование от трёх взаимно-перпендикулярных 
-излучающий диполей (IDX IDY IDZ) к трём взаимно-перпендикулярным 
-излучающим контурам (IHX IHY IHZ). Поэтому мы в ходе решения 
-обратной задачи будем искать распределение в пространстве горной 
-породы излучающих контуров (IHX IHY IHZ), а переход от них к 
-физически правильным излучающим диполям предоставим физикам-интерпретаторам.
+РќРѕ РґР»СЏ С†РµР»РµР№ СѓРґРѕР±СЃС‚РІР° Р°РЅР°Р»РёР·Р° РїСЂРёС‘РјР° СЌС‚РѕРіРѕ РёР·Р»СѓС‡РµРЅРёСЏ СЂР°РјРѕС‡РЅРѕР№
+Р°РЅС‚РµРЅРЅРѕР№ РґРѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РЅР°Рј РёР·РІРµСЃС‚РЅРѕ (РµСЃР»Рё РЅР°Рј РЅРµ РёР·РІРµСЃС‚РЅРѕ,
+С‚Рѕ РѕРЅРѕ РЅР°РІРµСЂРЅСЏРєР° РёР·РІРµСЃС‚РЅРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р°Рј РїРѕ С„РёР·РёРєРµ С‚РІС‘СЂРґРѕРіРѕ С‚РµР»Р°)
+РјР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РѕС‚ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С…
+РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ) Рє С‚СЂС‘Рј РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹Рј
+РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂР°Рј (IHX IHY IHZ). РџРѕСЌС‚РѕРјСѓ РјС‹ РІ С…РѕРґРµ СЂРµС€РµРЅРёСЏ
+РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё Р±СѓРґРµРј РёСЃРєР°С‚СЊ СЂР°СЃРїСЂРµРґРµР»РµРЅРёРµ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ РіРѕСЂРЅРѕР№
+РїРѕСЂРѕРґС‹ РёР·Р»СѓС‡Р°СЋС‰РёС… РєРѕРЅС‚СѓСЂРѕРІ (IHX IHY IHZ), Р° РїРµСЂРµС…РѕРґ РѕС‚ РЅРёС… Рє
+С„РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅС‹Рј РёР·Р»СѓС‡Р°СЋС‰РёРј РґРёРїРѕР»СЏРј РїСЂРµРґРѕСЃС‚Р°РІРёРј С„РёР·РёРєР°Рј-РёРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂР°Рј.
 
-Для начала предположим, что мы имеем дело с одним излучающим контуром.
+Р”Р»СЏ РЅР°С‡Р°Р»Р° РїСЂРµРґРїРѕР»РѕР¶РёРј, С‡С‚Рѕ РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ РѕРґРЅРёРј РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂРѕРј.
 
-Диаграмма направленности излучающего контура?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂР°?
 
-Диаграмма направленности пары излучающего и принимающего контуров?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїР°СЂС‹ РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ Рё РїСЂРёРЅРёРјР°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂРѕРІ?
 
 
 
 	*/
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, phi_k, value;
 	long j,p,r,C,i;
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
-	int a; //номер антены 
+	int a; //РЅРѕРјРµСЂ Р°РЅС‚РµРЅС‹
 	//AX(1,0,0),		a = 0
 	//AY(0,1,0)			a = 1
-	//и AZ(0,0,1)		a = 2
+	//Рё AZ(0,0,1)		a = 2
 
-	// степень диаграммы направленности приёмника
+	// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	//int pw_dnp = 2;
 
-    //минимальное значение, которое вносится в оператор прямой задачи    
+    //РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РІРЅРѕСЃРёС‚СЃСЏ РІ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	//double min_value = 1e-16;
 
 	//double k_phi_max = (PI/2.0)/atan(1.0/2.0*k);
 
 	double k1 = 1.0;
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно УТРОЕННОЙ длине сигнала, 
-	// т.к. мы ищем ОПЕРАТОР ПРЯМОЙ ЗАДАЧИ ДЛЯ ТРЁХ АНТЕН
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
-	// НА АНТЕНАХ AX(1,0,0), AY(0,1,0) и AZ(0,0,1) 
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РЈРўР РћР•РќРќРћР™ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°,
+	// С‚.Рє. РјС‹ РёС‰РµРј РћРџР•Р РђРўРћР  РџР РЇРњРћР™ Р—РђР”РђР§Р Р”Р›РЇ РўР РЃРҐ РђРќРўР•Рќ
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+	// РќРђ РђРќРўР•РќРђРҐ AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1)
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	double z_min = z0 - pages * delta_z;
 
 	double sum_operator_value_x = 0.0;
@@ -1726,10 +1725,10 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 	double hi, w, sum_operator_z_per_xy;
 
-	if (m) // если дана матрица, пишем в неё (в оперативную память)
+	if (m) // РµСЃР»Рё РґР°РЅР° РјР°С‚СЂРёС†Р°, РїРёС€РµРј РІ РЅРµС‘ (РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ)
 	{
 		(*m).resize(signal_len * 3);
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			//int ax = a == 0;
 			//int ay = a == 1;
@@ -1739,17 +1738,17 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ax = A[a][j].ax;
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);		
+				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				int putted_in_row = 0;
-				
+
 				for (p = 0; p < pages; p++)
-				{						
+				{
 				//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
@@ -1757,44 +1756,43 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
 
-					//часть пути луча, на котором происходит затухание
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
-					
+
 					for (r = 0; r < rows; r++)
 					{
-						
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							//value = k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k;
 							double d = part_of_len * len;
-							value = k1 * norm * phi_k * ( 
+							value = k1 * norm * phi_k * (
 								Chislitel_Integral(noise_color, d, b, omega_max) -
 								Chislitel_Integral(noise_color, d, b, omega_min));
 
 							if (fabs(value) > min_value)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								(*m)[j].put(i, value);
 								sum_operator_value_x += ax * value * w ;
 								sum_operator_value_y += ay * value * w;
@@ -1810,31 +1808,31 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 	else
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Filling the matrix 3D with napravlennosty diagramm\nUnable to open file" , filename, MB_OK);
 				return false;
 			}
-		}			
+		}
 		char buff[BUFF_SIZE];
 		Archive ar( &f, Archive::store, BUFF_SIZE, buff );
 
-		// записываем размерность матрицы
-		//ar << rows; 
+		// Р·Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹
+		//ar << rows;
 		//ar << cols;
 		ar << signal_len * 3;
 		long rows_cols_pages = pages * rows * cols;
 		ar << rows_cols_pages;
 
-		// а теперь саму матрицу - построчно!!
+		// Р° С‚РµРїРµСЂСЊ СЃР°РјСѓ РјР°С‚СЂРёС†Сѓ - РїРѕСЃС‚СЂРѕС‡РЅРѕ!!
 
 		/*for (long r = 0; r < rows; r++)
 		{
 			ar << m[r];
 		}*/
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			//int ax = a == 0;
 			//int ay = a == 1;
@@ -1844,58 +1842,58 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ax = A[a][j].ax;
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);		
+				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
-			
+
 				for (p = 0; p < pages; p++)
-				{						
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				{
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
-					
+
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
-					
-					//часть пути луча, на котором происходит затухание
+
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
 
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							//value = k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k;
 							double d = part_of_len * len;
-							value = k1 * norm * phi_k * ( 
+							value = k1 * norm * phi_k * (
 								Chislitel_Integral(noise_color, d, b, omega_max) -
 								Chislitel_Integral(noise_color, d, b, omega_min));
 							if (fabs(value) > min_value)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								///(*m)[j].put(i, K);
 								ar << i;
 								ar << value;
@@ -1907,7 +1905,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 						}
 					}
 				}
-				//признак конца записи строки
+				//РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° Р·Р°РїРёСЃРё СЃС‚СЂРѕРєРё
 				i = -1;
 				value = 0.0;
 				ar << i;
@@ -1935,7 +1933,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 
 bool FillingTheMatrix3D_with_napravlennosty_diagramm(
-					  double k_oslablenie,// коэффициент ослабления
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
 					  vector<SparseRow> * m,
 					  char * filename,
 					  long rows, long cols, long pages,
@@ -1945,7 +1943,7 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm(
 					  vector<double> & Y,
 					  vector<double> & Z,
 					  vector<vector<anten_direction> > & A,
-					  double pw_dnp,// степень диаграммы направленности приёмника
+					  double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 					  double min_value,
 					  int wave_type,
 					  sourse_power_model spm
@@ -1953,90 +1951,90 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm(
 {
 
 	/*
-Прямая и обратная задача в УИМПЗ
+РџСЂСЏРјР°СЏ Рё РѕР±СЂР°С‚РЅР°СЏ Р·Р°РґР°С‡Р° РІ РЈРРњРџР—
 
-1)	Направления рамочных антенн X, Y и Z задаются как вектора нормали: 
-AX(1,0,0), AY(0,1,0) и AZ(0,0,1) соответственно.
-2)	Координата источника излучения xi, yi, zi
-3)	Его мощность W
-4)	Его эллипсоид поляризации зададим отношением широтной компоненты амплитуды вектора напряжённости излучаемого переменного магнитного поля к его долготной компоненте PEW/NS. 
-5)	Координата измерения излучения x, y, z
-6)	Проводим вектор луча от источника к точке измерения L (x-xi, y-yi, z-zi)
-7)	Модуль вектора луча |L| даёт расстояние, пройденное сигналом
-8)	Ослабление сигнала вычисляем через коэффициент ослабления k_oslablenie : exp ( - k_oslablenie * |L|)
+1)	РќР°РїСЂР°РІР»РµРЅРёСЏ СЂР°РјРѕС‡РЅС‹С… Р°РЅС‚РµРЅРЅ X, Y Рё Z Р·Р°РґР°СЋС‚СЃСЏ РєР°Рє РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё:
+AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1) СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ.
+2)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+3)	Р•РіРѕ РјРѕС‰РЅРѕСЃС‚СЊ W
+4)	Р•РіРѕ СЌР»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё Р·Р°РґР°РґРёРј РѕС‚РЅРѕС€РµРЅРёРµРј С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚С‹ Р°РјРїР»РёС‚СѓРґС‹ РІРµРєС‚РѕСЂР° РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°РµРјРѕРіРѕ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ Рє РµРіРѕ РґРѕР»РіРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ PEW/NS.
+5)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёР·РјРµСЂРµРЅРёСЏ РёР·Р»СѓС‡РµРЅРёСЏ x, y, z
+6)	РџСЂРѕРІРѕРґРёРј РІРµРєС‚РѕСЂ Р»СѓС‡Р° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° Рє С‚РѕС‡РєРµ РёР·РјРµСЂРµРЅРёСЏ L (x-xi, y-yi, z-zi)
+7)	РњРѕРґСѓР»СЊ РІРµРєС‚РѕСЂР° Р»СѓС‡Р° |L| РґР°С‘С‚ СЂР°СЃСЃС‚РѕСЏРЅРёРµ, РїСЂРѕР№РґРµРЅРЅРѕРµ СЃРёРіРЅР°Р»РѕРј
+8)	РћСЃР»Р°Р±Р»РµРЅРёРµ СЃРёРіРЅР°Р»Р° РІС‹С‡РёСЃР»СЏРµРј С‡РµСЂРµР· РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ k_oslablenie : exp ( - k_oslablenie * |L|)
 
-Вывод формулы для коэффициента выхода антенны, учитывая диаграмму направленности антенн и эллипсоид 
-поляризации электромагнитного луча. Эллипсоид поляризации определяем по вектору напряжённости 
-амплитуды переменного магнитного поля, образующего ЭМ волну. 
+Р’С‹РІРѕРґ С„РѕСЂРјСѓР»С‹ РґР»СЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹, СѓС‡РёС‚С‹РІР°СЏ РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё Р°РЅС‚РµРЅРЅ Рё СЌР»Р»РёРїСЃРѕРёРґ
+РїРѕР»СЏСЂРёР·Р°С†РёРё СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕРіРѕ Р»СѓС‡Р°. Р­Р»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё РѕРїСЂРµРґРµР»СЏРµРј РїРѕ РІРµРєС‚РѕСЂСѓ РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+Р°РјРїР»РёС‚СѓРґС‹ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ, РѕР±СЂР°Р·СѓСЋС‰РµРіРѕ Р­Рњ РІРѕР»РЅСѓ.
 
-Допустим, что ЭМ волна от источника излучения xi, yi, zi 
-распространяется снизу вверх вертикально, а нормаль антенны AZ(0,0,1) 
-тоже расположена вертикально. Поток электромагнитной индукции или магнитный поток 
-(проверить применение какого термина уместнее), вызванный вектором напряжённости 
-магнитного поля рассматриваемого луча в силу геометрических причин не будет 
-пересекать контур, поэтому коэффициент выхода антенны будет равен нулю. 
+Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ Р­Рњ РІРѕР»РЅР° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ СЃРЅРёР·Сѓ РІРІРµСЂС… РІРµСЂС‚РёРєР°Р»СЊРЅРѕ, Р° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ AZ(0,0,1)
+С‚РѕР¶Рµ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРµСЂС‚РёРєР°Р»СЊРЅРѕ. РџРѕС‚РѕРє СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РёР»Рё РјР°РіРЅРёС‚РЅС‹Р№ РїРѕС‚РѕРє
+(РїСЂРѕРІРµСЂРёС‚СЊ РїСЂРёРјРµРЅРµРЅРёРµ РєР°РєРѕРіРѕ С‚РµСЂРјРёРЅР° СѓРјРµСЃС‚РЅРµРµ), РІС‹Р·РІР°РЅРЅС‹Р№ РІРµРєС‚РѕСЂРѕРј РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° РІ СЃРёР»Сѓ РіРµРѕРјРµС‚СЂРёС‡РµСЃРєРёС… РїСЂРёС‡РёРЅ РЅРµ Р±СѓРґРµС‚
+РїРµСЂРµСЃРµРєР°С‚СЊ РєРѕРЅС‚СѓСЂ, РїРѕСЌС‚РѕРјСѓ РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ РЅСѓР»СЋ.
 
-Рассмотрим взаимодействие этой же волны с антенной AX(1,0,0), 
-нормаль которой расположена вдоль оси X, то есть по широте. Контур 
-этой антенны будет нормально (под прямым углом) пересечён иксовой (широтной) 
-компонентой эллипсоида поляризации рассматриваемого луча ЭМ волны. Т.о. 
-коэффициент выхода антенны будет равен широтной компоненте эллипсоида 
-поляризации, т.е. PEW/NS.
+Р Р°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЌС‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AX(1,0,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё X, С‚Рѕ РµСЃС‚СЊ РїРѕ С€РёСЂРѕС‚Рµ. РљРѕРЅС‚СѓСЂ
+СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ (РїРѕРґ РїСЂСЏРјС‹Рј СѓРіР»РѕРј) РїРµСЂРµСЃРµС‡С‘РЅ РёРєСЃРѕРІРѕР№ (С€РёСЂРѕС‚РЅРѕР№)
+РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ.
+РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ СЌР»Р»РёРїСЃРѕРёРґР°
+РїРѕР»СЏСЂРёР·Р°С†РёРё, С‚.Рµ. PEW/NS.
 
-Теперь рассмотрим взаимодействие той же волны с антенной AY(0,1,0), 
-нормаль которой расположена вдоль оси Y, то есть по долготе. Контур этой антенны 
-будет нормально пересечён игрековой (долготной) компонентой эллипсоида поляризации 
-рассматриваемого луча ЭМ волны. Т.о. коэффициент выхода антенны будет равен 1.0 / PEW/NS.
+РўРµРїРµСЂСЊ СЂР°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ С‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AY(0,1,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё Y, С‚Рѕ РµСЃС‚СЊ РїРѕ РґРѕР»РіРѕС‚Рµ. РљРѕРЅС‚СѓСЂ СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹
+Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ РїРµСЂРµСЃРµС‡С‘РЅ РёРіСЂРµРєРѕРІРѕР№ (РґРѕР»РіРѕС‚РЅРѕР№) РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё
+СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ. РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ 1.0 / PEW/NS.
 
-9)	Учитываем диаграмму направленности. При допущении, что электромагнитный луч не 
-поляризован, используя закон электромагнитной индукции для контура, вводим коэффициент 
-равный sin(phi) в степени n, где n равно 1 или 2, а phi – угол между векторами луча и 
-нормалью антенны AX, AY или AZ. Определяем сперва cos(phi) через скалярное произведение 
-AL векторов луча L и антенной нормали A (ax,ay,az). 
-Вычисляем AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi). 
-Откуда (зная, что |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
+9)	РЈС‡РёС‚С‹РІР°РµРј РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё. РџСЂРё РґРѕРїСѓС‰РµРЅРёРё, С‡С‚Рѕ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅС‹Р№ Р»СѓС‡ РЅРµ
+РїРѕР»СЏСЂРёР·РѕРІР°РЅ, РёСЃРїРѕР»СЊР·СѓСЏ Р·Р°РєРѕРЅ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РґР»СЏ РєРѕРЅС‚СѓСЂР°, РІРІРѕРґРёРј РєРѕСЌС„С„РёС†РёРµРЅС‚
+СЂР°РІРЅС‹Р№ sin(phi) РІ СЃС‚РµРїРµРЅРё n, РіРґРµ n СЂР°РІРЅРѕ 1 РёР»Рё 2, Р° phi вЂ“ СѓРіРѕР» РјРµР¶РґСѓ РІРµРєС‚РѕСЂР°РјРё Р»СѓС‡Р° Рё
+РЅРѕСЂРјР°Р»СЊСЋ Р°РЅС‚РµРЅРЅС‹ AX, AY РёР»Рё AZ. РћРїСЂРµРґРµР»СЏРµРј СЃРїРµСЂРІР° cos(phi) С‡РµСЂРµР· СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
+AL РІРµРєС‚РѕСЂРѕРІ Р»СѓС‡Р° L Рё Р°РЅС‚РµРЅРЅРѕР№ РЅРѕСЂРјР°Р»Рё A (ax,ay,az).
+Р’С‹С‡РёСЃР»СЏРµРј AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi).
+РћС‚РєСѓРґР° (Р·РЅР°СЏ, С‡С‚Рѕ |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
 
-Приближение неполяризованного луча позволяет произвести более подробную 
-реконструкцию распределения мощности излучателей в пространстве. 
-Но не даёт возможности произвести анализ анизотропии излучения горных пород.
+РџСЂРёР±Р»РёР¶РµРЅРёРµ РЅРµРїРѕР»СЏСЂРёР·РѕРІР°РЅРЅРѕРіРѕ Р»СѓС‡Р° РїРѕР·РІРѕР»СЏРµС‚ РїСЂРѕРёР·РІРµСЃС‚Рё Р±РѕР»РµРµ РїРѕРґСЂРѕР±РЅСѓСЋ
+СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЋ СЂР°СЃРїСЂРµРґРµР»РµРЅРёСЏ РјРѕС‰РЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°С‚РµР»РµР№ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ.
+РќРѕ РЅРµ РґР°С‘С‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РїСЂРѕРёР·РІРµСЃС‚Рё Р°РЅР°Р»РёР· Р°РЅРёР·РѕС‚СЂРѕРїРёРё РёР·Р»СѓС‡РµРЅРёСЏ РіРѕСЂРЅС‹С… РїРѕСЂРѕРґ.
 
 
 
-Физически правильно рассматривать кристалл излучающей горной породы 
-как комбинацию трёх взаимно-перпендикулярных излучающий диполей (IDX IDY IDZ).
+Р¤РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅРѕ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ РєСЂРёСЃС‚Р°Р»Р» РёР·Р»СѓС‡Р°СЋС‰РµР№ РіРѕСЂРЅРѕР№ РїРѕСЂРѕРґС‹
+РєР°Рє РєРѕРјР±РёРЅР°С†РёСЋ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С… РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ).
 
-Но для целей удобства анализа приёма этого излучения рамочной 
-антенной допустим, что нам известно (если нам не известно, 
-то оно наверняка известно специалистам по физике твёрдого тела) 
-математическое преобразование от трёх взаимно-перпендикулярных 
-излучающий диполей (IDX IDY IDZ) к трём взаимно-перпендикулярным 
-излучающим контурам (IHX IHY IHZ). Поэтому мы в ходе решения 
-обратной задачи будем искать распределение в пространстве горной 
-породы излучающих контуров (IHX IHY IHZ), а переход от них к 
-физически правильным излучающим диполям предоставим физикам-интерпретаторам.
+РќРѕ РґР»СЏ С†РµР»РµР№ СѓРґРѕР±СЃС‚РІР° Р°РЅР°Р»РёР·Р° РїСЂРёС‘РјР° СЌС‚РѕРіРѕ РёР·Р»СѓС‡РµРЅРёСЏ СЂР°РјРѕС‡РЅРѕР№
+Р°РЅС‚РµРЅРЅРѕР№ РґРѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РЅР°Рј РёР·РІРµСЃС‚РЅРѕ (РµСЃР»Рё РЅР°Рј РЅРµ РёР·РІРµСЃС‚РЅРѕ,
+С‚Рѕ РѕРЅРѕ РЅР°РІРµСЂРЅСЏРєР° РёР·РІРµСЃС‚РЅРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р°Рј РїРѕ С„РёР·РёРєРµ С‚РІС‘СЂРґРѕРіРѕ С‚РµР»Р°)
+РјР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РѕС‚ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С…
+РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ) Рє С‚СЂС‘Рј РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹Рј
+РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂР°Рј (IHX IHY IHZ). РџРѕСЌС‚РѕРјСѓ РјС‹ РІ С…РѕРґРµ СЂРµС€РµРЅРёСЏ
+РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё Р±СѓРґРµРј РёСЃРєР°С‚СЊ СЂР°СЃРїСЂРµРґРµР»РµРЅРёРµ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ РіРѕСЂРЅРѕР№
+РїРѕСЂРѕРґС‹ РёР·Р»СѓС‡Р°СЋС‰РёС… РєРѕРЅС‚СѓСЂРѕРІ (IHX IHY IHZ), Р° РїРµСЂРµС…РѕРґ РѕС‚ РЅРёС… Рє
+С„РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅС‹Рј РёР·Р»СѓС‡Р°СЋС‰РёРј РґРёРїРѕР»СЏРј РїСЂРµРґРѕСЃС‚Р°РІРёРј С„РёР·РёРєР°Рј-РёРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂР°Рј.
 
-Для начала предположим, что мы имеем дело с одним излучающим контуром.
+Р”Р»СЏ РЅР°С‡Р°Р»Р° РїСЂРµРґРїРѕР»РѕР¶РёРј, С‡С‚Рѕ РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ РѕРґРЅРёРј РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂРѕРј.
 
-Диаграмма направленности излучающего контура?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂР°?
 
-Диаграмма направленности пары излучающего и принимающего контуров?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїР°СЂС‹ РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ Рё РїСЂРёРЅРёРјР°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂРѕРІ?
 
 
 
 	*/
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, phi_k, value;
 	long j,p,r,C,i;
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
-	int a; //номер антены 
+	int a; //РЅРѕРјРµСЂ Р°РЅС‚РµРЅС‹
 	//AX(1,0,0),		a = 0
 	//AY(0,1,0)			a = 1
-	//и AZ(0,0,1)		a = 2
+	//Рё AZ(0,0,1)		a = 2
 
-	// степень диаграммы направленности приёмника
+	// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	//int pw_dnp = 2;
 
-    //минимальное значение, которое вносится в оператор прямой задачи    
+    //РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РІРЅРѕСЃРёС‚СЃСЏ РІ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	//double min_value = 0.03;
 	//double min_value = 1e-16;
 
@@ -2044,44 +2042,44 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 	double k1 = 1.0;
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно УТРОЕННОЙ длине сигнала, 
-	// т.к. мы ищем ОПЕРАТОР ПРЯМОЙ ЗАДАЧИ ДЛЯ ТРЁХ АНТЕН
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
-	// НА АНТЕНАХ AX(1,0,0), AY(0,1,0) и AZ(0,0,1) 
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РЈРўР РћР•РќРќРћР™ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°,
+	// С‚.Рє. РјС‹ РёС‰РµРј РћРџР•Р РђРўРћР  РџР РЇРњРћР™ Р—РђР”РђР§Р Р”Р›РЇ РўР РЃРҐ РђРќРўР•Рќ
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+	// РќРђ РђРќРўР•РќРђРҐ AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1)
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	double z_min = z0 - pages * delta_z;
 
 	double sum_operator_value_x = 0.0;
 	double sum_operator_value_y = 0.0;
 	double sum_operator_value_z = 0.0;
 	double hi, w, sum_operator_z_per_xy;
-	if (m) // если дана матрица, пишем в неё (в оперативную память)
+	if (m) // РµСЃР»Рё РґР°РЅР° РјР°С‚СЂРёС†Р°, РїРёС€РµРј РІ РЅРµС‘ (РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ)
 	{
 		(*m).resize(signal_len * 3);
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			int ax = a == 0;
 			int ay = a == 1;
 			int az = a == 2;
 			for (j = 0; j < signal_len; j++)
 			{
-				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);		
+				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);
 
 
 				int putted_in_row = 0;
-				
+
 				for (p = 0; p < pages; p++)
-				{						
+				{
 				//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
@@ -2089,39 +2087,39 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
 
-					//часть пути луча, на котором происходит затухание
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
-					
+
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 	#if 1
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k;
 							if (fabs(value) > min_value)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								(*m)[j].put(i, value);
 								putted_in_row++;
 
@@ -2130,16 +2128,16 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 								sum_operator_value_z += az * value * w;
 							}
 	#else
-							// угол направления на источник
+							// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 							phi = acos (Zj_zi / len);
-							// вычисляем угловой коэффициент
+							// РІС‹С‡РёСЃР»СЏРµРј СѓРіР»РѕРІРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 							k_phi = k_phi_max * phi;
 							if (fabs(k_phi) > PI) k_phi = 0.0;
-							// мягкое включение углового коэффициента
+							// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 							phi_k = pow(sin(k_phi), smoof_power);
 							if (phi_k > 0.1)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								(*m)[j].put(i, k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k);
 								putted_in_row++;
 							}
@@ -2153,85 +2151,84 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 	else
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Filling the matrix 3D with napravlennosty diagramm\nUnable to open file" , filename, MB_OK);
 				return false;
 			}
-		}			
+		}
 		char buff[BUFF_SIZE];
 		Archive ar( &f, Archive::store, BUFF_SIZE, buff );
 
-		// записываем размерность матрицы
-		//ar << rows; 
+		// Р·Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹
+		//ar << rows;
 		//ar << cols;
 		ar << signal_len * 3;
 		long rows_cols_pages = pages * rows * cols;
 		ar << rows_cols_pages;
 
-		// а теперь саму матрицу - построчно!!
+		// Р° С‚РµРїРµСЂСЊ СЃР°РјСѓ РјР°С‚СЂРёС†Сѓ - РїРѕСЃС‚СЂРѕС‡РЅРѕ!!
 
 		/*for (long r = 0; r < rows; r++)
 		{
 			ar << m[r];
 		}*/
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			int ax = a == 0;
 			int ay = a == 1;
 			int az = a == 2;
 			for (j = 0; j < signal_len; j++)
 			{
-				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);		
+				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);
 
-			
 				for (p = 0; p < pages; p++)
-				{						
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				{
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
-					
+
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
-					
-					//часть пути луча, на котором происходит затухание
+
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
 
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 	#if 1
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k;
 							if (fabs(value) > min_value)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								///(*m)[j].put(i, K);
 								ar << i;
 								ar << value;
@@ -2241,16 +2238,16 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 								sum_operator_value_z += az * value * w;
 							}
 	#else
-							// угол направления на источник
+							// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 							phi = acos (Zj_zi / len);
-							// вычисляем угловой коэффициент
+							// РІС‹С‡РёСЃР»СЏРµРј СѓРіР»РѕРІРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 							k_phi = k_phi_max * phi;
 							if (fabs(k_phi) > PI) k_phi = 0.0;
-							// мягкое включение углового коэффициента
+							// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 							phi_k = pow(sin(k_phi), smoof_power);
 							if (phi_k > 0.1)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								//(*m)[j].put(i, k1 * exp ( - k2 * part_of_len * len) * phi_k);
 								if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 								value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k;
@@ -2261,7 +2258,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 						}
 					}
 				}
-				//признак конца записи строки
+				//РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° Р·Р°РїРёСЃРё СЃС‚СЂРѕРєРё
 				i = -1;
 				value = 0.0;
 				ar << i;
@@ -2301,7 +2298,7 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm_assume_tgdelta_much_more_th
 	vector<double> & Y,
 	vector<double> & Z,
 	vector<vector<anten_direction> > & A,
-	double pw_dnp,// степень диаграммы направленности приёмника
+	double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double min_value,
 	int wave_type,
 	sourse_power_model spm
@@ -2316,107 +2313,107 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm_assume_tgdelta_much_more_th
 
 
 	/*
-Прямая и обратная задача в УИМПЗ
+РџСЂСЏРјР°СЏ Рё РѕР±СЂР°С‚РЅР°СЏ Р·Р°РґР°С‡Р° РІ РЈРРњРџР—
 
-1)	Направления рамочных антенн X, Y и Z задаются как вектора нормали: 
-AX(1,0,0), AY(0,1,0) и AZ(0,0,1) соответственно.
-2)	Координата источника излучения xi, yi, zi
-3)	Его мощность W
-4)	Его эллипсоид поляризации зададим отношением широтной компоненты амплитуды вектора напряжённости излучаемого переменного магнитного поля к его долготной компоненте PEW/NS. 
-5)	Координата измерения излучения x, y, z
-6)	Проводим вектор луча от источника к точке измерения L (x-xi, y-yi, z-zi)
-7)	Модуль вектора луча |L| даёт расстояние, пройденное сигналом
-8)	Ослабление сигнала вычисляем через коэффициент ослабления k_oslablenie : exp ( - k_oslablenie * |L|)
+1)	РќР°РїСЂР°РІР»РµРЅРёСЏ СЂР°РјРѕС‡РЅС‹С… Р°РЅС‚РµРЅРЅ X, Y Рё Z Р·Р°РґР°СЋС‚СЃСЏ РєР°Рє РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё:
+AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1) СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ.
+2)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+3)	Р•РіРѕ РјРѕС‰РЅРѕСЃС‚СЊ W
+4)	Р•РіРѕ СЌР»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё Р·Р°РґР°РґРёРј РѕС‚РЅРѕС€РµРЅРёРµРј С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚С‹ Р°РјРїР»РёС‚СѓРґС‹ РІРµРєС‚РѕСЂР° РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°РµРјРѕРіРѕ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ Рє РµРіРѕ РґРѕР»РіРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ PEW/NS.
+5)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёР·РјРµСЂРµРЅРёСЏ РёР·Р»СѓС‡РµРЅРёСЏ x, y, z
+6)	РџСЂРѕРІРѕРґРёРј РІРµРєС‚РѕСЂ Р»СѓС‡Р° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° Рє С‚РѕС‡РєРµ РёР·РјРµСЂРµРЅРёСЏ L (x-xi, y-yi, z-zi)
+7)	РњРѕРґСѓР»СЊ РІРµРєС‚РѕСЂР° Р»СѓС‡Р° |L| РґР°С‘С‚ СЂР°СЃСЃС‚РѕСЏРЅРёРµ, РїСЂРѕР№РґРµРЅРЅРѕРµ СЃРёРіРЅР°Р»РѕРј
+8)	РћСЃР»Р°Р±Р»РµРЅРёРµ СЃРёРіРЅР°Р»Р° РІС‹С‡РёСЃР»СЏРµРј С‡РµСЂРµР· РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ k_oslablenie : exp ( - k_oslablenie * |L|)
 
-Вывод формулы для коэффициента выхода антенны, учитывая диаграмму направленности антенн и эллипсоид 
-поляризации электромагнитного луча. Эллипсоид поляризации определяем по вектору напряжённости 
-амплитуды переменного магнитного поля, образующего ЭМ волну. 
+Р’С‹РІРѕРґ С„РѕСЂРјСѓР»С‹ РґР»СЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹, СѓС‡РёС‚С‹РІР°СЏ РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё Р°РЅС‚РµРЅРЅ Рё СЌР»Р»РёРїСЃРѕРёРґ
+РїРѕР»СЏСЂРёР·Р°С†РёРё СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕРіРѕ Р»СѓС‡Р°. Р­Р»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё РѕРїСЂРµРґРµР»СЏРµРј РїРѕ РІРµРєС‚РѕСЂСѓ РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+Р°РјРїР»РёС‚СѓРґС‹ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ, РѕР±СЂР°Р·СѓСЋС‰РµРіРѕ Р­Рњ РІРѕР»РЅСѓ.
 
-Допустим, что ЭМ волна от источника излучения xi, yi, zi 
-распространяется снизу вверх вертикально, а нормаль антенны AZ(0,0,1) 
-тоже расположена вертикально. Поток электромагнитной индукции или магнитный поток 
-(проверить применение какого термина уместнее), вызванный вектором напряжённости 
-магнитного поля рассматриваемого луча в силу геометрических причин не будет 
-пересекать контур, поэтому коэффициент выхода антенны будет равен нулю. 
+Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ Р­Рњ РІРѕР»РЅР° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ СЃРЅРёР·Сѓ РІРІРµСЂС… РІРµСЂС‚РёРєР°Р»СЊРЅРѕ, Р° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ AZ(0,0,1)
+С‚РѕР¶Рµ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРµСЂС‚РёРєР°Р»СЊРЅРѕ. РџРѕС‚РѕРє СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РёР»Рё РјР°РіРЅРёС‚РЅС‹Р№ РїРѕС‚РѕРє
+(РїСЂРѕРІРµСЂРёС‚СЊ РїСЂРёРјРµРЅРµРЅРёРµ РєР°РєРѕРіРѕ С‚РµСЂРјРёРЅР° СѓРјРµСЃС‚РЅРµРµ), РІС‹Р·РІР°РЅРЅС‹Р№ РІРµРєС‚РѕСЂРѕРј РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° РІ СЃРёР»Сѓ РіРµРѕРјРµС‚СЂРёС‡РµСЃРєРёС… РїСЂРёС‡РёРЅ РЅРµ Р±СѓРґРµС‚
+РїРµСЂРµСЃРµРєР°С‚СЊ РєРѕРЅС‚СѓСЂ, РїРѕСЌС‚РѕРјСѓ РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ РЅСѓР»СЋ.
 
-Рассмотрим взаимодействие этой же волны с антенной AX(1,0,0), 
-нормаль которой расположена вдоль оси X, то есть по широте. Контур 
-этой антенны будет нормально (под прямым углом) пересечён иксовой (широтной) 
-компонентой эллипсоида поляризации рассматриваемого луча ЭМ волны. Т.о. 
-коэффициент выхода антенны будет равен широтной компоненте эллипсоида 
-поляризации, т.е. PEW/NS.
+Р Р°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЌС‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AX(1,0,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё X, С‚Рѕ РµСЃС‚СЊ РїРѕ С€РёСЂРѕС‚Рµ. РљРѕРЅС‚СѓСЂ
+СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ (РїРѕРґ РїСЂСЏРјС‹Рј СѓРіР»РѕРј) РїРµСЂРµСЃРµС‡С‘РЅ РёРєСЃРѕРІРѕР№ (С€РёСЂРѕС‚РЅРѕР№)
+РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ.
+РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ СЌР»Р»РёРїСЃРѕРёРґР°
+РїРѕР»СЏСЂРёР·Р°С†РёРё, С‚.Рµ. PEW/NS.
 
-Теперь рассмотрим взаимодействие той же волны с антенной AY(0,1,0), 
-нормаль которой расположена вдоль оси Y, то есть по долготе. Контур этой антенны 
-будет нормально пересечён игрековой (долготной) компонентой эллипсоида поляризации 
-рассматриваемого луча ЭМ волны. Т.о. коэффициент выхода антенны будет равен 1.0 / PEW/NS.
+РўРµРїРµСЂСЊ СЂР°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ С‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AY(0,1,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё Y, С‚Рѕ РµСЃС‚СЊ РїРѕ РґРѕР»РіРѕС‚Рµ. РљРѕРЅС‚СѓСЂ СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹
+Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ РїРµСЂРµСЃРµС‡С‘РЅ РёРіСЂРµРєРѕРІРѕР№ (РґРѕР»РіРѕС‚РЅРѕР№) РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё
+СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ. РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ 1.0 / PEW/NS.
 
-9)	Учитываем диаграмму направленности. При допущении, что электромагнитный луч не 
-поляризован, используя закон электромагнитной индукции для контура, вводим коэффициент 
-равный sin(phi) в степени n, где n равно 1 или 2, а phi – угол между векторами луча и 
-нормалью антенны AX, AY или AZ. Определяем сперва cos(phi) через скалярное произведение 
-AL векторов луча L и антенной нормали A (ax,ay,az). 
-Вычисляем AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi). 
-Откуда (зная, что |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
+9)	РЈС‡РёС‚С‹РІР°РµРј РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё. РџСЂРё РґРѕРїСѓС‰РµРЅРёРё, С‡С‚Рѕ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅС‹Р№ Р»СѓС‡ РЅРµ
+РїРѕР»СЏСЂРёР·РѕРІР°РЅ, РёСЃРїРѕР»СЊР·СѓСЏ Р·Р°РєРѕРЅ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РґР»СЏ РєРѕРЅС‚СѓСЂР°, РІРІРѕРґРёРј РєРѕСЌС„С„РёС†РёРµРЅС‚
+СЂР°РІРЅС‹Р№ sin(phi) РІ СЃС‚РµРїРµРЅРё n, РіРґРµ n СЂР°РІРЅРѕ 1 РёР»Рё 2, Р° phi вЂ“ СѓРіРѕР» РјРµР¶РґСѓ РІРµРєС‚РѕСЂР°РјРё Р»СѓС‡Р° Рё
+РЅРѕСЂРјР°Р»СЊСЋ Р°РЅС‚РµРЅРЅС‹ AX, AY РёР»Рё AZ. РћРїСЂРµРґРµР»СЏРµРј СЃРїРµСЂРІР° cos(phi) С‡РµСЂРµР· СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
+AL РІРµРєС‚РѕСЂРѕРІ Р»СѓС‡Р° L Рё Р°РЅС‚РµРЅРЅРѕР№ РЅРѕСЂРјР°Р»Рё A (ax,ay,az).
+Р’С‹С‡РёСЃР»СЏРµРј AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi).
+РћС‚РєСѓРґР° (Р·РЅР°СЏ, С‡С‚Рѕ |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
 
-Приближение неполяризованного луча позволяет произвести более подробную 
-реконструкцию распределения мощности излучателей в пространстве. 
-Но не даёт возможности произвести анализ анизотропии излучения горных пород.
+РџСЂРёР±Р»РёР¶РµРЅРёРµ РЅРµРїРѕР»СЏСЂРёР·РѕРІР°РЅРЅРѕРіРѕ Р»СѓС‡Р° РїРѕР·РІРѕР»СЏРµС‚ РїСЂРѕРёР·РІРµСЃС‚Рё Р±РѕР»РµРµ РїРѕРґСЂРѕР±РЅСѓСЋ
+СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЋ СЂР°СЃРїСЂРµРґРµР»РµРЅРёСЏ РјРѕС‰РЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°С‚РµР»РµР№ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ.
+РќРѕ РЅРµ РґР°С‘С‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РїСЂРѕРёР·РІРµСЃС‚Рё Р°РЅР°Р»РёР· Р°РЅРёР·РѕС‚СЂРѕРїРёРё РёР·Р»СѓС‡РµРЅРёСЏ РіРѕСЂРЅС‹С… РїРѕСЂРѕРґ.
 
 
 
-Физически правильно рассматривать кристалл излучающей горной породы 
-как комбинацию трёх взаимно-перпендикулярных излучающий диполей (IDX IDY IDZ).
+Р¤РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅРѕ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ РєСЂРёСЃС‚Р°Р»Р» РёР·Р»СѓС‡Р°СЋС‰РµР№ РіРѕСЂРЅРѕР№ РїРѕСЂРѕРґС‹
+РєР°Рє РєРѕРјР±РёРЅР°С†РёСЋ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С… РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ).
 
-Но для целей удобства анализа приёма этого излучения рамочной 
-антенной допустим, что нам известно (если нам не известно, 
-то оно наверняка известно специалистам по физике твёрдого тела) 
-математическое преобразование от трёх взаимно-перпендикулярных 
-излучающий диполей (IDX IDY IDZ) к трём взаимно-перпендикулярным 
-излучающим контурам (IHX IHY IHZ). Поэтому мы в ходе решения 
-обратной задачи будем искать распределение в пространстве горной 
-породы излучающих контуров (IHX IHY IHZ), а переход от них к 
-физически правильным излучающим диполям предоставим физикам-интерпретаторам.
+РќРѕ РґР»СЏ С†РµР»РµР№ СѓРґРѕР±СЃС‚РІР° Р°РЅР°Р»РёР·Р° РїСЂРёС‘РјР° СЌС‚РѕРіРѕ РёР·Р»СѓС‡РµРЅРёСЏ СЂР°РјРѕС‡РЅРѕР№
+Р°РЅС‚РµРЅРЅРѕР№ РґРѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РЅР°Рј РёР·РІРµСЃС‚РЅРѕ (РµСЃР»Рё РЅР°Рј РЅРµ РёР·РІРµСЃС‚РЅРѕ,
+С‚Рѕ РѕРЅРѕ РЅР°РІРµСЂРЅСЏРєР° РёР·РІРµСЃС‚РЅРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р°Рј РїРѕ С„РёР·РёРєРµ С‚РІС‘СЂРґРѕРіРѕ С‚РµР»Р°)
+РјР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РѕС‚ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С…
+РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ) Рє С‚СЂС‘Рј РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹Рј
+РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂР°Рј (IHX IHY IHZ). РџРѕСЌС‚РѕРјСѓ РјС‹ РІ С…РѕРґРµ СЂРµС€РµРЅРёСЏ
+РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё Р±СѓРґРµРј РёСЃРєР°С‚СЊ СЂР°СЃРїСЂРµРґРµР»РµРЅРёРµ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ РіРѕСЂРЅРѕР№
+РїРѕСЂРѕРґС‹ РёР·Р»СѓС‡Р°СЋС‰РёС… РєРѕРЅС‚СѓСЂРѕРІ (IHX IHY IHZ), Р° РїРµСЂРµС…РѕРґ РѕС‚ РЅРёС… Рє
+С„РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅС‹Рј РёР·Р»СѓС‡Р°СЋС‰РёРј РґРёРїРѕР»СЏРј РїСЂРµРґРѕСЃС‚Р°РІРёРј С„РёР·РёРєР°Рј-РёРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂР°Рј.
 
-Для начала предположим, что мы имеем дело с одним излучающим контуром.
+Р”Р»СЏ РЅР°С‡Р°Р»Р° РїСЂРµРґРїРѕР»РѕР¶РёРј, С‡С‚Рѕ РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ РѕРґРЅРёРј РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂРѕРј.
 
-Диаграмма направленности излучающего контура?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂР°?
 
-Диаграмма направленности пары излучающего и принимающего контуров?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїР°СЂС‹ РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ Рё РїСЂРёРЅРёРјР°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂРѕРІ?
 
 
 
 	*/
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, phi_k, value;
 	long j,p,r,C,i;
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
-	int a; //номер антены 
+	int a; //РЅРѕРјРµСЂ Р°РЅС‚РµРЅС‹
 	//AX(1,0,0),		a = 0
 	//AY(0,1,0)			a = 1
-	//и AZ(0,0,1)		a = 2
+	//Рё AZ(0,0,1)		a = 2
 
-	// степень диаграммы направленности приёмника
+	// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	//int pw_dnp = 2;
 
-    //минимальное значение, которое вносится в оператор прямой задачи    
+    //РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РІРЅРѕСЃРёС‚СЃСЏ РІ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	//double min_value = 1e-16;
 
 	//double k_phi_max = (PI/2.0)/atan(1.0/2.0*k);
 
 	double k1 = 1.0;
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно УТРОЕННОЙ длине сигнала, 
-	// т.к. мы ищем ОПЕРАТОР ПРЯМОЙ ЗАДАЧИ ДЛЯ ТРЁХ АНТЕН
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
-	// НА АНТЕНАХ AX(1,0,0), AY(0,1,0) и AZ(0,0,1) 
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РЈРўР РћР•РќРќРћР™ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°,
+	// С‚.Рє. РјС‹ РёС‰РµРј РћРџР•Р РђРўРћР  РџР РЇРњРћР™ Р—РђР”РђР§Р Р”Р›РЇ РўР РЃРҐ РђРќРўР•Рќ
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+	// РќРђ РђРќРўР•РќРђРҐ AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1)
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	double z_min = z0 - pages * delta_z;
 
 	double sum_operator_value_x = 0.0;
@@ -2425,27 +2422,27 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 	double hi, w, sum_operator_z_per_xy;
 
-	if (m) // если дана матрица, пишем в неё (в оперативную память)
+	if (m) // РµСЃР»Рё РґР°РЅР° РјР°С‚СЂРёС†Р°, РїРёС€РµРј РІ РЅРµС‘ (РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ)
 	{
 		(*m).resize(signal_len * 3);
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			int ax = a == 0;
 			int ay = a == 1;
 			int az = a == 2;
 			for (j = 0; j < signal_len; j++)
 			{
-				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);		
+				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);
 
 
 				int putted_in_row = 0;
-				
+
 				for (p = 0; p < pages; p++)
-				{						
+				{
 				//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
@@ -2453,44 +2450,44 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
 
-					//часть пути луча, на котором происходит затухание
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
-					
+
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							//value = k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k;
 							double d = part_of_len * len;
-							value = k1 * norm * phi_k * ( 
+							value = k1 * norm * phi_k * (
 								Chislitel_Integral(noise_color, d, b, omega_max) -
 								Chislitel_Integral(noise_color, d, b, omega_min));
 
 							if (fabs(value) > min_value)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								(*m)[j].put(i, value);
 								sum_operator_value_x += ax * value * w ;
 								sum_operator_value_y += ay * value * w;
@@ -2506,89 +2503,89 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 	else
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Filling the matrix 3D with napravlennosty diagramm\nUnable to open file" , filename, MB_OK);
 				return false;
 			}
-		}			
+		}
 		char buff[BUFF_SIZE];
 		Archive ar( &f, Archive::store, BUFF_SIZE, buff );
 
-		// записываем размерность матрицы
-		//ar << rows; 
+		// Р·Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹
+		//ar << rows;
 		//ar << cols;
 		ar << signal_len * 3;
 		long rows_cols_pages = pages * rows * cols;
 		ar << rows_cols_pages;
 
-		// а теперь саму матрицу - построчно!!
+		// Р° С‚РµРїРµСЂСЊ СЃР°РјСѓ РјР°С‚СЂРёС†Сѓ - РїРѕСЃС‚СЂРѕС‡РЅРѕ!!
 
 		/*for (long r = 0; r < rows; r++)
 		{
 			ar << m[r];
 		}*/
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			int ax = a == 0;
 			int ay = a == 1;
 			int az = a == 2;
 			for (j = 0; j < signal_len; j++)
 			{
-				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);		
+				printf("Filling of matrix %ld %ld\n", j + a * signal_len, signal_len * 3);
 
-			
+
 				for (p = 0; p < pages; p++)
-				{						
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				{
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
-					
+
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
-					
-					//часть пути луча, на котором происходит затухание
+
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
 
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							//value = k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k;
 							double d = part_of_len * len;
-							value = k1 * norm * phi_k * ( 
+							value = k1 * norm * phi_k * (
 								Chislitel_Integral(noise_color, d, b, omega_max) -
 								Chislitel_Integral(noise_color, d, b, omega_min));
 							if (fabs(value) > min_value)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								///(*m)[j].put(i, K);
 								ar << i;
 								ar << value;
@@ -2600,7 +2597,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 						}
 					}
 				}
-				//признак конца записи строки
+				//РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° Р·Р°РїРёСЃРё СЃС‚СЂРѕРєРё
 				i = -1;
 				value = 0.0;
 				ar << i;
@@ -2618,15 +2615,15 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 	printf("sum_operator_z_per_xy = %f\n", sum_operator_z_per_xy);
 }
 
-void ddet_dbeta_domega_div_det(double beta, double omega, 
-					double rx, double ry, double rz, 
+void ddet_dbeta_domega_div_det(double beta, double omega,
+					double rx, double ry, double rz,
 					double ax, double ay, double az,
 
 					double & ddet_dbeta_div_det,
 					double & ddet_domega_div_det,
 
 					double & d2det_dbeta2_div_det,
-					double & d2det_domega2_div_det					
+					double & d2det_domega2_div_det
 					)
 {
 	double Det_fi = ax*sin(beta)*cos(omega)*rz-ax*cos(beta)*ry+sin(beta)*sin(omega)*ry*az-sin(beta)*sin(omega)*ay*rz+rx*ay*cos(beta)-rx*sin(beta)*cos(omega)*az;
@@ -2644,40 +2641,40 @@ void ddet_dbeta_domega_div_det(double beta, double omega,
 }
 
 
-// коэффициент выхода диаграммы направленности
-double nju_phi_calc(double beta, double omega, 
-					double rx, double ry, double rz, 
+// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
+double nju_phi_calc(double beta, double omega,
+					double rx, double ry, double rz,
 					double ax, double ay, double az)
 {
 	/*
 	double px, py, pz;
 
-	// направление вектора электрического диполя источника излучения
+	// РЅР°РїСЂР°РІР»РµРЅРёРµ РІРµРєС‚РѕСЂР° СЌР»РµРєС‚СЂРёС‡РµСЃРєРѕРіРѕ РґРёРїРѕР»СЏ РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ
 	pz = cos(beta);
 	px = sin(beta) * sin(omega);
 	py = sin(beta) * cos(omega);
 
 
-	//опорные координаты вектора Н 
-	//(без правильного масштабирования по модулю – 
-	//нам только нужен угол, поэтому для направления 
-	//вектора Н нам достаточно взять векторное 
-	//произведение px,py,pz на (X[j]-xi),(Y[j]-yi),(Z[j]-zi))
+	//РѕРїРѕСЂРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІРµРєС‚РѕСЂР° Рќ
+	//(Р±РµР· РїСЂР°РІРёР»СЊРЅРѕРіРѕ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ РїРѕ РјРѕРґСѓР»СЋ вЂ“
+	//РЅР°Рј С‚РѕР»СЊРєРѕ РЅСѓР¶РµРЅ СѓРіРѕР», РїРѕСЌС‚РѕРјСѓ РґР»СЏ РЅР°РїСЂР°РІР»РµРЅРёСЏ
+	//РІРµРєС‚РѕСЂР° Рќ РЅР°Рј РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІР·СЏС‚СЊ РІРµРєС‚РѕСЂРЅРѕРµ
+	//РїСЂРѕРёР·РІРµРґРµРЅРёРµ px,py,pz РЅР° (X[j]-xi),(Y[j]-yi),(Z[j]-zi))
 
-	//hx = py*rz – pz*ry;
-	//hy = pz*rx – px*rz;
-	//hz = px*ry – py*rx;
+	//hx = py*rz вЂ“ pz*ry;
+	//hy = pz*rx вЂ“ px*rz;
+	//hz = px*ry вЂ“ py*rx;
 
 	double hx = py*rz - pz*ry;
 	double hy = pz*rx - px*rz;
 	double hz = px*ry - py*rx;
 */
-	// коэффициент выхода диаграммы направленности
+	// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 	//nju_phi = pow(sin(theta)*cos(alpha), pw_dnp);
-	//sin(theta)*cos(alpha) = 
-	//sin(theta)*(a,h)/(|a|*|h|) = 
-	//sin(theta)*(a,h)/(|a|*|P|*|r|*|sin(theta)|) = 
-	//(a,h)/|r| = 
+	//sin(theta)*cos(alpha) =
+	//sin(theta)*(a,h)/(|a|*|h|) =
+	//sin(theta)*(a,h)/(|a|*|P|*|r|*|sin(theta)|) =
+	//(a,h)/|r| =
 	//(a,[P,r])/|r| =
 	//det(M)/|r|
 
@@ -2689,9 +2686,9 @@ double nju_phi_calc(double beta, double omega,
 }
 
 void FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
-					  double k_oslablenie,// коэффициент ослабления
-					  double **** m,// указатель на три матрицы njuXr, njuYr, njuZr
-					  double **** R,// указатель на три матрицы rx, ry, rz
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
+					  double **** m,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ njuXr, njuYr, njuZr
+					  double **** R,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ rx, ry, rz
 					  long rows, long cols, long pages,
 					  double x0, double y0, double z0,
 					  double delta_x, double delta_y, double delta_z,
@@ -2699,7 +2696,7 @@ void FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
 					  vector<double> & Y,
 					  vector<double> & Z,
 					  vector<vector<anten_direction> > & A,
-	double pw_dnp,// степень диаграммы направленности приёмника
+	double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double min_value,
 	int wave_type,
 	sourse_power_model spm
@@ -2707,99 +2704,99 @@ void FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
 {
 
 	/*
-Прямая и обратная задача в УИМПЗ
+РџСЂСЏРјР°СЏ Рё РѕР±СЂР°С‚РЅР°СЏ Р·Р°РґР°С‡Р° РІ РЈРРњРџР—
 
-1)	Направления рамочных антенн X, Y и Z задаются как вектора нормали: 
-AX(1,0,0), AY(0,1,0) и AZ(0,0,1) соответственно.
-2)	Координата источника излучения xi, yi, zi
-3)	Его мощность W
-4)	Его эллипсоид поляризации зададим отношением широтной компоненты амплитуды вектора напряжённости излучаемого переменного магнитного поля к его долготной компоненте PEW/NS. 
-5)	Координата измерения излучения x, y, z
-6)	Проводим вектор луча от источника к точке измерения L (x-xi, y-yi, z-zi)
-7)	Модуль вектора луча |L| даёт расстояние, пройденное сигналом
-8)	Ослабление сигнала вычисляем через коэффициент ослабления k_oslablenie : exp ( - k_oslablenie * |L|)
+1)	РќР°РїСЂР°РІР»РµРЅРёСЏ СЂР°РјРѕС‡РЅС‹С… Р°РЅС‚РµРЅРЅ X, Y Рё Z Р·Р°РґР°СЋС‚СЃСЏ РєР°Рє РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё:
+AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1) СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ.
+2)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+3)	Р•РіРѕ РјРѕС‰РЅРѕСЃС‚СЊ W
+4)	Р•РіРѕ СЌР»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё Р·Р°РґР°РґРёРј РѕС‚РЅРѕС€РµРЅРёРµРј С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚С‹ Р°РјРїР»РёС‚СѓРґС‹ РІРµРєС‚РѕСЂР° РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°РµРјРѕРіРѕ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ Рє РµРіРѕ РґРѕР»РіРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ PEW/NS.
+5)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёР·РјРµСЂРµРЅРёСЏ РёР·Р»СѓС‡РµРЅРёСЏ x, y, z
+6)	РџСЂРѕРІРѕРґРёРј РІРµРєС‚РѕСЂ Р»СѓС‡Р° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° Рє С‚РѕС‡РєРµ РёР·РјРµСЂРµРЅРёСЏ L (x-xi, y-yi, z-zi)
+7)	РњРѕРґСѓР»СЊ РІРµРєС‚РѕСЂР° Р»СѓС‡Р° |L| РґР°С‘С‚ СЂР°СЃСЃС‚РѕСЏРЅРёРµ, РїСЂРѕР№РґРµРЅРЅРѕРµ СЃРёРіРЅР°Р»РѕРј
+8)	РћСЃР»Р°Р±Р»РµРЅРёРµ СЃРёРіРЅР°Р»Р° РІС‹С‡РёСЃР»СЏРµРј С‡РµСЂРµР· РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ k_oslablenie : exp ( - k_oslablenie * |L|)
 
-Вывод формулы для коэффициента выхода антенны, учитывая диаграмму направленности антенн и эллипсоид 
-поляризации электромагнитного луча. Эллипсоид поляризации определяем по вектору напряжённости 
-амплитуды переменного магнитного поля, образующего ЭМ волну. 
+Р’С‹РІРѕРґ С„РѕСЂРјСѓР»С‹ РґР»СЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹, СѓС‡РёС‚С‹РІР°СЏ РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё Р°РЅС‚РµРЅРЅ Рё СЌР»Р»РёРїСЃРѕРёРґ
+РїРѕР»СЏСЂРёР·Р°С†РёРё СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕРіРѕ Р»СѓС‡Р°. Р­Р»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё РѕРїСЂРµРґРµР»СЏРµРј РїРѕ РІРµРєС‚РѕСЂСѓ РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+Р°РјРїР»РёС‚СѓРґС‹ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ, РѕР±СЂР°Р·СѓСЋС‰РµРіРѕ Р­Рњ РІРѕР»РЅСѓ.
 
-Допустим, что ЭМ волна от источника излучения xi, yi, zi 
-распространяется снизу вверх вертикально, а нормаль антенны AZ(0,0,1) 
-тоже расположена вертикально. Поток электромагнитной индукции или магнитный поток 
-(проверить применение какого термина уместнее), вызванный вектором напряжённости 
-магнитного поля рассматриваемого луча в силу геометрических причин не будет 
-пересекать контур, поэтому коэффициент выхода антенны будет равен нулю. 
+Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ Р­Рњ РІРѕР»РЅР° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ СЃРЅРёР·Сѓ РІРІРµСЂС… РІРµСЂС‚РёРєР°Р»СЊРЅРѕ, Р° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ AZ(0,0,1)
+С‚РѕР¶Рµ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРµСЂС‚РёРєР°Р»СЊРЅРѕ. РџРѕС‚РѕРє СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РёР»Рё РјР°РіРЅРёС‚РЅС‹Р№ РїРѕС‚РѕРє
+(РїСЂРѕРІРµСЂРёС‚СЊ РїСЂРёРјРµРЅРµРЅРёРµ РєР°РєРѕРіРѕ С‚РµСЂРјРёРЅР° СѓРјРµСЃС‚РЅРµРµ), РІС‹Р·РІР°РЅРЅС‹Р№ РІРµРєС‚РѕСЂРѕРј РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° РІ СЃРёР»Сѓ РіРµРѕРјРµС‚СЂРёС‡РµСЃРєРёС… РїСЂРёС‡РёРЅ РЅРµ Р±СѓРґРµС‚
+РїРµСЂРµСЃРµРєР°С‚СЊ РєРѕРЅС‚СѓСЂ, РїРѕСЌС‚РѕРјСѓ РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ РЅСѓР»СЋ.
 
-Рассмотрим взаимодействие этой же волны с антенной AX(1,0,0), 
-нормаль которой расположена вдоль оси X, то есть по широте. Контур 
-этой антенны будет нормально (под прямым углом) пересечён иксовой (широтной) 
-компонентой эллипсоида поляризации рассматриваемого луча ЭМ волны. Т.о. 
-коэффициент выхода антенны будет равен широтной компоненте эллипсоида 
-поляризации, т.е. PEW/NS.
+Р Р°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЌС‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AX(1,0,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё X, С‚Рѕ РµСЃС‚СЊ РїРѕ С€РёСЂРѕС‚Рµ. РљРѕРЅС‚СѓСЂ
+СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ (РїРѕРґ РїСЂСЏРјС‹Рј СѓРіР»РѕРј) РїРµСЂРµСЃРµС‡С‘РЅ РёРєСЃРѕРІРѕР№ (С€РёСЂРѕС‚РЅРѕР№)
+РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ.
+РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ СЌР»Р»РёРїСЃРѕРёРґР°
+РїРѕР»СЏСЂРёР·Р°С†РёРё, С‚.Рµ. PEW/NS.
 
-Теперь рассмотрим взаимодействие той же волны с антенной AY(0,1,0), 
-нормаль которой расположена вдоль оси Y, то есть по долготе. Контур этой антенны 
-будет нормально пересечён игрековой (долготной) компонентой эллипсоида поляризации 
-рассматриваемого луча ЭМ волны. Т.о. коэффициент выхода антенны будет равен 1.0 / PEW/NS.
+РўРµРїРµСЂСЊ СЂР°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ С‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AY(0,1,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё Y, С‚Рѕ РµСЃС‚СЊ РїРѕ РґРѕР»РіРѕС‚Рµ. РљРѕРЅС‚СѓСЂ СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹
+Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ РїРµСЂРµСЃРµС‡С‘РЅ РёРіСЂРµРєРѕРІРѕР№ (РґРѕР»РіРѕС‚РЅРѕР№) РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё
+СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ. РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ 1.0 / PEW/NS.
 
-9)	Учитываем диаграмму направленности. При допущении, что электромагнитный луч не 
-поляризован, используя закон электромагнитной индукции для контура, вводим коэффициент 
-равный sin(phi) в степени n, где n равно 1 или 2, а phi – угол между векторами луча и 
-нормалью антенны AX, AY или AZ. Определяем сперва cos(phi) через скалярное произведение 
-AL векторов луча L и антенной нормали A (ax,ay,az). 
-Вычисляем AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi). 
-Откуда (зная, что |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
+9)	РЈС‡РёС‚С‹РІР°РµРј РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё. РџСЂРё РґРѕРїСѓС‰РµРЅРёРё, С‡С‚Рѕ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅС‹Р№ Р»СѓС‡ РЅРµ
+РїРѕР»СЏСЂРёР·РѕРІР°РЅ, РёСЃРїРѕР»СЊР·СѓСЏ Р·Р°РєРѕРЅ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РґР»СЏ РєРѕРЅС‚СѓСЂР°, РІРІРѕРґРёРј РєРѕСЌС„С„РёС†РёРµРЅС‚
+СЂР°РІРЅС‹Р№ sin(phi) РІ СЃС‚РµРїРµРЅРё n, РіРґРµ n СЂР°РІРЅРѕ 1 РёР»Рё 2, Р° phi вЂ“ СѓРіРѕР» РјРµР¶РґСѓ РІРµРєС‚РѕСЂР°РјРё Р»СѓС‡Р° Рё
+РЅРѕСЂРјР°Р»СЊСЋ Р°РЅС‚РµРЅРЅС‹ AX, AY РёР»Рё AZ. РћРїСЂРµРґРµР»СЏРµРј СЃРїРµСЂРІР° cos(phi) С‡РµСЂРµР· СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
+AL РІРµРєС‚РѕСЂРѕРІ Р»СѓС‡Р° L Рё Р°РЅС‚РµРЅРЅРѕР№ РЅРѕСЂРјР°Р»Рё A (ax,ay,az).
+Р’С‹С‡РёСЃР»СЏРµРј AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi).
+РћС‚РєСѓРґР° (Р·РЅР°СЏ, С‡С‚Рѕ |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
 
-Приближение неполяризованного луча позволяет произвести более подробную 
-реконструкцию распределения мощности излучателей в пространстве. 
-Но не даёт возможности произвести анализ анизотропии излучения горных пород.
+РџСЂРёР±Р»РёР¶РµРЅРёРµ РЅРµРїРѕР»СЏСЂРёР·РѕРІР°РЅРЅРѕРіРѕ Р»СѓС‡Р° РїРѕР·РІРѕР»СЏРµС‚ РїСЂРѕРёР·РІРµСЃС‚Рё Р±РѕР»РµРµ РїРѕРґСЂРѕР±РЅСѓСЋ
+СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЋ СЂР°СЃРїСЂРµРґРµР»РµРЅРёСЏ РјРѕС‰РЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°С‚РµР»РµР№ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ.
+РќРѕ РЅРµ РґР°С‘С‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РїСЂРѕРёР·РІРµСЃС‚Рё Р°РЅР°Р»РёР· Р°РЅРёР·РѕС‚СЂРѕРїРёРё РёР·Р»СѓС‡РµРЅРёСЏ РіРѕСЂРЅС‹С… РїРѕСЂРѕРґ.
 
 
 
-Физически правильно рассматривать кристалл излучающей горной породы 
-как комбинацию трёх взаимно-перпендикулярных излучающий диполей (IDX IDY IDZ).
+Р¤РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅРѕ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ РєСЂРёСЃС‚Р°Р»Р» РёР·Р»СѓС‡Р°СЋС‰РµР№ РіРѕСЂРЅРѕР№ РїРѕСЂРѕРґС‹
+РєР°Рє РєРѕРјР±РёРЅР°С†РёСЋ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С… РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ).
 
-Но для целей удобства анализа приёма этого излучения рамочной 
-антенной допустим, что нам известно (если нам не известно, 
-то оно наверняка известно специалистам по физике твёрдого тела) 
-математическое преобразование от трёх взаимно-перпендикулярных 
-излучающий диполей (IDX IDY IDZ) к трём взаимно-перпендикулярным 
-излучающим контурам (IHX IHY IHZ). Поэтому мы в ходе решения 
-обратной задачи будем искать распределение в пространстве горной 
-породы излучающих контуров (IHX IHY IHZ), а переход от них к 
-физически правильным излучающим диполям предоставим физикам-интерпретаторам.
+РќРѕ РґР»СЏ С†РµР»РµР№ СѓРґРѕР±СЃС‚РІР° Р°РЅР°Р»РёР·Р° РїСЂРёС‘РјР° СЌС‚РѕРіРѕ РёР·Р»СѓС‡РµРЅРёСЏ СЂР°РјРѕС‡РЅРѕР№
+Р°РЅС‚РµРЅРЅРѕР№ РґРѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РЅР°Рј РёР·РІРµСЃС‚РЅРѕ (РµСЃР»Рё РЅР°Рј РЅРµ РёР·РІРµСЃС‚РЅРѕ,
+С‚Рѕ РѕРЅРѕ РЅР°РІРµСЂРЅСЏРєР° РёР·РІРµСЃС‚РЅРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р°Рј РїРѕ С„РёР·РёРєРµ С‚РІС‘СЂРґРѕРіРѕ С‚РµР»Р°)
+РјР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РѕС‚ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С…
+РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ) Рє С‚СЂС‘Рј РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹Рј
+РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂР°Рј (IHX IHY IHZ). РџРѕСЌС‚РѕРјСѓ РјС‹ РІ С…РѕРґРµ СЂРµС€РµРЅРёСЏ
+РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё Р±СѓРґРµРј РёСЃРєР°С‚СЊ СЂР°СЃРїСЂРµРґРµР»РµРЅРёРµ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ РіРѕСЂРЅРѕР№
+РїРѕСЂРѕРґС‹ РёР·Р»СѓС‡Р°СЋС‰РёС… РєРѕРЅС‚СѓСЂРѕРІ (IHX IHY IHZ), Р° РїРµСЂРµС…РѕРґ РѕС‚ РЅРёС… Рє
+С„РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅС‹Рј РёР·Р»СѓС‡Р°СЋС‰РёРј РґРёРїРѕР»СЏРј РїСЂРµРґРѕСЃС‚Р°РІРёРј С„РёР·РёРєР°Рј-РёРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂР°Рј.
 
-Для начала предположим, что мы имеем дело с одним излучающим контуром.
+Р”Р»СЏ РЅР°С‡Р°Р»Р° РїСЂРµРґРїРѕР»РѕР¶РёРј, С‡С‚Рѕ РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ РѕРґРЅРёРј РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂРѕРј.
 
-Диаграмма направленности излучающего контура?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂР°?
 
-Диаграмма направленности пары излучающего и принимающего контуров?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїР°СЂС‹ РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ Рё РїСЂРёРЅРёРјР°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂРѕРІ?
 
 
 
 	*/
-	double 
-		xi,yi,zi, 
+	double
+		xi,yi,zi,
 
-		rx, rx2, 
-		ry, ry2, 
+		rx, rx2,
+		ry, ry2,
 		rz, rz2,
 
-		len, phi, 
+		len, phi,
 
 		phi_k, value;
 	long j,p,r,C,i;
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
-	int a; //номер антены 
+	int a; //РЅРѕРјРµСЂ Р°РЅС‚РµРЅС‹
 	//AX(1,0,0),		a = 0
 	//AY(0,1,0)			a = 1
-	//и AZ(0,0,1)		a = 2
+	//Рё AZ(0,0,1)		a = 2
 
-	// степень диаграммы направленности приёмника
+	// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	//int pw_dnp = 2;
 
-    //минимальное значение, которое вносится в оператор прямой задачи    
+    //РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РІРЅРѕСЃРёС‚СЃСЏ РІ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	//double min_value = 0.03;
 	//double min_value = 1e-16;
 
@@ -2807,32 +2804,32 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 	double k1 = 1.0;
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно УТРОЕННОЙ длине сигнала, 
-	// т.к. мы ищем ОПЕРАТОР ПРЯМОЙ ЗАДАЧИ ДЛЯ ТРЁХ АНТЕН
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
-	// НА АНТЕНАХ AX(1,0,0), AY(0,1,0) и AZ(0,0,1) 
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РЈРўР РћР•РќРќРћР™ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°,
+	// С‚.Рє. РјС‹ РёС‰РµРј РћРџР•Р РђРўРћР  РџР РЇРњРћР™ Р—РђР”РђР§Р Р”Р›РЇ РўР РЃРҐ РђРќРўР•Рќ
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+	// РќРђ РђРќРўР•РќРђРҐ AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1)
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	double z_min = z0 - pages * delta_z;
 
 	double sum_operator_value_x = 0.0;
 	double sum_operator_value_y = 0.0;
 	double sum_operator_value_z = 0.0;
 	double hi, w, sum_operator_z_per_xy;
-	if (m && R) // если дана матрица, пишем в неё (в оперативную память)
+	if (m && R) // РµСЃР»Рё РґР°РЅР° РјР°С‚СЂРёС†Р°, РїРёС€РµРј РІ РЅРµС‘ (РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ)
 	{
 		//(*m).resize(signal_len * 3);
-		//template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols) 
+		//template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 
 		*m = Alloc3DMat<double>(3, signal_len, rows * cols * pages);
 		*R = Alloc3DMat<double>(3, signal_len, rows * cols * pages);
 
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			//int ax = a == 0;
 			//int ay = a == 1;
@@ -2843,18 +2840,18 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
 
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);		
+				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				int putted_in_row = 0;
-				
+
 				for (p = 0; p < pages; p++)
-				{						
+				{
 				//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
 
-				
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 
@@ -2863,37 +2860,37 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 					rz = (Z[j]-zi);
 					rz2 = rz * rz;
 
-					//часть пути луча, на котором происходит затухание
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / rz;
-					
+
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						ry = Y[j]-yi;
 						ry2 = ry*ry;
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
 							rx = (X[j]-xi);
 							rx2 = rx * rx;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								rx2 + 
-								ry2 + 
-								rz2 
+								rx2 +
+								ry2 +
+								rz2
 								);
 
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							//phi = acos((ax*rx + ay*ry + az*rz) / len);
-							// коэффициент выхода диаграммы направленности nju_fi
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё nju_fi
 							//phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len);
 							//value = k1 * phi_k;
@@ -2904,7 +2901,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 								//	value = DBL_MIN;
 								//}
 
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								//(*m)[j].put(i, value);
 								(*m)[a][j][i] = value;
 								(*R)[0][j][i] = rx;
@@ -2948,9 +2945,9 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 
 bool FillingTheMatrix3D_with_napravlennosty_diagramm(
-					  double k_oslablenie,// коэффициент ослабления
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
 					  char * filename,
-					  double **** m,// указатель на три матрицы njuX, njuY, njuZ
+					  double **** m,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 					  long rows, long cols, long pages,
 					  double x0, double y0, double z0,
 					  double delta_x, double delta_y, double delta_z,
@@ -2958,7 +2955,7 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm(
 					  vector<double> & Y,
 					  vector<double> & Z,
 					  vector<vector<anten_direction> > & A,
-	double pw_dnp,// степень диаграммы направленности приёмника
+	double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double min_value,
 	int wave_type,
 	sourse_power_model spm
@@ -2966,90 +2963,90 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm(
 {
 
 	/*
-Прямая и обратная задача в УИМПЗ
+РџСЂСЏРјР°СЏ Рё РѕР±СЂР°С‚РЅР°СЏ Р·Р°РґР°С‡Р° РІ РЈРРњРџР—
 
-1)	Направления рамочных антенн X, Y и Z задаются как вектора нормали: 
-AX(1,0,0), AY(0,1,0) и AZ(0,0,1) соответственно.
-2)	Координата источника излучения xi, yi, zi
-3)	Его мощность W
-4)	Его эллипсоид поляризации зададим отношением широтной компоненты амплитуды вектора напряжённости излучаемого переменного магнитного поля к его долготной компоненте PEW/NS. 
-5)	Координата измерения излучения x, y, z
-6)	Проводим вектор луча от источника к точке измерения L (x-xi, y-yi, z-zi)
-7)	Модуль вектора луча |L| даёт расстояние, пройденное сигналом
-8)	Ослабление сигнала вычисляем через коэффициент ослабления k_oslablenie : exp ( - k_oslablenie * |L|)
+1)	РќР°РїСЂР°РІР»РµРЅРёСЏ СЂР°РјРѕС‡РЅС‹С… Р°РЅС‚РµРЅРЅ X, Y Рё Z Р·Р°РґР°СЋС‚СЃСЏ РєР°Рє РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё:
+AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1) СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ.
+2)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+3)	Р•РіРѕ РјРѕС‰РЅРѕСЃС‚СЊ W
+4)	Р•РіРѕ СЌР»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё Р·Р°РґР°РґРёРј РѕС‚РЅРѕС€РµРЅРёРµРј С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚С‹ Р°РјРїР»РёС‚СѓРґС‹ РІРµРєС‚РѕСЂР° РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°РµРјРѕРіРѕ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ Рє РµРіРѕ РґРѕР»РіРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ PEW/NS.
+5)	РљРѕРѕСЂРґРёРЅР°С‚Р° РёР·РјРµСЂРµРЅРёСЏ РёР·Р»СѓС‡РµРЅРёСЏ x, y, z
+6)	РџСЂРѕРІРѕРґРёРј РІРµРєС‚РѕСЂ Р»СѓС‡Р° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° Рє С‚РѕС‡РєРµ РёР·РјРµСЂРµРЅРёСЏ L (x-xi, y-yi, z-zi)
+7)	РњРѕРґСѓР»СЊ РІРµРєС‚РѕСЂР° Р»СѓС‡Р° |L| РґР°С‘С‚ СЂР°СЃСЃС‚РѕСЏРЅРёРµ, РїСЂРѕР№РґРµРЅРЅРѕРµ СЃРёРіРЅР°Р»РѕРј
+8)	РћСЃР»Р°Р±Р»РµРЅРёРµ СЃРёРіРЅР°Р»Р° РІС‹С‡РёСЃР»СЏРµРј С‡РµСЂРµР· РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ k_oslablenie : exp ( - k_oslablenie * |L|)
 
-Вывод формулы для коэффициента выхода антенны, учитывая диаграмму направленности антенн и эллипсоид 
-поляризации электромагнитного луча. Эллипсоид поляризации определяем по вектору напряжённости 
-амплитуды переменного магнитного поля, образующего ЭМ волну. 
+Р’С‹РІРѕРґ С„РѕСЂРјСѓР»С‹ РґР»СЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹, СѓС‡РёС‚С‹РІР°СЏ РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё Р°РЅС‚РµРЅРЅ Рё СЌР»Р»РёРїСЃРѕРёРґ
+РїРѕР»СЏСЂРёР·Р°С†РёРё СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕРіРѕ Р»СѓС‡Р°. Р­Р»Р»РёРїСЃРѕРёРґ РїРѕР»СЏСЂРёР·Р°С†РёРё РѕРїСЂРµРґРµР»СЏРµРј РїРѕ РІРµРєС‚РѕСЂСѓ РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+Р°РјРїР»РёС‚СѓРґС‹ РїРµСЂРµРјРµРЅРЅРѕРіРѕ РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ, РѕР±СЂР°Р·СѓСЋС‰РµРіРѕ Р­Рњ РІРѕР»РЅСѓ.
 
-Допустим, что ЭМ волна от источника излучения xi, yi, zi 
-распространяется снизу вверх вертикально, а нормаль антенны AZ(0,0,1) 
-тоже расположена вертикально. Поток электромагнитной индукции или магнитный поток 
-(проверить применение какого термина уместнее), вызванный вектором напряжённости 
-магнитного поля рассматриваемого луча в силу геометрических причин не будет 
-пересекать контур, поэтому коэффициент выхода антенны будет равен нулю. 
+Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ Р­Рњ РІРѕР»РЅР° РѕС‚ РёСЃС‚РѕС‡РЅРёРєР° РёР·Р»СѓС‡РµРЅРёСЏ xi, yi, zi
+СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ СЃРЅРёР·Сѓ РІРІРµСЂС… РІРµСЂС‚РёРєР°Р»СЊРЅРѕ, Р° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ AZ(0,0,1)
+С‚РѕР¶Рµ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРµСЂС‚РёРєР°Р»СЊРЅРѕ. РџРѕС‚РѕРє СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РёР»Рё РјР°РіРЅРёС‚РЅС‹Р№ РїРѕС‚РѕРє
+(РїСЂРѕРІРµСЂРёС‚СЊ РїСЂРёРјРµРЅРµРЅРёРµ РєР°РєРѕРіРѕ С‚РµСЂРјРёРЅР° СѓРјРµСЃС‚РЅРµРµ), РІС‹Р·РІР°РЅРЅС‹Р№ РІРµРєС‚РѕСЂРѕРј РЅР°РїСЂСЏР¶С‘РЅРЅРѕСЃС‚Рё
+РјР°РіРЅРёС‚РЅРѕРіРѕ РїРѕР»СЏ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° РІ СЃРёР»Сѓ РіРµРѕРјРµС‚СЂРёС‡РµСЃРєРёС… РїСЂРёС‡РёРЅ РЅРµ Р±СѓРґРµС‚
+РїРµСЂРµСЃРµРєР°С‚СЊ РєРѕРЅС‚СѓСЂ, РїРѕСЌС‚РѕРјСѓ РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ РЅСѓР»СЋ.
 
-Рассмотрим взаимодействие этой же волны с антенной AX(1,0,0), 
-нормаль которой расположена вдоль оси X, то есть по широте. Контур 
-этой антенны будет нормально (под прямым углом) пересечён иксовой (широтной) 
-компонентой эллипсоида поляризации рассматриваемого луча ЭМ волны. Т.о. 
-коэффициент выхода антенны будет равен широтной компоненте эллипсоида 
-поляризации, т.е. PEW/NS.
+Р Р°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЌС‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AX(1,0,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё X, С‚Рѕ РµСЃС‚СЊ РїРѕ С€РёСЂРѕС‚Рµ. РљРѕРЅС‚СѓСЂ
+СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ (РїРѕРґ РїСЂСЏРјС‹Рј СѓРіР»РѕРј) РїРµСЂРµСЃРµС‡С‘РЅ РёРєСЃРѕРІРѕР№ (С€РёСЂРѕС‚РЅРѕР№)
+РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ.
+РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ С€РёСЂРѕС‚РЅРѕР№ РєРѕРјРїРѕРЅРµРЅС‚Рµ СЌР»Р»РёРїСЃРѕРёРґР°
+РїРѕР»СЏСЂРёР·Р°С†РёРё, С‚.Рµ. PEW/NS.
 
-Теперь рассмотрим взаимодействие той же волны с антенной AY(0,1,0), 
-нормаль которой расположена вдоль оси Y, то есть по долготе. Контур этой антенны 
-будет нормально пересечён игрековой (долготной) компонентой эллипсоида поляризации 
-рассматриваемого луча ЭМ волны. Т.о. коэффициент выхода антенны будет равен 1.0 / PEW/NS.
+РўРµРїРµСЂСЊ СЂР°СЃСЃРјРѕС‚СЂРёРј РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ С‚РѕР№ Р¶Рµ РІРѕР»РЅС‹ СЃ Р°РЅС‚РµРЅРЅРѕР№ AY(0,1,0),
+РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ СЂР°СЃРїРѕР»РѕР¶РµРЅР° РІРґРѕР»СЊ РѕСЃРё Y, С‚Рѕ РµСЃС‚СЊ РїРѕ РґРѕР»РіРѕС‚Рµ. РљРѕРЅС‚СѓСЂ СЌС‚РѕР№ Р°РЅС‚РµРЅРЅС‹
+Р±СѓРґРµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ РїРµСЂРµСЃРµС‡С‘РЅ РёРіСЂРµРєРѕРІРѕР№ (РґРѕР»РіРѕС‚РЅРѕР№) РєРѕРјРїРѕРЅРµРЅС‚РѕР№ СЌР»Р»РёРїСЃРѕРёРґР° РїРѕР»СЏСЂРёР·Р°С†РёРё
+СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРјРѕРіРѕ Р»СѓС‡Р° Р­Рњ РІРѕР»РЅС‹. Рў.Рѕ. РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° Р°РЅС‚РµРЅРЅС‹ Р±СѓРґРµС‚ СЂР°РІРµРЅ 1.0 / PEW/NS.
 
-9)	Учитываем диаграмму направленности. При допущении, что электромагнитный луч не 
-поляризован, используя закон электромагнитной индукции для контура, вводим коэффициент 
-равный sin(phi) в степени n, где n равно 1 или 2, а phi – угол между векторами луча и 
-нормалью антенны AX, AY или AZ. Определяем сперва cos(phi) через скалярное произведение 
-AL векторов луча L и антенной нормали A (ax,ay,az). 
-Вычисляем AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi). 
-Откуда (зная, что |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
+9)	РЈС‡РёС‚С‹РІР°РµРј РґРёР°РіСЂР°РјРјСѓ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё. РџСЂРё РґРѕРїСѓС‰РµРЅРёРё, С‡С‚Рѕ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅС‹Р№ Р»СѓС‡ РЅРµ
+РїРѕР»СЏСЂРёР·РѕРІР°РЅ, РёСЃРїРѕР»СЊР·СѓСЏ Р·Р°РєРѕРЅ СЌР»РµРєС‚СЂРѕРјР°РіРЅРёС‚РЅРѕР№ РёРЅРґСѓРєС†РёРё РґР»СЏ РєРѕРЅС‚СѓСЂР°, РІРІРѕРґРёРј РєРѕСЌС„С„РёС†РёРµРЅС‚
+СЂР°РІРЅС‹Р№ sin(phi) РІ СЃС‚РµРїРµРЅРё n, РіРґРµ n СЂР°РІРЅРѕ 1 РёР»Рё 2, Р° phi вЂ“ СѓРіРѕР» РјРµР¶РґСѓ РІРµРєС‚РѕСЂР°РјРё Р»СѓС‡Р° Рё
+РЅРѕСЂРјР°Р»СЊСЋ Р°РЅС‚РµРЅРЅС‹ AX, AY РёР»Рё AZ. РћРїСЂРµРґРµР»СЏРµРј СЃРїРµСЂРІР° cos(phi) С‡РµСЂРµР· СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
+AL РІРµРєС‚РѕСЂРѕРІ Р»СѓС‡Р° L Рё Р°РЅС‚РµРЅРЅРѕР№ РЅРѕСЂРјР°Р»Рё A (ax,ay,az).
+Р’С‹С‡РёСЃР»СЏРµРј AL = |A|*|L|* cos(phi) = ax*(x-xi) + ay*(y-yi) + az*(z-zi).
+РћС‚РєСѓРґР° (Р·РЅР°СЏ, С‡С‚Рѕ |A| = 1): cos(phi) = (ax*(x-xi) + ay*(y-yi) + az*(z-zi)) / |L|.
 
-Приближение неполяризованного луча позволяет произвести более подробную 
-реконструкцию распределения мощности излучателей в пространстве. 
-Но не даёт возможности произвести анализ анизотропии излучения горных пород.
+РџСЂРёР±Р»РёР¶РµРЅРёРµ РЅРµРїРѕР»СЏСЂРёР·РѕРІР°РЅРЅРѕРіРѕ Р»СѓС‡Р° РїРѕР·РІРѕР»СЏРµС‚ РїСЂРѕРёР·РІРµСЃС‚Рё Р±РѕР»РµРµ РїРѕРґСЂРѕР±РЅСѓСЋ
+СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЋ СЂР°СЃРїСЂРµРґРµР»РµРЅРёСЏ РјРѕС‰РЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°С‚РµР»РµР№ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ.
+РќРѕ РЅРµ РґР°С‘С‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РїСЂРѕРёР·РІРµСЃС‚Рё Р°РЅР°Р»РёР· Р°РЅРёР·РѕС‚СЂРѕРїРёРё РёР·Р»СѓС‡РµРЅРёСЏ РіРѕСЂРЅС‹С… РїРѕСЂРѕРґ.
 
 
 
-Физически правильно рассматривать кристалл излучающей горной породы 
-как комбинацию трёх взаимно-перпендикулярных излучающий диполей (IDX IDY IDZ).
+Р¤РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅРѕ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ РєСЂРёСЃС‚Р°Р»Р» РёР·Р»СѓС‡Р°СЋС‰РµР№ РіРѕСЂРЅРѕР№ РїРѕСЂРѕРґС‹
+РєР°Рє РєРѕРјР±РёРЅР°С†РёСЋ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С… РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ).
 
-Но для целей удобства анализа приёма этого излучения рамочной 
-антенной допустим, что нам известно (если нам не известно, 
-то оно наверняка известно специалистам по физике твёрдого тела) 
-математическое преобразование от трёх взаимно-перпендикулярных 
-излучающий диполей (IDX IDY IDZ) к трём взаимно-перпендикулярным 
-излучающим контурам (IHX IHY IHZ). Поэтому мы в ходе решения 
-обратной задачи будем искать распределение в пространстве горной 
-породы излучающих контуров (IHX IHY IHZ), а переход от них к 
-физически правильным излучающим диполям предоставим физикам-интерпретаторам.
+РќРѕ РґР»СЏ С†РµР»РµР№ СѓРґРѕР±СЃС‚РІР° Р°РЅР°Р»РёР·Р° РїСЂРёС‘РјР° СЌС‚РѕРіРѕ РёР·Р»СѓС‡РµРЅРёСЏ СЂР°РјРѕС‡РЅРѕР№
+Р°РЅС‚РµРЅРЅРѕР№ РґРѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РЅР°Рј РёР·РІРµСЃС‚РЅРѕ (РµСЃР»Рё РЅР°Рј РЅРµ РёР·РІРµСЃС‚РЅРѕ,
+С‚Рѕ РѕРЅРѕ РЅР°РІРµСЂРЅСЏРєР° РёР·РІРµСЃС‚РЅРѕ СЃРїРµС†РёР°Р»РёСЃС‚Р°Рј РїРѕ С„РёР·РёРєРµ С‚РІС‘СЂРґРѕРіРѕ С‚РµР»Р°)
+РјР°С‚РµРјР°С‚РёС‡РµСЃРєРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РѕС‚ С‚СЂС‘С… РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹С…
+РёР·Р»СѓС‡Р°СЋС‰РёР№ РґРёРїРѕР»РµР№ (IDX IDY IDZ) Рє С‚СЂС‘Рј РІР·Р°РёРјРЅРѕ-РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅС‹Рј
+РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂР°Рј (IHX IHY IHZ). РџРѕСЌС‚РѕРјСѓ РјС‹ РІ С…РѕРґРµ СЂРµС€РµРЅРёСЏ
+РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё Р±СѓРґРµРј РёСЃРєР°С‚СЊ СЂР°СЃРїСЂРµРґРµР»РµРЅРёРµ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ РіРѕСЂРЅРѕР№
+РїРѕСЂРѕРґС‹ РёР·Р»СѓС‡Р°СЋС‰РёС… РєРѕРЅС‚СѓСЂРѕРІ (IHX IHY IHZ), Р° РїРµСЂРµС…РѕРґ РѕС‚ РЅРёС… Рє
+С„РёР·РёС‡РµСЃРєРё РїСЂР°РІРёР»СЊРЅС‹Рј РёР·Р»СѓС‡Р°СЋС‰РёРј РґРёРїРѕР»СЏРј РїСЂРµРґРѕСЃС‚Р°РІРёРј С„РёР·РёРєР°Рј-РёРЅС‚РµСЂРїСЂРµС‚Р°С‚РѕСЂР°Рј.
 
-Для начала предположим, что мы имеем дело с одним излучающим контуром.
+Р”Р»СЏ РЅР°С‡Р°Р»Р° РїСЂРµРґРїРѕР»РѕР¶РёРј, С‡С‚Рѕ РјС‹ РёРјРµРµРј РґРµР»Рѕ СЃ РѕРґРЅРёРј РёР·Р»СѓС‡Р°СЋС‰РёРј РєРѕРЅС‚СѓСЂРѕРј.
 
-Диаграмма направленности излучающего контура?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂР°?
 
-Диаграмма направленности пары излучающего и принимающего контуров?
+Р”РёР°РіСЂР°РјРјР° РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїР°СЂС‹ РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ Рё РїСЂРёРЅРёРјР°СЋС‰РµРіРѕ РєРѕРЅС‚СѓСЂРѕРІ?
 
 
 
 	*/
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, phi_k, value;
 	long j,p,r,C,i;
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
-	int a; //номер антены 
+	int a; //РЅРѕРјРµСЂ Р°РЅС‚РµРЅС‹
 	//AX(1,0,0),		a = 0
 	//AY(0,1,0)			a = 1
-	//и AZ(0,0,1)		a = 2
+	//Рё AZ(0,0,1)		a = 2
 
-	// степень диаграммы направленности приёмника
+	// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	//int pw_dnp = 2;
 
-    //минимальное значение, которое вносится в оператор прямой задачи    
+    //РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, РєРѕС‚РѕСЂРѕРµ РІРЅРѕСЃРёС‚СЃСЏ РІ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	//double min_value = 0.03;
 	//double min_value = 1e-16;
 
@@ -3057,31 +3054,31 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 	double k1 = 1.0;
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно УТРОЕННОЙ длине сигнала, 
-	// т.к. мы ищем ОПЕРАТОР ПРЯМОЙ ЗАДАЧИ ДЛЯ ТРЁХ АНТЕН
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
-	// НА АНТЕНАХ AX(1,0,0), AY(0,1,0) и AZ(0,0,1) 
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РЈРўР РћР•РќРќРћР™ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°,
+	// С‚.Рє. РјС‹ РёС‰РµРј РћРџР•Р РђРўРћР  РџР РЇРњРћР™ Р—РђР”РђР§Р Р”Р›РЇ РўР РЃРҐ РђРќРўР•Рќ
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+	// РќРђ РђРќРўР•РќРђРҐ AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1)
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	double z_min = z0 - pages * delta_z;
 
 	double sum_operator_value_x = 0.0;
 	double sum_operator_value_y = 0.0;
 	double sum_operator_value_z = 0.0;
 	double hi, w, sum_operator_z_per_xy;
-	if (m) // если дана матрица, пишем в неё (в оперативную память)
+	if (m) // РµСЃР»Рё РґР°РЅР° РјР°С‚СЂРёС†Р°, РїРёС€РµРј РІ РЅРµС‘ (РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ)
 	{
 		//(*m).resize(signal_len * 3);
-		//template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols) 
+		//template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 
 		*m = Alloc3DMat<double>(3, signal_len, rows * cols * pages);
 
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			//int ax = a == 0;
 			//int ay = a == 1;
@@ -3092,17 +3089,17 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
 
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);		
+				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				int putted_in_row = 0;
-				
+
 				for (p = 0; p < pages; p++)
-				{						
+				{
 				//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
@@ -3110,34 +3107,34 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
 
-					//часть пути луча, на котором происходит затухание
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
-					
+
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 	#if 1
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности nju_fi
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё nju_fi
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k;
 							//value = k1 * phi_k;
@@ -3148,7 +3145,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 								//	value = DBL_MIN;
 								//}
 
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								//(*m)[j].put(i, value);
 								(*m)[a][j][i] = value;
 								putted_in_row++;
@@ -3158,16 +3155,16 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 								sum_operator_value_z += az * value * w;
 							}
 	#else
-							// угол направления на источник
+							// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 							phi = acos (Zj_zi / len);
-							// вычисляем угловой коэффициент
+							// РІС‹С‡РёСЃР»СЏРµРј СѓРіР»РѕРІРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 							k_phi = k_phi_max * phi;
 							if (fabs(k_phi) > PI) k_phi = 0.0;
-							// мягкое включение углового коэффициента
+							// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 							phi_k = pow(sin(k_phi), smoof_power);
 							if (phi_k > 0.1)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								(*m)[j].put(i, k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k);
 								putted_in_row++;
 							}
@@ -3181,31 +3178,31 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 	else
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Filling the matrix 3D with napravlennosty diagramm\nUnable to open file" , filename, MB_OK);
 				return false;
 			}
-		}			
+		}
 		char buff[BUFF_SIZE];
 		Archive ar( &f, Archive::store, BUFF_SIZE, buff );
 
-		// записываем размерность матрицы
-		//ar << rows; 
+		// Р·Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹
+		//ar << rows;
 		//ar << cols;
 		ar << signal_len * 3;
 		long rows_cols_pages = pages * rows * cols;
 		ar << rows_cols_pages;
 
-		// а теперь саму матрицу - построчно!!
+		// Р° С‚РµРїРµСЂСЊ СЃР°РјСѓ РјР°С‚СЂРёС†Сѓ - РїРѕСЃС‚СЂРѕС‡РЅРѕ!!
 
 		/*for (long r = 0; r < rows; r++)
 		{
 			ar << m[r];
 		}*/
-		for (a = 0; a < 3; a++)// перебираем 3 антены
+		for (a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		{
 			//int ax = a == 0;
 			//int ay = a == 1;
@@ -3216,55 +3213,54 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
 
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);		
+				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
-			
 				for (p = 0; p < pages; p++)
-				{						
-					
-					//zi = z0 - p * delta_z;// это неверно!!!
-					// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				{
+
+					//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+					// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 					//zi = z0 - (p+1) * delta_z;
 					zi = z_min + p * delta_z;
 					hi = z0 - zi; w = spm.Apply(hi);
-					
+
 					Zj_zi = (Z[j]-zi);
 					Zj_zi2 = Zj_zi * Zj_zi;
-					
-					//часть пути луча, на котором происходит затухание
+
+					//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 					double part_of_len = (z0 - zi) / Zj_zi;
 
 					for (r = 0; r < rows; r++)
 					{
-						
+
 						yi = y0 + r * delta_y;
 						Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-						
+
 						for (C = 0; C < cols; C++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							i = p * rows * cols + r * cols + C;
-							// координата геологического источника
+							// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 							xi = x0 + C * delta_x;
-							// расстояние от геологического источника
-							// до приёмника на профиле
+							// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+							// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 							len = sqrt(
-								(X[j]-xi)*(X[j]-xi) + 
-								Yj_yi2 + 
-								Zj_zi2 
+								(X[j]-xi)*(X[j]-xi) +
+								Yj_yi2 +
+								Zj_zi2
 								);
 	#if 1
-							// угол между направлением на источник и нормалью к антене
+							// СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° РёСЃС‚РѕС‡РЅРёРє Рё РЅРѕСЂРјР°Р»СЊСЋ Рє Р°РЅС‚РµРЅРµ
 							phi = acos((ax*(X[j]-xi) + ay*(Y[j]-yi) + az*(Z[j]-zi)) / len);
-							// коэффициент выхода диаграммы направленности
+							// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 							phi_k = pow(sin(phi), pw_dnp);
-							// 
+							//
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							//value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k;
 							value = k1 * phi_k;
 							//if (fabs(value) > min_value)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								///(*m)[j].put(i, K);
 								ar << i;
 								ar << value;
@@ -3274,16 +3270,16 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 								sum_operator_value_z += az * value * w;
 							}
 	#else
-							// угол направления на источник
+							// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 							phi = acos (Zj_zi / len);
-							// вычисляем угловой коэффициент
+							// РІС‹С‡РёСЃР»СЏРµРј СѓРіР»РѕРІРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 							k_phi = k_phi_max * phi;
 							if (fabs(k_phi) > PI) k_phi = 0.0;
-							// мягкое включение углового коэффициента
+							// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 							phi_k = pow(sin(k_phi), smoof_power);
 							if (phi_k > 0.1)
 							{
-								// добавление элемента в разреженную строку
+								// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 								//(*m)[j].put(i, k1 * exp ( - k2 * part_of_len * len) * phi_k);
 								if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 								value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k;
@@ -3294,7 +3290,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 						}
 					}
 				}
-				//признак конца записи строки
+				//РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° Р·Р°РїРёСЃРё СЃС‚СЂРѕРєРё
 				i = -1;
 				value = 0.0;
 				ar << i;
@@ -3322,8 +3318,8 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 
 
 bool FillingTheMatrix3D(double smoof_power,
-					  double k_oslablenie,// коэффициент ослабления
-					  double k, // отношение глубины источника к полной (два плеча) длине аномалии
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
+					  double k, // РѕС‚РЅРѕС€РµРЅРёРµ РіР»СѓР±РёРЅС‹ РёСЃС‚РѕС‡РЅРёРєР° Рє РїРѕР»РЅРѕР№ (РґРІР° РїР»РµС‡Р°) РґР»РёРЅРµ Р°РЅРѕРјР°Р»РёРё
 					  vector<SparseRow> * m,
 					  char * filename,
 					  long rows, long cols, long pages,
@@ -3338,79 +3334,79 @@ bool FillingTheMatrix3D(double smoof_power,
 {
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, k_phi, phi_k, value;
 	long j,p,r,C,i;
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
 	double k_phi_max = (PI/2.0)/atan(1.0/2.0*k);
 
 	double k1 = 1.0;
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно длине сигнала 
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	double z_min = z0 - pages * delta_z;
 
 
-	if (m) // если дана матрица, пишем в неё (в оперативную память)
+	if (m) // РµСЃР»Рё РґР°РЅР° РјР°С‚СЂРёС†Р°, РїРёС€РµРј РІ РЅРµС‘ (РІ РѕРїРµСЂР°С‚РёРІРЅСѓСЋ РїР°РјСЏС‚СЊ)
 	{
 		(*m).resize(signal_len);
 		for (j = 0; j < signal_len; j++)
 		{
-			printf("Filling of matrix %ld %ld\n", j, signal_len);		
+			printf("Filling of matrix %ld %ld\n", j, signal_len);
 
 
 			int putted_in_row = 0;
-			
+
 			for (p = 0; p < pages; p++)
-			{						
+			{
 			//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
-				
-				//zi = z0 - p * delta_z;// это неверно!!!
-				// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+
+				//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+				// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 				//zi = z0 - (p+1) * delta_z;
 				zi = z_min + p * delta_z;
 				//hi = z0 - zi; w = w0 + hi * w1 + hi * hi * w2;
 
 				Zj_zi = (Z[j]-zi);
 				Zj_zi2 = Zj_zi * Zj_zi;
-				
-				//часть пути луча, на котором происходит затухание
+
+				//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 				double part_of_len = (z0 - zi) / Zj_zi;
 
 				for (r = 0; r < rows; r++)
 				{
-					
+
 					yi = y0 + r * delta_y;
 					Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-					
+
 					for (C = 0; C < cols; C++)
 					{
-						// индекс в строке матрицы оператора прямой задачи
+						// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 						i = p * rows * cols + r * cols + C;
-						// координата геологического источника
+						// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 						xi = x0 + C * delta_x;
-						// расстояние от геологического источника
-						// до приёмника на профиле
+						// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+						// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 						len = sqrt(
-							(X[j]-xi)*(X[j]-xi) + 
-							Yj_yi2 + 
-							Zj_zi2 
+							(X[j]-xi)*(X[j]-xi) +
+							Yj_yi2 +
+							Zj_zi2
 							);
-						// угол направления на источник
+						// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 						phi = acos (Zj_zi / len);
-						// вычисляем угловой коэффициент
+						// РІС‹С‡РёСЃР»СЏРµРј СѓРіР»РѕРІРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 						k_phi = k_phi_max * phi;
 						if (fabs(k_phi) > PI) k_phi = 0.0;
-						// мягкое включение углового коэффициента
+						// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 						phi_k = pow(sin(k_phi), smoof_power);
 						if (phi_k > 0.1)
 						{
-							// добавление элемента в разреженную строку
+							// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							(*m)[j].put(i, k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k);
 							putted_in_row++;
@@ -3423,25 +3419,25 @@ bool FillingTheMatrix3D(double smoof_power,
 	else
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Filling the matrix 3D\nUnable to open file" , filename, MB_OK);
 				return false;
 			}
-		}			
+		}
 		char buff[BUFF_SIZE];
 		Archive ar( &f, Archive::store, BUFF_SIZE, buff );
 
-		// записываем размерность матрицы
-		//ar << rows; 
+		// Р·Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹
+		//ar << rows;
 		//ar << cols;
 		ar << signal_len;
 		long rows_cols_pages = pages * rows * cols;
 		ar << rows_cols_pages;
 
-		// а теперь саму матрицу - построчно!!
+		// Р° С‚РµРїРµСЂСЊ СЃР°РјСѓ РјР°С‚СЂРёС†Сѓ - РїРѕСЃС‚СЂРѕС‡РЅРѕ!!
 
 		/*for (long r = 0; r < rows; r++)
 		{
@@ -3449,53 +3445,53 @@ bool FillingTheMatrix3D(double smoof_power,
 		}*/
 		for (j = 0; j < signal_len; j++)
 		{
-			printf("Filling of matrix %ld %ld\n", j, signal_len);	
+			printf("Filling of matrix %ld %ld\n", j, signal_len);
 
-		
+
 			for (p = 0; p < pages; p++)
-			{						
-				
-				//zi = z0 - p * delta_z;// это неверно!!!
-				// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+			{
+
+				//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+				// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 				//zi = z0 - (p+1) * delta_z;
 				zi = z_min + p * delta_z;
 				//hi = z0 - zi; w = w0 + hi * w1 + hi * hi * w2;
 
 				Zj_zi = (Z[j]-zi);
 				Zj_zi2 = Zj_zi * Zj_zi;
-				
-				//часть пути луча, на котором происходит затухание
+
+				//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 				double part_of_len = (z0 - zi) / Zj_zi;
 
 				for (r = 0; r < rows; r++)
 				{
-					
+
 					yi = y0 + r * delta_y;
 					Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-					
+
 					for (C = 0; C < cols; C++)
 					{
-						// индекс в строке матрицы оператора прямой задачи
+						// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 						i = p * rows * cols + r * cols + C;
-						// координата геологического источника
+						// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 						xi = x0 + C * delta_x;
-						// расстояние от геологического источника
-						// до приёмника на профиле
+						// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+						// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 						len = sqrt(
-							(X[j]-xi)*(X[j]-xi) + 
-							Yj_yi2 + 
-							Zj_zi2 
+							(X[j]-xi)*(X[j]-xi) +
+							Yj_yi2 +
+							Zj_zi2
 							);
-						// угол направления на источник
+						// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 						phi = acos (Zj_zi / len);
-						// вычисляем угловой коэффициент
+						// РІС‹С‡РёСЃР»СЏРµРј СѓРіР»РѕРІРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 						k_phi = k_phi_max * phi;
 						if (fabs(k_phi) > PI) k_phi = 0.0;
-						// мягкое включение углового коэффициента
+						// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 						phi_k = pow(sin(k_phi), smoof_power);
 						if (phi_k > 0.1)
 						{
-							// добавление элемента в разреженную строку
+							// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 							//(*m)[j].put(i, k1 * exp ( - k2 * len) * phi_k);
 							if (wave_type == 1)	k1 = (1.0 / pow(len, pw_dnp));
 							value = k1 * exp ( - k_oslablenie * pw_dnp * part_of_len * len) * phi_k;
@@ -3505,7 +3501,7 @@ bool FillingTheMatrix3D(double smoof_power,
 					}
 				}
 			}
-			//признак конца записи строки
+			//РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° Р·Р°РїРёСЃРё СЃС‚СЂРѕРєРё
 			i = -1;
 			value = 0.0;
 			ar << i;
@@ -3521,8 +3517,8 @@ bool FillingTheMatrix3D(double smoof_power,
 
 
 void FillingTheMatrix3D_(double smoof_power,
-					  double k_oslablenie,// коэффициент ослабления
-					  double k, // отношение глубины источника к полной (два плеча) длине аномалии
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
+					  double k, // РѕС‚РЅРѕС€РµРЅРёРµ РіР»СѓР±РёРЅС‹ РёСЃС‚РѕС‡РЅРёРєР° Рє РїРѕР»РЅРѕР№ (РґРІР° РїР»РµС‡Р°) РґР»РёРЅРµ Р°РЅРѕРјР°Р»РёРё
 					  vector<sparse_row>& m,
 					  vector<double>& b,
 					  long rows, long cols, long pages,
@@ -3535,14 +3531,14 @@ void FillingTheMatrix3D_(double smoof_power,
 {
 	double xi,yi,zi, len, phi, Zj_zi, Zj_zi2, Yj_yi2, phi_k;
 	long j,p,r,C,i, ip, ir, iC, ic;
-	long signal_len = signal.size(); // длина сигнала 
+	long signal_len = signal.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
 	double k_phi_max = (PI/2.0)/atan(1.0/2.0*k);
 
 	double k1 = 1.0;
 
 	vector<long> vp(pages), vr(rows), vc(cols);
-	
+
 	index_for_sort * vip  = new index_for_sort[pages];
 	for (ip = 0; ip < pages; ip++)
 	{
@@ -3583,66 +3579,65 @@ void FillingTheMatrix3D_(double smoof_power,
 	delete [] vic;
 
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно длине сигнала 
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 	m.resize(signal_len);
 	b.resize(signal_len);
 	for (j = 0; j < signal_len; j++)
 	{
-		printf("Filling of matrix %ld %ld\n", j, signal_len);		
+		printf("Filling of matrix %ld %ld\n", j, signal_len);
 
 
 		int putted_in_row = 0;
-		
+
 		for (ip = 0; ip < pages; ip++)
-		{			
+		{
 			p = vp[ip];
 		//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
-			
-			//zi = z0 - p * delta_z;// это неверно!!!
-			// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+
+			//zi = z0 - p * delta_z;// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+			// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 			zi = z0 - (p+1) * delta_z;
 
 			Zj_zi = (Z[j]-zi);
 			Zj_zi2 = Zj_zi * Zj_zi;
 
-			//часть пути луча, на котором происходит затухание
+			//С‡Р°СЃС‚СЊ РїСѓС‚Рё Р»СѓС‡Р°, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёСЃС…РѕРґРёС‚ Р·Р°С‚СѓС…Р°РЅРёРµ
 			double part_of_len = (z0 - zi) / Zj_zi;
 
-			
 			for (ir = 0; ir < rows; ir++)
 			{
 				r = vr[ir];
-				
+
 				yi = y0 + r * delta_y;
 				Yj_yi2 = (Y[j]-yi)*(Y[j]-yi);
-				
+
 				for (iC = 0; iC < cols; iC++)
 				{
 					C = vc[iC];
-					// индекс в строке матрицы оператора прямой задачи
+					// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					i = p * rows * cols + r * cols + C;
-					// координата геологического источника
+					// РєРѕРѕСЂРґРёРЅР°С‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
 					xi = x0 + C * delta_x;
-					// расстояние от геологического источника
-					// до приёмника на профиле
+					// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР°
+					// РґРѕ РїСЂРёС‘РјРЅРёРєР° РЅР° РїСЂРѕС„РёР»Рµ
 					len = sqrt(
-						(X[j]-xi)*(X[j]-xi) + 
-						Yj_yi2 + 
-						Zj_zi2 
+						(X[j]-xi)*(X[j]-xi) +
+						Yj_yi2 +
+						Zj_zi2
 						);
-					// угол направления на источник
+					// СѓРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёСЏ РЅР° РёСЃС‚РѕС‡РЅРёРє
 					phi = acos (Zj_zi / len);
-					// мягкое включение углового коэффициента
+					// РјСЏРіРєРѕРµ РІРєР»СЋС‡РµРЅРёРµ СѓРіР»РѕРІРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 					phi_k = pow(sin(k_phi_max * phi), smoof_power);
 					if (phi_k > 0.1)
 					{
-						// добавление элемента в разреженную строку
+						// РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ СЂР°Р·СЂРµР¶РµРЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 						m[j].put(i, k1 * exp ( - k_oslablenie * part_of_len * len) * phi_k);
 						putted_in_row++;
 					}
@@ -3662,7 +3657,7 @@ bool StoringTheMatrix(vector<SparseRow>& m, long cols)
 {
 	char buff[BUFF_SIZE];
 	char filename[4096];
-	TCHAR filter[] =     
+	TCHAR filter[] =
 		TEXT("Sparse Martix File (*.smf)\0*.smf\0")
 		TEXT("All Files (*.*)\0*.*\0");
 	sprintf(filename, "\0");
@@ -3670,9 +3665,9 @@ bool StoringTheMatrix(vector<SparseRow>& m, long cols)
 	if (SaveFileDlg(0, filename, filter, nFilterIndex) == S_OK)
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Storing the matrix\nUnable to open file" , filename, MB_OK);
 				return false;
@@ -3699,7 +3694,7 @@ bool StoringTheMatrix(vector<sparse_row>& m, long cols)
 {
 	char buff[BUFF_SIZE];
 	char filename[4096];
-	TCHAR filter[] =     
+	TCHAR filter[] =
 		TEXT("Sparse Martix File (*.smf)\0*.smf\0")
 		TEXT("All Files (*.*)\0*.*\0");
 	sprintf(filename, "\0");
@@ -3707,9 +3702,9 @@ bool StoringTheMatrix(vector<sparse_row>& m, long cols)
 	if (SaveFileDlg(0, filename, filter, nFilterIndex) == S_OK)
 	{
 		AFile f;
-		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+		if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 		{
-			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Storing the matrix\nUnable to open file" , filename, MB_OK);
 				return false;
@@ -3736,14 +3731,14 @@ void LoadingTheMatrix(vector<SparseRow>& m, long & cols)
 {
 	char buff[BUFF_SIZE];
 	char filename[4096];
-	TCHAR filter[] =     
+	TCHAR filter[] =
 		TEXT("Sparse Martix File (*.smf)\0*.smf\0")
 		TEXT("All Files (*.*)\0*.*\0");
 	sprintf(filename, "\0");
 	if (OpenFileDlg(0, filter, filename) == S_OK)
 	{
 		AFile f;
-		if( f.Open( filename, GENERIC_READ, OPEN_EXISTING) ) 
+		if( f.Open( filename, GENERIC_READ, OPEN_EXISTING) )
 		{
 			Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 			try
@@ -3767,9 +3762,9 @@ void LoadingTheMatrix(vector<SparseRow>& m, long & cols)
 			}
 			catch (CException* pe)
 			{
-				// catch errors from WinINet 
-				TCHAR szErr[4098]; 
-				pe->GetErrorMessage(szErr, 4098); 
+				// catch errors from WinINet
+				TCHAR szErr[4098];
+				pe->GetErrorMessage(szErr, 4098);
 				AfxMessageBox(szErr);
 				pe->Delete();
 			}
@@ -3777,7 +3772,7 @@ void LoadingTheMatrix(vector<SparseRow>& m, long & cols)
 			{
 				MessageBox(0,"unknown error of archive read","",0);
 			}
-			
+
 			ar.Close();
 			f.Close();
 		}
@@ -3800,9 +3795,9 @@ bool StoreMatrixHeader(char * filename, long rows, long cols, bool ByColomns)
 	}
 
 	AFile f;
-	if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+	if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 	{
-		if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+		if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 		{
 			MessageBox(0, "Store Matrix Header\nUnable to open file" , filename, MB_OK);
 			return false;
@@ -3831,9 +3826,9 @@ bool StoreMatrixHeader(char * filename, long rows, long cols)
 	}
 
 	AFile f;
-	if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+	if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 	{
-		if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+		if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 		{
 			MessageBox(0, "Store Matrix Header\nUnable to open file" , filename, MB_OK);
 			return false;
@@ -3863,9 +3858,9 @@ bool StoreMatrix(char * filename, vector<vector<double> > & m, bool ByColomns)
 	}
 
 	AFile f;
-	if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) ) 
+	if( !f.Open( filename, GENERIC_WRITE, TRUNCATE_EXISTING) )
 	{
-		if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) ) 
+		if( !f.Open( filename, GENERIC_WRITE, CREATE_NEW) )
 		{
 			MessageBox(0, "Store Matrix\nUnable to open file" , filename, MB_OK);
 			return false;
@@ -3907,7 +3902,7 @@ bool LoadMatrix(char * filename, vector<vector<double> > & m)
 {
 	bool result = false;
 	AFile f;
-	if( !f.Open( filename, GENERIC_READ, OPEN_EXISTING) ) 
+	if( !f.Open( filename, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Load Matrix\nUnable to open file" , filename, MB_OK);
 		return false;
@@ -3958,9 +3953,9 @@ bool LoadMatrix(char * filename, vector<vector<double> > & m)
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -3968,26 +3963,26 @@ bool LoadMatrix(char * filename, vector<vector<double> > & m)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar.Close();
 	f.Close();
 
 	return result;
 }
-bool ApplyOperator(long signal_len, 
+bool ApplyOperator(long signal_len,
 				   long q,
 				   vector<double> & sol,
-				   char * filename_in, 
+				   char * filename_in,
 				   vector<vector<double> > & mw
 				   )
 {
-	// на вектор решения действуем оператором прямой задачи
-	// и получаем q-тую колонку новой матрицы
-	// которая будет выражать оператор прямой задачи в частотной области
+	// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+	// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 
 	bool result = false;
 	AFile f;
-	if( f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) ) 
+	if( f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) )
 	{
 		char buff[BUFF_SIZE];
 		Archive ar( &f, Archive::load, BUFF_SIZE, buff );
@@ -4004,7 +3999,7 @@ bool ApplyOperator(long signal_len,
 
 				long cc;
 				double value;
-				do 
+				do
 				{
 					ar >> cc;
 					ar >> value;
@@ -4030,9 +4025,9 @@ bool ApplyOperator(long signal_len,
 		}
 		catch (CException* pe)
 		{
-			// catch errors from WinINet 
-			TCHAR szErr[4098]; 
-			pe->GetErrorMessage(szErr, 4098); 
+			// catch errors from WinINet
+			TCHAR szErr[4098];
+			pe->GetErrorMessage(szErr, 4098);
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
@@ -4040,7 +4035,7 @@ bool ApplyOperator(long signal_len,
 		{
 			MessageBox(0,"unknown error of archive read","",0);
 		}
-		
+
 		ar.Close();
 		f.Close();
 	}
@@ -4052,20 +4047,20 @@ bool ApplyOperator(long signal_len,
 	return result;
 }
 
-bool ApplyOperator(long signal_len, 
+bool ApplyOperator(long signal_len,
 				   vector<double> & sol,
-				   char * filename_in, 
-				   char * filename_out 
+				   char * filename_in,
+				   char * filename_out
 				   )
 {
-	// на вектор решения действуем оператором прямой задачи
-	// и получаем q-тую колонку новой матрицы
-	// которая будет выражать оператор прямой задачи в частотной области
+	// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+	// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 
 	bool result = false;
 
 	AFile f;
-	if( !f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) ) 
+	if( !f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Apply Operator\nUnable to open file" , filename_in, MB_OK);
 		result = false;
@@ -4073,20 +4068,20 @@ bool ApplyOperator(long signal_len,
 
 	char buff[BUFF_SIZE];
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
-	
+
 	AFile f2;
-	if( !f2.Open( filename_out, GENERIC_WRITE, OPEN_EXISTING) ) 
+	if( !f2.Open( filename_out, GENERIC_WRITE, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Apply Operator\nUnable to open file" , filename_out, MB_OK);
 		ar.Close();
 		f.Close();
 		result = false;
-	}	
+	}
 	f2.SeekToEnd();
-	
+
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
-	
+
 	try
 	{
 		long _cols, _rows;
@@ -4101,7 +4096,7 @@ bool ApplyOperator(long signal_len,
 
 			long cc;
 			double value;
-			do 
+			do
 			{
 				ar >> cc;
 				ar >> value;
@@ -4128,9 +4123,9 @@ bool ApplyOperator(long signal_len,
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -4138,7 +4133,7 @@ bool ApplyOperator(long signal_len,
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar2.Close();
 	f2.Close();
 
@@ -4148,21 +4143,21 @@ bool ApplyOperator(long signal_len,
 
 	return result;
 }
-	
-bool ApplyOperator(long signal_len, 
+
+bool ApplyOperator(long signal_len,
 				   double * sol, size_t sol_size,
-				   char * filename_in, 
-				   char * filename_out 
+				   char * filename_in,
+				   char * filename_out
 				   )
 {
-	// на вектор решения действуем оператором прямой задачи
-	// и получаем q-тую колонку новой матрицы
-	// которая будет выражать оператор прямой задачи в частотной области
+	// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+	// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 
 	bool result = false;
 
 	AFile f;
-	if( !f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) ) 
+	if( !f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Apply operator\nUnable to open file" , filename_in, MB_OK);
 		result = false;
@@ -4170,20 +4165,20 @@ bool ApplyOperator(long signal_len,
 
 	char buff[BUFF_SIZE];
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
-	
+
 	AFile f2;
-	if( !f2.Open( filename_out, GENERIC_WRITE, OPEN_EXISTING) ) 
+	if( !f2.Open( filename_out, GENERIC_WRITE, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Apply operator\nUnable to open file" , filename_out, MB_OK);
 		ar.Close();
 		f.Close();
 		result = false;
-	}	
+	}
 	f2.SeekToEnd();
-	
+
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
-	
+
 	try
 	{
 		long _cols, _rows;
@@ -4198,7 +4193,7 @@ bool ApplyOperator(long signal_len,
 
 			long cc;
 			double value;
-			do 
+			do
 			{
 				ar >> cc;
 				ar >> value;
@@ -4225,9 +4220,9 @@ bool ApplyOperator(long signal_len,
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -4235,7 +4230,7 @@ bool ApplyOperator(long signal_len,
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar2.Close();
 	f2.Close();
 
@@ -4245,20 +4240,20 @@ bool ApplyOperator(long signal_len,
 
 	return result;
 }
-bool ApplyOperator_SparseOut(long signal_len, 
+bool ApplyOperator_SparseOut(long signal_len,
 				   double * sol, size_t sol_size,
-				   char * filename_in, 
-				   char * filename_out 
+				   char * filename_in,
+				   char * filename_out
 				   )
 {
-	// на вектор решения действуем оператором прямой задачи
-	// и получаем q-тую колонку новой матрицы
-	// которая будет выражать оператор прямой задачи в частотной области
+	// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+	// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 
 	bool result = false;
 
 	AFile f;
-	if( !f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) ) 
+	if( !f.Open( filename_in, GENERIC_READ, OPEN_EXISTING) )
 	{
 		char str[4098];
 		sprintf(str,"Apply Oprator Sparse Out\nUnable to open file\nfilename_in = %s", filename_in);
@@ -4268,9 +4263,9 @@ bool ApplyOperator_SparseOut(long signal_len,
 
 	char buff[BUFF_SIZE];
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
-	
+
 	AFile f2;
-	if( !f2.Open( filename_out, GENERIC_WRITE, OPEN_EXISTING) ) 
+	if( !f2.Open( filename_out, GENERIC_WRITE, OPEN_EXISTING) )
 	{
 		char str[4098];
 		sprintf(str,"Apply Oprator Sparse Out\nUnable to open file\nfilename_out = %s", filename_out);
@@ -4278,12 +4273,12 @@ bool ApplyOperator_SparseOut(long signal_len,
 		ar.Close();
 		f.Close();
 		return false;
-	}	
+	}
 	f2.SeekToEnd();
-	
+
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
-	
+
 	try
 	{
 		long _cols, _rows;
@@ -4298,7 +4293,7 @@ bool ApplyOperator_SparseOut(long signal_len,
 
 			long cc;
 			double value;
-			do 
+			do
 			{
 				ar >> cc;
 				ar >> value;
@@ -4333,9 +4328,9 @@ bool ApplyOperator_SparseOut(long signal_len,
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -4343,7 +4338,7 @@ bool ApplyOperator_SparseOut(long signal_len,
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar2.Close();
 	f2.Close();
 
@@ -4368,16 +4363,16 @@ void GetWaveletFilters(Wavelet2D& w2)
 		n00_r,m00_r);
 
 	int len_h_r = dh_r.Length();
-	
+
 	left_h_r = len_h_r - 2;
 	right_h_r = 0;
 #else
 	WaveletGetLeftRight(
-		w2.wf_r, // флаг вейвлета
-		w2.order_r, // порядок вейвлета
+		w2.wf_r, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+		w2.order_r, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 		w2.orderBiorthogonalDecomposition_r,
 		w2.dh_r,
-		w2.dg_r, 
+		w2.dg_r,
 		w2.rh_r,
 		w2.rg_r,
 		w2.left_h_r,
@@ -4403,17 +4398,17 @@ void GetWaveletFilters(Wavelet2D& w2)
 		n00_c,m00_c);
 
 	int len_h_c = dh_c.Length();
-	
+
 	left_h_c = len_h_c - 2;
 	right_h_c = 0;
 
 #else
 	WaveletGetLeftRight(
-		w2.wf_c, // флаг вейвлета
-		w2.order_c, // порядок вейвлета
+		w2.wf_c, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+		w2.order_c, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 		w2.orderBiorthogonalDecomposition_c,
 		w2.dh_c,
-		w2.dg_c, 
+		w2.dg_c,
 		w2.rh_c,
 		w2.rg_c,
 		w2.left_h_c,
@@ -4427,11 +4422,11 @@ void GetWaveletFilters(Wavelet3D& w3)
 {
 
 	WaveletGetLeftRight(
-		w3.wf_p, // флаг вейвлета
-		w3.order_p, // порядок вейвлета
+		w3.wf_p, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+		w3.order_p, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 		w3.orderBiorthogonalDecomposition_p,
 		w3.dh_p,
-		w3.dg_p, 
+		w3.dg_p,
 		w3.rh_p,
 		w3.rg_p,
 		w3.left_h_p,
@@ -4441,11 +4436,11 @@ void GetWaveletFilters(Wavelet3D& w3)
 
 
 	WaveletGetLeftRight(
-		w3.wf_r, // флаг вейвлета
-		w3.order_r, // порядок вейвлета
+		w3.wf_r, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+		w3.order_r, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 		w3.orderBiorthogonalDecomposition_r,
 		w3.dh_r,
-		w3.dg_r, 
+		w3.dg_r,
 		w3.rh_r,
 		w3.rg_r,
 		w3.left_h_r,
@@ -4455,11 +4450,11 @@ void GetWaveletFilters(Wavelet3D& w3)
 
 
 	WaveletGetLeftRight(
-		w3.wf_c, // флаг вейвлета
-		w3.order_c, // порядок вейвлета
+		w3.wf_c, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+		w3.order_c, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 		w3.orderBiorthogonalDecomposition_c,
 		w3.dh_c,
-		w3.dg_c, 
+		w3.dg_c,
 		w3.rh_c,
 		w3.rg_c,
 		w3.left_h_c,
@@ -4473,7 +4468,7 @@ void w_fi(vdouble& fh, int d, vdouble& FI)
 {
 printf("w_fi(vdouble& fh, int d = %d, vdouble& FI)\n", d);
 	vdouble P;
-	FI = fh*2; 
+	FI = fh*2;
 	int lenh = fh.Length();
 printf("w_fi lenh = %d\n", lenh);
 	if (d==1)
@@ -4502,7 +4497,7 @@ printf("w_fi lenh = %d\n", lenh);
 		P.resize(pow_two*(lenh - 1) + 1, 0.0);
 		for (int i = 0; i < lenh;i++)
 			P[pow_two*i] = fh[i];
-		
+
 		FI=2*conv(P,FI);
 
 	}
@@ -4525,32 +4520,32 @@ Grid * InverseWaveletImage2D(Wavelet2D& w2, int d, MyMethodsData& mmd)
 	wavSimage->gridSection.xSize = 1;
 
 	wavSimage->gridSection.yLL = 0;
-	wavSimage->gridSection.ySize = 1;			  
+	wavSimage->gridSection.ySize = 1;
 #else
-	// Сравниваем размах профиля по X и по Y и
-	// в качестве горизонтальной координаты выбираем ту, по которой размах больше
+	// РЎСЂР°РІРЅРёРІР°РµРј СЂР°Р·РјР°С… РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y Рё
+	// РІ РєР°С‡РµСЃС‚РІРµ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІС‹Р±РёСЂР°РµРј С‚Сѓ, РїРѕ РєРѕС‚РѕСЂРѕР№ СЂР°Р·РјР°С… Р±РѕР»СЊС€Рµ
 	if (mmd.delta__x > mmd.delta__y)
 	{
-		//считаем по x
+		//СЃС‡РёС‚Р°РµРј РїРѕ x
 		wavSimage->gridSection.xLL = mmd.x0;
 		wavSimage->gridSection.xSize = mmd.delta_x;
 	}
 	else
 	{
-		//считаем по y
+		//СЃС‡РёС‚Р°РµРј РїРѕ y
 		wavSimage->gridSection.xLL = mmd.y0;
 		wavSimage->gridSection.xSize = mmd.delta_y;
 	}
 
 	wavSimage->gridSection.yLL = mmd.z0 - (wavSimage->gridSection.nRow - 1) * mmd.delta_z;
-	wavSimage->gridSection.ySize = mmd.delta_z;					  
+	wavSimage->gridSection.ySize = mmd.delta_z;
 #endif
 	wavSimage->gridSection.z = AllocDoubleMat(wavSimage->gridSection.nRow, wavSimage->gridSection.nCol);
 	wavSimage->gridSection.BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
-	
+
 	double min_z = DBL_MAX;
 	double max_z = -DBL_MAX;
-	
+
 	for (long c = 0; c < wavSimage->gridSection.nCol; c++)
 	{
 		for (long r = 0; r < wavSimage->gridSection.nRow; r++)
@@ -4594,15 +4589,15 @@ Grid4 * ShowCube(MyMethodsData3& mmd)
 
 //	wavSimage->gridSection.z = AllocDoubleMat(wavSimage->gridSection.nRow, wavSimage->gridSection.nCol);
 //	wavSimage->gridSection.BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
-		
-	
+
+
 	cube->grid4Section.v = Alloc3DMat<double>(cube->grid4Section.nPag, cube->grid4Section.nRow, cube->grid4Section.nCol);
 	cube->grid4Section.BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 
 	double min_v = DBL_MAX;
 	double max_v = -DBL_MAX;
 
-	for (long p = 0; p < cube->grid4Section.nPag; p++)				
+	for (long p = 0; p < cube->grid4Section.nPag; p++)
 	{
 		for (long c = 0; c < cube->grid4Section.nCol; c++)
 		{
@@ -4671,35 +4666,35 @@ printf("wavSimage->grid4Section.ySize = %f\n",wavSimage->grid4Section.ySize);
 printf("wavSimage->grid4Section.zSize = %f\n",wavSimage->grid4Section.zSize);
 
 #else
-	// Сравниваем размах профиля по X и по Y и
-	// в качестве горизонтальной координаты выбираем ту, по которой размах больше
+	// РЎСЂР°РІРЅРёРІР°РµРј СЂР°Р·РјР°С… РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y Рё
+	// РІ РєР°С‡РµСЃС‚РІРµ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІС‹Р±РёСЂР°РµРј С‚Сѓ, РїРѕ РєРѕС‚РѕСЂРѕР№ СЂР°Р·РјР°С… Р±РѕР»СЊС€Рµ
 	if (mmd.delta__x > mmd.delta__y)
 	{
-		//считаем по x
+		//СЃС‡РёС‚Р°РµРј РїРѕ x
 		wavSimage->gridSection.xLL = mmd.x0;
 		wavSimage->gridSection.xSize = mmd.delta_x;
 	}
 	else
 	{
-		//считаем по y
+		//СЃС‡РёС‚Р°РµРј РїРѕ y
 		wavSimage->gridSection.xLL = mmd.y0;
 		wavSimage->gridSection.xSize = mmd.delta_y;
 	}
 
 	wavSimage->gridSection.yLL = mmd.z0 - (wavSimage->gridSection.nRow - 1) * mmd.delta_z;
-	wavSimage->gridSection.ySize = mmd.delta_z;					  
+	wavSimage->gridSection.ySize = mmd.delta_z;
 #endif
 //	wavSimage->gridSection.z = AllocDoubleMat(wavSimage->gridSection.nRow, wavSimage->gridSection.nCol);
 //	wavSimage->gridSection.BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
-		
-	
+
+
 	wavSimage->grid4Section.v = Alloc3DMat<double>(wavSimage->grid4Section.nPag, wavSimage->grid4Section.nRow, wavSimage->grid4Section.nCol);
 	wavSimage->grid4Section.BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 
 	double min_v = DBL_MAX;
 	double max_v = -DBL_MAX;
 
-	for (long p = 0; p < wavSimage->grid4Section.nPag; p++)				
+	for (long p = 0; p < wavSimage->grid4Section.nPag; p++)
 	{
 		for (long c = 0; c < wavSimage->grid4Section.nCol; c++)
 		{
@@ -4724,7 +4719,6 @@ printf("wavSimage->grid4Section.zSize = %f\n",wavSimage->grid4Section.zSize);
 }
 
 
-			
 void InverseWaveletTransform2D(Wavelet2D& w2, Grid * grid, long increaser_pw, long len_r, long len_c)
 {
 	long r,c;
@@ -4732,11 +4726,11 @@ void InverseWaveletTransform2D(Wavelet2D& w2, Grid * grid, long increaser_pw, lo
 	{
 		vdouble current_s;
 		vdouble temp;
-		// проходим по всем строкам
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј
 		for (r = 0; r < len_r; r++)
 		{
 			//printf("r = %d\t", r);
-			// загружаем текущую колонку в вектор S-коэффициентов
+			// Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСѓС‰СѓСЋ РєРѕР»РѕРЅРєСѓ РІ РІРµРєС‚РѕСЂ S-РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 			current_s.resize(len_c);
 			for (c = 0; c < len_c; c++)
 			{
@@ -4752,9 +4746,9 @@ void InverseWaveletTransform2D(Wavelet2D& w2, Grid * grid, long increaser_pw, lo
 				}*/
 			}
 			//printf("\t");
-			//производим вейвлет преобразование
+			//РїСЂРѕРёР·РІРѕРґРёРј РІРµР№РІР»РµС‚ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ
 			temp.idwt(w2.left_h_c, w2.right_h_c, w2.rh_c, current_s);
-			// заносим результат обратно в текущую колонку
+			// Р·Р°РЅРѕСЃРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РѕР±СЂР°С‚РЅРѕ РІ С‚РµРєСѓС‰СѓСЋ РєРѕР»РѕРЅРєСѓ
 			for (c = 0; c < 2*len_c; c++)
 			{
 				grid->gridSection.z[r][c] = temp[c];
@@ -4770,19 +4764,19 @@ void InverseWaveletTransform2D(Wavelet2D& w2, Grid * grid, long increaser_pw, lo
 			//printf("\n");
 		}
 
-		// проходим по всем колонкам
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј
 		for (c = 0; c < 2*len_c; c++)
 		{
 			//printf("c = %d\n", c);
-			// загружаем текущую строку в вектор S-коэффициентов
+			// Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ РІ РІРµРєС‚РѕСЂ S-РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 			current_s.resize(len_r);
 			for (r = 0; r < len_r; r++)
 			{
 				current_s[r] = grid->gridSection.z[r][c];
 			}
-			//производим вейвлет преобразование
+			//РїСЂРѕРёР·РІРѕРґРёРј РІРµР№РІР»РµС‚ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ
 			temp.idwt(w2.left_h_r, w2.right_h_r, w2.rh_r, current_s);
-			// заносим результат обратно в текущую строку
+			// Р·Р°РЅРѕСЃРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РѕР±СЂР°С‚РЅРѕ РІ С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ
 			for (r = 0; r < 2*len_r; r++)
 			{
 				grid->gridSection.z[r][c] = temp[r];
@@ -4804,65 +4798,65 @@ void InverseWaveletTransform3D(Wavelet3D& w3, Grid4 * grid, long increaser_pw, l
 
 		for (p = 0; p < len_p; p++)
 		{
-			// проходим по всем строкам
+			// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј
 			for (r = 0; r < len_r; r++)
 			{
-				// загружаем текущую колонку в вектор S-коэффициентов
+				// Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСѓС‰СѓСЋ РєРѕР»РѕРЅРєСѓ РІ РІРµРєС‚РѕСЂ S-РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 				current_s.resize(len_c);
 				for (c = 0; c < len_c; c++)
 				{
 					current_s[c] = grid->grid4Section.v[p][r][c];
 				}
-				//производим вейвлет преобразование
+				//РїСЂРѕРёР·РІРѕРґРёРј РІРµР№РІР»РµС‚ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ
 				temp.idwt(w3.left_h_c, w3.right_h_c, w3.rh_c, current_s);
-				// заносим результат обратно в текущую колонку
+				// Р·Р°РЅРѕСЃРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РѕР±СЂР°С‚РЅРѕ РІ С‚РµРєСѓС‰СѓСЋ РєРѕР»РѕРЅРєСѓ
 				for (c = 0; c < 2*len_c; c++)
 				{
 					grid->grid4Section.v[p][r][c] = temp[c];
 				}
 			}
 
-			// проходим по всем колонкам
+			// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј
 			for (c = 0; c < 2*len_c; c++)
 			{
-				// загружаем текущую строку в вектор S-коэффициентов
+				// Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ РІ РІРµРєС‚РѕСЂ S-РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 				current_s.resize(len_r);
 				for (r = 0; r < len_r; r++)
 				{
 					current_s[r] = grid->grid4Section.v[p][r][c];
 				}
-				//производим вейвлет преобразование
+				//РїСЂРѕРёР·РІРѕРґРёРј РІРµР№РІР»РµС‚ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ
 				temp.idwt(w3.left_h_r, w3.right_h_r, w3.rh_r, current_s);
-				// заносим результат обратно в текущую строку
+				// Р·Р°РЅРѕСЃРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РѕР±СЂР°С‚РЅРѕ РІ С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ
 				for (r = 0; r < 2*len_r; r++)
 				{
 					grid->grid4Section.v[p][r][c] = temp[r];
 				}
-			}		
+			}
 		}
-		
-		// проходим по всем строкам
+
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј
 		for (r = 0; r < 2*len_r; r++)
 		{
-			// проходим по всем колонкам
+			// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј
 			for (c = 0; c < 2*len_c; c++)
 			{
-				// загружаем текущую строку в вектор S-коэффициентов
+				// Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ РІ РІРµРєС‚РѕСЂ S-РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 				current_s.resize(len_p);
 				for (p = 0; p < len_p; p++)
 				{
 					current_s[p] = grid->grid4Section.v[p][r][c];
 				}
-				//производим вейвлет преобразование
+				//РїСЂРѕРёР·РІРѕРґРёРј РІРµР№РІР»РµС‚ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ
 				temp.idwt(w3.left_h_p, w3.right_h_p, w3.rh_p, current_s);
-				// заносим результат обратно в текущую строку
+				// Р·Р°РЅРѕСЃРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РѕР±СЂР°С‚РЅРѕ РІ С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ
 				for (p = 0; p < 2*len_p; p++)
 				{
 					grid->grid4Section.v[p][r][c] = temp[p];
 				}
 			}
-		}	
-		
+		}
+
 		len_p *= 2;
 		len_r *= 2;
 		len_c *= 2;
@@ -4871,11 +4865,11 @@ void InverseWaveletTransform3D(Wavelet3D& w3, Grid4 * grid, long increaser_pw, l
 
 void FastFourierTransform2D(Grid * grid, ap::real_1d_array & a, bool inversefft, long r1)
 {
-	// зачем проходить по всем строкам, если в исходной матрице только один элемент ненулевой?
-	// достаточно сперва пройти только лишь по строке, содержащий этот ненулевой элемент
+	// Р·Р°С‡РµРј РїСЂРѕС…РѕРґРёС‚СЊ РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј, РµСЃР»Рё РІ РёСЃС…РѕРґРЅРѕР№ РјР°С‚СЂРёС†Рµ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЌР»РµРјРµРЅС‚ РЅРµРЅСѓР»РµРІРѕР№?
+	// РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЃРїРµСЂРІР° РїСЂРѕР№С‚Рё С‚РѕР»СЊРєРѕ Р»РёС€СЊ РїРѕ СЃС‚СЂРѕРєРµ, СЃРѕРґРµСЂР¶Р°С‰РёР№ СЌС‚РѕС‚ РЅРµРЅСѓР»РµРІРѕР№ СЌР»РµРјРµРЅС‚
 	long jj = r1;
 	{
-		// осуществляем преобразование текущей строки
+		// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
 		for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 		{
 			a(ii) = grid->gridSection.z[jj][ii];
@@ -4886,12 +4880,12 @@ void FastFourierTransform2D(Grid * grid, ap::real_1d_array & a, bool inversefft,
 			grid->gridSection.z[jj][ii] = a(ii);
 		}
 	}
-	// а затем
-	// проходим по всем колонкам
-	// поскольку в каждой колонке появился один ненулевой элемент
+	// Р° Р·Р°С‚РµРј
+	// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј
+	// РїРѕСЃРєРѕР»СЊРєСѓ РІ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРµ РїРѕСЏРІРёР»СЃСЏ РѕРґРёРЅ РЅРµРЅСѓР»РµРІРѕР№ СЌР»РµРјРµРЅС‚
 	for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 	{
-		// осуществляем преобразование текущей колонки
+		// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё
 		for (long jj = 0; jj < grid->gridSection.nRow; jj++)
 		{
 			a(jj) = grid->gridSection.z[jj][ii];
@@ -4906,10 +4900,10 @@ void FastFourierTransform2D(Grid * grid, ap::real_1d_array & a, bool inversefft,
 }
 void FastFourierTransform2D(Grid * grid, ap::real_1d_array & a, bool inversefft)
 {
-	// проходим по всем строкам
+	// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј
 	for (long jj = 0; jj < grid->gridSection.nRow; jj++)
 	{
-		// осуществляем преобразование текущей строки
+		// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
 		for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 		{
 			a(ii) = grid->gridSection.z[jj][ii];
@@ -4920,10 +4914,10 @@ void FastFourierTransform2D(Grid * grid, ap::real_1d_array & a, bool inversefft)
 			grid->gridSection.z[jj][ii] = a(ii);
 		}
 	}
-	// проходим по всем колонкам
+	// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј
 	for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 	{
-		// осуществляем преобразование текущей колонки
+		// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё
 		for (long jj = 0; jj < grid->gridSection.nRow; jj++)
 		{
 			a(jj) = grid->gridSection.z[jj][ii];
@@ -4938,13 +4932,13 @@ void FastFourierTransform2D(Grid * grid, ap::real_1d_array & a, bool inversefft)
 }
 void FastFourierTransform3D(Grid4 * grid, ap::real_1d_array & a, bool inversefft)
 {
-	// проходим по всем плоскостям (страницам)
+	// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РїР»РѕСЃРєРѕСЃС‚СЏРј (СЃС‚СЂР°РЅРёС†Р°Рј)
 	for (long pp = 0; pp < grid->grid4Section.nPag; pp++)
 	{
-		// проходим по всем строкам текущей плоскости
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 		for (long jj = 0; jj < grid->grid4Section.nRow; jj++)
 		{
-			// осуществляем преобразование текущей строки текущей плоскости
+			// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 			for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 			{
 				a(ii) = grid->grid4Section.v[pp][jj][ii];
@@ -4955,10 +4949,10 @@ void FastFourierTransform3D(Grid4 * grid, ap::real_1d_array & a, bool inversefft
 				grid->grid4Section.v[pp][jj][ii] = a(ii);
 			}
 		}
-		// проходим по всем колонкам текущей плоскости
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 		for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 		{
-			// осуществляем преобразование текущей колонки текущей плоскости
+			// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 			for (long jj = 0; jj < grid->grid4Section.nRow; jj++)
 			{
 				a(jj) = grid->grid4Section.v[pp][jj][ii];
@@ -4970,13 +4964,13 @@ void FastFourierTransform3D(Grid4 * grid, ap::real_1d_array & a, bool inversefft
 			}
 		}
 	}
-    // проходим по всем строкам
-	for (long jj = 0; jj < grid->grid4Section.nRow; jj++)						  
+    // РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј
+	for (long jj = 0; jj < grid->grid4Section.nRow; jj++)
 	{
-		// проходим по всем колонкам текущей строки
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
 		for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 		{
-			// осуществляем преобразование текущей колонки текущей строки вдоль оси страниц
+			// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё РІРґРѕР»СЊ РѕСЃРё СЃС‚СЂР°РЅРёС†
 			for (long pp = 0; pp < grid->grid4Section.nPag; pp++)
 			{
 				a(pp) = grid->grid4Section.v[pp][jj][ii];
@@ -4994,13 +4988,13 @@ void FastFourierTransform3D(Grid4 * grid, ap::real_1d_array & a, bool inversefft
 
 void FastFourierTransform3D(Grid4 * grid, ap::real_1d_array & a, bool inversefft, long p1, long r1)
 {
-	// проходим по всем плоскостям (страницам)
+	// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РїР»РѕСЃРєРѕСЃС‚СЏРј (СЃС‚СЂР°РЅРёС†Р°Рј)
 	long pp = p1;
 	{
-		// проходим по всем строкам текущей плоскости
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 		long jj = r1;
 		{
-			// осуществляем преобразование текущей строки текущей плоскости
+			// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 			for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 			{
 				a(ii) = grid->grid4Section.v[pp][jj][ii];
@@ -5011,10 +5005,10 @@ void FastFourierTransform3D(Grid4 * grid, ap::real_1d_array & a, bool inversefft
 				grid->grid4Section.v[pp][jj][ii] = a(ii);
 			}
 		}
-		// проходим по всем колонкам текущей плоскости
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 		for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 		{
-			// осуществляем преобразование текущей колонки текущей плоскости
+			// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё С‚РµРєСѓС‰РµР№ РїР»РѕСЃРєРѕСЃС‚Рё
 			for (long jj = 0; jj < grid->grid4Section.nRow; jj++)
 			{
 				a(jj) = grid->grid4Section.v[pp][jj][ii];
@@ -5026,13 +5020,13 @@ void FastFourierTransform3D(Grid4 * grid, ap::real_1d_array & a, bool inversefft
 			}
 		}
 	}
-    // проходим по всем строкам
-	for (long jj = 0; jj < grid->grid4Section.nRow; jj++)						  
+    // РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј СЃС‚СЂРѕРєР°Рј
+	for (long jj = 0; jj < grid->grid4Section.nRow; jj++)
 	{
-		// проходим по всем колонкам текущей строки
+		// РїСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј РєРѕР»РѕРЅРєР°Рј С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
 		for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 		{
-			// осуществляем преобразование текущей колонки текущей строки вдоль оси страниц
+			// РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё РІРґРѕР»СЊ РѕСЃРё СЃС‚СЂР°РЅРёС†
 			for (long pp = 0; pp < grid->grid4Section.nPag; pp++)
 			{
 				a(pp) = grid->grid4Section.v[pp][jj][ii];
@@ -5069,7 +5063,7 @@ void ErrorOfInverseProblemSolving(vector<vector<double> > & m, size_t rows, size
 		for(size_t i = 0; i < b.size(); i++)
 		{
 			fprintf(bln, "%f,%f\n", t[i],  b[i]);
-		}	
+		}
 		fprintf(bln, "%d,%d, reconstr\n", b.size(), 0);
 		for(size_t i = 0; i < b.size(); i++)
 		{
@@ -5083,7 +5077,7 @@ bool InverseProblemSolving(vector<vector<double> > & m, size_t cols, vector<doub
 {
 
 	size_t c, r, rows = m.size();
-	double alpha = 0.00; // регуляризационный коэффициент
+	double alpha = 0.00; // СЂРµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 	bool rand_not_zero_init = false;
 	int maxq = 1000;
     bool res = Tichonov(m, cols, alpha, rand_not_zero_init, maxq, b, sol);
@@ -5097,7 +5091,7 @@ bool InverseProblemSolving(vector<vector<double> > & m, size_t cols, vector<doub
 {
 #if  1
 	size_t c, r, rows = m.size();
-	double alpha = 0.00; // регуляризационный коэффициент
+	double alpha = 0.00; // СЂРµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 	bool rand_not_zero_init = false;
 	int maxq = 1000;
     bool res = Tichonov(m, cols, alpha, rand_not_zero_init, maxq, b, sol);
@@ -5113,7 +5107,7 @@ bool InverseProblemSolving(vector<vector<double> > & m, size_t cols, vector<doub
 		B[i] = 0.0;
 		for (r = 0; r < rows; r++)
 			B[i] += m[r][i] * b[r];
-		// формируем строку квадратной системы уравнений
+		// С„РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹ СѓСЂР°РІРЅРµРЅРёР№
 		//row.clear();
 
 		for (c = i; c < cols; c++)
@@ -5133,10 +5127,10 @@ bool InverseProblemSolving(vector<vector<double> > & m, size_t cols, vector<doub
 			//row.put(c, A_i_c);
 
 			A[c][i] = A[i][c];
-		}			
+		}
 		//A.push_back(row);
 	}
-	// обычный метод гаусса - число строк равно числу столбцов
+	// РѕР±С‹С‡РЅС‹Р№ РјРµС‚РѕРґ РіР°СѓСЃСЃР° - С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ С‡РёСЃР»Сѓ СЃС‚РѕР»Р±С†РѕРІ
 //	bool res = lesgausssolve(A,int (cols), B,sol,0.0);
 	bool res = lesgausssolve_find_max(A,int (cols),int (cols), B,sol,0.0);
 	vector <double> E(cols);
@@ -5161,7 +5155,7 @@ bool InverseProblemSolving(vector<vector<double> > & m, size_t cols, vector<doub
 		B[i] = 0.0;
 		for (r = 0; r < rows; r++)
 			B[i] += m[r][i] * b[r];
-		// формируем строку квадратной системы уравнений
+		// С„РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹ СѓСЂР°РІРЅРµРЅРёР№
 		//row.clear();
 
 		for (c = i; c < cols; c++)
@@ -5181,10 +5175,10 @@ bool InverseProblemSolving(vector<vector<double> > & m, size_t cols, vector<doub
 			//row.put(c, A_i_c);
 
 			A(c,i) = A(i,c);
-		}			
+		}
 		//A.push_back(row);
 	}
-	// обычный метод гаусса - число строк равно числу столбцов
+	// РѕР±С‹С‡РЅС‹Р№ РјРµС‚РѕРґ РіР°СѓСЃСЃР° - С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ С‡РёСЃР»Сѓ СЃС‚РѕР»Р±С†РѕРІ
 //	bool res = lesgausssolve(A,int (cols), B,sol,0.0);
 //	bool res = lesgausssolve_find_max(A,int (cols),int (cols), B,sol,0.0);
 	vdouble x;
@@ -5239,7 +5233,7 @@ void ErrorOfInverseProblemSolving(vector<SparseRow> & a, size_t rows, vector<dou
 		for(size_t i = 0; i < b.size(); i++)
 		{
 			fprintf(bln, "%f,%f\n", t[i],  b[i]);
-		}	
+		}
 		fprintf(bln, "%d,%d, reconstr\n", b.size(), 0);
 		for(size_t i = 0; i < b.size(); i++)
 		{
@@ -5252,16 +5246,16 @@ void ErrorOfInverseProblemSolving(vector<SparseRow> & a, size_t rows, vector<dou
 void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector<double> & b, vector<double> & sol, string name)
 {
 	printf("ErrorOfInverseProblemSolving\n");
-	
+
 	char buff[BUFF_SIZE];
-			
+
 	long _cols, rows;
 	vector <double> e;
 	vector <double> b_rec;
 
 
 	AFile f;
-	if( f.Open( fn_operator, GENERIC_READ, OPEN_EXISTING) ) 
+	if( f.Open( fn_operator, GENERIC_READ, OPEN_EXISTING) )
 	{
 		Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 		try
@@ -5298,9 +5292,9 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 		}
 		catch (CException* pe)
 		{
-			// catch errors from WinINet 
-			TCHAR szErr[4098]; 
-			pe->GetErrorMessage(szErr, 4098); 
+			// catch errors from WinINet
+			TCHAR szErr[4098];
+			pe->GetErrorMessage(szErr, 4098);
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
@@ -5308,7 +5302,7 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 		{
 			MessageBox(0,"unknown error of archive read","",0);
 		}
-		
+
 		ar.Close();
 		f.Close();
 	}
@@ -5330,12 +5324,12 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 		for(size_t i = 0; i < b.size(); i++)
 		{
 			fprintf(bln, "%f,%f\n", t[i],  b[i]);
-		}	
+		}
 		fclose(bln);
 	}
 	else
 		ErrorPrint("fopen");
-	
+
 	sprintf(bln_name, "%s\\%s_reconstr.bln", dir_out, name.c_str());
 	while (p=strchr (bln_name,'\"')){*p = '_';}
 	bln = fopen (bln_name, "wt");
@@ -5355,16 +5349,16 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 void ErrorOfMinSqProblemSolving(const char * fn_operator, vector<double> & b, vector<double> & sol, string name, vector <double> & b_rec)
 {
 	printf("ErrorOfMinSqProblemSolving\n");
-	
+
 	char buff[BUFF_SIZE];
-			
+
 	long _cols, rows;
 	vector <double> e;
 	;
 
 
 	AFile f;
-	if( f.Open( fn_operator, GENERIC_READ, OPEN_EXISTING) ) 
+	if( f.Open( fn_operator, GENERIC_READ, OPEN_EXISTING) )
 	{
 		Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 		try
@@ -5403,9 +5397,9 @@ void ErrorOfMinSqProblemSolving(const char * fn_operator, vector<double> & b, ve
 		}
 		catch (CException* pe)
 		{
-			// catch errors from WinINet 
-			TCHAR szErr[4098]; 
-			pe->GetErrorMessage(szErr, 4098); 
+			// catch errors from WinINet
+			TCHAR szErr[4098];
+			pe->GetErrorMessage(szErr, 4098);
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
@@ -5413,7 +5407,7 @@ void ErrorOfMinSqProblemSolving(const char * fn_operator, vector<double> & b, ve
 		{
 			MessageBox(0,"unknown error of archive read","",0);
 		}
-		
+
 		ar.Close();
 		f.Close();
 	}
@@ -5430,18 +5424,17 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 {
 	if (to_print)
 		printf("ErrorOfInverseProblemSolving\n");
-	
+
 	char buff[BUFF_SIZE];
-			
+
 	long _cols, rows;
 	vector <double> e;
 	;
 
-			
 	size_t b_size = b.size();
 
 	AFile f;
-	if( f.Open( fn_operator, GENERIC_READ, OPEN_EXISTING) ) 
+	if( f.Open( fn_operator, GENERIC_READ, OPEN_EXISTING) )
 	{
 		Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 		try
@@ -5479,9 +5472,9 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 		}
 		catch (CException* pe)
 		{
-			// catch errors from WinINet 
-			TCHAR szErr[4098]; 
-			pe->GetErrorMessage(szErr, 4098); 
+			// catch errors from WinINet
+			TCHAR szErr[4098];
+			pe->GetErrorMessage(szErr, 4098);
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
@@ -5489,7 +5482,7 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 		{
 			MessageBox(0,"unknown error of archive read","",0);
 		}
-		
+
 		ar.Close();
 		f.Close();
 	}
@@ -5515,12 +5508,12 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 			for(size_t i = 0; i < b.size(); i++)
 			{
 				fprintf(bln, "%f,%f\n", double(i), b[i]);
-			}	
+			}
 			fclose(bln);
 		}
 		else
 			ErrorPrint("fopen");
-		
+
 		sprintf(bln_name, "%s\\reconstr_%s.bln", dir_out, name.c_str());
 		while (p=strchr (bln_name,'\"')){*p = '_';}
 		bln = fopen (bln_name, "wt");
@@ -5540,14 +5533,14 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 
 bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vector)
 {
-    //vector<sparse_row_simple> at; представление матрицы в транспонированном виде
+    //vector<sparse_row_simple> at; РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РјР°С‚СЂРёС†С‹ РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 	vector<long> file_pointers;
 
 	long _cols, _rows;
 	bool res = false;
 
 	AFile f;
-	if( ! f.Open( fn_operator_wav, GENERIC_READ, OPEN_EXISTING) ) 
+	if( ! f.Open( fn_operator_wav, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "FormMinSquareMatrix\nUnable to open file" , fn_operator_wav, MB_OK);
 		return false;
@@ -5555,8 +5548,6 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 
 	char buff[BUFF_SIZE];
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
-	
-	
 
 	try
 	{
@@ -5573,23 +5564,21 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 			file_pointers[r+1] = file_pointers[r] + (row_s.size() + 1)*(sizeof(long) + sizeof(double));
 		}
 
-		// решение разреженной системы методом наименьших квадратов 
-		// с последующим применением разложения Холесского
+		// СЂРµС€РµРЅРёРµ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+		// СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРј РїСЂРёРјРµРЅРµРЅРёРµРј СЂР°Р·Р»РѕР¶РµРЅРёСЏ РҐРѕР»РµСЃСЃРєРѕРіРѕ
 		//bool res = SLAU3(m, cols, b, sol);
 
-		// решение уравнения методом наименьших квадратов
-		// из прямоугольной разреженной матрицы 
-		// формируем квадратную систему уравнений
-		
+		// СЂРµС€РµРЅРёРµ СѓСЂР°РІРЅРµРЅРёСЏ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+		// РёР· РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕР№ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+		// С„РѕСЂРјРёСЂСѓРµРј РєРІР°РґСЂР°С‚РЅСѓСЋ СЃРёСЃС‚РµРјСѓ СѓСЂР°РІРЅРµРЅРёР№
+
 		size_t cols = _rows;
 		size_t rows = _cols;
-		
 
 		size_t i, c;
 
 
 		alpha_vector.resize(cols);
-		
 
 		for (i = 0; i < cols; i++)
 		{
@@ -5612,12 +5601,9 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 
 
 			alpha_vector[c] = A_i_c;
-		}			
-	
+		}
 
 		res = true;
-
-
 	}
 	catch(char * str)
 	{
@@ -5625,9 +5611,9 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -5635,7 +5621,7 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar.Close();
 	f.Close();
 
@@ -5646,14 +5632,14 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 
 bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double alpha)
 {
-    //vector<sparse_row_simple> at; представление матрицы в транспонированном виде
+    //vector<sparse_row_simple> at; РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РјР°С‚СЂРёС†С‹ РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 	vector<long> file_pointers;
 
 	long _cols, _rows;
 	bool res = false;
 
 	AFile f;
-	if( ! f.Open( fn_operator_wav, GENERIC_READ, OPEN_EXISTING) ) 
+	if( ! f.Open( fn_operator_wav, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "FormMinSquareMatrix\nUnable to open file" , fn_operator_wav, MB_OK);
 		return false;
@@ -5661,16 +5647,16 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 
 	char buff[BUFF_SIZE];
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
-	
+
 	AFile f2;
-	if( !f2.Open( fn_min_sq_mat, GENERIC_WRITE, CREATE_NEW) ) 
+	if( !f2.Open( fn_min_sq_mat, GENERIC_WRITE, CREATE_NEW) )
 	{
 		MessageBox(0, "FormMinSquareMatrix\nUnable to open file" , fn_min_sq_mat, MB_OK);
 		ar.Close();
 		f.Close();
 		return false;
-	}	
-	
+	}
+
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
 
@@ -5689,26 +5675,26 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 			file_pointers[r+1] = file_pointers[r] + (row_s.size() + 1)*(sizeof(long) + sizeof(double));
 		}
 
-		// решение разреженной системы методом наименьших квадратов 
-		// с последующим применением разложения Холесского
+		// СЂРµС€РµРЅРёРµ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+		// СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРј РїСЂРёРјРµРЅРµРЅРёРµРј СЂР°Р·Р»РѕР¶РµРЅРёСЏ РҐРѕР»РµСЃСЃРєРѕРіРѕ
 		//bool res = SLAU3(m, cols, b, sol);
 
-		// решение уравнения методом наименьших квадратов
-		// из прямоугольной разреженной матрицы 
-		// формируем квадратную систему уравнений
-		
+		// СЂРµС€РµРЅРёРµ СѓСЂР°РІРЅРµРЅРёСЏ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+		// РёР· РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕР№ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+		// С„РѕСЂРјРёСЂСѓРµРј РєРІР°РґСЂР°С‚РЅСѓСЋ СЃРёСЃС‚РµРјСѓ СѓСЂР°РІРЅРµРЅРёР№
+
 		size_t cols = _rows;
 		size_t rows = _cols;
-		
+
 		printf("FormMinSquareMatrix rows = %u cols = %u\n",  rows, cols);
 
 		size_t i, r, c;
 
 
-		// матрица квадратная
+		// РјР°С‚СЂРёС†Р° РєРІР°РґСЂР°С‚РЅР°СЏ
 		ar2 << cols;
 		ar2 << cols;
-		
+
 		vector<long> vc(cols); size_t ic;
 		index_for_sort * vic  = new index_for_sort[cols];
 
@@ -5722,7 +5708,7 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 			f.Seek(file_pointers[i], FILE_BEGIN);ar.ClearReadBuffer();
 			ar >> at_i;
 
-			// формируем строку квадратной системы уравнений
+			// С„РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹ СѓСЂР°РІРЅРµРЅРёР№
 			row.clear();
 			size_t row_size = 0;
 
@@ -5762,12 +5748,12 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 
 				if (row.put(c, A_i_c))
 					row_size++;
-			}			
+			}
 	printf("row_size = %u\n",row_size);
 			//A.push_back(row);
 			ar2 << row;
 		}
-		
+
 		delete [] vic;
 
 		res = true;
@@ -5780,9 +5766,9 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -5790,7 +5776,7 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar.Close();
 	f.Close();
 
@@ -5803,36 +5789,36 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 
 bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal, vector<double> & B, double alpha, vector<double> sol_mean)
 {
-    //vector<sparse_row_simple> at; представление матрицы в транспонированном виде
+    //vector<sparse_row_simple> at; РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РјР°С‚СЂРёС†С‹ РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 
 	char buff[BUFF_SIZE];
 	long _cols, _rows;
 	bool res = false;
 
 	AFile f;
-	if( !f.Open( fn_operator_transponed, GENERIC_READ, OPEN_EXISTING) ) 
+	if( !f.Open( fn_operator_transponed, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "FormMinSquareB\nUnable to open file" , fn_operator_transponed, MB_OK);
 	}
-	
+
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
-	
+
 	try
 	{
 		ar >> _rows;
 		ar >> _cols;
 
-		// решение разреженной системы методом наименьших квадратов 
-		// с последующим применением разложения Холесского
+		// СЂРµС€РµРЅРёРµ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+		// СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРј РїСЂРёРјРµРЅРµРЅРёРµРј СЂР°Р·Р»РѕР¶РµРЅРёСЏ РҐРѕР»РµСЃСЃРєРѕРіРѕ
 		//bool res = SLAU3(m, cols, b, sol);
 
-		// решение уравнения методом наименьших квадратов
-		// из прямоугольной разреженной матрицы 
-		// формируем квадратную систему уравнений
-		
+		// СЂРµС€РµРЅРёРµ СѓСЂР°РІРЅРµРЅРёСЏ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+		// РёР· РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕР№ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+		// С„РѕСЂРјРёСЂСѓРµРј РєРІР°РґСЂР°С‚РЅСѓСЋ СЃРёСЃС‚РµРјСѓ СѓСЂР°РІРЅРµРЅРёР№
+
 		size_t cols = _rows;
 		size_t rows = _cols;
-		
+
 		//printf("FormMinSquareB rows = %u cols = %u\n",  rows, cols);
 
 		size_t i, r, c;
@@ -5846,7 +5832,7 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
 			sparse_row_simple at_i;
 			at_i.clear();
 			ar >> at_i;
-		
+
 			B[i]         = at_i.ScalarProduct(signal) + alpha * sol_mean[i];
 		}
 
@@ -5859,9 +5845,9 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -5869,7 +5855,7 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar.Close();
 	f.Close();
 
@@ -5877,29 +5863,29 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
 }
 bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & signal, vector<double> & v_korr, vector<double> & v_cov)
 {
-    //vector<sparse_row_simple> at; представление матрицы в транспонированном виде
+    //vector<sparse_row_simple> at; РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РјР°С‚СЂРёС†С‹ РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 
 	char buff[BUFF_SIZE];
 	long _cols, _rows;
 	bool res = false;
 
 	AFile f;
-	if( !f.Open( fn_operator_transponed, GENERIC_READ, OPEN_EXISTING) ) 
+	if( !f.Open( fn_operator_transponed, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "FormMinSquareB\nUnable to open file" , fn_operator_transponed, MB_OK);
 	}
-	
+
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
-	
+
 	try
 	{
 		ar >> _rows;
 		ar >> _cols;
 
-		
+
 		size_t cols = _rows;
 		size_t rows = _cols;
-		
+
 		//printf("FormMinSquareB rows = %u cols = %u\n",  rows, cols);
 
 		size_t i, r, c;
@@ -5927,9 +5913,9 @@ bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & si
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -5937,7 +5923,7 @@ bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & si
 	{
 		MessageBox(0,"unknown error of archive read","",0);
 	}
-	
+
 	ar.Close();
 	f.Close();
 
@@ -5948,7 +5934,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 	bool res = false;
 
 	char TempDirName[4098];
-	sprintf(TempDirName, "%s\\Temp", dir);		
+	sprintf(TempDirName, "%s\\Temp", dir);
 	if (!CreateDirectory(TempDirName,NULL))
 	{
 		char err_str[4096];
@@ -5964,44 +5950,44 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 	long cols, rows;
 
 	AFile f;
-	if( ! f.Open( fn_min_sq_mat, GENERIC_READ, OPEN_EXISTING) ) 
+	if( ! f.Open( fn_min_sq_mat, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Unable to open file" , fn_min_sq_mat, MB_OK);
 		return false;
 	}
-	
+
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 	try
 	{
-		// читаем заголовок
+		// С‡РёС‚Р°РµРј Р·Р°РіРѕР»РѕРІРѕРє
 		ar >> rows;
 		ar >> cols;
 
-		// копируем все строки (без заголовка) в нулевой временной файл
+		// РєРѕРїРёСЂСѓРµРј РІСЃРµ СЃС‚СЂРѕРєРё (Р±РµР· Р·Р°РіРѕР»РѕРІРєР°) РІ РЅСѓР»РµРІРѕР№ РІСЂРµРјРµРЅРЅРѕР№ С„Р°Р№Р»
 
 		AFile f3;
-		if( !f3.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) ) 
+		if( !f3.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) )
 		{
 			MessageBox(0, "Holesski 0\nUnable to open file" , TempFileName, MB_OK);
 			return false;
-		}	
-		
+		}
+
 		char buff3[BUFF_SIZE];
 		Archive ar3( &f3, Archive::store, BUFF_SIZE, buff3 );
-			
+
 		for(long i = 0; i < rows; i++)
 		{
 			sparse_row_simple row_s;
 			row_s.clear();
 
-			// здесь строки переписываем в рассортированном виде
-			// исходная матрица - наименьших квадратов - рассортированна
-			// поэтому просто копируем строки используя простую строку
+			// Р·РґРµСЃСЊ СЃС‚СЂРѕРєРё РїРµСЂРµРїРёСЃС‹РІР°РµРј РІ СЂР°СЃСЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
+			// РёСЃС…РѕРґРЅР°СЏ РјР°С‚СЂРёС†Р° - РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ - СЂР°СЃСЃРѕСЂС‚РёСЂРѕРІР°РЅРЅР°
+			// РїРѕСЌС‚РѕРјСѓ РїСЂРѕСЃС‚Рѕ РєРѕРїРёСЂСѓРµРј СЃС‚СЂРѕРєРё РёСЃРїРѕР»СЊР·СѓСЏ РїСЂРѕСЃС‚СѓСЋ СЃС‚СЂРѕРєСѓ
 
 			ar  >> row_s;
 			ar3 << row_s;
 		}
-		
+
 		ar3.Close();
 		f3.Close();
 	}
@@ -6012,9 +5998,9 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -6023,32 +6009,32 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		MessageBox(0,"unknown error of archive read","",0);
 		return false;
 	}
-	// закрываем исходный файл
+	// Р·Р°РєСЂС‹РІР°РµРј РёСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р»
 	ar.Close();
 	f.Close();
 
 	///////////////////////////////////////////////////////////////////////
-	// открываем выходной файл
+	// РѕС‚РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 
 	AFile f2;
-	if( !f2.Open( fn_Lt, GENERIC_WRITE, CREATE_NEW) ) 
+	if( !f2.Open( fn_Lt, GENERIC_WRITE, CREATE_NEW) )
 	{
 		MessageBox(0, "Holesski 1\nUnable to open file" , fn_Lt, MB_OK);
 		return false;
-	}	
-	
+	}
+
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
-	
-	DWORD 
+
+	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
 
 	try
-	{	// формируем заголовок выходного файла	
-		ar2 << rows;		
+	{	// С„РѕСЂРјРёСЂСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+		ar2 << rows;
 		ar2 << cols;
 
 		for(long i = 0; i < rows; i++)
@@ -6062,26 +6048,26 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 			sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, i);
 
 			AFile fi;
-			if( !fi.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) ) 
+			if( !fi.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
 			{
 				MessageBox(0, "Holesski 2\nUnable to open file" , TempFileName, MB_OK);
 				return false;
-			}	
+			}
 
-			
+
 			char buffi[BUFF_SIZE];
-			Archive ari( &fi, Archive::load, BUFF_SIZE, buffi );			
+			Archive ari( &fi, Archive::load, BUFF_SIZE, buffi );
 
 			try
 			{
-				//Считываем строку из i-того tmp файла 
+				//РЎС‡РёС‚С‹РІР°РµРј СЃС‚СЂРѕРєСѓ РёР· i-С‚РѕРіРѕ tmp С„Р°Р№Р»Р°
 				sparse_row row_dv;
 				row_dv.clear();
 				ari >> row_dv;
-				// Проверяем её на 
-				//1) непустоту
-				//2) первый элемент диагонален i == c
-				//3) диагональный элемент больше нуля
+				// РџСЂРѕРІРµСЂСЏРµРј РµС‘ РЅР°
+				//1) РЅРµРїСѓСЃС‚РѕС‚Сѓ
+				//2) РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РґРёР°РіРѕРЅР°Р»РµРЅ i == c
+				//3) РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ Р±РѕР»СЊС€Рµ РЅСѓР»СЏ
 				BraidedNode<sparse_row_element<double> > * nd = row_dv.root->next();
 				if (nd == row_dv.root)
 				{
@@ -6096,7 +6082,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 					char err[512];
 					sprintf(err, "The matrix is not positively defined\n"
 						"As diagonal element at row %u is missed\n"
-						"col of first element is %u\n"						
+						"col of first element is %u\n"
 						, i, nd->val.col);
 					MessageBox(0, err, "Holesski", MB_OK);
 					return false;
@@ -6111,17 +6097,17 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 					return false;
 				}
 				double sqrt_d = sqrt(d);
-				// Заменяем в данной строке диагональный элемент на его корень  sqrt_d
+				// Р—Р°РјРµРЅСЏРµРј РІ РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРµ РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РЅР° РµРіРѕ РєРѕСЂРµРЅСЊ  sqrt_d
 				nd->val.val = sqrt_d;
-				// остальные элементы делим на sqrt_d
+				// РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РґРµР»РёРј РЅР° sqrt_d
 				BraidedNode<sparse_row_element<double> > * n = nd->next();
 				while (n != row_dv.root)
 				{
 					n->val.val /= sqrt_d;
 					n = n->next();
 				}
-				// сохраняем преобразованную строку в выходной файл
-				// уже в сортированном виде
+				// СЃРѕС…СЂР°РЅСЏРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРЅСѓСЋ СЃС‚СЂРѕРєСѓ РІ РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
+				// СѓР¶Рµ РІ СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 				ar2 << row_dv;
 
 				//////////////////////////////////////////////////////
@@ -6129,14 +6115,14 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 
 				sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, i+1);
-				
+
 				AFile fi1;
-				if( !fi1.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) ) 
+				if( !fi1.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) )
 				{
 					MessageBox(0, "Holesski 3\nUnable to open file" , TempFileName, MB_OK);
 					return false;
-				}	
-				
+				}
+
 				char buffi1[BUFF_SIZE];
 				Archive ari1( &fi1, Archive::store, BUFF_SIZE, buffi1 );
 
@@ -6145,13 +6131,13 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 				for(long r = i+1; r < rows; r++)
 				{
-					// Считываем следующую строку из i-того tmp файла 
+					// РЎС‡РёС‚С‹РІР°РµРј СЃР»РµРґСѓСЋС‰СѓСЋ СЃС‚СЂРѕРєСѓ РёР· i-С‚РѕРіРѕ tmp С„Р°Р№Р»Р°
 					sparse_row row_r;
 					row_r.clear();
 					ari >> row_r;
-					// Ищем в строке row_dv узел, для которого c == r
+					// РС‰РµРј РІ СЃС‚СЂРѕРєРµ row_dv СѓР·РµР», РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ c == r
 					BraidedNode<sparse_row_element<double> > * n1 = row_dv.root->rchild();
-					// если нашли
+					// РµСЃР»Рё РЅР°С€Р»Рё
 					if (row_dv._find(sparse_row_element<double>((size_t)r,1.0), n1) && n1)
 					{
 						//size_t c1 = n1->val.col;
@@ -6165,13 +6151,13 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 							n2 = n2->next();
 						}
 					}
-					// сохраняем row_r в i+1-тый tmp файл
+					// СЃРѕС…СЂР°РЅСЏРµРј row_r РІ i+1-С‚С‹Р№ tmp С„Р°Р№Р»
 					//  ari1 << row_r;
-					// но уже в рассортированном виде
+					// РЅРѕ СѓР¶Рµ РІ СЂР°СЃСЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 
 					//row_r.SaveDissorted(ari1);
 					row_r.SaveDissorted_recursive(ari1);
-					
+
 
 				}
 				//////////////////////////////////////////////////////
@@ -6188,9 +6174,9 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 			}
 			catch (CException* pe)
 			{
-				// catch errors from WinINet 
-				TCHAR szErr[4098]; 
-				pe->GetErrorMessage(szErr, 4098); 
+				// catch errors from WinINet
+				TCHAR szErr[4098];
+				pe->GetErrorMessage(szErr, 4098);
 				AfxMessageBox(szErr);
 				pe->Delete();
 			}
@@ -6202,11 +6188,11 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 			ari.Close();
 			fi.Close();
-			// удаляем i-тый tmp файл
+			// СѓРґР°Р»СЏРµРј i-С‚С‹Р№ tmp С„Р°Р№Р»
 			sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, i);
 			DeleteFile(TempFileName);
 		}
-		// удаляем rows-тый tmp файл
+		// СѓРґР°Р»СЏРµРј rows-С‚С‹Р№ tmp С„Р°Р№Р»
 		sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, rows);
 		DeleteFile(TempFileName);
 	}
@@ -6217,9 +6203,9 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -6228,7 +6214,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		MessageBox(0,"unknown error of archive read","",0);
 		return false;
 	}
-	// закрываем выходной файл
+	// Р·Р°РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 	ar2.Close();
 	f2.Close();
 
@@ -6239,7 +6225,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 	bool res = false;
 
 	char TempDirName[4098];
-	sprintf(TempDirName, "%s\\Temp", dir);	
+	sprintf(TempDirName, "%s\\Temp", dir);
 	if (!CreateDirectory(TempDirName,NULL) && j_start == 0 )
 	{
 		//char err_str[4096];
@@ -6255,16 +6241,16 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 	long cols, rows;
 
 	AFile f;
-	if( ! f.Open( fn_min_sq_mat, GENERIC_READ, OPEN_EXISTING) ) 
+	if( ! f.Open( fn_min_sq_mat, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Unable to open file" , fn_min_sq_mat, MB_OK);
 		return false;
 	}
-	
+
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 	try
 	{
-		// читаем заголовок
+		// С‡РёС‚Р°РµРј Р·Р°РіРѕР»РѕРІРѕРє
 		ar >> rows;
 		ar >> cols;
 	}
@@ -6275,9 +6261,9 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -6287,14 +6273,14 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 		return false;
 	}
 
-	DWORD 
+	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
 
 	try
-	{	
+	{
 		for(long j = 0; j < rows; j++)
 		{
 			time_current = GetCurrentTime();
@@ -6303,7 +6289,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 
 			printf("Holesski3 %ld %ld, time_eplased = %0.3f %d sec\n", j,rows, double(time_eplased)/1000.0, (time_current - time_start)/1000);
 
-			// считываем очередную строку из входного файла
+			// СЃС‡РёС‚С‹РІР°РµРј РѕС‡РµСЂРµРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ РёР· РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
 
 			sparse_row row_j; row_j.clear();
 			ar >> row_j;
@@ -6313,7 +6299,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 
 			//Sleep(5);
 
-			// проверяем её на непустоту, наличие и положительность диагонального элемента
+			// РїСЂРѕРІРµСЂСЏРµРј РµС‘ РЅР° РЅРµРїСѓСЃС‚РѕС‚Сѓ, РЅР°Р»РёС‡РёРµ Рё РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕСЃС‚СЊ РґРёР°РіРѕРЅР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 
 
 			bool alpha_putted = false;
@@ -6343,7 +6329,7 @@ e_start_row_j:
 					char err[512];
 					sprintf(err, "The matrix is not positively defined\n"
 						"As diagonal element at row %u is missed\n"
-						"col of first element is %u\n"						
+						"col of first element is %u\n"
 						, j, nd->val.col);
 					MessageBox(0, err, "Holesski", MB_OK);
 					return false;
@@ -6370,29 +6356,29 @@ e_start_row_j:
 			}
 
 			//printf (" j = %d  d = %e\n",  j, d);
-				
+
 			double dd = 0.0;
 
 			for(long k = 0; k < j; k++)
 			{
-				
+
 
 				sprintf(TempFileName, "%s\\%06d.isr", TempDirName, k);
 
 				AFile fk;
-				if( !fk.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) ) 
+				if( !fk.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
 				{
 					MessageBox(0, "Holesski 2\nUnable to open file" , TempFileName, MB_OK);
 					return false;
-				}	
-				
+				}
+
 				char buffk[BUFF_SIZE];
 				Archive ark( &fk, Archive::load, BUFF_SIZE, buffk );
 
 				sparse_row_simple row_k;
 				long cc;
 				double value;
-				do 
+				do
 				{
 					ark >> cc;
 					ark >> value;
@@ -6417,20 +6403,19 @@ e_start_row_j:
 					{
 						if (row_k[i].col == j)
 						{
-							/*printf("i = %ld j = %ld row_k[i].col = %ld, row_k[i].val = %f value = %f\n", 
+							/*printf("i = %ld j = %ld row_k[i].col = %ld, row_k[i].val = %f value = %f\n",
 								i, j, row_k[i].col, row_k[i].val, value);*/
 
 							dd -= row_k[i].val * value;
 
 						}
-						
+
 						row_j.plus(row_k[i].col, - row_k[i].val * value);
 					}
 				}
 
 			}
 
-			
 			//printf ("dd = %e\n", dd);
 			//printf("nd->val.val = %e nd->val.col = %ld\n", nd->val.val, nd->val.col);
 
@@ -6446,9 +6431,9 @@ e_start_row_j:
 				return false;
 			}
 			double sqrt_d = sqrt(d);
-			// Заменяем в данной строке диагональный элемент на его корень  sqrt_d
+			// Р—Р°РјРµРЅСЏРµРј РІ РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРµ РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РЅР° РµРіРѕ РєРѕСЂРµРЅСЊ  sqrt_d
 			nd->val.val = sqrt_d;
-			// остальные элементы делим на sqrt_d
+			// РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РґРµР»РёРј РЅР° sqrt_d
 			BraidedNode<sparse_row_element<double> > * n = nd->next();
 			while (n != row_j.root)
 			{
@@ -6456,23 +6441,21 @@ e_start_row_j:
 				n = n->next();
 			}
 
-			// create j-тый tmp файл
+			// create j-С‚С‹Р№ tmp С„Р°Р№Р»
 			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
-			
+
 			AFile fj;
-			if( !fj.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) ) 
+			if( !fj.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) )
 			{
 				MessageBox(0, "Holesski 0\nUnable to open file" , TempFileName, MB_OK);
 				return false;
-			}	
-			
+			}
+
 			char buffj[BUFF_SIZE];
 			Archive arj( &fj, Archive::store, BUFF_SIZE, buffj );
 
-			
-
 			row_j.InverseSortedSave(arj);
-			
+
 			arj.Close();
 			fj.Close();
 		}
@@ -6484,9 +6467,9 @@ e_start_row_j:
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -6496,35 +6479,35 @@ e_start_row_j:
 		return false;
 	}
 	///////////////////////////////////////////////////////////////////////
-	// открываем выходной файл
+	// РѕС‚РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 
 	AFile f2;
-	if( !f2.Open( fn_Lt, GENERIC_WRITE, CREATE_NEW) ) 
+	if( !f2.Open( fn_Lt, GENERIC_WRITE, CREATE_NEW) )
 	{
 		MessageBox(0, "Holesski 1\nUnable to open file" , fn_Lt, MB_OK);
 		return false;
-	}	
-	
+	}
+
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
 	try{
-		// формируем заголовок выходного файла	
-		ar2 << rows;		
+		// С„РѕСЂРјРёСЂСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+		ar2 << rows;
 		ar2 << cols;
-		
+
 		char buffjs[BUFF_SIZE];
 		for(long j = 0; j < rows; j++)
 		{
-			// open j-тый tmp файл
-			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);	
+			// open j-С‚С‹Р№ tmp С„Р°Р№Р»
+			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
 
 			AFile fjs;
-			if( ! fjs.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) ) 
+			if( ! fjs.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
 			{
 				MessageBox(0, "Unable to open file" , TempFileName, MB_OK);
 				return false;
 			}
-			
+
 			Archive arjs( &fjs, Archive::load, BUFF_SIZE, buffjs );
 
 			sparse_row_simple row_js; row_js.clear();
@@ -6544,9 +6527,9 @@ e_start_row_j:
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -6556,7 +6539,7 @@ e_start_row_j:
 		return false;
 	}
 
-	// закрываем выходной файл
+	// Р·Р°РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 	ar2.Close();
 	f2.Close();
 
@@ -6567,7 +6550,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 	bool res = false;
 
 	//char TempDirName[4098];
-	//sprintf(TempDirName, "%s\\Temp", dir);		
+	//sprintf(TempDirName, "%s\\Temp", dir);
 	//if (!CreateDirectory(TempDirName,NULL) && j_start == 0 )
 	//{
 	//	char err_str[4096];
@@ -6583,16 +6566,16 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 	long cols, rows;
 
 	AFile f;
-	if( ! f.Open( fn_min_sq_mat, GENERIC_READ, OPEN_EXISTING) ) 
+	if( ! f.Open( fn_min_sq_mat, GENERIC_READ, OPEN_EXISTING) )
 	{
 		MessageBox(0, "Unable to open file" , fn_min_sq_mat, MB_OK);
 		return false;
 	}
-	
+
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 	try
 	{
-		// читаем заголовок
+		// С‡РёС‚Р°РµРј Р·Р°РіРѕР»РѕРІРѕРє
 		ar >> rows;
 		ar >> cols;
 	}
@@ -6603,9 +6586,9 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -6615,17 +6598,17 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 		return false;
 	}
 
-	DWORD 
+	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
-    
+
 	vector<sparse_row> m;
 	m.clear();
 
 	try
-	{	
+	{
 		for(long j = 0; j < rows; j++)
 		{
 			time_current = GetCurrentTime();
@@ -6634,7 +6617,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 
 			printf("Holesski3 %ld %ld, time_eplased = %0.3f %d sec\n", j,rows, double(time_eplased)/1000.0, (time_current - time_start)/1000);
 
-			// считываем очередную строку из входного файла
+			// СЃС‡РёС‚С‹РІР°РµРј РѕС‡РµСЂРµРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ РёР· РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
 
 			sparse_row row__j; row__j.clear();
 			ar >> row__j;
@@ -6646,7 +6629,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 
 			//Sleep(5);
 
-			// проверяем её на непустоту, наличие и положительность диагонального элемента
+			// РїСЂРѕРІРµСЂСЏРµРј РµС‘ РЅР° РЅРµРїСѓСЃС‚РѕС‚Сѓ, РЅР°Р»РёС‡РёРµ Рё РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕСЃС‚СЊ РґРёР°РіРѕРЅР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 
 
 			bool alpha_putted = false;
@@ -6676,7 +6659,7 @@ e_start__row_j:
 					char err[512];
 					sprintf(err, "The matrix is not positively defined\n"
 						"As diagonal element at row %u is missed\n"
-						"col of first element is %u\n"						
+						"col of first element is %u\n"
 						, j, nd->val.col);
 					MessageBox(0, err, "Holesski", MB_OK);
 					return false;
@@ -6724,22 +6707,22 @@ e_start__row_j:
 
 #else
 			//printf (" j = %d  d = %e\n",  j, d);
-				
+
 			double dd = 0.0;
 
 			for(long k = 0; k < j; k++)
 			{
-				
+
 
 				//sprintf(TempFileName, "%s\\%06d.isr", TempDirName, k);
 
 				//AFile fk;
-				//if( !fk.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) ) 
+				//if( !fk.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
 				//{
 				//	MessageBox(0, "Holesski 2\nUnable to open file" , TempFileName, MB_OK);
 				//	return false;
-				//}	
-				
+				//}
+
 				//char buffk[BUFF_SIZE];
 				//Archive ark( &fk, Archive::load, BUFF_SIZE, buffk );
 
@@ -6771,13 +6754,13 @@ e_start__row_j:
 					{
 						if (row_k[i].col == j)
 						{
-							/*printf("i = %ld j = %ld row_k[i].col = %ld, row_k[i].val = %f value = %f\n", 
+							/*printf("i = %ld j = %ld row_k[i].col = %ld, row_k[i].val = %f value = %f\n",
 								i, j, row_k[i].col, row_k[i].val, value);*/
 
 							dd -= row_k[i].val * value;
 
 						}
-						
+
 						m[j].plus(row_k[i].col, - row_k[i].val * value);
 					}
 				}
@@ -6800,9 +6783,9 @@ e_start__row_j:
 				return false;
 			}
 			double sqrt_d = sqrt(d);
-			// Заменяем в данной строке диагональный элемент на его корень  sqrt_d
+			// Р—Р°РјРµРЅСЏРµРј РІ РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРµ РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РЅР° РµРіРѕ РєРѕСЂРµРЅСЊ  sqrt_d
 			nd->val.val = sqrt_d;
-			// остальные элементы делим на sqrt_d
+			// РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РґРµР»РёРј РЅР° sqrt_d
 			BraidedNode<sparse_row_element<double> > * n = nd->next();
 			while (n != m[j].root)
 			{
@@ -6810,7 +6793,7 @@ e_start__row_j:
 				n = n->next();
 			}
 
-			// create j-тый tmp файл
+			// create j-С‚С‹Р№ tmp С„Р°Р№Р»
 			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
 			
 			AFile fj;
@@ -6857,7 +6840,7 @@ e_start__row_j:
 	//	return false;
 	//}
 	///////////////////////////////////////////////////////////////////////
-	// открываем выходной файл
+	// РѕС‚РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 
 	AFile f2;
 	if( !f2.Open( fn_Lt, GENERIC_WRITE, CREATE_NEW) ) 
@@ -6869,18 +6852,18 @@ e_start__row_j:
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
 	try{
-		// формируем заголовок выходного файла	
-		ar2 << rows;		
+		// С„РѕСЂРјРёСЂСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+		ar2 << rows;
 		ar2 << cols;
 		
 		char buffjs[BUFF_SIZE];
 		for(long j = 0; j < rows; j++)
 		{
-			// open j-тый tmp файл
-//			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);	
+			// open j-С‚С‹Р№ tmp С„Р°Р№Р»
+//			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
 
 			//AFile fjs;
-			//if( ! fjs.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) ) 
+			//if( ! fjs.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
 			//{
 			//	MessageBox(0, "Unable to open file" , TempFileName, MB_OK);
 			//	return false;
@@ -6919,13 +6902,13 @@ e_start__row_j:
 		return false;
 	}
 
-	// закрываем выходной файл
+	// Р·Р°РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 	ar2.Close();
 	f2.Close();
 
 	return true;
 }
-//Треугольное разложение матрицы методом Гаусса с выбором ведущего элемента по столбцу 
+//РўСЂРµСѓРіРѕР»СЊРЅРѕРµ СЂР°Р·Р»РѕР¶РµРЅРёРµ РјР°С‚СЂРёС†С‹ РјРµС‚РѕРґРѕРј Р“Р°СѓСЃСЃР° СЃ РІС‹Р±РѕСЂРѕРј РІРµРґСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РїРѕ СЃС‚РѕР»Р±С†Сѓ
 /* Subroutine */ bool afg1d_c(double *a, int *p, int *n)
 {
     /* Initialized data */
@@ -6958,11 +6941,11 @@ e_start__row_j:
 
 	for (f = 0; f < N; f++)
 	{
-		//f;// номер диагонального элемента - переходим к следующему диагональному элементу
+		//f;// РЅРѕРјРµСЂ РґРёР°РіРѕРЅР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° - РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ РґРёР°РіРѕРЅР°Р»СЊРЅРѕРјСѓ СЌР»РµРјРµРЅС‚Сѓ
 		pivot = f;
 		pivotValue = fabs(a_ref(f, f));
-		//выбираем максимальный по модулю элемент в столбце
-		//поиск опорного элемента
+		//РІС‹Р±РёСЂР°РµРј РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РїРѕ РјРѕРґСѓР»СЋ СЌР»РµРјРµРЅС‚ РІ СЃС‚РѕР»Р±С†Рµ
+		//РїРѕРёСЃРє РѕРїРѕСЂРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 
 		for (row = f; row < N; ++row) 
 		{
@@ -6976,7 +6959,7 @@ e_start__row_j:
 			}
 		}
 
-		// переставляем местами строки
+		// РїРµСЂРµСЃС‚Р°РІР»СЏРµРј РјРµСЃС‚Р°РјРё СЃС‚СЂРѕРєРё
 		for (j = 0; j < N; ++j) 
 		{
 			bx = a_ref(pivot, j);
@@ -6992,23 +6975,23 @@ e_start__row_j:
 		tk = (d__1 = a_ref(f, f), fabs(d__1));
 		if (tk == 0.) 
 		{
-            printf("error(Матрица вырождена)\n");
+            printf("error(РњР°С‚СЂРёС†Р° РІС‹СЂРѕР¶РґРµРЅР°)\n");
 			printf ("error bad matrix\n");
 			return false;
-			// если максимальный по модулю в столбце элемент всё же оказался нулём
-			// переходим к следующему столбцу без каких-либо преобразований
+			// РµСЃР»Рё РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РїРѕ РјРѕРґСѓР»СЋ РІ СЃС‚РѕР»Р±С†Рµ СЌР»РµРјРµРЅС‚ РІСЃС‘ Р¶Рµ РѕРєР°Р·Р°Р»СЃСЏ РЅСѓР»С‘Рј
+			// РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ СЃС‚РѕР»Р±С†Сѓ Р±РµР· РєР°РєРёС…-Р»РёР±Рѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёР№
 			continue;
 		}
 
-		// делим весь столбец на u(i,i) диагональный элемент, 
-		// начиная с элемента который находится под диагональным элементом
+		// РґРµР»РёРј РІРµСЃСЊ СЃС‚РѕР»Р±РµС† РЅР° u(i,i) РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚,
+		// РЅР°С‡РёРЅР°СЏ СЃ СЌР»РµРјРµРЅС‚Р° РєРѕС‚РѕСЂС‹Р№ РЅР°С…РѕРґРёС‚СЃСЏ РїРѕРґ РґРёР°РіРѕРЅР°Р»СЊРЅС‹Рј СЌР»РµРјРµРЅС‚РѕРј
 		pr = 1. / a_ref(f, f);
 		for (row = l; row < N; ++row) {
 			a_ref(row, f) = pr * a_ref(row, f);
 		}
 
-		// вычисляем дополнение Шура - отнимаем из подматрицы 
-		// произведение векторов, начинающихся от текущего диагонального элемента
+		// РІС‹С‡РёСЃР»СЏРµРј РґРѕРїРѕР»РЅРµРЅРёРµ РЁСѓСЂР° - РѕС‚РЅРёРјР°РµРј РёР· РїРѕРґРјР°С‚СЂРёС†С‹
+		// РїСЂРѕРёР·РІРµРґРµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ, РЅР°С‡РёРЅР°СЋС‰РёС…СЃСЏ РѕС‚ С‚РµРєСѓС‰РµРіРѕ РґРёР°РіРѕРЅР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 		for (j = l; j < N; ++j) {
 			for (row = l; row < N; ++row) {
 				a_ref(row, j) -= a_ref(f, j) * a_ref(row, f);
@@ -7037,7 +7020,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 	try
 	{
-		// читаем заголовок
+		// С‡РёС‚Р°РµРј Р·Р°РіРѕР»РѕРІРѕРє
 		ar >> rows;
 		ar >> cols;
 	}
@@ -7078,7 +7061,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	{	
 		for(long r = 0; r < rows; r++)
 		{
-			// считываем очередную строку из входного файла
+			// СЃС‡РёС‚С‹РІР°РµРј РѕС‡РµСЂРµРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ РёР· РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
 			sparse_row row__j; row__j.clear();
 			ar >> row__j;
 
@@ -7100,9 +7083,9 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	}
 	catch (CException* pe)
 	{
-		// catch errors from WinINet 
-		TCHAR szErr[4098]; 
-		pe->GetErrorMessage(szErr, 4098); 
+		// catch errors from WinINet
+		TCHAR szErr[4098];
+		pe->GetErrorMessage(szErr, 4098);
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
@@ -7130,7 +7113,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	}
 	printf("\n");
 	///////////////////////////////////////////////////////////////////////
-	// открываем выходной файл
+	// РѕС‚РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 
 	AFile f4;
 	if( !f4.Open( fn_L, GENERIC_WRITE, CREATE_NEW) ) 
@@ -7142,8 +7125,8 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	char buff4[BUFF_SIZE];
 	Archive ar4( &f4, Archive::store, BUFF_SIZE, buff4 );
 	try{
-		// формируем заголовок выходного файла	
-		ar4 << rows;		
+		// С„РѕСЂРјРёСЂСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+		ar4 << rows;
 		ar4 << cols;
 		
 		for(long j = 0; j < rows; j++)
@@ -7176,12 +7159,12 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		return false;
 	}
 
-	// закрываем выходной файл
+	// Р·Р°РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 	ar4.Close();
 	f4.Close();
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
-	// открываем выходной файл
+	// РѕС‚РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 
 	AFile f3;
 	if( !f3.Open( fn_U, GENERIC_WRITE, CREATE_NEW) ) 
@@ -7193,8 +7176,8 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	char buff3[BUFF_SIZE];
 	Archive ar3( &f3, Archive::store, BUFF_SIZE, buff3 );
 	try{
-		// формируем заголовок выходного файла	
-		ar3 << rows;		
+		// С„РѕСЂРјРёСЂСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+		ar3 << rows;
 		ar3 << cols;
 		
 		for(long j = 0; j < rows; j++)
@@ -7226,15 +7209,15 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		return false;
 	}
 
-	// закрываем выходной файл
+	// Р·Р°РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 	ar3.Close();
 	f3.Close();
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
-	// открываем выходной файл
+	// РѕС‚РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 
 	AFile f2;
-	if( !f2.Open( fn_P, GENERIC_WRITE, CREATE_NEW) ) 
+	if( !f2.Open( fn_P, GENERIC_WRITE, CREATE_NEW) )
 	{
 		MessageBox(0, "Holesski 1\nUnable to open file" , fn_P, MB_OK);
 		return false;
@@ -7243,8 +7226,8 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
 	try{
-		// формируем заголовок выходного файла	
-		ar2 << rows;		
+		// С„РѕСЂРјРёСЂСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+		ar2 << rows;
 		
 		char buffjs[BUFF_SIZE];
 		for(long j = 0; j < rows; j++)
@@ -7271,7 +7254,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		return false;
 	}
 
-	// закрываем выходной файл
+	// Р·Р°РєСЂС‹РІР°РµРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 	ar2.Close();
 	f2.Close();
 	///////////////////////////////////////////////////////////////////////
@@ -7305,7 +7288,7 @@ bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed,
 	Archive ar( &f, Archive::load, BUFF_SIZE, buff );
 	try
 	{
-		// читаем заголовок
+		// С‡РёС‚Р°РµРј Р·Р°РіРѕР»РѕРІРѕРє
 		ar >> pivots;
 		int pivot;
 		for (long r = 0; r < pivots; r++)
@@ -7419,7 +7402,7 @@ bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed,
 
 bool InverseProblemSolving_(char * fn_operator_wav, vector<double> & t, vector<double> & b, vector<double> & sol, string name)
 {
-    //vector<sparse_row_simple> at; представление матрицы в транспонированном виде
+    //vector<sparse_row_simple> at; РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РјР°С‚СЂРёС†С‹ РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 	vector<long> file_pointers;
 
 
@@ -7446,13 +7429,13 @@ bool InverseProblemSolving_(char * fn_operator_wav, vector<double> & t, vector<d
 				file_pointers[r+1] = file_pointers[r] + (row_s.size() + 1)*(sizeof(long) + sizeof(double));
 			}
 
-			// решение разреженной системы методом наименьших квадратов 
-			// с последующим применением разложения Холесского
+			// СЂРµС€РµРЅРёРµ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+			// СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРј РїСЂРёРјРµРЅРµРЅРёРµРј СЂР°Р·Р»РѕР¶РµРЅРёСЏ РҐРѕР»РµСЃСЃРєРѕРіРѕ
 			//bool res = SLAU3(m, cols, b, sol);
 
-			// решение уравнения методом наименьших квадратов
-			// из прямоугольной разреженной матрицы 
-			// формируем квадратную систему уравнений
+			// СЂРµС€РµРЅРёРµ СѓСЂР°РІРЅРµРЅРёСЏ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+			// РёР· РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕР№ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+			// С„РѕСЂРјРёСЂСѓРµРј РєРІР°РґСЂР°С‚РЅСѓСЋ СЃРёСЃС‚РµРјСѓ СѓСЂР°РІРЅРµРЅРёР№
 			
 			size_t cols = _rows;
 			size_t rows = _cols;
@@ -7477,7 +7460,7 @@ bool InverseProblemSolving_(char * fn_operator_wav, vector<double> & t, vector<d
 				f.Seek(file_pointers[i], FILE_BEGIN);ar.ClearReadBuffer();
 				ar >> at_i;
 
-				// формируем строку квадратной системы уравнений
+				// С„РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹ СѓСЂР°РІРЅРµРЅРёР№
 				row.clear();
 				size_t row_size = 0;
 
@@ -7564,19 +7547,19 @@ bool InverseProblemSolving_(char * fn_operator_wav, vector<double> & t, vector<d
 
 bool InverseProblemSolving(vector<SparseRow> & at, vector<double> & t, vector<double> & b, vector<double> & sol, string name)
 {
-    //vector<sparse_row_simple> at представление матрицы в транспонированном виде
-	
-	// решение разреженной системы методом наименьших квадратов 
-	// с последующим применением разложения Холесского
+    //vector<sparse_row_simple> at РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РјР°С‚СЂРёС†С‹ РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
+
+	// СЂРµС€РµРЅРёРµ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ СЃРёСЃС‚РµРјС‹ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+	// СЃ РїРѕСЃР»РµРґСѓСЋС‰РёРј РїСЂРёРјРµРЅРµРЅРёРµРј СЂР°Р·Р»РѕР¶РµРЅРёСЏ РҐРѕР»РµСЃСЃРєРѕРіРѕ
 	//bool res = SLAU3(m, cols, b, sol);
 
-	// решение уравнения методом наименьших квадратов
-	// из прямоугольной разреженной матрицы 
-	// формируем квадратную систему уравнений
-	
+	// СЂРµС€РµРЅРёРµ СѓСЂР°РІРЅРµРЅРёСЏ РјРµС‚РѕРґРѕРј РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ
+	// РёР· РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕР№ СЂР°Р·СЂРµР¶РµРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+	// С„РѕСЂРјРёСЂСѓРµРј РєРІР°РґСЂР°С‚РЅСѓСЋ СЃРёСЃС‚РµРјСѓ СѓСЂР°РІРЅРµРЅРёР№
+
 	size_t cols = at.size();
 	size_t rows = b.size();
-	
+
 	printf("InverseProblemSolving rows = %u cols = %u\n",  rows, cols);
 
 
@@ -7592,7 +7575,7 @@ bool InverseProblemSolving(vector<SparseRow> & at, vector<double> & t, vector<do
 	for (i = 0; i < cols; i++)
 	{
 printf("%u %u ", i, cols);
-		// формируем строку квадратной системы уравнений
+		// С„РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РєРІР°РґСЂР°С‚РЅРѕР№ СЃРёСЃС‚РµРјС‹ СѓСЂР°РІРЅРµРЅРёР№
 		row.clear();
 		size_t row_size = 0;
 
@@ -7643,24 +7626,24 @@ printf("%u\n",row_size);
 
 Grid * CreateProfileGrid2D( MyMethodsData & mmd )
 {        
-	//здесь вычисляем грид
-	// Грид по размеру геологической структуры
+	//Р·РґРµСЃСЊ РІС‹С‡РёСЃР»СЏРµРј РіСЂРёРґ
+	// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	Grid * grid = new Grid;
     
 	grid->gridSection.nRow = mmd.rows;
 	grid->gridSection.nCol = mmd.cols;
 
-	// Сравниваем размах профиля по X и по Y и
-	// в качестве горизонтальной координаты выбираем ту, по которой размах больше
+	// РЎСЂР°РІРЅРёРІР°РµРј СЂР°Р·РјР°С… РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y Рё
+	// РІ РєР°С‡РµСЃС‚РІРµ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІС‹Р±РёСЂР°РµРј С‚Сѓ, РїРѕ РєРѕС‚РѕСЂРѕР№ СЂР°Р·РјР°С… Р±РѕР»СЊС€Рµ
 	if (mmd.delta__x > mmd.delta__y)
 	{
-		//считаем по x
+		//СЃС‡РёС‚Р°РµРј РїРѕ x
 		grid->gridSection.xLL = mmd.x0;
 		grid->gridSection.xSize = mmd.delta_x;
 	}
 	else
 	{
-		//считаем по y
+		//СЃС‡РёС‚Р°РµРј РїРѕ y
 		grid->gridSection.xLL = mmd.y0;
 		grid->gridSection.xSize = mmd.delta_y;
 	}
@@ -7683,8 +7666,8 @@ Grid * CreateProfileGrid2D( MyMethodsData & mmd )
 
 Grid4 * CreateProfileGrid3D( MyMethodsData3 & mmd )
 {        
-	//здесь вычисляем грид
-	// Грид по размеру геологической структуры
+	//Р·РґРµСЃСЊ РІС‹С‡РёСЃР»СЏРµРј РіСЂРёРґ
+	// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	Grid4 * grid = new Grid4;
     
 	grid->grid4Section.nRow = mmd.rows;
@@ -7699,7 +7682,7 @@ Grid4 * CreateProfileGrid3D( MyMethodsData3 & mmd )
 	grid->grid4Section.ySize = mmd.delta_y;
 
 	// grid->grid4Section.zLL = mmd.z0 - (mmd.pages - 1) * mmd.delta_z;// 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	grid->grid4Section.zLL = mmd.z0 - mmd.pages * mmd.delta_z;
 	grid->grid4Section.zSize = mmd.delta_z;					  
 					  
@@ -7713,20 +7696,20 @@ Grid4 * CreateProfileGrid3D( MyMethodsData3 & mmd )
 
 #define ON_THE_FLY_STORING 1
 #define SPARSE_OUT_W 1
-void DoMyMethod2(FILE * description, 
-				 MyMethodsData& mmd,				 
+void DoMyMethod2(FILE * description,
+				 MyMethodsData& mmd,
 				 auto_build_parametrs& ab,
 				 vector<double> & X,
 				 vector<double> & Y,
-				 vector<double> & Z, // альтитуда измерений - полёта самолёта
+				 vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				 vector<double> & signal,
 				 string name)
 {
 	printf ( "DoMyMethod %s\n", name.c_str() );
 
-	long signal_len = signal.size(); // длина сигнала 
+	long signal_len = signal.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 
-	// отношение строк и столбцов
+	// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ
 	// int pw_rcd = 2;
 	//cout << "Enter pw_rcd rows/cols deviation pw (0,1,2,...)?\n";
 	//cin >> pw_rcd;
@@ -7742,10 +7725,10 @@ void DoMyMethod2(FILE * description,
 
 	//long Nr=1, Nc=1;
 
-	// всего неизвестных коэффициентов Фурье образов 2*Nr * 2*Nc
-	// всего уравнений signal_len
+	// РІСЃРµРіРѕ РЅРµРёР·РІРµСЃС‚РЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Р¤СѓСЂСЊРµ РѕР±СЂР°Р·РѕРІ 2*Nr * 2*Nc
+	// РІСЃРµРіРѕ СѓСЂР°РІРЅРµРЅРёР№ signal_len
 
-	// необходимо соблюсти условие 2*Nr * 2*Nc ~ signal_len
+	// РЅРµРѕР±С…РѕРґРёРјРѕ СЃРѕР±Р»СЋСЃС‚Рё СѓСЃР»РѕРІРёРµ 2*Nr * 2*Nc ~ signal_len
 	//  Nr * Nc ~ signal_len / 4
 	//  as   (rows = cols / rcd) and (rcd = pow(2,pw_rcd)) so  Nc = Nr + pw_rcd;
 	//  Nr * (Nr + pw_rcd) ~ signal_len / 4
@@ -7758,31 +7741,31 @@ void DoMyMethod2(FILE * description,
 
 	//  Nr = Nc ~ sqrt(signal_len / 4)
 #if 0
-	// без учёта того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// Р±РµР· СѓС‡С‘С‚Р° С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 	double near_Nr = sqrt(double(signal_len) / 4.0);
-	// если я хочу получить недоопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	Nc = Nr = ceil(near_Nr);
 
-	// если я хочу получить переопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	// Nr = Nc = floor(near_Nr);
 #else
-	// с учётом того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// СЃ СѓС‡С‘С‚РѕРј С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 	double D = mmd.pw_rcd * mmd.pw_rcd + signal_len;
 	double near_Nr = ( - mmd.pw_rcd + sqrt(D)) / 2.0;
-	// если я хочу получить недоопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	mmd.Nr = ceil(near_Nr);
 
-	// если я хочу получить переопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	// Nr = floor(near_Nr);
 
 	mmd.Nc = mmd.Nr + mmd.pw_rcd;
 #endif
 
-	// суммарное число частот
+	// СЃСѓРјРјР°СЂРЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚
 	long Nq = 2*mmd.Nr * 2*mmd.Nc;
 
 	//long increaser_pw = 2;
@@ -7793,9 +7776,9 @@ void DoMyMethod2(FILE * description,
 
 	double near_cols = sqrt( double(signal_len * rcd) );
 
-	// размер сетки - степень двойки
-	mmd.cols = increaser * pow(2.0, ceil(log10(double(near_cols))/log10(2.0))); // длина сигнала 
-	mmd.rows = mmd.cols / rcd;// а это глубина
+	// СЂР°Р·РјРµСЂ СЃРµС‚РєРё - СЃС‚РµРїРµРЅСЊ РґРІРѕР№РєРё
+	mmd.cols = increaser * pow(2.0, ceil(log10(double(near_cols))/log10(2.0))); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
+	mmd.rows = mmd.cols / rcd;// Р° СЌС‚Рѕ РіР»СѓР±РёРЅР°
 
 
 	cout << "cols = " << mmd.cols << endl;
@@ -7845,7 +7828,7 @@ void DoMyMethod2(FILE * description,
 
 	printf ( "DoMyMethod cols = %ld rows = %ld\n", mmd.cols,  mmd.rows);
 
-	// Простейшая формулировка прямой задачи
+	// РџСЂРѕСЃС‚РµР№С€Р°СЏ С„РѕСЂРјСѓР»РёСЂРѕРІРєР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 
 	bool the_martix_on_memory = false;
 
@@ -7866,14 +7849,14 @@ void DoMyMethod2(FILE * description,
 		smoof_power *= 2;
 
 		printf("Filling of matrix\n");
-		// формируем матрицу оператора прямой задачи, 
-		// число строк равно длине сигнала 
-		// (или суммарной длине нескольких сигналов - 
-		// нескольких профилей на одной или, ещё лучше, на разных высотах)
-		// на вход оператора подаётся геологическая структура 
-		// источников геополяритонного сигнала
-		// на выходе оператора имеем мощность излучения (сигнал) на профилях
-		FillingTheMatrix(smoof_power, mmd.k_oslablenie, ab.k, NULL, spm_filename, mmd.rows, mmd.cols, 
+		// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+		// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+		// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+		// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+		// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+		// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+		// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+		FillingTheMatrix(smoof_power, mmd.k_oslablenie, ab.k, NULL, spm_filename, mmd.rows, mmd.cols,
 			mmd.x0, mmd.y0, mmd.z0,
 			mmd.delta_x, mmd.delta_y, mmd.delta_z,
 			X, Y, Z);
@@ -7886,14 +7869,14 @@ void DoMyMethod2(FILE * description,
 	if (!CheckMyLicense()) return;
 
         
-	// здесь вычисляем грид
-	// Грид по размеру геологической структуры
+	// Р·РґРµСЃСЊ РІС‹С‡РёСЃР»СЏРµРј РіСЂРёРґ
+	// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	Grid * grid = CreateProfileGrid2D(mmd);
 
 
 	printf("Creating the matrix in Frequency region\n");
 #if !ON_THE_FLY_STORING
-	//матрица оператора прямой задачи в частотной области
+	//РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<vector<double> > mw(signal_len);
 	for (long j = 0; j < signal_len; j++)
 		mw[j].resize(Nq);
@@ -7914,13 +7897,13 @@ void DoMyMethod2(FILE * description,
 	/*DWORD 
 		time_eplased1 = 0,
 		time_start = GetCurrentTime();*/
-	// перебираем всевозможные комбинации пространственных частот
+	// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµРІРѕР·РјРѕР¶РЅС‹Рµ РєРѕРјР±РёРЅР°С†РёРё РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹С… С‡Р°СЃС‚РѕС‚
 	for(long rw = 2, q = 0; rw <= 1 + 2*mmd.Nr; rw++)
 	{
 		printf("Filling the matrix in Frequency region %ld %ld\n", rw, 1 + 2*mmd.Nr);
 		for(long cw = 2; cw <= 1 + 2*mmd.Nc; cw++)
 		{
-			// сначала формируем пространственный "отклик" на текущую частоту
+			// СЃРЅР°С‡Р°Р»Р° С„РѕСЂРјРёСЂСѓРµРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹Р№ "РѕС‚РєР»РёРє" РЅР° С‚РµРєСѓС‰СѓСЋ С‡Р°СЃС‚РѕС‚Сѓ
 			ZeroDoubleMat(grid->gridSection.z, grid->gridSection.nRow, grid->gridSection.nCol);
 
 			//printf("rw = %ld, cw = %ld\n", rw, cw);
@@ -7931,20 +7914,20 @@ void DoMyMethod2(FILE * description,
 			FastFourierTransform2D(grid, a, inversefft, rw);
 	//time_eplased1 += GetCurrentTime() - time_start1;
 
-			// сформированный отклик текущей частоты заносим в вектор решения
+			// СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ РѕС‚РєР»РёРє С‚РµРєСѓС‰РµР№ С‡Р°СЃС‚РѕС‚С‹ Р·Р°РЅРѕСЃРёРј РІ РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
 			for (long jj = 0; jj < grid->gridSection.nRow; jj++)
 			{
 				for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 				{
-					// индекс в строке матрицы оператора прямой задачи
+					// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					long i = jj * mmd.cols + ii;
 					sol[i] = grid->gridSection.z[jj][ii];
 				}
 			}
 
-			// на вектор решения действуем оператором прямой задачи
-			// и получаем q-тую колонку новой матрицы
-			// которая будет выражать оператор прямой задачи в частотной области
+			// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+			// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+			// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 			/*if (m)
 			{
 				for (long j = 0; j < signal_len; j++)
@@ -7987,11 +7970,11 @@ void DoMyMethod2D_part2()
 {*/
 	printf("Start of solve the inverse problem\n");
 #if ON_THE_FLY_STORING
-	//матрица оператора прямой задачи в частотной области
+	//РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<vector<double> > mw;
 #endif
 	LoadMatrix(mmd.fn_operator_wav, mw);
-	// находим решение обратной задачи в частотной области
+	// РЅР°С…РѕРґРёРј СЂРµС€РµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<double> solw(Nq);
 
 	if(!InverseProblemSolving(mw, Nq, signal, solw))
@@ -8001,7 +7984,7 @@ void DoMyMethod2D_part2()
 	printf("The inverse problem is solved!!!\n");
 	printf("Form the frequency matrix from the inverse problem solving!!!\n");
 
-	// формируем частотную матрицу
+	// С„РѕСЂРјРёСЂСѓРµРј С‡Р°СЃС‚РѕС‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	ZeroDoubleMat(grid->gridSection.z, grid->gridSection.nRow, grid->gridSection.nCol);
 	for(long rw = 2, q = 0; rw <= 1 + 2*mmd.Nr; rw++)
 	{
@@ -8014,7 +7997,7 @@ void DoMyMethod2D_part2()
 
 	printf("Form the razrez matrix by fft\n");
 			
-	// наконец, формируем пространственный "отклик" на частотную матрицу
+	// РЅР°РєРѕРЅРµС†, С„РѕСЂРјРёСЂСѓРµРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹Р№ "РѕС‚РєР»РёРє" РЅР° С‡Р°СЃС‚РѕС‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	FastFourierTransform2D(grid, a, inversefft);
 
 	printf("Save the razrez matrix\n");
@@ -8035,7 +8018,7 @@ void DoMyMethod2D_part2()
 		}
 	}
 
-	// Ниже оно будет обращено
+	// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 	for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 	{
@@ -8074,23 +8057,23 @@ void DoMyMethod2D_part2()
 }
 
 
-void DoMyMethod3(int type, // тип прямой задачи
+void DoMyMethod3(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				 FILE * description,
 				 double k_oslablenie,
-				 auto_build_parametrs& ab, 
+				 auto_build_parametrs& ab,
 				 vector<double> & X,
 				 vector<double> & Y,
-				 vector<double> & Z, // альтитуда измерений - полёта самолёта
+				 vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				 vector<vector<anten_direction> > & A,
-				 double z0,// альтитуда земной поверхности
+				 double z0,// Р°Р»СЊС‚РёС‚СѓРґР° Р·РµРјРЅРѕР№ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
 				 vector<double> & signal,
 				 string name)
 {
 	printf ( "DoMyMethod %s\n", name.c_str() );
 
-	long signal_len = signal.size(); // длина сигнала 
+	long signal_len = signal.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
-	// отношение строк и столбцов
+	// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ
 	int pw_pcd = 1;
 	cout << "Enter pw_pcd pages/cols deviation pw (0,1,2,...)?\n";
 	cin >> pw_pcd;
@@ -8101,45 +8084,45 @@ void DoMyMethod3(int type, // тип прямой задачи
 	// cols * cols * cols / pcd > signal_len
 	// cols > sqrt3( signal_len * rcd ) = pow(double(signal_len * pcd), 1.0/3.0)
 	// cols is power of 2
-	// 
+	//
 
 	long Np=1, Nr=1, Nc=1;
 
-	// всего неизвестных коэффициентов Фурье образов 2*Np * 2*Nr * 2*Nc
-	// всего уравнений signal_len
+	// РІСЃРµРіРѕ РЅРµРёР·РІРµСЃС‚РЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Р¤СѓСЂСЊРµ РѕР±СЂР°Р·РѕРІ 2*Np * 2*Nr * 2*Nc
+	// РІСЃРµРіРѕ СѓСЂР°РІРЅРµРЅРёР№ signal_len
 
-	// необходимо соблюсти условие 2*Np * 2*Nr * 2*Nc ~ signal_len
+	// РЅРµРѕР±С…РѕРґРёРјРѕ СЃРѕР±Р»СЋСЃС‚Рё СѓСЃР»РѕРІРёРµ 2*Np * 2*Nr * 2*Nc ~ signal_len
 	//  Np * Nr * Nc ~ signal_len / 8
 	//			Np ~ pow(signal_len / 8, 1 / 3)
 	//  as   (pages = cols / pcd, rows = cols) and (pcd = pow(2,pw_pcd)) so Nr = Nc = Np + pw_pcd;
 	//  Np * (Np + pw_pcd) * (Np + pw_pcd) ~ signal_len / 8
 
 #if 1
-	// без учёта того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// Р±РµР· СѓС‡С‘С‚Р° С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 	double near_Np = pow(double(signal_len) / 8.0, 1.0/3.0);
-	// если я хочу получить недоопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	Np = Nr = Nc = ceil(near_Np);
 
-	// если я хочу получить переопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	// Np = Nr = Nc = floor(near_Np);
 #else
-	// с учётом того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// СЃ СѓС‡С‘С‚РѕРј С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 	double D = pw_rcd * pw_rcd + signal_len;
 	double near_Np = ( - pw_rcd + sqrt(D)) / 2.0;
-	// если я хочу получить недоопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	Np = ceil(near_Np);
 
-	// если я хочу получить переопределённую систему
+	// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 	// Np = floor(near_Np);
 
 	Nr = Nc = Np + pw_pcd;
 #endif
 
-	// суммарное число частот
+	// СЃСѓРјРјР°СЂРЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚
 	long Nq = 2*Np * 2*Nr * 2*Nc;
 
 
@@ -8150,10 +8133,10 @@ void DoMyMethod3(int type, // тип прямой задачи
 
 	double near_cols = pow(double(signal_len * pcd), 1.0/3.0);
 
-	// размер сетки - степень двойки
-	long cols = increaser * pow(2.0, ceil(log10(double(near_cols))/log10(2.0))); // длина сигнала 
+	// СЂР°Р·РјРµСЂ СЃРµС‚РєРё - СЃС‚РµРїРµРЅСЊ РґРІРѕР№РєРё
+	long cols = increaser * pow(2.0, ceil(log10(double(near_cols))/log10(2.0))); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 	long rows = cols;
-	long pages = cols / pcd;// а это глубина
+	long pages = cols / pcd;// Р° СЌС‚Рѕ РіР»СѓР±РёРЅР°
 
 	cout << "cols = " << cols << endl;
 	cout << "rows [" << rows << "]\n";
@@ -8172,12 +8155,12 @@ void DoMyMethod3(int type, // тип прямой задачи
 		cin >> pages;
 	}
 
-	
+
 	if (pages < 2*Np+2)
 	{
 		printf("Error: (pages (%ld)) < (2*Np(%d)+2)(%ld)\n", pages, Np, 2*Np+2);
 		return;
-	}	
+	}
 	if (rows < 2*Nr+2)
 	{
 		printf("Error: (rows (%ld)) < (2*Nr(%d)+2)(%ld)\n", rows, Nr, 2*Nr+2);
@@ -8212,7 +8195,7 @@ void DoMyMethod3(int type, // тип прямой задачи
 
 	printf ( "DoMyMethod cols = %ld rows = %ld pages = %ld\n", cols,  rows, pages);
 
-	// Простейшая формулировка прямой задачи
+	// РџСЂРѕСЃС‚РµР№С€Р°СЏ С„РѕСЂРјСѓР»РёСЂРѕРІРєР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 
 	char spm_filename[4096];
 	sprintf(spm_filename, "%s\\operator.spm", dir_out);
@@ -8237,13 +8220,13 @@ void DoMyMethod3(int type, // тип прямой задачи
 		smoof_power *= 2;
 
 		printf("Filling of matrix\n");
-		// формируем матрицу оператора прямой задачи, 
-		// число строк равно длине сигнала 
-		// (или суммарной длине нескольких сигналов - 
-		// нескольких профилей на одной или, ещё лучше, на разных высотах)
-		// на вход оператора подаётся геологическая структура 
-		// источников геополяритонного сигнала
-		// на выходе оператора имеем мощность излучения (сигнал) на профилях
+		// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+		// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+		// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+		// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+		// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+		// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+		// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 		switch(type)
 		{
 		case 0:
@@ -8280,7 +8263,7 @@ void DoMyMethod3(int type, // тип прямой задачи
 
 
         
-	//здесь вычисляем грид
+	//Р·РґРµСЃСЊ РІС‹С‡РёСЃР»СЏРµРј РіСЂРёРґ
 	Grid4 * grid = new Grid4;
     
 	grid->grid4Section.nRow = rows;
@@ -8304,7 +8287,7 @@ void DoMyMethod3(int type, // тип прямой задачи
 
 	printf("Creating the matrix in Frequency region\n");
 #if !ON_THE_FLY_STORING
-	//матрица оператора прямой задачи в частотной области
+	//РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<vector<double> > mw(signal_len);
 	for (long j = 0; j < signal_len; j++)
 		mw[j].resize(Nq);
@@ -8323,7 +8306,7 @@ void DoMyMethod3(int type, // тип прямой задачи
 #if ON_THE_FLY_STORING
 	StoreMatrixHeader(vvd_filename, signal_len, Nq, true);
 #endif
-	// перебираем всевозможные комбинации пространственных частот
+	// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµРІРѕР·РјРѕР¶РЅС‹Рµ РєРѕРјР±РёРЅР°С†РёРё РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹С… С‡Р°СЃС‚РѕС‚
 	for(long pw = 2, q = 0; pw <= 1 + 2*Np; pw++)
 	{
 printf("Filling the matrix in Frequency region %ld %ld\n", pw, 1 + 2*Np);
@@ -8331,29 +8314,29 @@ printf("Filling the matrix in Frequency region %ld %ld\n", pw, 1 + 2*Np);
 		{
 			for(long cw = 2; cw <= 1 + 2*Nc; cw++)
 			{
-				// сначала формируем пространственный "отклик" на текущую частоту
+				// СЃРЅР°С‡Р°Р»Р° С„РѕСЂРјРёСЂСѓРµРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹Р№ "РѕС‚РєР»РёРє" РЅР° С‚РµРєСѓС‰СѓСЋ С‡Р°СЃС‚РѕС‚Сѓ
 				Zero3DMat<double>(grid->grid4Section.v, grid->grid4Section.nPag, grid->grid4Section.nRow, grid->grid4Section.nCol);
 				grid->grid4Section.v[pw][rw][cw] = 1.0;
 
 				FastFourierTransform3D(grid, a, inversefft, pw, rw);
 
-				// сформированный отклик текущей частоты заносим в вектор решения
+				// СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ РѕС‚РєР»РёРє С‚РµРєСѓС‰РµР№ С‡Р°СЃС‚РѕС‚С‹ Р·Р°РЅРѕСЃРёРј РІ РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
 				for (long pp = 0; pp < grid->grid4Section.nPag; pp++)
 				{
 					for (long jj = 0; jj < grid->grid4Section.nRow; jj++)
 					{
 						for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							long i = pp * rows * cols + jj * cols + ii;
 							sol[i] = grid->grid4Section.v[pp][jj][ii];
 						}
 					}
 				}
 
-				// на вектор решения действуем оператором прямой задачи
-				// и получаем q-тую колонку новой матрицы
-				// которая будет выражать оператор прямой задачи в частотной области
+				// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+				// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+				// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 				/*for (long j = 0; j < signal_len; j++)
 				{
 					mw[j][q] = m[j].ScalarProduct(sol);
@@ -8387,11 +8370,11 @@ void DoMyMethod2D_part2()
 {*/
 	printf("Start of solve the inverse problem\n");
 #if ON_THE_FLY_STORING
-	//матрица оператора прямой задачи в частотной области
+	//РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<vector<double> > mw;
 #endif
 	LoadMatrix(vvd_filename, mw);
-	// находим решение обратной задачи в частотной области
+	// РЅР°С…РѕРґРёРј СЂРµС€РµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<double> solw(Nq);
 
 	if(!InverseProblemSolving(mw, Nq, signal, solw))
@@ -8401,7 +8384,7 @@ void DoMyMethod2D_part2()
 	printf("The inverse problem is solved!!!\n");
 	printf("Form the frequency matrix from the inverse problem solving!!!\n");
 
-	// формируем частотную матрицу
+	// С„РѕСЂРјРёСЂСѓРµРј С‡Р°СЃС‚РѕС‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	Zero3DMat<double>(grid->grid4Section.v, grid->grid4Section.nPag, grid->grid4Section.nRow, grid->grid4Section.nCol);
 	for(long pw = 2, q = 0; pw <= 1 + 2*Np; pw++)
 	{
@@ -8417,7 +8400,7 @@ void DoMyMethod2D_part2()
 
 	printf("Form the razrez matrix by fft\n");
 			
-	// наконец, формируем пространственный "отклик" на частотную матрицу
+	// РЅР°РєРѕРЅРµС†, С„РѕСЂРјРёСЂСѓРµРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹Р№ "РѕС‚РєР»РёРє" РЅР° С‡Р°СЃС‚РѕС‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	FastFourierTransform3D(grid, a, inversefft);
 
 	printf("Save the razrez matrix\n");
@@ -8441,7 +8424,7 @@ void DoMyMethod2D_part2()
 		}
 	}
 #if 0
-	// Ниже оно будет обращено
+	// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 	for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 	{
@@ -8481,21 +8464,21 @@ void DoMyMethod2D_part2()
 
 
 
-void DoMyMethod2W(FILE * description, 
+void DoMyMethod2W(FILE * description,
 				  MyMethodsData& mmd,
 				  Wavelet2D& w2,
 				  auto_build_parametrs& ab,
 				  vector<double> & X,
 				  vector<double> & Y,
-				  vector<double> & Z, // альтитуда измерений - полёта самолёта
+				  vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				  //string name,
 				  bool to_fill_matrix)
 {
 	fprintf (description, "DoMyMethod \n" );
 
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 
-	// отношение строк и столбцов
+	// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ
 	// int pw_rcd = 2;
 	int rcd = pow(2.0, mmd.pw_rcd);
 	// rows = cols / rcd;
@@ -8509,59 +8492,59 @@ void DoMyMethod2W(FILE * description,
 	//bool have_pereopredelen_system = false;
 	bool have_pereopredelen_system = true;
 
-	// Nr Число S коэффициентов по вертикали
-	// Nc Число S коэффициентов по горизонтали
+	// Nr Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+	// Nc Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
 	// long Nr=1, Nc=1;
 
-	// всего неизвестных S коэффициентов Nr * Nc
-	// всего уравнений signal_len
+	// РІСЃРµРіРѕ РЅРµРёР·РІРµСЃС‚РЅС‹С… S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Nr * Nc
+	// РІСЃРµРіРѕ СѓСЂР°РІРЅРµРЅРёР№ signal_len
 
-	// необходимо соблюсти условие Nr * Nc ~ signal_len
+	// РЅРµРѕР±С…РѕРґРёРјРѕ СЃРѕР±Р»СЋСЃС‚Рё СѓСЃР»РѕРІРёРµ Nr * Nc ~ signal_len
 	//  Nr * Nc ~ signal_len
 	//  as   (rows = cols / rcd) and (rcd = pow(2,pw_rcd)) so  Nc = Nr * rcd;
-	//  Nr * Nr * rcd ~ signal_len 
+	//  Nr * Nr * rcd ~ signal_len
 	//  Nr * Nr ~ signal_len / rcd
 
 #if 0
-	// без учёта того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// Р±РµР· СѓС‡С‘С‚Р° С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 	double near_Nr = sqrt(double(signal_len));
 	if (have_pereopredelen_system)
 	{
-		// если я хочу получить переопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		Nr = Nc = floor(near_Nr);
 	}
 	else
 	{
-		// если я хочу получить недоопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		Nc = Nr = ceil(near_Nr);
 	}
 
 #else
-	// с учётом того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// СЃ СѓС‡С‘С‚РѕРј С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 	double near_Nr = sqrt( double(signal_len) / rcd);
 	
 	if (have_pereopredelen_system)
 	{
-		// если я хочу получить переопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		mmd.Nr = floor(near_Nr);
 	}
 	else
 	{
-		// если я хочу получить недоопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		mmd.Nr = ceil(near_Nr);
 	}
-	// Число коэффициентов больше в 2^n раз , чем по вертикали
+	// Р§РёСЃР»Рѕ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Р±РѕР»СЊС€Рµ РІ 2^n СЂР°Р· , С‡РµРј РїРѕ РІРµСЂС‚РёРєР°Р»Рё
 	mmd.Nc = mmd.Nr * rcd;
 
 #endif
 	//Nr *= 4;
 	//Nc *= 4;
 
-	// суммарное число s коэффициентов
+	// СЃСѓРјРјР°СЂРЅРѕРµ С‡РёСЃР»Рѕ s РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	long Ns = mmd.Nr * mmd.Nc;
 
 	fprintf (description, "Nr = %ld Nc = %ld Ns = %ld\n", mmd.Nr, mmd.Nc, Ns);
@@ -8573,9 +8556,9 @@ void DoMyMethod2W(FILE * description,
 
 	fprintf (description, "increaser_pw = %ld increaser = %ld\n", mmd.increaser_pw, increaser);
 
-	// размер сетки - степень двойки
-	mmd.cols = increaser * mmd.Nc; // число точек геологической структуры по горизонтали 
-	mmd.rows = increaser * mmd.Nr; // ------------//--------------------- по глубине (вертикали)
+	// СЂР°Р·РјРµСЂ СЃРµС‚РєРё - СЃС‚РµРїРµРЅСЊ РґРІРѕР№РєРё
+	mmd.cols = increaser * mmd.Nc; // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	mmd.rows = increaser * mmd.Nr; // ------------//--------------------- РїРѕ РіР»СѓР±РёРЅРµ (РІРµСЂС‚РёРєР°Р»Рё)
 
 	fprintf (description, "rows = %ld cols = %ld\n", mmd.rows, mmd.cols);
 
@@ -8597,10 +8580,10 @@ void DoMyMethod2W(FILE * description,
 		cin >> rows;
 	}*/
 
-	// Экстремальные значения геодезичнеских координат профиля
+	// Р­РєСЃС‚СЂРµРјР°Р»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РіРµРѕРґРµР·РёС‡РЅРµСЃРєРёС… РєРѕРѕСЂРґРёРЅР°С‚ РїСЂРѕС„РёР»СЏ
 	double min__x, min__y, min__z;
 	double max__x, max__y, max__z;
-	// Размах профиля по X и по Y
+	// Р Р°Р·РјР°С… РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
 	//double delta__x;
 	//double delta__y;
 
@@ -8612,23 +8595,23 @@ void DoMyMethod2W(FILE * description,
 	mmd.x0 = min__x;
 	mmd.y0 = min__y;
 
-	// Шаг вдоль профиля по X и по Y
+	// РЁР°Рі РІРґРѕР»СЊ РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
 	mmd.delta_x = mmd.delta__x / mmd.cols;
 	mmd.delta_y = mmd.delta__y / mmd.cols;
 
-	// Шаг вдоль геологической структуры по z (глубине)
+	// РЁР°Рі РІРґРѕР»СЊ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ РїРѕ z (РіР»СѓР±РёРЅРµ)
 	mmd.delta_z = sqrt(mmd.delta_x*mmd.delta_x + mmd.delta_y*mmd.delta_y);
 
 	fprintf (description, "x0 = %f y0 = %f\n", mmd.x0, mmd.y0);
 	fprintf (description, "delta_x = %f delta_y = %f delta_z = %f\n", mmd.delta_x, mmd.delta_y, mmd.delta_z);
 
 
-	// Число точек геологической структуры
+	// Р§РёСЃР»Рѕ С‚РѕС‡РµРє РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	long rows_cols = mmd.rows*mmd.cols;
 
 	printf ( "DoMyMethod cols = %ld rows = %ld\n", mmd.cols,  mmd.rows);
 
-	// Простейшая формулировка прямой задачи
+	// РџСЂРѕСЃС‚РµР№С€Р°СЏ С„РѕСЂРјСѓР»РёСЂРѕРІРєР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	
 	bool the_martix_on_memory = false;
 
@@ -8648,14 +8631,14 @@ void DoMyMethod2W(FILE * description,
 	fprintf (description, "smoof_power = %d\n", smoof_power);
 
 		printf("Filling of matrix\n");
-		// формируем матрицу оператора прямой задачи, 
-		// число строк равно длине сигнала 
-		// (или суммарной длине нескольких сигналов - 
-		// нескольких профилей на одной или, ещё лучше, на разных высотах)
-		// на вход оператора подаётся геологическая структура 
-		// источников геополяритонного сигнала
-		// на выходе оператора имеем мощность излучения (сигнал) на профилях
-		FillingTheMatrix(smoof_power, mmd.k_oslablenie, ab.k, NULL, mmd.fn_operator_spm, mmd.rows, mmd.cols, 
+		// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+		// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+		// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+		// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+		// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+		// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+		// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
+		FillingTheMatrix(smoof_power, mmd.k_oslablenie, ab.k, NULL, mmd.fn_operator_spm, mmd.rows, mmd.cols,
 			mmd.x0, mmd.y0, mmd.z0,
 			mmd.delta_x, mmd.delta_y, mmd.delta_z,
 			X, Y, Z);
@@ -8669,14 +8652,14 @@ void DoMyMethod2W(FILE * description,
 
 	if (to_fill_matrix_2)
 	{
-		// здесь создаём грид
-		// Грид по размеру геологической структуры
+		// Р·РґРµСЃСЊ СЃРѕР·РґР°С‘Рј РіСЂРёРґ
+		// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 		Grid * grid = CreateProfileGrid2D(mmd);
 
 		printf("Creating the matrix in S-Coefficient region\n");
 
 	#if !ON_THE_FLY_STORING
-		//матрица оператора прямой задачи в S области
+		//РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ S РѕР±Р»Р°СЃС‚Рё
 		vector<vector<double> > ms(signal_len);
 		for (long j = 0; j < signal_len; j++)
 			ms[j].resize(Ns);
@@ -8691,7 +8674,7 @@ void DoMyMethod2W(FILE * description,
 #endif
 	#if ON_THE_FLY_STORING
 #if SPARSE_OUT_W
-		//матрицу сохраняем в транспонированном виде
+		//РјР°С‚СЂРёС†Сѓ СЃРѕС…СЂР°РЅСЏРµРј РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 		StoreMatrixHeader(mmd.fn_operator_wav, Ns, signal_len);
 #else
 		StoreMatrixHeader(mmd.vvd_filename, signal_len, Ns, true);
@@ -8704,7 +8687,7 @@ void DoMyMethod2W(FILE * description,
 		sprintf(fn, "%s\\iwsi.grd", 
 			dir_out);
 		
-		// Ниже оно будет обращено
+		// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 		for (long ii = 0; ii < wavSimage->gridSection.nCol; ii++)
 		{
@@ -8725,7 +8708,7 @@ void DoMyMethod2W(FILE * description,
 		long shift_c = 2 * (w2.right_h_c/2 - (w2.rh_c.Length()-2)/2);
 		long shift_r = 2 * (w2.right_h_r/2 - (w2.rh_r.Length()-2)/2);
 
-		// перебираем всевозможные комбинации пространственных частот
+		// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµРІРѕР·РјРѕР¶РЅС‹Рµ РєРѕРјР±РёРЅР°С†РёРё РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹С… С‡Р°СЃС‚РѕС‚
 		long q = 0;
 		for(long rs = 0; rs < mmd.Nr; rs++)
 		{
@@ -8734,18 +8717,18 @@ void DoMyMethod2W(FILE * description,
 			{
 				{
 	#if 0
-				// сначала формируем пространственный "отклик" на текущую частоту
+				// СЃРЅР°С‡Р°Р»Р° С„РѕСЂРјРёСЂСѓРµРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹Р№ "РѕС‚РєР»РёРє" РЅР° С‚РµРєСѓС‰СѓСЋ С‡Р°СЃС‚РѕС‚Сѓ
 				ZeroDoubleMat(grid->gridSection.z, grid->gridSection.nRow, grid->gridSection.nCol);
 				grid->gridSection.z[rs][cs] = 1.0;
 
 				InverseWaveletTransform2D(w2, grid, mmd.increaser_pw, mmd.Nr, mmd.Nc);
 
-				// сформированный отклик текущей частоты заносим в вектор решения
+				// СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ РѕС‚РєР»РёРє С‚РµРєСѓС‰РµР№ С‡Р°СЃС‚РѕС‚С‹ Р·Р°РЅРѕСЃРёРј РІ РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
 				for (long rr = 0; rr < grid->gridSection.nRow; rr++)
 				{
 					for (long cc = 0; cc < grid->gridSection.nCol; cc++)
 					{
-						// индекс в строке матрицы оператора прямой задачи
+						// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 						long i = rr * mmd.cols + cc;
 						sol[i] = grid->gridSection.z[rr][cc];
 					}
@@ -8761,7 +8744,7 @@ void DoMyMethod2W(FILE * description,
 					for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 					{
 						double w = grid->gridSection.z[jj][ii];
-						// индекс в строке матрицы оператора прямой задачи
+						// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 						if(w != 0.0) 
 						{
 							r_end = jj;
@@ -8787,7 +8770,7 @@ void DoMyMethod2W(FILE * description,
 					rs,cs,
 					r_begin, r_end, c_begin, c_end);
 				
-				// Ниже оно будет обращено
+				// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 				for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 				{
@@ -8813,7 +8796,7 @@ void DoMyMethod2W(FILE * description,
 					i0c *= 2; i0c += shift_c;
 				}
 				printf("i0r = %d i0c = %d\n", i0r, i0c);
-				// сформированный отклик текущей частоты заносим в вектор решения
+				// СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ РѕС‚РєР»РёРє С‚РµРєСѓС‰РµР№ С‡Р°СЃС‚РѕС‚С‹ Р·Р°РЅРѕСЃРёРј РІ РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
 				for (long r = 0; r < wavSimage->gridSection.nRow; r++)
 				{
 					for (long c = 0; c < wavSimage->gridSection.nCol; c++)
@@ -8822,7 +8805,7 @@ void DoMyMethod2W(FILE * description,
 						long cc_ = c + i0c;
 						if (rr_ >= 0 && cc_ >= 0 && rr_ < grid->gridSection.nRow && cc_ < grid->gridSection.nCol )
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							long i = rr_ * mmd.cols + cc_;
 							psol[i] = wavSimage->gridSection.z[r][c];
 						}
@@ -8854,7 +8837,7 @@ void DoMyMethod2W(FILE * description,
 						
 						if (rr__ >= 0 && cc__ >= 0 && rr__ < grid->gridSection.nRow && cc__ < grid->gridSection.nCol )
 						{
-							// индекс в строке матрицы оператора прямой задачи
+							// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 							//long i = rr * mmd.cols + cc;
 							//psol[i] = wavSimage->gridSection.z[r][c];
 
@@ -8885,7 +8868,7 @@ void DoMyMethod2W(FILE * description,
 					rs,cs,
 					r_begin, r_end, c_begin, c_end);
 				
-				// Ниже оно будет обращено
+				// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 				for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 				{
@@ -8902,9 +8885,9 @@ void DoMyMethod2W(FILE * description,
 				SaveAsSurfer7Grid(fn, grid);
 	#endif
 				}
-				// на вектор решения действуем оператором прямой задачи
-				// и получаем q-тую колонку новой матрицы
-				// которая будет выражать оператор прямой задачи в частотной области
+				// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+				// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+				// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 
 	#if ON_THE_FLY_STORING
 	#if 1
@@ -8968,17 +8951,17 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 	printf("DoInverseAndFillGrid2W %s\n", name.c_str());
 
 	//printf_vector(signal)
-	// здесь создаём грид
-	// Грид по размеру геологической структуры
+	// Р·РґРµСЃСЊ СЃРѕР·РґР°С‘Рј РіСЂРёРґ
+	// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	Grid * grid = CreateProfileGrid2D(mmd);
 
-	// суммарное число s коэффициентов
+	// СЃСѓРјРјР°СЂРЅРѕРµ С‡РёСЃР»Рѕ s РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	long Ns = mmd.Nr * mmd.Nc;
 
 	printf("Start of solve the inverse problem\n");
 
 
-	// находим решение обратной задачи в частотной области
+	// РЅР°С…РѕРґРёРј СЂРµС€РµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<double> sols(Ns);
 	vector<double> sols_mean(Ns, 0.0);
 	double alpha = 0.0;
@@ -8995,7 +8978,7 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 	printf("The inverse problem is solved!!!\n");
 	printf("Form the frequency matrix from the inverse problem solving!!!\n");
 
-	// формируем частотную матрицу
+	// С„РѕСЂРјРёСЂСѓРµРј С‡Р°СЃС‚РѕС‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	ZeroDoubleMat(grid->gridSection.z, grid->gridSection.nRow, grid->gridSection.nCol);
 	long q = 0;
 	for(long rs = 0; rs < mmd.Nr; rs++)
@@ -9009,7 +8992,7 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 
 	printf("Form the razrez matrix by fft\n");
 			
-	// наконец, формируем пространственный "отклик" на частотную матрицу
+	// РЅР°РєРѕРЅРµС†, С„РѕСЂРјРёСЂСѓРµРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹Р№ "РѕС‚РєР»РёРє" РЅР° С‡Р°СЃС‚РѕС‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	InverseWaveletTransform2D(w2, grid, mmd.increaser_pw, mmd.Nr, mmd.Nc);
 
 	printf("Save the razrez matrix\n");
@@ -9031,7 +9014,7 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 			if (max_z < z_value) max_z = z_value;
 			if (min_z > z_value) min_z = z_value;
             
-			// индекс в строке матрицы оператора прямой задачи
+			// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 			//i = r * cols + C;
 			long i = jj * grid->gridSection.nCol + ii;
 			sol[i] = z_value;
@@ -9040,7 +9023,7 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 
 	ErrorOfInverseProblemSolving(mmd.fn_operator_spm, t, signal, sol, name);
 
-	// Ниже оно будет обращено
+	// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 	for (long ii = 0; ii < grid->gridSection.nCol; ii++)
 	{
@@ -9075,32 +9058,32 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 
 
 
-void DoMyMethod3W(int type, // тип прямой задачи
+void DoMyMethod3W(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				  bool granicy_kak_glubina,
 				  FILE * description,
 				  MyMethodsData3& mmd,
 				  Wavelet3D& w3,
-				 auto_build_parametrs& ab, 
+				 auto_build_parametrs& ab,
 				 vector<double> & X,
 				 vector<double> & Y,
-				 vector<double> & Z, // альтитуда измерений - полёта самолёта
+				 vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				 vector<vector<anten_direction> > & A,
-				 //double z0,// альтитуда земной поверхности
+				 //double z0,// Р°Р»СЊС‚РёС‚СѓРґР° Р·РµРјРЅРѕР№ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
 				 //vector<double> & signal,
 				 //string name,
 				 bool to_fill_matrix)
 {
 	printf ( "DoMyMethod3W\n" );
 
-	long signal_len = X.size(); // длина сигнала 
+	long signal_len = X.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р°
 #if 0
-	// отношение строк и столбцов
+	// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ
 	int pw_pcd = 1;
 	cout << "Enter pw_pcd pages/cols deviation pw (0,1,2,...)?\n";
 	cin >> pw_pcd;
 	int pcd = pow(2.0, pw_pcd);
 #else
-	// отношение строк и столбцов
+	// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ
 	// int pw_rcd = 2;
 	int pcd = pow(2.0, mmd.pw_pcd);
 #endif
@@ -9114,43 +9097,43 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 	//bool have_pereopredelen_system = true;
 
-	// Np Число S коэффициентов по вертикали
-	// Nr Число S коэффициентов по горизонтали
-	// Nc Число S коэффициентов по горизонтали
+	// Np Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РІРµСЂС‚РёРєР°Р»Рё
+	// Nr Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// Nc Р§РёСЃР»Рѕ S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
 	//long Np=1, Nr=1, Nc=1;
 
-	// всего неизвестных S коэффициентов Nr * Nc * Np
-	// всего уравнений signal_len
+	// РІСЃРµРіРѕ РЅРµРёР·РІРµСЃС‚РЅС‹С… S РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Nr * Nc * Np
+	// РІСЃРµРіРѕ СѓСЂР°РІРЅРµРЅРёР№ signal_len
 
-	// необходимо соблюсти условие Nr * Nc * Np ~ signal_len
+	// РЅРµРѕР±С…РѕРґРёРјРѕ СЃРѕР±Р»СЋСЃС‚Рё СѓСЃР»РѕРІРёРµ Nr * Nc * Np ~ signal_len
 	//  Nr * Nr * Np ~ signal_len
 	//  as   (pages = cols / rcd) and (rcd = pow(2,pw_rcd)) so  Nr = Nc = Np + pw_pcd;;
-	//  (Np + pw_pcd) * (Np + pw_pcd) * Np ~ signal_len 
+	//  (Np + pw_pcd) * (Np + pw_pcd) * Np ~ signal_len
 
 
 
 #if 0
-	// без учёта того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// Р±РµР· СѓС‡С‘С‚Р° С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 	double near_Np = pow(double(signal_len), 1.0/3.0);
 
 	if (have_pereopredelen_system)
 	{
-		// если я хочу получить переопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		mmd.Np = mmd.Nr = mmd.Nc = floor(near_Np);
 	}
 	else
 	{
-		// если я хочу получить недоопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		mmd.Np = mmd.Nr = mmd.Nc = ceil(near_Np);
 	}
 #else
-	// с учётом того, что по вертикали и горизонтали 
-	// разное число частот в том случае, если мы имеем 
-	// неравный вертикальный и горизонтальные размеры
+	// СЃ СѓС‡С‘С‚РѕРј С‚РѕРіРѕ, С‡С‚Рѕ РїРѕ РІРµСЂС‚РёРєР°Р»Рё Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
+	// СЂР°Р·РЅРѕРµ С‡РёСЃР»Рѕ С‡Р°СЃС‚РѕС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјС‹ РёРјРµРµРј
+	// РЅРµСЂР°РІРЅС‹Р№ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ Рё РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Рµ СЂР°Р·РјРµСЂС‹
 
-	// надо решать кубическое уравнение
+	// РЅР°РґРѕ СЂРµС€Р°С‚СЊ РєСѓР±РёС‡РµСЃРєРѕРµ СѓСЂР°РІРЅРµРЅРёРµ
 
 	//double D = pw_rcd * pw_rcd + signal_len;
 
@@ -9162,33 +9145,33 @@ void DoMyMethod3W(int type, // тип прямой задачи
 	den[2] = mmd.pw_pcd*mmd.pw_pcd;
 	den[3] = -signal_len;
 
-	vdouble droots; // Действительные корни
-	Vector<complex> croots; //Комплексные корни знаменателя
+	vdouble droots; // Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РєРѕСЂРЅРё
+	Vector<complex> croots; //РљРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 	// ============== Roots of denominator ==========================
 	Vector<int> order_dr, order_cr;
 	int res = den.roots(droots, croots, order_dr, order_cr);
 
 	for (int i = 0; i < droots.Length(); i++)
 	{
-		// Действительный корень
+		// Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Р№ РєРѕСЂРµРЅСЊ
 		near_Np = droots[i];
 	}
 
 	if (mmd.have_pereopredelen_system)
 	{
-		// если я хочу получить переопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РїРµСЂРµРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		mmd.Np = floor(near_Np);
 	}
 	else
 	{
-		// если я хочу получить недоопределённую систему
+		// РµСЃР»Рё СЏ С…РѕС‡Сѓ РїРѕР»СѓС‡РёС‚СЊ РЅРµРґРѕРѕРїСЂРµРґРµР»С‘РЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ
 		mmd.Np = ceil(near_Np);
 	}
 
 	mmd.Nr = mmd.Nc = mmd.Np + mmd.pw_pcd;
 #endif
 
-	// суммарное число s коэффициентов
+	// СЃСѓРјРјР°СЂРЅРѕРµ С‡РёСЃР»Рѕ s РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	long Ns = mmd.Np * mmd.Nr * mmd.Nc;
 
 	fprintf (description, "Np = %ld Nr = %ld Nc = %ld Ns = %ld\n", mmd.Np, mmd.Nr, mmd.Nc, Ns);
@@ -9204,7 +9187,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 	mmd.cols = increaser * mmd.Nc; 
 	mmd.rows = increaser * mmd.Nr;
-	mmd.pages = increaser * mmd.Np;// а это глубина
+	mmd.pages = increaser * mmd.Np;// Р° СЌС‚Рѕ РіР»СѓР±РёРЅР°
 
 	cout << "cols = " << mmd.cols << endl;
 	cout << "rows [" << mmd.rows << "]\n";
@@ -9254,12 +9237,12 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 	if (granicy_kak_glubina)
 	{
-		// Здесь мы размер куба уменьшаем на величину глубины
+		// Р—РґРµСЃСЊ РјС‹ СЂР°Р·РјРµСЂ РєСѓР±Р° СѓРјРµРЅСЊС€Р°РµРј РЅР° РІРµР»РёС‡РёРЅСѓ РіР»СѓР±РёРЅС‹
 
 		mmd.x0 = min__x + mmd.delta__z;
 		mmd.y0 = min__y + mmd.delta__z;
 
-		// Шаг вдоль профиля по X и по Y
+		// РЁР°Рі РІРґРѕР»СЊ РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
 		mmd.delta_x = (mmd.delta__x - 2.0 * mmd.delta__z) / (mmd.cols - 1);
 		mmd.delta_y = (mmd.delta__y - 2.0 * mmd.delta__z) / (mmd.rows - 1);
 	}
@@ -9268,22 +9251,22 @@ void DoMyMethod3W(int type, // тип прямой задачи
 		mmd.x0 = min__x;
 		mmd.y0 = min__y;
 
-		// Шаг вдоль профиля по X и по Y
+		// РЁР°Рі РІРґРѕР»СЊ РїСЂРѕС„РёР»СЏ РїРѕ X Рё РїРѕ Y
 		mmd.delta_x = mmd.delta__x / (mmd.cols - 1);
 		mmd.delta_y = mmd.delta__y / (mmd.rows - 1);
 	}
 
 
-	// Шаг вдоль геологической структуры по z (глубине)
-	//mmd.delta_z = mmd.delta__z / (mmd.pages - 1);// это неверно!!!
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РЁР°Рі РІРґРѕР»СЊ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ РїРѕ z (РіР»СѓР±РёРЅРµ)
+	//mmd.delta_z = mmd.delta__z / (mmd.pages - 1);// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	mmd.delta_z = mmd.delta__z / mmd.pages;
 
 	long rows_cols_pages = mmd.rows * mmd.cols * mmd.pages;
 
 	printf ( "DoMyMethod cols = %ld rows = %ld pages = %ld\n", mmd.cols, mmd.rows, mmd.pages);
 
-	// Простейшая формулировка прямой задачи
+	// РџСЂРѕСЃС‚РµР№С€Р°СЏ С„РѕСЂРјСѓР»РёСЂРѕРІРєР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 #if 0
 	char spm_filename[4096];
 	sprintf(spm_filename, "%s\\operator.spm", dir_out);
@@ -9308,18 +9291,18 @@ void DoMyMethod3W(int type, // тип прямой задачи
 	fprintf (description, "smoof_power = %d\n", smoof_power);
 
 		printf("Filling of matrix\n");
-		// формируем матрицу оператора прямой задачи, 
-		// число строк равно длине сигнала 
-		// (или суммарной длине нескольких сигналов - 
-		// нескольких профилей на одной или, ещё лучше, на разных высотах)
-		// на вход оператора подаётся геологическая структура 
-		// источников геополяритонного сигнала
-		// на выходе оператора имеем мощность излучения (сигнал) на профилях
+		// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё,
+		// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р°
+		// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ -
+		// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+		// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР°
+		// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+		// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 		switch(type)
 		{
 		case 0:
 			{
-				FillingTheMatrix3D(smoof_power, mmd.k_oslablenie, ab.k, NULL, mmd.fn_operator_spm, 
+				FillingTheMatrix3D(smoof_power, mmd.k_oslablenie, ab.k, NULL, mmd.fn_operator_spm,
 					mmd.rows, mmd.cols, mmd.pages,
 					mmd.x0, mmd.y0, mmd.z0,
 					mmd.delta_x, mmd.delta_y, mmd.delta_z,
@@ -9356,12 +9339,12 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 	if (!CheckMyLicense()) return;        
 
-	// Грид по размеру геологической структуры
+	// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	Grid4 * grid = CreateProfileGrid3D(mmd);
 
 	printf("Creating the matrix in Frequency region\n");
 #if !ON_THE_FLY_STORING
-	//матрица оператора прямой задачи в частотной области
+	//РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ С‡Р°СЃС‚РѕС‚РЅРѕР№ РѕР±Р»Р°СЃС‚Рё
 	vector<vector<double> > ms(signal_len);
 	for (long j = 0; j < signal_len; j++)
 		ms[j].resize(Ns);
@@ -9387,7 +9370,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 #if ON_THE_FLY_STORING
 	//StoreMatrixHeader(vvd_filename, signal_len, Nq, true);
 	#if SPARSE_OUT_W
-		//матрицу сохраняем в транспонированном виде
+		//РјР°С‚СЂРёС†Сѓ СЃРѕС…СЂР°РЅСЏРµРј РІ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
 		StoreMatrixHeader(mmd.fn_operator_wav, Ns, signal_len);
 	#else
 		StoreMatrixHeader(mmd.vvd_filename, signal_len, Ns, true);
@@ -9400,7 +9383,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 		sprintf(fn, "%s\\iwsi.cub", 
 			dir_out);
 		
-		// Ниже оно будет обращено
+		// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 		for (long rr = 0; rr < wavSimage->grid4Section.nRow; rr++)
 		{
@@ -9425,7 +9408,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 		long shift_r = 2 * (w3.right_h_r/2 - (w3.rh_r.Length()-2)/2);
 		long shift_p = 2 * (w3.right_h_p/2 - (w3.rh_p.Length()-2)/2);
 
-		// перебираем всевозможные комбинации пространственных масштабных функций
+		// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµРІРѕР·РјРѕР¶РЅС‹Рµ РєРѕРјР±РёРЅР°С†РёРё РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹С… РјР°СЃС€С‚Р°Р±РЅС‹С… С„СѓРЅРєС†РёР№
 		long q = 0;
 		for(long ps = 0; ps < mmd.Np; ps++)
 		{
@@ -9445,7 +9428,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 						i0c *= 2; i0c += shift_c;
 					}
 					//printf("i0p = %d i0r = %d i0c = %d\n", i0p, i0r, i0c);
-					// сформированный отклик текущей частоты заносим в вектор решения
+					// СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ РѕС‚РєР»РёРє С‚РµРєСѓС‰РµР№ С‡Р°СЃС‚РѕС‚С‹ Р·Р°РЅРѕСЃРёРј РІ РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
 					for (long p = 0; p < wavSimage->grid4Section.nPag; p++)
 					{
 						for (long r = 0; r < wavSimage->grid4Section.nRow; r++)
@@ -9457,7 +9440,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 								long cc_ = c + i0c;
 								if (pp_ >= 0 && rr_ >= 0 && cc_ >= 0 && pp_ < grid->grid4Section.nPag && rr_ < grid->grid4Section.nRow && cc_ < grid->grid4Section.nCol )
 								{
-									// индекс в строке матрицы оператора прямой задачи
+									// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 									//long i = rr_ * mmd.cols + cc_;
 									long i = pp_ * mmd.rows * mmd.cols + rr_ * mmd.cols + cc_;
 									psol[i] = wavSimage->grid4Section.v[p][r][c];
@@ -9466,9 +9449,9 @@ void DoMyMethod3W(int type, // тип прямой задачи
 						}
 					}
 
-					// на вектор решения действуем оператором прямой задачи
-					// и получаем q-тую колонку новой матрицы
-					// которая будет выражать оператор прямой задачи в S области
+					// РЅР° РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РґРµР№СЃС‚РІСѓРµРј РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+					// Рё РїРѕР»СѓС‡Р°РµРј q-С‚СѓСЋ РєРѕР»РѕРЅРєСѓ РЅРѕРІРѕР№ РјР°С‚СЂРёС†С‹
+					// РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РІС‹СЂР°Р¶Р°С‚СЊ РѕРїРµСЂР°С‚РѕСЂ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё РІ S РѕР±Р»Р°СЃС‚Рё
 
 		#if ON_THE_FLY_STORING
 		//#if 1
@@ -9522,15 +9505,15 @@ void DoInverseAndFillGrid3W(MyMethodsData3& mmd,
 							vector<double> & rec_signal
 							)
 {
-	// Грид по размеру геологической структуры
+	// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	Grid4 * grid = CreateProfileGrid3D(mmd);
 
-	// суммарное число s коэффициентов
+	// СЃСѓРјРјР°СЂРЅРѕРµ С‡РёСЃР»Рѕ s РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	long Ns = mmd.Np * mmd.Nr * mmd.Nc;
 
 	printf("Start of solve the inverse problem in S region\n");
 
-	// находим решение обратной задачи в S области
+	// РЅР°С…РѕРґРёРј СЂРµС€РµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё РІ S РѕР±Р»Р°СЃС‚Рё
 	vector<double> sol_S(Ns);
 	vector<double> sol_S_mean(Ns, 0.0);
 	double alpha = 0.0;
@@ -9549,7 +9532,7 @@ void DoInverseAndFillGrid3W(MyMethodsData3& mmd,
 
 
 
-	// формируем частотную матрицу
+	// С„РѕСЂРјРёСЂСѓРµРј С‡Р°СЃС‚РѕС‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	Zero3DMat<double>(grid->grid4Section.v, grid->grid4Section.nPag, grid->grid4Section.nRow, grid->grid4Section.nCol);
 	long q = 0;
 	for(long ps = 0; ps < mmd.Np; ps++)
@@ -9567,7 +9550,7 @@ void DoInverseAndFillGrid3W(MyMethodsData3& mmd,
 
 	printf("Form the razrez matrix by fft\n");
 			
-	// наконец, формируем пространственный "отклик" на S матрицу
+	// РЅР°РєРѕРЅРµС†, С„РѕСЂРјРёСЂСѓРµРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅС‹Р№ "РѕС‚РєР»РёРє" РЅР° S РјР°С‚СЂРёС†Сѓ
 	InverseWaveletTransform3D(w3, grid, mmd.increaser_pw, mmd.Np, mmd.Nr, mmd.Nc);
 
 	printf("Save the razrez matrix\n");
@@ -9590,7 +9573,7 @@ void DoInverseAndFillGrid3W(MyMethodsData3& mmd,
 				if (max_v < v_value) max_v = v_value;
 				if (min_v > v_value) min_v = v_value;
 
-				// индекс в строке матрицы оператора прямой задачи
+				// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				//long i = rr_ * mmd.cols + cc_;
 				long i = pp * mmd.rows * mmd.cols + rr * mmd.cols + cc;
 				sol[i] = v_value;
@@ -9599,7 +9582,7 @@ void DoInverseAndFillGrid3W(MyMethodsData3& mmd,
 	}
 	ErrorOfInverseProblemSolving(true, mmd.fn_operator_spm, signal, sol, name, rec_signal);
 #if 1
-	// Ниже оно будет обращено
+	// РќРёР¶Рµ РѕРЅРѕ Р±СѓРґРµС‚ РѕР±СЂР°С‰РµРЅРѕ
 
 	for (long ii = 0; ii < grid->grid4Section.nCol; ii++)
 	{
@@ -9851,7 +9834,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 	if (PrintDlg(&pd)!=TRUE) 
 	{
 		// GDI calls to render output.
-		// что нибудб печатаем... 
+		// С‡С‚Рѕ РЅРёР±СѓРґР± РїРµС‡Р°С‚Р°РµРј... 
 		// BeginPrinting(hwnd, &pd);
 		return;
 	}	
@@ -9870,7 +9853,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 		return ;
 	}
 
-	// Получаем указатели на две структуры с установками.
+	// РџРѕР»СѓС‡Р°РµРј СѓРєР°Р·Р°С‚РµР»Рё РЅР° РґРІРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ СЃ СѓСЃС‚Р°РЅРѕРІРєР°РјРё.
 	DEVNAMES FAR *lpDevNames =
 		(DEVNAMES FAR *)::GlobalLock(pd.hDevNames);
 	
@@ -9887,8 +9870,8 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 	LPSTR szOutputPortName = (LPTSTR)lpDevNames +
 		lpDevNames->wOutputOffset;
 
-	// Создать контекст устройства для принтера, 
-	// на котором должна быть выполнена печать.
+	// РЎРѕР·РґР°С‚СЊ РєРѕРЅС‚РµРєСЃС‚ СѓСЃС‚СЂРѕР№СЃС‚РІР° РґР»СЏ РїСЂРёРЅС‚РµСЂР°, 
+	// РЅР° РєРѕС‚РѕСЂРѕРј РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РІС‹РїРѕР»РЅРµРЅР° РїРµС‡Р°С‚СЊ.
 	//........................................
 	hDC = CreateDC( 
 		szDriverName,//"WINSPOOL", 
@@ -9900,8 +9883,8 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 	int  iWidthMM, iHeightMM, iWidthPels, iHeightPels;
 	double  iMMPerPelX, iMMPerPelY;
 
-	// Вычислить размер клиентской области в единицах 
-	// длины 0,01 мм.
+	// Р’С‹С‡РёСЃР»РёС‚СЊ СЂР°Р·РјРµСЂ РєР»РёРµРЅС‚СЃРєРѕР№ РѕР±Р»Р°СЃС‚Рё РІ РµРґРёРЅРёС†Р°С… 
+	// РґР»РёРЅС‹ 0,01 РјРј.
 	//................................................
 	iWidthMM    = GetDeviceCaps(hDC, HORZSIZE);
 	iHeightMM   = GetDeviceCaps(hDC, VERTSIZE);
@@ -9925,7 +9908,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 
 	printf("lf %d rt %d tp %d bt %d", rect.left,rect.right,rect.top,rect.bottom);
 
-	// Создать расширенный метафайл.
+	// РЎРѕР·РґР°С‚СЊ СЂР°СЃС€РёСЂРµРЅРЅС‹Р№ РјРµС‚Р°С„Р°Р№Р».
 	//.............................
 	HENHMETAFILE hMetaFile = NULL;
 	HDC  hMetaDC;
@@ -10130,7 +10113,7 @@ void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd)
 	f.Close();
 }
 #define WITH_FOURIER 0
-void UseOneOfMyMethods(int type, // тип прямой задачи
+void UseOneOfMyMethods(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   bool granicy_kak_glubina, 
 #if WITH_2D
 					   bool use_only_2D,
@@ -10139,7 +10122,7 @@ void UseOneOfMyMethods(int type, // тип прямой задачи
 					   auto_build_parametrs& ab,
 					   vector<double> & X,
 					   vector<double> & Y,
-					   vector<double> & Z, // альтитуда измерений - полёта самолёта
+					   vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 					   vector<vector<anten_direction> > & A,
 					   vector<double> & vModul,
 					   vector<vector<double> > & v,
@@ -10180,7 +10163,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 					cin >> mmd.increaser_pw;
 				}
 				
-				// отношение строк и столбцов	
+				// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ	
 				mmd.pw_rcd = 2;
 				cout << "pw_rcd rows/cols deviation pw = " << mmd.pw_rcd << "\n";
 				cout << "Do you want reenter pw_rcd rows/cols deviation pw (0,1,2,...)?\n";
@@ -10246,7 +10229,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 					cin >> mmd3.increaser_pw;
 				}
 				
-				// отношение строк и столбцов	
+				// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ	
 				mmd3.pw_pcd = 2;
 				cout << "pw_pcd pages/cols deviation pw = " << mmd3.pw_pcd << "\n";
 				cout << "Do you want reenter pw_pcd pages/cols deviation pw (0,1,2,...)?\n";
@@ -10303,7 +10286,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 	}
 #endif //#if WITH_2D
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 	char filename_description[4096];
 	sprintf(filename_description, "%s\\description2.txt", dir_out);		
 	FILE * description = fopen(filename_description,"wt");
@@ -10366,13 +10349,13 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 					bool to_fill_matrix = true;
 
 					Wavelet2D w2;
-					w2.wf_r = WF_DAUBECHIES; // флаг вейвлета
-					w2.wf_r = WF_COIFLETS; // флаг вейвлета
-					w2.order_r = 2; // порядок вейвлета
-					w2.orderBiorthogonalDecomposition_r = 0; // порядок вейвлета
-					w2.wf_c = WF_COIFLETS; // флаг вейвлета
-					w2.order_c = 1; // порядок вейвлета
-					w2.orderBiorthogonalDecomposition_c = 0; // порядок вейвлета	
+					w2.wf_r = WF_DAUBECHIES; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w2.wf_r = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w2.order_r = 2; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w2.orderBiorthogonalDecomposition_r = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w2.wf_c = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w2.order_c = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w2.orderBiorthogonalDecomposition_c = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 					
 					if (ans_OP == IDYES)
 					{
@@ -10525,16 +10508,16 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 
 					if (mmd.delta__x > mmd.delta__y)
 					{
-						//считаем по x
+						//СЃС‡РёС‚Р°РµРј РїРѕ x
 						t = &X;
 					}
 					else
 					{
-						//считаем по y
+						//СЃС‡РёС‚Р°РµРј РїРѕ y
 						t = &Y;
 					}
 
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						//printf_vector(v[c])
 						DoInverseAndFillGrid2W(mmd, w2, *t, v[c],names_of_colomns[original_col_numbers[c]]);
@@ -10547,7 +10530,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 				{
 					DoMyMethod2(description, mmd, ab,X,Y,Z,vModul,"modul");
 
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						
 						DoMyMethod2(description, mmd, ab,X,Y,Z, v[c],names_of_colomns[original_col_numbers[c]]);
@@ -10570,7 +10553,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 					
 					/*DoMyMethod3W(description,k_oslablenie, ab,vX,vY,vZ,z0,vModul,"modul");
 
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						DoMyMethod3W(description,k_oslablenie, ab,vX,vY,vZ, z0, v[c],names_of_colomns[original_col_numbers[c]]);
 					}	*/
@@ -10578,42 +10561,42 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 
 					Wavelet3D w3;
 #if 0
-					w3.wf_p = WF_DAUBECHIES; // флаг вейвлета
-					w3.order_p = 2; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_p = 0; // порядок вейвлета	
+					w3.wf_p = WF_DAUBECHIES; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_p = 2; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_p = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 					
-					w3.wf_r = WF_DAUBECHIES; // флаг вейвлета
-					w3.order_r = 3; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_r = 0; // порядок вейвлета
+					w3.wf_r = WF_DAUBECHIES; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_r = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_r = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 					
-					w3.wf_c = WF_DAUBECHIES; // флаг вейвлета
-					w3.order_c = 3; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_c = 0; // порядок вейвлета	
+					w3.wf_c = WF_DAUBECHIES; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_c = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_c = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 #else
 #if 0
-					w3.wf_p = WF_SYMLETS; // флаг вейвлета
-					w3.order_p = 2; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_p = 0; // порядок вейвлета	
+					w3.wf_p = WF_SYMLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_p = 2; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_p = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 					
-					w3.wf_r = WF_SYMLETS; // флаг вейвлета
-					w3.order_r = 3; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_r = 0; // порядок вейвлета
+					w3.wf_r = WF_SYMLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_r = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_r = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 					
-					w3.wf_c = WF_SYMLETS; // флаг вейвлета
-					w3.order_c = 3; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_c = 0; // порядок вейвлета	
+					w3.wf_c = WF_SYMLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_c = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_c = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 #else
-					w3.wf_p = WF_COIFLETS; // флаг вейвлета
-					w3.order_p = 1; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_p = 0; // порядок вейвлета	
+					w3.wf_p = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_p = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_p = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 					
-					w3.wf_r = WF_COIFLETS; // флаг вейвлета
-					w3.order_r = 3; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_r = 0; // порядок вейвлета
+					w3.wf_r = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_r = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_r = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 					
-					w3.wf_c = WF_COIFLETS; // флаг вейвлета
-					w3.order_c = 3; // порядок вейвлета
-					w3.orderBiorthogonalDecomposition_c = 0; // порядок вейвлета	
+					w3.wf_c = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+					w3.order_c = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+					w3.orderBiorthogonalDecomposition_c = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 #endif
 					
 #endif
@@ -10744,7 +10727,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 					GetWaveletFilters(w3);
 
 
-					// начало расчётного блока
+					// РЅР°С‡Р°Р»Рѕ СЂР°СЃС‡С‘С‚РЅРѕРіРѕ Р±Р»РѕРєР°
 					DoMyMethod3W(type, granicy_kak_glubina, description, mmd3, w3, ab, X, Y, Z, A, to_fill_matrix);
 
 					if (description)
@@ -10794,7 +10777,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 					case 0:
 						{
 							rec_signals.resize(cols);
-							for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+							for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 							{
 								//printf_vector(v[c])
 								DoInverseAndFillGrid3W(mmd3, w3, v[c], names_of_colomns[original_col_numbers[c]], rec_signals[c]);
@@ -10831,7 +10814,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 							}
 
 							rec_signals.resize(cols_3);
-							for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+							for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 							{
 								//printf_vector(v[c])
 								DoInverseAndFillGrid3W(mmd3, w3, new_v[cc], 
@@ -10869,7 +10852,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 							}
 
 							rec_signals.resize(cols_3);
-							for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+							for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 							{
 								//printf_vector(v[c])
 								DoInverseAndFillGrid3W(mmd3, w3, v[cc], 
@@ -10887,7 +10870,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 				{
 					DoMyMethod3(description,mmd3.k_oslablenie, ab,X,Y,Z,mmd.z0,vModul,"modul");
 
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						DoMyMethod3(description,mmd3.k_oslablenie, ab,X,Y,Z, mmd.z0, v[c],names_of_colomns[original_col_numbers[c]]);
 					}	
@@ -10910,7 +10893,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 	}
 }
 
-void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
+void UseOneOfMyMethods3W_preparing(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   int & ans_OP,
 					   double z0, double z_min, double & DZ,
 					   int & cols,
@@ -10937,7 +10920,7 @@ void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
 			cin >> mmd3.increaser_pw;
 		}
 		
-		// отношение строк и столбцов	
+		// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ	
 		mmd3.pw_pcd = 2;
 		cout << "pw_pcd pages/cols deviation pw = " << mmd3.pw_pcd << "\n";
 		cout << "Do you want reenter pw_pcd pages/cols deviation pw (0,1,2,...)?\n";
@@ -11126,7 +11109,7 @@ void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
 		DZ = mmd3.z0 - mmd3.z_min;
 	}
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 	char filename_description[4096];
 	sprintf(filename_description, "%s\\description.txt", dir_out);		
 	FILE * description = fopen(filename_description,"wt");
@@ -11221,42 +11204,42 @@ void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
 	}
 
 #if 0
-	w3.wf_p = WF_DAUBECHIES; // флаг вейвлета
-	w3.order_p = 2; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_p = 0; // порядок вейвлета	
+	w3.wf_p = WF_DAUBECHIES; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_p = 2; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_p = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 	
-	w3.wf_r = WF_DAUBECHIES; // флаг вейвлета
-	w3.order_r = 3; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_r = 0; // порядок вейвлета
+	w3.wf_r = WF_DAUBECHIES; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_r = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_r = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 	
-	w3.wf_c = WF_DAUBECHIES; // флаг вейвлета
-	w3.order_c = 3; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_c = 0; // порядок вейвлета	
+	w3.wf_c = WF_DAUBECHIES; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_c = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_c = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 #else
 #if 0
-	w3.wf_p = WF_SYMLETS; // флаг вейвлета
-	w3.order_p = 2; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_p = 0; // порядок вейвлета	
+	w3.wf_p = WF_SYMLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_p = 2; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_p = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 	
-	w3.wf_r = WF_SYMLETS; // флаг вейвлета
-	w3.order_r = 3; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_r = 0; // порядок вейвлета
+	w3.wf_r = WF_SYMLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_r = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_r = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 	
-	w3.wf_c = WF_SYMLETS; // флаг вейвлета
-	w3.order_c = 3; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_c = 0; // порядок вейвлета	
+	w3.wf_c = WF_SYMLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_c = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_c = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 #else
-	w3.wf_p = WF_COIFLETS; // флаг вейвлета
-	w3.order_p = 1; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_p = 0; // порядок вейвлета	
+	w3.wf_p = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_p = 1; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_p = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 	
-	w3.wf_r = WF_COIFLETS; // флаг вейвлета
-	w3.order_r = 3; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_r = 0; // порядок вейвлета
+	w3.wf_r = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_r = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_r = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 	
-	w3.wf_c = WF_COIFLETS; // флаг вейвлета
-	w3.order_c = 3; // порядок вейвлета
-	w3.orderBiorthogonalDecomposition_c = 0; // порядок вейвлета	
+	w3.wf_c = WF_COIFLETS; // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	w3.order_c = 3; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	w3.orderBiorthogonalDecomposition_c = 0; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°	
 #endif
 	
 #endif
@@ -11265,7 +11248,7 @@ void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
 	cout << "Else Enter j_start = 0" << endl;
 	cin >> mmd3.j_start;
 }
-void UseOneOfMyMethods3W(int type, // тип прямой задачи
+void UseOneOfMyMethods3W(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   bool granicy_kak_glubina, 
 					   int & ans_OP,
 					   double z0, double z_min,
@@ -11275,7 +11258,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 					   auto_build_parametrs & ab,
 					   vector<double> & X,
 					   vector<double> & Y,
-					   vector<double> & Z, // альтитуда измерений - полёта самолёта
+					   vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 					   vector<vector<anten_direction> > & A,
 					   vector<double> & vModul,
 					   vector<vector<double> > & v,
@@ -11287,14 +11270,14 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 					   )
 {
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 	char filename_description[4096];
 	sprintf(filename_description, "%s\\description3W.txt", dir_out);		
 	FILE * description = fopen(filename_description,"wt");
 
 	/*DoMyMethod3W(description,k_oslablenie, ab,vX,vY,vZ,z0,vModul,"modul");
 
-	for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+	for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 	{
 		DoMyMethod3W(description,k_oslablenie, ab,vX,vY,vZ, z0, v[c],names_of_colomns[original_col_numbers[c]]);
 	}	*/
@@ -11417,7 +11400,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 	GetWaveletFilters(w3);
 
 
-	// начало расчётного блока
+	// РЅР°С‡Р°Р»Рѕ СЂР°СЃС‡С‘С‚РЅРѕРіРѕ Р±Р»РѕРєР°
 	DoMyMethod3W(type, granicy_kak_glubina, description, mmd3, w3, ab, X, Y, Z, A, to_fill_matrix);
 
 	if (description)
@@ -11460,7 +11443,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 	case 0:
 		{
 			rec_signals.resize(cols);
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				//printf_vector(v[c])
 				DoInverseAndFillGrid3W(mmd3, w3, v[c], names_of_colomns[original_col_numbers[c]], rec_signals[c]);
@@ -11497,7 +11480,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 			}
 
 			rec_signals.resize(cols_3);
-			for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+			for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				//printf_vector(v[c])
 				DoInverseAndFillGrid3W(mmd3, w3, new_v[cc], 
@@ -11521,27 +11504,27 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 
 			for (int cc = 0; cc < cols_3; cc++)
 			{
-				for(size_t c = cc * 3; c < (cc+1) * 3; c++) 
-				{								
+				for(size_t c = cc * 3; c < (cc+1) * 3; c++)
+				{
 					/*for (int i = 0; i < X.size(); i++)
 					{
 						double value_v_c_i = v[c][i];
 						new_v[cc].push_back(value_v_c_i);
 					}*/
-					new_names_of_colomns[cc] += 
+					new_names_of_colomns[cc] +=
 						names_of_colomns[original_col_numbers[c]];
 					new_names_of_colomns[cc] += "_";
 				}
 			}
 
 			rec_signals.resize(cols_3);
-			for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+			for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				//printf_vector(v[c])
-				DoInverseAndFillGrid3W(mmd3, w3, v[cc], 
-					new_names_of_colomns[cc], 
+				DoInverseAndFillGrid3W(mmd3, w3, v[cc],
+					new_names_of_colomns[cc],
 					rec_signals[cc]);
-			}	
+			}
 		}
 		break;
 	}
@@ -11579,36 +11562,36 @@ bool AutoBuildProfile_main(
 	}
 
 	// double quantil_naklony = 0.50;
-	// квантиль отбора "локалов" по углу налона
-	// мы будем отбирать только те аномалии в "локалах",
-	// которые имеют минимальный угол наклона
-	// чем меньше квантиль, тем меньше локалов будет оторано
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° "Р»РѕРєР°Р»РѕРІ" РїРѕ СѓРіР»Сѓ РЅР°Р»РѕРЅР°
+	// РјС‹ Р±СѓРґРµРј РѕС‚Р±РёСЂР°С‚СЊ С‚РѕР»СЊРєРѕ С‚Рµ Р°РЅРѕРјР°Р»РёРё РІ "Р»РѕРєР°Р»Р°С…",
+	// РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓРіРѕР» РЅР°РєР»РѕРЅР°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ, С‚РµРј РјРµРЅСЊС€Рµ Р»РѕРєР°Р»РѕРІ Р±СѓРґРµС‚ РѕС‚РѕСЂР°РЅРѕ
 
 	//bool allow_sd_limit = true;
 	//double peregib_krutizna_quantil = 0.40;
-	// квантиль отбора точек перегиба по их крутизне
-	// квантиль отбора локальных экстремумов второй производной
-	// если квантиль отбора равен 0,5 то мы отбираем все определяемые точки перегиба
-	// чем меньше квантиль отбора тем больше точек перегиба мы отфильтровываем,
-	// тем самым мы оставляем лишь блее крутые точки перегиба
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РїРѕ РёС… РєСЂСѓС‚РёР·РЅРµ
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° Р»РѕРєР°Р»СЊРЅС‹С… СЌРєСЃС‚СЂРµРјСѓРјРѕРІ РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	// РµСЃР»Рё РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° СЂР°РІРµРЅ 0,5 С‚Рѕ РјС‹ РѕС‚Р±РёСЂР°РµРј РІСЃРµ РѕРїСЂРµРґРµР»СЏРµРјС‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
+	// С‡РµРј РјРµРЅСЊС€Рµ РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° С‚РµРј Р±РѕР»СЊС€Рµ С‚РѕС‡РµРє РїРµСЂРµРіРёР±Р° РјС‹ РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РµРј,
+	// С‚РµРј СЃР°РјС‹Рј РјС‹ РѕСЃС‚Р°РІР»СЏРµРј Р»РёС€СЊ Р±Р»РµРµ РєСЂСѓС‚С‹Рµ С‚РѕС‡РєРё РїРµСЂРµРіРёР±Р°
 
 	//double limit = 0.5;	
 	//double limit_dima = 0.8, double limit_1 = 0.9;
 	//double minimum_of_signal = 0.1;
 				
-	//size_t start_j1 = 1;//начальный уровень фильтрации для чистых локалов
-	//size_t start_j2 = 0;//начальный уровень фильтрации для window_cycles_after_locals
+	//size_t start_j1 = 1;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ С‡РёСЃС‚С‹С… Р»РѕРєР°Р»РѕРІ
+	//size_t start_j2 = 0;//РЅР°С‡Р°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ С„РёР»СЊС‚СЂР°С†РёРё РґР»СЏ window_cycles_after_locals
 
 	//bool use_repeat_points = true;
 	//bool use_repeat_points = false;
-	//int n = 1;//плечо области запрета ( можно 0 и выше)
+	//int n = 1;//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 		
 	//int delim = ',';
 
 	int num_col = -1;
 
 	//##############################################################
-	//блок чтения файла с нумерами колонок
+	//Р±Р»РѕРє С‡С‚РµРЅРёСЏ С„Р°Р№Р»Р° СЃ РЅСѓРјРµСЂР°РјРё РєРѕР»РѕРЅРѕРє
 	vector<bool> use_col;
 
 #if 0
@@ -11661,7 +11644,7 @@ bool AutoBuildProfile_main(
 	{
 		return false;
 	}
-	if (OpenFileDlg(NULL, 
+	if (OpenFileDlg(NULL,
 		"CSV (*.csv)\0*.csv\0"
 		"Data (*.dat)\0*.dat\0"
 		"All files \0*.*\0") == S_OK)
@@ -11671,7 +11654,7 @@ bool AutoBuildProfile_main(
 		vvvvkp.clear();
 
 		vector<profile_interval> profile_intervals;
-		profile_intervals.clear();		
+		profile_intervals.clear();
 
 		char filename[256];
 		vector<size_t> original_col_numbers;
@@ -11722,7 +11705,7 @@ bool AutoBuildProfile_main(
 
 		vector<double> vvv(rows, 0.0);
 		
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			for (size_t r = 0; r < rows; r++)
 			{
@@ -11733,7 +11716,7 @@ bool AutoBuildProfile_main(
 		vector<vector <double> > rec_signals;
 		vector <double> rec_modul;
 			
-		int type = 0; // тип прямой задачи
+		int type = 0; // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		cout << "Enter type of prjamoj zadachi" << endl;
 		cout << "0 - simple" << endl;
 		cout << "1 - with diagramm of 3 antenns and nonpolarized sources" << endl;
@@ -11755,7 +11738,7 @@ bool AutoBuildProfile_main(
 #else
 		
 		bool is_reverse = false;
-		int shoulder = 50;// плечо -  длина окна - это два плеча плюс один
+		int shoulder = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 		int step = 5;
 		int wlen_base = 20;
 		int wlen_auto = 10;
@@ -11843,7 +11826,7 @@ bool ReadColomnNumbers(
 		{
 			_cols = pcells_num_col->operator [](0).size();
 			printf("rows = %d _cols = %d\n", rows, _cols);
-		}	
+		}
 		num_col = rows;
 		use_col.resize(num_col);
 
@@ -11866,9 +11849,9 @@ bool ReadColomnNumbers(
 
 }
 
-bool ReadProfileFile( 
-				  char * sz_path_to_file, char * current_directory, char* filename, 
-				  bool consol, 
+bool ReadProfileFile(
+				  char * sz_path_to_file, char * current_directory, char* filename,
+				  bool consol,
 				  AutoBuildProfile * p_auto_build_profile,
 				  auto_build_parametrs& ab,
 				  int& rows, int& cols,
@@ -11891,15 +11874,15 @@ bool ReadProfileFile(
 	pnames_of_colomns->clear();
 	original_col_numbers.clear();
 	//##############################################################
-	//блок чтения файла
+	//Р±Р»РѕРє С‡С‚РµРЅРёСЏ С„Р°Р№Р»Р°
 	vector<vector<cell> > * pcells = new vector<vector<cell> >;
-	
+
 printf("ReadProfileFile sz_path_to_file = %s, current_directory = %s\n", sz_path_to_file, current_directory);
 
 	ReadCellFile(NULL, sz_path_to_file, filename, pcells, pnames_of_colomns, delim );
 
 
-	//блок чтения файла
+	//Р±Р»РѕРє С‡С‚РµРЅРёСЏ С„Р°Р№Р»Р°
 	//##############################################################
 
 	rows = pcells->size();
@@ -11913,8 +11896,8 @@ printf("ReadProfileFile sz_path_to_file = %s, current_directory = %s\n", sz_path
 	{
 		_cols = pcells->operator [](0).size();
 		printf("rows = %d _cols = %d\n", rows, _cols);
-	}		
-		
+	}
+
 	int tcols, use_time_col = 0;
 	int miss_cols = 0;
 
@@ -11953,7 +11936,7 @@ printf("cols = %d\n", cols);
 	Y.resize(rows);
 	Z.resize(rows, 0.0);
 
-	//длина профиля
+	//РґР»РёРЅР° РїСЂРѕС„РёР»СЏ
 	//double profile_size = t.back() - (*t.begin());
 	//double one_point_size = profile_size / (rows-1);
 
@@ -11965,13 +11948,13 @@ printf("cols = %d\n", cols);
 	if (cols > 0)
 	{
 		//##############################################################
-		//блок заполнения массива координат и массива данных
+		//Р±Р»РѕРє Р·Р°РїРѕР»РЅРµРЅРёСЏ РјР°СЃСЃРёРІР° РєРѕРѕСЂРґРёРЅР°С‚ Рё РјР°СЃСЃРёРІР° РґР°РЅРЅС‹С…
 		v.resize(cols);
 		w.resize(cols);
 		original_col_numbers.resize(cols);
 		size_t cc = 0;
 		for (size_t c = 0; c < _cols; c++)
-		{						
+		{
 			if (c < tcols+use_time_col)
 			{
 				if (!ab.use_num_col)
@@ -11984,7 +11967,7 @@ printf("cols = %d\n", cols);
 #endif
 				}
 				else
-				{								
+				{
 					if (use_col[c])
 					{
 #if !SOURCE_COORDINATES_3D
@@ -12068,7 +12051,7 @@ printf("cols = %d\n", cols);
 
 		pcells->clear();
 		delete pcells;
-		//блок заполнения массива координат и массива данных
+		//Р±Р»РѕРє Р·Р°РїРѕР»РЅРµРЅРёСЏ РјР°СЃСЃРёРІР° РєРѕРѕСЂРґРёРЅР°С‚ Рё РјР°СЃСЃРёРІР° РґР°РЅРЅС‹С…
 		//##############################################################
 		return true;
 	}
@@ -12091,7 +12074,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					 char * current_directory,
 					 char * filename,
 					 bool is_reverse,
-					 int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
+					 int shoulder,// = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 					 int step)
 {
 	double k = ab.k;
@@ -12104,7 +12087,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 	}
 
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 	char filename_description[4096];
 	sprintf(filename_description, "%s\\description_old.txt", dir_out);
 	FILE *stream;
@@ -12117,18 +12100,18 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 	//**********************************************
 	if (!CheckMyLicense()) return false;
 	//##############################################################
-	//это блок построения корреляционной матрицы
+	//СЌС‚Рѕ Р±Р»РѕРє РїРѕСЃС‚СЂРѕРµРЅРёСЏ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 	bool vertical_korr_on_base_wnd = true;
 	bool vertical_auto_korr = true;
 	bool gorizontal_korr = true;
 	if (vertical_korr_on_base_wnd)
-		// чуть изменённый алгоритм Ивана с корреляцией по вертикальным столбцам
-		// здесь мы поэкспериментируем с построением корреляционной матрицы по вертикальным столбцам
-		// основываясь на одном базовом изначально выбранном и фиксированном окне
+		// С‡СѓС‚СЊ РёР·РјРµРЅС‘РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РРІР°РЅР° СЃ РєРѕСЂСЂРµР»СЏС†РёРµР№ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+		// Р·РґРµСЃСЊ РјС‹ РїРѕСЌРєСЃРїРµСЂРёРјРµРЅС‚РёСЂСѓРµРј СЃ РїРѕСЃС‚СЂРѕРµРЅРёРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+		// РѕСЃРЅРѕРІС‹РІР°СЏСЃСЊ РЅР° РѕРґРЅРѕРј Р±Р°Р·РѕРІРѕРј РёР·РЅР°С‡Р°Р»СЊРЅРѕ РІС‹Р±СЂР°РЅРЅРѕРј Рё С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРј РѕРєРЅРµ
 	{
-		// этими переменными мы можем изменить (-1, +1) направление прохода 
-		// по каждому из окон
-		// при расчёте корреляционного коэффициента
+		// СЌС‚РёРјРё РїРµСЂРµРјРµРЅРЅС‹РјРё РјС‹ РјРѕР¶РµРј РёР·РјРµРЅРёС‚СЊ (-1, +1) РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР°
+		// РїРѕ РєР°Р¶РґРѕРјСѓ РёР· РѕРєРѕРЅ
+		// РїСЂРё СЂР°СЃС‡С‘С‚Рµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 		int reverse1 = +1, reverse2 = +1;
 
 		profile_interval prof_interval;
@@ -12146,34 +12129,34 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			}
 
 			vvvvkp.resize(cols);
-			// построение корреляционных матриц по принципу каждая колонка с каждой
+			// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РјР°С‚СЂРёС† РїРѕ РїСЂРёРЅС†РёРїСѓ РєР°Р¶РґР°СЏ РєРѕР»РѕРЅРєР° СЃ РєР°Р¶РґРѕР№
 			for(size_t c1 = 0; c1 < cols; c1++)
-			{		
+			{
 				vvvvkp[c1].resize(cols);
 				for(size_t c2 = 0; c2 < cols; c2++)
 				{
-					// набор колонок можно по указателю вынести за пределы функции 
+					// РЅР°Р±РѕСЂ РєРѕР»РѕРЅРѕРє РјРѕР¶РЅРѕ РїРѕ СѓРєР°Р·Р°С‚РµР»СЋ РІС‹РЅРµСЃС‚Рё Р·Р° РїСЂРµРґРµР»С‹ С„СѓРЅРєС†РёРё
 					// BuildProfile
-					//  а также за пределы этой функции вынести корреляционную обработку этих колонок, 
-					// чтобы обрабатывать одинаковым образом не один профиль только,
-					// а сразу все профили в функции UseWholeDirectory
+					//  Р° С‚Р°РєР¶Рµ Р·Р° РїСЂРµРґРµР»С‹ СЌС‚РѕР№ С„СѓРЅРєС†РёРё РІС‹РЅРµСЃС‚Рё РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РѕР±СЂР°Р±РѕС‚РєСѓ СЌС‚РёС… РєРѕР»РѕРЅРѕРє,
+					// С‡С‚РѕР±С‹ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РѕРґРёРЅР°РєРѕРІС‹Рј РѕР±СЂР°Р·РѕРј РЅРµ РѕРґРёРЅ РїСЂРѕС„РёР»СЊ С‚РѕР»СЊРєРѕ,
+					// Р° СЃСЂР°Р·Сѓ РІСЃРµ РїСЂРѕС„РёР»Рё РІ С„СѓРЅРєС†РёРё UseWholeDirectory
 
 					DoGorizontalCorrilation(k, shoulder,step,&vvvvkp[c1][c2],
-						v, X, Y, pnames_of_colomns, original_col_numbers, 
-						rows, c1, c2, reverse1, reverse2, delim);	
+						v, X, Y, pnames_of_colomns, original_col_numbers,
+						rows, c1, c2, reverse1, reverse2, delim);
 
 					BuildGrid(0,//short crd_type,
 								// 0 - x, 1 - y, 2 - profile_len
 						1, 		// short value_type,
-								// 1 - korr_k;  // коэффициент горизонтальной корреляции
-								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
+								// 1 - korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+								// 2 - korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+								// 3 - korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 						NULL, //pcollection,
 						&vvvvkp[c1][c2],
 						profile_intervals,
 						pnames_of_colomns,
 						original_col_numbers,
-						5, 5, 200, //double xSize, double ySize, double max_glubina, 
+						5, 5, 200, //double xSize, double ySize, double max_glubina,
 						c1, c2,
 						reverse1, reverse2);
 
@@ -12184,7 +12167,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			if (vvvvkp[0].size() > 0)
 				prof_interval.i2 = vvvvkp[0][0].size()-1;
 
-		prof_interval.layer = NULL;					
+		prof_interval.layer = NULL;
 		SurfDoc * doc = NULL;
 		if (p_auto_build_profile)
 			doc = (SurfDoc*)p_auto_build_profile->GetDoc();
@@ -12197,11 +12180,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		profile_intervals.push_back(prof_interval);
 		prof_interval.i1 = prof_interval.i2+1;
 	}
-	if (vertical_auto_korr)// чуть изменённый алгоритм Ивана с корреляцией по вертикальным столбцам
+	if (vertical_auto_korr)// С‡СѓС‚СЊ РёР·РјРµРЅС‘РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РРІР°РЅР° СЃ РєРѕСЂСЂРµР»СЏС†РёРµР№ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
 	{
-		// этими переменными мы можем изменить (-1, +1) направление прохода 
-		// по каждому из окон
-		// при расчёте корреляционного коэффициента
+		// СЌС‚РёРјРё РїРµСЂРµРјРµРЅРЅС‹РјРё РјС‹ РјРѕР¶РµРј РёР·РјРµРЅРёС‚СЊ (-1, +1) РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР°
+		// РїРѕ РєР°Р¶РґРѕРјСѓ РёР· РѕРєРѕРЅ
+		// РїСЂРё СЂР°СЃС‡С‘С‚Рµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 		int reverse1 = +1, reverse2 = +1;
 
 		for (size_t j = 0; j < 2; j++)
@@ -12214,11 +12197,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			{
 				reverse1 = +1, reverse2 = +1;
 			}
-			// построение корреляционных матриц по принципу каждая колонка с каждой
+			// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РјР°С‚СЂРёС† РїРѕ РїСЂРёРЅС†РёРїСѓ РєР°Р¶РґР°СЏ РєРѕР»РѕРЅРєР° СЃ РєР°Р¶РґРѕР№
 			for(size_t c1 = 0; c1 < cols; c1++)
-			{			
+			{
 				for(size_t c2 = 0; c2 < cols; c2++)
-				{	
+				{
 					TCHAR lpstrFile[1024];
 					FILE * stream_corr_ivan = NULL;
 					sprintf(lpstrFile, "%s\\corr_ivan_%s_%s_sym_%d.dat", dir_out,
@@ -12226,7 +12209,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
 						);
-					
+
 					char *p;
 					while (p=strchr (lpstrFile,'\"'))
 					{
@@ -12235,7 +12218,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					printf("try to open file: \n%s\n", lpstrFile);
 					stream_corr_ivan = fopen(lpstrFile, "wt");
 
-											
+
 					TCHAR blnFile[1024];
 					FILE * bln = NULL;
 					sprintf(blnFile, "%s\\corr_ivan_%s_%s_sym_%d.bln", dir_out,
@@ -12251,12 +12234,12 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 					bln = fopen(blnFile, "wt");
 
-					if (stream_corr_ivan && bln) 
-					{	
+					if (stream_corr_ivan && bln)
+					{
 						printf("start of filling file: \n%s\n", lpstrFile);
 
 
-						//исходя из максимальной глубины вычисляем максимальное плечо
+						//РёСЃС…РѕРґСЏ РёР· РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РіР»СѓР±РёРЅС‹ РІС‹С‡РёСЃР»СЏРµРј РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РїР»РµС‡Рѕ
 
 						double max_z = 10000.0;
 						double profile_len = 0.0;
@@ -12275,7 +12258,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						int max_shoulder = max_delta_rows/2;
 
 
-						int shoulder = 90;// плечо -  длина окна - это два плеча плюс один
+						int shoulder = 90;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 						//int step = shoulder+1;
 						int step = 5;
 
@@ -12285,7 +12268,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						vvkp.clear();
 
 
-						// координата нашей колонки
+						// РєРѕРѕСЂРґРёРЅР°С‚Р° РЅР°С€РµР№ РєРѕР»РѕРЅРєРё
 						//for (int r = max_shoulder; r < rows-max_shoulder; r++)
 						//for (int r = 0; r < rows; r++)
 						for (int r = 0; r < rows; r+=step)
@@ -12299,7 +12282,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								int r1 = r - sh, r2 = r + sh;
 								if (r1 >= 0 && r2 >= 0 && r1 < rows && r2 < rows)
 								{		
-									// вычисляем матожидание в каждом из окон
+									// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 									double m1 = 0.0, m2 = 0.0;
 									int n1 = 0, n2 = 0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
@@ -12316,7 +12299,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 									}
 									if (n1) m1 /= n1;
 									if (n2) m2 /= n2;
-									// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
+									// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 									double D1 = 0.0, D2 = 0.0;
 									n1=0,n2=0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
@@ -12337,7 +12320,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 									if (n2) D2 /= n2;
 									double sigma1 = sqrt(D1);
 									double sigma2 = sqrt(D2);
-									// рассчитываем корреляционный коэффициент
+									// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 									double K_r1_r2_c1_c2 = 0.0;
 									int n = 0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
@@ -12353,7 +12336,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 									double k_r1_r2_c1_c2 = K_r1_r2_c1_c2 / (sigma1*sigma2);
 
-									// вычисление привязки к источнику сигнала
+									// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРёРІСЏР·РєРё Рє РёСЃС‚РѕС‡РЅРёРєСѓ СЃРёРіРЅР°Р»Р°
 									double x1 = X[r1];
 									double x2 = X[r2];
 									double y1 = Y[r1];
@@ -12430,45 +12413,45 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 
 
-						// проводим корреляцию между столбцами
+						// РїСЂРѕРІРѕРґРёРј РєРѕСЂСЂРµР»СЏС†РёСЋ РјРµР¶РґСѓ СЃС‚РѕР»Р±С†Р°РјРё
 
-						int wlen = 10;//длина окна корреляции
+						int wlen = 10;//РґР»РёРЅР° РѕРєРЅР° РєРѕСЂСЂРµР»СЏС†РёРё
 #define AUTO_KORR 1
 #if !AUTO_KORR
 						for (size_t R = 1; R < vvkp.size(); R++)
 						{
-							//длины двух соседних столбцов
+							//РґР»РёРЅС‹ РґРІСѓС… СЃРѕСЃРµРґРЅРёС… СЃС‚РѕР»Р±С†РѕРІ
 							size_t len0 = vvkp[R-1].size();
 							size_t len1 = vvkp[R].size();
 
-							// ссылки на соседние столбцы
+							// СЃСЃС‹Р»РєРё РЅР° СЃРѕСЃРµРґРЅРёРµ СЃС‚РѕР»Р±С†С‹
 							vector<korr_point>& vkp_0  = vvkp[R-1];
 							vector<korr_point>& vkp_1  = vvkp[R];
 #else
 						for (size_t R = 0; R < vvkp.size(); R++)
 						{
-							//длины двух соседних столбцов
+							//РґР»РёРЅС‹ РґРІСѓС… СЃРѕСЃРµРґРЅРёС… СЃС‚РѕР»Р±С†РѕРІ
 							size_t len0 = vvkp[R].size();
 							size_t len1 = vvkp[R].size();
 
-							// ссылки на соседние столбцы
+							// СЃСЃС‹Р»РєРё РЅР° СЃРѕСЃРµРґРЅРёРµ СЃС‚РѕР»Р±С†С‹
 							vector<korr_point>& vkp_0  = vvkp[R];
 							vector<korr_point>& vkp_1  = vvkp[R];
 #endif
 
-							// отнимаем длину окна плюс один 
-							// получаем размерность корреляционной матрицы 
-							// которую мы сейчас должны рассчитать 
-							// для поиска послойной корреляции 
-							// между соседними столбцами
+							// РѕС‚РЅРёРјР°РµРј РґР»РёРЅСѓ РѕРєРЅР° РїР»СЋСЃ РѕРґРёРЅ
+							// РїРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+							// РєРѕС‚РѕСЂСѓСЋ РјС‹ СЃРµР№С‡Р°СЃ РґРѕР»Р¶РЅС‹ СЂР°СЃСЃС‡РёС‚Р°С‚СЊ
+							// РґР»СЏ РїРѕРёСЃРєР° РїРѕСЃР»РѕР№РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+							// РјРµР¶РґСѓ СЃРѕСЃРµРґРЅРёРјРё СЃС‚РѕР»Р±С†Р°РјРё
 
 							int len_0 = len0-wlen+1;
 							int len_1 = len1-wlen+1;
 
-                            // если размерность корреляционной матрицы разумна
+                            // РµСЃР»Рё СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·СѓРјРЅР°
 							if (len_0 > 0 && len_1 > 0)
 							{
-								// выделяем память под корреляционную матрицу
+								// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 								double **M = AllocDoubleMat(len_0,len_1);
 
 								double min_k = DBL_MAX;
@@ -12476,15 +12459,15 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								int i_0_max, i_1_max, i_0_min, i_1_min;
 
-								//поэлементное заполнение корреляционной матрицы 
-								// в двух циклах
+								//РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+								// РІ РґРІСѓС… С†РёРєР»Р°С…
 								for (int i_0 = 0; i_0 < len_0; i_0++)
 								{
 									for (int i_1 = 0; i_1 < len_1; i_1++)
 									{
-										// начинаем расчёт корреляционного коэффициента											
+										// РЅР°С‡РёРЅР°РµРј СЂР°СЃС‡С‘С‚ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 										//
-										// вычисляем матожидание в каждом из окон
+										// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 										double m_0 = 0.0, m_1 = 0.0;
 										//int n_0 = 0, n_1 = 0;
 										for (int w = 0; w < wlen; w++)
@@ -12495,7 +12478,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 										m_0 /= wlen;
 										m_1 /= wlen;
 
-										// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
+										// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 										double D_0 = 0.0, D_1 = 0.0;										
 										for (int w = 0; w < wlen; w++)
 										{
@@ -12507,7 +12490,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 										double sigma_0 = sqrt(D_0);
 										double sigma_1 = sqrt(D_1);
-										// рассчитываем корреляционный коэффициент
+										// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 										double K_0_1 = 0.0;
 										for (int w = 0; w < wlen; w++)
 										{
@@ -12540,12 +12523,12 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								fprintf(bln,"%f,%f\n", vkp_1[wlen/2+i_1_max].x, vkp_0[wlen/2+i_1_max].z);
 
 
-								// а здесь проведём корреляцию строк или столбцов 
-								// (в случае автокорреляции матрица симметрична, 
-								// так что всё равно) друг с другом 
-								// в надежде увеличить чёткость отбивки слоёв
+								// Р° Р·РґРµСЃСЊ РїСЂРѕРІРµРґС‘Рј РєРѕСЂСЂРµР»СЏС†РёСЋ СЃС‚СЂРѕРє РёР»Рё СЃС‚РѕР»Р±С†РѕРІ
+								// (РІ СЃР»СѓС‡Р°Рµ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё РјР°С‚СЂРёС†Р° СЃРёРјРјРµС‚СЂРёС‡РЅР°,
+								// С‚Р°Рє С‡С‚Рѕ РІСЃС‘ СЂР°РІРЅРѕ) РґСЂСѓРі СЃ РґСЂСѓРіРѕРј
+								// РІ РЅР°РґРµР¶РґРµ СѓРІРµР»РёС‡РёС‚СЊ С‡С‘С‚РєРѕСЃС‚СЊ РѕС‚Р±РёРІРєРё СЃР»РѕС‘РІ
 
-								// выделяем память под корреляционную матрицу
+								// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 								double **M2 = AllocDoubleMat(len_0,len_0);
 
 								double min_k2 = DBL_MAX;
@@ -12588,7 +12571,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								double max_k4 = -DBL_MAX;
 
 								for (int i_00 = 0; i_00 < len_0; i_00++)
-								{								
+								{
 									for (int i_01 = 0; i_01 < len_0; i_01++)
 									{
 										double k = korr_koeff(len_1, M3[i_00], M3[i_01]);
@@ -12599,23 +12582,23 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 											min_k4 = k;
 									}
 								}
-								// после четырёх циклов построчной корреляции мы получаем 
-								// уже достаточную чёткость 
+								// РїРѕСЃР»Рµ С‡РµС‚С‹СЂС‘С… С†РёРєР»РѕРІ РїРѕСЃС‚СЂРѕС‡РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё РјС‹ РїРѕР»СѓС‡Р°РµРј
+								// СѓР¶Рµ РґРѕСЃС‚Р°С‚РѕС‡РЅСѓСЋ С‡С‘С‚РєРѕСЃС‚СЊ
 
-								// теперь выделяем память под вектор результирующей разбивки
+								// С‚РµРїРµСЂСЊ РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РІРµРєС‚РѕСЂ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РµР№ СЂР°Р·Р±РёРІРєРё
 
 								double * vk3 = new double[len_0];
 
-								// копируем в этот вектор первую строку матрицы
+								// РєРѕРїРёСЂСѓРµРј РІ СЌС‚РѕС‚ РІРµРєС‚РѕСЂ РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ РјР°С‚СЂРёС†С‹
 
 								for (int i_01 = 0; i_01 < len_0; i_01++)
-								{		
+								{
 									vk3[i_01] = M4[0][i_01];
 								}
 
 								if (false)
 								{
-									// суммируем к ней остальные с весом коэффициента корреляции
+									// СЃСѓРјРјРёСЂСѓРµРј Рє РЅРµР№ РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃ РІРµСЃРѕРј РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РєРѕСЂСЂРµР»СЏС†РёРё
 
 									for (int i_00 = 1; i_00 < len_0; i_00++)
 									{
@@ -12626,7 +12609,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 										}
 									}
 
-									// теперь нормируем на интервал -1 +1
+									// С‚РµРїРµСЂСЊ РЅРѕСЂРјРёСЂСѓРµРј РЅР° РёРЅС‚РµСЂРІР°Р» -1 +1
 									double min_k5 = DBL_MAX;
 									double max_k5 = -DBL_MAX;
 									for (int i_01 = 0; i_01 < len_0; i_01++)
@@ -12638,7 +12621,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 											min_k5 = k;
 									}
 
-									//сама нормировка
+									//СЃР°РјР° РЅРѕСЂРјРёСЂРѕРІРєР°
 									for (int i_01 = 0; i_01 < len_0; i_01++)
 									{		
 										double k = vk3[i_01];
@@ -12646,7 +12629,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 									}
 								}
 
-								// заносим результат в матрицу
+								// Р·Р°РЅРѕСЃРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РІ РјР°С‚СЂРёС†Сѓ
 
 								for (int i_01 = 0; i_01 < len_0; i_01++)
 								{
@@ -12663,7 +12646,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 										);
 								}
 
-								//запись пересечений с нулём
+								//Р·Р°РїРёСЃСЊ РїРµСЂРµСЃРµС‡РµРЅРёР№ СЃ РЅСѓР»С‘Рј
 
 								for (int i_01 = 1; i_01 < len_0; i_01++)
 								{
@@ -12684,7 +12667,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								if (vk3) delete [] vk3;
 
 								
-#if 0 // чтобы не писать промежуточные гриды
+#if 0 // С‡С‚РѕР±С‹ РЅРµ РїРёСЃР°С‚СЊ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ РіСЂРёРґС‹
 #if 1
 								{
 								// 
@@ -12814,7 +12797,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								}
 #endif
 #endif
-								// удаляем корреляционную матрицу
+								// СѓРґР°Р»СЏРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 								if (M) FreeDoubleMat(M);
 								if (M2) FreeDoubleMat(M2);
 								if (M3) FreeDoubleMat(M3);
@@ -12836,9 +12819,9 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					BuildGrid(0,//short crd_type,
 								// 0 - x, 1 - y, 2 - profile_len
 						3, 		// short value_type,
-								// 1 - korr_k;  // коэффициент горизонтальной корреляции
-								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
+								// 1 - korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+								// 2 - korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+								// 3 - korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 						NULL, //pcollection,
 						&vvvvkp[c1][c2],
 						profile_intervals,
@@ -12856,13 +12839,13 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 
 	if (gorizontal_korr)
-		// чуть изменённый алгоритм Ивана с корреляцией по вертикальным столбцам
-		// здесь мы поэкспериментируем с построением корреляционной матрицы по вертикальным столбцам
-		// основываясь на одном базовом изначально выбранном и фиксированном окне
+		// С‡СѓС‚СЊ РёР·РјРµРЅС‘РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РРІР°РЅР° СЃ РєРѕСЂСЂРµР»СЏС†РёРµР№ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+		// Р·РґРµСЃСЊ РјС‹ РїРѕСЌРєСЃРїРµСЂРёРјРµРЅС‚РёСЂСѓРµРј СЃ РїРѕСЃС‚СЂРѕРµРЅРёРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+		// РѕСЃРЅРѕРІС‹РІР°СЏСЃСЊ РЅР° РѕРґРЅРѕРј Р±Р°Р·РѕРІРѕРј РёР·РЅР°С‡Р°Р»СЊРЅРѕ РІС‹Р±СЂР°РЅРЅРѕРј Рё С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРј РѕРєРЅРµ
 	{
-		// этими переменными мы можем изменить (-1, +1) направление прохода 
-		// по каждому из окон
-		// при расчёте корреляционного коэффициента
+		// СЌС‚РёРјРё РїРµСЂРµРјРµРЅРЅС‹РјРё РјС‹ РјРѕР¶РµРј РёР·РјРµРЅРёС‚СЊ (-1, +1) РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР° 
+		// РїРѕ РєР°Р¶РґРѕРјСѓ РёР· РѕРєРѕРЅ
+		// РїСЂРё СЂР°СЃС‡С‘С‚Рµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 		int reverse1 = +1, reverse2 = +1;
 
 		for (size_t j = 0; j < 2; j++)
@@ -12875,7 +12858,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			{
 				reverse1 = +1, reverse2 = +1;
 			}
-			// построение корреляционных матриц по принципу каждая колонка с каждой
+			// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РјР°С‚СЂРёС† РїРѕ РїСЂРёРЅС†РёРїСѓ РєР°Р¶РґР°СЏ РєРѕР»РѕРЅРєР° СЃ РєР°Р¶РґРѕР№
 			for(size_t c1 = 0; c1 < cols; c1++)
 			{			
 				for(size_t c2 = 0; c2 < cols; c2++)
@@ -12901,7 +12884,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						printf("start of filling file: \n%s\n", lpstrFile);
 
 
-						//исходя из максимальной глубины вычисляем максимальное плечо
+						//РёСЃС…РѕРґСЏ РёР· РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РіР»СѓР±РёРЅС‹ РІС‹С‡РёСЃР»СЏРµРј РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РїР»РµС‡Рѕ
 
 						double max_z = 10000.0;
 						double profile_len = 0.0;
@@ -12920,21 +12903,21 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						int max_shoulder = max_delta_rows/2;
 
 
-						int shoulder = 90;// плечо -  длина окна - это два плеча плюс один
+						int shoulder = 90;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 						//int step = shoulder+1;
 						int step = 5;
 
 
-						// набор колонок можно по указателю вынести за пределы функции 
+						// РЅР°Р±РѕСЂ РєРѕР»РѕРЅРѕРє РјРѕР¶РЅРѕ РїРѕ СѓРєР°Р·Р°С‚РµР»СЋ РІС‹РЅРµСЃС‚Рё Р·Р° РїСЂРµРґРµР»С‹ С„СѓРЅРєС†РёРё
 						// BuildProfile
-						//  а также за пределы этой функции вынести корреляционную обработку этих колонок, 
-						// чтобы обрабатывать одинаковым образом не один профиль только,
-						// а сразу все профили в функции UseWholeDirectory
+						//  Р° С‚Р°РєР¶Рµ Р·Р° РїСЂРµРґРµР»С‹ СЌС‚РѕР№ С„СѓРЅРєС†РёРё РІС‹РЅРµСЃС‚Рё РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РѕР±СЂР°Р±РѕС‚РєСѓ СЌС‚РёС… РєРѕР»РѕРЅРѕРє,
+						// С‡С‚РѕР±С‹ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РѕРґРёРЅР°РєРѕРІС‹Рј РѕР±СЂР°Р·РѕРј РЅРµ РѕРґРёРЅ РїСЂРѕС„РёР»СЊ С‚РѕР»СЊРєРѕ,
+						// Р° СЃСЂР°Р·Сѓ РІСЃРµ РїСЂРѕС„РёР»Рё РІ С„СѓРЅРєС†РёРё UseWholeDirectory
 						vector<vector<korr_point> > vvkp;
 						vvkp.clear();
 
 
-						// координата нашей колонки
+						// РєРѕРѕСЂРґРёРЅР°С‚Р° РЅР°С€РµР№ РєРѕР»РѕРЅРєРё
 						//for (int r = max_shoulder; r < rows-max_shoulder; r++)
 						//for (int r = 0; r < rows; r++)
 						for (int r = 0; r < rows; r+=step)
@@ -12948,7 +12931,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								int r1 = r - sh, r2 = r + sh;
 								if (r1 >= 0 && r2 >= 0 && r1 < rows && r2 < rows)
 								{		
-									// вычисляем матожидание в каждом из окон
+									// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 									double m1 = 0.0, m2 = 0.0;
 									int n1 = 0, n2 = 0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
@@ -12965,7 +12948,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 									}
 									if (n1) m1 /= n1;
 									if (n2) m2 /= n2;
-									// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
+									// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 									double D1 = 0.0, D2 = 0.0;
 									n1=0,n2=0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
@@ -12986,7 +12969,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 									if (n2) D2 /= n2;
 									double sigma1 = sqrt(D1);
 									double sigma2 = sqrt(D2);
-									// рассчитываем корреляционный коэффициент
+									// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 									double K_r1_r2_c1_c2 = 0.0;
 									int n = 0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
@@ -13002,7 +12985,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 									double k_r1_r2_c1_c2 = K_r1_r2_c1_c2 / (sigma1*sigma2);
 
-									// вычисление привязки к источнику сигнала
+									// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРёРІСЏР·РєРё Рє РёСЃС‚РѕС‡РЅРёРєСѓ СЃРёРіРЅР°Р»Р°
 									double x1 = X[r1];
 									double x2 = X[r2];
 									double y1 = Y[r1];
@@ -13040,41 +13023,41 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						fclose(stream_corr_ivan);
 						printf("file closed:\n%s\n", lpstrFile);
 
-						// проводим корреляцию между столбцами
-#if 0 // если ноль, значит мы вынесли этот кусок за пределы функции
-						// эту обработку мы можем вынести за ределы этой функции
+						// РїСЂРѕРІРѕРґРёРј РєРѕСЂСЂРµР»СЏС†РёСЋ РјРµР¶РґСѓ СЃС‚РѕР»Р±С†Р°РјРё
+#if 0 // РµСЃР»Рё РЅРѕР»СЊ, Р·РЅР°С‡РёС‚ РјС‹ РІС‹РЅРµСЃР»Рё СЌС‚РѕС‚ РєСѓСЃРѕРє Р·Р° РїСЂРµРґРµР»С‹ С„СѓРЅРєС†РёРё
+						// СЌС‚Сѓ РѕР±СЂР°Р±РѕС‚РєСѓ РјС‹ РјРѕР¶РµРј РІС‹РЅРµСЃС‚Рё Р·Р° СЂРµРґРµР»С‹ СЌС‚РѕР№ С„СѓРЅРєС†РёРё
 						{
-							int wlen = 50;//длина окна корреляции
+							int wlen = 50;//РґР»РёРЅР° РѕРєРЅР° РєРѕСЂСЂРµР»СЏС†РёРё
 							int max_size = 0;
-							
+
 							for (size_t R = 0; R < vvkp.size(); R++)
 							{
-								//длины столбцов
+								//РґР»РёРЅС‹ СЃС‚РѕР»Р±С†РѕРІ
 								size_t len0 = vvkp[R].size();
 
-								// ссылки на столбцы
+								// СЃСЃС‹Р»РєРё РЅР° СЃС‚РѕР»Р±С†С‹
 								vector<korr_point>& vkp_0  = vvkp[R];
 
-								// отнимаем длину окна плюс один 
-								// получаем размерность корреляционной матрицы 
-								// которую мы сейчас должны рассчитать 
-								// для поиска послойной корреляции 
-								// между столбцами
+								// РѕС‚РЅРёРјР°РµРј РґР»РёРЅСѓ РѕРєРЅР° РїР»СЋСЃ РѕРґРёРЅ
+								// РїРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+								// РєРѕС‚РѕСЂСѓСЋ РјС‹ СЃРµР№С‡Р°СЃ РґРѕР»Р¶РЅС‹ СЂР°СЃСЃС‡РёС‚Р°С‚СЊ
+								// РґР»СЏ РїРѕРёСЃРєР° РїРѕСЃР»РѕР№РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+								// РјРµР¶РґСѓ СЃС‚РѕР»Р±С†Р°РјРё
 
 								int len_0 = len0-wlen+1;
-								// если размерность корреляционной матрицы разумна
+								// РµСЃР»Рё СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·СѓРјРЅР°
 								if (len_0 > max_size)
 								{
 									max_size = len_0;
 								}
 							}
 
-							// базовый столбец, его длина
+							// Р±Р°Р·РѕРІС‹Р№ СЃС‚РѕР»Р±РµС†, РµРіРѕ РґР»РёРЅР°
 							vector<korr_point>& vkp_1  = vvkp[vvkp.size()/2];
 							size_t len1 = vkp_1.size();
 							int len_1 = len1-wlen+1;
 
-							// здесь мы устанавливаем базовый отрезок колонки корреляции
+							// Р·РґРµСЃСЊ РјС‹ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р±Р°Р·РѕРІС‹Р№ РѕС‚СЂРµР·РѕРє РєРѕР»РѕРЅРєРё РєРѕСЂСЂРµР»СЏС†РёРё
 
 							for (int i_1 = 0; i_1 < len_1; i_1++)
 							//int i_1 = 0;
@@ -13094,7 +13077,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								}
 								FILE * dat = NULL;
 								dat = fopen(file_dat, "wt");
-								// выделяем память под корреляционную матрицу
+								// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 								double **M = AllocDoubleMat(max_size, vvkp.size());
 								double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 
@@ -13110,43 +13093,43 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								for (size_t R = 0; R < vvkp.size(); R++)
 								{
-									// ссылки на столбцы
+									// СЃСЃС‹Р»РєРё РЅР° СЃС‚РѕР»Р±С†С‹
 									vector<korr_point>& vkp_0  = vvkp[R];
 
-									//длины столбцов
-									size_t len0 = vkp_0.size();	
+									//РґР»РёРЅС‹ СЃС‚РѕР»Р±С†РѕРІ
+									size_t len0 = vkp_0.size();
 
 
-									// отнимаем длину окна плюс один 
-									// получаем размерность корреляционной матрицы 
-									// которую мы сейчас должны рассчитать 
-									// для поиска послойной корреляции 
-									// между соседними столбцами
+									// РѕС‚РЅРёРјР°РµРј РґР»РёРЅСѓ РѕРєРЅР° РїР»СЋСЃ РѕРґРёРЅ
+									// РїРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+									// РєРѕС‚РѕСЂСѓСЋ РјС‹ СЃРµР№С‡Р°СЃ РґРѕР»Р¶РЅС‹ СЂР°СЃСЃС‡РёС‚Р°С‚СЊ
+									// РґР»СЏ РїРѕРёСЃРєР° РїРѕСЃР»РѕР№РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+									// РјРµР¶РґСѓ СЃРѕСЃРµРґРЅРёРјРё СЃС‚РѕР»Р±С†Р°РјРё
 
 									int len_0 = len0-wlen+1;
-									
-									// если размерность корреляционной матрицы разумна
+
+									// РµСЃР»Рё СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·СѓРјРЅР°
 									if (len_0 > 0 && len_1 > 0)
 									{
-										//поэлементное заполнение корреляционной матрицы 
-										// в двух циклах
+										//РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+										// РІ РґРІСѓС… С†РёРєР»Р°С…
 										for (int i_0 = 0; i_0 < len_0; i_0++)
 										{
-											// начинаем расчёт корреляционного коэффициента											
+											// РЅР°С‡РёРЅР°РµРј СЂР°СЃС‡С‘С‚ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 											//
-											// вычисляем матожидание в каждом из окон
+											// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 											double m_0 = 0.0, m_1 = 0.0;
 											//int n_0 = 0, n_1 = 0;
 											for (int w = 0; w < wlen; w++)
-											{	
-												m_0 += vkp_0[w+i_0].korr_k;		
-												m_1 += vkp_1[w+i_1].korr_k;		
+											{
+												m_0 += vkp_0[w+i_0].korr_k;
+												m_1 += vkp_1[w+i_1].korr_k;
 											}
 											m_0 /= wlen;
 											m_1 /= wlen;
 
-											// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
-											double D_0 = 0.0, D_1 = 0.0;										
+											// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
+											double D_0 = 0.0, D_1 = 0.0;
 											for (int w = 0; w < wlen; w++)
 											{
 												D_0 += (vkp_0[w+i_0].korr_k-m_0)*(vkp_0[w+i_0].korr_k-m_0);                                            
@@ -13157,7 +13140,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 											double sigma_0 = sqrt(D_0);
 											double sigma_1 = sqrt(D_1);
-											// рассчитываем корреляционный коэффициент
+											// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 											double K_0_1 = 0.0;
 											for (int w = 0; w < wlen; w++)
 											{
@@ -13182,7 +13165,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 											if (k_0_1 < min_k)
 											{
 												min_k = k_0_1;
-											}					
+											}
 
 										}
 									}
@@ -13191,7 +13174,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 
 #if 1
-								// 
+								//
 								Grid grid;
 								grid.gridSection.z = M;
 								grid.gridSection.nCol = vvkp.size();
@@ -13223,7 +13206,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								}
 								SaveAsSurferGrid7(file, &grid);
 #endif
-								// удаляем корреляционную матрицу
+								// СѓРґР°Р»СЏРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 								if (M) FreeDoubleMat(M);
 								if (dat) fclose(dat);
 							}
@@ -13241,11 +13224,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		}
 	}
 
-	if (false)// чуть изменённый алгоритм Ивана скомбинированный с сетью кохонена
+	if (false)// С‡СѓС‚СЊ РёР·РјРµРЅС‘РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РРІР°РЅР° СЃРєРѕРјР±РёРЅРёСЂРѕРІР°РЅРЅС‹Р№ СЃ СЃРµС‚СЊСЋ РєРѕС…РѕРЅРµРЅР°
 	{
-		// этими переменными мы можем изменить (-1, +1) направление прохода 
-		// по каждому из окон
-		// при расчёте корреляционного коэффициента
+		// СЌС‚РёРјРё РїРµСЂРµРјРµРЅРЅС‹РјРё РјС‹ РјРѕР¶РµРј РёР·РјРµРЅРёС‚СЊ (-1, +1) РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР°
+		// РїРѕ РєР°Р¶РґРѕРјСѓ РёР· РѕРєРѕРЅ
+		// РїСЂРё СЂР°СЃС‡С‘С‚Рµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 		int reverse1 = +1, reverse2 = +1;
 
 		for (size_t j = 0; j < 2; j++)
@@ -13259,18 +13242,18 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				reverse1 = +1, reverse2 = +1;
 			}
 
-			// построение корреляционных матриц по принципу каждая колонка с каждой
+			// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РјР°С‚СЂРёС† РїРѕ РїСЂРёРЅС†РёРїСѓ РєР°Р¶РґР°СЏ РєРѕР»РѕРЅРєР° СЃ РєР°Р¶РґРѕР№
 			for(size_t c1 = 0; c1 < cols; c1++)
-			{			
+			{
 				for(size_t c2 = 0; c2 < cols; c2++)
-				{	
+				{
 
-					int shoulder = 90;// плечо -  длина окна - это два плеча плюс один
+					int shoulder = 90;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 					//int step = shoulder+1;
 					int step = 5;
 
 					//=======================================
-					//подготовка памяти для обучающего множества сети кохонена
+					//РїРѕРґРіРѕС‚РѕРІРєР° РїР°РјСЏС‚Рё РґР»СЏ РѕР±СѓС‡Р°СЋС‰РµРіРѕ РјРЅРѕР¶РµСЃС‚РІР° СЃРµС‚Рё РєРѕС…РѕРЅРµРЅР°
 					bool bScale = true;
 
 					vector<vector<double> > MM;
@@ -13293,7 +13276,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
 						);
-					
+
 					char *p;
 					while (p=strchr (lpstrFile,'\"'))
 					{
@@ -13305,23 +13288,23 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					{
 						stream_corr_ivan = fopen(lpstrFile, "wt");
 
-						if (stream_corr_ivan) 
-						{	
+						if (stream_corr_ivan)
+						{
 							printf("start of filling file: \n%s\n", lpstrFile);
 							for (int r1 = 0 + shoulder; r1 < rows-shoulder; r1+=step)
-							{					
+							{
 								for (int r2 = r1 + shoulder; r2 < rows-shoulder; r2+=step)
-								{		
-									// вычисляем матожидание в каждом из окон
+								{
+									// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 									double m1 = 0.0, m2 = 0.0;
 									int n1 = 0, n2 = 0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
-									{	
+									{
 										int i1 = r1 + sh, i2 = r2 + sh;
 										if (i1 >= 0 && i1 < rows)
 										{
 											m1 += v[c1][i1];n1++;
-										}								
+										}
 										if (i2 >= 0 && i2 < rows)
 										{
 											m2 += v[c2][i2];n2++;
@@ -13329,17 +13312,17 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 									}
 									if (n1) m1 /= n1;
 									if (n2) m2 /= n2;
-									// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
+									// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 									double D1 = 0.0, D2 = 0.0;
 									n1=0,n2=0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
-									{	
+									{
 										int i1 = r1 + sh, i2 = r2 + sh;
 										if (i1 >= 0 && i1 < rows)
 										{
 											D1 += (v[c1][i1]-m1)*(v[c1][i1]-m1);
 											n1++;
-										}								
+										}
 										if (i2 >= 0 && i2 < rows)
 										{
 											D2 += (v[c2][i2]-m2)*(v[c2][i2]-m2);
@@ -13350,11 +13333,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 									if (n2) D2 /= n2;
 									double sigma1 = sqrt(D1);
 									double sigma2 = sqrt(D2);
-									// рассчитываем корреляционный коэффициент
+									// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 									double K_r1_r2_c1_c2 = 0.0;
 									int n = 0;
 									for (int sh = -shoulder; sh <= shoulder; sh++)
-									{	
+									{
 										int i1 = r1 + reverse1*sh, i2 = r2 + reverse2*sh;
 										if (i1 >= 0 && i2 >= 0 && i1 < rows && i2 < rows)
 										{
@@ -13366,7 +13349,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 									double k_r1_r2_c1_c2 = K_r1_r2_c1_c2 / (sigma1*sigma2);
 
-									// вычисление привязки к источнику сигнала
+									// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРёРІСЏР·РєРё Рє РёСЃС‚РѕС‡РЅРёРєСѓ СЃРёРіРЅР°Р»Р°
 									double x1 = X[r1];
 									double x2 = X[r2];
 									double y1 = Y[r1];
@@ -13374,14 +13357,14 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 									double x = (x1 + x2)/2.0;
 									double y = (y1 + y2)/2.0;
-									double z = -ab.k*sqrt( 
-										(x1 - x2)*(x1 - x2) 
+									double z = -ab.k*sqrt(
+										(x1 - x2)*(x1 - x2)
 										+
-										(y1 - y2)*(y1 - y2) 
+										(y1 - y2)*(y1 - y2)
 										);
 
-									if (stream_corr_ivan) 
-										fprintf(stream_corr_ivan, 
+									if (stream_corr_ivan)
+										fprintf(stream_corr_ivan,
 										"%7.3f%c%7.3f%c%4.3f"
 										"%c%f"
 										"\n",
@@ -13401,7 +13384,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 										double mult = 1.0 / sqrt(sigma1*sigma2);
 
 										for (int sh = -shoulder; sh <= shoulder; sh++)
-										{	
+										{
 											int i1 = r1 + reverse1*sh, i2 = r2 + reverse2*sh;
 											//if (i1 >= 0 && i2 >= 0 && i1 < rows && i2 < rows)
 											{
@@ -13414,9 +13397,9 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 										}
 										if (bScale) Scale(W);
 										MM.push_back(W);
-										
+
 										i_example++;
-									}						
+									}
 
 
 								}
@@ -13439,11 +13422,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			}
 		}
 	}
-	if (false)// чуть изменённый алгоритм Ивана
+	if (false)// С‡СѓС‚СЊ РёР·РјРµРЅС‘РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РРІР°РЅР°
 	{
-		// этими переменными мы можем изменить (-1, +1) направление прохода 
-		// по каждому из окон
-		// при расчёте корреляционного коэффициента
+		// СЌС‚РёРјРё РїРµСЂРµРјРµРЅРЅС‹РјРё РјС‹ РјРѕР¶РµРј РёР·РјРµРЅРёС‚СЊ (-1, +1) РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР°
+		// РїРѕ РєР°Р¶РґРѕРјСѓ РёР· РѕРєРѕРЅ
+		// РїСЂРё СЂР°СЃС‡С‘С‚Рµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 		int reverse1 = +1, reverse2 = +1;
 
 		for (size_t j = 0; j < 2; j++)
@@ -13456,11 +13439,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			{
 				reverse1 = +1, reverse2 = +1;
 			}
-			// построение корреляционных матриц по принципу каждая колонка с каждой
+			// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РјР°С‚СЂРёС† РїРѕ РїСЂРёРЅС†РёРїСѓ РєР°Р¶РґР°СЏ РєРѕР»РѕРЅРєР° СЃ РєР°Р¶РґРѕР№
 			for(size_t c1 = 0; c1 < cols; c1++)
-			{			
+			{
 				for(size_t c2 = 0; c2 < cols; c2++)
-				{	
+				{
 					TCHAR lpstrFile[1024];
 					FILE * stream_corr_ivan = NULL;
 					sprintf(lpstrFile, "%s\\corr_ivan_%s_%s_sym_%d.dat", dir_out,
@@ -13468,7 +13451,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
 						);
-					
+
 					char *p;
 					while (p=strchr (lpstrFile,'\"'))
 					{
@@ -13477,27 +13460,27 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					printf("try to open file: \n%s\n", lpstrFile);
 					stream_corr_ivan = fopen(lpstrFile, "wt");
 
-					if (stream_corr_ivan) 
-					{	
+					if (stream_corr_ivan)
+					{
 						printf("start of filling file: \n%s\n", lpstrFile);
 
-						int shoulder = 90;// плечо -  длина окна - это два плеча плюс один
+						int shoulder = 90;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 						//int step = shoulder+1;
 						int step = 5;
 						for (int r1 = 0 + shoulder; r1 < rows-shoulder; r1+=step)
-						{					
+						{
 							for (int r2 = r1 + shoulder; r2 < rows-shoulder; r2+=step)
-							{		
-								// вычисляем матожидание в каждом из окон
+							{
+								// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 								double m1 = 0.0, m2 = 0.0;
 								int n1 = 0, n2 = 0;
 								for (int sh = -shoulder; sh <= shoulder; sh++)
-								{	
+								{
 									int i1 = r1 + sh, i2 = r2 + sh;
 									if (i1 >= 0 && i1 < rows)
 									{
 										m1 += v[c1][i1];n1++;
-									}								
+									}
 									if (i2 >= 0 && i2 < rows)
 									{
 										m2 += v[c2][i2];n2++;
@@ -13505,17 +13488,17 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								}
 								if (n1) m1 /= n1;
 								if (n2) m2 /= n2;
-								// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
+								// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 								double D1 = 0.0, D2 = 0.0;
 								n1=0,n2=0;
 								for (int sh = -shoulder; sh <= shoulder; sh++)
-								{	
+								{
 									int i1 = r1 + sh, i2 = r2 + sh;
 									if (i1 >= 0 && i1 < rows)
 									{
 										D1 += (v[c1][i1]-m1)*(v[c1][i1]-m1);
 										n1++;
-									}								
+									}
 									if (i2 >= 0 && i2 < rows)
 									{
 										D2 += (v[c2][i2]-m2)*(v[c2][i2]-m2);
@@ -13526,11 +13509,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 								if (n2) D2 /= n2;
 								double sigma1 = sqrt(D1);
 								double sigma2 = sqrt(D2);
-								// рассчитываем корреляционный коэффициент
+								// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 								double K_r1_r2_c1_c2 = 0.0;
 								int n = 0;
 								for (int sh = -shoulder; sh <= shoulder; sh++)
-								{	
+								{
 									int i1 = r1 + reverse1*sh, i2 = r2 + reverse2*sh;
 									if (i1 >= 0 && i2 >= 0 && i1 < rows && i2 < rows)
 									{
@@ -13542,7 +13525,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								double k_r1_r2_c1_c2 = K_r1_r2_c1_c2 / (sigma1*sigma2);
 
-								// вычисление привязки к источнику сигнала
+								// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРёРІСЏР·РєРё Рє РёСЃС‚РѕС‡РЅРёРєСѓ СЃРёРіРЅР°Р»Р°
 								double x1 = X[r1];
 								double x2 = X[r2];
 								double y1 = Y[r1];
@@ -13550,14 +13533,14 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								double x = (x1 + x2)/2.0;
 								double y = (y1 + y2)/2.0;
-								double z = -ab.k*sqrt( 
-									(x1 - x2)*(x1 - x2) 
+								double z = -ab.k*sqrt(
+									(x1 - x2)*(x1 - x2)
 									+
-									(y1 - y2)*(y1 - y2) 
+									(y1 - y2)*(y1 - y2)
 									);
 
-								if (stream_corr_ivan) 
-									fprintf(stream_corr_ivan, 
+								if (stream_corr_ivan)
+									fprintf(stream_corr_ivan,
 									"%7.3f%c%7.3f%c%4.3f"
 									"%c%f"
 									"\n",
@@ -13585,14 +13568,14 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 	if (false)
 	{
-		// выделение ярких точек путём поиска симметричности сигнала в каждой колонке
-		// хорошо работает, если применять его не к вейвлет-разложениям,
-		// а непосредственно к сигналу или к дисперсиям
+		// РІС‹РґРµР»РµРЅРёРµ СЏСЂРєРёС… С‚РѕС‡РµРє РїСѓС‚С‘Рј РїРѕРёСЃРєР° СЃРёРјРјРµС‚СЂРёС‡РЅРѕСЃС‚Рё СЃРёРіРЅР°Р»Р° РІ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРµ
+		// С…РѕСЂРѕС€Рѕ СЂР°Р±РѕС‚Р°РµС‚, РµСЃР»Рё РїСЂРёРјРµРЅСЏС‚СЊ РµРіРѕ РЅРµ Рє РІРµР№РІР»РµС‚-СЂР°Р·Р»РѕР¶РµРЅРёСЏРј,
+		// Р° РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ Рє СЃРёРіРЅР°Р»Сѓ РёР»Рё Рє РґРёСЃРїРµСЂСЃРёСЏРј
 		TCHAR lpstrFile[1024];
 		FILE * stream_corr_c = NULL;
 		sprintf(lpstrFile, "%s\\corr_c.dat", dir_out);
 		stream_corr_c = fopen(lpstrFile, "wt");
-			
+
 		double max_z = 10000.0;
 		double profile_len = 0.0;
 		for (size_t r = 1; r < rows; r++)
@@ -13601,14 +13584,14 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				(X[r]-X[r-1])*(X[r]-X[r-1])
 				+
 				(Y[r]-Y[r-1])*(Y[r]-Y[r-1])
-				);                
+				);
 		}
 		double row_step = profile_len/rows;
 		double h_step = row_step*ab.k;
 		size_t max_delta_rows = max_z/h_step;
 		printf("max_delta_rows = %u\n", max_delta_rows);
 		int shoulder = max_delta_rows/2;
-		// вычисление матожидания каждой колонки
+		// РІС‹С‡РёСЃР»РµРЅРёРµ РјР°С‚РѕР¶РёРґР°РЅРёСЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё
 		vector<double> mc;
 		mc.resize(cols);
 		for (size_t c = 0; c < cols; c++)
@@ -13617,21 +13600,21 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			for(size_t r = 0; r < rows; r++) mc[c] += v[c][r];
 			mc[c] /= rows;
 		}
-		// выделение ярких точек путём поиска симметричности сигнала в каждой колонке
-		// хорошо работает, если применять его не к вейвлет-разложениям,
-		// а непосредственно к сигналу или к дисперсиям
+		// РІС‹РґРµР»РµРЅРёРµ СЏСЂРєРёС… С‚РѕС‡РµРє РїСѓС‚С‘Рј РїРѕРёСЃРєР° СЃРёРјРјРµС‚СЂРёС‡РЅРѕСЃС‚Рё СЃРёРіРЅР°Р»Р° РІ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРµ
+		// С…РѕСЂРѕС€Рѕ СЂР°Р±РѕС‚Р°РµС‚, РµСЃР»Рё РїСЂРёРјРµРЅСЏС‚СЊ РµРіРѕ РЅРµ Рє РІРµР№РІР»РµС‚-СЂР°Р·Р»РѕР¶РµРЅРёСЏРј,
+		// Р° РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ Рє СЃРёРіРЅР°Р»Сѓ РёР»Рё Рє РґРёСЃРїРµСЂСЃРёСЏРј
 		for (int r = shoulder; r < rows-shoulder; r++)
-		{			
+		{
 printf("r = %u rows = %d\n", r, rows);
 			for(size_t c = 0; c < cols; c++)
 			{
 				vector<double> v_K_r1_r2_c;
-				v_K_r1_r2_c.resize(shoulder);	
-				
+				v_K_r1_r2_c.resize(shoulder);
+
 				double K_r1_r2_c = 0.0;
 				double D1 = 0.0, D2 = 0.0;
 				for (int sh = 0; sh < shoulder; sh++)
-				{	
+				{
 					int r1 = r - sh, r2 = r + sh;
 					if (r1 >= 0 && r2 >= 0 && r1 < rows && r2 < rows)
 					{
@@ -13639,9 +13622,9 @@ printf("r = %u rows = %d\n", r, rows);
 						D2 += (v[c][r2] - mc[c]) * (v[c][r2] - mc[c]);
 						K_r1_r2_c += (v[c][r1] - mc[c]) * (v[c][r2] - mc[c]);
 
-						// коэффициент ковариации
+						// РєРѕСЌС„С„РёС†РёРµРЅС‚ РєРѕРІР°СЂРёР°С†РёРё
 						v_K_r1_r2_c[sh] = K_r1_r2_c/(sh+1);
-						// коэффициент корреляции
+						// РєРѕСЌС„С„РёС†РёРµРЅС‚ РєРѕСЂСЂРµР»СЏС†РёРё
 						/*v_K_r1_r2_c[sh] = 
 							(K_r1_r2_c/(sh+1))
 							/
@@ -13733,8 +13716,8 @@ printf("r = %u rows = %d\n", r, rows);
 			corrs[f] = fopen(lpstrFile,"wt");
 		}
 
-		// Мы может рассматривать каждую колонку как реализацию случайной функции
-		// При этом надо брать совокупность близких по природе колонок
+		// РњС‹ РјРѕР¶РµС‚ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ РєР°Р¶РґСѓСЋ РєРѕР»РѕРЅРєСѓ РєР°Рє СЂРµР°Р»РёР·Р°С†РёСЋ СЃР»СѓС‡Р°Р№РЅРѕР№ С„СѓРЅРєС†РёРё
+		// РџСЂРё СЌС‚РѕРј РЅР°РґРѕ Р±СЂР°С‚СЊ СЃРѕРІРѕРєСѓРїРЅРѕСЃС‚СЊ Р±Р»РёР·РєРёС… РїРѕ РїСЂРёСЂРѕРґРµ РєРѕР»РѕРЅРѕРє
 		bool to_nornalize_on_cols = true;
 		double max_z = 10000.0;
 		double profile_len = 0.0;
@@ -13752,14 +13735,14 @@ printf("r = %u rows = %d\n", r, rows);
 		size_t max_delta_rows = max_z/h_step;
 		printf("max_delta_rows = %u\n", max_delta_rows);
 
-		// сначала производим нормировку по колонкам
+		// СЃРЅР°С‡Р°Р»Р° РїСЂРѕРёР·РІРѕРґРёРј РЅРѕСЂРјРёСЂРѕРІРєСѓ РїРѕ РєРѕР»РѕРЅРєР°Рј
 		if (to_nornalize_on_cols)
 		{
 			for(size_t c = 0; c < cols; c++)
 				Center_And_Scale(w[c]);
 		}
 
-		// Мы можем посчитать матожидание нашей случайной функции
+		// РњС‹ РјРѕР¶РµРј РїРѕСЃС‡РёС‚Р°С‚СЊ РјР°С‚РѕР¶РёРґР°РЅРёРµ РЅР°С€РµР№ СЃР»СѓС‡Р°Р№РЅРѕР№ С„СѓРЅРєС†РёРё
 		vector<double> m;
 		m.resize(rows);
 		for (size_t r = 0; r < rows; r++)
@@ -13769,7 +13752,7 @@ printf("r = %u rows = %d\n", r, rows);
 			m[r] /= cols;
 		}			
 		
-		// Также мы можем посчитать дисперсию нашей случайной функции
+		// РўР°РєР¶Рµ РјС‹ РјРѕР¶РµРј РїРѕСЃС‡РёС‚Р°С‚СЊ РґРёСЃРїРµСЂСЃРёСЋ РЅР°С€РµР№ СЃР»СѓС‡Р°Р№РЅРѕР№ С„СѓРЅРєС†РёРё
 		vector<double> D;
 		vector<double> sigma;
 		D.resize(rows);
@@ -13783,13 +13766,13 @@ printf("r = %u rows = %d\n", r, rows);
 			sigma[r] = sqrt(D[r]);
 		}
 
-		// Далее мы должны хнать корреляционную (автокорреляционную) функцию 
-		// которая характеризует степень зависимости между сечениями (строками)
-		// случайной функции, относящимися к различным t (точкам вдоль профиля)
+		// Р”Р°Р»РµРµ РјС‹ РґРѕР»Р¶РЅС‹ С…РЅР°С‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ (Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ) С„СѓРЅРєС†РёСЋ
+		// РєРѕС‚РѕСЂР°СЏ С…Р°СЂР°РєС‚РµСЂРёР·СѓРµС‚ СЃС‚РµРїРµРЅСЊ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РјРµР¶РґСѓ СЃРµС‡РµРЅРёСЏРјРё (СЃС‚СЂРѕРєР°РјРё)
+		// СЃР»СѓС‡Р°Р№РЅРѕР№ С„СѓРЅРєС†РёРё, РѕС‚РЅРѕСЃСЏС‰РёРјРёСЃСЏ Рє СЂР°Р·Р»РёС‡РЅС‹Рј t (С‚РѕС‡РєР°Рј РІРґРѕР»СЊ РїСЂРѕС„РёР»СЏ)
 /*#if 0
-		// Мы можем построить корреляционную матрицу размером rows x rows
+		// РњС‹ РјРѕР¶РµРј РїРѕСЃС‚СЂРѕРёС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ СЂР°Р·РјРµСЂРѕРј rows x rows
 		vector<vector<double> > K;
-		//  нормированную корреляционную матрицу
+		//  РЅРѕСЂРјРёСЂРѕРІР°РЅРЅСѓСЋ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 		vector<vector<double> > nk;
 		K.resize(rows);
 		nk.resize(rows);
@@ -14037,7 +14020,7 @@ printf("r = %u rows = %d\n", r, rows);
 		if (sum_corr_loc_min) fclose (sum_corr_loc_min);
 
 
-		if (false)// классификация сетью кохонена образов, заложенных в сигнале двух точек
+		if (false)// РєР»Р°СЃСЃРёС„РёРєР°С†РёСЏ СЃРµС‚СЊСЋ РєРѕС…РѕРЅРµРЅР° РѕР±СЂР°Р·РѕРІ, Р·Р°Р»РѕР¶РµРЅРЅС‹С… РІ СЃРёРіРЅР°Р»Рµ РґРІСѓС… С‚РѕС‡РµРє
 		{
 			bool bScale = true;
 
@@ -14107,7 +14090,7 @@ printf("r = %u rows = %d\n", r, rows);
 
 		}
 	}
-	//конец блока построения корреляционной матрицы
+	//РєРѕРЅРµС† Р±Р»РѕРєР° РїРѕСЃС‚СЂРѕРµРЅРёСЏ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 	//##############################################################
 	if (false)
 	{
@@ -14141,7 +14124,7 @@ printf("r = %u rows = %d\n", r, rows);
 			MessageBox(0, str, "Error",0);
 			return false;
 		}
-		//в этом блоке открываем общие файлы
+		//РІ СЌС‚РѕРј Р±Р»РѕРєРµ РѕС‚РєСЂС‹РІР°РµРј РѕР±С‰РёРµ С„Р°Р№Р»С‹
 		TCHAR lpstrFile[1024];		
 		//##############################################################
 		//FILE * stream_common_razez = NULL;
@@ -14292,7 +14275,7 @@ printf("r = %u rows = %d\n", r, rows);
 		//============================================================================
 		//============================================================================
 		//##############################################################
-		//конец блока открытия общих файлов
+		//РєРѕРЅРµС† Р±Р»РѕРєР° РѕС‚РєСЂС‹С‚РёСЏ РѕР±С‰РёС… С„Р°Р№Р»РѕРІ
 		//##############################################################
 
 		
@@ -14306,7 +14289,7 @@ printf("r = %u rows = %d\n", r, rows);
 		if (consol)
 		{
 #if _USE_WINSURF_ON_CONSOL_
-			//готовим классы для 3D визуализации
+			//РіРѕС‚РѕРІРёРј РєР»Р°СЃСЃС‹ РґР»СЏ 3D РІРёР·СѓР°Р»РёР·Р°С†РёРё
 			singleton_cleaner<win_app> app_cleaner;
 			app = win_app::GetInstance();  
 			app_cleaner.SetInstance(app);
@@ -14394,12 +14377,12 @@ printf("r = %u rows = %d\n", r, rows);
 #endif
 
 			printf("Begin %d colomn handling\n", c);
-			// коэффициент рассчёта глубин источников для данной колонки
+			// РєРѕСЌС„С„РёС†РёРµРЅС‚ СЂР°СЃСЃС‡С‘С‚Р° РіР»СѓР±РёРЅ РёСЃС‚РѕС‡РЅРёРєРѕРІ РґР»СЏ РґР°РЅРЅРѕР№ РєРѕР»РѕРЅРєРё
 			//double k = 1.0;
 			
 
 			//##############################################################
-			//блок поиска минимального значения в теущей колонке данных
+			//Р±Р»РѕРє РїРѕРёСЃРєР° РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІ С‚РµСѓС‰РµР№ РєРѕР»РѕРЅРєРµ РґР°РЅРЅС‹С…
 			double min_v; 
 			bool start = true;
 			for (size_t i = 0; i < rows; i++)
@@ -14415,7 +14398,7 @@ printf("r = %u rows = %d\n", r, rows);
 					if (min_v > f) min_v = f;
 				}
 			}
-			//блок поиска минимального значения в теущей колонке данных
+			//Р±Р»РѕРє РїРѕРёСЃРєР° РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІ С‚РµСѓС‰РµР№ РєРѕР»РѕРЅРєРµ РґР°РЅРЅС‹С…
 			//##############################################################
 #if _DRAW_LINES_OF_GRAPHICS_
 			vector<double> vX,vY,vZ;
@@ -14424,8 +14407,8 @@ printf("r = %u rows = %d\n", r, rows);
 			vZ.resize(rows);
 #endif
 			//##############################################################
-			//блок предварительного сдвига данных текущей колонки,
-			//чтобы минимальное значение было 1.0 
+			//Р±Р»РѕРє РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕРіРѕ СЃРґРІРёРіР° РґР°РЅРЅС‹С… С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё,
+			//С‡С‚РѕР±С‹ РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ Р±С‹Р»Рѕ 1.0
 			for (size_t i = 0; i < rows; i++)
 			{
 				v[c][i]+=ab.minimum_of_signal-min_v;
@@ -14442,13 +14425,13 @@ printf("r = %u rows = %d\n", r, rows);
 #endif
 #endif
 			}
-			//блок предварительного сдвига данных текущей колонки,
-			//чтобы минимальное значение было 1.0 
+			//Р±Р»РѕРє РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕРіРѕ СЃРґРІРёРіР° РґР°РЅРЅС‹С… С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРё,
+			//С‡С‚РѕР±С‹ РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ Р±С‹Р»Рѕ 1.0
 			//##############################################################
 printf("start of locals block\n");
 
 			//##############################################################
-			//блок фильтрации по локальным экстремумам
+			//Р±Р»РѕРє С„РёР»СЊС‚СЂР°С†РёРё РїРѕ Р»РѕРєР°Р»СЊРЅС‹Рј СЌРєСЃС‚СЂРµРјСѓРјР°Рј
 			vector<vector<size_t> > vvi_lock_min;
 			vector<vector<size_t> > vvi_lock_max; 
 			//size_t nMaxLevels = 5;
@@ -14489,8 +14472,8 @@ printf("end  of Filtration() \n");
 					LocalsMaker(ab.quantil_naklony, 
 #if SOURCE_COORDINATES_3D
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						original_col_numbers[c], //номер колонки
-						/* size_t level =*/ j, // уровень разложения
+						original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+						/* size_t level =*/ j, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 						X, Y,
 #else
@@ -14515,7 +14498,7 @@ printf("end  of Filtration() \n");
 						ab.m_gradient_type,
 						ab.limit_dima, ab.limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						original_col_numbers[c], //номер колонки
+						original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -14527,7 +14510,7 @@ printf("end  of Filtration() \n");
 						v[c],
 						vvi_lock_max[j],
 						ab.win_velonsity,
-						ab.use_repeat_points,  ab.n,//плечо области запрета ( можно 0 и выше)
+						ab.use_repeat_points,  ab.n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 						ab.minimum_of_signal, 
 						
 						ab.k,	delim,
@@ -14559,8 +14542,8 @@ printf("end of locals cycle 1\n");
 					LocalsMaker(ab.quantil_naklony, 
 #if SOURCE_COORDINATES_3D
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						original_col_numbers[c], //номер колонки
-						/* size_t level =*/ j, // уровень разложения
+						original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+						/* size_t level =*/ j, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 						X, Y,
 #else
@@ -14587,7 +14570,7 @@ printf("end of locals cycle 1\n");
 						ab.m_gradient_type,
 						ab.limit_dima, ab.limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						original_col_numbers[c], //номер колонки
+						original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -14598,7 +14581,7 @@ printf("end of locals cycle 1\n");
 						v[c],
 						vvi_lock_min[j],
 						ab.win_velonsity,
-						ab.use_repeat_points,  ab.n,//плечо области запрета ( можно 0 и выше)
+						ab.use_repeat_points,  ab.n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 						ab.minimum_of_signal, 
 						
 						ab.k,	delim,
@@ -14653,8 +14636,8 @@ printf("end of locals cycle 2\n");
 								ab.quantil_naklony, 
 #if SOURCE_COORDINATES_3D
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-								original_col_numbers[c], //номер колонки
-								/* size_t level =*/ j, // уровень разложения
+								original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+								/* size_t level =*/ j, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 								X, Y,
 #else
@@ -14676,7 +14659,7 @@ printf("end of locals cycle 2\n");
 								ab.m_gradient_type,
 								ab.limit_dima, ab.limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-								original_col_numbers[c], //номер колонки
+								original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -14687,7 +14670,7 @@ printf("end of locals cycle 2\n");
 								v[c],
 								vi,
 								ab.win_velonsity,
-								ab.use_repeat_points,  ab.n,//плечо области запрета ( можно 0 и выше)
+								ab.use_repeat_points,  ab.n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 								ab.minimum_of_signal, 
 								
 								ab.k,	delim,
@@ -14708,8 +14691,8 @@ printf("end of locals cycle 2\n");
 							LocalsMaker(ab.quantil_naklony, 
 #if SOURCE_COORDINATES_3D
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-								original_col_numbers[c], //номер колонки
-								/* size_t level =*/ j, // уровень разложения
+								original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+								/* size_t level =*/ j, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 								X, Y,
 #else
@@ -14730,7 +14713,7 @@ printf("end of locals cycle 2\n");
 				}
 
 			}
-			//конец блока фильтрации по локальным экстремумам
+			//РєРѕРЅРµС† Р±Р»РѕРєР° С„РёР»СЊС‚СЂР°С†РёРё РїРѕ Р»РѕРєР°Р»СЊРЅС‹Рј СЌРєСЃС‚СЂРµРјСѓРјР°Рј
 			//##############################################################
 printf("\nend of local extremums block\n\n");
 			if(ab.use_window_cycles_algorithm_dima || ab.use_window_cycles_algorithm_1)
@@ -14738,7 +14721,7 @@ printf("\nend of local extremums block\n\n");
 					ab.m_gradient_type,
 					ab.limit_dima, ab.limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-					original_col_numbers[c], //номер колонки
+					original_col_numbers[c], //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -14752,7 +14735,7 @@ printf("\nend of local extremums block\n\n");
 					start_window_len, end_window_len, //step_vindow_len,
 					ab.win_velonsity,
 						
-					ab.use_repeat_points,  ab.n,//плечо области запрета ( можно 0 и выше)
+					ab.use_repeat_points,  ab.n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 					ab.minimum_of_signal,
 						
 					ab.k,	
@@ -14775,7 +14758,7 @@ printf("\nend of Window_Cycle block\n\n");
 
 #if _USE_WINSURF_
 #if _DRAW_LINES_OF_GRAPHICS_
-			// складываем информацию в SufDoc
+			// СЃРєР»Р°РґС‹РІР°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ РІ SufDoc
 			{
 
 				Line3D line(doc);
@@ -14787,7 +14770,7 @@ printf("\nend of Window_Cycle block\n\n");
 #endif
 #endif
 		}
-		//конец организации цикла по колонкам
+		//РєРѕРЅРµС† РѕСЂРіР°РЅРёР·Р°С†РёРё С†РёРєР»Р° РїРѕ РєРѕР»РѕРЅРєР°Рј
 		//##############################################################
 //			fclose (stream_common_negative_dima);
 //			fclose (stream_common_positive_dima);
@@ -14844,7 +14827,7 @@ printf("files closed!!!\n");
 		{
 			app->GetWinProject()->ZoomView();
 			app->GetWinProject()->Draw();
-			//запуск 3D визуализации
+			//Р·Р°РїСѓСЃРє 3D РІРёР·СѓР°Р»РёР·Р°С†РёРё
 			return StartWinSurfLoop();
 		}
 
@@ -14869,7 +14852,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					 char * current_directory,
 					 char * filename,
 					 bool is_reverse,
-					 int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
+					 int shoulder,// = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 					 int step,
 					 int wlen_auto)
 {
@@ -14883,7 +14866,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 	}
 
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 	char filename_description[4096];
 	sprintf(filename_description, "%s\\description_ivan.txt", dir_out);
 	FILE *stream;
@@ -14896,16 +14879,16 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 	//**********************************************
 	if (!CheckMyLicense()) return false;
 	//##############################################################
-	//это блок построения корреляционной матрицы
+	//СЌС‚Рѕ Р±Р»РѕРє РїРѕСЃС‚СЂРѕРµРЅРёСЏ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 	bool vertical_korr_on_base_wnd = true;
 	if (vertical_korr_on_base_wnd)
-		// чуть изменённый алгоритм Ивана с корреляцией по вертикальным столбцам
-		// здесь мы поэкспериментируем с построением корреляционной матрицы по вертикальным столбцам
-		// основываясь на одном базовом изначально выбранном и фиксированном окне
+		// С‡СѓС‚СЊ РёР·РјРµРЅС‘РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РРІР°РЅР° СЃ РєРѕСЂСЂРµР»СЏС†РёРµР№ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+		// Р·РґРµСЃСЊ РјС‹ РїРѕСЌРєСЃРїРµСЂРёРјРµРЅС‚РёСЂСѓРµРј СЃ РїРѕСЃС‚СЂРѕРµРЅРёРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+		// РѕСЃРЅРѕРІС‹РІР°СЏСЃСЊ РЅР° РѕРґРЅРѕРј Р±Р°Р·РѕРІРѕРј РёР·РЅР°С‡Р°Р»СЊРЅРѕ РІС‹Р±СЂР°РЅРЅРѕРј Рё С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРј РѕРєРЅРµ
 	{
-		// этими переменными мы можем изменить (-1, +1) направление прохода 
-		// по каждому из окон
-		// при расчёте корреляционного коэффициента
+		// СЌС‚РёРјРё РїРµСЂРµРјРµРЅРЅС‹РјРё РјС‹ РјРѕР¶РµРј РёР·РјРµРЅРёС‚СЊ (-1, +1) РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР°
+		// РїРѕ РєР°Р¶РґРѕРјСѓ РёР· РѕРєРѕРЅ
+		// РїСЂРё СЂР°СЃС‡С‘С‚Рµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 		int reverse1 = +1, reverse2 = +1;
 
 		profile_interval prof_interval;
@@ -14924,21 +14907,21 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			}
 
 			vvvvkp.resize(cols);
-			// построение корреляционных матриц по принципу каждая колонка с каждой
+			// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РјР°С‚СЂРёС† РїРѕ РїСЂРёРЅС†РёРїСѓ РєР°Р¶РґР°СЏ РєРѕР»РѕРЅРєР° СЃ РєР°Р¶РґРѕР№
 			for(size_t c1 = 0; c1 < cols; c1++)
-			{		
+			{
 				vvvvkp[c1].resize(cols);
 				for(size_t c2 = 0; c2 < cols; c2++)
 				{
-					// набор колонок можно по указателю вынести за пределы функции 
+					// РЅР°Р±РѕСЂ РєРѕР»РѕРЅРѕРє РјРѕР¶РЅРѕ РїРѕ СѓРєР°Р·Р°С‚РµР»СЋ РІС‹РЅРµСЃС‚Рё Р·Р° РїСЂРµРґРµР»С‹ С„СѓРЅРєС†РёРё
 					// BuildProfile
-					//  а также за пределы этой функции вынести корреляционную обработку этих колонок, 
-					// чтобы обрабатывать одинаковым образом не один профиль только,
-					// а сразу все профили в функции UseWholeDirectory
+					//  Р° С‚Р°РєР¶Рµ Р·Р° РїСЂРµРґРµР»С‹ СЌС‚РѕР№ С„СѓРЅРєС†РёРё РІС‹РЅРµСЃС‚Рё РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РѕР±СЂР°Р±РѕС‚РєСѓ СЌС‚РёС… РєРѕР»РѕРЅРѕРє,
+					// С‡С‚РѕР±С‹ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РѕРґРёРЅР°РєРѕРІС‹Рј РѕР±СЂР°Р·РѕРј РЅРµ РѕРґРёРЅ РїСЂРѕС„РёР»СЊ С‚РѕР»СЊРєРѕ,
+					// Р° СЃСЂР°Р·Сѓ РІСЃРµ РїСЂРѕС„РёР»Рё РІ С„СѓРЅРєС†РёРё UseWholeDirectory
 
 					DoGorizontalCorrilation(k, shoulder,step,&vvvvkp[c1][c2],
-						v, X, Y, pnames_of_colomns, original_col_numbers, 
-						rows, c1, c2, reverse1, reverse2, delim);	
+						v, X, Y, pnames_of_colomns, original_col_numbers,
+						rows, c1, c2, reverse1, reverse2, delim);
 
 					DoVerticalAutoCorrelation(
 						shoulder,step,wlen_auto,
@@ -14946,7 +14929,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 						&vvvvkp[c1][c2],
 						profile_intervals,
 						pnames_of_colomns,
-						original_col_numbers, 
+						original_col_numbers,
 						c1, c2,
 						reverse1, reverse2,
 						delim
@@ -14955,9 +14938,9 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					BuildGrid(0,//short crd_type,
 								// 0 - x, 1 - y, 2 - profile_len
 						1, 		// short value_type,
-								// 1 - korr_k;  // коэффициент горизонтальной корреляции
-								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
+								// 1 - korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+								// 2 - korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+								// 3 - korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 						NULL, //pcollection,
 						&vvvvkp[c1][c2],
 						profile_intervals,
@@ -14974,7 +14957,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			if (vvvvkp[0].size() > 0)
 				prof_interval.i2 = vvvvkp[0][0].size()-1;
 
-		prof_interval.layer = NULL;					
+		prof_interval.layer = NULL;
 		SurfDoc * doc = NULL;
 		if (p_auto_build_profile)
 			doc = (SurfDoc*)p_auto_build_profile->GetDoc();
@@ -15016,18 +14999,17 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 #endif
 
 
-			
 	//**********************************************
 	//##############################################################
-	//это блок построения корреляционной матрицы
+	//СЌС‚Рѕ Р±Р»РѕРє РїРѕСЃС‚СЂРѕРµРЅРёСЏ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 
-	// чуть изменённый алгоритм Ивана с корреляцией по вертикальным столбцам
-	// здесь мы поэкспериментируем с построением корреляционной матрицы по вертикальным столбцам
-	// основываясь на одном базовом изначально выбранном и фиксированном окне
+	// С‡СѓС‚СЊ РёР·РјРµРЅС‘РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РРІР°РЅР° СЃ РєРѕСЂСЂРµР»СЏС†РёРµР№ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+	// Р·РґРµСЃСЊ РјС‹ РїРѕСЌРєСЃРїРµСЂРёРјРµРЅС‚РёСЂСѓРµРј СЃ РїРѕСЃС‚СЂРѕРµРЅРёРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Рј СЃС‚РѕР»Р±С†Р°Рј
+	// РѕСЃРЅРѕРІС‹РІР°СЏСЃСЊ РЅР° РѕРґРЅРѕРј Р±Р°Р·РѕРІРѕРј РёР·РЅР°С‡Р°Р»СЊРЅРѕ РІС‹Р±СЂР°РЅРЅРѕРј Рё С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРј РѕРєРЅРµ
 
-	// этими переменными мы можем изменить (-1, +1) направление прохода 
-	// по каждому из окон
-	// при расчёте корреляционного коэффициента
+	// СЌС‚РёРјРё РїРµСЂРµРјРµРЅРЅС‹РјРё РјС‹ РјРѕР¶РµРј РёР·РјРµРЅРёС‚СЊ (-1, +1) РЅР°РїСЂР°РІР»РµРЅРёРµ РїСЂРѕС…РѕРґР°
+	// РїРѕ РєР°Р¶РґРѕРјСѓ РёР· РѕРєРѕРЅ
+	// РїСЂРё СЂР°СЃС‡С‘С‚Рµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 	int reverse1 = +1, reverse2 = +1;
 
 	int jend = is_reverse ? 2 : 1;
@@ -15042,16 +15024,16 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 			reverse1 = +1, reverse2 = -1;
 		}
 
-		// построение корреляционных матриц по принципу каждая колонка с каждой
+		// РїРѕСЃС‚СЂРѕРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹С… РјР°С‚СЂРёС† РїРѕ РїСЂРёРЅС†РёРїСѓ РєР°Р¶РґР°СЏ РєРѕР»РѕРЅРєР° СЃ РєР°Р¶РґРѕР№
 		for(size_t c1 = 0; c1 < cols; c1++)
-		{	
+		{
 			for(size_t c2 = 0; c2 < cols; c2++)
 			{
-				// набор колонок можно по указателю вынести за пределы функции 
+				// РЅР°Р±РѕСЂ РєРѕР»РѕРЅРѕРє РјРѕР¶РЅРѕ РїРѕ СѓРєР°Р·Р°С‚РµР»СЋ РІС‹РЅРµСЃС‚Рё Р·Р° РїСЂРµРґРµР»С‹ С„СѓРЅРєС†РёРё
 				// BuildProfile
-				//  а также за пределы этой функции вынести корреляционную обработку этих колонок, 
-				// чтобы обрабатывать одинаковым образом не один профиль только,
-				// а сразу все профили в функции UseWholeDirectory
+				//  Р° С‚Р°РєР¶Рµ Р·Р° РїСЂРµРґРµР»С‹ СЌС‚РѕР№ С„СѓРЅРєС†РёРё РІС‹РЅРµСЃС‚Рё РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РѕР±СЂР°Р±РѕС‚РєСѓ СЌС‚РёС… РєРѕР»РѕРЅРѕРє,
+				// С‡С‚РѕР±С‹ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РѕРґРёРЅР°РєРѕРІС‹Рј РѕР±СЂР°Р·РѕРј РЅРµ РѕРґРёРЅ РїСЂРѕС„РёР»СЊ С‚РѕР»СЊРєРѕ,
+				// Р° СЃСЂР°Р·Сѓ РІСЃРµ РїСЂРѕС„РёР»Рё РІ С„СѓРЅРєС†РёРё UseWholeDirectory
 				//vector<vector<korr_point> > vvkp;
 				//vvkp.clear();
 #if MANY_COLLECTIONS_ON_EACH_COL
@@ -15070,8 +15052,8 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				}
 #endif
 
-				// проводим корреляцию между столбцами
-				// эту обработку мы можем вынести за ределы этой функции
+				// РїСЂРѕРІРѕРґРёРј РєРѕСЂСЂРµР»СЏС†РёСЋ РјРµР¶РґСѓ СЃС‚РѕР»Р±С†Р°РјРё
+				// СЌС‚Сѓ РѕР±СЂР°Р±РѕС‚РєСѓ РјС‹ РјРѕР¶РµРј РІС‹РЅРµСЃС‚Рё Р·Р° СЂРµРґРµР»С‹ СЌС‚РѕР№ С„СѓРЅРєС†РёРё
 				DoVerticalCorrelation(
 					wlen,
 					pcollection,
@@ -15087,9 +15069,9 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				BuildGrid(0,//short crd_type,
 							// 0 - x, 1 - y, 2 - profile_len
 					2, 		// short value_type,
-							// 1 - korr_k;  // коэффициент горизонтальной корреляции
-							// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-							// 3 - korr_k3; // коэффициент вертикальной автокорреляции
+							// 1 - korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+							// 2 - korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+							// 3 - korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 					pcollection,
 					&vvvvkp[c1][c2],
 					profile_intervals,
@@ -15103,7 +15085,7 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		}
 	}
 
-	//конец блока построения корреляционной матрицы
+	//РєРѕРЅРµС† Р±Р»РѕРєР° РїРѕСЃС‚СЂРѕРµРЅРёСЏ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 	//##############################################################
 
 	return true;
@@ -15124,7 +15106,7 @@ void MakeLinePointPair(
 #if SOURCE_COORDINATES_3D
 				 double z,
 #endif
-				char *name, COLORREF color, 
+				char *name, COLORREF color,
 				COLLECTION * pcollection_,
 				SurfDoc* doc
 				)
@@ -15133,12 +15115,12 @@ void MakeLinePointPair(
 	{
 #if 0
 		Collection collection_0(doc);
-						
+
 		collection_0.SetName(name);
-		Collection * pcollection_0 = 
+		Collection * pcollection_0 =
 			dynamic_cast<Collection *>(pcollection_->AddObject(&collection_0));
 		if (pcollection_0)
-		{	
+		{
 			Line3D line(doc);
 			/*line.m_bChecked = false;
 			char name[255];
@@ -15179,7 +15161,7 @@ void MakeLinePointPair(
 void Window_Cycle(auto_build_parametrs::gradient_type m_gradient_type, 
 				  double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-				  size_t icol, //номер колонки
+				  size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -15196,7 +15178,7 @@ void Window_Cycle(auto_build_parametrs::gradient_type m_gradient_type,
 				  //size_t step_vindow_len,
 				  double win_velonsity,
 				  
-				  bool use_repeat_points,  int n,//плечо области запрета ( можно 0 и выше)
+				  bool use_repeat_points,  int n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 				  double minimum_of_signal, 
 				   
 				  double k,	
@@ -15237,12 +15219,12 @@ printf("Window_Cycle start\n");
 	}
 
 	//##############################################################
-	//блок формирования ветора градиента по текущей колонке
+	//Р±Р»РѕРє С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РІРµС‚РѕСЂР° РіСЂР°РґРёРµРЅС‚Р° РїРѕ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРµ
 #if !_USE_MIN_IN_WINDOW_
 	// relative gradient
 	vector<double> rg; rg.resize(rows-1);
 #endif
-	// free flag флаг не-использования точки
+	// free flag С„Р»Р°Рі РЅРµ-РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РєРё
 	vector<bool> ff; ff.resize(rows-1);
 	if (rows > 1)
 	{
@@ -15266,7 +15248,7 @@ printf("Window_Cycle start\n");
 #endif
 		}
 	}
-	//блок формирования ветора градиента по текущей колонке
+	//Р±Р»РѕРє С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РІРµС‚РѕСЂР° РіСЂР°РґРёРµРЅС‚Р° РїРѕ С‚РµРєСѓС‰РµР№ РєРѕР»РѕРЅРєРµ
 	//##############################################################
 
 ///*
@@ -15282,7 +15264,7 @@ printf("Window_Cycle start\n");
 
 
 	//##############################################################
-	//организация цикла по длинам окна
+	//РѕСЂРіР°РЅРёР·Р°С†РёСЏ С†РёРєР»Р° РїРѕ РґР»РёРЅР°Рј РѕРєРЅР°
 	size_t window_len = start_window_len;
 	size_t step_win_len = max(1.0, end_window_len * ((1.0-win_velonsity) + win_velonsity*double(start_window_len - window_len)/double(start_window_len - end_window_len)));
 	//for (size_t window_len = start_window_len; window_len <= end_window_len; window_len+=step_vindow_len)
@@ -15330,20 +15312,20 @@ printf("Window_Cycle start\n");
 */
 
 		//##############################################################
-		//задаёмся целью создания массивов координат внутриоконных максимумов и минимумов
+		//Р·Р°РґР°С‘РјСЃСЏ С†РµР»СЊСЋ СЃРѕР·РґР°РЅРёСЏ РјР°СЃСЃРёРІРѕРІ РєРѕРѕСЂРґРёРЅР°С‚ РІРЅСѓС‚СЂРёРѕРєРѕРЅРЅС‹С… РјР°РєСЃРёРјСѓРјРѕРІ Рё РјРёРЅРёРјСѓРјРѕРІ
 		vector<size_t> vi_max_grad, vi_min_grad;
 		vi_max_grad.clear(), vi_min_grad.clear();
 		vector<double> v_max_grad, v_min_grad;
 		v_max_grad.clear(), v_min_grad.clear();
 		//##############################################################
-		//организация цикла перемещения окна
+		//РѕСЂРіР°РЅРёР·Р°С†РёСЏ С†РёРєР»Р° РїРµСЂРµРјРµС‰РµРЅРёСЏ РѕРєРЅР°
 		while (start_of_window + window_len < rows)
 		{
 			//vector<double> vg;
 			//vg.clear();
 #if _USE_MIN_IN_WINDOW_
 			//##############################################################
-			//блок поиска минимального значения в текущем окне
+			//Р±Р»РѕРє РїРѕРёСЃРєР° РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІ С‚РµРєСѓС‰РµРј РѕРєРЅРµ
 			double min_v; 
 			bool start = true;
 			for (size_t i = start_of_window; i < start_of_window + window_len; i++)
@@ -15359,21 +15341,21 @@ printf("Window_Cycle start\n");
 					if (min_v > f) min_v = f;
 				}
 			}
-			//конец блока поиска минимального значения в текущем окне
+			//РєРѕРЅРµС† Р±Р»РѕРєР° РїРѕРёСЃРєР° РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІ С‚РµРєСѓС‰РµРј РѕРєРЅРµ
 			//##############################################################
 #endif
 			//##############################################################
-			//задаёмся целью поиска максимума и минимума градиента внутри окна
+			//Р·Р°РґР°С‘РјСЃСЏ С†РµР»СЊСЋ РїРѕРёСЃРєР° РјР°РєСЃРёРјСѓРјР° Рё РјРёРЅРёРјСѓРјР° РіСЂР°РґРёРµРЅС‚Р° РІРЅСѓС‚СЂРё РѕРєРЅР°
 			double max_grad, min_grad;
 			size_t i_max_grad, i_min_grad;
 			start = true;
 
 			//##############################################################
-			//организация цикла внутри окна
+			//РѕСЂРіР°РЅРёР·Р°С†РёСЏ С†РёРєР»Р° РІРЅСѓС‚СЂРё РѕРєРЅР°
 			for (size_t i = start_of_window; i < -1 + start_of_window + window_len; i++)
 			{
 				//##############################################################
-				//если точа не использована уже ранее или установлен режим повторного использования точек
+				//РµСЃР»Рё С‚РѕС‡Р° РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅР° СѓР¶Рµ СЂР°РЅРµРµ РёР»Рё СѓСЃС‚Р°РЅРѕРІР»РµРЅ СЂРµР¶РёРј РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє
 				if (ff[i] || use_repeat_points)
 				{
 #if _USE_MIN_IN_WINDOW_
@@ -15413,7 +15395,7 @@ printf("Window_Cycle start\n");
 					double grad = rg[i];
 #endif
 					//##############################################################
-					//ищем максимум и минимум нашего градиента и их положение внутри окна
+					//РёС‰РµРј РјР°РєСЃРёРјСѓРј Рё РјРёРЅРёРјСѓРј РЅР°С€РµРіРѕ РіСЂР°РґРёРµРЅС‚Р° Рё РёС… РїРѕР»РѕР¶РµРЅРёРµ РІРЅСѓС‚СЂРё РѕРєРЅР°
 					if (start)
 					{
 						max_grad = min_grad = grad;
@@ -15426,17 +15408,17 @@ printf("Window_Cycle start\n");
 						if (max_grad < grad) {max_grad = grad; i_max_grad = i;}
 						if (min_grad > grad) {min_grad = grad; i_min_grad = i;}
 					}
-					//ищем максимум и минимум нашего градиента и их положение внутри окна
+					//РёС‰РµРј РјР°РєСЃРёРјСѓРј Рё РјРёРЅРёРјСѓРј РЅР°С€РµРіРѕ РіСЂР°РґРёРµРЅС‚Р° Рё РёС… РїРѕР»РѕР¶РµРЅРёРµ РІРЅСѓС‚СЂРё РѕРєРЅР°
 					//##############################################################
 				}
-				//если точа не использована уже ранее или установлен режим повторного использования точек
+				//РµСЃР»Рё С‚РѕС‡Р° РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅР° СѓР¶Рµ СЂР°РЅРµРµ РёР»Рё СѓСЃС‚Р°РЅРѕРІР»РµРЅ СЂРµР¶РёРј РїРѕРІС‚РѕСЂРЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє
 				//##############################################################
 			}
 			if (start) 
 			{
 				//MessageBox(0, "start!!!!", "min_grad & max_grad not determined", 0);
 				printf( "start!!!! min_grad & max_grad not determined\n");
-				//выход из цикла по длинам окна
+				//РІС‹С…РѕРґ РёР· С†РёРєР»Р° РїРѕ РґР»РёРЅР°Рј РѕРєРЅР°
 				continue_cycle_on_window_len = false;
 			}
 			else
@@ -15455,19 +15437,19 @@ printf("Window_Cycle start\n");
 					MessageBox(0, str, "", 0);
 				}
 
-				//организация цикла внутри окна
+				//РѕСЂРіР°РЅРёР·Р°С†РёСЏ С†РёРєР»Р° РІРЅСѓС‚СЂРё РѕРєРЅР°
 				//##############################################################
 				//printf("i_max_grad = %d i_min_grad = %d\n",i_max_grad, i_min_grad);
 				vi_max_grad.push_back(i_max_grad);
 				vi_min_grad.push_back(i_min_grad);
 				v_max_grad.push_back(max_grad);
 				v_min_grad.push_back(min_grad);
-				//здесь мы уже достигли цель поиска максимума и минимума градиента внутри окна
-				//а также знаем их положение
+				//Р·РґРµСЃСЊ РјС‹ СѓР¶Рµ РґРѕСЃС‚РёРіР»Рё С†РµР»СЊ РїРѕРёСЃРєР° РјР°РєСЃРёРјСѓРјР° Рё РјРёРЅРёРјСѓРјР° РіСЂР°РґРёРµРЅС‚Р° РІРЅСѓС‚СЂРё РѕРєРЅР°
+				//Р° С‚Р°РєР¶Рµ Р·РЅР°РµРј РёС… РїРѕР»РѕР¶РµРЅРёРµ
 				//##############################################################
 
 				//##############################################################
-				//сбрасываем флаг неиспользования точки
+				//СЃР±СЂР°СЃС‹РІР°РµРј С„Р»Р°Рі РЅРµРёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РєРё
 				if (i_max_grad < start_of_window + window_len/2 || start_of_window + 3*window_len/2 > rows) 
 				{
 					
@@ -15485,29 +15467,29 @@ printf("Window_Cycle start\n");
 							ff[jj] = false;
 					}
 				}
-				//сбросили флаг неиспользования точки
+				//СЃР±СЂРѕСЃРёР»Рё С„Р»Р°Рі РЅРµРёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РєРё
 				//##############################################################
 			}
 
-			//шаг перемещения окна
+			//С€Р°Рі РїРµСЂРµРјРµС‰РµРЅРёСЏ РѕРєРЅР°
 			start_of_window += window_len/2;
 		}
-		//конец организации цикла перемещения окна
+		//РєРѕРЅРµС† РѕСЂРіР°РЅРёР·Р°С†РёРё С†РёРєР»Р° РїРµСЂРµРјРµС‰РµРЅРёСЏ РѕРєРЅР°
 		//##############################################################
 //printf("Window_Cycle end of inter window cycle \n");
 
-		//здесь мы уже создали массивы координат внутриоконных максимумов и минимумов
+		//Р·РґРµСЃСЊ РјС‹ СѓР¶Рµ СЃРѕР·РґР°Р»Рё РјР°СЃСЃРёРІС‹ РєРѕРѕСЂРґРёРЅР°С‚ РІРЅСѓС‚СЂРёРѕРєРѕРЅРЅС‹С… РјР°РєСЃРёРјСѓРјРѕРІ Рё РјРёРЅРёРјСѓРјРѕРІ
 		//vector<size_t> vi_max_grad, vi_min_grad;
 		//##############################################################
 
 		//##############################################################
-		//блок формирования выходных данных
-		//группировка максимумов и минимумов в пары
+		//Р±Р»РѕРє С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РІС‹С…РѕРґРЅС‹С… РґР°РЅРЅС‹С…
+		//РіСЂСѓРїРїРёСЂРѕРІРєР° РјР°РєСЃРёРјСѓРјРѕРІ Рё РјРёРЅРёРјСѓРјРѕРІ РІ РїР°СЂС‹
 		OutputDimaAlgorithm(limit_dima, 
 #if SOURCE_COORDINATES_3D
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-			icol, //номер колонки
-			level, // уровень разложения
+			icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+			level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 			X,Y,
 #else
@@ -15533,8 +15515,8 @@ printf("Window_Cycle start\n");
 		OutputFirstAlgorithm(limit_1, 
 #if SOURCE_COORDINATES_3D
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-				icol, //номер колонки
-				level, // уровень разложения
+				icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+				level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 
 				X,Y,
@@ -15558,35 +15540,35 @@ printf("Window_Cycle start\n");
 				stream_common_razez_negative
 
 				);
-		//конец блока формирования выходных данных
+		//РєРѕРЅРµС† Р±Р»РѕРєР° С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РІС‹С…РѕРґРЅС‹С… РґР°РЅРЅС‹С…
 		//##############################################################
 		level++;
 	}
-	//конец организации цикла по длинам окна
+	//РєРѕРЅРµС† РѕСЂРіР°РЅРёР·Р°С†РёРё С†РёРєР»Р° РїРѕ РґР»РёРЅР°Рј РѕРєРЅР°
 	//##############################################################
 printf("Window_Cycle end !!! \n");
 }
 
 void OutputDimaAlgorithm(double limit_dima,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						 size_t icol, //номер колонки
-						 size_t level, // уровень разложения
+						 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+						 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
-						 vector<double>& X, 
-						 vector<double>& Y, 
+						 vector<double>& X,
+						 vector<double>& Y,
 #else
-						 vector<double>& t, 
+						 vector<double>& t,
 #endif
-						 
+
 						 vector<double>& in,
 						 vector<size_t>& vi_max_grad, vector<size_t>& vi_min_grad,
 						 vector<double>& v_max_grad, vector<double>& v_min_grad,
-						 
-						 double k,	
+
+						 double k,
 						 int delim,
 #if _USE_WINSURF_
-						 SurfDoc * doc, 
+						 SurfDoc * doc,
 						 COLLECTION * pcollection_nda,
 						 COLLECTION * pcollection_pda,
 #endif
@@ -15596,15 +15578,15 @@ void OutputDimaAlgorithm(double limit_dima,
 						 )
 {
 	//##############################################################
-	//алгоритм, который предложил Дима:
+	//Р°Р»РіРѕСЂРёС‚Рј, РєРѕС‚РѕСЂС‹Р№ РїСЂРµРґР»РѕР¶РёР» Р”РёРјР°:
 	//--------------------------------------
-	//в 1-м окне берём только максимум, 
-	//во 2-м окне берём только минимум
-	//группируем их в пару - эта пара соответствет положительной аномалии
+	//РІ 1-Рј РѕРєРЅРµ Р±РµСЂС‘Рј С‚РѕР»СЊРєРѕ РјР°РєСЃРёРјСѓРј,
+	//РІРѕ 2-Рј РѕРєРЅРµ Р±РµСЂС‘Рј С‚РѕР»СЊРєРѕ РјРёРЅРёРјСѓРј
+	//РіСЂСѓРїРїРёСЂСѓРµРј РёС… РІ РїР°СЂСѓ - СЌС‚Р° РїР°СЂР° СЃРѕРѕС‚РІРµС‚СЃС‚РІРµС‚ РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕР№ Р°РЅРѕРјР°Р»РёРё
 	//---------------------------------------
-	//во 1-м окне берём только максимум, 
-	//в 3-м окне берём только минимум
-	//группируем их в пару - и т.д.
+	//РІРѕ 1-Рј РѕРєРЅРµ Р±РµСЂС‘Рј С‚РѕР»СЊРєРѕ РјР°РєСЃРёРјСѓРј,
+	//РІ 3-Рј РѕРєРЅРµ Р±РµСЂС‘Рј С‚РѕР»СЊРєРѕ РјРёРЅРёРјСѓРј
+	//РіСЂСѓРїРїРёСЂСѓРµРј РёС… РІ РїР°СЂСѓ - Рё С‚.Рґ.
 	//---------------------------------------
 
 	if(vi_max_grad.size() > 0 && vi_min_grad.size() > 0)
@@ -15649,10 +15631,10 @@ void OutputDimaAlgorithm(double limit_dima,
 #if SOURCE_COORDINATES_3D
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i_max+1, i_min, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
+						icol, i_max+1, i_min, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-						x_max, y_max, x_min, y_min, k, 
+						x_max, y_max, x_min, y_min, k,
 						stream_com_raz_pos, delim, r_ , max_, x, y, z);//j ???
 
 	#if _USE_WINSURF_
@@ -15660,7 +15642,7 @@ void OutputDimaAlgorithm(double limit_dima,
 					MakeLinePointPair(X, Y, in, i_max, i_min, x,y,z, name, RGB(255,0,0), pcollection_pda, doc);
 	#endif
 #else
-					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k, 
+					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k,
 						stream_com_raz_pos, delim, r_ , max_, x, y);//j ???
 
 	#if _USE_WINSURF_
@@ -15708,11 +15690,11 @@ void OutputDimaAlgorithm(double limit_dima,
 #if SOURCE_COORDINATES_3D
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i_max, i_min+1, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
+						icol, i_max, i_min+1, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-						
-						x_max, y_max, x_min, y_min, k, 
+
+						x_max, y_max, x_min, y_min, k,
 						stream_com_raz_neg, delim, r_ , max_, x, y, z);//j ???
 
 	#if _USE_WINSURF_
@@ -15720,7 +15702,7 @@ void OutputDimaAlgorithm(double limit_dima,
 					MakeLinePointPair(X, Y, in, i_max, i_min, x,y,z, name, RGB(0,0,255), pcollection_nda, doc);
 	#endif
 #else
-					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k, 
+					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k,
 						stream_com_raz_neg, delim, r_ , max_, x, y);//j ???
 
 	#if _USE_WINSURF_
@@ -15733,29 +15715,29 @@ void OutputDimaAlgorithm(double limit_dima,
 			}
 		}
 	}
-	//конец алгоритма, который предложил Дима
+	//РєРѕРЅРµС† Р°Р»РіРѕСЂРёС‚РјР°, РєРѕС‚РѕСЂС‹Р№ РїСЂРµРґР»РѕР¶РёР» Р”РёРјР°
 	//##############################################################
 }
 void OutputFirstAlgorithm(double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						 size_t icol, //номер колонки
-						 size_t level, // уровень разложения
+						 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+						 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
-						  vector<double>& X, 
-						  vector<double>& Y, 
+						  vector<double>& X,
+						  vector<double>& Y,
 #else
-						  vector<double>& t, 
+						  vector<double>& t,
 #endif
-						 
+
 						 vector<double>& in,
 						 vector<size_t>& vi_max_grad, vector<size_t>& vi_min_grad,
 						 vector<double>& v_max_grad, vector<double>& v_min_grad,
-						 
-						 double k,	
+
+						 double k,
 						 int delim,
 #if _USE_WINSURF_
-						 SurfDoc * doc, 
+						 SurfDoc * doc,
 						 COLLECTION * pcollection_na,
 						 COLLECTION * pcollection_pa,
 #endif
@@ -15765,12 +15747,12 @@ void OutputFirstAlgorithm(double limit_1,
 						 )
 {
 	//##############################################################
-	//алгоритм 1 
+	//Р°Р»РіРѕСЂРёС‚Рј 1
 	//--------------------------------------
-	//максимум и минимум берём из каждого одного и того же окна
-	//группируем их в пару - 
-	//затем эти пары делим на положительные или отрицательные аномалии
-	//по признаку: если максимум левее, то аномалия положительная
+	//РјР°РєСЃРёРјСѓРј Рё РјРёРЅРёРјСѓРј Р±РµСЂС‘Рј РёР· РєР°Р¶РґРѕРіРѕ РѕРґРЅРѕРіРѕ Рё С‚РѕРіРѕ Р¶Рµ РѕРєРЅР°
+	//РіСЂСѓРїРїРёСЂСѓРµРј РёС… РІ РїР°СЂСѓ -
+	//Р·Р°С‚РµРј СЌС‚Рё РїР°СЂС‹ РґРµР»РёРј РЅР° РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рµ РёР»Рё РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рµ Р°РЅРѕРјР°Р»РёРё
+	//РїРѕ РїСЂРёР·РЅР°РєСѓ: РµСЃР»Рё РјР°РєСЃРёРјСѓРј Р»РµРІРµРµ, С‚Рѕ Р°РЅРѕРјР°Р»РёСЏ РїРѕР»РѕР¶РёС‚РµР»СЊРЅР°СЏ
 	//---------------------------------------
 
 	bool pre_positive_anomaly=false;;
@@ -15807,7 +15789,7 @@ void OutputFirstAlgorithm(double limit_1,
 
 				if (g_min == 0)
 				{
-					MessageBox(0, "g_min == 0", "алгоритм 1",0);
+					MessageBox(0, "g_min == 0", "Р°Р»РіРѕСЂРёС‚Рј 1",0);
 				}
 
 #if SOURCE_COORDINATES_3D
@@ -15823,10 +15805,10 @@ void OutputFirstAlgorithm(double limit_1,
 #if SOURCE_COORDINATES_3D
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i_max+1, i_min, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
-#endif						
-						x_max, y_max, x_min, y_min, k, 
+						icol, i_max+1, i_min, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
+#endif
+						x_max, y_max, x_min, y_min, k,
 						stream_com_raz_pos, delim, r_ , max_, x, y, z);//j ???
 
 #if _USE_WINSURF_
@@ -15834,7 +15816,7 @@ void OutputFirstAlgorithm(double limit_1,
 					MakeLinePointPair(X,Y, in, i_max, i_min, x,y,z, name, RGB(255,0,0), pcollection_pa, doc);
 #endif
 #else
-					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k, 
+					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k,
 						stream_com_raz_pos, delim, r_ , max_, x, y);//j ???
 
 #if _USE_WINSURF_
@@ -15864,7 +15846,7 @@ void OutputFirstAlgorithm(double limit_1,
 
 				if (g_min == 0)
 				{
-					MessageBox(0, "g_min == 0", "алгоритм 1",0);
+					MessageBox(0, "g_min == 0", "Р°Р»РіРѕСЂРёС‚Рј 1",0);
 				}
 
 #if SOURCE_COORDINATES_3D
@@ -15881,11 +15863,11 @@ void OutputFirstAlgorithm(double limit_1,
 
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i_max, i_min+1, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
+						icol, i_max, i_min+1, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-						
-						x_max, y_max, x_min, y_min, k, 
+
+						x_max, y_max, x_min, y_min, k,
 					stream_com_raz_neg, delim, r_ , max_, x, y, z);//j ???
 
 #if _USE_WINSURF_
@@ -15893,7 +15875,7 @@ void OutputFirstAlgorithm(double limit_1,
 					MakeLinePointPair(X, Y, in, i_max, i_min, x,y,z, name, RGB(0,0,255), pcollection_na, doc);
 #endif
 #else
-					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k, 
+					SourcesCoordinates_Calcule_AndSave(t_max, t_min, k,
 					stream_com_raz_neg, delim, r_ , max_, x, y);//j ???
 
 #if _USE_WINSURF_
@@ -15905,7 +15887,7 @@ void OutputFirstAlgorithm(double limit_1,
 			}
 		}
 	}
-	//конец алгоритма 1
+	//РєРѕРЅРµС† Р°Р»РіРѕСЂРёС‚РјР° 1
 	//##############################################################
 }
 
@@ -15913,7 +15895,7 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 		auto_build_parametrs::gradient_type m_gradient_type,
 		double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-		size_t icol, //номер колонки
+		size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 
 #if SOURCE_COORDINATES_3D
@@ -15927,7 +15909,7 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 		 vector<size_t>& vi,
 		 double win_velonsity,
 		 
-		 bool use_repeat_points,  int n,//плечо области запрета ( можно 0 и выше)
+		 bool use_repeat_points,  int n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 		 double minimum_of_signal, 
 
 		 double k,	
@@ -16034,7 +16016,7 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 			m_gradient_type,
 			limit_dima, limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-			icol, //номер колонки
+			icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
 #endif
 #if SOURCE_COORDINATES_3D
 			xx, yy, 
@@ -16042,20 +16024,20 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 			tt, 
 #endif
 			in, 	
-			//start_window_len, end_window_len, step_vindow_len,                            
-			in.size()/2, in.size()/10, //in.size()/20,   
+			//start_window_len, end_window_len, step_vindow_len,
+			in.size()/2, in.size()/10, //in.size()/20,
 			win_velonsity,
-			use_repeat_points,  n,//плечо области запрета ( можно 0 и выше)
+			use_repeat_points,  n,//РїР»РµС‡Рѕ РѕР±Р»Р°СЃС‚Рё Р·Р°РїСЂРµС‚Р° ( РјРѕР¶РЅРѕ 0 Рё РІС‹С€Рµ)
 			minimum_of_signal,
-			k,	
-			delim, 
-#if _USE_WINSURF_	
+			k,
+			delim,
+#if _USE_WINSURF_
 			doc,
 			pcollection_pda_,
 			pcollection_nda_,
 			pcollection_pa_,
 			pcollection_na_,
-#endif				  
+#endif
 			stream_com_raz_pos_dima_,
 			stream_com_raz_neg_dima_,
 			stream_com_raz_pos_,
@@ -16067,25 +16049,25 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 
 void SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-	size_t icol, size_t j1, size_t j2, // номер колонки, индексы начала и конца аномалии
-	size_t level, // уровень разложения	
+	size_t icol, size_t j1, size_t j2, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+	size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-	double x1, double y1, 
+	double x1, double y1,
 	double x2, double y2,
-	double k, FILE * stream, int delim, double r_ , double max_, 
+	double k, FILE * stream, int delim, double r_ , double max_,
 	double& x, double& y, double& z)
 {
-	//вычисление координат и глубин источников
+	//РІС‹С‡РёСЃР»РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚ Рё РіР»СѓР±РёРЅ РёСЃС‚РѕС‡РЅРёРєРѕРІ
 	x = (x1 + x2)/2.0;
 	y = (y1 + y2)/2.0;
-	z = -k*sqrt( 
-		(x1 - x2)*(x1 - x2) 
+	z = -k*sqrt(
+		(x1 - x2)*(x1 - x2)
 		+
-		(y1 - y2)*(y1 - y2) 
+		(y1 - y2)*(y1 - y2)
 		);
 
-	if (stream) 
-		fprintf(stream, 
+	if (stream)
+		fprintf(stream,
 		"%7.3f%c%7.3f%c%7.3f%c%1.6f%c%3.5f"
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
 		"%c%u%c%u%c%u"
@@ -16095,46 +16077,46 @@ void SourcesCoordinates_Calcule_AndSave(
 		x, delim, y, delim, z, delim, r_, delim, max_
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
 		, delim, icol, delim, j1, delim, j2
-		, delim, level	// уровень разложения			
+		, delim, level	// СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 		);
 }
 #else /*SOURCE_COORDINATES_3D*/
 void SourcesCoordinates_Calcule_AndSave(double t1, double t2, double k, FILE * stream, int delim, double r_ , double max_, double& x, double& y)
 {
-	//вычисление координат и глубин источников
+	//РІС‹С‡РёСЃР»РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚ Рё РіР»СѓР±РёРЅ РёСЃС‚РѕС‡РЅРёРєРѕРІ
 	x = (t1 + t2)/2.0;
 	y = -k*fabs(t1 - t2);
 
-	if (stream) 
-		fprintf(stream, 
+	if (stream)
+		fprintf(stream,
 		"%7.3f%c%7.3f%c%1.6f%c%3.5f"
 		//"%c%d"
 		"\n",
 		x, delim, y, delim, r_, delim, max_
-		//, delim, j				
+		//, delim, j
 		);
 }
 #endif /*SOURCE_COORDINATES_3D*/
 
 void LocalsMaker(
-				 double quantil_naklony, 
+				 double quantil_naklony,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-				 size_t icol, //номер колонки
-				 size_t level, // уровень разложения
+				 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+				 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
-				 vector<double>& X, 
-				 vector<double>& Y, 
+				 vector<double>& X,
+				 vector<double>& Y,
 #else
-				 vector<double>& t, 
+				 vector<double>& t,
 #endif
 				 vector<double>& in,
 				 vector<size_t>& vi,
-				 double k,	
+				 double k,
 				 int delim,
 #if _USE_WINSURF_
-				 SurfDoc * doc, 
+				 SurfDoc * doc,
 				 COLLECTION * pcollection_,
 				 COLORREF color,
 #endif
@@ -16144,9 +16126,9 @@ void LocalsMaker(
 
 {
 	// quantil_naklony
-	// квантиль отбора "локалов" по углу налона
-	// мы будем отбирать только те аномалии в "локалах",
-	// которые имеют минимальный угол наклона
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° "Р»РѕРєР°Р»РѕРІ" РїРѕ СѓРіР»Сѓ РЅР°Р»РѕРЅР°
+	// РјС‹ Р±СѓРґРµРј РѕС‚Р±РёСЂР°С‚СЊ С‚РѕР»СЊРєРѕ С‚Рµ Р°РЅРѕРјР°Р»РёРё РІ "Р»РѕРєР°Р»Р°С…",
+	// РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓРіРѕР» РЅР°РєР»РѕРЅР°
 
 	if (vi.size() > 1)
 	{
@@ -16157,23 +16139,23 @@ void LocalsMaker(
 			size_t i1 = vi[i];
 			size_t i2 = vi[i+1];
 
-			// разница значения функций
+			// СЂР°Р·РЅРёС†Р° Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёР№
 			double r_ = fabs(in[i1] - in[i2]);
 			//double max_ = max(in[i1], in[i2]);
-			// разница в координатах 
+			// СЂР°Р·РЅРёС†Р° РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С…
 #if SOURCE_COORDINATES_3D
 			double delta_t = sqrt(
-				(X[i1] - X[i2])*(X[i1] - X[i2]) 
+				(X[i1] - X[i2])*(X[i1] - X[i2])
 				+
-				(Y[i1] - Y[i2])*(Y[i1] - Y[i2]) 
+				(Y[i1] - Y[i2])*(Y[i1] - Y[i2])
 				);
 #else
 			double delta_t = fabs(t[i1] - t[i2]);
 #endif /*SOURCE_COORDINATES_3D*/
-			
-			double naklon = r_/delta_t;	
+
+			double naklon = r_/delta_t;
 			v_naklony.push_back(naklon);
-		}	
+		}
 		sort(v_naklony.begin(), v_naklony.end());
 		size_t len = v_naklony.size();
 		size_t dlen = size_t(quantil_naklony*len);
@@ -16184,21 +16166,21 @@ void LocalsMaker(
 //	printf("v_naklony[%d] = %f\n",i, v_naklony[i]);
 
 //printf("v_naklony[0] %f naklon_limit %f v_naklony[len-1] %f len %d dlen %d\n", v_naklony[0], naklon_limit, v_naklony[len-1], len, dlen);
-					    
+
 		for (size_t i = 0; i < vi.size()-1; i++)
 		{
 			size_t i1 = vi[i];
 			size_t i2 = vi[i+1];
 
-			// разница значения функций
+			// СЂР°Р·РЅРёС†Р° Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёР№
 			double r_ = fabs(in[i1] - in[i2]);
 			double max_ = max(in[i1], in[i2]);
-			// разница в координатах 
+			// СЂР°Р·РЅРёС†Р° РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С…
 #if SOURCE_COORDINATES_3D
 			double delta_t = sqrt(
-				(X[i1] - X[i2])*(X[i1] - X[i2]) 
+				(X[i1] - X[i2])*(X[i1] - X[i2])
 				+
-				(Y[i1] - Y[i2])*(Y[i1] - Y[i2]) 
+				(Y[i1] - Y[i2])*(Y[i1] - Y[i2])
 				);
 #else
 			double delta_t = fabs(t[i1] - t[i2]);
@@ -16224,12 +16206,12 @@ void LocalsMaker(
 					double x, y, z;
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i1, i2, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
+						icol, i1, i2, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-						X[i1], Y[i1], 
-						X[i2], Y[i2], 
-						k, 
+						X[i1], Y[i1],
+						X[i2], Y[i2],
+						k,
 						stream_less, delim, r_ , max_, x, y, z);//j ???
 	#if _USE_WINSURF_
 					char name[255]; sprintf(name, "i1=%u i2=%u", i1, i2);
@@ -16238,7 +16220,7 @@ void LocalsMaker(
 
 	#else /*SOURCE_COORDINATES_3D*/
 					double x, y;
-					SourcesCoordinates_Calcule_AndSave(t[i1], t[i2], k, 
+					SourcesCoordinates_Calcule_AndSave(t[i1], t[i2], k,
 						stream_less, delim, r_ , max_, x, y);//j ???
 	#if _USE_WINSURF_
 					char name[255]; sprintf(name, "i1=%u i2=%u t1=%f t2=%f", i1, i2, t[i1], t[i2]);
@@ -16253,12 +16235,12 @@ void LocalsMaker(
 					double x, y, z;
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i1, i2, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
+						icol, i1, i2, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-						X[i1], Y[i1], 
-						X[i2], Y[i2], 
-						k, 
+						X[i1], Y[i1],
+						X[i2], Y[i2],
+						k,
 						stream_more, delim, r_ , max_, x, y, z);//j ???
 	#if _USE_WINSURF_
 					char name[255]; sprintf(name, "i1=%u i2=%u", i1, i2);
@@ -16285,23 +16267,23 @@ void LocalsMaker(
 
 
 void SticksMaker(
-				 double quantil_naklony, 
+				 double quantil_naklony,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-				 size_t icol, //номер колонки
-				 size_t level, // уровень разложения
+				 size_t icol, //РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё
+				 size_t level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
 #if SOURCE_COORDINATES_3D
-				 vector<double>& X, 
-				 vector<double>& Y, 
+				 vector<double>& X,
+				 vector<double>& Y,
 #else
-				 vector<double>& t, 
+				 vector<double>& t,
 #endif
 				 vector<double>& in,
 				 vector<size_t>& vi,
-				 double k,	
+				 double k,
 				 int delim,
 #if _USE_WINSURF_
-				 SurfDoc * doc, 
+				 SurfDoc * doc,
 				 COLLECTION * pcollection_,
 				 COLORREF color,
 #endif
@@ -16311,9 +16293,9 @@ void SticksMaker(
 
 {
 	// quantil_naklony
-	// квантиль отбора "локалов" по углу налона
-	// мы будем отбирать только те аномалии в "локалах",
-	// которые имеют минимальный угол наклона
+	// РєРІР°РЅС‚РёР»СЊ РѕС‚Р±РѕСЂР° "Р»РѕРєР°Р»РѕРІ" РїРѕ СѓРіР»Сѓ РЅР°Р»РѕРЅР°
+	// РјС‹ Р±СѓРґРµРј РѕС‚Р±РёСЂР°С‚СЊ С‚РѕР»СЊРєРѕ С‚Рµ Р°РЅРѕРјР°Р»РёРё РІ "Р»РѕРєР°Р»Р°С…",
+	// РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓРіРѕР» РЅР°РєР»РѕРЅР°
 
 	if (vi.size() > 1)
 	{
@@ -16324,23 +16306,23 @@ void SticksMaker(
 			size_t i1 = vi[i];
 			size_t i2 = vi[i+1];
 
-			// разница значения функций
+			// СЂР°Р·РЅРёС†Р° Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёР№
 			double r_ = fabs(in[i1] - in[i2]);
 			//double max_ = max(in[i1], in[i2]);
-			// разница в координатах 
+			// СЂР°Р·РЅРёС†Р° РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С…
 #if SOURCE_COORDINATES_3D
 			double delta_t = sqrt(
-				(X[i1] - X[i2])*(X[i1] - X[i2]) 
+				(X[i1] - X[i2])*(X[i1] - X[i2])
 				+
-				(Y[i1] - Y[i2])*(Y[i1] - Y[i2]) 
+				(Y[i1] - Y[i2])*(Y[i1] - Y[i2])
 				);
 #else
 			double delta_t = fabs(t[i1] - t[i2]);
 #endif /*SOURCE_COORDINATES_3D*/
-			
-			double naklon = r_/delta_t;	
+
+			double naklon = r_/delta_t;
 			v_naklony.push_back(naklon);
-		}	
+		}
 		sort(v_naklony.begin(), v_naklony.end());
 		size_t len = v_naklony.size();
 		size_t dlen = size_t(quantil_naklony*len);
@@ -16351,21 +16333,21 @@ void SticksMaker(
 //	printf("v_naklony[%d] = %f\n",i, v_naklony[i]);
 
 //printf("v_naklony[0] %f naklon_limit %f v_naklony[len-1] %f len %d dlen %d\n", v_naklony[0], naklon_limit, v_naklony[len-1], len, dlen);
-					    
+
 		for (size_t i = 0; i < vi.size()-1; i++)
 		{
 			size_t i1 = vi[i];
 			size_t i2 = vi[i+1];
 
-			// разница значения функций
+			// СЂР°Р·РЅРёС†Р° Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёР№
 			double r_ = fabs(in[i1] - in[i2]);
 			double max_ = max(in[i1], in[i2]);
-			// разница в координатах 
+			// СЂР°Р·РЅРёС†Р° РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С…
 #if SOURCE_COORDINATES_3D
 			double delta_t = sqrt(
-				(X[i1] - X[i2])*(X[i1] - X[i2]) 
+				(X[i1] - X[i2])*(X[i1] - X[i2])
 				+
-				(Y[i1] - Y[i2])*(Y[i1] - Y[i2]) 
+				(Y[i1] - Y[i2])*(Y[i1] - Y[i2])
 				);
 #else
 			double delta_t = fabs(t[i1] - t[i2]);
@@ -16391,12 +16373,12 @@ void SticksMaker(
 					double x, y, z;
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i1, i2, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
+						icol, i1, i2, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-						X[i1], Y[i1], 
-						X[i2], Y[i2], 
-						k, 
+						X[i1], Y[i1],
+						X[i2], Y[i2],
+						k,
 						stream_less, delim, r_ , max_, x, y, z);//j ???
 	#if _USE_WINSURF_
 					char name[255]; sprintf(name, "i1=%u i2=%u", i1, i2);
@@ -16405,7 +16387,7 @@ void SticksMaker(
 
 	#else /*SOURCE_COORDINATES_3D*/
 					double x, y;
-					SourcesCoordinates_Calcule_AndSave(t[i1], t[i2], k, 
+					SourcesCoordinates_Calcule_AndSave(t[i1], t[i2], k,
 						stream_less, delim, r_ , max_, x, y);//j ???
 	#if _USE_WINSURF_
 					char name[255]; sprintf(name, "i1=%u i2=%u t1=%f t2=%f", i1, i2, t[i1], t[i2]);
@@ -16420,12 +16402,12 @@ void SticksMaker(
 					double x, y, z;
 					SourcesCoordinates_Calcule_AndSave(
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
-						icol, i1, i2, // номер колонки, индексы начала и конца аномалии
-						level, // уровень разложения	
+						icol, i1, i2, // РЅРѕРјРµСЂ РєРѕР»РѕРЅРєРё, РёРЅРґРµРєСЃС‹ РЅР°С‡Р°Р»Р° Рё РєРѕРЅС†Р° Р°РЅРѕРјР°Р»РёРё
+						level, // СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 #endif
-						X[i1], Y[i1], 
-						X[i2], Y[i2], 
-						k, 
+						X[i1], Y[i1],
+						X[i2], Y[i2],
+						k,
 						stream_more, delim, r_ , max_, x, y, z);//j ???
 	#if _USE_WINSURF_
 					char name[255]; sprintf(name, "i1=%u i2=%u", i1, i2);
@@ -16434,7 +16416,7 @@ void SticksMaker(
 
 	#else /*SOURCE_COORDINATES_3D*/
 					double x, y;
-					SourcesCoordinates_Calcule_AndSave(t[i1], t[i2], k, 
+					SourcesCoordinates_Calcule_AndSave(t[i1], t[i2], k,
 						stream_more, delim, r_ , max_, x, y);//j ???
 	#if _USE_WINSURF_
 					char name[255]; sprintf(name, "i1=%u i2=%u t1=%f t2=%f", i1, i2, t[i1], t[i2]);
@@ -16451,14 +16433,14 @@ void SticksMaker(
 #define COLLEC_TION FastCollection
 
 
-void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
+void DoVerticalAutoCorrelation(int shoulder,// = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 							   int step,
-							   int wlen,// = 10;//длина окна корреляции
+							   int wlen,// = 10;//РґР»РёРЅР° РѕРєРЅР° РєРѕСЂСЂРµР»СЏС†РёРё
 							   //Collection * pcollection,
-							   vector<vert_korr_points> * vvkp, 
+							   vector<vert_korr_points> * vvkp,
 							   vector<profile_interval> & profile_intervals,
 							   vector<string> * pnames_of_colomns,
-							   vector<size_t>& original_col_numbers, 
+							   vector<size_t>& original_col_numbers,
 							   size_t c1, size_t c2,
 							   int reverse1, int reverse2,
 							   int delim)
@@ -16484,7 +16466,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 	bln = fopen(blnFile, "wt");
 #endif
 
-	//исходя из максимальной глубины вычисляем максимальное плечо
+	//РёСЃС…РѕРґСЏ РёР· РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РіР»СѓР±РёРЅС‹ РІС‹С‡РёСЃР»СЏРµРј РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РїР»РµС‡Рѕ
 /*
 	double max_z = 10000.0;
 	double profile_len = 0.0;
@@ -16494,7 +16476,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 			(X[r]-X[r-1])*(X[r]-X[r-1])
 			+
 			(Y[r]-Y[r-1])*(Y[r]-Y[r-1])
-			);                
+			);
 	}
 	double row_step = profile_len/rows;
 	double h_step = row_step*ab.k;
@@ -16511,7 +16493,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 		reverse1 * reverse2
 		);
-	
+
 	while (p=strchr (lpstrFile,'\"'))
 	{
 		*p = '_';
@@ -16541,44 +16523,44 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 #endif
 
 
-	// проводим корреляцию между столбцами
+	// РїСЂРѕРІРѕРґРёРј РєРѕСЂСЂРµР»СЏС†РёСЋ РјРµР¶РґСѓ СЃС‚РѕР»Р±С†Р°РјРё
 
 #define AUTO_KORR 1
 #if !AUTO_KORR
 	for (size_t R = 1; R < (*vvkp).size(); R++)
 	{
-		//длины двух соседних столбцов
+		//РґР»РёРЅС‹ РґРІСѓС… СЃРѕСЃРµРґРЅРёС… СЃС‚РѕР»Р±С†РѕРІ
 		size_t len0 = (*vvkp)[R-1].vkp.size();
 		size_t len1 = (*vvkp)[R].vkp.size();
 
-		// ссылки на соседние столбцы
+		// СЃСЃС‹Р»РєРё РЅР° СЃРѕСЃРµРґРЅРёРµ СЃС‚РѕР»Р±С†С‹
 		vector<korr_point>& vkp_0  = (*vvkp)[R-1].vkp;
 		vector<korr_point>& vkp_1  = (*vvkp)[R].vkp;
 #else
 	for (size_t R = 0; R < (*vvkp).size(); R++)
 	{
-		//длины двух соседних столбцов
+		//РґР»РёРЅС‹ РґРІСѓС… СЃРѕСЃРµРґРЅРёС… СЃС‚РѕР»Р±С†РѕРІ
 		size_t len0 = (*vvkp)[R].vkp.size();
 		size_t len1 = (*vvkp)[R].vkp.size();
 
-		// ссылки на соседние столбцы
+		// СЃСЃС‹Р»РєРё РЅР° СЃРѕСЃРµРґРЅРёРµ СЃС‚РѕР»Р±С†С‹
 		vector<korr_point>& vkp_0  = (*vvkp)[R].vkp;
 		vector<korr_point>& vkp_1  = (*vvkp)[R].vkp;
 #endif
 
-		// отнимаем длину окна плюс один 
-		// получаем размерность корреляционной матрицы 
-		// которую мы сейчас должны рассчитать 
-		// для поиска послойной корреляции 
-		// между соседними столбцами
+		// РѕС‚РЅРёРјР°РµРј РґР»РёРЅСѓ РѕРєРЅР° РїР»СЋСЃ РѕРґРёРЅ
+		// РїРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+		// РєРѕС‚РѕСЂСѓСЋ РјС‹ СЃРµР№С‡Р°СЃ РґРѕР»Р¶РЅС‹ СЂР°СЃСЃС‡РёС‚Р°С‚СЊ
+		// РґР»СЏ РїРѕРёСЃРєР° РїРѕСЃР»РѕР№РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+		// РјРµР¶РґСѓ СЃРѕСЃРµРґРЅРёРјРё СЃС‚РѕР»Р±С†Р°РјРё
 
 		int len_0 = len0-wlen+1;
 		int len_1 = len1-wlen+1;
 
-        // если размерность корреляционной матрицы разумна
+        // РµСЃР»Рё СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·СѓРјРЅР°
 		if (len_0 > 0 && len_1 > 0)
 		{
-			// выделяем память под корреляционную матрицу
+			// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 			double **M = AllocDoubleMat(len_0,len_1);
 
 			double min_k = DBL_MAX;
@@ -16586,27 +16568,27 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 
 			int i_0_max, i_1_max, i_0_min, i_1_min;
 
-			//поэлементное заполнение корреляционной матрицы 
-			// в двух циклах
+			//РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+			// РІ РґРІСѓС… С†РёРєР»Р°С…
 			for (int i_0 = 0; i_0 < len_0; i_0++)
 			{
 				for (int i_1 = 0; i_1 < len_1; i_1++)
 				{
-					// начинаем расчёт корреляционного коэффициента											
+					// РЅР°С‡РёРЅР°РµРј СЂР°СЃС‡С‘С‚ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 					//
-					// вычисляем матожидание в каждом из окон
+					// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 					double m_0 = 0.0, m_1 = 0.0;
 					//int n_0 = 0, n_1 = 0;
 					for (int w = 0; w < wlen; w++)
-					{	
-						m_0 += vkp_0[w+i_0].korr_k;		
-						m_1 += vkp_1[w+i_1].korr_k;		
+					{
+						m_0 += vkp_0[w+i_0].korr_k;
+						m_1 += vkp_1[w+i_1].korr_k;
 					}
 					m_0 /= wlen;
 					m_1 /= wlen;
 
-					// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
-					double D_0 = 0.0, D_1 = 0.0;										
+					// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
+					double D_0 = 0.0, D_1 = 0.0;
 					for (int w = 0; w < wlen; w++)
 					{
 						D_0 += (vkp_0[w+i_0].korr_k-m_0)*(vkp_0[w+i_0].korr_k-m_0);                                            
@@ -16617,7 +16599,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 
 					double sigma_0 = sqrt(D_0);
 					double sigma_1 = sqrt(D_1);
-					// рассчитываем корреляционный коэффициент
+					// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 					double K_0_1 = 0.0;
 					for (int w = 0; w < wlen; w++)
 					{
@@ -16652,19 +16634,19 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 			}
 
 
-			// а здесь проведём корреляцию строк или столбцов 
-			// (в случае автокорреляции матрица симметрична, 
-			// так что всё равно) друг с другом 
-			// в надежде увеличить чёткость отбивки слоёв
+			// Р° Р·РґРµСЃСЊ РїСЂРѕРІРµРґС‘Рј РєРѕСЂСЂРµР»СЏС†РёСЋ СЃС‚СЂРѕРє РёР»Рё СЃС‚РѕР»Р±С†РѕРІ
+			// (РІ СЃР»СѓС‡Р°Рµ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё РјР°С‚СЂРёС†Р° СЃРёРјРјРµС‚СЂРёС‡РЅР°,
+			// С‚Р°Рє С‡С‚Рѕ РІСЃС‘ СЂР°РІРЅРѕ) РґСЂСѓРі СЃ РґСЂСѓРіРѕРј
+			// РІ РЅР°РґРµР¶РґРµ СѓРІРµР»РёС‡РёС‚СЊ С‡С‘С‚РєРѕСЃС‚СЊ РѕС‚Р±РёРІРєРё СЃР»РѕС‘РІ
 
-			// выделяем память под корреляционную матрицу
+			// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 			double **M2 = AllocDoubleMat(len_0,len_0);
 
 			double min_k2 = DBL_MAX;
 			double max_k2 = -DBL_MAX;
 
 			for (int i_00 = 0; i_00 < len_0; i_00++)
-			{								
+			{
 				for (int i_01 = 0; i_01 < len_0; i_01++)
 				{
 					double k = korr_koeff(len_1, M[i_00], M[i_01]);
@@ -16682,7 +16664,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 			double max_k3 = -DBL_MAX;
 
 			for (int i_00 = 0; i_00 < len_0; i_00++)
-			{								
+			{
 				for (int i_01 = 0; i_01 < len_0; i_01++)
 				{
 					double k = korr_koeff(len_1, M2[i_00], M2[i_01]);
@@ -16700,7 +16682,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 			double max_k4 = -DBL_MAX;
 
 			for (int i_00 = 0; i_00 < len_0; i_00++)
-			{								
+			{
 				for (int i_01 = 0; i_01 < len_0; i_01++)
 				{
 					double k = korr_koeff(len_1, M3[i_00], M3[i_01]);
@@ -16711,38 +16693,38 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 						min_k4 = k;
 				}
 			}
-			// после четырёх циклов построчной корреляции мы получаем 
-			// уже достаточную чёткость 
+			// РїРѕСЃР»Рµ С‡РµС‚С‹СЂС‘С… С†РёРєР»РѕРІ РїРѕСЃС‚СЂРѕС‡РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё РјС‹ РїРѕР»СѓС‡Р°РµРј
+			// СѓР¶Рµ РґРѕСЃС‚Р°С‚РѕС‡РЅСѓСЋ С‡С‘С‚РєРѕСЃС‚СЊ
 
-			// теперь выделяем память под вектор результирующей разбивки
+			// С‚РµРїРµСЂСЊ РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РІРµРєС‚РѕСЂ СЂРµР·СѓР»СЊС‚РёСЂСѓСЋС‰РµР№ СЂР°Р·Р±РёРІРєРё
 
 			double * vk3 = new double[len_0];
 
-			// копируем в этот вектор первую строку матрицы
+			// РєРѕРїРёСЂСѓРµРј РІ СЌС‚РѕС‚ РІРµРєС‚РѕСЂ РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ РјР°С‚СЂРёС†С‹
 
 			for (int i_01 = 0; i_01 < len_0; i_01++)
-			{		
+			{
 				vk3[i_01] = M4[0][i_01];
 			}
 
 			if (false)
 			{
-				// суммируем к ней остальные с весом коэффициента корреляции
+				// СЃСѓРјРјРёСЂСѓРµРј Рє РЅРµР№ РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃ РІРµСЃРѕРј РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РєРѕСЂСЂРµР»СЏС†РёРё
 
 				for (int i_00 = 1; i_00 < len_0; i_00++)
 				{
-					double k = korr_koeff(len_1, M4[i_00], vk3);								
+					double k = korr_koeff(len_1, M4[i_00], vk3);
 					for (int i_01 = 0; i_01 < len_0; i_01++)
 					{
-						vk3[i_01] += k*M4[i_00][i_01];										
+						vk3[i_01] += k*M4[i_00][i_01];
 					}
 				}
 
-				// теперь нормируем на интервал -1 +1
+				// С‚РµРїРµСЂСЊ РЅРѕСЂРјРёСЂСѓРµРј РЅР° РёРЅС‚РµСЂРІР°Р» -1 +1
 				double min_k5 = DBL_MAX;
 				double max_k5 = -DBL_MAX;
 				for (int i_01 = 0; i_01 < len_0; i_01++)
-				{		
+				{
 					double k = vk3[i_01];
 					if (k > max_k5)
 						max_k5 = k;
@@ -16750,27 +16732,27 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 						min_k5 = k;
 				}
 
-				//сама нормировка
+				//СЃР°РјР° РЅРѕСЂРјРёСЂРѕРІРєР°
 				for (int i_01 = 0; i_01 < len_0; i_01++)
-				{		
+				{
 					double k = vk3[i_01];
 					vk3[i_01] = -1.0 + 2.0 * (k - min_k5) / (max_k5 - min_k5);
 				}
 			}
 
-			// заносим результат в матрицу
+			// Р·Р°РЅРѕСЃРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РІ РјР°С‚СЂРёС†Сѓ
 
 			for (int i_01 = 0; i_01 < len_0; i_01++)
 			{
 				vkp_0[wlen/2+i_01].korr_k3 = vk3[i_01];
-				if (corr_v3) 
-					fprintf(corr_v3, 
+				if (corr_v3)
+					fprintf(corr_v3,
 					"%7.3f%c%7.3f%c%4.3f"
 					"%c%f"
 					"\n",
-					vkp_0[wlen/2+i_01].x, delim, 
-					vkp_0[wlen/2+i_01].y, delim, 
-					vkp_0[wlen/2+i_01].z, delim, 
+					vkp_0[wlen/2+i_01].x, delim,
+					vkp_0[wlen/2+i_01].y, delim,
+					vkp_0[wlen/2+i_01].z, delim,
 					vkp_0[wlen/2+i_01].korr_k3
 					);
 
@@ -16780,31 +16762,31 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 				vK.push_back(vkp_0[wlen/2+i_01].korr_k3);
 			}
 
-			//запись пересечений с нулём
+			//Р·Р°РїРёСЃСЊ РїРµСЂРµСЃРµС‡РµРЅРёР№ СЃ РЅСѓР»С‘Рј
 
 			for (int i_01 = 1; i_01 < len_0; i_01++)
 			{
 				if(vkp_0[wlen/2+i_01].korr_k3 * vkp_0[wlen/2+i_01-1].korr_k3 < 0.0)
 				{
-					if (corr_v_3) 
-						fprintf(corr_v_3, 
+					if (corr_v_3)
+						fprintf(corr_v_3,
 						"%7.3f%c%7.3f%c%4.3f"
 						"%c%f"
 						"\n",
-						vkp_0[wlen/2+i_01].x, delim, 
-						vkp_0[wlen/2+i_01].y, delim, 
-						vkp_0[wlen/2+i_01].z, delim, 
+						vkp_0[wlen/2+i_01].x, delim,
+						vkp_0[wlen/2+i_01].y, delim,
+						vkp_0[wlen/2+i_01].z, delim,
 						vkp_0[wlen/2+i_01].korr_k3
 						);
 				}
 			}
 			if (vk3) delete [] vk3;
 
-			
-#if 0 // чтобы не писать промежуточные гриды
+
+#if 0 // С‡С‚РѕР±С‹ РЅРµ РїРёСЃР°С‚СЊ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ РіСЂРёРґС‹
 #if 1
 			{
-			// 
+			//
 			Grid grid;
 			grid.gridSection.z = M;
 			grid.gridSection.nCol = len_1;
@@ -16836,7 +16818,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 #endif
 #if 1
 			{
-			// 
+			//
 			Grid grid2;
 			grid2.gridSection.z = M2;
 			grid2.gridSection.nCol = len_0;
@@ -16868,7 +16850,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 #endif
 #if 1
 			{
-			// 
+			//
 			Grid grid3;
 			grid3.gridSection.z = M3;
 			grid3.gridSection.nCol = len_0;
@@ -16900,7 +16882,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 #endif
 #if 1
 			{
-			// 
+			//
 			Grid grid4;
 			grid4.gridSection.z = M4;
 			grid4.gridSection.nCol = len_0;
@@ -16931,7 +16913,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 			}
 #endif
 #endif
-			// удаляем корреляционную матрицу
+			// СѓРґР°Р»СЏРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 			if (M) FreeDoubleMat(M);
 			if (M2) FreeDoubleMat(M2);
 			if (M3) FreeDoubleMat(M3);
@@ -16952,66 +16934,66 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это
 		reverse1 * reverse2
 		);
 
-				
+
 	double xSize = 20;
 	double ySize = 20;
-	double max_glubina = 2000; 
+	double max_glubina = 2000;
 
 	BuildGrid(file_grd,
-				vX,			
-				vY,			
-				vZ,			
-				vK,			
-				xSize, ySize, max_glubina, 
+				vX,
+				vY,
+				vZ,
+				vK,
+				xSize, ySize, max_glubina,
 				NULL// pcollection
 				);
 
 /*	BuildGrid(0,//short crd_type,
 				// 0 - x, 1 - y, 2 - profile_len
 		3, 		// short value_type,
-				// 1 - korr_k;  // коэффициент горизонтальной корреляции
-				// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-				// 3 - korr_k3; // коэффициент вертикальной автокорреляции
+				// 1 - korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+				// 2 - korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+				// 3 - korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 		NULL, //pcollection,
 		vvkp,
 		profile_intervals,
 		pnames_of_colomns,
 		original_col_numbers,
-		20, 5, 200, //double xSize, double ySize, double max_glubina, 
+		20, 5, 200, //double xSize, double ySize, double max_glubina,
 		c1, c2,
 		reverse1, reverse2);*/
 }
-void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
+void DoVerticalCorrelation(	int wlen,// = 100;//РґР»РёРЅР° РѕРєРЅР° РєРѕСЂСЂРµР»СЏС†РёРё
 						   Collection * pcollection,
-						   vector<vert_korr_points> * vvkp, 
+						   vector<vert_korr_points> * vvkp,
 						   vector<profile_interval> & profile_intervals,
 						   vector<string> * pnames_of_colomns,
-						   vector<size_t>& original_col_numbers, 
+						   vector<size_t>& original_col_numbers,
 						   size_t c1, size_t c2,
 						   int reverse1, int reverse2,
 						   int delim)
 {
-// проводим корреляцию между столбцами
-// эту обработку мы можем вынести за ределы этой функции
-	//int wlen = 50;//длина окна корреляции
+// РїСЂРѕРІРѕРґРёРј РєРѕСЂСЂРµР»СЏС†РёСЋ РјРµР¶РґСѓ СЃС‚РѕР»Р±С†Р°РјРё
+// СЌС‚Сѓ РѕР±СЂР°Р±РѕС‚РєСѓ РјС‹ РјРѕР¶РµРј РІС‹РЅРµСЃС‚Рё Р·Р° СЂРµРґРµР»С‹ СЌС‚РѕР№ С„СѓРЅРєС†РёРё
+	//int wlen = 50;//РґР»РёРЅР° РѕРєРЅР° РєРѕСЂСЂРµР»СЏС†РёРё
 	/*int max_size = 0;
-	
+
 	for (size_t R = 0; R < (*vvkp).size(); R++)
 	{
-		//длины столбцов
+		//РґР»РёРЅС‹ СЃС‚РѕР»Р±С†РѕРІ
 		size_t len0 = (*vvkp)[R].vkp.size();
 
-		// ссылки на столбцы
+		// СЃСЃС‹Р»РєРё РЅР° СЃС‚РѕР»Р±С†С‹
 		vert_korr_points& vkp_0  = (*vvkp)[R];
 
-		// отнимаем длину окна плюс один 
-		// получаем размерность корреляционной матрицы 
-		// которую мы сейчас должны рассчитать 
-		// для поиска послойной корреляции 
-		// между столбцами
+		// РѕС‚РЅРёРјР°РµРј РґР»РёРЅСѓ РѕРєРЅР° РїР»СЋСЃ РѕРґРёРЅ
+		// РїРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+		// РєРѕС‚РѕСЂСѓСЋ РјС‹ СЃРµР№С‡Р°СЃ РґРѕР»Р¶РЅС‹ СЂР°СЃСЃС‡РёС‚Р°С‚СЊ
+		// РґР»СЏ РїРѕРёСЃРєР° РїРѕСЃР»РѕР№РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+		// РјРµР¶РґСѓ СЃС‚РѕР»Р±С†Р°РјРё
 
 		int len_0 = len0-wlen+1;
-		// если размерность корреляционной матрицы разумна
+		// РµСЃР»Рё СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·СѓРјРЅР°
 		if (len_0 > max_size)
 		{
 			max_size = len_0;
@@ -17021,29 +17003,29 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 
 
 
-	// базовый столбец, его длина
+	// Р±Р°Р·РѕРІС‹Р№ СЃС‚РѕР»Р±РµС†, РµРіРѕ РґР»РёРЅР°
 	size_t R_base = (*vvkp).size()/2;
 	vert_korr_points& vkp_1  = (*vvkp)[R_base];
 	size_t len1 = vkp_1.vkp.size();
 	int len_1 = len1-wlen+1;
 
-	// здесь мы устанавливаем базовый отрезок колонки корреляции
+	// Р·РґРµСЃСЊ РјС‹ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р±Р°Р·РѕРІС‹Р№ РѕС‚СЂРµР·РѕРє РєРѕР»РѕРЅРєРё РєРѕСЂСЂРµР»СЏС†РёРё
 
 	//int i_1 = 0;
 	int i_1 = len_1/2;
 	for (int i_1 = 0; i_1 < len_1; i_1 += len_1/2)
-	{		
+	{
 
-		// вычисляем матожидание в базовом отрезке колонки корреляции
+		// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ Р±Р°Р·РѕРІРѕРј РѕС‚СЂРµР·РєРµ РєРѕР»РѕРЅРєРё РєРѕСЂСЂРµР»СЏС†РёРё
 		double m_1 = 0.0;
 		for (int w = 0; w < wlen; w++)
-		{	
-			m_1 += vkp_1.vkp[w+i_1].korr_k;		
+		{
+			m_1 += vkp_1.vkp[w+i_1].korr_k;
 		}
 		m_1 /= wlen;
 
-		// вычисляем дисперсию и среднеквадратичное отклонение в базовом отрезке колонки корреляции
-		double D_1 = 0.0;										
+		// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ Р±Р°Р·РѕРІРѕРј РѕС‚СЂРµР·РєРµ РєРѕР»РѕРЅРєРё РєРѕСЂСЂРµР»СЏС†РёРё
+		double D_1 = 0.0;
 		for (int w = 0; w < wlen; w++)
 		{
 			D_1 += (vkp_1.vkp[w+i_1].korr_k-m_1)*(vkp_1.vkp[w+i_1].korr_k-m_1);
@@ -17068,7 +17050,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 		ThePoint3D prim;
 
 
-		// выделяем память под корреляционную матрицу
+		// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 		//double **M = AllocDoubleMat(max_size, (*vvkp).size());
 		//double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 
@@ -17091,7 +17073,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 
 		char file_dat[2048];
 
-		sprintf(file_dat, "%s\\base_vert_%d_%s_%s sym %d i_1 = %04d.dat", 	
+		sprintf(file_dat, "%s\\base_vert_%d_%s_%s sym %d i_1 = %04d.dat",
 			current_profile_interval ? current_profile_interval->dir : dir_out,
 			wlen,
 			(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
@@ -17108,7 +17090,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 		dat = fopen(file_dat, "wt");
 
 		if (pcollection)
-		{			
+		{
 			COLLEC_TION current_fast_collection;
 			SurfDoc * doc = (SurfDoc*)pcollection->GetDoc();
 			current_fast_collection.InitDoc(doc);
@@ -17116,7 +17098,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 			if (current_profile_interval)
 				current_fast_collection.
 				SetLayer(current_profile_interval->layer);
-			pcurrent_fast_collection = 
+			pcurrent_fast_collection =
 				dynamic_cast<COLLEC_TION *>(pcollection->AddObject(&current_fast_collection));
 
 		}
@@ -17144,7 +17126,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 				printf("#");
 			}
 
-			// изменяем файл для записи и коллекцию для 3Д если мы переходим на новый профиль
+			// РёР·РјРµРЅСЏРµРј С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё Рё РєРѕР»Р»РµРєС†РёСЋ РґР»СЏ 3Р” РµСЃР»Рё РјС‹ РїРµСЂРµС…РѕРґРёРј РЅР° РЅРѕРІС‹Р№ РїСЂРѕС„РёР»СЊ
 			if (current_profile_interval)
 			{
 				if (R == current_profile_interval->i2)
@@ -17158,7 +17140,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 
 						current_profile_interval = &profile_intervals[current_profile_number];
 
-						sprintf(file_dat, "%s\\base_vert_%d_%s_%s sym %d i_1 = %04d.dat", 	
+						sprintf(file_dat, "%s\\base_vert_%d_%s_%s sym %d i_1 = %04d.dat",
 							current_profile_interval ? current_profile_interval->dir : dir_out,
 							wlen,
 							(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
@@ -17175,7 +17157,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 						dat = fopen(file_dat, "wt");
 
 						if (pcollection)
-						{			
+						{
 							COLLEC_TION current_fast_collection;
 							SurfDoc * doc = (SurfDoc*)pcollection->GetDoc();
 							current_fast_collection.InitDoc(doc);
@@ -17183,7 +17165,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 							if (current_profile_interval)
 								current_fast_collection.
 								SetLayer(current_profile_interval->layer);
-							pcurrent_fast_collection = 
+							pcurrent_fast_collection =
 								dynamic_cast<COLLEC_TION *>(pcollection->AddObject(&current_fast_collection));
 						}
 						else
@@ -17192,49 +17174,49 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 				}
 			}
 
-			// ссылки на столбцы
+			// СЃСЃС‹Р»РєРё РЅР° СЃС‚РѕР»Р±С†С‹
 			vert_korr_points& vkp_0  = (*vvkp)[R];
 
-			//длины столбцов
-			size_t len0 = vkp_0.vkp.size();	
+			//РґР»РёРЅС‹ СЃС‚РѕР»Р±С†РѕРІ
+			size_t len0 = vkp_0.vkp.size();
 
 
-			// отнимаем длину окна плюс один 
-			// получаем размерность корреляционной матрицы 
-			// которую мы сейчас должны рассчитать 
-			// для поиска послойной корреляции 
-			// между соседними столбцами
+			// РѕС‚РЅРёРјР°РµРј РґР»РёРЅСѓ РѕРєРЅР° РїР»СЋСЃ РѕРґРёРЅ
+			// РїРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
+			// РєРѕС‚РѕСЂСѓСЋ РјС‹ СЃРµР№С‡Р°СЃ РґРѕР»Р¶РЅС‹ СЂР°СЃСЃС‡РёС‚Р°С‚СЊ
+			// РґР»СЏ РїРѕРёСЃРєР° РїРѕСЃР»РѕР№РЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+			// РјРµР¶РґСѓ СЃРѕСЃРµРґРЅРёРјРё СЃС‚РѕР»Р±С†Р°РјРё
 
 			int len_0 = len0-wlen+1;
-			
-			// если размерность корреляционной матрицы разумна
+
+			// РµСЃР»Рё СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·СѓРјРЅР°
 			if (len_0 > 0 && len_1 > 0)
 			{
-				//поэлементное заполнение корреляционной матрицы 
+				//РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 				for (int i_0 = 0; i_0 < len_0; i_0++)
 				{
-					// начинаем расчёт корреляционного коэффициента											
+					// РЅР°С‡РёРЅР°РµРј СЂР°СЃС‡С‘С‚ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 					//
-					// вычисляем матожидание в каждом из окон
+					// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 					double m_0 = 0.0;
 					for (int w = 0; w < wlen; w++)
-					{	
-						m_0 += vkp_0.vkp[w+i_0].korr_k;		
+					{
+						m_0 += vkp_0.vkp[w+i_0].korr_k;
 					}
 					m_0 /= wlen;
 
-					// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
-					double D_0 = 0.0;										
+					// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
+					double D_0 = 0.0;
 					for (int w = 0; w < wlen; w++)
 					{
-						D_0 += (vkp_0.vkp[w+i_0].korr_k-m_0)*(vkp_0.vkp[w+i_0].korr_k-m_0);                                            
+						D_0 += (vkp_0.vkp[w+i_0].korr_k-m_0)*(vkp_0.vkp[w+i_0].korr_k-m_0);
 					}
 					D_0 /= wlen;
 
 					double sigma_0 = sqrt(D_0);
 
 
-					// рассчитываем корреляционный коэффициент
+					// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 					double K_0_1 = 0.0;
 					for (int w = 0; w < wlen; w++)
 					{
@@ -17247,7 +17229,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 					int ind = wlen/2+i_0;
 					vkp_0.vkp[ind].korr_k2 = k_0_1;
 
-					if(dat) 
+					if(dat)
 						fprintf(dat, "%f,%f,%f,%f\n",
 							vkp_0.vkp[ind].x,
 							vkp_0.vkp[ind].y,
@@ -17258,7 +17240,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 					if (pcurrent_fast_collection)
 					{
 						COLORREF color = 0;
-						// часть из диапазона возможных значений
+						// С‡Р°СЃС‚СЊ РёР· РґРёР°РїР°Р·РѕРЅР° РІРѕР·РјРѕР¶РЅС‹С… Р·РЅР°С‡РµРЅРёР№
 						double color_part = (k_0_1 + 1.0) / 2.0;
 
 						if(pcurrent_fast_collection->GetDoc())
@@ -17282,29 +17264,29 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 					if (k_0_1 < min_k)
 					{
 						min_k = k_0_1;
-					}*/					
+					}*/
 
 				}
 			}
-			// если размерность корреляционной матрицы разумна
+			// РµСЃР»Рё СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·СѓРјРЅР°
 			if (len_0 > 0 && len_1 > 0)
 			{
-				//поэлементное заполнение корреляционной матрицы 
+				//РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 				for (int i_0 = 1; i_0 < len_0 -1; i_0++)
 				{
 					int ind = wlen/2+i_0;
 					if(
-						vkp_0.vkp[ind+1].korr_k2 * vkp_0.vkp[ind-1].korr_k2 < 0.0 
-						/*||	
+						vkp_0.vkp[ind+1].korr_k2 * vkp_0.vkp[ind-1].korr_k2 < 0.0
+						/*||
 						(vkp_0.vkp[ind+1].korr_k2 > vkp_0.vkp[ind].korr_k2 && vkp_0.vkp[ind-1].korr_k2 > vkp_0.vkp[ind].korr_k2)
-						||						
+						||
 						(vkp_0.vkp[ind+1].korr_k2 < vkp_0.vkp[ind].korr_k2 && vkp_0.vkp[ind-1].korr_k2 < vkp_0.vkp[ind].korr_k2)*/
 						)
 					{
 						if (pcurrent_fast_collection)
 						{
 							COLORREF color = 0;
-							// часть из диапазона возможных значений
+							// С‡Р°СЃС‚СЊ РёР· РґРёР°РїР°Р·РѕРЅР° РІРѕР·РјРѕР¶РЅС‹С… Р·РЅР°С‡РµРЅРёР№
 							double color_part = (vkp_0.vkp[ind].korr_k2 + 1.0) / 2.0;
 
 							if(pcurrent_fast_collection->GetDoc())
@@ -17330,7 +17312,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 		if (pcurrent_fast_collection)
 			pcurrent_fast_collection->InitObjectList();
 #if 0
-		// 
+		//
 		Grid grid;
 		grid.gridSection.z = M;
 		grid.gridSection.nCol = (*vvkp).size();
@@ -17363,7 +17345,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 		}
 		SaveAsSurferGrid7(file, &grid);
 #endif
-		// удаляем корреляционную матрицу
+		// СѓРґР°Р»СЏРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 		//if (M) FreeDoubleMat(M);
 		if (dat) fclose(dat);
 	}
@@ -17372,18 +17354,18 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
 
 
 void DoGorizontalCorrilation(double k,
-							 int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
+							 int shoulder,// = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 							 int step,
 							 vector<vert_korr_points> * vvkp,
-							 vector<vector<double> >& v, 
-							 vector<double>& X, 
+							 vector<vector<double> >& v,
+							 vector<double>& X,
 							 vector<double>& Y,
 							 vector<string> * pnames_of_colomns,
-							 vector<size_t>& original_col_numbers, 
+							 vector<size_t>& original_col_numbers,
 							 int rows, size_t c1, size_t c2,
 							 int reverse1, int reverse2,
 							 int delim)
-{	
+{
 	TCHAR lpstrFile[1024];
 	FILE * stream_corr_ivan = NULL;
 	sprintf(lpstrFile, "%s\\gor_kor_%d_%d_%s_%s_sym_%d.dat", dir_out,
@@ -17392,7 +17374,7 @@ void DoGorizontalCorrilation(double k,
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 		reverse1 * reverse2
 		);
-	
+
 	char *p;
 	while (p=strchr (lpstrFile,'\"'))
 	{
@@ -17401,12 +17383,12 @@ void DoGorizontalCorrilation(double k,
 	printf("try to open file: \n%s\n", lpstrFile);
 	stream_corr_ivan = fopen(lpstrFile, "wt");
 
-	if (stream_corr_ivan) 
-	{	
+	if (stream_corr_ivan)
+	{
 		printf("start of filling file: \n%s\n", lpstrFile);
 
 
-		//исходя из максимальной глубины вычисляем максимальное плечо
+		//РёСЃС…РѕРґСЏ РёР· РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ РіР»СѓР±РёРЅС‹ РІС‹С‡РёСЃР»СЏРµРј РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РїР»РµС‡Рѕ
 
 		double max_z = 10000.0;
 		double profile_len = 0.0;
@@ -17416,7 +17398,7 @@ void DoGorizontalCorrilation(double k,
 				(X[r]-X[r-1])*(X[r]-X[r-1])
 				+
 				(Y[r]-Y[r-1])*(Y[r]-Y[r-1])
-				);                
+				);
 		}
 		double row_step = profile_len/rows;
 		double h_step = row_step*k;
@@ -17426,8 +17408,8 @@ void DoGorizontalCorrilation(double k,
 
 
 
-		// готовим тестовые графики длины окна в километрах 
-		// в зависимости от координаты окна
+		// РіРѕС‚РѕРІРёРј С‚РµСЃС‚РѕРІС‹Рµ РіСЂР°С„РёРєРё РґР»РёРЅС‹ РѕРєРЅР° РІ РєРёР»РѕРјРµС‚СЂР°С…
+		// РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РєРѕРѕСЂРґРёРЅР°С‚С‹ РѕРєРЅР°
 		if (c1 == 0 && c2 == 0)
 		{
 			TCHAR testFile[1024];
@@ -17440,10 +17422,10 @@ void DoGorizontalCorrilation(double k,
 
 			int len = 0;
 			for (int r = 0; r < rows; r+=step)
-			{		
+			{
 				int r1 = r - shoulder, r2 = r + shoulder;
 				if (r1 >= 0 && r2 >= 0 && r1 < rows && r2 < rows)
-				{	
+				{
 					len++;
 				}
 			}
@@ -17451,31 +17433,31 @@ void DoGorizontalCorrilation(double k,
 			if (test_y) fprintf(test_y, "%d,0\n", len);
 
 			for (int r = 0; r < rows; r+=step)
-			{		
+			{
 				int r1 = r - shoulder, r2 = r + shoulder;
 				if (r1 >= 0 && r2 >= 0 && r1 < rows && r2 < rows)
-				{		
-					//вычисляем длину каждого окна в километрах
+				{
+					//РІС‹С‡РёСЃР»СЏРµРј РґР»РёРЅСѓ РєР°Р¶РґРѕРіРѕ РѕРєРЅР° РІ РєРёР»РѕРјРµС‚СЂР°С…
 					double dx = X[r1]-X[r2];
 					double dy = Y[r1]-Y[r1];
 					double dw = sqrt(dx*dx + dy*dy);
 
-					if (test_x) 
-						fprintf(test_x, 
+					if (test_x)
+						fprintf(test_x,
 						"%7.3f%c"
 						"%4.3f"
 						"\n",
-						X[r], delim, 
-						dw					
-						);					
-					
-					if (test_y) 
-						fprintf(test_y, 
+						X[r], delim,
+						dw
+						);
+
+					if (test_y)
+						fprintf(test_y,
 						"%7.3f%c"
 						"%4.3f"
 						"\n",
-						Y[r], delim, 
-						dw					
+						Y[r], delim,
+						dw
 						);
 				}
 			}
@@ -17484,22 +17466,22 @@ void DoGorizontalCorrilation(double k,
 		}
 
 
-		// координата нашей колонки
+		// РєРѕРѕСЂРґРёРЅР°С‚Р° РЅР°С€РµР№ РєРѕР»РѕРЅРєРё
 		//for (int r = max_shoulder; r < rows-max_shoulder; r++)
 		//for (int r = 0; r < rows; r++)
 
 		for (int r = 0; r < rows; r+=step)
-		{		
+		{
 			vert_korr_points vkp;
 			vkp.vkp.clear();
 
 printf("r = %u rows = %d\n", r, rows);
 			for (int sh = 0; sh < max_shoulder; sh++)
-			{	
+			{
 				int r1 = r - sh, r2 = r + sh;
 				if (r1 >= 0 && r2 >= 0 && r1 < rows && r2 < rows)
-				{		
-					//вычисляем длину каждого окна в километрах
+				{
+					//РІС‹С‡РёСЃР»СЏРµРј РґР»РёРЅСѓ РєР°Р¶РґРѕРіРѕ РѕРєРЅР° РІ РєРёР»РѕРјРµС‚СЂР°С…
 					/*double dx1 = X[r1 + shoulder]-X[r1 - shoulder];
 					double dy1 = Y[r1 + shoulder]-Y[r1 - shoulder];
 
@@ -17510,16 +17492,16 @@ printf("r = %u rows = %d\n", r, rows);
 					double d2 = sqrt(dx2*dx2 + dy2*dy2);*/
 
 
-					// вычисляем матожидание в каждом из окон
+					// РІС‹С‡РёСЃР»СЏРµРј РјР°С‚РѕР¶РёРґР°РЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 					double m1 = 0.0, m2 = 0.0;
 					int n1 = 0, n2 = 0;
 					for (int sh = -shoulder; sh <= shoulder; sh++)
-					{	
+					{
 						int i1 = r1 + sh, i2 = r2 + sh;
 						if (i1 >= 0 && i1 < rows)
 						{
 							m1 += v[c1][i1];n1++;
-						}								
+						}
 						if (i2 >= 0 && i2 < rows)
 						{
 							m2 += v[c2][i2];n2++;
@@ -17528,17 +17510,17 @@ printf("r = %u rows = %d\n", r, rows);
 					if (n1) m1 /= n1;
 					if (n2) m2 /= n2;
 
-					// вычисляем дисперсию и среднеквадратичное отклонение в каждом из окон
+					// РІС‹С‡РёСЃР»СЏРµРј РґРёСЃРїРµСЂСЃРёСЋ Рё СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РІ РєР°Р¶РґРѕРј РёР· РѕРєРѕРЅ
 					double D1 = 0.0, D2 = 0.0;
 					n1=0,n2=0;
 					for (int sh = -shoulder; sh <= shoulder; sh++)
-					{	
+					{
 						int i1 = r1 + sh, i2 = r2 + sh;
 						if (i1 >= 0 && i1 < rows)
 						{
 							D1 += (v[c1][i1]-m1)*(v[c1][i1]-m1);
 							n1++;
-						}								
+						}
 						if (i2 >= 0 && i2 < rows)
 						{
 							D2 += (v[c2][i2]-m2)*(v[c2][i2]-m2);
@@ -17550,11 +17532,11 @@ printf("r = %u rows = %d\n", r, rows);
 
 					double sigma1 = sqrt(D1);
 					double sigma2 = sqrt(D2);
-					// рассчитываем корреляционный коэффициент
+					// СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 					double K_r1_r2_c1_c2 = 0.0;
 					int n = 0;
 					for (int sh = -shoulder; sh <= shoulder; sh++)
-					{	
+					{
 						int i1 = r1 + reverse1*sh, i2 = r2 + reverse2*sh;
 						if (i1 >= 0 && i2 >= 0 && i1 < rows && i2 < rows)
 						{
@@ -17566,7 +17548,7 @@ printf("r = %u rows = %d\n", r, rows);
 
 					double k_r1_r2_c1_c2 = K_r1_r2_c1_c2 / (sigma1*sigma2);
 
-					// вычисление привязки к источнику сигнала
+					// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРёРІСЏР·РєРё Рє РёСЃС‚РѕС‡РЅРёРєСѓ СЃРёРіРЅР°Р»Р°
 					double x1 = X[r1];
 					double x2 = X[r2];
 					double y1 = Y[r1];
@@ -17574,14 +17556,14 @@ printf("r = %u rows = %d\n", r, rows);
 
 					double x = (x1 + x2)/2.0;
 					double y = (y1 + y2)/2.0;
-					double z = -k*sqrt( 
-						(x1 - x2)*(x1 - x2) 
+					double z = -k*sqrt(
+						(x1 - x2)*(x1 - x2)
 						+
-						(y1 - y2)*(y1 - y2) 
+						(y1 - y2)*(y1 - y2)
 						);
 
-					if (stream_corr_ivan) 
-						fprintf(stream_corr_ivan, 
+					if (stream_corr_ivan)
+						fprintf(stream_corr_ivan,
 						"%7.3f%c%7.3f%c%4.3f"
 						"%c%f"
 						"\n",
@@ -17613,11 +17595,11 @@ printf("r = %u rows = %d\n", r, rows);
 }
 
 void BuildGrid(char * file_grd,
-			   vector<double> &vX,			
-			   vector<double> &vY,			
-			   vector<double> &vZ,			
-			   vector<double> &vK,			
-			   double xSize, double ySize, double max_glubina, 
+			   vector<double> &vX,
+			   vector<double> &vY,
+			   vector<double> &vZ,
+			   vector<double> &vK,
+			   double xSize, double ySize, double max_glubina,
 			   Collection * pcollection
 			   )
 {
@@ -17637,7 +17619,7 @@ void BuildGrid(char * file_grd,
 	ThePoint3D prim;
 
 
-	// выделяем память под корреляционную матрицу
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	//double **M = AllocDoubleMat(max_size, (*vvkp).size());
 	//double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 
@@ -17652,7 +17634,7 @@ void BuildGrid(char * file_grd,
 	double max_k = -DBL_MAX;
 */
 
-	vector<double> VX, VY, VZ;// векторы для построения гридов
+	vector<double> VX, VY, VZ;// РІРµРєС‚РѕСЂС‹ РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂРёРґРѕРІ
 	double min__x = DBL_MAX, min__y = DBL_MAX, min__z = DBL_MAX;
 	double max__x = -DBL_MAX, max__y = -DBL_MAX, max__z = -DBL_MAX;
 	///////////////////////////////////////////////////////////////////////////
@@ -17662,7 +17644,7 @@ void BuildGrid(char * file_grd,
 
 	for (size_t i = 0; i < vX.size(); i++)
 	{
-		double 
+		double
 			x_value = vX[i],
 			y_value = vY[i],
 			z_value = vZ[i];
@@ -17688,14 +17670,14 @@ void BuildGrid(char * file_grd,
 
 	if (delta__x > delta__y)
 	{
-		//считаем по x
+		//СЃС‡РёС‚Р°РµРј РїРѕ x
 		max_x = max__x;
 		min_x = min__x;
 		pVX = &vX;
 	}
 	else
 	{
-		//считаем по y
+		//СЃС‡РёС‚Р°РµРј РїРѕ y
 		max_x = max__y;
 		min_x = min__y;
 		pVX = &vY;
@@ -17705,7 +17687,7 @@ void BuildGrid(char * file_grd,
 	min_y = min__z;
 
 
-/*	sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d.grd", 	
+/*	sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d.grd",
 		current_profile_interval ? current_profile_interval->dir : dir_out,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -17720,7 +17702,7 @@ void BuildGrid(char * file_grd,
 	printf("try to open file %s\n", file_grd);
 
 	if (pcollection)
-	{			
+	{
 		COLLEC_TION current_fast_collection;
 		SurfDoc * doc = (SurfDoc*)pcollection->GetDoc();
 		current_fast_collection.InitDoc(doc);
@@ -17728,7 +17710,7 @@ void BuildGrid(char * file_grd,
 //		if (current_profile_interval)
 //			current_fast_collection.
 //			SetLayer(current_profile_interval->layer);
-		pcurrent_fast_collection = 
+		pcurrent_fast_collection =
 			dynamic_cast<COLLEC_TION *>(pcollection->AddObject(&current_fast_collection));
 	}
 	else
@@ -17741,7 +17723,7 @@ void BuildGrid(char * file_grd,
 	///////////////////////////////////////////////////////////////////////////
 
 
-	//здесь вычисляем грид
+	//Р·РґРµСЃСЊ РІС‹С‡РёСЃР»СЏРµРј РіСЂРёРґ
 	Grid grid;
 	grid.gridSection.nCol = (long)(max_x-min_x)/xSize + 1;
 	grid.gridSection.nRow = (long)(max_y-min_y)/ySize + 1;
@@ -17772,7 +17754,7 @@ void BuildGrid(char * file_grd,
 if (pcurrent_fast_collection)
 {
 	COLORREF color = 0;
-	// часть из диапазона возможных значений
+	// С‡Р°СЃС‚СЊ РёР· РґРёР°РїР°Р·РѕРЅР° РІРѕР·РјРѕР¶РЅС‹С… Р·РЅР°С‡РµРЅРёР№
 	double color_part = (k_0_1 + 1.0) / 2.0;
 
 	if(pcurrent_fast_collection->GetDoc())
@@ -17800,15 +17782,15 @@ if (pcurrent_fast_collection)
 
 
 void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
-			   short value_type,// 1 - korr_k;  // коэффициент горизонтальной корреляции
-								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
-								// 3 - korr_k3; // коэффициент вертикальной автокорреляции				
+			   short value_type,// 1 - korr_k;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё
+								// 2 - korr_k2; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РєРѕСЂСЂРµР»СЏС†РёРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±Р°Р·РѕРІРѕРіРѕ РѕС‚СЂРµР·РєР°
+								// 3 - korr_k3; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ Р°РІС‚РѕРєРѕСЂСЂРµР»СЏС†РёРё
 			   Collection * pcollection,
 			   vector<vert_korr_points> * vvkp,
 			   vector<profile_interval> & profile_intervals,
 			   vector<string> * pnames_of_colomns,
-			   vector<size_t>& original_col_numbers, 
-			   double xSize, double ySize, double max_glubina, 
+			   vector<size_t>& original_col_numbers,
+			   double xSize, double ySize, double max_glubina,
 			   size_t c1, size_t c2,
 			   int reverse1, int reverse2)
 {
@@ -17828,7 +17810,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	ThePoint3D prim;
 
 
-	// выделяем память под корреляционную матрицу
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 	//double **M = AllocDoubleMat(max_size, (*vvkp).size());
 	//double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 
@@ -17843,7 +17825,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	double max_k = -DBL_MAX;
 */
 
-	vector<double> VX, VY, VZ;// векторы для построения гридов
+	vector<double> VX, VY, VZ;// РІРµРєС‚РѕСЂС‹ РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂРёРґРѕРІ
 	double min_x = DBL_MAX, min_y = DBL_MAX;
 	double max_x = -DBL_MAX, max_y = -DBL_MAX;
 	///////////////////////////////////////////////////////////////////////////
@@ -17853,7 +17835,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 	char file_grd[2048];
 
-	sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d.grd", 	
+	sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d.grd",
 		current_profile_interval ? current_profile_interval->dir : dir_out,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -17868,7 +17850,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	printf("try to open file %s\n", file_grd);
 
 	if (pcollection)
-	{			
+	{
 		COLLEC_TION current_fast_collection;
 		SurfDoc * doc = (SurfDoc*)pcollection->GetDoc();
 		current_fast_collection.InitDoc(doc);
@@ -17876,7 +17858,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 		if (current_profile_interval)
 			current_fast_collection.
 			SetLayer(current_profile_interval->layer);
-		pcurrent_fast_collection = 
+		pcurrent_fast_collection =
 			dynamic_cast<COLLEC_TION *>(pcollection->AddObject(&current_fast_collection));
 	}
 	else
@@ -17903,12 +17885,12 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 			printf("#");
 		}
 
-		// изменяем файл для записи и коллекцию для 3Д если мы переходим на новый профиль
+		// РёР·РјРµРЅСЏРµРј С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё Рё РєРѕР»Р»РµРєС†РёСЋ РґР»СЏ 3Р” РµСЃР»Рё РјС‹ РїРµСЂРµС…РѕРґРёРј РЅР° РЅРѕРІС‹Р№ РїСЂРѕС„РёР»СЊ
 		if (current_profile_interval)
 		{
 			if (R == current_profile_interval->i2)
 			{
-				//здесь вычисляем грид
+				//Р·РґРµСЃСЊ РІС‹С‡РёСЃР»СЏРµРј РіСЂРёРґ
 				Grid grid;
 				grid.gridSection.nCol = (long)(max_x-min_x)/xSize;
 				grid.gridSection.nRow = (long)(max_y-min_y)/ySize;
@@ -17933,9 +17915,9 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 				//param.row_weight = 1.0;
 				param.alpha_t0 = 0.0;
-				param.alpha_t1 = 0.0;					
+				param.alpha_t1 = 0.0;
 				param.alpha_c0 = 0.0;
-				param.alpha_c1 = 0.0;					
+				param.alpha_c1 = 0.0;
 				param.dij = 0;
 
 				griddata_3(NULL, VX, VY, VZ, &grid, &param);
@@ -17946,7 +17928,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 				current_profile_number++;
 
-				VX.clear(), VY.clear(), VZ.clear();// векторы для построения гридов
+				VX.clear(), VY.clear(), VZ.clear();// РІРµРєС‚РѕСЂС‹ РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂРёРґРѕРІ
 				min_x = DBL_MAX, min_y = DBL_MAX;
 				max_x = -DBL_MAX, max_y = -DBL_MAX;
 
@@ -17954,7 +17936,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 				{
 					current_profile_interval = &profile_intervals[current_profile_number];
 
-					sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d i_1 = %04d.dat", 	
+					sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d i_1 = %04d.dat",
 						current_profile_interval ? current_profile_interval->dir : dir_out,
 						(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -17968,7 +17950,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 					}
 
 					if (pcollection)
-					{			
+					{
 						COLLEC_TION current_fast_collection;
 						SurfDoc * doc = (SurfDoc*)pcollection->GetDoc();
 						current_fast_collection.InitDoc(doc);
@@ -17976,7 +17958,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 						if (current_profile_interval)
 							current_fast_collection.
 							SetLayer(current_profile_interval->layer);
-						pcurrent_fast_collection = 
+						pcurrent_fast_collection =
 							dynamic_cast<COLLEC_TION *>(pcollection->AddObject(&current_fast_collection));
 					}
 					else
@@ -17985,13 +17967,13 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 			}
 		}
 
-		// ссылки на столбцы
+		// СЃСЃС‹Р»РєРё РЅР° СЃС‚РѕР»Р±С†С‹
 		vert_korr_points& vkp_0  = (*vvkp)[R];
 
-		//длины столбцов
-		size_t len0 = vkp_0.vkp.size();	
+		//РґР»РёРЅС‹ СЃС‚РѕР»Р±С†РѕРІ
+		size_t len0 = vkp_0.vkp.size();
 
-		//поэлементное заполнение корреляционной матрицы 
+		//РїРѕСЌР»РµРјРµРЅС‚РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјР°С‚СЂРёС†С‹
 		for (int i = 0; i < len0; i++)
 		{
 			double y_value = vkp_0.vkp[i].z;
@@ -18043,7 +18025,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 			if (pcurrent_fast_collection)
 			{
 				COLORREF color = 0;
-				// часть из диапазона возможных значений
+				// С‡Р°СЃС‚СЊ РёР· РґРёР°РїР°Р·РѕРЅР° РІРѕР·РјРѕР¶РЅС‹С… Р·РЅР°С‡РµРЅРёР№
 				double color_part = (k_0_1 + 1.0) / 2.0;
 
 				if(pcurrent_fast_collection->GetDoc())
@@ -18068,7 +18050,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	if (pcurrent_fast_collection)
 		pcurrent_fast_collection->InitObjectList();
 #if 0
-	// 
+	//
 	Grid grid;
 	grid.gridSection.z = M;
 	grid.gridSection.nCol = (*vvkp).size();
@@ -18100,7 +18082,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	}
 	SaveAsSurferGrid7(file, &grid);
 #endif
-	// удаляем корреляционную матрицу
+	// СѓРґР°Р»СЏРµРј РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 
 
 }

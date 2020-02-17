@@ -26,7 +26,7 @@ public:
 	void Zoom(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean);
 	virtual bool UpdateExtremums();
 	void Init(const AutoBuildProfile& bp)
-	{			
+	{
 		// Objects' vectors
 		this->m_collections				= bp.m_collections;
 		this->m_collections_ObjectList.Init(this->m_collections, this);
@@ -44,7 +44,7 @@ public:
 	{
 		return false;
 	}
-	virtual bool IsSelected(CPoint3 selected_view_pt, 
+	virtual bool IsSelected(CPoint3 selected_view_pt,
 			double search_radius,
 			WhatSelected& ws);
 	AutoBuildProfile& AutoBuildProfile::operator=(const AutoBuildProfile& bp);

@@ -12,14 +12,14 @@
 
 class AutoBuildProfileWnd /*: public CWnd*/
 {
-	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc( HWND hwnd, 
+	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc( HWND hwnd,
 		UINT uMsg, WPARAM wParam, LPARAM lParam);
 	HWND hWnd;
 	CRITICAL_SECTION CriticalSection;
 // Construction
 public:
 	AutoBuildProfileWnd();
-    HWND hwnd; 
+    HWND hwnd;
 
 // Attributes
 private:
@@ -28,7 +28,7 @@ private:
 	double*	m_yPoints;
 	double*	m_vxPoints;
 	double*	m_vyPoints;
-	double 
+	double
 		m_xMax,
 		m_xMin,
 		m_yMax,

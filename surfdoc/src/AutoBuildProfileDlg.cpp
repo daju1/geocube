@@ -32,7 +32,7 @@ using namespace std;
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
-extern HINSTANCE hInst;   // текущий экземпляр
+extern HINSTANCE hInst;   // С‚РµРєСѓС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
 //extern char directory[];
 extern char szPath[];
 extern char dir_out[];
@@ -42,8 +42,8 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<double> & b, vector<double> & sol, string name, vector <double> & b_rec);
 
 bool FillingTheMatrix3D(double smoof_power,
-					  double k_oslablenie,// коэффициент ослабления
-					  double k, // отношение глубины источника к полной (два плеча) длине аномалии
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
+					  double k, // РѕС‚РЅРѕС€РµРЅРёРµ РіР»СѓР±РёРЅС‹ РёСЃС‚РѕС‡РЅРёРєР° Рє РїРѕР»РЅРѕР№ (РґРІР° РїР»РµС‡Р°) РґР»РёРЅРµ Р°РЅРѕРјР°Р»РёРё
 					  vector<SparseRow> * m,
 					  char * filename,
 					  long rows, long cols, long pages,
@@ -56,7 +56,7 @@ bool FillingTheMatrix3D(double smoof_power,
 					  int wave_type
 					  );
 bool FillingTheMatrix3D_with_napravlennosty_diagramm(
-	double k_oslablenie,// коэффициент ослабления
+	double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
 	vector<SparseRow> * m,
 	char * filename,
 	long rows, long cols, long pages,
@@ -66,7 +66,7 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm(
 	vector<double> & Y,
 	vector<double> & Z,
 	vector<vector<anten_direction> > & A,
-	double pw_dnp,// степень диаграммы направленности приёмника
+	double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double min_value,		
 	int wave_type,
 	sourse_power_model spm
@@ -85,15 +85,15 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm_assume_tgdelta_much_more_th
 	vector<double> & Y,
 	vector<double> & Z,
 	vector<vector<anten_direction> > & A,
-	double pw_dnp,// степень диаграммы направленности приёмника
+	double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double min_value,
 	int wave_type,
 	sourse_power_model spm
 	);
 bool FillingTheMatrix3D_with_napravlennosty_diagramm(
-					  double k_oslablenie,// коэффициент ослабления
+					  double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
 					  char * filename,
-					  double **** m,// указатель на три матрицы njuX, njuY, njuZ
+					  double **** m,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 					  long rows, long cols, long pages,
 					  double x0, double y0, double z0,
 					  double delta_x, double delta_y, double delta_z,
@@ -101,16 +101,16 @@ bool FillingTheMatrix3D_with_napravlennosty_diagramm(
 					  vector<double> & Y,
 					  vector<double> & Z,
 					  vector<vector<anten_direction> > & A,
-					  double pw_dnp,// степень диаграммы направленности приёмника
+					  double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 					  double min_value,
 					  int wave_type,
 					  sourse_power_model spm
 					  );
 
 void FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
-	double k_oslablenie,// коэффициент ослабления
-	double **** m,// указатель на три матрицы njuXr, njuYr, njuZr
-	double **** R,// указатель на три матрицы rx, ry, rz
+	double k_oslablenie,// РєРѕСЌС„С„РёС†РёРµРЅС‚ РѕСЃР»Р°Р±Р»РµРЅРёСЏ
+	double **** m,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ njuXr, njuYr, njuZr
+	double **** R,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ rx, ry, rz
 	long rows, long cols, long pages,
 	double x0, double y0, double z0,
 	double delta_x, double delta_y, double delta_z,
@@ -118,7 +118,7 @@ void FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
 	vector<double> & Y,
 	vector<double> & Z,
 	vector<vector<anten_direction> > & A,
-	double pw_dnp,// степень диаграммы направленности приёмника
+	double pw_dnp,// СЃС‚РµРїРµРЅСЊ РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё РїСЂРёС‘РјРЅРёРєР°
 	double min_value,
 	int wave_type,
 	sourse_power_model spm
@@ -139,7 +139,7 @@ void ddet_dbeta_domega_div_det(double beta, double omega,
 					);
 
 bool Dipol(int use_newton, 
-		   int type, // тип прямой задачи
+		   int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		   long cols,
 		   bool apply_dgdni,		   
 		   bool apply_dgdKTi,
@@ -156,12 +156,12 @@ bool Dipol(int use_newton,
 		   vector<vector<double> > &W,
 		   vector<vector<anten_direction> > & A,
 		   bool init_by_lamp,
-		   // массив коэффициентов симметризации
+		   // РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 		   vector<vector<double> > & S,
 		   MyMethodsData3 &mmd3,
 		   double DZ,
 		   char * common_directory);
-bool Lamp(int use_newton, int type, // тип прямой задачи
+bool Lamp(int use_newton, int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		   long cols,
 		   bool apply_dgdni,		   
 		   bool apply_dgdKTi,
@@ -176,7 +176,7 @@ bool Lamp(int use_newton, int type, // тип прямой задачи
 		   vector<vector<double> > &W,
 		   vector<vector<anten_direction> > & A,
 		   bool only_init,
-		   // массив коэффициентов симметризации
+		   // РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 		   vector<vector<double> > & S,
 		   MyMethodsData3 &mmd3,
 		   double DZ,
@@ -196,7 +196,7 @@ bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed,
 							 const char * fn_U, 
 							 const char * fn_P, 
 							 vector<double> b, vector<double> & sol, double alpha, vector<double> sol_mean);
-void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
+void UseOneOfMyMethods3W_preparing(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   int & ans_OP,
 					   double z0, double z_min, double & DZ,
 					   int & cols,
@@ -205,7 +205,7 @@ void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
 					   auto_build_parametrs & ab
 					   );
 
-void UseOneOfMyMethods3W(int type, // тип прямой задачи
+void UseOneOfMyMethods3W(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   bool granicy_kak_glubina, 
 					   int & ans_OP,
 					   double z0, double z_min,
@@ -215,7 +215,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 					   auto_build_parametrs & ab,
 					   vector<double> & X,
 					   vector<double> & Y,
-					   vector<double> & Z, // альтитуда измерений - полёта самолёта
+					   vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 					   vector<vector<anten_direction> > & A,
 					   vector<double> & vModul,
 					   vector<vector<double> > & v,
@@ -666,7 +666,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 	return( TRUE );
 }
 
-//коэффициент корреляции
+//РєРѕСЌС„С„РёС†РёРµРЅС‚ РєРѕСЂСЂРµР»СЏС†РёРё
 bool CorrelationCoefficient(vector<double> & v1, vector<double> & v2, double & k, double & Cov)
 {
 	size_t i, len = v1.size();
@@ -973,7 +973,7 @@ printf("this->m_ab.start_j2 = %d\n", this->m_ab.start_j2);
 
 	if (this->m_ab.use_num_col && !num_col_file_selected)
 	{
-		MessageBox(hDlg, "Вы не выбрали имя файла с номерами колонок","AutoBuildProfileDlg",0);
+		MessageBox(hDlg, "Р’С‹ РЅРµ РІС‹Р±СЂР°Р»Рё РёРјСЏ С„Р°Р№Р»Р° СЃ РЅРѕРјРµСЂР°РјРё РєРѕР»РѕРЅРѕРє","AutoBuildProfileDlg",0);
 		return;
 	}
 
@@ -1474,7 +1474,7 @@ printf("this->m_ab.start_j2 = %d\n", this->m_ab.start_j2);
 */
 	if (this->m_ab.use_num_col && !num_col_file_selected)
 	{
-		MessageBox(hDlg, "Вы не выбрали имя файла с номерами колонок","AutoBuildProfileDlg",0);
+		MessageBox(hDlg, "Р’С‹ РЅРµ РІС‹Р±СЂР°Р»Рё РёРјСЏ С„Р°Р№Р»Р° СЃ РЅРѕРјРµСЂР°РјРё РєРѕР»РѕРЅРѕРє","AutoBuildProfileDlg",0);
 		return;
 	}
 
@@ -1670,14 +1670,14 @@ void GetPartOfData(
 
 				   vector<double> & X,
 				   vector<double> & Y,
-				   vector<double> & Z, // альтитуда измерений - полёта самолёта
+				   vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				   vector<vector<anten_direction> > & A,
 				   vector<double> & vModul,
 				   vector<vector<double> > & v,
 				   
 				   vector<double> & pX,
 				   vector<double> & pY,
-				   vector<double> & pZ, // альтитуда измерений - полёта самолёта
+				   vector<double> & pZ, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				   vector<vector<anten_direction> > & pA,
 				   vector<double> & pvModul,
 				   vector<vector<double> > & pv,
@@ -1710,7 +1710,7 @@ void GetPartOfData(
 			pZ.push_back(Z[i]);
 
 			pvModul.push_back(vModul[i]);
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				pv[c].push_back(v[c][i]);
 			}
@@ -1727,14 +1727,14 @@ void GetPartOfData(double p_min, // 0.45
 				   double p_max, // 0.55
 				   vector<double> & X,
 				   vector<double> & Y,
-				   vector<double> & Z, // альтитуда измерений - полёта самолёта
+				   vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				   vector<vector<anten_direction> > & A,
 				   vector<double> & vModul,
 				   vector<vector<double> > & v,
 				   
 				   vector<double> & pX,
 				   vector<double> & pY,
-				   vector<double> & pZ, // альтитуда измерений - полёта самолёта
+				   vector<double> & pZ, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				   vector<vector<anten_direction> > & pA,
 				   vector<double> & pvModul,
 				   vector<vector<double> > & pv
@@ -1774,7 +1774,7 @@ void GetPartOfData(double p_min, // 0.45
 			pZ.push_back(Z[i]);
 
 			pvModul.push_back(vModul[i]);
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				pv[c].push_back(v[c][i]);
 			}
@@ -1788,14 +1788,14 @@ void GetPartOfData(double p_min, // 0.45
 void GetPartOfData(int frec, // 1 2 .. 10 ...
 				   vector<double> & X,
 				   vector<double> & Y,
-				   vector<double> & Z, // альтитуда измерений - полёта самолёта
+				   vector<double> & Z, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				   vector<vector<anten_direction> > & A,
 				   vector<double> & vModul,
 				   vector<vector<double> > & v,
 				   
 				   vector<double> & pX,
 				   vector<double> & pY,
-				   vector<double> & pZ, // альтитуда измерений - полёта самолёта
+				   vector<double> & pZ, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 				   vector<vector<anten_direction> > & pA,
 				   vector<double> & pvModul,
 				   vector<vector<double> > & pv
@@ -1815,7 +1815,7 @@ void GetPartOfData(int frec, // 1 2 .. 10 ...
 			pZ.push_back(Z[i]);
 
 			pvModul.push_back(vModul[i]);
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				pv[c].push_back(v[c][i]);
 			}
@@ -1852,7 +1852,7 @@ void SaveCubesAndSlices(const char * common_directory,
 					if (max_v < v_value) max_v = v_value;
 					if (min_v > v_value) min_v = v_value;
 
-					// индекс в строке матрицы оператора прямой задачи
+					// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					//long i = rr_ * mmd.cols + cc_;
 					long i = _pp * mmd3.rows * mmd3.cols + _rr * mmd3.cols + _cc;
 					//sol[i] = v_value;
@@ -1906,7 +1906,7 @@ void SaveCubesAndSlices(const char * common_directory,
 			}
 			break;
 		}
-		static Grid grid;// грид для построения и сохранения разреза куба
+		static Grid grid;// РіСЂРёРґ РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ СЂР°Р·СЂРµР·Р° РєСѓР±Р°
 		
 		char lpstrFile[4098];
 
@@ -2064,7 +2064,7 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 			{
 				for(long P = 0; P < mmd3.pages; P++)
 				{
-					// индекс в строке матрицы оператора прямой задачи
+					// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					long i = P * mmd3.rows * mmd3.cols + r * mmd3.cols + c;
 					// rows = 1, cols = 1, i = p
 					if (apply_log10)
@@ -2244,7 +2244,7 @@ void ApplyIteration(long c_apply,
 
 	}
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		if (apply_dgdep && fabs(d2GdEp2[a]) > FLT_MIN)
 		{
@@ -2454,7 +2454,7 @@ void ApplyIteration_dipol(long c_apply,
 
 	}
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		if (apply_dgdep && fabs(d2GdEp2[a]) > FLT_MIN)
 		{
@@ -2591,7 +2591,7 @@ void ApplyIteration_dipol(double one,
 
 
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		if (fabs(d2GdEp2[a]) > FLT_MIN)
 		{
@@ -2706,7 +2706,7 @@ void CalcDerivatives(long c_apply,
 			d2Gdni2_A[c] = 0.0;
 			dGdni_B[c] = 0.0;
 			d2Gdni2_B[c] = 0.0;
-			for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+			for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 			
 				for (long r = 0; r < operator_rows; r++)
 				{
@@ -2732,7 +2732,7 @@ void CalcDerivatives(long c_apply,
 	//double d2GdEp2_abs_sub_A = 0.0;
 	//double dGdk_abs_sub_B = 0.0;
 	//double d2Gdk2_abs_sub_B = 0.0;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		if (apply_dgdep)
 		{
@@ -2824,7 +2824,7 @@ void CalcDerivatives(long c_apply,
 		d2GdKTi2_A[c] = 0.0;
 		dGdKTi_B[c] = 0.0;
 		d2GdKTi2_B[c] = 0.0;
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 			double tmp2_A = 0.0;
 			double tmp2_B = 0.0;
 			for (long r = 0; r < operator_rows; r++)
@@ -2844,7 +2844,7 @@ void CalcDerivatives(long c_apply,
 		}
 		d2GdKTi2_A[c] *= four_per_sqrt_pi;
 		d2GdKTi2_B[c] *= four_per_sqrt_pi;
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены						
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹						
 			dGdKTi_A[c] +=  temp_A[a][c];	
 			d2GdKTi2_A[c] += 2.0 * temp52_A[a][c] - 5.0 * temp_A[a][c];	
 			dGdKTi_B[c] +=  s[a] * temp_B[a][c];	
@@ -2892,7 +2892,7 @@ void CalcDerivatives_dipol(long c_apply,
 					long operator_cols,
 
 					double pw,
-					double *** R,// указатель на три матрицы rx, ry, rz
+					double *** R,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ rx, ry, rz
 					vector<vector<anten_direction> > & A,
 					
 					double *** p_A,
@@ -2982,7 +2982,7 @@ void CalcDerivatives_dipol(long c_apply,
 			d2Gdni2_A[c] = 0.0;
 			dGdni_B[c] = 0.0;
 			d2Gdni2_B[c] = 0.0;
-			for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+			for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 			
 				for (long r = 0; r < operator_rows; r++)
 				{
@@ -3024,7 +3024,7 @@ void CalcDerivatives_dipol(long c_apply,
 	double d2det_dbeta2_div_det_B;
 	double d2det_domega2_div_det_B;				
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		if (apply_dgdep)
 		{
@@ -3189,7 +3189,7 @@ void CalcDerivatives_dipol(long c_apply,
 		dGdKTi_B[c] = 0.0;
 		d2GdKTi2_B[c] = 0.0;
 
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 			double tmp2_A = 0.0;
 			double tmp2_B = 0.0;
 			for (long r = 0; r < operator_rows; r++)
@@ -3212,7 +3212,7 @@ void CalcDerivatives_dipol(long c_apply,
 		}
 		d2GdKTi2_A[c] *= four_per_sqrt_pi;
 		d2GdKTi2_B[c] *= four_per_sqrt_pi;
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены						
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹						
 			dGdKTi_A[c] +=  temp_A[a][c];	
 			d2GdKTi2_A[c] += 2.0 * temp52_A[a][c] - 5.0 * temp_A[a][c];	
 			dGdKTi_B[c] +=  s[a] * temp_B[a][c];	
@@ -3273,8 +3273,8 @@ void ForwordOperatorApply_dipol(long c_apply,
 						  double & GA,
 						  double & GB,
 						  vector<short> & va,
-						  double *** m, // три матрицы njuX, njuY, njuZ
-						  double *** R,// указатель на три матрицы rx, ry, rz
+						  double *** m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
+						  double *** R,// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚СЂРё РјР°С‚СЂРёС†С‹ rx, ry, rz
 						  vector<vector<anten_direction> > & A,
 						  vector<vector<double> > & W,
                           
@@ -3338,7 +3338,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 	double rx, ry, rz;
 
 	double nju_phi_min = DBL_MAX;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		for (long r = 0; r < operator_rows; r++)
 		{
@@ -3352,7 +3352,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 				ry = R[1][r][c];
 				rz = R[2][r][c];
 				//double ktic = KTi[c], epa = Ep[a], marc = m[a][r][c];
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_A = nju_phi_calc(beta_A[c], omega_A[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -3360,7 +3360,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 				if (nju_phi_A > DBL_MIN && nju_phi_A < nju_phi_min)
 					nju_phi_min = nju_phi_A;
 
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -3373,7 +3373,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 
 	double zero_substitution = 0.9 * nju_phi_min;
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		for (long r = 0; r < operator_rows; r++)
 		{
@@ -3387,7 +3387,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 				ry = R[1][r][c];
 				rz = R[2][r][c];
 				//double ktic = KTi[c], epa = Ep[a], marc = m[a][r][c];
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_A = nju_phi_calc(beta_A[c], omega_A[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -3402,7 +3402,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 				//double W_p_a_r_c_A = W_p_A[a][r][c];
 				CJI_A[a][r][c] = S[a][r] * ni_A[c] * W_p_A[a][r][c];
 				
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -3424,11 +3424,11 @@ void ForwordOperatorApply_dipol(long c_apply,
 	size_t W_size = W.size();
 	double mean_CB[3];
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		mean_CB[a] = 0.0;
 		for (long r = 0; r < operator_rows; r++)
 		{
-			// Выход оператора прямой задачи
+			// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 			C_A[a][r] = 0.0;
 			C_B[a][r] = 0.0;
 			for (long c = 0; c < operator_cols; c++)
@@ -3449,19 +3449,19 @@ void ForwordOperatorApply_dipol(long c_apply,
 		else
 			s[a] = 0.0;
 
-		//поправка Выхода оператора прямой задачи
+		//РїРѕРїСЂР°РІРєР° Р’С‹С…РѕРґР° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		for (long r = 0; r < operator_rows; r++)
 		{
 			C_B[a][r] *= s[a];
-			// Невязка
-			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
-			Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+			// РќРµРІСЏР·РєР°
+			Er_A[a][r] = C_A[a][r] - W[a][r];//СЂРµР¶РёРј Рђ
+			Er_B[a][r] = C_B[a][r] - W[a+3][r];//СЂРµР¶РёРј B
 		}
 	}
 
 	GA = 0.0;
 	GB = 0.0;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		for (long r = 0; r < operator_rows; r++)
 		{
@@ -3484,7 +3484,7 @@ void ForwordOperatorApply(long c_apply,
 						  double & GA,
 						  double & GB,
 						  vector<short> & va,
-						  double *** m, // три матрицы njuX, njuY, njuZ
+						  double *** m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 						  vector<vector<double> > & W,
                           
 						  long operator_rows,
@@ -3539,7 +3539,7 @@ void ForwordOperatorApply(long c_apply,
 	//	return 1.0 + 2.0 * sqrt (p / PI) * exp(-p) - alglib::errorfunction(sqrt(P));
 	//}
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		for (long r = 0; r < operator_rows; r++)
 		{
@@ -3568,11 +3568,11 @@ void ForwordOperatorApply(long c_apply,
 	size_t W_size = W.size();
 	double mean_CB[3];
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		mean_CB[a] = 0.0;
 		for (long r = 0; r < operator_rows; r++)
 		{
-			// Выход оператора прямой задачи
+			// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 			C_A[a][r] = 0.0;
 			C_B[a][r] = 0.0;
 			for (long c = 0; c < operator_cols; c++)
@@ -3590,19 +3590,19 @@ void ForwordOperatorApply(long c_apply,
 		mean_CB[a] /= operator_rows;
 		s[a] = mean_B_B[a] / mean_CB[a];
 
-		//поправка Выхода оператора прямой задачи
+		//РїРѕРїСЂР°РІРєР° Р’С‹С…РѕРґР° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		for (long r = 0; r < operator_rows; r++)
 		{
 			C_B[a][r] *= s[a];
-			// Невязка
-			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
-			Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+			// РќРµРІСЏР·РєР°
+			Er_A[a][r] = C_A[a][r] - W[a][r];//СЂРµР¶РёРј Рђ
+			Er_B[a][r] = C_B[a][r] - W[a+3][r];//СЂРµР¶РёРј B
 		}
 	}
 
 	GA = 0.0;
 	GB = 0.0;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		for (long r = 0; r < operator_rows; r++)
 		{
@@ -3620,8 +3620,8 @@ void ForwordOperatorApply(long c_apply,
 	GB /= 2.0;
 
 }
-//теперь предполагаем, что мощность источников:
-// 1) постоянна по всей глубине - не зависит от глубины
+//С‚РµРїРµСЂСЊ РїСЂРµРґРїРѕР»Р°РіР°РµРј, С‡С‚Рѕ РјРѕС‰РЅРѕСЃС‚СЊ РёСЃС‚РѕС‡РЅРёРєРѕРІ:
+// 1) РїРѕСЃС‚РѕСЏРЅРЅР° РїРѕ РІСЃРµР№ РіР»СѓР±РёРЅРµ - РЅРµ Р·Р°РІРёСЃРёС‚ РѕС‚ РіР»СѓР±РёРЅС‹
 
 //double IX(double b, double sqw)
 //{
@@ -3633,13 +3633,13 @@ void ForwordOperatorApply(long c_apply,
 	//mIs_Z_hi_w_Ihi = -1/4/b^2/sqw^2/hi+2*hi*Ei(1,2*hi*b*sqw)-5/6/exp(hi*b*sqw)^2/b/sqw-1/6/exp(hi*b*sqw)^2*hi-2/3*b^2*sqw^2*hi^3*Ei(1,2*hi*b*sqw)+1/3*b*sqw/exp(hi*b*sqw)^2*hi^2+1/4/b^2/sqw^2/hi/exp(hi*b*sqw)^2
 //}
 
-// 2) пропорциональна корню из глубины
+// 2) РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅР° РєРѕСЂРЅСЋ РёР· РіР»СѓР±РёРЅС‹
 //mIs_X_hi_w_Ihi = -3/4/b^2/sqw^2/hi^(1/2)+10/21/b/sqw*pi^(1/2)*2^(1/2)/(b*sqw)^(1/2)*erf(2^(1/2)*(b*sqw)^(1/2)*hi^(1/2))+2/3*hi^(3/2)*Ei(1,2*hi*b*sqw)-17/42*hi^(1/2)/exp(hi*b*sqw)^2/b/sqw+1/14*hi^(3/2)/exp(hi*b*sqw)^2+2/7*b^2*sqw^2*hi^(7/2)*Ei(1,2*hi*b*sqw)-1/7*b*sqw*hi^(5/2)/exp(hi*b*sqw)^2+3/4/b^2/sqw^2/hi^(1/2)/exp(hi*b*sqw)^2
 //mIs_Z_hi_w_Ihi = -1/2/b^2/sqw^2/hi^(1/2)+8/21/b/sqw*pi^(1/2)*2^(1/2)/(b*sqw)^(1/2)*erf(2^(1/2)*(b*sqw)^(1/2)*hi^(1/2))+4/3*hi^(3/2)*Ei(1,2*hi*b*sqw)-11/21*hi^(1/2)/exp(hi*b*sqw)^2/b/sqw-1/7*hi^(3/2)/exp(hi*b*sqw)^2-4/7*b^2*sqw^2*hi^(7/2)*Ei(1,2*hi*b*sqw)+2/7*b*sqw*hi^(5/2)/exp(hi*b*sqw)^2+1/2/b^2/sqw^2/hi^(1/2)/exp(hi*b*sqw)^2
 
 
-//теперь предполагаем, что мощность источников:
-// 1) постоянна по всей глубине - не зависит от глубины
+//С‚РµРїРµСЂСЊ РїСЂРµРґРїРѕР»Р°РіР°РµРј, С‡С‚Рѕ РјРѕС‰РЅРѕСЃС‚СЊ РёСЃС‚РѕС‡РЅРёРєРѕРІ:
+// 1) РїРѕСЃС‚РѕСЏРЅРЅР° РїРѕ РІСЃРµР№ РіР»СѓР±РёРЅРµ - РЅРµ Р·Р°РІРёСЃРёС‚ РѕС‚ РіР»СѓР±РёРЅС‹
 //mIs_X_hi_w_Ihi = 4/3/b/sqw
 //mIs_Z_hi_w_Ihi = 4/3/b/sqw
 
@@ -3666,7 +3666,7 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 	}
 }
 void
-UsingOneOfMyMethods3W(int type, // тип прямой задачи
+UsingOneOfMyMethods3W(int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   bool granicy_kak_glubina, 
 					   int & ans_OP,
 					   double z0, double z_min,
@@ -3676,7 +3676,7 @@ UsingOneOfMyMethods3W(int type, // тип прямой задачи
 					   auto_build_parametrs& ab,
 					   vector<double> & pX,
 					   vector<double> & pY,
-					   vector<double> & pZ, // альтитуда измерений - полёта самолёта
+					   vector<double> & pZ, // Р°Р»СЊС‚РёС‚СѓРґР° РёР·РјРµСЂРµРЅРёР№ - РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°
 					   vector<vector<anten_direction> > & pA,
 					   vector<double> & pModul,
 					   vector<vector<double> > & pW,
@@ -3704,7 +3704,7 @@ UsingOneOfMyMethods3W(int type, // тип прямой задачи
 
 		if (to_test_algorithm_by_reconstructed_signal)
 		{
-			// а теперь подаём на вход реконструированный сигнал
+			// Р° С‚РµРїРµСЂСЊ РїРѕРґР°С‘Рј РЅР° РІС…РѕРґ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹Р№ СЃРёРіРЅР°Р»
 			sprintf(dir_out, "%s\\common_rec_of_%d_files", common_directory_iX_iY, nFilesInDirectory);
 			int n = 0;
 			while (!CreateDirectory(dir_out,NULL))
@@ -3724,7 +3724,7 @@ UsingOneOfMyMethods3W(int type, // тип прямой задачи
 			UseOneOfMyMethods3W(-type, granicy_kak_glubina,ans_OP, z0, z_min, cols, mmd3, w3, ab, pX, pY, pZ, pA, rec_modul, rec_signals, names_of_colomns, original_col_numbers,
 				rec_signals2, rec_modul2);
 
-			// а теперь подаём на вход реконструированный сигнал
+			// Р° С‚РµРїРµСЂСЊ РїРѕРґР°С‘Рј РЅР° РІС…РѕРґ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹Р№ СЃРёРіРЅР°Р»
 			/*sprintf(dir_out, "%s\\common_rec2_of_%d_files", common_directory, this->m_files_in_dir.nFilesInDirectory);
 			n = 0;
 			while (!CreateDirectory(dir_out,NULL))
@@ -3765,7 +3765,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 #if !USE_MY_METHOD
 	bool is_reverse = false;
-	int shoulder = 50;// плечо -  длина окна - это два плеча плюс один
+	int shoulder = 50;// РїР»РµС‡Рѕ -  РґР»РёРЅР° РѕРєРЅР° - СЌС‚Рѕ РґРІР° РїР»РµС‡Р° РїР»СЋСЃ РѕРґРёРЅ
 	int step = 5;
 	int wlen_base = 20;
 	int wlen_auto = 10;
@@ -3790,7 +3790,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	//int delim = ',';
 	int num_col = -1;
 	//##############################################################
-	//блок чтения файла с нумерами колонок
+	//Р±Р»РѕРє С‡С‚РµРЅРёСЏ С„Р°Р№Р»Р° СЃ РЅСѓРјРµСЂР°РјРё РєРѕР»РѕРЅРѕРє
 	vector<bool> use_col;
 	if (!ReadColomnNumbers(AutoBuildProfile::ab,use_col,num_col,AutoBuildProfile::ab.delim))
 	{
@@ -3814,7 +3814,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	char common_directory_iX_iY[4096];
 
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 	char filename_description[4096];
 	sprintf(filename_description, "%s\\description1.txt", common_directory);
 	FILE *stream;
@@ -3828,7 +3828,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 
 	this->m_files_in_dir.nFilesInDirectory = SendDlgItemMessage( hDlg, IDC_LIST2, LB_GETCOUNT, 0, 0);
-	//память не освобождена!!!!
+	//РїР°РјСЏС‚СЊ РЅРµ РѕСЃРІРѕР±РѕР¶РґРµРЅР°!!!!
 	this->m_files_in_dir.vFileNameLengthes = (int *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		sizeof( int ) *  this->m_files_in_dir.nFilesInDirectory);
 	this->m_files_in_dir.vFileNames = (char **)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -3857,19 +3857,19 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		fclose(stream);
 	}
 
-	//Программная реализация трёх-антенной прямой задачи требует договора о том, 
-	//как производить соответствие между антеннами на самолёте и логическими 
-	//антеннами AX(1,0,0), AY(0,1,0) и AZ(0,0,1).
+	//РџСЂРѕРіСЂР°РјРјРЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ С‚СЂС‘С…-Р°РЅС‚РµРЅРЅРѕР№ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё С‚СЂРµР±СѓРµС‚ РґРѕРіРѕРІРѕСЂР° Рѕ С‚РѕРј, 
+	//РєР°Рє РїСЂРѕРёР·РІРѕРґРёС‚СЊ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ РјРµР¶РґСѓ Р°РЅС‚РµРЅРЅР°РјРё РЅР° СЃР°РјРѕР»С‘С‚Рµ Рё Р»РѕРіРёС‡РµСЃРєРёРјРё 
+	//Р°РЅС‚РµРЅРЅР°РјРё AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1).
 	
-	//Допустим, что прибор под именем X записывает в базу данных ту антенну, 
-	//нормаль которой направлена вдоль направления полёта самолёта. Тогда условие 
-	//необходимости замены обозначений антенн не возникает, если самолёт летит 
-	//вдоль широты, но такая необходимость замены обозначений антенн возникает, 
-	//если самолёт летит вдоль долготы. 
+	//Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РїСЂРёР±РѕСЂ РїРѕРґ РёРјРµРЅРµРј X Р·Р°РїРёСЃС‹РІР°РµС‚ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С… С‚Сѓ Р°РЅС‚РµРЅРЅСѓ, 
+	//РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ РЅР°РїСЂР°РІР»РµРЅР° РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°. РўРѕРіРґР° СѓСЃР»РѕРІРёРµ 
+	//РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ 
+	//РІРґРѕР»СЊ С€РёСЂРѕС‚С‹, РЅРѕ С‚Р°РєР°СЏ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РІРѕР·РЅРёРєР°РµС‚, 
+	//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹. 
 	
-	//Если вдоль направления полёта самолёта закреплена нормаль антенны Y, 
-	//тогда наоборот условие необходимости замены обозначений антенн не возникает, 
-	//если самолёт летит вдоль долготы, но возникает, если самолёт летит вдоль широты. 
+	//Р•СЃР»Рё РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р° Р·Р°РєСЂРµРїР»РµРЅР° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ Y, 
+	//С‚РѕРіРґР° РЅР°РѕР±РѕСЂРѕС‚ СѓСЃР»РѕРІРёРµ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, 
+	//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹, РЅРѕ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ С€РёСЂРѕС‚С‹. 
 
 	int when_to_swap = 0;
 
@@ -3895,7 +3895,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		break;
 	default:
 		{
-			MessageBox(0, "Вы не определили нормаль какой антены парралельна профилю", "Ошибка ввода", 0);
+			MessageBox(0, "Р’С‹ РЅРµ РѕРїСЂРµРґРµР»РёР»Рё РЅРѕСЂРјР°Р»СЊ РєР°РєРѕР№ Р°РЅС‚РµРЅС‹ РїР°СЂСЂР°Р»РµР»СЊРЅР° РїСЂРѕС„РёР»СЋ", "РћС€РёР±РєР° РІРІРѕРґР°", 0);
 			return false;
 		}
 	}
@@ -3969,7 +3969,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			
 			for (size_t r = 0; r < rows; r++)
 			{	
-				for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+				for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					vvv[r] += v[c][r]*v[c][r];
 				}
@@ -3998,30 +3998,30 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				A.resize(3);
 			}
 
-			// отдельно будем складывать профиля
-			// чтобы потом отцентрировать каждый
+			// РѕС‚РґРµР»СЊРЅРѕ Р±СѓРґРµРј СЃРєР»Р°РґС‹РІР°С‚СЊ РїСЂРѕС„РёР»СЏ
+			// С‡С‚РѕР±С‹ РїРѕС‚РѕРј РѕС‚С†РµРЅС‚СЂРёСЂРѕРІР°С‚СЊ РєР°Р¶РґС‹Р№
 			vW.push_back(vector<vector<double> > () );
 			vW.back().resize(cols);
 
-			// если delta__x оказывается меньше delta__y, 
-			// то есть если профиль является субмеридиональным, 
-			// тогда производится автоматическая замена сигнала антенн.
+			// РµСЃР»Рё delta__x РѕРєР°Р·С‹РІР°РµС‚СЃСЏ РјРµРЅСЊС€Рµ delta__y, 
+			// С‚Рѕ РµСЃС‚СЊ РµСЃР»Рё РїСЂРѕС„РёР»СЊ СЏРІР»СЏРµС‚СЃСЏ СЃСѓР±РјРµСЂРёРґРёРѕРЅР°Р»СЊРЅС‹Рј, 
+			// С‚РѕРіРґР° РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ Р·Р°РјРµРЅР° СЃРёРіРЅР°Р»Р° Р°РЅС‚РµРЅРЅ.
 
 			bool to_swap;
 			if (when_to_swap == 0)
 			{
-				//Допустим, что прибор под именем X записывает в базу данных ту антенну, 
-				//нормаль которой направлена вдоль направления полёта самолёта. Тогда условие 
-				//необходимости замены обозначений антенн не возникает, если самолёт летит 
-				//вдоль широты (delta__x > delta__y), но такая необходимость замены обозначений антенн возникает, 
-				//если самолёт летит вдоль долготы (delta__x < delta__y). 
+				//Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РїСЂРёР±РѕСЂ РїРѕРґ РёРјРµРЅРµРј X Р·Р°РїРёСЃС‹РІР°РµС‚ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С… С‚Сѓ Р°РЅС‚РµРЅРЅСѓ, 
+				//РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ РЅР°РїСЂР°РІР»РµРЅР° РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°. РўРѕРіРґР° СѓСЃР»РѕРІРёРµ 
+				//РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ 
+				//РІРґРѕР»СЊ С€РёСЂРѕС‚С‹ (delta__x > delta__y), РЅРѕ С‚Р°РєР°СЏ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РІРѕР·РЅРёРєР°РµС‚, 
+				//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹ (delta__x < delta__y). 
 				to_swap = delta__x < delta__y;	
 			}
 			else 
 			{
-				//Если вдоль направления полёта самолёта закреплена нормаль антенны Y, 
-				//тогда наоборот условие необходимости замены обозначений антенн не возникает, 
-				//если самолёт летит вдоль долготы, но возникает, если самолёт летит вдоль широты. 
+				//Р•СЃР»Рё РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р° Р·Р°РєСЂРµРїР»РµРЅР° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ Y, 
+				//С‚РѕРіРґР° РЅР°РѕР±РѕСЂРѕС‚ СѓСЃР»РѕРІРёРµ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, 
+				//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹, РЅРѕ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ С€РёСЂРѕС‚С‹. 
 				to_swap = delta__x > delta__y;
 			}
 
@@ -4036,7 +4036,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 					if (stream)
 					{
-						fprintf(stream, "меняем антены X и Y\n");
+						fprintf(stream, "РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X Рё Y\n");
 						fprintf(stream, "swapping of parameters %s and %s on profile %s\n", 
 							names_of_colomns[original_col_numbers[0]].c_str(), 
 							names_of_colomns[original_col_numbers[1]].c_str(), 
@@ -4053,7 +4053,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 					if (stream)
 					{
-						fprintf(stream, "меняем антены X2 и Y2\n");
+						fprintf(stream, "РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X2 Рё Y2\n");
 						fprintf(stream, "swapping of parameters %s and %s on profile %s\n", 
 							names_of_colomns[original_col_numbers[3]].c_str(), 
 							names_of_colomns[original_col_numbers[4]].c_str(), 
@@ -4070,7 +4070,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 					if (stream)
 					{
-						fprintf(stream, "меняем антены X3 и Y3\n");
+						fprintf(stream, "РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X3 Рё Y3\n");
 						fprintf(stream, "swapping of parameters %s and %s on profile %s\n", 
 							names_of_colomns[original_col_numbers[6]].c_str(), 
 							names_of_colomns[original_col_numbers[7]].c_str(), 
@@ -4079,7 +4079,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				}
 
 				
-				//считаем по y
+				//СЃС‡РёС‚Р°РµРј РїРѕ y
 				//grid->gridSection.xLL = min__y;
 				//grid->gridSection.xSize = delta_y;
 
@@ -4126,19 +4126,19 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					vZ.push_back(Z[r]);
 					vModul.push_back(vvv[r]);
 					
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						size_t C = c;
 
-						// меняем антены X и Y
+						// РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X Рё Y
 						if (c == 0) C = 1;
 						else if (c == 1) C = 0;
 
-						// меняем антены X2 и Y2
+						// РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X2 Рё Y2
 						else if (c == 3) C = 4;
 						else if (c == 4) C = 3;
 
-						// меняем антены X3 и Y3
+						// РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X3 Рё Y3
 						else if (c == 6) C = 7;
 						else if (c == 7) C = 6;
 
@@ -4149,7 +4149,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			}
 			else
 			{
-				//считаем по x
+				//СЃС‡РёС‚Р°РµРј РїРѕ x
 				//grid->gridSection.xLL = min__x;
 				//grid->gridSection.xSize = delta_x;
 
@@ -4196,7 +4196,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					vZ.push_back(Z[r]);
 					vModul.push_back(vvv[r]);
 
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						W[c].push_back(v[c][r]);
 						vW.back().operator [](c).push_back(v[c][r]);
@@ -4231,15 +4231,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		}
 	}
 
-	// центруем сигналы по каждому профилю отдельно
-	// а затем прибавляем общую среднюю
+	// С†РµРЅС‚СЂСѓРµРј СЃРёРіРЅР°Р»С‹ РїРѕ РєР°Р¶РґРѕРјСѓ РїСЂРѕС„РёР»СЋ РѕС‚РґРµР»СЊРЅРѕ
+	// Р° Р·Р°С‚РµРј РїСЂРёР±Р°РІР»СЏРµРј РѕР±С‰СѓСЋ СЃСЂРµРґРЅСЋСЋ
 
 	int n_profiles = vW.size();
 	vector <double> mean(cols), disp(cols);
 	vector <vector <double> > profile_mean(n_profiles);
 	vector <vector <double> > profile_disp(n_profiles);
 
-	for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+	for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 	{
 		mean[c] = Mean(W[c]); 
 		disp[c] = Disp(W[c]); 
@@ -4249,7 +4249,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	{
 		profile_mean[n_prof].resize(cols);
 		profile_disp[n_prof].resize(cols);
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			profile_mean[n_prof][c] = Mean(vW[n_prof][c]); 
 			profile_disp[n_prof][c] = Disp(vW[n_prof][c]); 
@@ -4264,7 +4264,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	{
 		fprintf(means, "where");
 		printf("where");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(means, ",mean(%s)", 
 				names_of_colomns[original_col_numbers[c]].c_str());
@@ -4276,7 +4276,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 		fprintf(means, "all_object");
 		printf("all_object");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(means, ",%f", mean[c]);
 			printf(",%f", mean[c]);
@@ -4287,7 +4287,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		{
 			fprintf(means, "%s", fnames[n_prof].c_str());
 			printf("%s", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(means, ",%f", profile_mean[n_prof][c]);
 				printf(",%f", profile_mean[n_prof][c]);
@@ -4302,7 +4302,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 	if(means)
 	{
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(means, "mean(%s) = %f\n", 
 				names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -4317,7 +4317,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		{
 			fprintf(means, "%s\n", fnames[n_prof].c_str());
 			printf("%s\n", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(means, "mean(%s) = %f\n", 
 					names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -4343,7 +4343,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	{
 		fprintf(disps, "where");
 		printf("where");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(disps, ",disp(%s)", 
 				names_of_colomns[original_col_numbers[c]].c_str());
@@ -4355,7 +4355,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 		fprintf(disps, "all_object");
 		printf("all_object");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(disps, ",%f", disp[c]);
 			printf(",%f", disp[c]);
@@ -4366,7 +4366,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		{
 			fprintf(disps, "%s", fnames[n_prof].c_str());
 			printf("%s", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(disps, ",%f", profile_disp[n_prof][c]);
 				printf(",%f", profile_disp[n_prof][c]);
@@ -4381,7 +4381,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 	if(disps)
 	{
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(disps, "disp(%s) = %f\n", 
 				names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -4396,7 +4396,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		{
 			fprintf(disps, "%s\n", fnames[n_prof].c_str());
 			printf("%s\n", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(disps, "disp(%s) = %f\n", 
 					names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -4428,7 +4428,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		{
 			for (int n_prof = 0; n_prof < n_profiles; n_prof++)
 			{
-				for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+				for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					for (int i = 0; i < vW[n_prof][c].size(); i++)
 					{
@@ -4441,7 +4441,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		{
 			for (int n_prof = 0; n_prof < n_profiles; n_prof++)
 			{
-				for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+				for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					for (int i = 0; i < vW[n_prof][c].size(); i++)
 					{
@@ -4455,7 +4455,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	{
 		for (int n_prof = 0; n_prof < n_profiles; n_prof++)
 		{
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				for (int i = 0; i < vW[n_prof][c].size(); i++)
 				{
@@ -4473,7 +4473,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 	if (to_recenter_profiles || to_set_mean_of_profiles_to_zero)
 	{
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			int r = 0;
 			for (int n_prof = 0; n_prof < n_profiles; n_prof++)
@@ -4488,13 +4488,13 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	}
 
 	
-	// здесь исключить близкие точки
-	// если матрица оператора прямой задачи 
-	// содержит практически одинаковые строки, 
-	// то это означает плохую обусловленность матрицы. 
-	// Для улучшения обусловленности матрицы необходмо 
-	// исключить из рассмотрения такие пары измерений, 
-	// расстояние между которыми меньше, скажем половины шага измерения
+	// Р·РґРµСЃСЊ РёСЃРєР»СЋС‡РёС‚СЊ Р±Р»РёР·РєРёРµ С‚РѕС‡РєРё
+	// РµСЃР»Рё РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё 
+	// СЃРѕРґРµСЂР¶РёС‚ РїСЂР°РєС‚РёС‡РµСЃРєРё РѕРґРёРЅР°РєРѕРІС‹Рµ СЃС‚СЂРѕРєРё, 
+	// С‚Рѕ СЌС‚Рѕ РѕР·РЅР°С‡Р°РµС‚ РїР»РѕС…СѓСЋ РѕР±СѓСЃР»РѕРІР»РµРЅРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹. 
+	// Р”Р»СЏ СѓР»СѓС‡С€РµРЅРёСЏ РѕР±СѓСЃР»РѕРІР»РµРЅРЅРѕСЃС‚Рё РјР°С‚СЂРёС†С‹ РЅРµРѕР±С…РѕРґРјРѕ 
+	// РёСЃРєР»СЋС‡РёС‚СЊ РёР· СЂР°СЃСЃРјРѕС‚СЂРµРЅРёСЏ С‚Р°РєРёРµ РїР°СЂС‹ РёР·РјРµСЂРµРЅРёР№, 
+	// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РєРѕС‚РѕСЂС‹РјРё РјРµРЅСЊС€Рµ, СЃРєР°Р¶РµРј РїРѕР»РѕРІРёРЅС‹ С€Р°РіР° РёР·РјРµСЂРµРЅРёСЏ
 	vector<double> vLen;
 	for (int i = 0; i < vX.size()-1; i++)
 	{
@@ -4538,7 +4538,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		r_it != to_exclude.rend(); r_it++)
 	{
 		printf ("to_exclude = %d\t%f\n", (*r_it).first, (*r_it).second);
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			vector<double>::iterator it_w_c = W[c].begin() + (*r_it).first;
 			W[c].erase(it_w_c);
@@ -4572,18 +4572,18 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			
 
 
-			//ищем уравнение прямой в виде
+			//РёС‰РµРј СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
 			// ax+by+c=0
 
-			// определяем профиль является субширотным или субмериодиональным
+			// РѕРїСЂРµРґРµР»СЏРµРј РїСЂРѕС„РёР»СЊ СЏРІР»СЏРµС‚СЃСЏ СЃСѓР±С€РёСЂРѕС‚РЅС‹Рј РёР»Рё СЃСѓР±РјРµСЂРёРѕРґРёРѕРЅР°Р»СЊРЅС‹Рј
 			double profile_dx = fabs(vX[0] - vX.back());
 			double profile_dy = fabs(vY[0] - vY.back());
 
 			if (profile_dx > profile_dy)
 			{
-				//субширотный
-				//ищем уравнение прямой в виде
-				//y=Ax+B, где A=-a/b B=-c/b b!=0
+				//СЃСѓР±С€РёСЂРѕС‚РЅС‹Р№
+				//РёС‰РµРј СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//y=Ax+B, РіРґРµ A=-a/b B=-c/b b!=0
 
 				double xy = ScalarProduct(vX, vY);
 				double xx = SquareSum(vX);
@@ -4608,9 +4608,9 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			}
 			else
 			{
-				//субмериодиональный
-				//ищем уравнение прямой в виде
-				//x=Ay+B, где A=-b/a B=-c/a a!=0
+				//СЃСѓР±РјРµСЂРёРѕРґРёРѕРЅР°Р»СЊРЅС‹Р№
+				//РёС‰РµРј СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//x=Ay+B, РіРґРµ A=-b/a B=-c/a a!=0
 
 				double xy = ScalarProduct(vX, vY);
 				double yy = SquareSum(vY);
@@ -4639,11 +4639,11 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			if (profile_dx > profile_dy)
 			{
 				printf("subshirotny\n");
-				//субширотный
-				//уравнение прямой в виде
-				//y=Ax+B, где A=-a/b B=-c/b b!=0
+				//СЃСѓР±С€РёСЂРѕС‚РЅС‹Р№
+				//СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//y=Ax+B, РіРґРµ A=-a/b B=-c/b b!=0
 
-				//ищем начальную точку в как ту у которой минимальный икс
+				//РёС‰РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ С‚РѕС‡РєСѓ РІ РєР°Рє С‚Сѓ Сѓ РєРѕС‚РѕСЂРѕР№ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РёРєСЃ
 				vector<double>::iterator it_min_vx = min_element(vX.begin(), vX.end());
 				if (it_min_vx != vX.end())
 				{
@@ -4656,11 +4656,11 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			}
 			else
 			{
-				//субмериодиональный
-				//уравнение прямой в виде
-				//x=Ay+B, где A=-b/a B=-c/a a!=0
+				//СЃСѓР±РјРµСЂРёРѕРґРёРѕРЅР°Р»СЊРЅС‹Р№
+				//СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//x=Ay+B, РіРґРµ A=-b/a B=-c/a a!=0
 
-				//ищем начальную точку в как ту у которой минимальный игрек
+				//РёС‰РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ С‚РѕС‡РєСѓ РІ РєР°Рє С‚Сѓ Сѓ РєРѕС‚РѕСЂРѕР№ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РёРіСЂРµРє
 				vector<double>::iterator it_min_vy = min_element(vY.begin(), vY.end());
 				if (it_min_vy != vY.end())
 				{
@@ -4717,7 +4717,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	
 	sprintf(dir_out, "%s\0", common_directory);
 				
-	int type = 0; // тип прямой задачи
+	int type = 0; // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	cout << "Enter type of prjamoj zadachi" << endl;
 	cout << "0 - simple" << endl;
 	cout << "1 - with diagramm of 3 antenns and nonpolarized sources" << endl;
@@ -4765,7 +4765,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		cout << "Enter Do you want to_test_algorithm_by_reconstructed_signal? 1 - yes 0 - no" << endl;
 		cin >> to_test_algorithm_by_reconstructed_signal;
 		
-		//тестируем на уменьшенной площади
+		//С‚РµСЃС‚РёСЂСѓРµРј РЅР° СѓРјРµРЅСЊС€РµРЅРЅРѕР№ РїР»РѕС‰Р°РґРё
 		vector<double> pX, pY, pZ, pModul;
 		vector<vector<anten_direction> > pA;
 		vector<vector<double> > pW;
@@ -4792,7 +4792,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					vX,vY,vZ, A, vModul, W,
 					pX,pY,pZ,pA, pModul,pW);
 
-				UsingOneOfMyMethods3W(type, // тип прямой задачи
+				UsingOneOfMyMethods3W(type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   mmd3.granicy_kak_glubina, 
 					   ans_OP, 
 					   z0, z_min,
@@ -4824,7 +4824,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					vX,vY,vZ, A, vModul, W,
 					pX,pY,pZ,pA, pModul,pW);
 
-				UsingOneOfMyMethods3W(type, // тип прямой задачи
+				UsingOneOfMyMethods3W(type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					   mmd3.granicy_kak_glubina, 
 					   ans_OP, z0, z_min,
 					   cols, 
@@ -4867,8 +4867,8 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 						double min_y = min_Y + (iY) * dy;
 						double max_y = min_Y + (iY + 1) * dy + 2*DZ*int(mmd3.granicy_kak_glubina);
 
-						// массив индексов урезанных массивов pX, pY, pZ, pModul,pW
-						// в индексации первоначальных массивов vX, vY, vZ, vModul, W
+						// РјР°СЃСЃРёРІ РёРЅРґРµРєСЃРѕРІ СѓСЂРµР·Р°РЅРЅС‹С… РјР°СЃСЃРёРІРѕРІ pX, pY, pZ, pModul,pW
+						// РІ РёРЅРґРµРєСЃР°С†РёРё РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅС‹С… РјР°СЃСЃРёРІРѕРІ vX, vY, vZ, vModul, W
 						vector <long> pInd;
 
 						GetPartOfData(min_x, max_x, min_y, max_y,
@@ -4904,7 +4904,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								{
 								}
 
-								UsingOneOfMyMethods3W(type, // тип прямой задачи
+								UsingOneOfMyMethods3W(type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 									mmd3.granicy_kak_glubina, 
 									ans_OP, z0, z_min,
 									cols, mmd3, w3, AutoBuildProfile::ab,
@@ -4945,7 +4945,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				mmd3.delta__z = mmd3.z0 - mmd3.z_min;
 
 
-				// на случай редукции к двумерному случаю
+				// РЅР° СЃР»СѓС‡Р°Р№ СЂРµРґСѓРєС†РёРё Рє РґРІСѓРјРµСЂРЅРѕРјСѓ СЃР»СѓС‡Р°СЋ
 				bool to_reduce_x = (DX - dx) < 0.0;
 				bool to_reduce_y = (DY - dy) < 0.0;
 
@@ -4979,8 +4979,8 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							double min_y = center_y - 0.5 * dy;
 							double max_y = center_y + 0.5 * dy;
 
-							// массив индексов урезанных массивов pX, pY, pZ, pModul,pW
-							// в индексации первоначальных массивов vX, vY, vZ, vModul, W
+							// РјР°СЃСЃРёРІ РёРЅРґРµРєСЃРѕРІ СѓСЂРµР·Р°РЅРЅС‹С… РјР°СЃСЃРёРІРѕРІ pX, pY, pZ, pModul,pW
+							// РІ РёРЅРґРµРєСЃР°С†РёРё РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅС‹С… РјР°СЃСЃРёРІРѕРІ vX, vY, vZ, vModul, W
 							vector<long> __pInd;
 
 							GetPartOfData(min_x, max_x, min_y, max_y,
@@ -5004,15 +5004,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					//mmd3.pages = type > 0 ? min_len_pX * 3 : min_len_pX;
 				}
 
-				//mmd3.delta_z = mmd3.delta__z / (mmd3.pages - 1);// это неверно!!!
-				// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				//mmd3.delta_z = mmd3.delta__z / (mmd3.pages - 1);// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+				// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 				mmd3.delta_z = mmd3.delta__z / mmd3.pages;
 	
 
 				typedef  Grid4 * GRID_POINTER;
 				typedef  GRID_POINTER * GRID_2_POINTER;
 
-				// корреляционные кубы
+				// РєРѕСЂСЂРµР»СЏС†РёРѕРЅРЅС‹Рµ РєСѓР±С‹
 
 				Grid4 *** _cubes = new GRID_2_POINTER[cols_3];
 				for (int cc = 0; cc < cols_3; cc++)
@@ -5020,14 +5020,14 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					_cubes[cc] = new GRID_POINTER[2];
 					for (int i_alpha = 0; i_alpha < 2; i_alpha++)
 					{
-						// Грид по размеру геологической структуры
+						// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 						_cubes[cc][i_alpha] = CreateProfileGrid3D(mmd3);
 						Zero3DMat<double>(_cubes[cc][i_alpha]->grid4Section.v, _cubes[cc][i_alpha]->grid4Section.nPag, _cubes[cc][i_alpha]->grid4Section.nRow, _cubes[cc][i_alpha]->grid4Section.nCol);
 						Fill3DMatByValue<double>(BLANK_VALUE, _cubes[cc][i_alpha]->grid4Section.v, _cubes[cc][i_alpha]->grid4Section.nPag, _cubes[cc][i_alpha]->grid4Section.nRow, _cubes[cc][i_alpha]->grid4Section.nCol);
 					}
 				}
 
-				// кубы для решения обратной задачи
+				// РєСѓР±С‹ РґР»СЏ СЂРµС€РµРЅРёСЏ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё
 
 				Grid4 *** cubes = new GRID_2_POINTER[cols_3];
 
@@ -5042,7 +5042,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					cubes[cc] = new GRID_POINTER[mmd3.n_alpha];
 					for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha++)
 					{
-						// Грид по размеру геологической структуры
+						// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 						cubes[cc][i_alpha] = CreateProfileGrid3D(mmd3);
 						Zero3DMat<double>(cubes[cc][i_alpha]->grid4Section.v, cubes[cc][i_alpha]->grid4Section.nPag, cubes[cc][i_alpha]->grid4Section.nRow, cubes[cc][i_alpha]->grid4Section.nCol);
 						Fill3DMatByValue<double>(BLANK_VALUE, cubes[cc][i_alpha]->grid4Section.v, cubes[cc][i_alpha]->grid4Section.nPag, cubes[cc][i_alpha]->grid4Section.nRow, cubes[cc][i_alpha]->grid4Section.nCol);
@@ -5070,7 +5070,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					cout << "Enter r0?" << endl;
 					cin >> r0;
 
-					for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+					for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha++)
 						{
@@ -5085,7 +5085,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							if (OpenFileDlg(NULL, "Cube 3D grid(*.cub)\0*.cub\0All files \0*.*\0", 
 								file) == S_OK)
 							{
-								//здесь load грид
+								//Р·РґРµСЃСЊ load РіСЂРёРґ
 								if (0 == ImportSurfer7Grid4(file, cubes[cc][i_alpha]))
 								{
 								}
@@ -5097,7 +5097,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				{
 				}
 
-				// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+				// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 				vector<vector<vector<double> > >  sols_mean(mmd3.pages);
 				double z_min = mmd3.z0 - mmd3.pages * mmd3.delta_z;
 				//for (long p = 0; p < mmd3.pages; p++)
@@ -5111,9 +5111,9 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 				vector<vector<vector<double> > > new_vv;
 
-				// матрицы реконструированных сигналов
+				// РјР°С‚СЂРёС†С‹ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹С… СЃРёРіРЅР°Р»РѕРІ
 				vector<vector<vector <sparse_row_map> > > MRECs;
-				// число строк в этой матрице определяется длиной сигнала
+				// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє РІ СЌС‚РѕР№ РјР°С‚СЂРёС†Рµ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РґР»РёРЅРѕР№ СЃРёРіРЅР°Р»Р°
 				switch(type)
 				{
 				case 0:
@@ -5130,7 +5130,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								sols_mean[cc][i_alpha].resize(mmd3.pages);
 								for(long p = 0; p < mmd3.pages; p++)
 								{
-									// индекс в строке матрицы оператора прямой задачи
+									// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 									//i = p * rows * cols + r * cols + C;
 									// rows = 1, cols = 1, i = p
 									//cubes[cc][i_alpha]->grid4Section.v[p][r][c] = sol[p];
@@ -5157,7 +5157,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								sols_mean[cc][i_alpha].resize(mmd3.pages);
 								for(long p = 0; p < mmd3.pages; p++)
 								{
-									// индекс в строке матрицы оператора прямой задачи
+									// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 									//i = p * rows * cols + r * cols + C;
 									// rows = 1, cols = 1, i = p
 									//cubes[cc][i_alpha]->grid4Section.v[p][r][c] = sol[p];
@@ -5169,10 +5169,10 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					}
 					break;
 				}
-				//а число колонок - соответствует числу светящихся столбов
+				//Р° С‡РёСЃР»Рѕ РєРѕР»РѕРЅРѕРє - СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ С‡РёСЃР»Сѓ СЃРІРµС‚СЏС‰РёС…СЃСЏ СЃС‚РѕР»Р±РѕРІ
 
-				// массив индексов урезанных массивов pX, pY, pZ, pModul,pW
-				// в индексации первоначальных массивов vX, vY, vZ, vModul, W
+				// РјР°СЃСЃРёРІ РёРЅРґРµРєСЃРѕРІ СѓСЂРµР·Р°РЅРЅС‹С… РјР°СЃСЃРёРІРѕРІ pX, pY, pZ, pModul,pW
+				// РІ РёРЅРґРµРєСЃР°С†РёРё РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅС‹С… РјР°СЃСЃРёРІРѕРІ vX, vY, vZ, vModul, W
 				vector<vector <long> > v_pInd;
 
 
@@ -5192,8 +5192,8 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 						double min_y = center_y - 0.5 * dy;
 						double max_y = center_y + 0.5 * dy;
 
-						// массив индексов урезанных массивов pX, pY, pZ, pModul,pW
-						// в индексации первоначальных массивов vX, vY, vZ, vModul, W
+						// РјР°СЃСЃРёРІ РёРЅРґРµРєСЃРѕРІ СѓСЂРµР·Р°РЅРЅС‹С… РјР°СЃСЃРёРІРѕРІ pX, pY, pZ, pModul,pW
+						// РІ РёРЅРґРµРєСЃР°С†РёРё РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅС‹С… РјР°СЃСЃРёРІРѕРІ vX, vY, vZ, vModul, W
 						v_pInd.push_back(vector<long>());
 
 						GetPartOfData(min_x, max_x, min_y, max_y,
@@ -5232,7 +5232,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								//{
 								//}
 
-								//UsingOneOfMyMethods3W(type, // тип прямой задачи
+								//UsingOneOfMyMethods3W(type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 								//	granicy_kak_glubina, 
 								//	ans_OP, z0, z_min,
 								//	cols, mmd3, w3, AutoBuildProfile::ab,
@@ -5254,7 +5254,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 									
 
-								// начало расчётного блока
+								// РЅР°С‡Р°Р»Рѕ СЂР°СЃС‡С‘С‚РЅРѕРіРѕ Р±Р»РѕРєР°
 								//DoMyMethod3W(type, granicy_kak_glubina, description, mmd3, w3, ab,X,Y,Z, to_fill_matrix);
 								if (/*to_fill_matrix*/true)
 								{
@@ -5273,13 +5273,13 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 									//fprintf (description, "smoof_power = %d\n", smoof_power);
 
 									printf("Filling of matrix\n");
-									// формируем матрицу оператора прямой задачи, 
-									// число строк равно длине сигнала 
-									// (или суммарной длине нескольких сигналов - 
-									// нескольких профилей на одной или, ещё лучше, на разных высотах)
-									// на вход оператора подаётся геологическая структура 
-									// источников геополяритонного сигнала
-									// на выходе оператора имеем мощность излучения (сигнал) на профилях
+									// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё, 
+									// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р° 
+									// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ - 
+									// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+									// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° 
+									// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+									// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 									switch(type)
 									{
 									case 0:
@@ -5350,14 +5350,14 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								
 								if (true)
 								{
-									// считаем коэффициенты корреляции между оператором прямой задачи 
-									// и сигналом
+									// СЃС‡РёС‚Р°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РєРѕСЂСЂРµР»СЏС†РёРё РјРµР¶РґСѓ РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё 
+									// Рё СЃРёРіРЅР°Р»РѕРј
 									switch (type)
 									{
 									case 0:
 										{
 											/*rec_signals.resize(cols);
-											for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+											for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 											{
 												//printf_vector(v[c])
 												DoInverseAndFillGrid3W(mmd3, w3, v[c], names_of_colomns[original_col_numbers[c]], rec_signals[c]);
@@ -5397,7 +5397,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 											
 
 
-											for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+											for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 											{
 												//rec_signals[cc].resize(mmd3.n_alpha);
 												//rec_signals2[cc].resize(mmd3.n_alpha);
@@ -5414,7 +5414,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 													for(long p = 0; p < mmd3.pages; p++)
 													{
-														// индекс в строке матрицы оператора прямой задачи
+														// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 														//i = p * rows * cols + r * cols + C;
 														// rows = 1, cols = 1, i = p
 														_cubes[cc][0]->grid4Section.v[p][r][c] = v_korr[p];
@@ -5555,7 +5555,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								case 0:
 									{
 										/*rec_signals.resize(cols);
-										for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+										for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 										{
 											//printf_vector(v[c])
 											DoInverseAndFillGrid3W(mmd3, w3, v[c], names_of_colomns[original_col_numbers[c]], rec_signals[c]);
@@ -5602,7 +5602,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 										vector<vector<vector <double> > > rec_signals2;
 										rec_signals2.resize(cols_3);
 
-										for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+										for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 										{
 											rec_signals[cc].resize(mmd3.n_alpha);
 											rec_signals2[cc].resize(mmd3.n_alpha);
@@ -5612,7 +5612,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												{
 													printf("Start of solve the inverse problem\n");
 													
-													// находим решение обратной задачи
+													// РЅР°С…РѕРґРёРј СЂРµС€РµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё
 													vector<double> sol(/*Ns*/mmd3.pages);
 													//#if SPARSE_OUT_W
 													if (mmd3.to_calculi_holesski)
@@ -5641,7 +5641,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												
 													for(long p = 0; p < mmd3.pages; p++)
 													{
-														// индекс в строке матрицы оператора прямой задачи
+														// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 														//i = p * rows * cols + r * cols + C;
 														// rows = 1, cols = 1, i = p
 														cubes[cc][i_alpha]->grid4Section.v[p][r][c] = sol[p];
@@ -5667,7 +5667,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 													{
 														printf("Start of solve the inverse problem by reconstructed signal\n");
 														
-														// находим решение обратной задачи
+														// РЅР°С…РѕРґРёРј СЂРµС€РµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё
 														vector<double> sol2(/*Ns*/mmd3.pages);
 														//#if SPARSE_OUT_W
 														if (mmd3.to_calculi_holesski)
@@ -5695,7 +5695,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 													
 														for(long p = 0; p < mmd3.pages; p++)
 														{
-															// индекс в строке матрицы оператора прямой задачи
+															// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 															//i = p * rows * cols + r * cols + C;
 															// rows = 1, cols = 1, i = p
 														//	cubes2[cc][i_alpha]->grid4Section.v[p][r][c] = sol2[p];
@@ -5709,7 +5709,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												{
 													for(long p = 0; p < mmd3.pages; p++)
 													{
-														// индекс в строке матрицы оператора прямой задачи
+														// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 														//i = p * rows * cols + r * cols + C;
 														// rows = 1, cols = 1, i = p
 														cubes[cc][i_alpha]->grid4Section.v[p][r][c] = sols_mean[cc][i_alpha][p];
@@ -5764,7 +5764,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				{
 				}
 
-				for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+				for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					int i_cube = 0;
 					SaveCubesAndSlices(DirName,
@@ -5782,7 +5782,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					if (!CreateDirectory(DirName,NULL))
 					{
 					}
-					for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+					for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha ++)
 						{
@@ -5797,8 +5797,8 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 
 
-					// матрицы реконструированных сигналов
-					// число строк в этой матрице определяется длиной сигнала
+					// РјР°С‚СЂРёС†С‹ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹С… СЃРёРіРЅР°Р»РѕРІ
+					// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє РІ СЌС‚РѕР№ РјР°С‚СЂРёС†Рµ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РґР»РёРЅРѕР№ СЃРёРіРЅР°Р»Р°
 					switch(type)
 					{
 					case 0:
@@ -5855,15 +5855,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 									//bool use_norm_k = true;
 									if(true)
 									{
-										// производим построчное суммирование матрицы реконструированных сигналов,
+										// РїСЂРѕРёР·РІРѕРґРёРј РїРѕСЃС‚СЂРѕС‡РЅРѕРµ СЃСѓРјРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹С… СЃРёРіРЅР°Р»РѕРІ,
 										vector<double> SXYZ(MRECs[cc][i_alpha].size());
 										vector<double> DXYZ(MRECs[cc][i_alpha].size());
 										for (int mrec_r = 0; mrec_r < MRECs[cc][i_alpha].size(); mrec_r++)
 										{
-											// получаем таким образом вектор суммарного реконструированного сигнала 
-											// от всех светящихся столбов
+											// РїРѕР»СѓС‡Р°РµРј С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј РІРµРєС‚РѕСЂ СЃСѓРјРјР°СЂРЅРѕРіРѕ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р° 
+											// РѕС‚ РІСЃРµС… СЃРІРµС‚СЏС‰РёС…СЃСЏ СЃС‚РѕР»Р±РѕРІ
 											SXYZ[mrec_r] = MRECs[cc][i_alpha][mrec_r].Sum();
-											// отнимаем этот вектор из вектора исходного сигнала
+											// РѕС‚РЅРёРјР°РµРј СЌС‚РѕС‚ РІРµРєС‚РѕСЂ РёР· РІРµРєС‚РѕСЂР° РёСЃС…РѕРґРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
 											DXYZ[mrec_r] = new_V[cc][mrec_r] - SXYZ[mrec_r];
 										}
 
@@ -6031,7 +6031,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 										}
 										else//inverse mrec
 										{
-											// находим вектор нормировочных коэффициентов для всех всетящихся столбцов
+											// РЅР°С…РѕРґРёРј РІРµРєС‚РѕСЂ РЅРѕСЂРјРёСЂРѕРІРѕС‡РЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РґР»СЏ РІСЃРµС… РІСЃРµС‚СЏС‰РёС…СЃСЏ СЃС‚РѕР»Р±С†РѕРІ
 											vector<double> sol_norm_k(light_colomn_number);
 											vector<double> sol_norm_k_mean(light_colomn_number, 0.0);
 											//#if SPARSE_OUT_W
@@ -6085,7 +6085,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							if (!CreateDirectory(DirName,NULL))
 							{
 							}
-							for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+							for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 							{
 								for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha ++)
 								{
@@ -6096,15 +6096,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 									if(true)
 									{
-										// производим построчное суммирование матрицы реконструированных сигналов,
+										// РїСЂРѕРёР·РІРѕРґРёРј РїРѕСЃС‚СЂРѕС‡РЅРѕРµ СЃСѓРјРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹С… СЃРёРіРЅР°Р»РѕРІ,
 										vector<double> SXYZ(MRECs[cc][i_alpha].size());
 										vector<double> DXYZ(MRECs[cc][i_alpha].size());
 										for (int mrec_r = 0; mrec_r < MRECs[cc][i_alpha].size(); mrec_r++)
 										{
-											// получаем таким образом вектор суммарного реконструированного сигнала 
-											// от всех светящихся столбов
+											// РїРѕР»СѓС‡Р°РµРј С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј РІРµРєС‚РѕСЂ СЃСѓРјРјР°СЂРЅРѕРіРѕ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р° 
+											// РѕС‚ РІСЃРµС… СЃРІРµС‚СЏС‰РёС…СЃСЏ СЃС‚РѕР»Р±РѕРІ
 											SXYZ[mrec_r] = MRECs[cc][i_alpha][mrec_r].Sum();
-											// отнимаем этот вектор из вектора исходного сигнала
+											// РѕС‚РЅРёРјР°РµРј СЌС‚РѕС‚ РІРµРєС‚РѕСЂ РёР· РІРµРєС‚РѕСЂР° РёСЃС…РѕРґРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
 											DXYZ[mrec_r] = new_V[cc][mrec_r] - SXYZ[mrec_r];
 										}
 
@@ -6170,7 +6170,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							if (iter_txt)
 							{
 								fprintf(iter_txt, "iterations");
-								for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+								for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 								{
 									for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha ++)
 									{
@@ -6232,34 +6232,34 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 									fprintf(iter_txt, "%d", iteration);
 								}
 								bool to_break = true;
-								for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+								for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 								{
 									for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha ++)
 									{	
 										if (to_calc[cc][i_alpha])
 										{
 											to_break = false;
-											//в цикле для каждого свет. столба 
+											//РІ С†РёРєР»Рµ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЃРІРµС‚. СЃС‚РѕР»Р±Р° 
 											size_t ___light_colomn_number = 0;
 											for (int c = 0; c < mmd3.cols; c++)
 											{
 												for (int r = 0; r < mmd3.rows; r++)
 												{
-													// производим построчное суммирование матрицы реконструированных сигналов,
-													// исключая из этого суммирования текущую колонку,
-													// соответствующую номеру текщего светящегося столба
+													// РїСЂРѕРёР·РІРѕРґРёРј РїРѕСЃС‚СЂРѕС‡РЅРѕРµ СЃСѓРјРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹С… СЃРёРіРЅР°Р»РѕРІ,
+													// РёСЃРєР»СЋС‡Р°СЏ РёР· СЌС‚РѕРіРѕ СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ С‚РµРєСѓС‰СѓСЋ РєРѕР»РѕРЅРєСѓ,
+													// СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ РЅРѕРјРµСЂСѓ С‚РµРєС‰РµРіРѕ СЃРІРµС‚СЏС‰РµРіРѕСЃСЏ СЃС‚РѕР»Р±Р°
 
 													vector<double> sXYZ(MRECs[cc][i_alpha].size());
 													vector<double> dXYZ(MRECs[cc][i_alpha].size());
 													for (int mrec_r = 0; mrec_r < MRECs[cc][i_alpha].size(); mrec_r++)
 													{
-														// получаем таким образом вектор суммарного реконструированного сигнала 
-														// от всех светящихся столбов кроме текущего реконструированного столба
+														// РїРѕР»СѓС‡Р°РµРј С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј РІРµРєС‚РѕСЂ СЃСѓРјРјР°СЂРЅРѕРіРѕ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р° 
+														// РѕС‚ РІСЃРµС… СЃРІРµС‚СЏС‰РёС…СЃСЏ СЃС‚РѕР»Р±РѕРІ РєСЂРѕРјРµ С‚РµРєСѓС‰РµРіРѕ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅРѕРіРѕ СЃС‚РѕР»Р±Р°
 														sXYZ[mrec_r] = MRECs[cc][i_alpha][mrec_r].SumExcludeColomn(___light_colomn_number);
-														// отнимаем этот вектор из вектора исходного сигнала
+														// РѕС‚РЅРёРјР°РµРј СЌС‚РѕС‚ РІРµРєС‚РѕСЂ РёР· РІРµРєС‚РѕСЂР° РёСЃС…РѕРґРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
 														dXYZ[mrec_r] = new_V[cc][mrec_r] - sXYZ[mrec_r];
 													}
-													// извлекаем из этой разности dXYZ с помощью текущего вектора индексов pInd вектор pXYZ (аналог new_v)
+													// РёР·РІР»РµРєР°РµРј РёР· СЌС‚РѕР№ СЂР°Р·РЅРѕСЃС‚Рё dXYZ СЃ РїРѕРјРѕС‰СЊСЋ С‚РµРєСѓС‰РµРіРѕ РІРµРєС‚РѕСЂР° РёРЅРґРµРєСЃРѕРІ pInd РІРµРєС‚РѕСЂ pXYZ (Р°РЅР°Р»РѕРі new_v)
 													vector<double> pXYZ(3*v_pInd[___light_colomn_number].size());
 													for (int i_ind = 0;i_ind < v_pInd[___light_colomn_number].size(); i_ind++)
 													{
@@ -6272,13 +6272,13 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 														i += v_pInd[___light_colomn_number].size(); ind += vX.size();
 														pXYZ[i] = mmd3.dXYZ_part * dXYZ[ind];
 													}
-													// к которому с помощью метода наименьших квадратов приближаем 
-													// сигнал текущего столба
+													// Рє РєРѕС‚РѕСЂРѕРјСѓ СЃ РїРѕРјРѕС‰СЊСЋ РјРµС‚РѕРґР° РЅР°РёРјРµРЅСЊС€РёС… РєРІР°РґСЂР°С‚РѕРІ РїСЂРёР±Р»РёР¶Р°РµРј 
+													// СЃРёРіРЅР°Р» С‚РµРєСѓС‰РµРіРѕ СЃС‚РѕР»Р±Р°
 													if (true)
 													{
 														//printf("Start of solve the inverse problem\n");
 														
-														// находим решение обратной задачи
+														// РЅР°С…РѕРґРёРј СЂРµС€РµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ Р·Р°РґР°С‡Рё
 														vector<double> sol(/*Ns*/mmd3.pages);
 														//#if SPARSE_OUT_W
 														sprintf(dir_out, "%s\\c=%03d_r=%03d", common_directory, c, r);												
@@ -6325,7 +6325,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 													
 														for(long p = 0; p < mmd3.pages; p++)
 														{
-															// индекс в строке матрицы оператора прямой задачи
+															// РёРЅРґРµРєСЃ РІ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 															// i = p * rows * cols + r * cols + C;
 															// rows = 1, cols = 1, i = p
 															cubes[cc][i_alpha]->grid4Section.v[p][r][c] = sol[p];
@@ -6422,15 +6422,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												}
 											}
 									
-											// производим построчное суммирование матрицы реконструированных сигналов,
+											// РїСЂРѕРёР·РІРѕРґРёРј РїРѕСЃС‚СЂРѕС‡РЅРѕРµ СЃСѓРјРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹С… СЃРёРіРЅР°Р»РѕРІ,
 											vector<double> SXYZ(MRECs[cc][i_alpha].size());
 											vector<double> DXYZ(MRECs[cc][i_alpha].size());
 											for (int mrec_r = 0; mrec_r < MRECs[cc][i_alpha].size(); mrec_r++)
 											{
-												// получаем таким образом вектор суммарного реконструированного сигнала 
-												// от всех светящихся столбов
+												// РїРѕР»СѓС‡Р°РµРј С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј РІРµРєС‚РѕСЂ СЃСѓРјРјР°СЂРЅРѕРіРѕ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р° 
+												// РѕС‚ РІСЃРµС… СЃРІРµС‚СЏС‰РёС…СЃСЏ СЃС‚РѕР»Р±РѕРІ
 												SXYZ[mrec_r] = MRECs[cc][i_alpha][mrec_r].Sum();
-												// отнимаем этот вектор из вектора исходного сигнала
+												// РѕС‚РЅРёРјР°РµРј СЌС‚РѕС‚ РІРµРєС‚РѕСЂ РёР· РІРµРєС‚РѕСЂР° РёСЃС…РѕРґРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
 												DXYZ[mrec_r] = new_V[cc][mrec_r] - SXYZ[mrec_r];
 											}
 
@@ -6559,14 +6559,14 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 						}
 						break;
 					}
-					//а число колонок - соответствует числу светящихся столбов
+					//Р° С‡РёСЃР»Рѕ РєРѕР»РѕРЅРѕРє - СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ С‡РёСЃР»Сѓ СЃРІРµС‚СЏС‰РёС…СЃСЏ СЃС‚РѕР»Р±РѕРІ
 					
 
 				}
 
 
 
-				for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+				for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha ++)
 					{
@@ -6579,7 +6579,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				delete cubes;
 
 
-				for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+				for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					for (int i_alpha = 0; i_alpha < 2; i_alpha ++)
 					{
@@ -6602,13 +6602,13 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		case 7:// iteration algorithm
 			{
 				bool only_init = false;
-				// массив коэффициентов симметризации
+				// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 				vector<vector<double> > S(3);
 
 				bool use_newton = true;
 
 				Lamp(use_newton,
-					type, // тип прямой задачи
+					type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					cols,
 					apply_dgdni,
 					apply_dgdKTi,
@@ -6803,7 +6803,7 @@ function write_eas(filename,data,header,line1);
 					fprintf(stream,"X\n");
 					fprintf(stream,"Y\n");
 					fprintf(stream,"Z\n");
-					for(size_t C = 0; C < cols; C++) // для каждой колонки - суть для каждого параметра
+					for(size_t C = 0; C < cols; C++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						fprintf(stream, "%s\n", names_of_colomns[original_col_numbers[C]].c_str());
 					}	
@@ -6813,7 +6813,7 @@ function write_eas(filename,data,header,line1);
 						fprintf(stream, "%18.12g   %18.12g   %18.12g", 
 							vX[R],vY[R],vZ[R]);
 
-						for(size_t C = 0; C < cols; C++) // для каждой колонки - суть для каждого параметра
+						for(size_t C = 0; C < cols; C++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 						{
 							fprintf(stream, "   %18.12g", W[C][R]);
 						}	
@@ -6843,7 +6843,7 @@ function write_eas(filename,data,header,line1);
 							fprintf(stream, "%lf, %lf, %lf", 
 								vX[R],vY[R],vZ[R]);
 
-							for(size_t C = 0; C < cols; C++) // для каждой колонки - суть для каждого параметра
+							for(size_t C = 0; C < cols; C++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 							{
 								fprintf(stream, ", %lf", W[C][R]);
 							}	
@@ -6856,7 +6856,7 @@ function write_eas(filename,data,header,line1);
 #if 0
 		case 11:// iteration algorithm
 			{			
-				// массив коэффициентов симметризации
+				// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 				vector<vector<double> > S(3);
 
 				bool init_by_lamp = true;
@@ -6869,7 +6869,7 @@ function write_eas(filename,data,header,line1);
 				{
 					bool only_init = true;
 					Lamp(use_newton,
-						type, // тип прямой задачи
+						type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 						cols,
 						names_of_colomns,
 						original_col_numbers,
@@ -6888,7 +6888,7 @@ function write_eas(filename,data,header,line1);
 
 
 				Dipol(use_newton,
-					type, // тип прямой задачи
+					type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					cols,
 					names_of_colomns,
 					original_col_numbers,
@@ -6916,7 +6916,7 @@ function write_eas(filename,data,header,line1);
 					vX,vY,vZ, A, vModul, W,
 					pX,pY,pZ,pA, pModul,pW);	
 
-				// массив коэффициентов симметризации
+				// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 				vector<vector<double> > S(3);
 
 				bool init_by_lamp = true;
@@ -6930,7 +6930,7 @@ function write_eas(filename,data,header,line1);
 					bool only_init = true;
 
 					Lamp(use_newton,
-						type, // тип прямой задачи
+						type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 						cols,
 						names_of_colomns,
 						original_col_numbers,
@@ -6949,7 +6949,7 @@ function write_eas(filename,data,header,line1);
 
 
 				Dipol(use_newton,
-					type, // тип прямой задачи
+					type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					cols,
 					names_of_colomns,
 					original_col_numbers,
@@ -6978,13 +6978,13 @@ function write_eas(filename,data,header,line1);
 					pX,pY,pZ,pA, pModul,pW);	
 
 				bool only_init = false;
-				// массив коэффициентов симметризации
+				// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 				vector<vector<double> > S(3);
 
 				bool use_newton = true;
 
 				Lamp(use_newton,
-					type, // тип прямой задачи
+					type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					cols,
 					names_of_colomns,
 					original_col_numbers,
@@ -7055,7 +7055,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	//int delim = ',';
 	int num_col = -1;
 	//##############################################################
-	//блок чтения файла с нумерами колонок
+	//Р±Р»РѕРє С‡С‚РµРЅРёСЏ С„Р°Р№Р»Р° СЃ РЅСѓРјРµСЂР°РјРё РєРѕР»РѕРЅРѕРє
 	vector<bool> use_col;
 	if (!ReadColomnNumbers(AutoBuildProfile::ab,use_col,num_col,AutoBuildProfile::ab.delim))
 	{
@@ -7079,7 +7079,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	char common_directory_iX_iY[4096];
 
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 	char filename_description[4096];
 	sprintf(filename_description, "%s\\description1.txt", common_directory);
 	FILE *stream;
@@ -7093,7 +7093,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 	this->m_files_in_dir.nFilesInDirectory = SendDlgItemMessage( hDlg, IDC_LIST2, LB_GETCOUNT, 0, 0);
-	//память не освобождена!!!!
+	//РїР°РјСЏС‚СЊ РЅРµ РѕСЃРІРѕР±РѕР¶РґРµРЅР°!!!!
 	this->m_files_in_dir.vFileNameLengthes = (int *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		sizeof( int ) *  this->m_files_in_dir.nFilesInDirectory);
 	this->m_files_in_dir.vFileNames = (char **)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -7122,19 +7122,19 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		fclose(stream);
 	}
 
-	//Программная реализация трёх-антенной прямой задачи требует договора о том, 
-	//как производить соответствие между антеннами на самолёте и логическими 
-	//антеннами AX(1,0,0), AY(0,1,0) и AZ(0,0,1).
+	//РџСЂРѕРіСЂР°РјРјРЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ С‚СЂС‘С…-Р°РЅС‚РµРЅРЅРѕР№ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё С‚СЂРµР±СѓРµС‚ РґРѕРіРѕРІРѕСЂР° Рѕ С‚РѕРј, 
+	//РєР°Рє РїСЂРѕРёР·РІРѕРґРёС‚СЊ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ РјРµР¶РґСѓ Р°РЅС‚РµРЅРЅР°РјРё РЅР° СЃР°РјРѕР»С‘С‚Рµ Рё Р»РѕРіРёС‡РµСЃРєРёРјРё 
+	//Р°РЅС‚РµРЅРЅР°РјРё AX(1,0,0), AY(0,1,0) Рё AZ(0,0,1).
 	
-	//Допустим, что прибор под именем X записывает в базу данных ту антенну, 
-	//нормаль которой направлена вдоль направления полёта самолёта. Тогда условие 
-	//необходимости замены обозначений антенн не возникает, если самолёт летит 
-	//вдоль широты, но такая необходимость замены обозначений антенн возникает, 
-	//если самолёт летит вдоль долготы. 
+	//Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РїСЂРёР±РѕСЂ РїРѕРґ РёРјРµРЅРµРј X Р·Р°РїРёСЃС‹РІР°РµС‚ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С… С‚Сѓ Р°РЅС‚РµРЅРЅСѓ, 
+	//РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ РЅР°РїСЂР°РІР»РµРЅР° РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°. РўРѕРіРґР° СѓСЃР»РѕРІРёРµ 
+	//РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ 
+	//РІРґРѕР»СЊ С€РёСЂРѕС‚С‹, РЅРѕ С‚Р°РєР°СЏ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РІРѕР·РЅРёРєР°РµС‚, 
+	//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹. 
 	
-	//Если вдоль направления полёта самолёта закреплена нормаль антенны Y, 
-	//тогда наоборот условие необходимости замены обозначений антенн не возникает, 
-	//если самолёт летит вдоль долготы, но возникает, если самолёт летит вдоль широты. 
+	//Р•СЃР»Рё РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р° Р·Р°РєСЂРµРїР»РµРЅР° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ Y, 
+	//С‚РѕРіРґР° РЅР°РѕР±РѕСЂРѕС‚ СѓСЃР»РѕРІРёРµ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, 
+	//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹, РЅРѕ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ С€РёСЂРѕС‚С‹. 
 
 	int when_to_swap = 0;
 
@@ -7222,7 +7222,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			
 			for (size_t r = 0; r < rows; r++)
 			{	
-				for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+				for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					vvv[r] += v[c][r]*v[c][r];
 				}
@@ -7251,30 +7251,30 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 				A.resize(3);
 			}
 
-			// отдельно будем складывать профиля
-			// чтобы потом отцентрировать каждый
+			// РѕС‚РґРµР»СЊРЅРѕ Р±СѓРґРµРј СЃРєР»Р°РґС‹РІР°С‚СЊ РїСЂРѕС„РёР»СЏ
+			// С‡С‚РѕР±С‹ РїРѕС‚РѕРј РѕС‚С†РµРЅС‚СЂРёСЂРѕРІР°С‚СЊ РєР°Р¶РґС‹Р№
 			vW.push_back(vector<vector<double> > () );
 			vW.back().resize(cols);
 
-			// если delta__x оказывается меньше delta__y, 
-			// то есть если профиль является субмеридиональным, 
-			// тогда производится автоматическая замена сигнала антенн.
+			// РµСЃР»Рё delta__x РѕРєР°Р·С‹РІР°РµС‚СЃСЏ РјРµРЅСЊС€Рµ delta__y, 
+			// С‚Рѕ РµСЃС‚СЊ РµСЃР»Рё РїСЂРѕС„РёР»СЊ СЏРІР»СЏРµС‚СЃСЏ СЃСѓР±РјРµСЂРёРґРёРѕРЅР°Р»СЊРЅС‹Рј, 
+			// С‚РѕРіРґР° РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєР°СЏ Р·Р°РјРµРЅР° СЃРёРіРЅР°Р»Р° Р°РЅС‚РµРЅРЅ.
 
 			bool to_swap;
 			if (when_to_swap == 0)
 			{
-				//Допустим, что прибор под именем X записывает в базу данных ту антенну, 
-				//нормаль которой направлена вдоль направления полёта самолёта. Тогда условие 
-				//необходимости замены обозначений антенн не возникает, если самолёт летит 
-				//вдоль широты (delta__x > delta__y), но такая необходимость замены обозначений антенн возникает, 
-				//если самолёт летит вдоль долготы (delta__x < delta__y). 
+				//Р”РѕРїСѓСЃС‚РёРј, С‡С‚Рѕ РїСЂРёР±РѕСЂ РїРѕРґ РёРјРµРЅРµРј X Р·Р°РїРёСЃС‹РІР°РµС‚ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С… С‚Сѓ Р°РЅС‚РµРЅРЅСѓ, 
+				//РЅРѕСЂРјР°Р»СЊ РєРѕС‚РѕСЂРѕР№ РЅР°РїСЂР°РІР»РµРЅР° РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р°. РўРѕРіРґР° СѓСЃР»РѕРІРёРµ 
+				//РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ 
+				//РІРґРѕР»СЊ С€РёСЂРѕС‚С‹ (delta__x > delta__y), РЅРѕ С‚Р°РєР°СЏ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РІРѕР·РЅРёРєР°РµС‚, 
+				//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹ (delta__x < delta__y). 
 				to_swap = delta__x < delta__y;	
 			}
 			else 
 			{
-				//Если вдоль направления полёта самолёта закреплена нормаль антенны Y, 
-				//тогда наоборот условие необходимости замены обозначений антенн не возникает, 
-				//если самолёт летит вдоль долготы, но возникает, если самолёт летит вдоль широты. 
+				//Р•СЃР»Рё РІРґРѕР»СЊ РЅР°РїСЂР°РІР»РµРЅРёСЏ РїРѕР»С‘С‚Р° СЃР°РјРѕР»С‘С‚Р° Р·Р°РєСЂРµРїР»РµРЅР° РЅРѕСЂРјР°Р»СЊ Р°РЅС‚РµРЅРЅС‹ Y, 
+				//С‚РѕРіРґР° РЅР°РѕР±РѕСЂРѕС‚ СѓСЃР»РѕРІРёРµ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё Р·Р°РјРµРЅС‹ РѕР±РѕР·РЅР°С‡РµРЅРёР№ Р°РЅС‚РµРЅРЅ РЅРµ РІРѕР·РЅРёРєР°РµС‚, 
+				//РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ РґРѕР»РіРѕС‚С‹, РЅРѕ РІРѕР·РЅРёРєР°РµС‚, РµСЃР»Рё СЃР°РјРѕР»С‘С‚ Р»РµС‚РёС‚ РІРґРѕР»СЊ С€РёСЂРѕС‚С‹. 
 				to_swap = delta__x > delta__y;
 			}
 
@@ -7289,7 +7289,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 					if (stream)
 					{
-						fprintf(stream, "меняем антены X и Y\n");
+						fprintf(stream, "РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X Рё Y\n");
 						fprintf(stream, "swapping of parameters %s and %s on profile %s\n", 
 							names_of_colomns[original_col_numbers[0]].c_str(), 
 							names_of_colomns[original_col_numbers[1]].c_str(), 
@@ -7306,7 +7306,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 					if (stream)
 					{
-						fprintf(stream, "меняем антены X2 и Y2\n");
+						fprintf(stream, "РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X2 Рё Y2\n");
 						fprintf(stream, "swapping of parameters %s and %s on profile %s\n", 
 							names_of_colomns[original_col_numbers[3]].c_str(), 
 							names_of_colomns[original_col_numbers[4]].c_str(), 
@@ -7323,7 +7323,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 					if (stream)
 					{
-						fprintf(stream, "меняем антены X3 и Y3\n");
+						fprintf(stream, "РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X3 Рё Y3\n");
 						fprintf(stream, "swapping of parameters %s and %s on profile %s\n", 
 							names_of_colomns[original_col_numbers[6]].c_str(), 
 							names_of_colomns[original_col_numbers[7]].c_str(), 
@@ -7332,7 +7332,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 				}
 
 				
-				//считаем по y
+				//СЃС‡РёС‚Р°РµРј РїРѕ y
 				//grid->gridSection.xLL = min__y;
 				//grid->gridSection.xSize = delta_y;
 
@@ -7379,19 +7379,19 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 					vZ.push_back(Z[r]);
 					vModul.push_back(vvv[r]);
 					
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						size_t C = c;
 
-						// меняем антены X и Y
+						// РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X Рё Y
 						if (c == 0) C = 1;
 						else if (c == 1) C = 0;
 
-						// меняем антены X2 и Y2
+						// РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X2 Рё Y2
 						else if (c == 3) C = 4;
 						else if (c == 4) C = 3;
 
-						// меняем антены X3 и Y3
+						// РјРµРЅСЏРµРј Р°РЅС‚РµРЅС‹ X3 Рё Y3
 						else if (c == 6) C = 7;
 						else if (c == 7) C = 6;
 
@@ -7402,7 +7402,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			}
 			else
 			{
-				//считаем по x
+				//СЃС‡РёС‚Р°РµРј РїРѕ x
 				//grid->gridSection.xLL = min__x;
 				//grid->gridSection.xSize = delta_x;
 
@@ -7449,7 +7449,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 					vZ.push_back(Z[r]);
 					vModul.push_back(vvv[r]);
 
-					for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+					for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 					{
 						W[c].push_back(v[c][r]);
 						vW.back().operator [](c).push_back(v[c][r]);
@@ -7484,15 +7484,15 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		}
 	}
 
-	// центруем сигналы по каждому профилю отдельно
-	// а затем прибавляем общую среднюю
+	// С†РµРЅС‚СЂСѓРµРј СЃРёРіРЅР°Р»С‹ РїРѕ РєР°Р¶РґРѕРјСѓ РїСЂРѕС„РёР»СЋ РѕС‚РґРµР»СЊРЅРѕ
+	// Р° Р·Р°С‚РµРј РїСЂРёР±Р°РІР»СЏРµРј РѕР±С‰СѓСЋ СЃСЂРµРґРЅСЋСЋ
 
 	int n_profiles = vW.size();
 	vector <double> mean(cols), disp(cols);
 	vector <vector <double> > profile_mean(n_profiles);
 	vector <vector <double> > profile_disp(n_profiles);
 
-	for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+	for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 	{
 		mean[c] = Mean(W[c]); 
 		disp[c] = Disp(W[c]); 
@@ -7502,7 +7502,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		profile_mean[n_prof].resize(cols);
 		profile_disp[n_prof].resize(cols);
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			profile_mean[n_prof][c] = Mean(vW[n_prof][c]); 
 			profile_disp[n_prof][c] = Disp(vW[n_prof][c]); 
@@ -7517,7 +7517,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		fprintf(means, "where");
 		printf("where");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(means, ",mean(%s)", 
 				names_of_colomns[original_col_numbers[c]].c_str());
@@ -7529,7 +7529,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 		fprintf(means, "all_object");
 		printf("all_object");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(means, ",%f", mean[c]);
 			printf(",%f", mean[c]);
@@ -7540,7 +7540,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			fprintf(means, "%s", fnames[n_prof].c_str());
 			printf("%s", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(means, ",%f", profile_mean[n_prof][c]);
 				printf(",%f", profile_mean[n_prof][c]);
@@ -7555,7 +7555,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 	if(means)
 	{
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(means, "mean(%s) = %f\n", 
 				names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -7570,7 +7570,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			fprintf(means, "%s\n", fnames[n_prof].c_str());
 			printf("%s\n", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(means, "mean(%s) = %f\n", 
 					names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -7596,7 +7596,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		fprintf(disps, "where");
 		printf("where");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(disps, ",disp(%s)", 
 				names_of_colomns[original_col_numbers[c]].c_str());
@@ -7608,7 +7608,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 		fprintf(disps, "all_object");
 		printf("all_object");
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(disps, ",%f", disp[c]);
 			printf(",%f", disp[c]);
@@ -7619,7 +7619,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			fprintf(disps, "%s", fnames[n_prof].c_str());
 			printf("%s", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(disps, ",%f", profile_disp[n_prof][c]);
 				printf(",%f", profile_disp[n_prof][c]);
@@ -7634,7 +7634,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 	if(disps)
 	{
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			fprintf(disps, "disp(%s) = %f\n", 
 				names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -7649,7 +7649,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			fprintf(disps, "%s\n", fnames[n_prof].c_str());
 			printf("%s\n", fnames[n_prof].c_str());
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				fprintf(disps, "disp(%s) = %f\n", 
 					names_of_colomns[original_col_numbers[c]].c_str(), 
@@ -7687,7 +7687,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			for (int n_prof = 0; n_prof < n_profiles; n_prof++)
 			{
-				for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+				for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					for (int i = 0; i < vW[n_prof][c].size(); i++)
 					{
@@ -7700,7 +7700,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			for (int n_prof = 0; n_prof < n_profiles; n_prof++)
 			{
-				for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+				for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 				{
 					for (int i = 0; i < vW[n_prof][c].size(); i++)
 					{
@@ -7714,7 +7714,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		for (int n_prof = 0; n_prof < n_profiles; n_prof++)
 		{
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 			{
 				for (int i = 0; i < vW[n_prof][c].size(); i++)
 				{
@@ -7733,7 +7733,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 	if (to_recenter_profiles || to_set_mean_of_profiles_to_zero)
 	{
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			int r = 0;
 			for (int n_prof = 0; n_prof < n_profiles; n_prof++)
@@ -7748,13 +7748,13 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 
 	
-	// здесь исключить близкие точки
-	// если матрица оператора прямой задачи 
-	// содержит практически одинаковые строки, 
-	// то это означает плохую обусловленность матрицы. 
-	// Для улучшения обусловленности матрицы необходмо 
-	// исключить из рассмотрения такие пары измерений, 
-	// расстояние между которыми меньше, скажем половины шага измерения
+	// Р·РґРµСЃСЊ РёСЃРєР»СЋС‡РёС‚СЊ Р±Р»РёР·РєРёРµ С‚РѕС‡РєРё
+	// РµСЃР»Рё РјР°С‚СЂРёС†Р° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё 
+	// СЃРѕРґРµСЂР¶РёС‚ РїСЂР°РєС‚РёС‡РµСЃРєРё РѕРґРёРЅР°РєРѕРІС‹Рµ СЃС‚СЂРѕРєРё, 
+	// С‚Рѕ СЌС‚Рѕ РѕР·РЅР°С‡Р°РµС‚ РїР»РѕС…СѓСЋ РѕР±СѓСЃР»РѕРІР»РµРЅРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹. 
+	// Р”Р»СЏ СѓР»СѓС‡С€РµРЅРёСЏ РѕР±СѓСЃР»РѕРІР»РµРЅРЅРѕСЃС‚Рё РјР°С‚СЂРёС†С‹ РЅРµРѕР±С…РѕРґРјРѕ 
+	// РёСЃРєР»СЋС‡РёС‚СЊ РёР· СЂР°СЃСЃРјРѕС‚СЂРµРЅРёСЏ С‚Р°РєРёРµ РїР°СЂС‹ РёР·РјРµСЂРµРЅРёР№, 
+	// СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РєРѕС‚РѕСЂС‹РјРё РјРµРЅСЊС€Рµ, СЃРєР°Р¶РµРј РїРѕР»РѕРІРёРЅС‹ С€Р°РіР° РёР·РјРµСЂРµРЅРёСЏ
 	vector<double> vLen;
 	for (int i = 0; i < vX.size()-1; i++)
 	{
@@ -7798,7 +7798,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		r_it != to_exclude.rend(); r_it++)
 	{
 		printf ("to_exclude = %d\t%f\n", (*r_it).first, (*r_it).second);
-		for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+		for(size_t c = 0; c < cols; c++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			vector<double>::iterator it_w_c = W[c].begin() + (*r_it).first;
 			W[c].erase(it_w_c);
@@ -7836,18 +7836,18 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 
-			//ищем уравнение прямой в виде
+			//РёС‰РµРј СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
 			// ax+by+c=0
 
-			// определяем профиль является субширотным или субмериодиональным
+			// РѕРїСЂРµРґРµР»СЏРµРј РїСЂРѕС„РёР»СЊ СЏРІР»СЏРµС‚СЃСЏ СЃСѓР±С€РёСЂРѕС‚РЅС‹Рј РёР»Рё СЃСѓР±РјРµСЂРёРѕРґРёРѕРЅР°Р»СЊРЅС‹Рј
 			double profile_dx = fabs(vX[0] - vX.back());
 			double profile_dy = fabs(vY[0] - vY.back());
 
 			if (profile_dx > profile_dy)
 			{
-				//субширотный
-				//ищем уравнение прямой в виде
-				//y=Ax+B, где A=-a/b B=-c/b b!=0
+				//СЃСѓР±С€РёСЂРѕС‚РЅС‹Р№
+				//РёС‰РµРј СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//y=Ax+B, РіРґРµ A=-a/b B=-c/b b!=0
 
 				double xy = ScalarProduct(vX, vY);
 				double xx = SquareSum(vX);
@@ -7872,9 +7872,9 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			}
 			else
 			{
-				//субмериодиональный
-				//ищем уравнение прямой в виде
-				//x=Ay+B, где A=-b/a B=-c/a a!=0
+				//СЃСѓР±РјРµСЂРёРѕРґРёРѕРЅР°Р»СЊРЅС‹Р№
+				//РёС‰РµРј СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//x=Ay+B, РіРґРµ A=-b/a B=-c/a a!=0
 
 				double xy = ScalarProduct(vX, vY);
 				double yy = SquareSum(vY);
@@ -7903,11 +7903,11 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			if (profile_dx > profile_dy)
 			{
 				printf("subshirotny\n");
-				//субширотный
-				//уравнение прямой в виде
-				//y=Ax+B, где A=-a/b B=-c/b b!=0
+				//СЃСѓР±С€РёСЂРѕС‚РЅС‹Р№
+				//СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//y=Ax+B, РіРґРµ A=-a/b B=-c/b b!=0
 
-				//ищем начальную точку в как ту у которой минимальный икс
+				//РёС‰РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ С‚РѕС‡РєСѓ РІ РєР°Рє С‚Сѓ Сѓ РєРѕС‚РѕСЂРѕР№ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РёРєСЃ
 				vector<double>::iterator it_min_vx = min_element(vX.begin(), vX.end());
 				if (it_min_vx != vX.end())
 				{
@@ -7920,11 +7920,11 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			}
 			else
 			{
-				//субмериодиональный
-				//уравнение прямой в виде
-				//x=Ay+B, где A=-b/a B=-c/a a!=0
+				//СЃСѓР±РјРµСЂРёРѕРґРёРѕРЅР°Р»СЊРЅС‹Р№
+				//СѓСЂР°РІРЅРµРЅРёРµ РїСЂСЏРјРѕР№ РІ РІРёРґРµ
+				//x=Ay+B, РіРґРµ A=-b/a B=-c/a a!=0
 
-				//ищем начальную точку в как ту у которой минимальный игрек
+				//РёС‰РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ С‚РѕС‡РєСѓ РІ РєР°Рє С‚Сѓ Сѓ РєРѕС‚РѕСЂРѕР№ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РёРіСЂРµРє
 				vector<double>::iterator it_min_vy = min_element(vY.begin(), vY.end());
 				if (it_min_vy != vY.end())
 				{
@@ -7980,7 +7980,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	
 	sprintf(dir_out, "%s\0", common_directory);
 				
-	int type = 0; // тип прямой задачи
+	int type = 0; // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	//cout << "Enter type of prjamoj zadachi" << endl;
 	//cout << "0 - simple" << endl;
 	//cout << "1 - with diagramm of 3 antenns and nonpolarized sources" << endl;
@@ -8026,7 +8026,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 //			cin >> mmd3.increaser_pw;
 //		}
 		
-		// отношение строк и столбцов	
+		// РѕС‚РЅРѕС€РµРЅРёРµ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ	
 //		mmd3.pw_pcd = 2;
 //		cout << "pw_pcd pages/cols deviation pw = " << mmd3.pw_pcd << "\n";
 //		cout << "Do you want reenter pw_pcd pages/cols deviation pw (0,1,2,...)?\n";
@@ -8169,7 +8169,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 	//**********************************************
-	//формируем файл описания режима работы
+	//С„РѕСЂРјРёСЂСѓРµРј С„Р°Р№Р» РѕРїРёСЃР°РЅРёСЏ СЂРµР¶РёРјР° СЂР°Р±РѕС‚С‹
 //	char filename_description[4096];
 	sprintf(filename_description, "%s\\description.txt", dir_out);		
 	FILE * description = fopen(filename_description,"wt");
@@ -8264,7 +8264,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	else 
 		lamp = false;
 
-	//тестируем на уменьшенной площади
+	//С‚РµСЃС‚РёСЂСѓРµРј РЅР° СѓРјРµРЅСЊС€РµРЅРЅРѕР№ РїР»РѕС‰Р°РґРё
 	vector<double> pX, pY, pZ, pModul;
 	vector<vector<anten_direction> > pA;
 	vector<vector<double> > pW;
@@ -8309,11 +8309,11 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 				pX,pY,pZ,pA, pModul,pW);	
 
 			bool only_init = false;
-			// массив коэффициентов симметризации
+			// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 			vector<vector<double> > S(3);
 
 			Lamp(use_newton,
-				type, // тип прямой задачи
+				type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				cols,
 				apply_dgdni,
 				apply_dgdKTi,
@@ -8336,11 +8336,11 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		else
 		{
 			bool only_init = false;
-			// массив коэффициентов симметризации
+			// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 			vector<vector<double> > S(3);
 
 			Lamp(use_newton,
-				type, // тип прямой задачи
+				type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				cols,
 				apply_dgdni,
 				apply_dgdKTi,
@@ -8376,7 +8376,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 				vX,vY,vZ, A, vModul, W,
 				pX,pY,pZ,pA, pModul,pW);	
 
-			// массив коэффициентов симметризации
+			// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 			vector<vector<double> > S(3);
 
 			bool init_by_lamp = IsDlgButtonChecked(hDlg, IDC_CHECK_TO_INIT_BY_LAMP) == BST_CHECKED;
@@ -8390,7 +8390,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 				bool only_init = true;
 
 				Lamp(use_newton,
-					type, // тип прямой задачи
+					type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					cols,
 					apply_dgdni,
 					apply_dgdKTi,
@@ -8413,7 +8413,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 			Dipol(use_newton,
-				type, // тип прямой задачи
+				type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				cols,
 
 				apply_dgdni,
@@ -8439,7 +8439,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		}
 		else
 		{
-			// массив коэффициентов симметризации
+			// РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 			vector<vector<double> > S(3);
 
 			bool init_by_lamp = IsDlgButtonChecked(hDlg, IDC_CHECK_TO_INIT_BY_LAMP) == BST_CHECKED;
@@ -8448,7 +8448,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			{
 				bool only_init = true;
 				Lamp(use_newton,
-					type, // тип прямой задачи
+					type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 					cols,
 					apply_dgdni,
 					apply_dgdKTi,
@@ -8471,7 +8471,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 			Dipol(use_newton,
-				type, // тип прямой задачи
+				type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				cols,
 				apply_dgdni,
 				apply_dgdKTi,
@@ -8504,7 +8504,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 }
 
 bool Dipol(int use_newton,
-		   int type, // тип прямой задачи
+		   int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		   long cols,
 		   bool apply_dgdni,		   
 		   bool apply_dgdKTi,
@@ -8521,7 +8521,7 @@ bool Dipol(int use_newton,
 		   vector<vector<double> > &W,
 		   vector<vector<anten_direction> > & A,
 		   bool init_by_lamp,
-		   // массив коэффициентов симметризации
+		   // РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 		   vector<vector<double> > & S,
 		   MyMethodsData3 &mmd3,
 		   double DZ,
@@ -8563,7 +8563,7 @@ bool Dipol(int use_newton,
 	mmd3.delta__z = mmd3.z0 - mmd3.z_min;
 
 
-	// на случай редукции к двумерному случаю
+	// РЅР° СЃР»СѓС‡Р°Р№ СЂРµРґСѓРєС†РёРё Рє РґРІСѓРјРµСЂРЅРѕРјСѓ СЃР»СѓС‡Р°СЋ
 	bool to_reduce_x = (DX - dx) < 0.0;
 	bool to_reduce_y = (DY - dy) < 0.0;
 
@@ -8621,22 +8621,22 @@ bool Dipol(int use_newton,
 	int cols_3 = cols / 3;//2
 	new_names_of_colomns.resize(cols_3);
 
-	//mmd3.delta_z = mmd3.delta__z / (mmd3.pages - 1);// это неверно!!!
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	//mmd3.delta_z = mmd3.delta__z / (mmd3.pages - 1);// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	mmd3.delta_z = mmd3.delta__z / mmd3.pages;
 
 
 	double *** R;// rx,ry,rz
 
-	double *** m;// три матрицы njuXr, njuYr, njuZr
+	double *** m;// С‚СЂРё РјР°С‚СЂРёС†С‹ njuXr, njuYr, njuZr
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно длине сигнала 
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё, 
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р° 
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ - 
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° 
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 
 	if (type == 1)
 	{
@@ -8670,8 +8670,8 @@ bool Dipol(int use_newton,
 	double *** p_B;
 	double *** W_p_B;
 
-	long signal_len = vX.size(); // длина сигнала 
-	long operator_rows = signal_len; // длина сигнала 
+	long signal_len = vX.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
+	long operator_rows = signal_len; // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 	long operator_cols = mmd3.rows * mmd3.cols * mmd3.pages;
 
 	p_A = Alloc3DMat<double>(3, operator_rows, operator_cols);
@@ -8695,9 +8695,9 @@ bool Dipol(int use_newton,
 	va.push_back(0);//x
 	va.push_back(1);//y
 	va.push_back(2);//z
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-	//for (int a = 0; a < 3; a++)// перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+	//for (int a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			double _Ep = W[a+6][r];
 			if (max_Ep < _Ep) max_Ep = _Ep;
@@ -8726,8 +8726,8 @@ bool Dipol(int use_newton,
 	}
 	double zero_substitution = 0.9 * min_m;
 	printf("zero_substitution = %e\n", zero_substitution);
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			for (long c = 0; c < operator_cols; c++)
 			{
@@ -8748,10 +8748,10 @@ bool Dipol(int use_newton,
 	double min_b = DBL_MAX;
 
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
-			double _b = W[a][r];//режим А
+			double _b = W[a][r];//СЂРµР¶РёРј Рђ
 			if (max_b < _b)
 				max_b = _b;
 			if (min_b > _b)
@@ -8759,17 +8759,17 @@ bool Dipol(int use_newton,
 		}
 	}
 
-	// считаем коэффициенты корреляции между оператором прямой задачи 
-	// и сигналом
+	// СЃС‡РёС‚Р°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РєРѕСЂСЂРµР»СЏС†РёРё РјРµР¶РґСѓ РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё 
+	// Рё СЃРёРіРЅР°Р»РѕРј
 	vector<double> k_corr(operator_cols, 0.0);
 	vector<double> k_cov(operator_cols, 0.0);
-	for (long c = 0; c < operator_cols; c++) //длина геологической структуры
+	for (long c = 0; c < operator_cols; c++) //РґР»РёРЅР° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	{
 		vector<double> v_m(operator_rows * va.size());
 		vector<double> v_s(operator_rows * va.size());
 
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-			for (long r = 0; r < operator_rows; r++) // длина сигнала по одной антене
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+			for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° РїРѕ РѕРґРЅРѕР№ Р°РЅС‚РµРЅРµ
 			{
 				double _m = m[a][r][c];
 				double _signal = W[a][r];
@@ -8778,7 +8778,7 @@ bool Dipol(int use_newton,
 				v_s[operator_rows * ia + r] = _signal;
 			}
 		}
-		//рассчитываем коэффициент корреляции k_corr[c] для текущего элемента геологической структуры;
+		//СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚ РєРѕСЂСЂРµР»СЏС†РёРё k_corr[c] РґР»СЏ С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹;
 		double k, Cov;
 		if (CorrelationCoefficient(v_s, v_m, k, Cov))
 		{
@@ -8787,27 +8787,27 @@ bool Dipol(int use_newton,
 		}
 	}
 
-	// инициализируем векторы решения
+	// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РІРµРєС‚РѕСЂС‹ СЂРµС€РµРЅРёСЏ
 	double Ep[3] = {1.0, 1.0, 1.0};
 	double k[3] = {1.0, 1.0, 1.0};
 	double s[3] = {1.0, 1.0, 1.0};
-//				double init_KT = 0.2 / min_m;  //эта иициализация к значению init_KT = 10e+16 причём KT не подстраивается за обозримое количество итераций
-	//double init_KT = 0.2 / mean_m; эта инициализация привела к тому что суммарный выход оператора прямой задачи стал равен нулю но тут могла быть ошибка так как в mean_m вместо вреднего вычислялась сумма, что вело к значительному занижению значения init_KT
-	//double init_KT = 0.2; // слишком мала "температура" -> суммарный выход оператора прямой задачи стал равен нулю
+//				double init_KT = 0.2 / min_m;  //СЌС‚Р° РёРёС†РёР°Р»РёР·Р°С†РёСЏ Рє Р·РЅР°С‡РµРЅРёСЋ init_KT = 10e+16 РїСЂРёС‡С‘Рј KT РЅРµ РїРѕРґСЃС‚СЂР°РёРІР°РµС‚СЃСЏ Р·Р° РѕР±РѕР·СЂРёРјРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РёС‚РµСЂР°С†РёР№
+	//double init_KT = 0.2 / mean_m; СЌС‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСЂРёРІРµР»Р° Рє С‚РѕРјСѓ С‡С‚Рѕ СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЃС‚Р°Р» СЂР°РІРµРЅ РЅСѓР»СЋ РЅРѕ С‚СѓС‚ РјРѕРіР»Р° Р±С‹С‚СЊ РѕС€РёР±РєР° С‚Р°Рє РєР°Рє РІ mean_m РІРјРµСЃС‚Рѕ РІСЂРµРґРЅРµРіРѕ РІС‹С‡РёСЃР»СЏР»Р°СЃСЊ СЃСѓРјРјР°, С‡С‚Рѕ РІРµР»Рѕ Рє Р·РЅР°С‡РёС‚РµР»СЊРЅРѕРјСѓ Р·Р°РЅРёР¶РµРЅРёСЋ Р·РЅР°С‡РµРЅРёСЏ init_KT
+	//double init_KT = 0.2; // СЃР»РёС€РєРѕРј РјР°Р»Р° "С‚РµРјРїРµСЂР°С‚СѓСЂР°" -> СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЃС‚Р°Р» СЂР°РІРµРЅ РЅСѓР»СЋ
 	double init_KT = 0.2*1e6;
 	//init_KT = 0.2 / mean_m;
-	init_KT = 10.0 / max_m;// это значит, что минимальный р будет равен 0.1
+	init_KT = 10.0 / max_m;// СЌС‚Рѕ Р·РЅР°С‡РёС‚, С‡С‚Рѕ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂ Р±СѓРґРµС‚ СЂР°РІРµРЅ 0.1
 	vector<double> KTi_A(operator_cols, init_KT);
 	vector<double> KTi_B(operator_cols, init_KT);
 	if (false)
 	{
-		// эта инициализация "копирует" рельефные и краевые эффекты оператора прямой задачи
+		// СЌС‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ "РєРѕРїРёСЂСѓРµС‚" СЂРµР»СЊРµС„РЅС‹Рµ Рё РєСЂР°РµРІС‹Рµ СЌС„С„РµРєС‚С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		for (long c = 0; c < operator_cols; c++) KTi_A[c] = 0.2 / vmin_m[c];
 	}
 		
-	// эта инициализация равномерна по глубине, т.к. использует макс. m, который 
-	// для каждой геоточки соответсвует направлению вертикально вверх
-	// кроме того это означает, что минимальный р равен 0.1
+	// СЌС‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЂР°РІРЅРѕРјРµСЂРЅР° РїРѕ РіР»СѓР±РёРЅРµ, С‚.Рє. РёСЃРїРѕР»СЊР·СѓРµС‚ РјР°РєСЃ. m, РєРѕС‚РѕСЂС‹Р№ 
+	// РґР»СЏ РєР°Р¶РґРѕР№ РіРµРѕС‚РѕС‡РєРё СЃРѕРѕС‚РІРµС‚СЃРІСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёСЋ РІРµСЂС‚РёРєР°Р»СЊРЅРѕ РІРІРµСЂС…
+	// РєСЂРѕРјРµ С‚РѕРіРѕ СЌС‚Рѕ РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂ СЂР°РІРµРЅ 0.1
 	
 	// mode_A
 	for (long c = 0; c < operator_cols; c++) KTi_A[c] = 10.0 / vmax_m[c];
@@ -8815,9 +8815,9 @@ bool Dipol(int use_newton,
 	for (long c = 0; c < operator_cols; c++) KTi_B[c] = 10.0 * min_Ep / vmax_m[c];
 
 
-	//beta и omega – углы в сферической системе координат, дающие ориентацию излучающего диполя в пространстве
-	//beta - отклонение вектора диполя от вертикали
-	//omega - азимут наклона диполя (угол между направлением на север и направлением диполя, отсчитываемый по часовой стрелке)
+	//beta Рё omega вЂ“ СѓРіР»С‹ РІ СЃС„РµСЂРёС‡РµСЃРєРѕР№ СЃРёСЃС‚РµРјРµ РєРѕРѕСЂРґРёРЅР°С‚, РґР°СЋС‰РёРµ РѕСЂРёРµРЅС‚Р°С†РёСЋ РёР·Р»СѓС‡Р°СЋС‰РµРіРѕ РґРёРїРѕР»СЏ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ
+	//beta - РѕС‚РєР»РѕРЅРµРЅРёРµ РІРµРєС‚РѕСЂР° РґРёРїРѕР»СЏ РѕС‚ РІРµСЂС‚РёРєР°Р»Рё
+	//omega - Р°Р·РёРјСѓС‚ РЅР°РєР»РѕРЅР° РґРёРїРѕР»СЏ (СѓРіРѕР» РјРµР¶РґСѓ РЅР°РїСЂР°РІР»РµРЅРёРµРј РЅР° СЃРµРІРµСЂ Рё РЅР°РїСЂР°РІР»РµРЅРёРµРј РґРёРїРѕР»СЏ, РѕС‚СЃС‡РёС‚С‹РІР°РµРјС‹Р№ РїРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ)
 
 
 	vector<double> beta_A(operator_cols, 0.0);
@@ -8826,7 +8826,7 @@ bool Dipol(int use_newton,
 	vector<double> omega_A(operator_cols, 0.0);
 	vector<double> omega_B(operator_cols, 0.0);
 
-	//случайная инициализация
+	//СЃР»СѓС‡Р°Р№РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	for (long c = 0; c < operator_cols; c++)
 	{
 		beta_A[c] = 0.5 * PI * ((double)rand()/(double)RAND_MAX);
@@ -8836,7 +8836,7 @@ bool Dipol(int use_newton,
 		omega_B[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
 	}
 
-	//послойная инициализация
+	//РїРѕСЃР»РѕР№РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	for (long rr = 0; rr < mmd3.rows; rr++)
 	{
 		for (long cc = 0; cc < mmd3.cols; cc++)
@@ -8879,7 +8879,7 @@ bool Dipol(int use_newton,
 		}
 	}
 
-	//послойная инициализация
+	//РїРѕСЃР»РѕР№РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	for (long rr = 0; rr < mmd3.rows; rr++)
 	{
 		for (long cc = 0; cc < mmd3.cols; cc++)
@@ -8922,7 +8922,7 @@ bool Dipol(int use_newton,
 		}
 	}
 
-	//послойная инициализация
+	//РїРѕСЃР»РѕР№РЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	for (long rr = 0; rr < mmd3.rows; rr++)
 	{
 		for (long cc = 0; cc < mmd3.cols; cc++)
@@ -8957,7 +8957,7 @@ bool Dipol(int use_newton,
 	}
 
 #if 0
-	//вертикально вверх инициализация
+	//РІРµСЂС‚РёРєР°Р»СЊРЅРѕ РІРІРµСЂС… РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	for (long c = 0; c < operator_cols; c++)
 	{
 		beta_A[c] = 0.0;
@@ -8972,8 +8972,8 @@ bool Dipol(int use_newton,
 	double rx, ry, rz;
 
 	double nju_phi_min = DBL_MAX;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			ax = A[a][r].ax;
 			ay = A[a][r].ay;
@@ -8985,7 +8985,7 @@ bool Dipol(int use_newton,
 				ry = R[1][r][c];
 				rz = R[2][r][c];
 
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_A = nju_phi_calc(beta_A[c], omega_A[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -8993,7 +8993,7 @@ bool Dipol(int use_newton,
 				if (nju_phi_A > DBL_MIN && nju_phi_A < nju_phi_min)
 					nju_phi_min = nju_phi_A;
 
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -9007,8 +9007,8 @@ bool Dipol(int use_newton,
 
 	zero_substitution = 0.9 * nju_phi_min;
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			ax = A[a][r].ax;
 			ay = A[a][r].ay;
@@ -9020,7 +9020,7 @@ bool Dipol(int use_newton,
 				ry = R[1][r][c];
 				rz = R[2][r][c];
 
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_A = nju_phi_calc(beta_A[c], omega_A[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -9044,7 +9044,7 @@ bool Dipol(int use_newton,
 				//	printf("Ep[a]=%f m[a][r][c]=%e nju_phi_A=%e KTi_A[c]=%f\n", Ep[a], m[a][r][c], nju_phi_A, KTi_A[c]);
 				//	printf("ax=%f, ay=%f, az=%f, rx=%f, ry=%f, rz=%f\n", ax, ay, az, rx, ry, rz);
 				//}
-				// коэффициент выхода диаграммы направленности
+				// РєРѕСЌС„С„РёС†РёРµРЅС‚ РІС‹С…РѕРґР° РґРёР°РіСЂР°РјРјС‹ РЅР°РїСЂР°РІР»РµРЅРЅРѕСЃС‚Рё
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
 					ax, ay, az);
@@ -9063,8 +9063,8 @@ bool Dipol(int use_newton,
 	}
 
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			for (long c = 0; c < operator_cols; c++)
 			{
@@ -9075,14 +9075,14 @@ bool Dipol(int use_newton,
 	}
 	
 
-	// Выход оператора прямой задачи
+	// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	vector<vector<double> > C_A(3);
 	vector<vector<vector<double> > > CJI_A(3);
 	vector<vector<double> > C_B(3);
 	vector<vector<vector<double> > > CJI_B(3);
 
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		if (!init_by_lamp) 
 			S[a].resize(operator_rows, 0.0);
 		C_A[a].resize(operator_rows, 0.0);
@@ -9091,7 +9091,7 @@ bool Dipol(int use_newton,
 		C_B[a].resize(operator_rows, 0.0);
 		CJI_B[a].resize(operator_rows);
 
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			CJI_A[a][r].resize(operator_cols, 0.0);
 			CJI_B[a][r].resize(operator_cols, 0.0);
@@ -9100,21 +9100,21 @@ bool Dipol(int use_newton,
 
 	// init ni
 
-	double sum_C_a_r_A = 0.0;//суммарный выход оператора прямой задачи
-	double sum_W_a_r_A = 0.0;//сумма векторов правых членов
+	double sum_C_a_r_A = 0.0;//СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	double sum_W_a_r_A = 0.0;//СЃСѓРјРјР° РІРµРєС‚РѕСЂРѕРІ РїСЂР°РІС‹С… С‡Р»РµРЅРѕРІ
 
-	double sum_C_a_r_B = 0.0;//суммарный выход оператора прямой задачи
-	double sum_W_a_r_B = 0.0;//сумма векторов правых членов
+	double sum_C_a_r_B = 0.0;//СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	double sum_W_a_r_B = 0.0;//СЃСѓРјРјР° РІРµРєС‚РѕСЂРѕРІ РїСЂР°РІС‹С… С‡Р»РµРЅРѕРІ
 
 	double mean_B_A[3];
 	double mean_B_B[3];
 			
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		mean_B_A[a] = 0.0;
 		mean_B_B[a] = 0.0;
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
-			// Выход оператора прямой задачи
+			// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 			C_A[a][r] = 0.0;
 			C_B[a][r] = 0.0;
 			for (long c = 0; c < operator_cols; c++)
@@ -9159,13 +9159,13 @@ bool Dipol(int use_newton,
 
 	if (sum_C_a_r_A == 0.0)
 	{
-		MessageBox(0, "Сумарный выход прямой задачи равен нулю!","Инициализация не верна", MB_OK);
+		MessageBox(0, "РЎСѓРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЂР°РІРµРЅ РЅСѓР»СЋ!","РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РЅРµ РІРµСЂРЅР°", MB_OK);
 		return false;
 
 	}
 	if (sum_C_a_r_B == 0.0)
 	{
-		MessageBox(0, "Сумарный выход прямой задачи равен нулю!","Инициализация не верна", MB_OK);
+		MessageBox(0, "РЎСѓРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЂР°РІРµРЅ РЅСѓР»СЋ!","РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РЅРµ РІРµСЂРЅР°", MB_OK);
 		return false;
 
 	}
@@ -9176,10 +9176,10 @@ bool Dipol(int use_newton,
 
 
 
-	// Невязка
+	// РќРµРІСЏР·РєР°
 	vector<vector<double> > Er_A(3);
 	vector<vector<double> > Er_B(3);
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		Er_A[a].resize(operator_rows);
 		Er_B[a].resize(operator_rows);
 	}
@@ -9192,11 +9192,11 @@ bool Dipol(int use_newton,
 
 	if (!init_by_lamp)
 	{
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		
 			for (long r = 0; r < operator_rows; r++)
 			{
-				// Выход оператора прямой задачи
+				// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 				C_A[a][r] = 0.0;
 				C_B[a][r] = 0.0;
 				for (long c = 0; c < operator_cols; c++)
@@ -9205,12 +9205,12 @@ bool Dipol(int use_newton,
 					C_A[a][r] += ni_A[c] * W_p_A[a][r][c];
 					C_B[a][r] += ni_B[c] * W_p_B[a][r][c];
 				}
-				// инициализация коэффициента симметризации
+				// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 				if (C_A[a][r] != 0)
-					S[a][r] = mean_B_A[a] / C_A[a][r]; // здесь иницивлизация не работает в том случае если имеются нулевые C_A[a][r]
+					S[a][r] = mean_B_A[a] / C_A[a][r]; // Р·РґРµСЃСЊ РёРЅРёС†РёРІР»РёР·Р°С†РёСЏ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ РµСЃР»Рё РёРјРµСЋС‚СЃСЏ РЅСѓР»РµРІС‹Рµ C_A[a][r]
 				else
 				{
-					MessageBox(0, "иницивлизация не работает имеются нулевые C_A[a][r]", "", 0);
+					MessageBox(0, "РёРЅРёС†РёРІР»РёР·Р°С†РёСЏ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ РёРјРµСЋС‚СЃСЏ РЅСѓР»РµРІС‹Рµ C_A[a][r]", "", 0);
 					return false;
 				}
 				//S[a][r] = 
@@ -9243,11 +9243,11 @@ bool Dipol(int use_newton,
 		NULL, mmd3, 
 		to_reduce_x, to_reduce_y);
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		for (long r = 0; r < operator_rows; r++)
 		{
-			// пересчёт выхода оператора прямой задачи с учётом коэффициента симметризации
+			// РїРµСЂРµСЃС‡С‘С‚ РІС‹С…РѕРґР° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЃ СѓС‡С‘С‚РѕРј РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 			C_A[a][r] = 0.0;
 			C_A[a][r] = 0.0;
 			for (long c = 0; c < operator_cols; c++)
@@ -9264,9 +9264,9 @@ bool Dipol(int use_newton,
 			}
 			//double car = C[a][r], war = W[a][r];
 			//size_t W_a_size = W[a].size();
-			// Невязка
-			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
-			Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+			// РќРµРІСЏР·РєР°
+			Er_A[a][r] = C_A[a][r] - W[a][r];//СЂРµР¶РёРј Рђ
+			Er_B[a][r] = C_B[a][r] - W[a+3][r];//СЂРµР¶РёРј B
 		}
 	}
 
@@ -9311,7 +9311,7 @@ bool Dipol(int use_newton,
 	vector<vector<double> > temp52_A(3);
 	vector<vector<double> > temp_B(3);
 	vector<vector<double> > temp52_B(3);
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		temp_A[a].resize(operator_cols);
 		temp52_A[a].resize(operator_cols);
@@ -9348,7 +9348,7 @@ bool Dipol(int use_newton,
 		fprintf(iter_txt, "iterations,nparam,one");
 		fprintf(iter_txt, ",GA,errorA,EpX,EpY,EpZ");
 		fprintf(iter_txt, ",GB,errorB,kX,kY,kZ, sX,sY,sZ");
-		/*for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+		/*for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha ++)
 			{
@@ -9374,7 +9374,7 @@ bool Dipol(int use_newton,
 		cubes[cc] = new GRID_POINTER[4];
 		for (int i_cube = 0; i_cube < 4; i_cube++)
 		{
-			// Грид по размеру геологической структуры
+			// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 			cubes[cc][i_cube] = CreateProfileGrid3D(mmd3);
 			Zero3DMat<double>(cubes[cc][i_cube]->grid4Section.v, cubes[cc][i_cube]->grid4Section.nPag, cubes[cc][i_cube]->grid4Section.nRow, cubes[cc][i_cube]->grid4Section.nCol);
 			Fill3DMatByValue<double>(BLANK_VALUE, cubes[cc][i_cube]->grid4Section.v, cubes[cc][i_cube]->grid4Section.nPag, cubes[cc][i_cube]->grid4Section.nRow, cubes[cc][i_cube]->grid4Section.nCol);
@@ -9382,9 +9382,9 @@ bool Dipol(int use_newton,
 	}
 	double MA = 0.0;
 	double MB = 0.0;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			//if(r == operator_rows - 1)
 			//{
@@ -9545,7 +9545,7 @@ bool Dipol(int use_newton,
 
 		ForwordOperatorApply_dipol(c_apply,
 
-			GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+			GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 			R, A,
 			W,
 	            
@@ -9601,7 +9601,7 @@ bool Dipol(int use_newton,
 			}
 		}
 		
-		for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+		for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 		}
 
@@ -9657,7 +9657,7 @@ bool Dipol(int use_newton,
 
 			ForwordOperatorApply_dipol(c_apply,
 
-				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+				GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 				R, A,
 				W,
 		            
@@ -9720,7 +9720,7 @@ bool Dipol(int use_newton,
 
 				ForwordOperatorApply_dipol(c_apply,
 
-					GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+					GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 					R, A,
 					W,
 			            
@@ -9790,7 +9790,7 @@ bool Dipol(int use_newton,
 
 			ForwordOperatorApply_dipol(c_apply,
 
-				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+				GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 				R, A,
 				W,
 	                
@@ -9869,7 +9869,7 @@ bool Dipol(int use_newton,
 						GA,
 						GB,
 						va,
-						m, // три матрицы njuX, njuY, njuZ
+						m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 						R, A,
 						W,
 						
@@ -10135,7 +10135,7 @@ bool Dipol(int use_newton,
 
 
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	//vector<vector<vector<double> > >  sols_mean;
 //				double z_min = mmd3.z0 - mmd3.pages * mmd3.delta_z;
 	//for (long p = 0; p < mmd3.pages; p++)
@@ -10155,7 +10155,7 @@ bool Dipol(int use_newton,
 	Free3DMat(W_p_A);
 	Free3DMat(W_p_B);
 
-	for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+	for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 	{
 		for (int i_cube = 0; i_cube < 2; i_cube ++)
 		{
@@ -10175,7 +10175,7 @@ bool Dipol(int use_newton,
 
 
 bool Lamp(int use_newton,
-		  int type, // тип прямой задачи
+		  int type, // С‚РёРї РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		   long cols,
 		   bool apply_dgdni,		   
 		   bool apply_dgdKTi,
@@ -10190,7 +10190,7 @@ bool Lamp(int use_newton,
 		   vector<vector<double> > &W,
 		   vector<vector<anten_direction> > & A,
 		   bool only_init,
-		   // массив коэффициентов симметризации
+		   // РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 		   vector<vector<double> > & S,
 		   MyMethodsData3 &mmd3,
 		   double DZ,
@@ -10229,7 +10229,7 @@ bool Lamp(int use_newton,
 	mmd3.delta__z = mmd3.z0 - mmd3.z_min;
 
 
-	// на случай редукции к двумерному случаю
+	// РЅР° СЃР»СѓС‡Р°Р№ СЂРµРґСѓРєС†РёРё Рє РґРІСѓРјРµСЂРЅРѕРјСѓ СЃР»СѓС‡Р°СЋ
 	bool to_reduce_x = (DX - dx) < 0.0;
 	bool to_reduce_y = (DY - dy) < 0.0;
 
@@ -10287,19 +10287,19 @@ bool Lamp(int use_newton,
 	int cols_3 = cols / 3;//2
 	new_names_of_colomns.resize(cols_3);
 
-	//mmd3.delta_z = mmd3.delta__z / (mmd3.pages - 1);// это неверно!!!
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	//mmd3.delta_z = mmd3.delta__z / (mmd3.pages - 1);// СЌС‚Рѕ РЅРµРІРµСЂРЅРѕ!!!
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	mmd3.delta_z = mmd3.delta__z / mmd3.pages;
 
-	double *** m;// три матрицы njuX, njuY, njuZ
+	double *** m;// С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 	printf("Filling of matrix\n");
-	// формируем матрицу оператора прямой задачи, 
-	// число строк равно длине сигнала 
-	// (или суммарной длине нескольких сигналов - 
-	// нескольких профилей на одной или, ещё лучше, на разных высотах)
-	// на вход оператора подаётся геологическая структура 
-	// источников геополяритонного сигнала
-	// на выходе оператора имеем мощность излучения (сигнал) на профилях
+	// С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё, 
+	// С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ РґР»РёРЅРµ СЃРёРіРЅР°Р»Р° 
+	// (РёР»Рё СЃСѓРјРјР°СЂРЅРѕР№ РґР»РёРЅРµ РЅРµСЃРєРѕР»СЊРєРёС… СЃРёРіРЅР°Р»РѕРІ - 
+	// РЅРµСЃРєРѕР»СЊРєРёС… РїСЂРѕС„РёР»РµР№ РЅР° РѕРґРЅРѕР№ РёР»Рё, РµС‰С‘ Р»СѓС‡С€Рµ, РЅР° СЂР°Р·РЅС‹С… РІС‹СЃРѕС‚Р°С…)
+	// РЅР° РІС…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїРѕРґР°С‘С‚СЃСЏ РіРµРѕР»РѕРіРёС‡РµСЃРєР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° 
+	// РёСЃС‚РѕС‡РЅРёРєРѕРІ РіРµРѕРїРѕР»СЏСЂРёС‚РѕРЅРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
+	// РЅР° РІС‹С…РѕРґРµ РѕРїРµСЂР°С‚РѕСЂР° РёРјРµРµРј РјРѕС‰РЅРѕСЃС‚СЊ РёР·Р»СѓС‡РµРЅРёСЏ (СЃРёРіРЅР°Р») РЅР° РїСЂРѕС„РёР»СЏС…
 
 	if (type == 1)
 	{
@@ -10333,8 +10333,8 @@ bool Lamp(int use_newton,
 	double *** p_B;
 	double *** W_p_B;
 
-	long signal_len = vX.size(); // длина сигнала 
-	long operator_rows = signal_len; // длина сигнала 
+	long signal_len = vX.size(); // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
+	long operator_rows = signal_len; // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 	long operator_cols = mmd3.rows * mmd3.cols * mmd3.pages;
 
 	p_A = Alloc3DMat<double>(3, operator_rows, operator_cols);
@@ -10358,9 +10358,9 @@ bool Lamp(int use_newton,
 	va.push_back(0);//x
 	va.push_back(1);//y
 	va.push_back(2);//z
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-	//for (int a = 0; a < 3; a++)// перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+	//for (int a = 0; a < 3; a++)// РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			double _Ep = W[a+6][r];
 			if (max_Ep < _Ep) max_Ep = _Ep;
@@ -10388,8 +10388,8 @@ bool Lamp(int use_newton,
 		}
 	}
 	const double zero_substitution = 0.9 * min_m;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			for (long c = 0; c < operator_cols; c++)
 			{
@@ -10410,10 +10410,10 @@ bool Lamp(int use_newton,
 	double min_b = DBL_MAX;
 
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
-			double _b = W[a][r];//режим А
+			double _b = W[a][r];//СЂРµР¶РёРј Рђ
 			if (max_b < _b)
 				max_b = _b;
 			if (min_b > _b)
@@ -10421,17 +10421,17 @@ bool Lamp(int use_newton,
 		}
 	}
 
-	// считаем коэффициенты корреляции между оператором прямой задачи 
-	// и сигналом
+	// СЃС‡РёС‚Р°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РєРѕСЂСЂРµР»СЏС†РёРё РјРµР¶РґСѓ РѕРїРµСЂР°С‚РѕСЂРѕРј РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё 
+	// Рё СЃРёРіРЅР°Р»РѕРј
 	vector<double> k_corr(operator_cols, 0.0);
 	vector<double> k_cov(operator_cols, 0.0);
-	for (long c = 0; c < operator_cols; c++) //длина геологической структуры
+	for (long c = 0; c < operator_cols; c++) //РґР»РёРЅР° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	{
 		vector<double> v_m(operator_rows * va.size());
 		vector<double> v_s(operator_rows * va.size());
 
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-			for (long r = 0; r < operator_rows; r++) // длина сигнала по одной антене
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+			for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° РїРѕ РѕРґРЅРѕР№ Р°РЅС‚РµРЅРµ
 			{
 				double _m = m[a][r][c];
 				double _signal = W[a][r];
@@ -10440,7 +10440,7 @@ bool Lamp(int use_newton,
 				v_s[operator_rows * ia + r] = _signal;
 			}
 		}
-		//рассчитываем коэффициент корреляции k_corr[c] для текущего элемента геологической структуры;
+		//СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚ РєРѕСЂСЂРµР»СЏС†РёРё k_corr[c] РґР»СЏ С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹;
 		double k, Cov;
 		if (CorrelationCoefficient(v_s, v_m, k, Cov))
 		{
@@ -10449,27 +10449,27 @@ bool Lamp(int use_newton,
 		}
 	}
 
-	// инициализируем векторы решения
+	// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РІРµРєС‚РѕСЂС‹ СЂРµС€РµРЅРёСЏ
 	double Ep[3] = {1.0, 1.0, 1.0};
 	double k[3] = {1.0, 1.0, 1.0};
 	double s[3] = {1.0, 1.0, 1.0};
-//				double init_KT = 0.2 / min_m;  //эта иициализация к значению init_KT = 10e+16 причём KT не подстраивается за обозримое количество итераций
-	//double init_KT = 0.2 / mean_m; эта инициализация привела к тому что суммарный выход оператора прямой задачи стал равен нулю но тут могла быть ошибка так как в mean_m вместо вреднего вычислялась сумма, что вело к значительному занижению значения init_KT
-	//double init_KT = 0.2; // слишком мала "температура" -> суммарный выход оператора прямой задачи стал равен нулю
+//				double init_KT = 0.2 / min_m;  //СЌС‚Р° РёРёС†РёР°Р»РёР·Р°С†РёСЏ Рє Р·РЅР°С‡РµРЅРёСЋ init_KT = 10e+16 РїСЂРёС‡С‘Рј KT РЅРµ РїРѕРґСЃС‚СЂР°РёРІР°РµС‚СЃСЏ Р·Р° РѕР±РѕР·СЂРёРјРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РёС‚РµСЂР°С†РёР№
+	//double init_KT = 0.2 / mean_m; СЌС‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСЂРёРІРµР»Р° Рє С‚РѕРјСѓ С‡С‚Рѕ СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЃС‚Р°Р» СЂР°РІРµРЅ РЅСѓР»СЋ РЅРѕ С‚СѓС‚ РјРѕРіР»Р° Р±С‹С‚СЊ РѕС€РёР±РєР° С‚Р°Рє РєР°Рє РІ mean_m РІРјРµСЃС‚Рѕ РІСЂРµРґРЅРµРіРѕ РІС‹С‡РёСЃР»СЏР»Р°СЃСЊ СЃСѓРјРјР°, С‡С‚Рѕ РІРµР»Рѕ Рє Р·РЅР°С‡РёС‚РµР»СЊРЅРѕРјСѓ Р·Р°РЅРёР¶РµРЅРёСЋ Р·РЅР°С‡РµРЅРёСЏ init_KT
+	//double init_KT = 0.2; // СЃР»РёС€РєРѕРј РјР°Р»Р° "С‚РµРјРїРµСЂР°С‚СѓСЂР°" -> СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЃС‚Р°Р» СЂР°РІРµРЅ РЅСѓР»СЋ
 	double init_KT = 0.2*1e6;
 	//init_KT = 0.2 / mean_m;
-	init_KT = 10.0 / max_m;// это значит, что минимальный р будет равен 0.1
+	init_KT = 10.0 / max_m;// СЌС‚Рѕ Р·РЅР°С‡РёС‚, С‡С‚Рѕ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂ Р±СѓРґРµС‚ СЂР°РІРµРЅ 0.1
 	vector<double> KTi_A(operator_cols, init_KT);
 	vector<double> KTi_B(operator_cols, init_KT);
 	if (false)
 	{
-		// эта инициализация "копирует" рельефные и краевые эффекты оператора прямой задачи
+		// СЌС‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ "РєРѕРїРёСЂСѓРµС‚" СЂРµР»СЊРµС„РЅС‹Рµ Рё РєСЂР°РµРІС‹Рµ СЌС„С„РµРєС‚С‹ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 		for (long c = 0; c < operator_cols; c++) KTi_A[c] = 0.2 / vmin_m[c];
 	}
 		
-	// эта инициализация равномерна по глубине, т.к. использует макс. m, который 
-	// для каждой геоточки соответсвует направлению вертикально вверх
-	// кроме того это означает, что минимальный р равен 0.1
+	// СЌС‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЂР°РІРЅРѕРјРµСЂРЅР° РїРѕ РіР»СѓР±РёРЅРµ, С‚.Рє. РёСЃРїРѕР»СЊР·СѓРµС‚ РјР°РєСЃ. m, РєРѕС‚РѕСЂС‹Р№ 
+	// РґР»СЏ РєР°Р¶РґРѕР№ РіРµРѕС‚РѕС‡РєРё СЃРѕРѕС‚РІРµС‚СЃРІСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёСЋ РІРµСЂС‚РёРєР°Р»СЊРЅРѕ РІРІРµСЂС…
+	// РєСЂРѕРјРµ С‚РѕРіРѕ СЌС‚Рѕ РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂ СЂР°РІРµРЅ 0.1
 	
 	// mode_A
 	for (long c = 0; c < operator_cols; c++) KTi_A[c] = 10.0 / vmax_m[c];
@@ -10480,8 +10480,8 @@ bool Lamp(int use_newton,
 
 
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			for (long c = 0; c < operator_cols; c++)
 			{
@@ -10504,8 +10504,8 @@ bool Lamp(int use_newton,
 		}
 	}
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			for (long c = 0; c < operator_cols; c++)
 			{
@@ -10516,13 +10516,13 @@ bool Lamp(int use_newton,
 	}
 	
 
-	// Выход оператора прямой задачи
+	// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 	vector<vector<double> > C_A(3);
 	vector<vector<vector<double> > > CJI_A(3);
 	vector<vector<double> > C_B(3);
 	vector<vector<vector<double> > > CJI_B(3);
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		S[a].resize(operator_rows, 0.0);
 		C_A[a].resize(operator_rows, 0.0);
 		CJI_A[a].resize(operator_rows);
@@ -10530,7 +10530,7 @@ bool Lamp(int use_newton,
 		C_B[a].resize(operator_rows, 0.0);
 		CJI_B[a].resize(operator_rows);
 
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			CJI_A[a][r].resize(operator_cols, 0.0);
 			CJI_B[a][r].resize(operator_cols, 0.0);
@@ -10540,21 +10540,21 @@ bool Lamp(int use_newton,
 
 	// init ni
 
-	double sum_C_a_r_A = 0.0;//суммарный выход оператора прямой задачи
-	double sum_W_a_r_A = 0.0;//сумма векторов правых членов
+	double sum_C_a_r_A = 0.0;//СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	double sum_W_a_r_A = 0.0;//СЃСѓРјРјР° РІРµРєС‚РѕСЂРѕРІ РїСЂР°РІС‹С… С‡Р»РµРЅРѕРІ
 
-	double sum_C_a_r_B = 0.0;//суммарный выход оператора прямой задачи
-	double sum_W_a_r_B = 0.0;//сумма векторов правых членов
+	double sum_C_a_r_B = 0.0;//СЃСѓРјРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
+	double sum_W_a_r_B = 0.0;//СЃСѓРјРјР° РІРµРєС‚РѕСЂРѕРІ РїСЂР°РІС‹С… С‡Р»РµРЅРѕРІ
 
 	double mean_B_A[3];
 	double mean_B_B[3];
 			
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		mean_B_A[a] = 0.0;
 		mean_B_B[a] = 0.0;
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
-			// Выход оператора прямой задачи
+			// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 			C_A[a][r] = 0.0;
 			C_B[a][r] = 0.0;
 			for (long c = 0; c < operator_cols; c++)
@@ -10591,13 +10591,13 @@ bool Lamp(int use_newton,
 
 	if (sum_C_a_r_A == 0.0)
 	{
-		MessageBox(0, "Сумарный выход прямой задачи равен нулю!","Инициализация не верна", MB_OK);
+		MessageBox(0, "РЎСѓРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЂР°РІРµРЅ РЅСѓР»СЋ!","РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РЅРµ РІРµСЂРЅР°", MB_OK);
 		return false;
 
 	}
 	if (sum_C_a_r_B == 0.0)
 	{
-		MessageBox(0, "Сумарный выход прямой задачи равен нулю!","Инициализация не верна", MB_OK);
+		MessageBox(0, "РЎСѓРјР°СЂРЅС‹Р№ РІС‹С…РѕРґ РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЂР°РІРµРЅ РЅСѓР»СЋ!","РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РЅРµ РІРµСЂРЅР°", MB_OK);
 		return false;
 
 	}
@@ -10605,20 +10605,20 @@ bool Lamp(int use_newton,
 
 	vector<double> ni_A(operator_cols, init_ni_A);
 	vector<double> ni_B(operator_cols, init_ni_B);
-	// Невязка
+	// РќРµРІСЏР·РєР°
 	vector<vector<double> > Er_A(3);
 	vector<vector<double> > Er_B(3);
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 		Er_A[a].resize(operator_rows);
 		Er_B[a].resize(operator_rows);
 	}
 
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		for (long r = 0; r < operator_rows; r++)
 		{
-			// Выход оператора прямой задачи
+			// Р’С‹С…РѕРґ РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё
 			C_A[a][r] = 0.0;
 			C_B[a][r] = 0.0;
 			for (long c = 0; c < operator_cols; c++)
@@ -10627,10 +10627,10 @@ bool Lamp(int use_newton,
 				C_A[a][r] += ni_A[c] * W_p_A[a][r][c];
 				C_B[a][r] += ni_B[c] * W_p_B[a][r][c];
 			}
-			// инициализация коэффициента симметризации
+			// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 			S[a][r] = mean_B_A[a] / C_A[a][r];
 
-			// пересчёт выхода оператора прямой задачи с учётом коэффициента симметризации
+			// РїРµСЂРµСЃС‡С‘С‚ РІС‹С…РѕРґР° РѕРїРµСЂР°С‚РѕСЂР° РїСЂСЏРјРѕР№ Р·Р°РґР°С‡Рё СЃ СѓС‡С‘С‚РѕРј РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРёРјРјРµС‚СЂРёР·Р°С†РёРё
 			C_A[a][r] = 0.0;
 			C_A[a][r] = 0.0;
 			for (long c = 0; c < operator_cols; c++)
@@ -10641,9 +10641,9 @@ bool Lamp(int use_newton,
 			}
 			//double car = C[a][r], war = W[a][r];
 			//size_t W_a_size = W[a].size();
-			// Невязка
-			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
-			Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+			// РќРµРІСЏР·РєР°
+			Er_A[a][r] = C_A[a][r] - W[a][r];//СЂРµР¶РёРј Рђ
+			Er_B[a][r] = C_B[a][r] - W[a+3][r];//СЂРµР¶РёРј B
 		}
 	}
 
@@ -10679,7 +10679,7 @@ bool Lamp(int use_newton,
 	vector<vector<double> > temp52_A(3);
 	vector<vector<double> > temp_B(3);
 	vector<vector<double> > temp52_B(3);
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
 		temp_A[a].resize(operator_cols);
 		temp52_A[a].resize(operator_cols);
@@ -10717,7 +10717,7 @@ bool Lamp(int use_newton,
 		fprintf(iter_txt, "iterations, one");
 		fprintf(iter_txt, ",GA,errorA,EpX,EpY,EpZ");
 		fprintf(iter_txt, ",GB,errorB,kX,kY,kZ, sX,sY,sZ");
-		/*for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+		/*for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 			for (int i_alpha = 0; i_alpha < mmd3.n_alpha; i_alpha ++)
 			{
@@ -10743,7 +10743,7 @@ bool Lamp(int use_newton,
 		cubes[cc] = new GRID_POINTER[2];
 		for (int i_cube = 0; i_cube < 2; i_cube++)
 		{
-			// Грид по размеру геологической структуры
+			// Р“СЂРёРґ РїРѕ СЂР°Р·РјРµСЂСѓ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 			cubes[cc][i_cube] = CreateProfileGrid3D(mmd3);
 			Zero3DMat<double>(cubes[cc][i_cube]->grid4Section.v, cubes[cc][i_cube]->grid4Section.nPag, cubes[cc][i_cube]->grid4Section.nRow, cubes[cc][i_cube]->grid4Section.nCol);
 			Fill3DMatByValue<double>(BLANK_VALUE, cubes[cc][i_cube]->grid4Section.v, cubes[cc][i_cube]->grid4Section.nPag, cubes[cc][i_cube]->grid4Section.nRow, cubes[cc][i_cube]->grid4Section.nCol);
@@ -10751,9 +10751,9 @@ bool Lamp(int use_newton,
 	}
 	double MA = 0.0;
 	double MB = 0.0;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // РїРµСЂРµР±РёСЂР°РµРј 3 Р°РЅС‚РµРЅС‹
 	
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
+		for (long r = 0; r < operator_rows; r++) // РґР»РёРЅР° СЃРёРіРЅР°Р»Р° 
 		{
 			//if(r == operator_rows - 1)
 			//{
@@ -10860,7 +10860,7 @@ bool Lamp(int use_newton,
 
 	ForwordOperatorApply(c_apply,
 
-		GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+		GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 		W,
 	        
 		operator_rows, operator_cols,
@@ -10915,7 +10915,7 @@ bool Lamp(int use_newton,
 			}
 		}
 		
-		for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+		for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 		{
 		}
 
@@ -10961,7 +10961,7 @@ bool Lamp(int use_newton,
 
 			ForwordOperatorApply(c_apply,
 
-				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+				GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 				W,
 		            
 				operator_rows, operator_cols,
@@ -11019,7 +11019,7 @@ bool Lamp(int use_newton,
 
 				ForwordOperatorApply(c_apply,
 
-					GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+					GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 					W,
 			            
 					operator_rows, operator_cols,
@@ -11087,7 +11087,7 @@ bool Lamp(int use_newton,
 
 			ForwordOperatorApply(c_apply,
 
-				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
+				GA, GB, va, m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 				W,
 	                
 				operator_rows, operator_cols,
@@ -11151,7 +11151,7 @@ bool Lamp(int use_newton,
 						GA,
 						GB,
 						va,
-						m, // три матрицы njuX, njuY, njuZ
+						m, // С‚СЂРё РјР°С‚СЂРёС†С‹ njuX, njuY, njuZ
 						W,
 						
 						operator_rows,
@@ -11352,7 +11352,7 @@ bool Lamp(int use_newton,
 
 
 
-	// опускаем верхнюю страницу куба под дневную поверхность на глубину delta_z
+	// РѕРїСѓСЃРєР°РµРј РІРµСЂС…РЅСЋСЋ СЃС‚СЂР°РЅРёС†Сѓ РєСѓР±Р° РїРѕРґ РґРЅРµРІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РЅР° РіР»СѓР±РёРЅСѓ delta_z
 	//vector<vector<vector<double> > >  sols_mean;
 //				double z_min = mmd3.z0 - mmd3.pages * mmd3.delta_z;
 	//for (long p = 0; p < mmd3.pages; p++)
@@ -11372,7 +11372,7 @@ bool Lamp(int use_newton,
 	Free3DMat(W_p_A);
 	Free3DMat(W_p_B);
 
-	for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
+	for (int cc = 0; cc < cols_3; cc++) // РґР»СЏ РєР°Р¶РґРѕР№ РєРѕР»РѕРЅРєРё - СЃСѓС‚СЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
 	{
 		for (int i_cube = 0; i_cube < 2; i_cube ++)
 		{
@@ -11468,7 +11468,7 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 			NULL 
 		);
 		char str[255];
-		sprintf(str, "Ошибка создания окна выбора файла = %d", dwErr);
+		sprintf(str, "РћС€РёР±РєР° СЃРѕР·РґР°РЅРёСЏ РѕРєРЅР° РІС‹Р±РѕСЂР° С„Р°Р№Р»Р° = %d", dwErr);
 
 
 		::MessageBox(NULL, (LPCTSTR)lpMsgBuf, str, MB_OK);
