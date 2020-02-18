@@ -32,6 +32,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wavelet", "wavelet\wavelet.vcproj", "{870ED2FD-41C1-4156-8A9A-60600B4AC1AE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "auto_build_3D", "auto_build_3D\auto_build_3D.vcproj", "{B902B0AE-8B33-4DB0-A2E3-AC649BE24AD1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B1E70CB6-4C53-47E9-9E01-39310886454D} = {B1E70CB6-4C53-47E9-9E01-39310886454D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dime", "dime\dime.vcproj", "{FB75E28E-CF3C-4716-A28D-EBA3FD81BCC3}"
 EndProject
@@ -120,6 +123,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{A4C40571-0720-402E-9F24-426041519B24}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logger", "logger\vc\Logger.vcproj", "{296335CC-C44A-4BB6-B1AF-971C44B29641}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TezeyCon2003", "TezeyCon2003.vcproj", "{427392D6-C266-4CC7-BEE6-268AED0509FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -345,6 +350,13 @@ Global
 		{296335CC-C44A-4BB6-B1AF-971C44B29641}.Release|Win32.Build.0 = Release|Win32
 		{296335CC-C44A-4BB6-B1AF-971C44B29641}.Release|x64.ActiveCfg = Release|x64
 		{296335CC-C44A-4BB6-B1AF-971C44B29641}.Release|x64.Build.0 = Release|x64
+		{427392D6-C266-4CC7-BEE6-268AED0509FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{427392D6-C266-4CC7-BEE6-268AED0509FC}.Debug|Win32.Build.0 = Debug|Win32
+		{427392D6-C266-4CC7-BEE6-268AED0509FC}.Debug|x64.ActiveCfg = Debug|Win32
+		{427392D6-C266-4CC7-BEE6-268AED0509FC}.Release|Win32.ActiveCfg = Release|Win32
+		{427392D6-C266-4CC7-BEE6-268AED0509FC}.Release|Win32.Build.0 = Release|Win32
+		{427392D6-C266-4CC7-BEE6-268AED0509FC}.Release|x64.ActiveCfg = Release|x64
+		{427392D6-C266-4CC7-BEE6-268AED0509FC}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

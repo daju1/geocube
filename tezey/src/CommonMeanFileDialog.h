@@ -183,11 +183,11 @@ struct CommonMeanFileData
 
 class CommonMeanFileDialog  
 {
-	friend int CALLBACK DlgProc1( HWND hDlg, UINT uMsg,
+	friend INT_PTR CALLBACK DlgProc1( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam );
-	friend int CALLBACK DlgProc2( HWND hDlg, UINT uMsg,
+	friend INT_PTR CALLBACK DlgProc2( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam );
-	friend int CALLBACK DlgProc3( HWND hDlg, UINT uMsg,
+	friend INT_PTR CALLBACK DlgProc3( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam );
 	// Массив описаний страниц блокнота Wizard
 //	PROPSHEETPAGE *   psheetPage;

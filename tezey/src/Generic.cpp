@@ -18,6 +18,15 @@
 #include "../../wintools/src/checkListBox.h"
 #include "../../resource.h"
 
+#define USE_GRINVICH_TIME
+
+
+#ifdef USE_GRINVICH_TIME
+#define GetTime GetSystemTime
+#else
+#define GetTime GetLocalTime
+#endif
+
 
 #define ID_FILE_CLOSE     1000001
 #define ID_FILE_NEW       1000002

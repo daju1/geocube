@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="TezeyCon2003"
 	ProjectGUID="{427392D6-C266-4CC7-BEE6-268AED0509FC}"
+	RootNamespace="TezeyCon2003"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -11,14 +12,17 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="2"
@@ -41,11 +45,11 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(IntDir)/../include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
+				PreprocessorDefinitions="CGRAPH2_ONE_PLOT;WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -63,10 +67,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib glu32.lib glaux.lib comctl32.lib jpeg.lib dime.lib"
-				OutputFile="$(OutDir)/../bin/TezeyCon2003.exe"
+				AdditionalDependencies="alglib.lib geocube_module.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib"
+				OutputFile="$(OutDir)/bin/TezeyCon2003.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(IntDir)/../lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/TezeyCon2003.pdb"
 				SubSystem="1"
@@ -97,9 +101,91 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
+				PreprocessorDefinitions="CGRAPH2_ONE_PLOT;WIN32;_DEBUG;_CONSOLE"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="alglib.lib geocube_module.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib"
+				OutputFile="$(OutDir)/bin/TezeyCon2003.exe"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(OutDir)/TezeyCon2003.pdb"
+				SubSystem="1"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="2"
@@ -121,9 +207,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(IntDir)/../include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="0"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
+				PreprocessorDefinitions="CGRAPH2_ONE_PLOT;WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -141,10 +227,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib glu32.lib glaux.lib comctl32.lib jpeg.lib dime.lib"
-				OutputFile="$(OutDir)/../bin/TezeyCon2003.exe"
+				AdditionalDependencies="alglib.lib geocube_module.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib"
+				OutputFile="$(OutDir)/bin/TezeyCon2003.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(IntDir)/../lib"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -152,6 +238,86 @@
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/include&quot;;&quot;$(SolutionDir)\logger\include&quot;;D:\boost\boost_1_56_0"
+				PreprocessorDefinitions="CGRAPH2_ONE_PLOT;WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="alglib.lib geocube_module.lib labdbdoc.lib surfer_connect.lib acad_connect.lib excel_connect.lib laboratory.lib geometry2d.lib kohonen.lib surfdoc.lib wintools.lib dime.lib tools.lib array.lib dct.lib winplot.lib geoid.lib comctl32.lib jpeg.lib opengl32.lib glu32.lib gdiplus.lib logger.lib"
+				OutputFile="$(OutDir)/bin/TezeyCon2003.exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(OutDir)/lib&quot;;&quot;D:\boost\boost_1_56_0\lib\$(PlatformName)&quot;;&quot;$(SolutionDir)\logger\lib\$(PlatformName)\$(ConfigurationName)&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -185,187 +351,79 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\abortPrint.cpp"
+				RelativePath=".\tezey\src\CommonMeanFileDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\AFile.cpp"
+				RelativePath=".\tezey\src\CommonMeanFileDialog.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Archive.cpp"
+				RelativePath=".\tezey\src\ComPort.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\BlnProfile3D.cpp"
+				RelativePath=".\tezey\src\ComPort.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BlnProfilePlane3D.cpp"
+				RelativePath=".\tezey\src\DPoint.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Bmp3D.cpp"
+				RelativePath=".\tezey\src\DPoint.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BmpProfile3D.cpp"
+				RelativePath=".\tezey\src\FileFormat.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\BrokenLine3D.cpp"
+				RelativePath=".\tezey\src\FileFormat.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BrokenPlane3D.cpp"
+				RelativePath=".\tezey\src\Generic.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\BrokenPoligon3D.cpp"
+				RelativePath=".\tezey\src\Generic.h"
 				>
 			</File>
 			<File
-				RelativePath=".\BrokenPoligon_3D.cpp"
+				RelativePath=".\tezey\src\Graph.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\camera.cpp"
+				RelativePath=".\tezey\src\Graph.h"
 				>
 			</File>
 			<File
-				RelativePath=".\checkListBox.cpp"
+				RelativePath=".\tezey\src\GraphsDoc.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\colormap.cpp"
+				RelativePath=".\tezey\src\GraphsDoc.h"
 				>
 			</File>
 			<File
-				RelativePath=".\CommandLineParser.cpp"
+				RelativePath=".\tezey\src\GraphsView.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\CommonMeanFileDialog.cpp"
+				RelativePath=".\tezey\src\GraphsView.h"
 				>
 			</File>
 			<File
-				RelativePath=".\ComPort.cpp"
+				RelativePath=".\tezey\src\map.h"
 				>
 			</File>
 			<File
-				RelativePath=".\conjgrad.cpp"
+				RelativePath=".\tezey\src\MessageItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\datenum.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\distance3d.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DrawListArray.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DrawScene.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\error.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\filedlg.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\FileFormat.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Generic.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeoCatch.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeoSurface.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\glade_dialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GLMan.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GLPrintMan.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Graph.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Graph2.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GraphsDoc.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GraphsView.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Grid.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GridProfile3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\interp.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\InterWellsLine3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\iso.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Line3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\listfun.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\matrixes.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\memory_track.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MessageItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\mtools.cpp"
+				RelativePath=".\tezey\src\MessageItem.h"
 				>
 			</File>
 			<File
@@ -373,707 +431,79 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Object.cpp"
+				RelativePath=".\tezey\src\ParseTimeString.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ObjectList.cpp"
+				RelativePath=".\tezey\src\ParseTimeString.h"
 				>
 			</File>
 			<File
-				RelativePath=".\objects.cpp"
+				RelativePath=".\tezey\src\PolyotyNnetDlg.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\palette.cpp"
+				RelativePath=".\tezey\src\PolyotyNnetDlg.h"
 				>
 			</File>
 			<File
-				RelativePath=".\ParseTimeString.cpp"
+				RelativePath=".\tezey\src\raporto.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Poligon3D.cpp"
+				RelativePath=".\tezey\src\raporto.h"
 				>
 			</File>
 			<File
-				RelativePath=".\PolyotyNnetDlg.cpp"
+				RelativePath=".\tezey\src\RoomQueueItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\print.cpp"
+				RelativePath=".\tezey\src\RoomQueueItem.h"
 				>
 			</File>
 			<File
-				RelativePath=".\PrintDlgBox.cpp"
+				RelativePath=".\tezey\src\systemnnet.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\project.cpp"
+				RelativePath=".\tezey\src\systemnnet.h"
 				>
 			</File>
 			<File
-				RelativePath=".\raporto.cpp"
+				RelativePath=".\tezey\src\TezeyCon2003.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\readfile.cpp"
+				RelativePath=".\tezey\src\winmap.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\RoomQueueItem.cpp"
+				RelativePath=".\tezey\src\winmap.h"
 				>
 			</File>
 			<File
-				RelativePath=".\SelectLine.cpp"
+				RelativePath=".\tezey\src\XYZBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\sorting.cpp"
+				RelativePath=".\tezey\src\XYZBuffer.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Sphere3D.cpp"
+				RelativePath=".\tezey\src\ymacrofun.h"
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\String3D.cpp"
+				RelativePath=".\tezey\src\ymacroses.h"
 				>
 			</File>
-			<File
-				RelativePath=".\Surface3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\SurfDoc.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\systemnnet.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\texture.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TezeyCon2003.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\tga.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ThePoint3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Triangle3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\TriangulatedGrid3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\utility.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Vdouble.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\vect.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\VectItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Vector.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\views.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\wav.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\well_3D.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_app.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_dialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_graphics_view.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_plot_views.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_project.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_project_view.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_views.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Wingeoid.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\winmap.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\winplot.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Winsurf.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\winsurfproc.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\winsurftree.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\XYZBuffer.cpp"
-				>
-			</File>
-			<Filter
-				Name="dct"
-				>
-				<File
-					RelativePath=".\dct\DelaunayTriangulation.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="kohonen"
-				>
-				<File
-					RelativePath=".\kohonen\KohonenDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\kohonen\KohonenMapWnd.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\kohonen\Layer.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\kohonen\LayerKohonen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\kohonen\Net.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\kohonen\NetKohonen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\kohonen\Neuron.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\kohonen\NeuronKohonen.cpp"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\abortPrint.h"
-				>
-			</File>
-			<File
-				RelativePath=".\AFile.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Archive.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BlnProfile3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BlnProfilePlane3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Bmp3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BmpProfile3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BrokenLine3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BrokenPlane3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BrokenPoligon3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BrokenPoligon_3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\camera.h"
-				>
-			</File>
-			<File
-				RelativePath=".\checkListBox.h"
-				>
-			</File>
-			<File
-				RelativePath=".\color.h"
-				>
-			</File>
-			<File
-				RelativePath=".\colormap.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CommandLineParser.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CommonMeanFileDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\commonOG.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Complex.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ComPort.h"
-				>
-			</File>
-			<File
-				RelativePath=".\conjgrad.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Datenum.h"
-				>
-			</File>
-			<File
-				RelativePath=".\dct\DelaunayTriangulation.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DPoint.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DrawListArray.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DrawScene.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Drill_3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\error.h"
-				>
-			</File>
-			<File
-				RelativePath=".\factorial.h"
-				>
-			</File>
-			<File
-				RelativePath=".\filedlg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\FileFormat.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Generic.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GeoCatch.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GeoSurface.h"
-				>
-			</File>
-			<File
-				RelativePath=".\glade_dialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GLMan.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GLPrintMan.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Graph.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Graph2.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GraphsDoc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GraphsView.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Grid.h"
-				>
-			</File>
-			<File
-				RelativePath=".\GridProfile3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\interp.h"
-				>
-			</File>
-			<File
-				RelativePath=".\InterWellsLine3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Lagerfun.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Line3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\listfun.h"
-				>
-			</File>
-			<File
-				RelativePath=".\map.h"
-				>
-			</File>
-			<File
-				RelativePath=".\matrixes.h"
-				>
-			</File>
-			<File
-				RelativePath=".\memory_track.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MessageItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\mtools.h"
-				>
-			</File>
-			<File
-				RelativePath=".\mylicense.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Object.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ObjectList.h"
-				>
-			</File>
-			<File
-				RelativePath=".\objects.h"
-				>
-			</File>
-			<File
-				RelativePath=".\palette.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ParseTimeString.h"
-				>
-			</File>
-			<File
-				RelativePath=".\plane.h"
-				>
-			</File>
-			<File
-				RelativePath=".\points.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Poligon3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PolyotyNnetDlg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Primitive3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\print.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PrintDlgBox.h"
-				>
-			</File>
-			<File
-				RelativePath=".\project.h"
-				>
-			</File>
-			<File
-				RelativePath=".\raporto.h"
-				>
-			</File>
-			<File
-				RelativePath=".\readfile.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resource.h"
-				>
-			</File>
-			<File
-				RelativePath=".\RoomQueueItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SelectLine.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Sequence.h"
-				>
-			</File>
-			<File
-				RelativePath=".\sorting.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Sphere3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.h"
-				>
-			</File>
-			<File
-				RelativePath=".\String3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\surface.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Surface3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\surfdefs.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SurfDoc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\systemnnet.h"
-				>
-			</File>
-			<File
-				RelativePath=".\tabfun.h"
-				>
-			</File>
-			<File
-				RelativePath=".\texture.h"
-				>
-			</File>
-			<File
-				RelativePath=".\tga.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ThePoint3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Triangle3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\TriangulatedGrid3D.h"
-				>
-			</File>
-			<File
-				RelativePath=".\typedef.h"
-				>
-			</File>
-			<File
-				RelativePath=".\utility.h"
-				>
-			</File>
-			<File
-				RelativePath=".\v3d.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Vdouble.h"
-				>
-			</File>
-			<File
-				RelativePath=".\vect.h"
-				>
-			</File>
-			<File
-				RelativePath=".\VectItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Vector.h"
-				>
-			</File>
-			<File
-				RelativePath=".\views.h"
-				>
-			</File>
-			<File
-				RelativePath=".\wav.h"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_app.h"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_dialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_graphics_view.h"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_plot_views.h"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_project.h"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_project_view.h"
-				>
-			</File>
-			<File
-				RelativePath=".\win32_views.h"
-				>
-			</File>
-			<File
-				RelativePath=".\wingeoid.h"
-				>
-			</File>
-			<File
-				RelativePath=".\winmap.h"
-				>
-			</File>
-			<File
-				RelativePath=".\winplot.h"
-				>
-			</File>
-			<File
-				RelativePath=".\winsurf.h"
-				>
-			</File>
-			<File
-				RelativePath=".\winsurfproc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\winsurftree.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

@@ -11,6 +11,15 @@
 #include "GraphsView.h"
 #include "XYZBuffer.h"
 
+#define USE_GRINVICH_TIME
+
+
+#ifdef USE_GRINVICH_TIME
+#define GetTime GetSystemTime
+#else
+#define GetTime GetLocalTime
+#endif
+
 
 #ifdef COMMON_RAPORT
 extern void WriteRaportoB(LPCTSTR s);

@@ -9,6 +9,15 @@
 #include "../../wintools/src/winsurf.h"
 #include "../../winplot/src/winplot.h"
 
+#define USE_GRINVICH_TIME
+
+
+#ifdef USE_GRINVICH_TIME
+#define GetTime GetSystemTime
+#else
+#define GetTime GetLocalTime
+#endif
+
 extern vdouble dsequence(double d0, long Len, double dend);
 extern Vector<int> sequence(int i1, int i2); // Возвращает последовательность целых чисел от i1 до i2
 extern void /*vdouble::*/WaveletFilters(int wf, // флаг типа вейвлетов

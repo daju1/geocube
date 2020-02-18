@@ -27,7 +27,7 @@ extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
 
 
 
-unsigned int CALLBACK DlgProcOpenFilesToCommon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+UINT_PTR CALLBACK DlgProcOpenFilesToCommon(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     OpenFilesToCommonData *oftcd;
     LPOPENFILENAME lpOFN;
@@ -54,7 +54,7 @@ unsigned int CALLBACK DlgProcOpenFilesToCommon(HWND hDlg, UINT message, WPARAM w
     return TRUE;
 }
 
-int CALLBACK DlgProc1( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK DlgProc1( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	const int n=1023; // length of buffer string line
@@ -369,7 +369,7 @@ extern WNDPROC wpOrigListViewWndProc;
 #define IDCOMBO2 11111
 #define IDLIST2 11112
 #define HEADER_IN_FIRST_ROW2	1
-BOOL CALLBACK DlgProc2(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) 
+INT_PTR CALLBACK DlgProc2(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) 
 { 
     int y; 
     TEXTMETRIC tm; 
@@ -894,7 +894,7 @@ BOOL CALLBACK DlgProc2(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 } 
 
 
-int CALLBACK DlgProc3( HWND hDlg, UINT uMsg,
+INT_PTR CALLBACK DlgProc3( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	char startDate[15],
