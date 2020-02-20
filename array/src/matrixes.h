@@ -41,7 +41,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 {
     T ****v;
     size_t cube, page, row;
-	// выделяем память под указатели на cubы
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° cubС‹
 	v = (T ****)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		ncubes *  sizeof( T *** ) );
 
@@ -51,7 +51,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		sprintf(errstr, "Not enough memory for %d * sizeof( T *** ) = %d bytes", ncubes, ncubes * sizeof( T *** ) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}	
-	// выделяем память под указатели на страницы
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂР°РЅРёС†С‹
 	v[0] = (T ***)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		ncubes * npages * sizeof( T ** ) );
 	if (v[0] == NULL)
@@ -60,7 +60,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		sprintf(errstr, "Not enough memory for %d * %d * sizeof( T ** ) = %d bytes", ncubes, npages, ncubes * npages * sizeof( T ** ) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
-	// выделяем память под указатели на строки
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂРѕРєРё
     v[0][0] = (T **) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		ncubes * npages * nrows * sizeof (T*));
  	if (v[0][0] == NULL)
@@ -69,7 +69,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		sprintf(errstr, "Not enough memory for %d * %d * %d * sizeof( T* ) = %d bytes", ncubes, npages, nrows, ncubes * npages * nrows * sizeof (T*) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
-	// выделяем память под указатели на элементы строк
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹ СЃС‚СЂРѕРє
     v[0][0][0] = (T *) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		ncubes * npages * nrows * ncols * sizeof (T));
  	if (v[0][0][0] == NULL)
@@ -88,8 +88,8 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		}
 		for (page = 0; page < npages; page ++)
 		{
-			// указателям на страницы присваиваем значения 
-			// указателей на первую строку на каждой странице
+			// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂР°РЅРёС†С‹ РїСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ 
+			// СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ РЅР° РєР°Р¶РґРѕР№ СЃС‚СЂР°РЅРёС†Рµ
 			if (page > 0)
 			{
 				v[cube][page] = v[cube][page - 1] + nrows;
@@ -97,8 +97,8 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 			}
 			for (row = 1; row < nrows; row++)
 			{
-				// указателям на строки присваиваем 
-				// значения указателей на первый элемент в каждой строке
+				// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂРѕРєРё РїСЂРёСЃРІР°РёРІР°РµРј 
+				// Р·РЅР°С‡РµРЅРёСЏ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ
 				v[cube][page][row] = v[cube][page][row-1] + ncols;
 			}
 		}
@@ -111,7 +111,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 {
     T ****v;
     size_t cube, page, row;
-	// выделяем память под указатели на cubы
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° cubС‹
 	v = (T ****)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		ncubes *  sizeof( T *** ) );
 
@@ -121,7 +121,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		sprintf(errstr, "Not enough memory for %d * sizeof( T *** ) = %d bytes", ncubes, ncubes * sizeof( T *** ) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}	
-	// выделяем память под указатели на страницы
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂР°РЅРёС†С‹
 	v[0] = (T ***)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		ncubes * npages * sizeof( T ** ) );
 	if (v[0] == NULL)
@@ -130,7 +130,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		sprintf(errstr, "Not enough memory for %d * %d * sizeof( T ** ) = %d bytes", ncubes, npages, ncubes * npages * sizeof( T ** ) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
-	// выделяем память под указатели на строки
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂРѕРєРё
     v[0][0] = (T **) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		ncubes * npages * nrows * sizeof (T*));
  	if (v[0][0] == NULL)
@@ -139,7 +139,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		sprintf(errstr, "Not enough memory for %d * %d * %d * sizeof( T* ) = %d bytes", ncubes, npages, nrows, ncubes * npages * nrows * sizeof (T*) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
-	// выделяем память под указатели на элементы строк
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹ СЃС‚СЂРѕРє
     v[0][0][0] = (T *) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		ncubes * npages * nrows * ncols * sizeof (T));
  	if (v[0][0][0] == NULL)
@@ -158,8 +158,8 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 		}
 		for (page = 0; page < npages; page ++)
 		{
-			// указателям на страницы присваиваем значения 
-			// указателей на первую строку на каждой странице
+			// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂР°РЅРёС†С‹ РїСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ 
+			// СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ РЅР° РєР°Р¶РґРѕР№ СЃС‚СЂР°РЅРёС†Рµ
 			if (page > 0)
 			{
 				v[cube][page] = v[cube][page - 1] + nrows;
@@ -167,8 +167,8 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 			}
 			for (row = 1; row < nrows; row++)
 			{
-				// указателям на строки присваиваем 
-				// значения указателей на первый элемент в каждой строке
+				// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂРѕРєРё РїСЂРёСЃРІР°РёРІР°РµРј 
+				// Р·РЅР°С‡РµРЅРёСЏ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ
 				v[cube][page][row] = v[cube][page][row-1] + ncols;
 			}
 		}
@@ -181,7 +181,7 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 {
     T ***v;
     size_t page, row;
-	// выделяем память под указатели на страницы
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂР°РЅРёС†С‹
 	v = (T ***)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		npages * sizeof( T ** ) );
 
@@ -191,7 +191,7 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 		sprintf(errstr, "Not enough memory for %u * sizeof( T ** ) = %d bytes", npages, npages * sizeof( T ** ) );
 		MessageBox(0,errstr,"AllocTMat",0);
 	}
-	// выделяем память под указатели на строки
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂРѕРєРё
     v[0] = (T **) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		npages * nrows * sizeof (T*));
 
@@ -201,7 +201,7 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 		sprintf(errstr, "Not enough memory for %u * %u * sizeof( T* ) = %u bytes", npages, nrows, npages * nrows * sizeof (T*) );
 		MessageBox(0,errstr,"AllocTMat",0);
 	}
-	// выделяем память под указатели на элементы строк
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹ СЃС‚СЂРѕРє
     v[0][0] = (T *) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		npages * nrows * ncols * sizeof (T));
 
@@ -214,8 +214,8 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 
 	for (page = 0; page < npages; page ++)
 	{
-		// указателям на страницы присваиваем значения 
-		// указателей на первую строку на каждой странице
+		// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂР°РЅРёС†С‹ РїСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ 
+		// СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ РЅР° РєР°Р¶РґРѕР№ СЃС‚СЂР°РЅРёС†Рµ
 		if (page > 0)
 		{
 			v[page] = v[page - 1] + nrows;
@@ -223,8 +223,8 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 		}
 		for (row = 1; row < nrows; row++)
 		{
-			// указателям на строки присваиваем 
-			// значения указателей на первый элемент в каждой строке
+			// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂРѕРєРё РїСЂРёСЃРІР°РёРІР°РµРј 
+			// Р·РЅР°С‡РµРЅРёСЏ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ
 			v[page][row] = v[page][row-1] + ncols;
 		}
 	}

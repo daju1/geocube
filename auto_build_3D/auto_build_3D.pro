@@ -14,11 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         auto_build_3d.cpp \
-    ./../surfdoc/src/AutoProfileBuilding.cpp
+    ./../surfdoc/src/AutoProfileBuilding.cpp \
+    ../surfdoc/src/AutoBuildProfileDlg.cpp
 
 HEADERS  += auto_build_3d.h \
     ./../surfdoc/src/AutoProfileBuilding.h \
-    picks_search.h
+    picks_search.h \
+    ../surfdoc/src/AutoBuildProfileDlg.h \
+    ../include/mywindows.h
 
 FORMS    += auto_build_3d.ui
 

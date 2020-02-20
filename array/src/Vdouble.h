@@ -151,7 +151,7 @@ public:
 	int dwt(int J, Vector<int>& t,
 		 int left_h, int right_h, vdouble &dh,  
 		 Vector<int>& ts, vdouble &s);
-	int vdouble::idwt(
+        int idwt(
 				  int left, int right,
 				  vdouble &rh, 
 				  vdouble &s);
@@ -456,7 +456,7 @@ static vdouble append(vdouble& ob, const double& a)
 	vdouble LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag_of_Inf, Vector<vdouble>& koefs, char * sNumDen, char* sRoots); // Вычисление коэффициентов Лагерра
 
 	double LagerDeterminant(); // Вычисляет детерминант системы уравнений используя вектор коэффициентов Лагерра
-	double vdouble::LagerDeterminant(double alpha, double beta, vdouble& alphai, vdouble& flip_betai, vdouble& num, vdouble& den);// Вычисляет детерминант системы уравнений используя вектор коэффициентов Лагерра, а также коэффициенты передаточной ф-ции
+        double LagerDeterminant(double alpha, double beta, vdouble& alphai, vdouble& flip_betai, vdouble& num, vdouble& den);// Вычисляет детерминант системы уравнений используя вектор коэффициентов Лагерра, а также коэффициенты передаточной ф-ции
 	int InvLaplace(vdouble& num, vdouble& den, vdouble& t, vdouble& f_rekonstr, Vector<vdouble>& koefs, char* sRoots); // Обратное преобразование Лаплапса для дроби полиномов
 
 	//============ Функции Линейной алгебры ============

@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 
 #if !defined(_VECTOR333_)
 #define _VECTOR333_
@@ -35,13 +35,13 @@ template <class T> class Vector
 {
 	friend class CGraph;
 	friend class vdouble;
-//====== Данные класса 
+//====== Р”Р°РЅРЅС‹Рµ РєР»Р°СЃСЃР° 
 private:
-	int size;		// Размер массива
+	int size;		// Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°
 //	bool m_Constructed;
-//====== Методы класса
+//====== РњРµС‚РѕРґС‹ РєР»Р°СЃСЃР°
 public:
-	T *data;		// Указатель начала массива компонент
+	T *data;		// РЈРєР°Р·Р°С‚РµР»СЊ РЅР°С‡Р°Р»Р° РјР°СЃСЃРёРІР° РєРѕРјРїРѕРЅРµРЅС‚
 	Vector()
 	{
 		data = NULL;
@@ -93,8 +93,8 @@ public:
 	{
 		Free(); 
 	}
-	int Size() { return size; }  // Возвращает длину вектора
-	T Max() // Возвращает мaксимальный элемент вектора
+	int Size() { return size; }  // Р’РѕР·РІСЂР°С‰Р°РµС‚ РґР»РёРЅСѓ РІРµРєС‚РѕСЂР°
+	T Max() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјaРєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 	{
 		T _Max;
 		_Max=*(data);
@@ -102,7 +102,7 @@ public:
 			_Max = _Max > *(data+i) ? _Max : *(data+i);
 		return _Max;
 	}
-	T Min() // Возвращает минимальный элемент вектора
+	T Min() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 	{
 		T _Min;
 		_Min=*(data);
@@ -149,7 +149,7 @@ public:
 	{
 		return size == 0 ? true : false;
 	}
-	void push_back(const T& a) // Добавляет элемент в конец вектора
+	void push_back(const T& a) // Р”РѕР±Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РєРѕРЅРµС† РІРµРєС‚РѕСЂР°
 	{
 		int size_1 = size;
 		size++; 
@@ -169,7 +169,7 @@ public:
 		if (data) delete[] data;
 		data=data2;
 	}
-	void push_back_Vector(T& a) // Добавляет элемент в конец вектора
+	void push_back_Vector(T& a) // Р”РѕР±Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РєРѕРЅРµС† РІРµРєС‚РѕСЂР°
 	{
 		Vector<T> v(size + 1);
 		Vector<T> *pv;
@@ -180,7 +180,7 @@ public:
 		this = &v;
 		pv->~Vector<T>();
 	}
-	void push_back(T& a) // Добавляет элемент в конец вектора
+	void push_back(T& a) // Р”РѕР±Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РєРѕРЅРµС† РІРµРєС‚РѕСЂР°
 	{
 		int size_1 = size;
 		size++; 
@@ -202,11 +202,11 @@ public:
 		if (data) delete[] data;
 		data=data2;
 	}
-	void DeleteAll() // Удаляет все элементы вектора
+	void DeleteAll() // РЈРґР°Р»СЏРµС‚ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР°
 	{
 		Free();
 	}
-	void DeleteElement_(const int& index) // Удаляет index-ный элемент вектора
+	void DeleteElement_(const int& index) // РЈРґР°Р»СЏРµС‚ index-РЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 	{
 		if (index > size-1 || index < 0)
 		{
@@ -224,12 +224,12 @@ public:
 		}
 		for(int i=0; i<index; i++)
 			*(data2+i) = *(data+i);
-		for(i=index; i<size; i++)
+                for(int i=index; i<size; i++)
 			*(data2+i) = *(data+i+1);
 		if (data) delete[] data;
 		data=data2;
 	}
-	void DeleteElement(const int& index) // Удаляет index-ный элемент вектора
+	void DeleteElement(const int& index) // РЈРґР°Р»СЏРµС‚ index-РЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 	{
 		if (index > size-1 || index < 0)
 		{
@@ -241,7 +241,7 @@ public:
 		for(int i=index; i<size; i++)
 			*(data+i) = *(data+i+1);
 	}
-	void DeleteElements(Vector<bool>& vbl) // Удаляет элементы вектора
+	void DeleteElements(Vector<bool>& vbl) // РЈРґР°Р»СЏРµС‚ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР°
 	{
 		if (size != vbl.Size())
 		{
@@ -273,7 +273,7 @@ public:
 		if (data) delete[] data;
 		data=data2;
 	}
-	T& End() // Возвращает последний элемент вектора
+	T& End() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 	{
 		if (size == 0)
 		{
@@ -363,7 +363,7 @@ public:
 	friend Vector<bool> inline operator&&(Vector<bool>& vb, bool& bl);
 	friend Vector<bool> inline operator&&(bool& bl, Vector<bool>& vb);
 	friend Vector<bool> inline operator&&(Vector<bool>& vb1, Vector<bool>& vb2);
-	//=================== Логические операторы =============================
+	//=================== Р›РѕРіРёС‡РµСЃРєРёРµ РѕРїРµСЂР°С‚РѕСЂС‹ =============================
 	//////////////////////////////////////////////////////////////
 	friend Vector<bool> inline operator>(Vector<int>& ob1, Vector<int>& ob2);
 	friend Vector<bool> inline operator>(const int& a, Vector<int>& ob);
@@ -373,7 +373,7 @@ public:
 	friend void inline operator>>(const T& a, Vector<T>& v);
 
 };
-//====== Внешняя реализация тела конструктора
+//====== Р’РЅРµС€РЅСЏСЏ СЂРµР°Р»РёР·Р°С†РёСЏ С‚РµР»Р° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
 Vector<int> inline Find(Vector<bool>& vbl)
 {
 	int sz = vbl.size;
@@ -513,7 +513,7 @@ Vector<bool> inline operator&&(Vector<bool>& vb1, Vector<bool>& vb2)
 	}
 	return vbl;
 }
-//=================== Логические операторы =============================
+//=================== Р›РѕРіРёС‡РµСЃРєРёРµ РѕРїРµСЂР°С‚РѕСЂС‹ =============================
 //////////////////////////////////////////////////////////////
 Vector<bool> inline operator>(Vector<int>& ob1, Vector<int>& ob2)
 {
@@ -601,32 +601,32 @@ class Archive;
 
 template <class T> Archive& operator <<(Archive& ar, Vector<T>& v)
 {
-	// метка старта вектора заносим в архив
+	// РјРµС‚РєР° СЃС‚Р°СЂС‚Р° РІРµРєС‚РѕСЂР° Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ
 	/*DWORD start_of_vector	= 0xabcd1234;
 
 	ar << start_of_vector;*/
-	// заносим в архив число элементов вектора
+	// Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 	ar << v.Size();
 	for (int i = 0; i < v.Size(); i++)
 		ar << v[i];
 
 
 
-	// метка конца вектора
+	// РјРµС‚РєР° РєРѕРЅС†Р° РІРµРєС‚РѕСЂР°
 	/*DWORD end_of_vector		= 0x4321dcba;
 	ar << end_of_vector;*/
 	return ar;
 }
 template <class T> Archive& operator >>(Archive& ar, Vector<T>& v)
 {
-	// метка старта вектора
+	// РјРµС‚РєР° СЃС‚Р°СЂС‚Р° РІРµРєС‚РѕСЂР°
 	/*DWORD start_of_vector;
 	ar >> start_of_vector;
 	if (start_of_vector	!= 0xabcd1234)
 	{
 		printf("Error of reading of start of vect from archive:\nstart_of_vector(%x) != 0xabcd1234", start_of_vector);
 	}*/
-	// число элементов вектора
+	// С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 	int len;
 	ar >> len;
 	v.resize(len);
@@ -634,7 +634,7 @@ template <class T> Archive& operator >>(Archive& ar, Vector<T>& v)
 		ar >> v[i];
 
 
-	// метка конца вектора
+	// РјРµС‚РєР° РєРѕРЅС†Р° РІРµРєС‚РѕСЂР°
 	/*DWORD end_of_vector		= 0x4321dcba;
 	ar >> end_of_vector;
 	if (end_of_vector != 0x4321dcba)

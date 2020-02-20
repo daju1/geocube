@@ -22,7 +22,9 @@ struct FilesInDirectory
 
 	char szFileFilter[16];
 	short nFileFilterID;
+#ifdef _MSC_VER
 	DWORD nFilterIndex;
+#endif
 };
 
 
@@ -31,6 +33,7 @@ struct FilesInDirectory
 class AutoBuildProfileDlg0  
 {
 protected:
+#ifdef _MSC_VER
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
 		HWND hwnd, 
 		UINT uMsg, 
@@ -38,6 +41,7 @@ protected:
 		LPARAM lParam) ;
 
 	HWND					hDlg;
+#endif
 	FilesInDirectory		m_files_in_dir;
 	char szFile		[4098];			// buffer for file name
 	char directory	[2048];			// for dir name
@@ -66,12 +70,13 @@ public:
 
 class AutoBuildProfileDlg  : public AutoBuildProfileDlg0
 {
+#ifdef _MSC_VER
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
 		HWND hwnd, 
 		UINT uMsg, 
 		WPARAM wParam, 
 		LPARAM lParam) ;
-
+#endif
 public:
 	auto_build_parametrs& m_ab;
 	int m_extremums_filter_type;
@@ -87,18 +92,21 @@ public:
 
 	AutoBuildProfileDlg(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab);
 	virtual ~AutoBuildProfileDlg();
+#ifdef _MSC_VER
 	friend LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 								  WPARAM wParam, LPARAM lParam );
+#endif
 };
 
 class AutoBuildProfileDlg1 : public AutoBuildProfileDlg0
 {
+#ifdef _MSC_VER
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
 		HWND hwnd, 
 		UINT uMsg, 
 		WPARAM wParam, 
 		LPARAM lParam) ;
-
+#endif
 
 public:
 	auto_build_parametrs& m_ab;
@@ -115,8 +123,10 @@ public:
 
 	AutoBuildProfileDlg1(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab);
 	virtual ~AutoBuildProfileDlg1();
+#ifdef _MSC_VER
 	friend LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 								  WPARAM wParam, LPARAM lParam );
+#endif
 };
 
 

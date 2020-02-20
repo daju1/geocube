@@ -12,6 +12,37 @@
 #ifdef _MSC_VER
 #include <windows.h>
 #include <commctrl.h>
+#else
+#include <stdarg.h>
+#include <stdio.h>
+inline int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...)
+{
+    va_list ap;
+    va_start(ap, format);
+    int result = vsnprintf(buffer, sizeOfBuffer, format, ap);
+    va_end(ap);
+    return result;
+}
+
+template<size_t sizeOfBuffer>
+inline int sprintf_s(char (&buffer)[sizeOfBuffer], const char* format, ...)
+{
+    va_list ap;
+    va_start(ap, format);
+    int result = vsnprintf(buffer, sizeOfBuffer, format, ap);
+    va_end(ap);
+    return result;
+}
+
+#include <qmessagebox.h>
+int MessageBox(void* hwnd, const char * title, const char * msg, int)
+{
+    QMessageBox mb(QMessageBox::Information, title, msg,  QMessageBox::Ok | QMessageBox::Cancel);
+    if(mb.exec() == QMessageBox::Ok)
+    {
+
+    }
+}
 #endif
 #include <stdio.h>
 #include <math.h>

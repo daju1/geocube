@@ -65,7 +65,9 @@ public:
 class profile_interval
 {
 public:
+#ifdef _MSC_VER
 	Layer * layer;
+#endif
 	int iFile;
 	size_t i1;//индекс первого элемента интервала текущего профиля
 	size_t i2;//индекс последнего элемента интервала текущего профиля
@@ -313,7 +315,7 @@ void SourcesCoordinates_Calcule_AndSave(
 void SourcesCoordinates_Calcule_AndSave(double t1, double t2, double k, FILE * stream, int delim, double r_ , double max_, double& x, double& y);
 #endif
 
-
+#if _USE_WINSURF_
 void MakeLinePointPair(
 #if SOURCE_COORDINATES_3D
 				 vector<double>& X, 
@@ -331,7 +333,7 @@ void MakeLinePointPair(
 				 , COLLECTION * pcollection_,
 				 SurfDoc* doc
 				);
-
+#endif
 
 void OutputDimaAlgorithm(double limit_dima,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
@@ -490,7 +492,9 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 							   int reverse1, int reverse2,
 							   int delim);
 void DoVerticalCorrelation(int wlen,// = 100;//длина окна корреляции
-						   Collection * pcollection,
+#ifdef _MSC_VER
+                           Collection * pcollection,
+#endif
 						   vector<vert_korr_points> * vvkp, 
 						   vector<profile_interval> & profile_intervals,
 						   vector<string> * pnames_of_colomns,
@@ -581,7 +585,11 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 			   short value_type,// 1 - korr_k;  // коэффициент горизонтальной корреляции
 								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
 								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
+#ifdef _MSC_VER
 			   Collection * pcollection,
+#else
+               void * pcollection,
+#endif
 			   vector<vert_korr_points> * vvkp,
 			   vector<profile_interval> & profile_intervals,
 			   vector<string> * pnames_of_colomns,
@@ -596,7 +604,11 @@ void BuildGrid(char * file_grd,
 			   vector<double> &vZ,			
 			   vector<double> &vK,			
 			   double xSize, double ySize, double max_glubina, 
-			   Collection * pcollection
+#ifdef _MSC_VER
+               Collection * pcollection
+#else
+               void * pcollection
+#endif
 			   );
 
 void

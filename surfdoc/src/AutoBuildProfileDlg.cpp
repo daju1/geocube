@@ -14,16 +14,17 @@ using namespace std;
 #include "AutoBuildProfileDlg.h"
 #include "../../array/src/sorting.h"
 #include "../../tools/src/filedlg.h"
-#include "../../array/src/vdouble.h"
+#include "../../array/src/Vdouble.h"
 #include "../../array/src/interp.h"
-#include "..\..\array\src\matrixes.h"
+#include "../../array/src/matrixes.h"
 
 #include "../../winplot/src/winplot.h"
 #include "../../wintools/src/winsurf.h"
 
 #include "../../resource.h"
-
-#include "surfdoc.h"
+#ifdef _MSC_VER
+#include "SurfDoc.h"
+#endif
 #include "../mylicense.h"
 #include "../../auto_build_3D/picks_search.h"
 #include "./../array/src/slau.h"

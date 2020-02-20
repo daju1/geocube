@@ -46,7 +46,7 @@ public:
 	void InitFileBlockHeader(long& type, long& version, DWORD size = 0);
 };
 //first was 0 !!!
-#ifndef _WIN64
+#if !defined( _WIN64) && defined (_MSC_VER)
 #define USE_SIZE_T_IN_ARCHIVE 1
 #endif
 class Archive
@@ -87,7 +87,7 @@ public:
 
 	DWORD ReWrite(unsigned char * from, DWORD to_BytesFromBegin, DWORD count);
 	DWORD Write(unsigned char * from, DWORD count);
-	DWORD Archive::Read(unsigned char * to, DWORD count);
+        DWORD Read(unsigned char * to, DWORD count);
 	void Flush(void);
 	void Close(void);
 
@@ -122,9 +122,10 @@ public:
 	Archive& operator <<(unsigned u);
 #endif
 	Archive& operator <<(bool b);
+#if defined (_MSC_VER)
 	Archive& operator <<(ULONGLONG dwdw);
 	Archive& operator <<(LONGLONG dwdw);
-
+#endif
 	friend Archive& operator <<(Archive& ar, RECT& rect);
 	friend Archive& operator <<(Archive& ar, POINT point);
 	friend Archive& operator <<(Archive& ar, SIZE size);
@@ -153,9 +154,10 @@ public:
 	Archive& operator >>(unsigned& u);
 #endif
 	Archive& operator >>(bool& b);
+#if defined (_MSC_VER)
 	Archive& operator >>(ULONGLONG& dwdw);
 	Archive& operator >>(LONGLONG& dwdw);
-
+#endif
 	friend Archive& operator >>(Archive& ar, RECT& rect);
 	friend Archive& operator >>(Archive& ar, POINT& point);
 	friend Archive& operator >>(Archive& ar, SIZE& size);
@@ -263,7 +265,7 @@ template <class T> Archive& operator >>(Archive& ar, std::vector<T>& v)
 template <class K, class T> Archive& operator <<(Archive& ar, std::map<K,T>& m)
 {
 	ar << m.size();
-	map <K, T>::iterator m1_Iter;
+        std::map <K, T>::const_iterator m1_Iter;
 	for ( m1_Iter = m.begin( ); m1_Iter != m.end( ); m1_Iter++ )
 	{
 		ar << m1_Iter -> first;
@@ -317,6 +319,7 @@ template <class K, class T> void Archive::ReadStdMapAsImport(std::map<K,T>& m)
 		m.insert( pair <K, T>( key, val ) );
 	}
 }
+#if defined (_MSC_VER)
 #include "Object.h"
 
 class VersionException
@@ -359,6 +362,7 @@ public:
 		return s;
 	}
 };
+#endif
 
 
 

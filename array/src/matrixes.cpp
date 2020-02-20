@@ -28,7 +28,7 @@ double **AllocDoubleMat (int nrows, int cols)
 {
     double **v;
     int k;
-	// выделяем память под указатели на строки
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂРѕРєРё
 	v = (double **)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		nrows * sizeof( double * ) );
 
@@ -38,7 +38,7 @@ double **AllocDoubleMat (int nrows, int cols)
 		sprintf(errstr, "Not enough memory for %d * sizeof( double * ) = %d bytes", nrows, nrows * sizeof( double * ) );
 		MessageBox(0,errstr,"AllocDoubleMat",0);
 	}
-	// выделяем память под указатели на элементы строк
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹ СЃС‚СЂРѕРє
     v[0] = (double *) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		nrows * cols * sizeof (double));
 
@@ -48,8 +48,8 @@ double **AllocDoubleMat (int nrows, int cols)
 		sprintf(errstr, "Not enough memory for %d * %d * sizeof( double ) = %d bytes", nrows, cols, nrows * cols * sizeof (double) );
 		MessageBox(0,errstr,"AllocDoubleMat",0);
 	}
-	// указателям на строки присваиваем 
-	// значения указателей на первый элемент в каждой строке
+	// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂРѕРєРё РїСЂРёСЃРІР°РёРІР°РµРј 
+	// Р·РЅР°С‡РµРЅРёСЏ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ
 	for (k = 1; k < nrows; k ++) v[k] = v[k - 1] + cols;
     return (v);	
 }
@@ -58,7 +58,7 @@ double ***AllocDouble3DMat (int npages, int nrows, int ncols)
 {
     double ***v;
     int page, row;
-	// выделяем память под указатели на страницы
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂР°РЅРёС†С‹
 	v = (double ***)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		npages * sizeof( double ** ) );
 
@@ -68,7 +68,7 @@ double ***AllocDouble3DMat (int npages, int nrows, int ncols)
 		sprintf(errstr, "Not enough memory for %d * sizeof( double ** ) = %d bytes", npages, npages * sizeof( double ** ) );
 		MessageBox(0,errstr,"AllocDoubleMat",0);
 	}
-	// выделяем память под указатели на строки
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂРѕРєРё
     v[0] = (double **) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		npages * nrows * sizeof (double*));
 
@@ -78,7 +78,7 @@ double ***AllocDouble3DMat (int npages, int nrows, int ncols)
 		sprintf(errstr, "Not enough memory for %d * %d * sizeof( double* ) = %d bytes", npages, nrows, npages * nrows * sizeof (double) );
 		MessageBox(0,errstr,"AllocDoubleMat",0);
 	}
-	// выделяем память под указатели на элементы строк
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹ СЃС‚СЂРѕРє
     v[0][0] = (double *) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		npages * nrows * ncols * sizeof (double));
 
@@ -91,8 +91,8 @@ double ***AllocDouble3DMat (int npages, int nrows, int ncols)
 
 	for (page = 0; page < npages; page ++)
 	{
-		// указателям на страницы присваиваем значения 
-		// указателей на первую строку на каждой странице
+		// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂР°РЅРёС†С‹ РїСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ 
+		// СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ РЅР° РєР°Р¶РґРѕР№ СЃС‚СЂР°РЅРёС†Рµ
 		if (page > 0)
 		{
 			v[page] = v[page - 1] + nrows;
@@ -100,8 +100,8 @@ double ***AllocDouble3DMat (int npages, int nrows, int ncols)
 		}
 		for (row = 1; row < nrows; row++)
 		{
-			// указателям на строки присваиваем 
-			// значения указателей на первый элемент в каждой строке
+			// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂРѕРєРё РїСЂРёСЃРІР°РёРІР°РµРј 
+			// Р·РЅР°С‡РµРЅРёСЏ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ
 			v[page][row] = v[page][row-1] + ncols;
 		}
 	}
@@ -117,7 +117,7 @@ int ***AllocInteger3DMat (int npages, int nrows, int ncols)
 {
     int ***v;
     int page, row;
-	// выделяем память под указатели на страницы
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂР°РЅРёС†С‹
 	v = (int ***)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		npages * sizeof( int ** ) );
 
@@ -127,7 +127,7 @@ int ***AllocInteger3DMat (int npages, int nrows, int ncols)
 		sprintf(errstr, "Not enough memory for %d * sizeof( int ** ) = %d bytes", npages, npages * sizeof( int ** ) );
 		MessageBox(0,errstr,"AllocDoubleMat",0);
 	}
-	// выделяем память под указатели на строки
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃС‚СЂРѕРєРё
     v[0] = (int **) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		npages * nrows * sizeof (int*));
 
@@ -137,7 +137,7 @@ int ***AllocInteger3DMat (int npages, int nrows, int ncols)
 		sprintf(errstr, "Not enough memory for %d * %d * sizeof( int* ) = %d bytes", npages, nrows, npages * nrows * sizeof (int) );
 		MessageBox(0,errstr,"AllocintMat",0);
 	}
-	// выделяем память под указатели на элементы строк
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹ СЃС‚СЂРѕРє
     v[0][0] = (int *) HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY, 
 		npages * nrows * ncols * sizeof (int));
 
@@ -150,8 +150,8 @@ int ***AllocInteger3DMat (int npages, int nrows, int ncols)
 
 	for (page = 0; page < npages; page ++)
 	{
-		// указателям на страницы присваиваем значения 
-		// указателей на первую строку на каждой странице
+		// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂР°РЅРёС†С‹ РїСЂРёСЃРІР°РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ 
+		// СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ РЅР° РєР°Р¶РґРѕР№ СЃС‚СЂР°РЅРёС†Рµ
 		if (page > 0)
 		{
 			v[page] = v[page - 1] + nrows;
@@ -159,8 +159,8 @@ int ***AllocInteger3DMat (int npages, int nrows, int ncols)
 		}
 		for (row = 1; row < nrows; row++)
 		{
-			// указателям на строки присваиваем 
-			// значения указателей на первый элемент в каждой строке
+			// СѓРєР°Р·Р°С‚РµР»СЏРј РЅР° СЃС‚СЂРѕРєРё РїСЂРёСЃРІР°РёРІР°РµРј 
+			// Р·РЅР°С‡РµРЅРёСЏ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ
 			v[page][row] = v[page][row-1] + ncols;
 		}
 	}

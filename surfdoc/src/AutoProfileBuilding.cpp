@@ -14,16 +14,15 @@
 
 #define TRACE              printf
 
-#ifdef _MSC_VER
 #include "stdafx.h"
-#endif
-
 #include "AutoProfileBuilding.h"
 #include "Archive.h"
+#if defined (_MSC_VER)
 #include "winsurftree.h"
 #include "SurfDoc.h"
 #include "../../winplot/src/winplot.h"
 #include "../../tools/src/errorexit.h"
+#endif
 #include "../../array/src/interp.h"
 #include "../../array/src/ap.h"
 #include "../../array/src/fft.h"
@@ -33,9 +32,9 @@
 
 
 #include "AutoBuildProfileDlg.h"
-
+#if defined (_MSC_VER)
 #include "./../kohonen/src/KohonenDlg.h"
-
+#endif
 #include "./../array/src/sorting.h"
 
 #include "./../array/src/korrelation.h"
@@ -17604,7 +17603,11 @@ void BuildGrid(char * file_grd,
 			   vector<double> &vZ,
 			   vector<double> &vK,
 			   double xSize, double ySize, double max_glubina,
-			   Collection * pcollection
+#ifdef _MSC_VER
+               Collection * pcollection
+#else
+               void * pcollection
+#endif
 			   )
 {
 	//return;
@@ -17789,7 +17792,11 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 			   short value_type,// 1 - korr_k;  // коэффициент горизонтальной корреляции
 								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
 								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
-			   Collection * pcollection,
+#ifdef _MSC_VER
+               Collection * pcollection,
+#else
+               void * pcollection,
+#endif
 			   vector<vert_korr_points> * vvkp,
 			   vector<profile_interval> & profile_intervals,
 			   vector<string> * pnames_of_colomns,
@@ -17804,9 +17811,9 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	if (current_profile_number < profile_intervals.size())
 		current_profile_interval = &profile_intervals[current_profile_number];
 
-
+#ifdef _MSC_VER
 	COLLEC_TION * pcurrent_fast_collection = NULL;
-
+#endif
 
 	CPoint3 pt;
 	pt.bVisible = true;
@@ -17852,7 +17859,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 		*p = '_';
 	}
 	printf("try to open file %s\n", file_grd);
-
+#ifdef _MSC_VER
 	if (pcollection)
 	{
 		COLLEC_TION current_fast_collection;
@@ -17873,7 +17880,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
-
+#endif
 	size_t ROWS = (*vvkp).size();
 	int printed_progress = 0;
 	double progress_len = 80;
@@ -17952,7 +17959,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 					{
 						*p = '_';
 					}
-
+#ifdef _MSC_VER
 					if (pcollection)
 					{
 						COLLEC_TION current_fast_collection;
@@ -17967,6 +17974,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 					}
 					else
 						printf("NOT pcollection on DoVerticalCorrelation !!!!!!!!!!!!!!!\n");
+#endif
 				}
 			}
 		}

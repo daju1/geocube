@@ -27,6 +27,8 @@ class Layer;
 #include <windows.h>
 #include <gdiplus.h>
 using namespace Gdiplus;
+#else
+#include <mywindows.h>
 #endif
 
 class map_view;

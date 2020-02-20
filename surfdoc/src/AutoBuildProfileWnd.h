@@ -12,10 +12,12 @@
 
 class AutoBuildProfileWnd /*: public CWnd*/
 {
+#if defined (_MSC_VER)
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc( HWND hwnd,
 		UINT uMsg, WPARAM wParam, LPARAM lParam);
 	HWND hWnd;
 	CRITICAL_SECTION CriticalSection;
+#endif
 // Construction
 public:
 	AutoBuildProfileWnd();
