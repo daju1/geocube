@@ -1462,8 +1462,19 @@ int ReadDatFile(const char * filename, vdouble& x, vdouble& y, vdouble& z)
 						z[i] = Z;
 						i++;
 					}
+					else
+					{
+						rez = sscanf(szBuff,"%lf;%lf;%lf",
+										&X, &Y, &Z);
+						if (rez == 3 && rez != EOF)
+						{
+							x[i] = X;
+							y[i] = Y;
+							z[i] = Z;
+							i++;
+						}
+					}
 				}
-
 			}
 		}
 		fclose(stream);
