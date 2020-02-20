@@ -1411,6 +1411,15 @@ int ReadDatFile(const char * filename, vdouble& x, vdouble& y, vdouble& z)
 					{
 						i++;
 					}
+					else
+					{
+						rez = sscanf(szBuff,"%lf;%lf;%lf",
+										&X, &Y, &Z);
+						if (rez == 3 && rez != EOF)
+						{
+							i++;
+						}
+					}
 				}
 
 			}

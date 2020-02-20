@@ -265,7 +265,7 @@ template <class T> Archive& operator >>(Archive& ar, std::vector<T>& v)
 template <class K, class T> Archive& operator <<(Archive& ar, std::map<K,T>& m)
 {
 	ar << m.size();
-        std::map <K, T>::const_iterator m1_Iter;
+	map <K, T>::iterator m1_Iter;
 	for ( m1_Iter = m.begin( ); m1_Iter != m.end( ); m1_Iter++ )
 	{
 		ar << m1_Iter -> first;
