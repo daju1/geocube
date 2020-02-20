@@ -3,7 +3,10 @@
 
 
 #include "stdafx.h"
-#include "..\surfdoc\src\autoprofilebuilding.h"
+
+#include "../surfdoc/src/AutoProfileBuilding.h"
+#include "./../array/src/wav.h"
+
 //минимизировать сигнал в окне
 #define _USE_MIN_IN_WINDOW_ 1
 
@@ -732,7 +735,7 @@ struct MyMethodsData3
 
 };
 
-#include ".\..\array\src\wav.h"
+
 
 struct Wavelet2D
 {

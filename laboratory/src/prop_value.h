@@ -1,7 +1,8 @@
 //prop_value.h
 #pragma once
-
+#ifdef _MSC_VER
 #include <windows.h>
+#endif
 #include <string>
 #include <vector>
 #include <map>
@@ -54,7 +55,7 @@ struct GranVyprobData1
 };
 struct GranVyprobData2
 {
-	long id_methoh;//просев 1 или ареометрич 2
+	long id_methoh;//РїСЂРѕСЃРµРІ 1 РёР»Рё Р°СЂРµРѕРјРµС‚СЂРёС‡ 2
 	string soil_class;
 
 	GranVyprobData2()
@@ -585,27 +586,27 @@ struct StatZondData2
 
 	bool ParseUstName()
 	{
-		if (strcmp (ust_name.c_str(), "С-832(Піка-15)"))
+		if (strcmp (ust_name.c_str(), "РЎ-832(РџС–РєР°-15)"))
 		{
 			id_ust = 1;
 			typ_zond = 2;
 		}
-		else if (strcmp (ust_name.c_str(), "С-979-1"))
+		else if (strcmp (ust_name.c_str(), "РЎ-979-1"))
 		{
 			id_ust = 2;
 			typ_zond = 1;
 		}
-		else if (strcmp (ust_name.c_str(), "С-979-2"))
+		else if (strcmp (ust_name.c_str(), "РЎ-979-2"))
 		{
 			id_ust = 3;
 			typ_zond = 1;
 		}
-		else if (strcmp (ust_name.c_str(), "С-59"))
+		else if (strcmp (ust_name.c_str(), "РЎ-59"))
 		{
 			id_ust = 4;
 			typ_zond = 1;
 		}
-		else if (strcmp (ust_name.c_str(), "Пика-15"))
+		else if (strcmp (ust_name.c_str(), "РџРёРєР°-15"))
 		{
 			id_ust = 5;
 			typ_zond = 2;

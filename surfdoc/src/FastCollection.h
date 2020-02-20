@@ -1,8 +1,8 @@
 #pragma once
 #include "Primitive3D.h"
-#include "object.h"
-#include "objectlist.h"
-#include "..\..\array\src\vect.h"
+#include "Object.h"
+#include "ObjectList.h"
+#include "../../array/src/vect.h"
 
 class FastCollection :
 	public Object

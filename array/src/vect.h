@@ -17,11 +17,15 @@ extern void WriteRaportoA(LPCTSTR file, LPCTSTR s);
 #endif
 */
 class Archive;
+#ifdef _MSC_VER
 #define VECT_WITH_CRITICAL_SECTION 1
+#else
+#define VECT_WITH_CRITICAL_SECTION 0
+#endif
 template <class T, class VITEM = vectItem<T> > class vect
 {
 	bool created;
-	//====== Данные класса 
+	//====== Р”Р°РЅРЅС‹Рµ РєР»Р°СЃСЃР° 
 #if VECT_WITH_CRITICAL_SECTION
 	CRITICAL_SECTION CriticalSection;
 #endif
@@ -30,9 +34,9 @@ template <class T, class VITEM = vectItem<T> > class vect
 	VITEM*	current;
 	VITEM*	current_i;
 
-	size_t count;		// Размер массива
-	bool vectCheck;		// Флаг отметки
-	long vectData;		// Данные, связанные с вектором
+	size_t count;		// Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+	bool vectCheck;		// Р¤Р»Р°Рі РѕС‚РјРµС‚РєРё
+	long vectData;		// Р”Р°РЅРЅС‹Рµ, СЃРІСЏР·Р°РЅРЅС‹Рµ СЃ РІРµРєС‚РѕСЂРѕРј
 
 	int i_msg, i_vect;
 
@@ -43,9 +47,9 @@ template <class T, class VITEM = vectItem<T> > class vect
 	vect* pre_vect;
 	vect* next_vect;
 
-	size_t count_vect;		// Размер массива
+	size_t count_vect;		// Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР°
 	size_t index_vect;
-	//====== Методы класса
+	//====== РњРµС‚РѕРґС‹ РєР»Р°СЃСЃР°
 public:
 	vect()
 	{
@@ -568,16 +572,16 @@ public:
 					g++;
 				}
 			}
-			// Перемещаем текущий внутренний вектор
+			// РџРµСЂРµРјРµС‰Р°РµРј С‚РµРєСѓС‰РёР№ РІРЅСѓС‚СЂРµРЅРЅРёР№ РІРµРєС‚РѕСЂ
 			while(this->IncrementCurrentVect());
 		}
 		return g;
 	}
-	size_t vectSize()// Возвращает длину вектора
+	size_t vectSize()// Р’РѕР·РІСЂР°С‰Р°РµС‚ РґР»РёРЅСѓ РІРµРєС‚РѕСЂР°
 	{
 		return count_vect;
 	}  
-	size_t msgSize()// Возвращает длину вектора
+	size_t msgSize()// Р’РѕР·РІСЂР°С‰Р°РµС‚ РґР»РёРЅСѓ РІРµРєС‚РѕСЂР°
 	{
 		return count;
 	}  
@@ -1299,7 +1303,7 @@ public:
 				T* pt2 = this->GetLastMsgPtr();
 				for( size_t i = 0; i < len; i++)
 				{
-					pt2[i] = ptr[i]; // вызов перегруженных операторов= для вложенных объектов T
+					pt2[i] = ptr[i]; // РІС‹Р·РѕРІ РїРµСЂРµРіСЂСѓР¶РµРЅРЅС‹С… РѕРїРµСЂР°С‚РѕСЂРѕРІ= РґР»СЏ РІР»РѕР¶РµРЅРЅС‹С… РѕР±СЉРµРєС‚РѕРІ T
 				}
 			}
 			while(ob.IncrementCurrentMsg());
@@ -1334,45 +1338,45 @@ public:
 template <class T> Archive& operator <<(Archive& ar, vect<T, vectItem<T> >& v)
 {
 //printf("Archive& operator <<(Archive& ar, vect<T, vectItem<T> >& v)\n");
-	// метка старта вектора заносим в архив
+	// РјРµС‚РєР° СЃС‚Р°СЂС‚Р° РІРµРєС‚РѕСЂР° Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ
 	DWORD start_of_vector	= 0xabcd1234;
 
 	ar << start_of_vector;
-	// заносим в архив число элементов вектора
+	// Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 	ar << v.msgSize();
-	// и если наш вектор не пуст
+	// Рё РµСЃР»Рё РЅР°С€ РІРµРєС‚РѕСЂ РЅРµ РїСѓСЃС‚
 	if ( v.SetCurrentMsgOnFirst())
 	{
-		// то для каждого элемента вектора
+		// С‚Рѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 		do
 		{
 			T* ptr = v.GetCurrentMsgPtr();
 			size_t len = v.GetCurrentMsgLen();
-			// заносим в архив длину каждого элемента вектора
+			// Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ РґР»РёРЅСѓ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 			ar << len;
-			// а затем в цикле
+			// Р° Р·Р°С‚РµРј РІ С†РёРєР»Рµ
 			for(size_t i = 0; i < len; i++)
 			{
-				// заносим каждый объект из текущего элемента вектора				
+				// Р·Р°РЅРѕСЃРёРј РєР°Р¶РґС‹Р№ РѕР±СЉРµРєС‚ РёР· С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°				
 				ar << ptr[i];
 			}
 		}
 		while(v.IncrementCurrentMsg());
 	}
-	// теперь заносим в архив число вложенных векторов
+	// С‚РµРїРµСЂСЊ Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ С‡РёСЃР»Рѕ РІР»РѕР¶РµРЅРЅС‹С… РІРµРєС‚РѕСЂРѕРІ
 	ar << v.vectSize();
-	// и если вложенные вектора существуют
+	// Рё РµСЃР»Рё РІР»РѕР¶РµРЅРЅС‹Рµ РІРµРєС‚РѕСЂР° СЃСѓС‰РµСЃС‚РІСѓСЋС‚
 	if (v.SetCurrentVectOnFirst())
 	{
-		// то для каждого вложенного вектора
+		// С‚Рѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ РІР»РѕР¶РµРЅРЅРѕРіРѕ РІРµРєС‚РѕСЂР°
 		do
 		{
-			// рекурсивно вызываем (этот же) оператор сохранения в архив
+			// СЂРµРєСѓСЂСЃРёРІРЅРѕ РІС‹Р·С‹РІР°РµРј (СЌС‚РѕС‚ Р¶Рµ) РѕРїРµСЂР°С‚РѕСЂ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІ Р°СЂС…РёРІ
 			ar << v.GetCurrentVect();
 		}
 		while(v.IncrementCurrentVect());
 	}
-	// метка конца вектора
+	// РјРµС‚РєР° РєРѕРЅС†Р° РІРµРєС‚РѕСЂР°
 	DWORD end_of_vector		= 0x4321dcba;
 	ar << end_of_vector;
 	return ar;
@@ -1380,7 +1384,7 @@ template <class T> Archive& operator <<(Archive& ar, vect<T, vectItem<T> >& v)
 template <class T> Archive& operator >>(Archive& ar, vect<T, vectItem<T> >& v)
 {
 //printf("Archive& operator >>(Archive& ar, vect<T, vectItem<T> >& v)\n");
-	// метка старта вектора
+	// РјРµС‚РєР° СЃС‚Р°СЂС‚Р° РІРµРєС‚РѕСЂР°
 	DWORD start_of_vector;
 	ar >> start_of_vector;
 	if (start_of_vector	!= 0xabcd1234)
@@ -1388,37 +1392,37 @@ template <class T> Archive& operator >>(Archive& ar, vect<T, vectItem<T> >& v)
 		printf("Error of reading of start of vect from archive:\nstart_of_vector(%x) != 0xabcd1234", start_of_vector);
 		throw "Error of reading of start of vect from archive";
 	}
-	// очищаем вектор если это не импорт
+	// РѕС‡РёС‰Р°РµРј РІРµРєС‚РѕСЂ РµСЃР»Рё СЌС‚Рѕ РЅРµ РёРјРїРѕСЂС‚
 	if(!Archive::OpenFileAsImport)
 		v.clear();
-	// число элементов вектора
+	// С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 	size_t msgSize;
 	ar >> msgSize;
 	for (size_t i = 0; i < msgSize; i++)
 	{
-		// для каждого элемента вектора
+		// РґР»СЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 		size_t len;
-		// длину каждого элемента вектора
+		// РґР»РёРЅСѓ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 		ar >> len;
 		v.AddMsg(len);
 		T* ptr = v.GetLastMsgPtr();
-		// а затем в цикле
+		// Р° Р·Р°С‚РµРј РІ С†РёРєР»Рµ
 		for(size_t i = 0; i < len; i++)
 		{
-			// каждый объект из текущего элемента вектора				
+			// РєР°Р¶РґС‹Р№ РѕР±СЉРµРєС‚ РёР· С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°				
 			ar >> ptr[i];
 		}
 	}
-	// число вложенных векторов
+	// С‡РёСЃР»Рѕ РІР»РѕР¶РµРЅРЅС‹С… РІРµРєС‚РѕСЂРѕРІ
 	size_t vectSize;
 	ar >> vectSize;
 	for (size_t j = 0; j < vectSize; j++)
 	{
 		v.CreateNewVect();
-		// рекурсивно вызываем (этот же) оператор сохранения в архив
+		// СЂРµРєСѓСЂСЃРёРІРЅРѕ РІС‹Р·С‹РІР°РµРј (СЌС‚РѕС‚ Р¶Рµ) РѕРїРµСЂР°С‚РѕСЂ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІ Р°СЂС…РёРІ
 		ar >> v.GetLastVect();
 	}
-	// метка конца вектора
+	// РјРµС‚РєР° РєРѕРЅС†Р° РІРµРєС‚РѕСЂР°
 	DWORD end_of_vector		= 0x4321dcba;
 	ar >> end_of_vector;
 	if (end_of_vector != 0x4321dcba)
@@ -1434,50 +1438,50 @@ template <class T> Archive& operator >>(Archive& ar, vect<T, vectItem<T> >& v)
 template <class T> Archive& operator <<(Archive& ar, vect<T, ObjectItem<T> >& v)
 {
 //printf("Archive& operator <<(Archive& ar, vect<T, ObjectItem<T> >& v)\n");
-	// метка старта вектора заносим в архив
+	// РјРµС‚РєР° СЃС‚Р°СЂС‚Р° РІРµРєС‚РѕСЂР° Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ
 	DWORD start_of_vector	= 0xabcd1234;
 
 	ar << start_of_vector;
-	// заносим в архив число элементов вектора
+	// Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 	ar << v.msgSize();
-	// и если наш вектор не пуст
+	// Рё РµСЃР»Рё РЅР°С€ РІРµРєС‚РѕСЂ РЅРµ РїСѓСЃС‚
 	if ( v.SetCurrentMsgOnFirst())
 	{
-		// то для каждого элемента вектора
+		// С‚Рѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 		do
 		{
 			T* ptr = v.GetCurrentMsgPtr();
 			size_t len = v.GetCurrentMsgLen();
-			// заносим в архив длину каждого элемента вектора
+			// Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ РґР»РёРЅСѓ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 			ar << len;
 
 			Object::object_type type = ptr->GetObjectType();
 			int ob_type = type;
 			ar << ob_type;
 
-			// а затем в цикле
+			// Р° Р·Р°С‚РµРј РІ С†РёРєР»Рµ
 			for(size_t i = 0; i < len; i++)
 			{
-				// заносим каждый объект из текущего элемента вектора				
+				// Р·Р°РЅРѕСЃРёРј РєР°Р¶РґС‹Р№ РѕР±СЉРµРєС‚ РёР· С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°				
 				ar << ptr[i];
 			}
 		}
 		while(v.IncrementCurrentMsg());
 	}
-	// теперь заносим в архив число вложенных векторов
+	// С‚РµРїРµСЂСЊ Р·Р°РЅРѕСЃРёРј РІ Р°СЂС…РёРІ С‡РёСЃР»Рѕ РІР»РѕР¶РµРЅРЅС‹С… РІРµРєС‚РѕСЂРѕРІ
 	ar << v.vectSize();
-	// и если вложенные вектора существуют
+	// Рё РµСЃР»Рё РІР»РѕР¶РµРЅРЅС‹Рµ РІРµРєС‚РѕСЂР° СЃСѓС‰РµСЃС‚РІСѓСЋС‚
 	if (v.SetCurrentVectOnFirst())
 	{
-		// то для каждого вложенного вектора
+		// С‚Рѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ РІР»РѕР¶РµРЅРЅРѕРіРѕ РІРµРєС‚РѕСЂР°
 		do
 		{
-			// рекурсивно вызываем (этот же) оператор сохранения в архив
+			// СЂРµРєСѓСЂСЃРёРІРЅРѕ РІС‹Р·С‹РІР°РµРј (СЌС‚РѕС‚ Р¶Рµ) РѕРїРµСЂР°С‚РѕСЂ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІ Р°СЂС…РёРІ
 			ar << v.GetCurrentVect();
 		}
 		while(v.IncrementCurrentVect());
 	}
-	// метка конца вектора
+	// РјРµС‚РєР° РєРѕРЅС†Р° РІРµРєС‚РѕСЂР°
 	DWORD end_of_vector		= 0x4321dcba;
 	ar << end_of_vector;
 	return ar;
@@ -1485,7 +1489,7 @@ template <class T> Archive& operator <<(Archive& ar, vect<T, ObjectItem<T> >& v)
 template <class T> Archive& operator >>(Archive& ar, vect<T, ObjectItem<T> >& v)
 {
 //printf("Archive& operator >>(Archive& ar, vect<T, ObjectItem<T> >& v)\n");
-	// метка старта вектора
+	// РјРµС‚РєР° СЃС‚Р°СЂС‚Р° РІРµРєС‚РѕСЂР°
 	DWORD start_of_vector;
 	ar >> start_of_vector;
 	if (start_of_vector	!= 0xabcd1234)
@@ -1493,17 +1497,17 @@ template <class T> Archive& operator >>(Archive& ar, vect<T, ObjectItem<T> >& v)
 		printf("Error of reading of start of vect from archive:\nstart_of_vector(%x) != 0xabcd1234", start_of_vector);
 		throw "Error of reading of start of vect from archive";
 	}
-	// очищаем вектор если это не импорт
+	// РѕС‡РёС‰Р°РµРј РІРµРєС‚РѕСЂ РµСЃР»Рё СЌС‚Рѕ РЅРµ РёРјРїРѕСЂС‚
 	if(!Archive::OpenFileAsImport)
 		v.clear();
-	// число элементов вектора
+	// С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 	size_t msgSize;
 	ar >> msgSize;
 	for (size_t i = 0; i < msgSize; i++)
 	{
-		// для каждого элемента вектора
+		// РґР»СЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 		size_t len;
-		// длину каждого элемента вектора
+		// РґР»РёРЅСѓ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°
 		ar >> len;
 
 		Object::object_type type;
@@ -1514,23 +1518,23 @@ template <class T> Archive& operator >>(Archive& ar, vect<T, ObjectItem<T> >& v)
 
 		v.AddMsg(len, type);
 		T* ptr = v.GetLastMsgPtr();
-		// а затем в цикле
+		// Р° Р·Р°С‚РµРј РІ С†РёРєР»Рµ
 		for(size_t i = 0; i < len; i++)
 		{
-			// каждый объект из текущего элемента вектора				
+			// РєР°Р¶РґС‹Р№ РѕР±СЉРµРєС‚ РёР· С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР°				
 			ar >> ptr[i];
 		}
 	}
-	// число вложенных векторов
+	// С‡РёСЃР»Рѕ РІР»РѕР¶РµРЅРЅС‹С… РІРµРєС‚РѕСЂРѕРІ
 	size_t vectSize;
 	ar >> vectSize;
 	for (size_t j = 0; j < vectSize; j++)
 	{
 		v.CreateNewVect();
-		// рекурсивно вызываем (этот же) оператор сохранения в архив
+		// СЂРµРєСѓСЂСЃРёРІРЅРѕ РІС‹Р·С‹РІР°РµРј (СЌС‚РѕС‚ Р¶Рµ) РѕРїРµСЂР°С‚РѕСЂ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІ Р°СЂС…РёРІ
 		ar >> v.GetLastVect();
 	}
-	// метка конца вектора
+	// РјРµС‚РєР° РєРѕРЅС†Р° РІРµРєС‚РѕСЂР°
 	DWORD end_of_vector		= 0x4321dcba;
 	ar >> end_of_vector;
 	if (end_of_vector != 0x4321dcba)

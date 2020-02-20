@@ -1,7 +1,7 @@
 #pragma once
-#include ".\object.h"
-#include ".\collection.h"
-#include ".\fastcollection.h"
+#include "Object.h"
+#include "Collection.h"
+#include "FastCollection.h"
 #include "../../auto_build_3D/picks_search.h"
 //#include "AutoBuildProfileDlg.h"
 

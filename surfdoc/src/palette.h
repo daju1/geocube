@@ -9,8 +9,10 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#ifdef _MSC_VER
 #include "..\..\stdAfx.h"
-#include ".\archive.h"
+#endif
+#include "Archive.h"
 
 class APalette /*: public Object*/
 {

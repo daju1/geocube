@@ -12,9 +12,9 @@
 #include "../../surfdefs.h"
 
 #include "Object.h"
-#include "..\..\array\src\Vector.h"
-#include "..\..\array\src\vect.h"
-#include "..\..\tools\src\filedlg.h"
+#include "../../array/src/Vector.h"
+#include "../../array/src/vect.h"
+#include "../../tools/src/filedlg.h"
 
 class ObjectList;
 #include <map>
@@ -307,7 +307,7 @@ template <class T> void DeletingUnchecked_from_vect(vect<T> * v, Object* parent)
 
 template <class T> void ObjectList::DeletingChecked_from_vect(vect<T> * v, Object* parent) 
 {
-	// óäàëÿåì âñå îòêëþ÷åííûå è ïóñòûå îáúåêòû ëèíèé áëàíêîâàíèÿ
+	// ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð²ÑÐµ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡ÐµÐ½Ð½Ñ‹Ðµ Ð¸ Ð¿ÑƒÑÑ‚Ñ‹Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹ Ð»Ð¸Ð½Ð¸Ð¹ Ð±Ð»Ð°Ð½ÐºÐ¾Ð²Ð°Ð½Ð¸Ñ
 	if (v->SetCurrentMsgOnFirst())
 	{
 		do
@@ -330,7 +330,7 @@ e_start_of_objectlist_cicle:
 
 template <class T> void ObjectList::DeletingUnchecked_from_vect(vect<T> * v, Object* parent) 
 {
-	// óäàëÿåì âñå îòêëþ÷åííûå è ïóñòûå îáúåêòû ëèíèé áëàíêîâàíèÿ
+	// ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð²ÑÐµ Ð¾Ñ‚ÐºÐ»ÑŽÑ‡ÐµÐ½Ð½Ñ‹Ðµ Ð¸ Ð¿ÑƒÑÑ‚Ñ‹Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹ Ð»Ð¸Ð½Ð¸Ð¹ Ð±Ð»Ð°Ð½ÐºÐ¾Ð²Ð°Ð½Ð¸Ñ
 	if (v->SetCurrentMsgOnFirst())
 	{
 		do

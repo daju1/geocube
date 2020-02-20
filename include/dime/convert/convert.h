@@ -41,7 +41,7 @@ class BlnProfile3D;
 
 #if DFX_LAYER_FROM_OBJECT
 #include "../stdafx.h"
-#include "../surfdoc/src/object.h"
+#include "../surfdoc/src/Object.h"
 #endif
 
 class DIME_DLL_API dxfConverter

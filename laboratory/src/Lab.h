@@ -1,9 +1,11 @@
 #pragma once
 
 #include <float.h>
+#ifdef _MSC_VER
 #include <commctrl.h>
-#include "baselab.h"
-#include "../../surfdoc/src/ground.h"
+#endif
+#include "BaseLab.h"
+#include "../../surfdoc/src/Ground.h"
 
 #define LABORATORY_WITH_SURFDOC 0
 #define USE_LAB_TRIALS_VECTOR 1
@@ -20,7 +22,7 @@ class MyExcel;
 class LabNumber;
 class LabTrialResults;
 
-#include "trialdatadef.h"
+#include "TrialDataDef.h"
 
 #include "prop_value.h"
 
@@ -339,8 +341,8 @@ public:
 
 
 	void SetLabNumber(const LabNumber * labnumber){lab_number = (LabNumber *)labnumber;}
-	// признаки испытаний
-	// численные значения соответствуют таковым в формате файла LAB
+	// РїСЂРёР·РЅР°РєРё РёСЃРїС‹С‚Р°РЅРёР№
+	// С‡РёСЃР»РµРЅРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‚ С‚Р°РєРѕРІС‹Рј РІ С„РѕСЂРјР°С‚Рµ С„Р°Р№Р»Р° LAB
 	enum indication 
 	{
 		undefined_lab_trial_indication							= 0,
@@ -420,21 +422,21 @@ public:
 	enum value_type
 	{
 		none = 0,
-		// влажность на границе текучести (доли ед.)                   .22
+		// РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ С‚РµРєСѓС‡РµСЃС‚Рё (РґРѕР»Рё РµРґ.)                   .22
 		vt_moisture_on_fluidity_border,
-		// влажность на границе раскатывания (пластичности) (доли ед.)                .17
+		// РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ СЂР°СЃРєР°С‚С‹РІР°РЅРёСЏ (РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё) (РґРѕР»Рё РµРґ.)                .17
 		vt_moisture_on_plasticity_border,
-		// влажность природного крупнообмена
+		// РІР»Р°Р¶РЅРѕСЃС‚СЊ РїСЂРёСЂРѕРґРЅРѕРіРѕ РєСЂСѓРїРЅРѕРѕР±РјРµРЅР°
 		vt_moisture_of_nature_large_exchange,
-		// влажность пробы заполнителя
+		// РІР»Р°Р¶РЅРѕСЃС‚СЊ РїСЂРѕР±С‹ Р·Р°РїРѕР»РЅРёС‚РµР»СЏ
 		vt_moisture_of_aggregate_sample,
-		// гигроскопическая влажность
+		// РіРёРіСЂРѕСЃРєРѕРїРёС‡РµСЃРєР°СЏ РІР»Р°Р¶РЅРѕСЃС‚СЊ
 		vt_hygroscopic_moisture,
-		// максимальная молекулярная влагоёмкость
+		// РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РјРѕР»РµРєСѓР»СЏСЂРЅР°СЏ РІР»Р°РіРѕС‘РјРєРѕСЃС‚СЊ
 		vt_maximal_molecular_moisture_capacity,
-		// плотность частиц грунта, г/см3                   2.71
+		// РїР»РѕС‚РЅРѕСЃС‚СЊ С‡Р°СЃС‚РёС† РіСЂСѓРЅС‚Р°, Рі/СЃРј3                   2.71
 		vt_density_of_ground_particles,
-		// плотность грунта, г/см3                          2.00
+		// РїР»РѕС‚РЅРѕСЃС‚СЊ РіСЂСѓРЅС‚Р°, Рі/СЃРј3                          2.00
 		vt_density_of_ground,
 		end
 	};
@@ -442,21 +444,21 @@ public:
 	static const char * ValueTypeToString(PhysicalLabTrial::value_type vt);
 	static int GetSignForReliabilityK(PhysicalLabTrial::value_type vt);
 
-	// влажность на границе текучести (доли ед.)                   .22
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ С‚РµРєСѓС‡РµСЃС‚Рё (РґРѕР»Рё РµРґ.)                   .22
 	trial_value moisture_on_fluidity_border;
-	// влажность на границе раскатывания (пластичности) (доли ед.)                .17
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ СЂР°СЃРєР°С‚С‹РІР°РЅРёСЏ (РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё) (РґРѕР»Рё РµРґ.)                .17
 	trial_value moisture_on_plasticity_border;
-	// влажность природного крупнообмена
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РїСЂРёСЂРѕРґРЅРѕРіРѕ РєСЂСѓРїРЅРѕРѕР±РјРµРЅР°
 	trial_value moisture_of_nature_large_exchange;
-	// влажность пробы заполнителя
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РїСЂРѕР±С‹ Р·Р°РїРѕР»РЅРёС‚РµР»СЏ
 	trial_value moisture_of_aggregate_sample;
-	// гигроскопическая влажность
+	// РіРёРіСЂРѕСЃРєРѕРїРёС‡РµСЃРєР°СЏ РІР»Р°Р¶РЅРѕСЃС‚СЊ
 	trial_value hygroscopic_moisture;
-	// максимальная молекулярная влагоёмкость
+	// РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РјРѕР»РµРєСѓР»СЏСЂРЅР°СЏ РІР»Р°РіРѕС‘РјРєРѕСЃС‚СЊ
 	trial_value maximal_molecular_moisture_capacity;
-	// плотность частиц грунта,г/см3                   2.71
+	// РїР»РѕС‚РЅРѕСЃС‚СЊ С‡Р°СЃС‚РёС† РіСЂСѓРЅС‚Р°,Рі/СЃРј3                   2.71
 	trial_value density_of_ground_particles;
-	// плотность грунта,г/см3                          2.00
+	// РїР»РѕС‚РЅРѕСЃС‚СЊ РіСЂСѓРЅС‚Р°,Рі/СЃРј3                          2.00
 	trial_value density_of_ground;
 
 
@@ -490,47 +492,47 @@ public:
 	enum value_type
 	{
 		none = 0,
-		//коэффициент пористости
+		//РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРѕСЂРёСЃС‚РѕСЃС‚Рё
 		vt_e,
-		// Полная влагоёмкость
+		// РџРѕР»РЅР°СЏ РІР»Р°РіРѕС‘РјРєРѕСЃС‚СЊ
 		vt_water_full_capacity,
-		// Влажность водонасыщения
+		// Р’Р»Р°Р¶РЅРѕСЃС‚СЊ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ
 		vt_w_water_saturated,
-		// Недостаток водонасыщения
+		// РќРµРґРѕСЃС‚Р°С‚РѕРє РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ
 		vt_lack_of_water_saturating,
-		// плотность сухого грунта
+		// РїР»РѕС‚РЅРѕСЃС‚СЊ СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°
 		vt_density_of_dry_ground,
-		// плотность водонасыщенного грунта
+		// РїР»РѕС‚РЅРѕСЃС‚СЊ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРЅРѕРіРѕ РіСЂСѓРЅС‚Р°
 		vt_density_of_water_saturated_ground,
-		//плотность взвешенного в воде грунта
+		//РїР»РѕС‚РЅРѕСЃС‚СЊ РІР·РІРµС€РµРЅРЅРѕРіРѕ РІ РІРѕРґРµ РіСЂСѓРЅС‚Р°
 		vt_density_of_suspended_in_water_ground,
-		//пористость	
+		//РїРѕСЂРёСЃС‚РѕСЃС‚СЊ	
 		vt_n,
-		//степень влажности 
+		//СЃС‚РµРїРµРЅСЊ РІР»Р°Р¶РЅРѕСЃС‚Рё 
 		vt_S,
 		vt_vlazhnost,
-		// число пластичности	
+		// С‡РёСЃР»Рѕ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё	
 		vt_plasticity_index,
-		// определяем тип грунта
+		// РѕРїСЂРµРґРµР»СЏРµРј С‚РёРї РіСЂСѓРЅС‚Р°
 		vt_ground_type,
-		// показатель текучести fluidity_index
+		// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‡РµСЃС‚Рё fluidity_index
 		vt_fluidity_index_nature,
 		vt_fluidity_index_water_saturated,
 
-		// Супесь - консистенция
-		// Суглинок и глина - консистенция
+		// РЎСѓРїРµСЃСЊ - РєРѕРЅСЃРёСЃС‚РµРЅС†РёСЏ
+		// РЎСѓРіР»РёРЅРѕРє Рё РіР»РёРЅР° - РєРѕРЅСЃРёСЃС‚РµРЅС†РёСЏ
 		vt_Consistencia_nature,
 		vt_Consistencia_water_saturated,
 
-		// удельный вес частиц грунта,г/см3                   2.71
+		// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ С‡Р°СЃС‚РёС† РіСЂСѓРЅС‚Р°,Рі/СЃРј3                   2.71
 		vt_specific_gravity_of_ground_particles,
-		// удельный вес грунта,г/см3                          2.00
+		// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РіСЂСѓРЅС‚Р°,Рі/СЃРј3                          2.00
 		vt_specific_gravity_of_ground,
-		// удельный вес сухого грунта
+		// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°
 		vt_specific_gravity_of_dry_ground,
-		// удельный вес водонасыщенного грунта
+		// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРЅРѕРіРѕ РіСЂСѓРЅС‚Р°
 		vt_specific_gravity_of_water_saturated_ground,
-		// удельный вес взвешенного в воде грунта
+		// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІР·РІРµС€РµРЅРЅРѕРіРѕ РІ РІРѕРґРµ РіСЂСѓРЅС‚Р°
 		vt_specific_gravity_of_suspended_in_water_ground,
 
 
@@ -543,23 +545,23 @@ public:
 
 	
    
-	//коэффициент пористости
+	//РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРѕСЂРёСЃС‚РѕСЃС‚Рё
 	trial_value e;
-	// Полная влагоёмкость
+	// РџРѕР»РЅР°СЏ РІР»Р°РіРѕС‘РјРєРѕСЃС‚СЊ
 	trial_value water_full_capacity;
-	// Влажность водонасыщения
+	// Р’Р»Р°Р¶РЅРѕСЃС‚СЊ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ
 	trial_value w_water_saturated;
-	// Недостаток водонасыщения
+	// РќРµРґРѕСЃС‚Р°С‚РѕРє РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ
 	trial_value lack_of_water_saturating;
-	// плотность сухого грунта
+	// РїР»РѕС‚РЅРѕСЃС‚СЊ СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°
 	trial_value density_of_dry_ground;
-	// плотность водонасыщенного грунта
+	// РїР»РѕС‚РЅРѕСЃС‚СЊ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРЅРѕРіРѕ РіСЂСѓРЅС‚Р°
 	trial_value density_of_water_saturated_ground;
-	//плотность взвешенного в воде грунта
+	//РїР»РѕС‚РЅРѕСЃС‚СЊ РІР·РІРµС€РµРЅРЅРѕРіРѕ РІ РІРѕРґРµ РіСЂСѓРЅС‚Р°
 	trial_value density_of_suspended_in_water_ground;
-	//пористость	
+	//РїРѕСЂРёСЃС‚РѕСЃС‚СЊ	
 	trial_value n;
-	//степень влажности 
+	//СЃС‚РµРїРµРЅСЊ РІР»Р°Р¶РЅРѕСЃС‚Рё 
 	trial_value S;
 
 	enum SandVlazhnost
@@ -573,22 +575,22 @@ public:
  	static const char * SandVlazhnostToStringSmall(PhysicalLabTrialResults::SandVlazhnost vzh);
 	SandVlazhnost m_sand_vlazhnost;
 
-	// число пластичности	
+	// С‡РёСЃР»Рѕ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё	
 	trial_value plasticity_index;
-	// определяем тип грунта
+	// РѕРїСЂРµРґРµР»СЏРµРј С‚РёРї РіСЂСѓРЅС‚Р°
 	CGround::ground_type t;
-	// показатель текучести fluidity_index
+	// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‡РµСЃС‚Рё fluidity_index
 	trial_value fluidity_index_nature;
 	trial_value fluidity_index_water_saturated;
 
 	enum Consistencia
 	{
 		undefined_cons = 0,
-		// Супесь - консистенция
+		// РЎСѓРїРµСЃСЊ - РєРѕРЅСЃРёСЃС‚РµРЅС†РёСЏ
 		tverdaya,
 		plastichnaya,
 		tekuchaya,
-		// Суглинок и глина - консистенция
+		// РЎСѓРіР»РёРЅРѕРє Рё РіР»РёРЅР° - РєРѕРЅСЃРёСЃС‚РµРЅС†РёСЏ
 		tverdye,
 		polutverdye,
 		tugoplastichnye,
@@ -603,15 +605,15 @@ public:
 	Consistencia m_Consistencia_water_saturated;
 
 
-	// удельный вес частиц грунта,г/см3                   2.71
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ С‡Р°СЃС‚РёС† РіСЂСѓРЅС‚Р°,Рі/СЃРј3                   2.71
 	trial_value specific_gravity_of_ground_particles;
-	// удельный вес грунта,г/см3                          2.00
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РіСЂСѓРЅС‚Р°,Рі/СЃРј3                          2.00
 	trial_value specific_gravity_of_ground;
-	// удельный вес сухого грунта
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°
 	trial_value specific_gravity_of_dry_ground;
-	// удельный вес водонасыщенного грунта
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРЅРѕРіРѕ РіСЂСѓРЅС‚Р°
 	trial_value specific_gravity_of_water_saturated_ground;
-	// удельный вес взвешенного в воде грунта
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІР·РІРµС€РµРЅРЅРѕРіРѕ РІ РІРѕРґРµ РіСЂСѓРЅС‚Р°
 	trial_value specific_gravity_of_suspended_in_water_ground;
 
 
@@ -643,23 +645,23 @@ public:
 	enum value_type
 	{
 		none = 0,
-		// общее содержание солей
+		// РѕР±С‰РµРµ СЃРѕРґРµСЂР¶Р°РЅРёРµ СЃРѕР»РµР№
 		vt_common_salts_content,
-		// легкорастворимые соли
+		// Р»РµРіРєРѕСЂР°СЃС‚РІРѕСЂРёРјС‹Рµ СЃРѕР»Рё
 		vt_well_solutable_salts,
-		// содержание растительных остатков
+		// СЃРѕРґРµСЂР¶Р°РЅРёРµ СЂР°СЃС‚РёС‚РµР»СЊРЅС‹С… РѕСЃС‚Р°С‚РєРѕРІ
 		vt_vegetable_remains_content,
-		// органические вещества
+		// РѕСЂРіР°РЅРёС‡РµСЃРєРёРµ РІРµС‰РµСЃС‚РІР°
 		vt_organic_matters,
-		// водородный показатель
+		// РІРѕРґРѕСЂРѕРґРЅС‹Р№ РїРѕРєР°Р·Р°С‚РµР»СЊ
 		vt_pH,
-		// потери массы стали
+		// РїРѕС‚РµСЂРё РјР°СЃСЃС‹ СЃС‚Р°Р»Рё
 		vt_steel_mass_loss,
-		// азотистые вещества
+		// Р°Р·РѕС‚РёСЃС‚С‹Рµ РІРµС‰РµСЃС‚РІР°
 		vt_nitrogenic_matters,
-		// хлор ион
+		// С…Р»РѕСЂ РёРѕРЅ
 		vt_Cl_ion,
-		// ион железа
+		// РёРѕРЅ Р¶РµР»РµР·Р°
 		vt_Fe_ion,
 
 		vt_gips,
@@ -673,23 +675,23 @@ public:
 	static const char * ChemicalLabTrial::ValueTypeToString(ChemicalLabTrial::value_type vt);
 	static int ChemicalLabTrial::GetSignForReliabilityK(ChemicalLabTrial::value_type vt);
 
-	// общее содержание солей
+	// РѕР±С‰РµРµ СЃРѕРґРµСЂР¶Р°РЅРёРµ СЃРѕР»РµР№
 	trial_value common_salts_content;
-	// легкорастворимые соли
+	// Р»РµРіРєРѕСЂР°СЃС‚РІРѕСЂРёРјС‹Рµ СЃРѕР»Рё
 	trial_value well_solutable_salts;
-	// содержание растительных остатков
+	// СЃРѕРґРµСЂР¶Р°РЅРёРµ СЂР°СЃС‚РёС‚РµР»СЊРЅС‹С… РѕСЃС‚Р°С‚РєРѕРІ
 	trial_value vegetable_remains_content;
-	// органические вещества
+	// РѕСЂРіР°РЅРёС‡РµСЃРєРёРµ РІРµС‰РµСЃС‚РІР°
 	trial_value organic_matters;
-	// водородный показатель
+	// РІРѕРґРѕСЂРѕРґРЅС‹Р№ РїРѕРєР°Р·Р°С‚РµР»СЊ
 	trial_value pH;
-	// потери массы стали
+	// РїРѕС‚РµСЂРё РјР°СЃСЃС‹ СЃС‚Р°Р»Рё
 	trial_value steel_mass_loss;
-	// азотистые вещества
+	// Р°Р·РѕС‚РёСЃС‚С‹Рµ РІРµС‰РµСЃС‚РІР°
 	trial_value nitrogenic_matters;
-	// хлор ион
+	// С…Р»РѕСЂ РёРѕРЅ
 	trial_value Cl_ion;
-	// ион железа
+	// РёРѕРЅ Р¶РµР»РµР·Р°
 	trial_value Fe_ion;
 
 	trial_value gips;
@@ -789,17 +791,17 @@ public:
 		vt_fractions_diameter,
 #endif
 		vt_fractions_content,
-		// содержание фракций в пробе заполнителя
+		// СЃРѕРґРµСЂР¶Р°РЅРёРµ С„СЂР°РєС†РёР№ РІ РїСЂРѕР±Рµ Р·Р°РїРѕР»РЅРёС‚РµР»СЏ
 		vt_fractions_content_in_aggregate_sample,
-		// содержание честиц ДМ > 2
+		// СЃРѕРґРµСЂР¶Р°РЅРёРµ С‡РµСЃС‚РёС† Р”Рњ > 2
 		vt_particles_content_of_diameter_more_2,
-		// содержание честиц ДМ < 1
+		// СЃРѕРґРµСЂР¶Р°РЅРёРµ С‡РµСЃС‚РёС† Р”Рњ < 1
 		vt_particles_content_of_diameter_less_1,
-		// окатанность
+		// РѕРєР°С‚Р°РЅРЅРѕСЃС‚СЊ
 		vt_pourness,
-		// угол откоса сухого грунта
+		// СѓРіРѕР» РѕС‚РєРѕСЃР° СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°
 		vt_slope_angle_of_dry_ground,
-		// угол откоса под водой
+		// СѓРіРѕР» РѕС‚РєРѕСЃР° РїРѕРґ РІРѕРґРѕР№
 		vt_slope_angle_under_water,
 		end
 	};
@@ -815,31 +817,31 @@ public:
 #endif
 	~FractionsLabTrial(){}
 
-	// количество фракций, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ С„СЂР°РєС†РёР№, 
 	int n_fractions;
 #if !USE_LAB_LAYER_FRACTIONS
-	// массив диаметров фракций
+	// РјР°СЃСЃРёРІ РґРёР°РјРµС‚СЂРѕРІ С„СЂР°РєС†РёР№
 #if USE_FRACTION_DIAMETERS_INTERVAL
 	fraction_diameters_interval * fractions_diameters;
 #else
 	double * fractions_diameters;
 #endif
 #endif
-	// массив содержания фракций
+	// РјР°СЃСЃРёРІ СЃРѕРґРµСЂР¶Р°РЅРёСЏ С„СЂР°РєС†РёР№
 	trial_value * fractions_content;
 
 
-	// содержание фракций в пробе заполнителя
+	// СЃРѕРґРµСЂР¶Р°РЅРёРµ С„СЂР°РєС†РёР№ РІ РїСЂРѕР±Рµ Р·Р°РїРѕР»РЅРёС‚РµР»СЏ
 	trial_value fractions_content_in_aggregate_sample;
-	// содержание честиц ДМ > 2
+	// СЃРѕРґРµСЂР¶Р°РЅРёРµ С‡РµСЃС‚РёС† Р”Рњ > 2
 	trial_value particles_content_of_diameter_more_2;
-	// содержание честиц ДМ < 1
+	// СЃРѕРґРµСЂР¶Р°РЅРёРµ С‡РµСЃС‚РёС† Р”Рњ < 1
 	trial_value particles_content_of_diameter_less_1;
-	// окатанность
+	// РѕРєР°С‚Р°РЅРЅРѕСЃС‚СЊ
 	trial_value pourness;
-	// угол откоса сухого грунта
+	// СѓРіРѕР» РѕС‚РєРѕСЃР° СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°
 	trial_value slope_angle_of_dry_ground;
-	// угол откоса под водой
+	// СѓРіРѕР» РѕС‚РєРѕСЃР° РїРѕРґ РІРѕРґРѕР№
 	trial_value slope_angle_under_water;
 
 
@@ -865,15 +867,15 @@ inline FractionsLabTrial::value_type operator++( FractionsLabTrial::value_type &
 class FractionsLabTrialResults : public LabTrialResults
 {
 public:
-	//Классификация крупнообломочных и песчаных грунтов
+	//РљР»Р°СЃСЃРёС„РёРєР°С†РёСЏ РєСЂСѓРїРЅРѕРѕР±Р»РѕРјРѕС‡РЅС‹С… Рё РїРµСЃС‡Р°РЅС‹С… РіСЂСѓРЅС‚РѕРІ
 	enum SandSoilsClass
 	{
 		undefined_sand_soil = 0,
-		//Крупнообломочный
+		//РљСЂСѓРїРЅРѕРѕР±Р»РѕРјРѕС‡РЅС‹Р№
 		valunnyj_or_glubovuj,
 		galechnikovyj_or_schebenistyj,
 		gravijnyj_or_dresvyanyj,
-		// Песчаный
+		// РџРµСЃС‡Р°РЅС‹Р№
 		gravelistyj,
 		krupnyj,
 		srednej_krupnosti,
@@ -883,13 +885,13 @@ public:
 	static const char * SandSoilsClassToString(FractionsLabTrialResults::SandSoilsClass sand_soil_class);
 	static const char * SandSoilsClassToStringSmall(FractionsLabTrialResults::SandSoilsClass sand_soil_class);
 	
-	// классификация глинистых грунтов по содержанию глинистых частиц (<0.005)
+	// РєР»Р°СЃСЃРёС„РёРєР°С†РёСЏ РіР»РёРЅРёСЃС‚С‹С… РіСЂСѓРЅС‚РѕРІ РїРѕ СЃРѕРґРµСЂР¶Р°РЅРёСЋ РіР»РёРЅРёСЃС‚С‹С… С‡Р°СЃС‚РёС† (<0.005)
 	enum ClaySoilsClass
 	{
 		undefined_clay_soil = 0,
-		clay,		//	Глина  >30%
-		loam,		//	суглинок 30-10%
-        sandyLoam,	//	супесь 10-3%
+		clay,		//	Р“Р»РёРЅР°  >30%
+		loam,		//	СЃСѓРіР»РёРЅРѕРє 30-10%
+        sandyLoam,	//	СЃСѓРїРµСЃСЊ 10-3%
 		sand		// < 3%		
 	};
 	static const char * ClaySoilsClassToString(FractionsLabTrialResults::ClaySoilsClass clay_soil_class);
@@ -923,12 +925,12 @@ public:
 
 	FractionsLabTrialResults::ClaySoilsClass m_clay_soil_class;
 	trial_value m_clay_frac_content;//m_soderzhanie_glinistyh_chastic; // (<0.005mm)
-	trial_value m_pyl_frac_content;// содержание пылеватой фракции (0.005-0.1)
+	trial_value m_pyl_frac_content;// СЃРѕРґРµСЂР¶Р°РЅРёРµ РїС‹Р»РµРІР°С‚РѕР№ С„СЂР°РєС†РёРё (0.005-0.1)
 
 	FractionsLabTrialResults::SandSoilsClass m_sand_soil_class;
 	double m_minimum_krupnosti_chastic, m_soderzhanie_chastic;
 
-	// Коэффициент неоднородности
+	// РљРѕСЌС„С„РёС†РёРµРЅС‚ РЅРµРѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё
 	trial_value d_60;
 	trial_value d_10;
 	trial_value C_u;
@@ -969,18 +971,18 @@ public:
 		vt_pressure,
 		vt_absolute_deformation,
 		vt_relative_deformation,
-		// тип прибора,	
+		// С‚РёРї РїСЂРёР±РѕСЂР°,	
 		vt_apparatus_type,
-		// диаметр кольца, 
+		// РґРёР°РјРµС‚СЂ РєРѕР»СЊС†Р°, 
 		vt_hoop_diameter,
-		// высота кольца, 
+		// РІС‹СЃРѕС‚Р° РєРѕР»СЊС†Р°, 
 		vt_hoop_height,
-		// метод испытания, 
+		// РјРµС‚РѕРґ РёСЃРїС‹С‚Р°РЅРёСЏ, 
 		vt_trial_method,
-		// заданная влажность, 
+		// Р·Р°РґР°РЅРЅР°СЏ РІР»Р°Р¶РЅРѕСЃС‚СЊ, 
 		vt_task_moisture,
 		vt_task_moisture_v,
-		// заданная плотность
+		// Р·Р°РґР°РЅРЅР°СЏ РїР»РѕС‚РЅРѕСЃС‚СЊ
 		vt_task_density,
 		vt_id_kolca,
 		vt_id_phys_vyprob,
@@ -1053,7 +1055,7 @@ public:
 
 
 	int compression_passport_type;
-	bool otnosit_def_on_graph;// какой график в паспорте: истина - относительное сжатие от давления, ложь - коэффициент пористости от давления
+	bool otnosit_def_on_graph;// РєР°РєРѕР№ РіСЂР°С„РёРє РІ РїР°СЃРїРѕСЂС‚Рµ: РёСЃС‚РёРЅР° - РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕРµ СЃР¶Р°С‚РёРµ РѕС‚ РґР°РІР»РµРЅРёСЏ, Р»РѕР¶СЊ - РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРѕСЂРёСЃС‚РѕСЃС‚Рё РѕС‚ РґР°РІР»РµРЅРёСЏ
 
 	long id_method;
 	bool zamach;
@@ -1139,13 +1141,13 @@ public:
 		const char * name, 
 		int n,
 		CompressionLabExperiment * compression, 
-		// влажность
+		// РІР»Р°Р¶РЅРѕСЃС‚СЊ
 		double W,
-		// влажность водонасыщения
+		// РІР»Р°Р¶РЅРѕСЃС‚СЊ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ
 		double W_sat,
-		//коэффициент пористости
+		//РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРѕСЂРёСЃС‚РѕСЃС‚Рё
 		double e,
-		// число пластичности
+		// С‡РёСЃР»Рѕ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё
 		double Ip
 		);
 
@@ -1193,11 +1195,11 @@ public:
 
 	trial_value Kp;
 
-	// диаметр штампа в прогнозе по Гурвичу	
-	static double shtamp_diameter;	//см
+	// РґРёР°РјРµС‚СЂ С€С‚Р°РјРїР° РІ РїСЂРѕРіРЅРѕР·Рµ РїРѕ Р“СѓСЂРІРёС‡Сѓ	
+	static double shtamp_diameter;	//СЃРј
 
-	// предел второй производной кривой осадки после замачивания
-	// для определения чётко-выраженного перегиба
+	// РїСЂРµРґРµР» РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№ РєСЂРёРІРѕР№ РѕСЃР°РґРєРё РїРѕСЃР»Рµ Р·Р°РјР°С‡РёРІР°РЅРёСЏ
+	// РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ С‡С‘С‚РєРѕ-РІС‹СЂР°Р¶РµРЅРЅРѕРіРѕ РїРµСЂРµРіРёР±Р°
 	static double y_SecondDerivativeLimit;
 
 
@@ -1333,7 +1335,7 @@ public:
 #if !USE_GRINVICH_CLASS
 	trial_value Kp;
 #endif
-	// коэффициент Пуассона
+	// РєРѕСЌС„С„РёС†РёРµРЅС‚ РџСѓР°СЃСЃРѕРЅР°
 	trial_value nju_tab;
 	trial_value nju_tab_ws;
 
@@ -1362,7 +1364,7 @@ public:
 	trial_value lin_interp_e_a0_in_01_02_interval;
 	trial_value lin_interp_e_a1_in_01_02_interval;
 
-	// коэффициент уплотнения
+	// РєРѕСЌС„С„РёС†РёРµРЅС‚ СѓРїР»РѕС‚РЅРµРЅРёСЏ
 	trial_value a_in_01_02_interval;
 
 
@@ -1371,7 +1373,7 @@ public:
 	trial_value lin_interp_e_a0_in_defined_interval;
 	trial_value lin_interp_e_a1_in_defined_interval;
 
-	// коэффициент уплотнения
+	// РєРѕСЌС„С„РёС†РёРµРЅС‚ СѓРїР»РѕС‚РЅРµРЅРёСЏ
 	trial_value a_in_defined_interval;
 
 							
@@ -1522,11 +1524,11 @@ public:
 
 	trial_value					svobodnoe_otnositelnoe_nabuhanie;
 	trial_value					davlenie_nabuhania;
-	//высота образца грунта при природной влажности и природном давлении (на глубине отбора образца)
+	//РІС‹СЃРѕС‚Р° РѕР±СЂР°Р·С†Р° РіСЂСѓРЅС‚Р° РїСЂРё РїСЂРёСЂРѕРґРЅРѕР№ РІР»Р°Р¶РЅРѕСЃС‚Рё Рё РїСЂРёСЂРѕРґРЅРѕРј РґР°РІР»РµРЅРёРё (РЅР° РіР»СѓР±РёРЅРµ РѕС‚Р±РѕСЂР° РѕР±СЂР°Р·С†Р°)
 	trial_value					h0;
 
 
-	//вторая производная осадки после замачивания
+	//РІС‚РѕСЂР°СЏ РїСЂРѕРёР·РІРѕРґРЅР°СЏ РѕСЃР°РґРєРё РїРѕСЃР»Рµ Р·Р°РјР°С‡РёРІР°РЅРёСЏ
 	vector<double>		m2X;
 	vector<trial_got_value> D2yDx2;
 	bool D2yDx2_calculed;
@@ -1636,23 +1638,23 @@ public:
 		vt_n_pressures,
 		vt_pressure,
 		vt_cut_resistance,
-		// тип прибора,	
+		// С‚РёРї РїСЂРёР±РѕСЂР°,	
 		vt_apparatus_type,
-		// диаметр кольца, 
+		// РґРёР°РјРµС‚СЂ РєРѕР»СЊС†Р°, 
 		vt_hoop_diameter,
-		// высота кольца, 
+		// РІС‹СЃРѕС‚Р° РєРѕР»СЊС†Р°, 
 		vt_hoop_height,
-		// метод испытания, 
+		// РјРµС‚РѕРґ РёСЃРїС‹С‚Р°РЅРёСЏ, 
 		vt_trial_method,
-		// заданная влажность, 
+		// Р·Р°РґР°РЅРЅР°СЏ РІР»Р°Р¶РЅРѕСЃС‚СЊ, 
 		vt_task_moisture,
 		vt_task_moisture_v,
-		// заданная плотность
+		// Р·Р°РґР°РЅРЅР°СЏ РїР»РѕС‚РЅРѕСЃС‚СЊ
 		vt_task_density,
 		// 
-		vt_hid, //Ход испытаний
-		vt_shema, //Схема испытаний
-		vt_stan, //Состояние грунта
+		vt_hid, //РҐРѕРґ РёСЃРїС‹С‚Р°РЅРёР№
+		vt_shema, //РЎС…РµРјР° РёСЃРїС‹С‚Р°РЅРёР№
+		vt_stan, //РЎРѕСЃС‚РѕСЏРЅРёРµ РіСЂСѓРЅС‚Р°
 		end
 	};
 	static const char * ValueTypeToString(CutLabTrial::value_type vt);
@@ -1763,9 +1765,9 @@ public:
 #endif
 	~PressingLabTrial();
 
-	// нагрузки
+	// РЅР°РіСЂСѓР·РєРё
 	double loads[3];
-	// сечения
+	// СЃРµС‡РµРЅРёСЏ
 	double sections[3];
 
 	void PrintfProperties();
@@ -1843,9 +1845,9 @@ public:
 #endif
 	~FiltrationLabTrial(){}
 
-	// расход
+	// СЂР°СЃС…РѕРґ
 	double expenditures[3];
-	// плотности
+	// РїР»РѕС‚РЅРѕСЃС‚Рё
 	double densities[3];
 
 	void PrintfProperties();
@@ -2225,7 +2227,7 @@ public:
 };
 class CutLabParametersResults_common : public LabParametersResults
 {
-	// по общей совокупности опытов
+	// РїРѕ РѕР±С‰РµР№ СЃРѕРІРѕРєСѓРїРЅРѕСЃС‚Рё РѕРїС‹С‚РѕРІ
 	map<CutLabTrialResults::value_type, LabParameter*> m_params;
 public:
 	CutLabParametersResults_common(LabParameters * p, LabLayer * );
@@ -2563,7 +2565,7 @@ class CutLabParameters : public LabParameters
 	friend struct LabTrialValueType; 
 protected:
 	CutLabTrial::type type;
-	CutLabParametersResults_common * parameters_results_common; // по общей совокупности опытов
+	CutLabParametersResults_common * parameters_results_common; // РїРѕ РѕР±С‰РµР№ СЃРѕРІРѕРєСѓРїРЅРѕСЃС‚Рё РѕРїС‹С‚РѕРІ
 public:
 	CutLabParameters(CutLabTrial::type t, LabLayer *);//{type = t;}
 	virtual void FillLabParameters();
@@ -2641,9 +2643,9 @@ public:
 	LabNumber * lab_number;
 
 	long lab_n;
-	// определяем тип грунта
+	// РѕРїСЂРµРґРµР»СЏРµРј С‚РёРї РіСЂСѓРЅС‚Р°
 	CGround::ground_type m_ground_type;
-	// или на основе числа платичности
+	// РёР»Рё РЅР° РѕСЃРЅРѕРІРµ С‡РёСЃР»Р° РїР»Р°С‚РёС‡РЅРѕСЃС‚Рё
 	trial_t_value plasticity_index;
 	trial_t_value fluidity_index_nature;
 	trial_t_value fluidity_index_water_saturated;
@@ -2654,11 +2656,11 @@ public:
 	/*void GetGroundTypeByPlasticityIndex()
 	{
 		if (		
-			// на основе числа платичности (доли ед.) 
+			// РЅР° РѕСЃРЅРѕРІРµ С‡РёСЃР»Р° РїР»Р°С‚РёС‡РЅРѕСЃС‚Рё (РґРѕР»Рё РµРґ.) 
 			plasticity_index.f)
 		{
-			// число пластичности						
-			// определяем тип грунта
+			// С‡РёСЃР»Рѕ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё						
+			// РѕРїСЂРµРґРµР»СЏРµРј С‚РёРї РіСЂСѓРЅС‚Р°
 			m_ground_type = DefineGroundType(plasticity_index.v);
 
 			switch (t)
@@ -2693,16 +2695,16 @@ public:
 	}*/
 
 
-	// или на основе грансостава
+	// РёР»Рё РЅР° РѕСЃРЅРѕРІРµ РіСЂР°РЅСЃРѕСЃС‚Р°РІР°
 		
 	FractionsLabTrialResults::SandSoilsClass m_sand_soil_class;
 	trial_t_value m_minimum_krupnosti_chastic, m_soderzhanie_chastic;
 
 	FractionsLabTrialResults::ClaySoilsClass m_clay_soil_class;
 	trial_t_value m_clay_frac_content;//m_soderzhanie_glinistyh_chastic;
-	trial_t_value m_pyl_frac_content;// содержание пылеватой фракции;
+	trial_t_value m_pyl_frac_content;// СЃРѕРґРµСЂР¶Р°РЅРёРµ РїС‹Р»РµРІР°С‚РѕР№ С„СЂР°РєС†РёРё;
 
-	// Коэффициент неоднородности
+	// РљРѕСЌС„С„РёС†РёРµРЅС‚ РЅРµРѕРґРЅРѕСЂРѕРґРЅРѕСЃС‚Рё
 	trial_t_value d_60;
 	trial_t_value d_10;
 	trial_t_value C_u;
@@ -2719,12 +2721,12 @@ public:
 	}
 	*/
 
-	//коэффициент пористости
+	//РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРѕСЂРёСЃС‚РѕСЃС‚Рё
 	trial_t_value e;
 
 
 
-	//степень влажности 
+	//СЃС‚РµРїРµРЅСЊ РІР»Р°Р¶РЅРѕСЃС‚Рё 
 	trial_t_value S;
 	PhysicalLabTrialResults::SandVlazhnost m_sand_vlazhnost;
 	/*void GetSandVlaznost()
@@ -2758,13 +2760,13 @@ public:
 	CompressionLabTrialResults3::Nabuhanie m_nabuhanie;
 	
 
-	// Срез
+	// РЎСЂРµР·
 	trial_t_value c;
 	trial_t_value fi;
 	trial_t_value tgfi;
 
-	//// это в естественном состоянии
-	//компрессия
+	//// СЌС‚Рѕ РІ РµСЃС‚РµСЃС‚РІРµРЅРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё
+	//РєРѕРјРїСЂРµСЃСЃРёСЏ
 	double def_module_01_02_pressure_interval[2];
 	trial_t_value compression_module_e_in_01_02_interval;
 	trial_t_value deformation_module_e_in_01_02_interval;
@@ -2773,7 +2775,7 @@ public:
 	trial_t_value compression_module_e_in_defined_interval;
 	trial_t_value deformation_module_e_in_defined_interval;
 
-	// гурвич
+	// РіСѓСЂРІРёС‡
 	trial_t_value gurvich_Kp;
 
 	double gurvich_shtamp_deformation_module_01_02_pressure_interval[2];
@@ -2784,9 +2786,9 @@ public:
 	trial_t_value gurvich_shtamp_deformation_module_in_defined_interval;
 	trial_t_value gurvich_shtamp_deformation_module_in_defined_interval_Kp;
 
-	// добавить также компрессию и гурвич в водонасыщенном состоянии
+	// РґРѕР±Р°РІРёС‚СЊ С‚Р°РєР¶Рµ РєРѕРјРїСЂРµСЃСЃРёСЋ Рё РіСѓСЂРІРёС‡ РІ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё
 
-	// стат.зондирование
+	// СЃС‚Р°С‚.Р·РѕРЅРґРёСЂРѕРІР°РЅРёРµ
 	trial_t_value pck;
 	trial_t_value pcb;
 	trial_t_value zond_type;
@@ -2918,9 +2920,9 @@ public:
 	LabTrial * AddNewLabTrial(LabTrial::indication t);
 #endif
 public:
-	// лабораторный идентификационный номер, 
+	// Р»Р°Р±РѕСЂР°С‚РѕСЂРЅС‹Р№ РёРґРµРЅС‚РёС„РёРєР°С†РёРѕРЅРЅС‹Р№ РЅРѕРјРµСЂ, 
 	string ID;
-	// наименование выработки, 
+	// РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РІС‹СЂР°Р±РѕС‚РєРё, 
 	string s_mine_working_type;
 	enum mine_working_type
 	{
@@ -2935,22 +2937,22 @@ public:
 
 	const char * MineWorkingTypeToStringRus(mine_working_type t);
 
-// содержим номер выработки в char кодировке
+// СЃРѕРґРµСЂР¶РёРј РЅРѕРјРµСЂ РІС‹СЂР°Р±РѕС‚РєРё РІ char РєРѕРґРёСЂРѕРІРєРµ
 #define CHAR_MINE_WORKING_NUMBER 1
-	// номер выработки,
+	// РЅРѕРјРµСЂ РІС‹СЂР°Р±РѕС‚РєРё,
 	string mine_working_number;
 	long lab_n;
 	long kt_idtyp;
-	// глубина пробы, 
+	// РіР»СѓР±РёРЅР° РїСЂРѕР±С‹, 
 	double depth;
 	long id_kodprob;
 	long id_gr;
 
 	long id_obj;		
-	long id_kt; // ID комплексной точки
+	long id_kt; // ID РєРѕРјРїР»РµРєСЃРЅРѕР№ С‚РѕС‡РєРё
 	long id_prob;
-	string soil_name;// из WenGeo - исходя из id_gr
-	string grunt_name;// Сгенерированное имя на основе свойств
+	string soil_name;// РёР· WenGeo - РёСЃС…РѕРґСЏ РёР· id_gr
+	string grunt_name;// РЎРіРµРЅРµСЂРёСЂРѕРІР°РЅРЅРѕРµ РёРјСЏ РЅР° РѕСЃРЅРѕРІРµ СЃРІРѕР№СЃС‚РІ
 	long id_ige;
 
 	string GetSoilDescription(bool from_db);
@@ -2964,7 +2966,7 @@ public:
 
 
 
-	// признаки испытания
+	// РїСЂРёР·РЅР°РєРё РёСЃРїС‹С‚Р°РЅРёСЏ
 	map <LabTrial::indication, LabTrial::indication> trial_indications;
 	bool is_trial_indication_1;
 	bool is_trial_indication_2;
@@ -3050,58 +3052,58 @@ public:
 	CompressionLabExperiment();
 	~CompressionLabExperiment();
 				
-	// тип прибора,	
+	// С‚РёРї РїСЂРёР±РѕСЂР°,	
 	string apparatus_type;
 #if USE_LAB_LAYER_HOOP
-	// диаметр кольца, 
+	// РґРёР°РјРµС‚СЂ РєРѕР»СЊС†Р°, 
 	double hoop_diameter;
-	// высота кольца, 
+	// РІС‹СЃРѕС‚Р° РєРѕР»СЊС†Р°, 
 	double hoop_height;
 
 #else
 	bool lab_layer_hoop_defined;
-	// диаметр кольца, 
+	// РґРёР°РјРµС‚СЂ РєРѕР»СЊС†Р°, 
 	double lab_layer_hoop_diameter;
-	// высота кольца, 
+	// РІС‹СЃРѕС‚Р° РєРѕР»СЊС†Р°, 
 	double lab_layer_hoop_height;
 #endif
-	// метод испытания, 
+	// РјРµС‚РѕРґ РёСЃРїС‹С‚Р°РЅРёСЏ, 
 	string trial_method;
-	// заданная влажность, 
+	// Р·Р°РґР°РЅРЅР°СЏ РІР»Р°Р¶РЅРѕСЃС‚СЊ, 
 	string task_moisture;
 	double task_moisture_v;
 	bool ParseTaskMoisture();
-	// заданная плотность
+	// Р·Р°РґР°РЅРЅР°СЏ РїР»РѕС‚РЅРѕСЃС‚СЊ
 	double task_density;
 
 
 #if !USE_LAB_LAYER_PRESSURES
-	// количество давлений в природном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ РїСЂРёСЂРѕРґРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int lab_layer_n_pressures_in_nature_condition;
-	// количество давлений в заданном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ Р·Р°РґР°РЅРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int lab_layer_n_pressures_in_task_condition;
-	// количество давлений на усадку
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РЅР° СѓСЃР°РґРєСѓ
 	int lab_layer_n_pressures_on_shrinkage;
 
-	// массив давлений природного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ РїСЂРёСЂРѕРґРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * lab_layer_pressures_in_nature_condition;
-	// массив давлений заданного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ Р·Р°РґР°РЅРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * lab_layer_pressures_in_task_condition;
-	// массив давлений на усадку
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ РЅР° СѓСЃР°РґРєСѓ
 	double * lab_layer_pressures_on_shrinkage;
 #else
-	// количество давлений в природном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ РїСЂРёСЂРѕРґРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int n_pressures_in_nature_condition;
-	// количество давлений в заданном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ Р·Р°РґР°РЅРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int n_pressures_in_task_condition;
-	// количество давлений на усадку
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РЅР° СѓСЃР°РґРєСѓ
 	int n_pressures_on_shrinkage;
 
-	// массив давлений природного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ РїСЂРёСЂРѕРґРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * pressures_in_nature_condition;
-	// массив давлений заданного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ Р·Р°РґР°РЅРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * pressures_in_task_condition;
-	// массив давлений на усадку
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ РЅР° СѓСЃР°РґРєСѓ
 	double * pressures_on_shrinkage;
 #endif
 
@@ -3115,39 +3117,39 @@ public:
 	CutLabExperiment();
 	~CutLabExperiment();
 				
-	// тип прибора,	
+	// С‚РёРї РїСЂРёР±РѕСЂР°,	
 	string apparatus_type;
-	// диаметр кольца, 
+	// РґРёР°РјРµС‚СЂ РєРѕР»СЊС†Р°, 
 	double hoop_diameter;
-	// высота кольца, 
+	// РІС‹СЃРѕС‚Р° РєРѕР»СЊС†Р°, 
 	double hoop_height;
-	// метод испытания, 
+	// РјРµС‚РѕРґ РёСЃРїС‹С‚Р°РЅРёСЏ, 
 	string trial_method;
-	// заданная влажность, 
+	// Р·Р°РґР°РЅРЅР°СЏ РІР»Р°Р¶РЅРѕСЃС‚СЊ, 
 	string task_moisture;
 	double task_moisture_v;
 	bool ParseTaskMoisture();
-	// заданная плотность
+	// Р·Р°РґР°РЅРЅР°СЏ РїР»РѕС‚РЅРѕСЃС‚СЊ
 	double task_density;
 #if !USE_LAB_LAYER_CUT_PRESSURES
-	// количество давлений в природном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ РїСЂРёСЂРѕРґРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int lab_layer_n_pressures_in_nature_condition;
-	// количество давлений в заданном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ Р·Р°РґР°РЅРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int lab_layer_n_pressures_in_task_condition;
 
-	// массив давлений природного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ РїСЂРёСЂРѕРґРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * lab_layer_pressures_in_nature_condition;
-	// массив давлений заданного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ Р·Р°РґР°РЅРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * lab_layer_pressures_in_task_condition;
 #else
-	// количество давлений в природном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ РїСЂРёСЂРѕРґРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int n_pressures_in_nature_condition;
-	// количество давлений в заданном состоянии, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РІР»РµРЅРёР№ РІ Р·Р°РґР°РЅРЅРѕРј СЃРѕСЃС‚РѕСЏРЅРёРё, 
 	int n_pressures_in_task_condition;
 
-	// массив давлений природного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ РїСЂРёСЂРѕРґРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * pressures_in_nature_condition;
-	// массив давлений заданного состояния
+	// РјР°СЃСЃРёРІ РґР°РІР»РµРЅРёР№ Р·Р°РґР°РЅРЅРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ
 	double * pressures_in_task_condition;
 #endif
 
@@ -3160,17 +3162,17 @@ public:
 	FiltrationLabExperiment();
 	~FiltrationLabExperiment();
 
-	// тип прибора,	
+	// С‚РёРї РїСЂРёР±РѕСЂР°,	
 	string apparatus_type;
-	// диаметр трубки , 
+	// РґРёР°РјРµС‚СЂ С‚СЂСѓР±РєРё , 
 	double tube_diameter;
-	// длина трубки, 
+	// РґР»РёРЅР° С‚СЂСѓР±РєРё, 
 	double tube_lenght;
-	// высота напора жидкости, 
+	// РІС‹СЃРѕС‚Р° РЅР°РїРѕСЂР° Р¶РёРґРєРѕСЃС‚Рё, 
 	double liquid_force_height;
-	// заданная плотность
+	// Р·Р°РґР°РЅРЅР°СЏ РїР»РѕС‚РЅРѕСЃС‚СЊ
 	double task_density;
-	// давления
+	// РґР°РІР»РµРЅРёСЏ
 	double pressures[3];
 
 	void PrintfProperties();
@@ -3182,13 +3184,13 @@ public:
 	PressingLabExperiment();
 	~PressingLabExperiment();
 
-	// тип прибора,	
+	// С‚РёРї РїСЂРёР±РѕСЂР°,	
 	string apparatus_type;
-	// заданная влажность, 
+	// Р·Р°РґР°РЅРЅР°СЏ РІР»Р°Р¶РЅРѕСЃС‚СЊ, 
 	string task_moisture;
 	double task_moisture_v;
 	bool ParseTaskMoisture();
-	// плотность невыветрелого грунта
+	// РїР»РѕС‚РЅРѕСЃС‚СЊ РЅРµРІС‹РІРµС‚СЂРµР»РѕРіРѕ РіСЂСѓРЅС‚Р°
 	double density;
 
 	void PrintfProperties();
@@ -3203,18 +3205,18 @@ public:
 	~FractionsLabExperiment();
 
 #if !USE_LAB_LAYER_FRACTIONS
-	// количество фракций, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ С„СЂР°РєС†РёР№, 
 	int lab_layer_n_fractions;
-	// массив диаметров фракций
+	// РјР°СЃСЃРёРІ РґРёР°РјРµС‚СЂРѕРІ С„СЂР°РєС†РёР№
 #if USE_FRACTION_DIAMETERS_INTERVAL
 	fraction_diameters_interval * lab_layer_fractions_diameters;
 #else
 	double * lab_layer_fractions_diameters;
 #endif
 #else
-	// количество фракций, 
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ С„СЂР°РєС†РёР№, 
 	int n_fractions;
-	// массив диаметров фракций
+	// РјР°СЃСЃРёРІ РґРёР°РјРµС‚СЂРѕРІ С„СЂР°РєС†РёР№
 #if USE_FRACTION_DIAMETERS_INTERVAL
 	fraction_diameters_interval * fractions_diameters;
 #else
@@ -3275,19 +3277,19 @@ public:
 	void ParamUnCheck(HWND hwndTV);
 
 	void GetChecked(vector<LabTrialValueType> & vvt);
-// содержим номер слоя в char кодировке
+// СЃРѕРґРµСЂР¶РёРј РЅРѕРјРµСЂ СЃР»РѕСЏ РІ char РєРѕРґРёСЂРѕРІРєРµ
 #define CHAR_LAYER_NUMBER_ID 1 
-	long id_ige;// из базы данных
+	long id_ige;// РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	string ID;
 	string layer_number;
 	string filename;
-	// схема испытания
+	// СЃС…РµРјР° РёСЃРїС‹С‚Р°РЅРёСЏ
 	string experiments_scheme;
-	bool is_compression;// компрессия
-	bool is_cut; // срез
-	bool is_filtracion;// фильтрация
-	bool is_pressing;// одноосное сжатие
-	bool is_fractions;// диаметры фракций (песок)
+	bool is_compression;// РєРѕРјРїСЂРµСЃСЃРёСЏ
+	bool is_cut; // СЃСЂРµР·
+	bool is_filtracion;// С„РёР»СЊС‚СЂР°С†РёСЏ
+	bool is_pressing;// РѕРґРЅРѕРѕСЃРЅРѕРµ СЃР¶Р°С‚РёРµ
+	bool is_fractions;// РґРёР°РјРµС‚СЂС‹ С„СЂР°РєС†РёР№ (РїРµСЃРѕРє)
 	bool ParseExperimentsScheme();
 	void FormExperimentsScheme();
 	void PrintfProperties();
@@ -3321,15 +3323,15 @@ public:
 
 	bool LabLayer::CalcNormative(LabTrialValueType & vt, 
 		vector<trial_got_value> & vv, 
-		int & n, // количество определений
-		trial_value & vn, // нормативное значение
-		double & S, // среднеквадратическое отклонение 
-		double & V  // коэффициент вариации
+		int & n, // РєРѕР»РёС‡РµСЃС‚РІРѕ РѕРїСЂРµРґРµР»РµРЅРёР№
+		trial_value & vn, // РЅРѕСЂРјР°С‚РёРІРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
+		double & S, // СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ 
+		double & V  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІР°СЂРёР°С†РёРё
 		);
 
 	bool LabLayer::CalcNormative(
 		vector<trial_got_value> & vv, 
-		int & norm, // нормативное значение
+		int & norm, // РЅРѕСЂРјР°С‚РёРІРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
 		int & n
 		);	
 
@@ -3406,8 +3408,8 @@ public:
 	void PassportFiz(const char * fn);
 	void PassportComp0(const char * fn, bool every);// normative list as Fiz
 	void PassportComp(const char * fn);// 
-	void PassportZriz(const char * fn);// нормативные значения прочностных х-к (среза) включая все состояния
-	void PassportZriz(const char * fn, LabTrial::indication ind);// нормативные значения прочностных х-к (среза) включая одно состояние
+	void PassportZriz(const char * fn);// РЅРѕСЂРјР°С‚РёРІРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РїСЂРѕС‡РЅРѕСЃС‚РЅС‹С… С…-Рє (СЃСЂРµР·Р°) РІРєР»СЋС‡Р°СЏ РІСЃРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ
+	void PassportZriz(const char * fn, LabTrial::indication ind);// РЅРѕСЂРјР°С‚РёРІРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РїСЂРѕС‡РЅРѕСЃС‚РЅС‹С… С…-Рє (СЃСЂРµР·Р°) РІРєР»СЋС‡Р°СЏ РѕРґРЅРѕ СЃРѕСЃС‚РѕСЏРЅРёРµ
 	void PassportZriz2(const char * fn, LabTrial::indication ind);
 	virtual void PrintfProperties(vector<fmtstr> & text);
 	virtual void PrintfProperties(vector<LabData> & labdata);
@@ -3524,11 +3526,11 @@ struct normative_value
 	trial_value v_85;
 	trial_value v_95;
 	trial_value v_99;
-	trial_value v_S;  // среднеквадратическое отклонение
-	trial_value v_V;  // коэффициент вариации
-	trial_value ro_85;// показатель точности
-	trial_value ro_95;// показатель точности
-	trial_value ro_99;// показатель точности
+	trial_value v_S;  // СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ
+	trial_value v_V;  // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІР°СЂРёР°С†РёРё
+	trial_value ro_85;// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РѕС‡РЅРѕСЃС‚Рё
+	trial_value ro_95;// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РѕС‡РЅРѕСЃС‚Рё
+	trial_value ro_99;// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РѕС‡РЅРѕСЃС‚Рё
 
 	trial_value gamma_g_tgfi_c;
 	trial_value sigma_min;
@@ -3541,9 +3543,9 @@ struct normative_value
 		trial_value v85, 
 		trial_value v95, 
 		trial_value v99,
-		trial_value S = trial_value(),   // среднеквадратическое отклонение 
-		trial_value V = trial_value(),   // коэффициент вариации
-		trial_value ro85 = trial_value(),// показатель точности среднего значения
+		trial_value S = trial_value(),   // СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РµСЃРєРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ 
+		trial_value V = trial_value(),   // РєРѕСЌС„С„РёС†РёРµРЅС‚ РІР°СЂРёР°С†РёРё
+		trial_value ro85 = trial_value(),// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РѕС‡РЅРѕСЃС‚Рё СЃСЂРµРґРЅРµРіРѕ Р·РЅР°С‡РµРЅРёСЏ
 		trial_value ro95 = trial_value(),
 		trial_value ro99 = trial_value(),
 		trial_value gamma = trial_value(),
@@ -3615,9 +3617,9 @@ struct excluded_lab_trial
 	string labnumer_ID;
 	LabNumber::mine_working_type m_mine_working_type;
 	string mine_working_number;
-	// глубина пробы, 
+	// РіР»СѓР±РёРЅР° РїСЂРѕР±С‹, 
 	double depth;
-	// тип данных для определения вида характеристики грунта	 
+	// С‚РёРї РґР°РЅРЅС‹С… РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ РІРёРґР° С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РіСЂСѓРЅС‚Р°	 
 	LabTrialValueType vt;
 	double v;
 	short * pf;
@@ -3638,10 +3640,10 @@ class Laboratory
 {
 public:
 	long id_obj;
-	// наименование объекта
+	// РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р°
 	string object_name;
 		
-	// наименование договора
+	// РЅР°РёРјРµРЅРѕРІР°РЅРёРµ РґРѕРіРѕРІРѕСЂР°
 	string contract;
 private:
 #if LABORATORY_WITH_SURFDOC
@@ -3696,7 +3698,7 @@ public:
 	void ReCreateContextWindow();
 	void ReDrawContextWindow();
 
-	static tagPOINT	context_window_pt;	// Текущая позиция context window
+	static tagPOINT	context_window_pt;	// РўРµРєСѓС‰Р°СЏ РїРѕР·РёС†РёСЏ context window
 
 	bool SelectLabObject(long & x, long & y, const LabObject * p1, HWND hWndParent);
 	void DestroyContextWindow();
@@ -3717,7 +3719,7 @@ public:
 	bool LabWaterSaturatedPartOfFullWaterCapacity();
 
 	vector<LabLayer *> m_layers;
-	// загрузка данных лабораторных анализов
+	// Р·Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… Р»Р°Р±РѕСЂР°С‚РѕСЂРЅС‹С… Р°РЅР°Р»РёР·РѕРІ
 	bool ReadLabInputFile(char *file);
 	int ParseLabInputFileLine(char* szBuff, int & type_line, const char * fn, bool use_compression3);
 
@@ -3743,7 +3745,7 @@ struct error_of_add_new_well_colomn_laboratory_analizes
 	string labnumer_ID;
 	LabNumber::mine_working_type m_mine_working_type;
 	string mine_working_number;
-	// глубина пробы, 
+	// РіР»СѓР±РёРЅР° РїСЂРѕР±С‹, 
 	double depth;
 };
 

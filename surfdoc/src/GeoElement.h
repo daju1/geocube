@@ -7,7 +7,7 @@ using namespace std ;
 #include "Ground.h"
 
 class GeoColomn;
-// базовый класс для элементов геологической колонки (разбивки) в документе
+// Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ СЌР»РµРјРµРЅС‚РѕРІ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ РєРѕР»РѕРЅРєРё (СЂР°Р·Р±РёРІРєРё) РІ РґРѕРєСѓРјРµРЅС‚Рµ
 class GeoElement : public GeoObject
 {
 	friend Archive& operator >>(Archive& ar, GeoColomn& ob);
@@ -70,7 +70,7 @@ public:
 Archive& operator <<(Archive& ar, GeoElement::type & tp);
 Archive& operator >>(Archive& ar, GeoElement::type & tp);
 
-// базовый класс для элементов геологической колонки (разбивки) в скважине
+// Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ СЌР»РµРјРµРЅС‚РѕРІ РіРµРѕР»РѕРіРёС‡РµСЃРєРѕР№ РєРѕР»РѕРЅРєРё (СЂР°Р·Р±РёРІРєРё) РІ СЃРєРІР°Р¶РёРЅРµ
 class StratigraficalGeoElement : public GeoElement
 {
 	void Init(long id_key);
@@ -118,7 +118,7 @@ protected:
 #define ENG_GEO_ELEMENT_VERSION 2
 struct LabTrialValueType;
 class LabLayer;
-#include "../../laboratory/src/lab.h"
+#include "../../laboratory/src/Lab.h"
 
 class EngineerGeoElement : public LithoGeoElement
 {
@@ -195,13 +195,13 @@ public:
 
 	enum GroundDescriptionType
 	{
-		//нормативные значения характеристик 
+		//РЅРѕСЂРјР°С‚РёРІРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє 
 		normative = 0,
-		//расчетные значения характеристик
-		// при расчетах оснований:          
-		// по деформациям:
+		//СЂР°СЃС‡РµС‚РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє
+		// РїСЂРё СЂР°СЃС‡РµС‚Р°С… РѕСЃРЅРѕРІР°РЅРёР№:          
+		// РїРѕ РґРµС„РѕСЂРјР°С†РёСЏРј:
 		calculated_on_deformations,
-		// по несущей способности   
+		// РїРѕ РЅРµСЃСѓС‰РµР№ СЃРїРѕСЃРѕР±РЅРѕСЃС‚Рё   
 		calculated_on_carry_ability
 	};
 	static const char * EngineerGeoElement::GroundDescriptionTypeToString(EngineerGeoElement::GroundDescriptionType gdt);
@@ -300,7 +300,7 @@ inline EngineerGeoElement::GroundDescriptionType operator++( EngineerGeoElement:
 class HydroGeoElement : public GeoElement
 {
 public:
-	bool ustanovlen;// установившийся ли уровень
+	bool ustanovlen;// СѓСЃС‚Р°РЅРѕРІРёРІС€РёР№СЃСЏ Р»Рё СѓСЂРѕРІРµРЅСЊ
 	void Init(long id_key);
 	HydroGeoElement(long id_key){Init(id_key);}
 	virtual void PrintfProperties(){}
@@ -358,7 +358,7 @@ public:
 
 
 
-// колонка гео элементов в документе
+// РєРѕР»РѕРЅРєР° РіРµРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РґРѕРєСѓРјРµРЅС‚Рµ
 class GeoColomn  : public GeoObject
 {
 	friend class GeoElement;

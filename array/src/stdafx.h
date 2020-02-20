@@ -9,10 +9,10 @@
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 // TODO: reference additional headers your program requires here
-
+#ifdef _MSC_VER
 #include <windows.h>
 #include <commctrl.h>
-
+#endif
 #include <stdio.h>
 #include <math.h>
 #include <algorithm>

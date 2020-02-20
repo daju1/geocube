@@ -9,11 +9,15 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#ifdef _MSC_VER
+#include <GdiplusEnums.h>
+#endif
+
 #include "Primitive3D.h"
 #include "../../tools/src/readfile.h"
 #include "../../array/src/vect.h"
 
-#include ".\WellElement.h"
+#include "./WellElement.h"
 
 class SurfDoc;
 class gdiplus_map_view;
@@ -249,7 +253,7 @@ public:
 	void PrintfProperties(vector<fmtstr> & text);
 
 };
-#include <GdiplusEnums.h>
+
 struct grunt_tolscha
 {
 	//long m_id_ige;
@@ -476,13 +480,13 @@ friend class BrokenPlane3D;
 		double glubina_rostverka,
 		long id_snip, bool razbivka_na_tolschi, long typ_grunt_1_zond_type, long id_method_FindMeanPCK, double step);
 
-	long   m_id_kt;       // ID комплексной точки
-	long   m_kt_idtyp;    //тип комплексной точки
-	long   m_id_bur_type; // способ бурения
-	long   m_d_bur;       // диаметр бурения
-	string m_data_bur;    // дата бурения
+	long   m_id_kt;       // ID РєРѕРјРїР»РµРєСЃРЅРѕР№ С‚РѕС‡РєРё
+	long   m_kt_idtyp;    //С‚РёРї РєРѕРјРїР»РµРєСЃРЅРѕР№ С‚РѕС‡РєРё
+	long   m_id_bur_type; // СЃРїРѕСЃРѕР± Р±СѓСЂРµРЅРёСЏ
+	long   m_d_bur;       // РґРёР°РјРµС‚СЂ Р±СѓСЂРµРЅРёСЏ
+	string m_data_bur;    // РґР°С‚Р° Р±СѓСЂРµРЅРёСЏ
 
-	double m_w;           // ширина колодца скважины
+	double m_w;           // С€РёСЂРёРЅР° РєРѕР»РѕРґС†Р° СЃРєРІР°Р¶РёРЅС‹
 public:
 	long GetIdKt(){return m_id_kt;}
 

@@ -23,9 +23,11 @@ class SurfDoc;
 class Layer;
 
 //#define UNICODE
+#ifdef _MSC_VER
 #include <windows.h>
 #include <gdiplus.h>
 using namespace Gdiplus;
+#endif
 
 class map_view;
 
@@ -44,9 +46,9 @@ class Line3D;
 
 class Object : public BaseObject
 {
-	//- используется как ключ при поиске однотипных объектов
+	//- РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєР°Рє РєР»СЋС‡ РїСЂРё РїРѕРёСЃРєРµ РѕРґРЅРѕС‚РёРїРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
 	static DWORD s_max_base_version;
-	DWORD m_base_version;//версия класса-родителя Object
+	DWORD m_base_version;//РІРµСЂСЃРёСЏ РєР»Р°СЃСЃР°-СЂРѕРґРёС‚РµР»СЏ Object
 	friend class ObjectList;
 	friend LRESULT CALLBACK DlgProcSurfIzolines2( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam );
@@ -56,8 +58,8 @@ protected:
 	bool m_toDisableDepthTest;
 	static bool s_canDisableDepthTest;
 	Object * m_parent;
-	string name;//имя объекта, присваивоемое пользователем
-	int m_UserID;// пользовательский идентифиатор объекта, 
+	string name;//РёРјСЏ РѕР±СЉРµРєС‚Р°, РїСЂРёСЃРІР°РёРІРѕРµРјРѕРµ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
+	int m_UserID;// РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ РёРґРµРЅС‚РёС„РёР°С‚РѕСЂ РѕР±СЉРµРєС‚Р°, 
 	static DWORD s_UserID_forCompare;
 	static string s_name_forCompare;
 	int layerID;
@@ -65,8 +67,8 @@ protected:
 	CPoint3 m_ptMax;
 	CPoint3 m_ptMin;
 	SurfDoc* m_pSurfDoc;
-	DWORD m_max_object_version;//версия объекта - потомка от класса Object которую надо использовать при сохранении той или иной версии документа
-	DWORD m_object_version;//версия объекта - потомка от класса Object
+	DWORD m_max_object_version;//РІРµСЂСЃРёСЏ РѕР±СЉРµРєС‚Р° - РїРѕС‚РѕРјРєР° РѕС‚ РєР»Р°СЃСЃР° Object РєРѕС‚РѕСЂСѓСЋ РЅР°РґРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё С‚РѕР№ РёР»Рё РёРЅРѕР№ РІРµСЂСЃРёРё РґРѕРєСѓРјРµРЅС‚Р°
+	DWORD m_object_version;//РІРµСЂСЃРёСЏ РѕР±СЉРµРєС‚Р° - РїРѕС‚РѕРјРєР° РѕС‚ РєР»Р°СЃСЃР° Object
 	bool m_bIsObjectList;
 	bool m_bIsPrimitive3;// if class is derived from Primitive<CPoint3>
 	bool m_bIsPrimitive4;// if class is derived from Primitive<CPoint4>
@@ -132,14 +134,14 @@ public:
 	{
 		if (to_select)
 		{
-			// SELECT OBJECT - включаем 2-й бит 
-			// в пользовательских данных объекта 
+			// SELECT OBJECT - РІРєР»СЋС‡Р°РµРј 2-Р№ Р±РёС‚ 
+			// РІ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёС… РґР°РЅРЅС‹С… РѕР±СЉРµРєС‚Р° 
 			this->m_lParam |= OBJECT_FLAG_SELECTED_BIT;
 		}
 		else
 		{
-			// UN SELECT OBJECT - выключаем 2-й бит 
-			// в пользовательских данных объекта
+			// UN SELECT OBJECT - РІС‹РєР»СЋС‡Р°РµРј 2-Р№ Р±РёС‚ 
+			// РІ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёС… РґР°РЅРЅС‹С… РѕР±СЉРµРєС‚Р°
 			this->m_lParam &= ~OBJECT_FLAG_SELECTED_BIT;
 		}
 	}
@@ -155,7 +157,7 @@ public:
 
 	enum object_type { 
 		undefined				= 0, 
-		// объекты
+		// РѕР±СЉРµРєС‚С‹
 		object					= 10,	
 		object_list				= 20, 
 
@@ -259,7 +261,7 @@ public:
 
 	void Init(const Object& ob);
 	Object(const Object& ob);
-	//====== Операция присвоения
+	//====== РћРїРµСЂР°С†РёСЏ РїСЂРёСЃРІРѕРµРЅРёСЏ
 	Object& Object::operator=(const Object& ob);
 	bool UpdateExtremums(vector<CPoint3>& vptmax, vector<CPoint3>& vptmin);
 	virtual bool UpdateExtremums(CPoint2 & profile_min, CPoint2 & profile_max){return false;}

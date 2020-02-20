@@ -1,13 +1,13 @@
 #pragma once
-#include "object.h"
-#include "objectList.h"
+#include "Object.h"
+#include "ObjectList.h"
 #include "GeoSurface.h"
 #include "ThePoint3D.h"
 
 class GeoCatch : public Object
 {
 	friend class SurfDoc;
-	// шаг сетки или число делений
+	// С€Р°Рі СЃРµС‚РєРё РёР»Рё С‡РёСЃР»Рѕ РґРµР»РµРЅРёР№
 	long N;
 public:
 	vect<GeoSurface>	m_surfaces;
@@ -102,7 +102,7 @@ public:
 		
 	size_t GetPointsNumber(){return 0;}
 
-	// добавляем горизонтальную плоскость (ГНК, ГВК или НВК) в объект ловушки - на основании базовой точки, принадлежащей поверхности искомого горизонтального контакта
+	// РґРѕР±Р°РІР»СЏРµРј РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅСѓСЋ РїР»РѕСЃРєРѕСЃС‚СЊ (Р“РќРљ, Р“Р’Рљ РёР»Рё РќР’Рљ) РІ РѕР±СЉРµРєС‚ Р»РѕРІСѓС€РєРё - РЅР° РѕСЃРЅРѕРІР°РЅРёРё Р±Р°Р·РѕРІРѕР№ С‚РѕС‡РєРё, РїСЂРёРЅР°РґР»РµР¶Р°С‰РµР№ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё РёСЃРєРѕРјРѕРіРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРіРѕ РєРѕРЅС‚Р°РєС‚Р°
 	bool InitGorizontPlane(CPoint3& base_point);
 
 	/*virtual*/ DWORD Serialize(Archive& ar);

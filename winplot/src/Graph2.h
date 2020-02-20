@@ -8,33 +8,34 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-
+#ifdef _MSC_VER
 #include "StdAfx.h"
-#include "..\..\tezey\src\Graph.h"
+#endif
+#include "../../tezey/src/Graph.h"
 
 /*
 struct TData
 {
-	//===== Порядок в нормализованном представлении числа
+	//===== РџРѕСЂСЏРґРѕРє РІ РЅРѕСЂРјР°Р»РёР·РѕРІР°РЅРЅРѕРј РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРё С‡РёСЃР»Р°
 	int Power;
-	//===== Флаг оси X
+	//===== Р¤Р»Р°Рі РѕСЃРё X
 	bool bX;
 	double
-		//======= Экстремумы
+		//======= Р­РєСЃС‚СЂРµРјСѓРјС‹
 		Min, Max,
-		//======= Множитель (10 в степени Power)
+		//======= РњРЅРѕР¶РёС‚РµР»СЊ (10 РІ СЃС‚РµРїРµРЅРё Power)
 		Factor,
-		//======= Шаг вдоль оси (мантисса)
+		//======= РЁР°Рі РІРґРѕР»СЊ РѕСЃРё (РјР°РЅС‚РёСЃСЃР°)
 		Step,
-		//======= Реальный шаг
+		//======= Р РµР°Р»СЊРЅС‹Р№ С€Р°Рі
 		dStep,
-		//======= Первая и последняя координаты (мантиссы)
+		//======= РџРµСЂРІР°СЏ Рё РїРѕСЃР»РµРґРЅСЏСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ (РјР°РЅС‚РёСЃСЃС‹)
 		Start, End,
-		//======= Первая и последняя координаты
+		//======= РџРµСЂРІР°СЏ Рё РїРѕСЃР»РµРґРЅСЏСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹
 		dStart, dEnd;
 };
 */
-	//===== Класс, реализующий функции плоского графика
+	//===== РљР»Р°СЃСЃ, СЂРµР°Р»РёР·СѓСЋС‰РёР№ С„СѓРЅРєС†РёРё РїР»РѕСЃРєРѕРіРѕ РіСЂР°С„РёРєР°
 class CGraph2
 {
 public:
@@ -44,28 +45,28 @@ public:
 	void InitLabels(LPSTR sTitle, LPSTR sX, LPSTR sY);
 	void InitPens();
 	void InitFonts();
-	//===== Данные, характеризующие данные вдоль осей
+	//===== Р”Р°РЅРЅС‹Рµ, С…Р°СЂР°РєС‚РµСЂРёР·СѓСЋС‰РёРµ РґР°РЅРЅС‹Рµ РІРґРѕР»СЊ РѕСЃРµР№
 	TData m_DataX, m_DataY;
-	//===== Контейнер точек графика
+	//===== РљРѕРЅС‚РµР№РЅРµСЂ С‚РѕС‡РµРє РіСЂР°С„РёРєР°
 	vect <CDPoint> m_vPoints;
 	vect <bool> m_vbYScale;
-	//===== Текущие размеры окна графика
+	//===== РўРµРєСѓС‰РёРµ СЂР°Р·РјРµСЂС‹ РѕРєРЅР° РіСЂР°С„РёРєР°
 	tagSIZE m_Size;
-	//===== Экранные координаты центра окна
+	//===== Р­РєСЂР°РЅРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ С†РµРЅС‚СЂР° РѕРєРЅР°
 	tagPOINT m_Center;
-	//===== Заголовок и наименования осей
+	//===== Р—Р°РіРѕР»РѕРІРѕРє Рё РЅР°РёРјРµРЅРѕРІР°РЅРёСЏ РѕСЃРµР№
 	char m_sTitle[255], m_sX[255], m_sY[255];
-	//===== Перо для рисования
+	//===== РџРµСЂРѕ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ
 	HPEN m_Pen;
-	//===== Два типа шрифтов
+	//===== Р”РІР° С‚РёРїР° С€СЂРёС„С‚РѕРІ
 	HFONT m_TitleFont, m_Font, m_font, m_YLabelFont;
-	//===== Высота буквы (зависит от шрифта)
+	//===== Р’С‹СЃРѕС‚Р° Р±СѓРєРІС‹ (Р·Р°РІРёСЃРёС‚ РѕС‚ С€СЂРёС„С‚Р°)
 	int		m_LH,
-	//===== Толщина пера
+	//===== РўРѕР»С‰РёРЅР° РїРµСЂР°
 			m_Width;
-	//===== Цвет пера
+	//===== Р¦РІРµС‚ РїРµСЂР°
 	COLORREF m_Clr;
-	//======= Методы для управления графиком
+	//======= РњРµС‚РѕРґС‹ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РіСЂР°С„РёРєРѕРј
 	CGraph2();
 	CGraph2(vdouble& x, vdouble& y, LPSTR sTitle = NULL, LPSTR sX = NULL, LPSTR sY = NULL);
 	CGraph2(Vector<vdouble> &vx, Vector<vdouble> &vy, LPSTR sTitle = NULL, LPSTR sX = NULL, LPSTR sY = NULL);
@@ -76,23 +77,23 @@ public:
 				LPSTR sTitle, LPSTR sX, LPSTR sY
 					);
 	virtual ~CGraph2();
-	//===== Заполнение TData для любой из осей
+	//===== Р—Р°РїРѕР»РЅРµРЅРёРµ TData РґР»СЏ Р»СЋР±РѕР№ РёР· РѕСЃРµР№
 	void Scale(UINT flag);
 	void Scale(TData& data);
 	void Scale(TData& data, UINT flag);
 	void Scale(TData& data, double fmin, double fmax, double fstep);
 	void GetScale(double &fXmin, double &fXmax, double &fXstep, double &fYmin, double &fYmax, double &fYstep);
 	void SetScale(double fXmin, double fXmax, double fXstep, double fYmin, double fYmax, double fYstep);
-	//===== Переход к логическим координатам точек
+	//===== РџРµСЂРµС…РѕРґ Рє Р»РѕРіРёС‡РµСЃРєРёРј РєРѕРѕСЂРґРёРЅР°С‚Р°Рј С‚РѕС‡РµРє
 	int MapToLogX (double d);
 	int MapToLogY (double d);
-	//===== Изображение в заданном контексте
+	//===== РР·РѕР±СЂР°Р¶РµРЅРёРµ РІ Р·Р°РґР°РЅРЅРѕРј РєРѕРЅС‚РµРєСЃС‚Рµ
 	void Draw (HDC hDC,	tagRECT r, UINT flag);
 	bool m_bLineWrite;
-	//===== Изображение одной линии
+	//===== РР·РѕР±СЂР°Р¶РµРЅРёРµ РѕРґРЅРѕР№ Р»РёРЅРёРё
 	void DrawLine(HDC hDC, UINT flag, bool useDiffColors = false);
 	void DrawPoints(HDC hDC, UINT flag, bool useDiffColors = false);
-	//===== Подготовка цифровой метки на оси
+	//===== РџРѕРґРіРѕС‚РѕРІРєР° С†РёС„СЂРѕРІРѕР№ РјРµС‚РєРё РЅР° РѕСЃРё
 	void MakeLabel(bool bX, double& v, char* s, size_t len);
 };
 

@@ -25,7 +25,7 @@ template <class T> class Primitive3D : public Object
 	friend class FastCollection;
 	friend class Surface3D;
 	friend class Cube4D;
-	GLenum  m_FillMode;  // Режим заполнения полигонов
+	GLenum  m_FillMode;  // Р РµР¶РёРј Р·Р°РїРѕР»РЅРµРЅРёСЏ РїРѕР»РёРіРѕРЅРѕРІ
 	size_t m_nPoints;
 	virtual void Drawing() = 0;
 public:
@@ -70,7 +70,7 @@ public:
 		dynamic_cast<Object*>(this)->Init(ob);
 		this->Init(ob);
 	}
-	//====== Операция присвоения
+	//====== РћРїРµСЂР°С†РёСЏ РїСЂРёСЃРІРѕРµРЅРёСЏ
 	Primitive3D& operator=(Primitive3D& ob)
 	{
 		if (this == &ob)
@@ -437,7 +437,7 @@ public:
 		AllocPoints(len);
 		m_color = color;
 		bool start = true;
-		// складываем данные в документ
+		// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 		for(size_t i = 0; i < GetPointsNumber(); i++)
 		{
 			m_vdPoints[i] = pts[i];
@@ -467,7 +467,7 @@ public:
 		AllocPoints(pts.size());
 		m_color = color;
 		bool start = true;
-		// складываем данные в документ
+		// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 		for(size_t i = 0; i < GetPointsNumber(); i++)
 		{
 			m_vdPoints[i] = pts[i];
@@ -501,7 +501,7 @@ public:
 			bool start = true;
 			T pt;
 			pt.bVisible = true;
-			// складываем данные в документ
+			// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 			for(size_t i = 0; i < GetPointsNumber(); i++)
 			{
 				pt.x = x[i];
@@ -535,7 +535,7 @@ public:
 		AllocPoints(1);
 		m_color = color;
 		bool start = true;
-		// складываем данные в документ
+		// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 
 		m_vdPoints[0] = pt;
 		m_vvPoints[0] = pt;
@@ -667,7 +667,7 @@ public:
 	{
 		for (size_t ipoint = 0; ipoint < m_nPoints; ipoint++)
 		{
-			// растояние от точки до плоскости
+			// СЂР°СЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё РґРѕ РїР»РѕСЃРєРѕСЃС‚Рё
 			double r = 
 				a*m_vdPoints[ipoint].x+
 				b*m_vdPoints[ipoint].y+

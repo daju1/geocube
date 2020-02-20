@@ -1,8 +1,8 @@
 #ifndef READ_FILE_H_
 #define READ_FILE_H_
-#include "..\stdafx.h"
-#include "..\..\array\src\Vector.h"
-#include "..\..\array\src\vdouble.h"
+#include "../stdafx.h"
+#include "../../array/src/Vector.h"
+#include "../../array/src/Vdouble.h"
 
 #define USE_STRING_IN_THE_CELL	1
 #define CELL_S_N_CHARS			8

@@ -15,7 +15,7 @@
 
 #include "points.h"
 #include "../../tools/src/filedlg.h"
-#include ".\archive.h"
+#include "Archive.h"
 #include "./CrdTranslator.h"
 
 extern int ChooseSurfColor(HWND hwndOwner, COLORREF& color);
@@ -27,7 +27,7 @@ template <class T> class Primitive3D : public Object
 	friend class FastCollection;
 	friend class Surface3D;
 	friend class Cube4D;
-	GLenum  m_FillMode;  // Режим заполнения полигонов
+	GLenum  m_FillMode;  // Р РµР¶РёРј Р·Р°РїРѕР»РЅРµРЅРёСЏ РїРѕР»РёРіРѕРЅРѕРІ
 	size_t m_nPoints;
 	virtual void Drawing() = 0;
 public:
@@ -80,7 +80,7 @@ public:
 		dynamic_cast<Object*>(this)->Init(ob);
 		this->Init(ob);
 	}
-	//====== Операция присвоения
+	//====== РћРїРµСЂР°С†РёСЏ РїСЂРёСЃРІРѕРµРЅРёСЏ
 	Primitive3D& operator=(const Primitive3D& ob)
 	{
 		if (this == &ob)
@@ -472,7 +472,7 @@ public:
 			double cosinus = sqrt(a*a + b*b + c*c) / sqrt(a*a + b*b);
 			double x0, y0; int i;
 			{
-				// запись bln файла в координатах плоскости сечения
+				// Р·Р°РїРёСЃСЊ bln С„Р°Р№Р»Р° РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С… РїР»РѕСЃРєРѕСЃС‚Рё СЃРµС‡РµРЅРёСЏ
 				if (a != 0.0 && b != 0)
 				{
 					if(fabs(a) < fabs(b))
@@ -651,7 +651,7 @@ public:
 		AllocPoints(len);
 		m_color = color;
 		bool start = true;
-		// складываем данные в документ
+		// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 		for(size_t i = 0; i < GetPointsNumber(); i++)
 		{
 			m_vdPoints[i] = pts[i];
@@ -681,7 +681,7 @@ public:
 		AllocPoints(pts.size());
 		m_color = color;
 		bool start = true;
-		// складываем данные в документ
+		// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 		for(size_t i = 0; i < GetPointsNumber(); i++)
 		{
 			m_vdPoints[i] = pts[i];
@@ -715,7 +715,7 @@ public:
 			bool start = true;
 			T pt;
 			pt.bVisible = true;
-			// складываем данные в документ
+			// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 			for(size_t i = 0; i < GetPointsNumber(); i++)
 			{
 				pt.x = x[i];
@@ -749,7 +749,7 @@ public:
 		AllocPoints(1);
 		m_color = color;
 		bool start = true;
-		// складываем данные в документ
+		// СЃРєР»Р°РґС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РґРѕРєСѓРјРµРЅС‚
 
 		m_vdPoints[0] = pt;
 		m_vvPoints[0] = pt;
@@ -889,7 +889,7 @@ public:
 	{
 		for (size_t ipoint = 0; ipoint < m_nPoints; ipoint++)
 		{
-			// растояние от точки до плоскости
+			// СЂР°СЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё РґРѕ РїР»РѕСЃРєРѕСЃС‚Рё
 			double r = 
 				a*m_vdPoints[ipoint].x+
 				b*m_vdPoints[ipoint].y+

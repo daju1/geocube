@@ -1,11 +1,13 @@
 #pragma once
 
+#ifdef _MSC_VER
 #include <windows.h>
+#endif
 #include <string>
 
 using namespace std ;
 
-#include "trialdatadef.h"
+#include "TrialDataDef.h"
 
 struct plot_data_2d
 {
@@ -118,11 +120,11 @@ struct axes_draw
 	int draw_x;
 	int draw_y;
 
-	int left; // давление (нахлёст) слева
-	int right; // давление справа
+	int left; // РґР°РІР»РµРЅРёРµ (РЅР°С…Р»С‘СЃС‚) СЃР»РµРІР°
+	int right; // РґР°РІР»РµРЅРёРµ СЃРїСЂР°РІР°
 
-	int top; // давление сверху
-	int bottom; // давление снизу
+	int top; // РґР°РІР»РµРЅРёРµ СЃРІРµСЂС…Сѓ
+	int bottom; // РґР°РІР»РµРЅРёРµ СЃРЅРёР·Сѓ
 
 
 	void borders(axes_draw& rhs);
@@ -209,22 +211,22 @@ public:
 	string title;
 	string xlabel;
 	string ylabel;
-	//===== Текущие размеры окна графика
+	//===== РўРµРєСѓС‰РёРµ СЂР°Р·РјРµСЂС‹ РѕРєРЅР° РіСЂР°С„РёРєР°
 	tagSIZE m_Size;
-	//===== Экранные координаты центра окна
+	//===== Р­РєСЂР°РЅРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ С†РµРЅС‚СЂР° РѕРєРЅР°
 	tagPOINT m_Center;
-	//===== Переход к логическим координатам точек
+	//===== РџРµСЂРµС…РѕРґ Рє Р»РѕРіРёС‡РµСЃРєРёРј РєРѕРѕСЂРґРёРЅР°С‚Р°Рј С‚РѕС‡РµРє
 	int MapToLogX (HDC hDC, double d);
 	int MapToLogY (HDC hDC, double d);
-	//===== Два типа шрифтов
+	//===== Р”РІР° С‚РёРїР° С€СЂРёС„С‚РѕРІ
 	//HFONT m_TitleFont, m_Font, m_font, m_YLabelFont;
 	//DrawPlot(hdc, x, y);	
 	void Draw (HDC hDC,	tagRECT r, tagRECT margin);
-	//===== Заголовок и наименования осей
+	//===== Р—Р°РіРѕР»РѕРІРѕРє Рё РЅР°РёРјРµРЅРѕРІР°РЅРёСЏ РѕСЃРµР№
 	//char m_sTitle[255], m_sX[255], m_sY[255];
-	//===== Высота буквы (зависит от шрифта)
+	//===== Р’С‹СЃРѕС‚Р° Р±СѓРєРІС‹ (Р·Р°РІРёСЃРёС‚ РѕС‚ С€СЂРёС„С‚Р°)
 	//int		m_LH,
-	//===== Толщина пера
+	//===== РўРѕР»С‰РёРЅР° РїРµСЂР°
 	//		m_Width;
 	//void InitFonts();
 

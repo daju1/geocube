@@ -1,7 +1,7 @@
 #pragma once
-#include "object.h"
-#include "objectlist.h"
-#include "..\..\array\src\vect.h"
+#include "Object.h"
+#include "ObjectList.h"
+#include "../../array/src/vect.h"
 
 class Collection :
 	public Object

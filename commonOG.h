@@ -2,9 +2,8 @@
 #ifndef __COMMON_OG_H__
 #define __COMMON_OG_H__
 
-#include <gl\gl.h>
-#include <gl\glu.h>
-
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 #include "surfdefs.h" //for define OG_DOUBLE_PRECISION
 

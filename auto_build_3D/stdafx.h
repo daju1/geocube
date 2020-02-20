@@ -7,7 +7,9 @@
 
 
 #include <iostream>
+#ifdef _MSC_VER
 #include <tchar.h>
+#endif
 
 // TODO: reference additional headers your program requires here
 #include <math.h>

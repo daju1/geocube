@@ -1,5 +1,7 @@
 #pragma once
+#ifdef _MSC_VER
 #include <windows.h>
+#endif
 class SurfDoc;
 class Svaj
 {
@@ -97,13 +99,13 @@ public:
 	static const char * SvaiTypeToString(BuroNabivSvaj::SvaiType svai_type, double v_custom_gamma_cf[4]);
 	static const char * SvaiTypeToString(BuroNabivSvaj::SvaiType svai_type);
 
-	// Массив описаний страниц блокнота
+	// РњР°СЃСЃРёРІ РѕРїРёСЃР°РЅРёР№ СЃС‚СЂР°РЅРёС† Р±Р»РѕРєРЅРѕС‚Р°
 	PROPSHEETPAGE   psheetPage[BuroNabivSvaj_npages];
 
-	// Заголовок блокнота
+	// Р—Р°РіРѕР»РѕРІРѕРє Р±Р»РѕРєРЅРѕС‚Р°
 	PROPSHEETHEADER psheetHeader;
 
-	// Идентификаторы страниц блокнота
+	// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂС‹ СЃС‚СЂР°РЅРёС† Р±Р»РѕРєРЅРѕС‚Р°
 	HPROPSHEETPAGE hPage[BuroNabivSvaj_npages];
 
 	static INT_PTR CALLBACK DlgProcAdditionals( HWND hDlg, UINT uMsg,

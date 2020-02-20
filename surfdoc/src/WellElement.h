@@ -26,18 +26,18 @@ struct GridDataPointRef
 class WellElement
 {
 	GLuint m_nglListNumber;
-	DWORD m_base_wellelement_version;// версия класса родителя
+	DWORD m_base_wellelement_version;// РІРµСЂСЃРёВ¤ РєР»Р°СЃСЃР° СЂРѕРґРёС‚РµР»В¤
 protected:
-	DWORD m_this_wellelement_version; // версия класса потомка
-	double zk;//альтитуда кровли 
-	double zp;//альтитуда подошвы 
+	DWORD m_this_wellelement_version; // РІРµСЂСЃРёВ¤ РєР»Р°СЃСЃР° РїРѕС‚РѕРјРєР°
+	double zk;//Р°Р»СЊС‚РёС‚СѓРґР° РєСЂРѕРІР»Рё 
+	double zp;//Р°Р»СЊС‚РёС‚СѓРґР° РїРѕРґРѕС€РІС‹ 
 
 
 	friend void To_GridData(WellColomn * pWellColomn, WellElement * pWellElem, GridData * pData, BYTE podoshva);
 
 
 	WellColomn * well_colomn;
-	string nameID;//имя идентификатор
+	string nameID;//РёРјВ¤ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ
 	friend class WellColomn;
 	friend class project;
 	WellElement();
@@ -99,8 +99,8 @@ Archive& operator >>(Archive& ar, WellElement::type & tp);
 
 class Well_IGE_Podoshva : public WellElement
 {
-	string key;// ключ ИГЭ
-	long id_ige; // ID_IGE в базе 
+	string key;// РєР»СЋС‡ В»в€љРЃ
+	long id_ige; // ID_IGE РІ Р±Р°Р·Рµ 
 	COLORREF color;
 	long id_umpoz;
 	string umpoz, hatchacad;
@@ -131,8 +131,8 @@ public:
 
 class Well_Litho_Podoshva : public WellElement
 {
-	string key;// ключ ИГЭ
-	long id_ige; // ID_IGE в базе 
+	string key;// РєР»СЋС‡ В»в€љРЃ
+	long id_ige; // ID_IGE РІ Р±Р°Р·Рµ 
 	COLORREF color;
 	long id_umpoz;
 	string umpoz, hatchacad;
@@ -161,8 +161,8 @@ public:
 class Well_IsSand_Podoshva : public WellElement
 {
 	friend class Well_3D;
-	//double z;//альтитуда подошвы 
-	bool isSand;// песок или пылеватоглинистый грунт
+	//double z;//Р°Р»СЊС‚РёС‚СѓРґР° РїРѕРґРѕС€РІС‹ 
+	bool isSand;// РїРµСЃРѕРє РёР»Рё РїС‹Р»РµРІР°С‚РѕРіР»РёРЅРёСЃС‚С‹Р№ РіСЂСѓРЅС‚
 public:
 	bool IsSand(){return isSand;}
 	Well_IsSand_Podoshva();
@@ -189,8 +189,8 @@ public:
 
 class Well_Hydro_Projavlenie : public WellElement
 {
-	//double z;//альтитуда гидропроявления 
-	bool ustanovlen;// установившийся ли уровень
+	//double z;//Р°Р»СЊС‚РёС‚СѓРґР° РіРёРґСЂРѕРїСЂРѕВ¤РІР»РµРЅРёВ¤ 
+	bool ustanovlen;// СѓСЃС‚Р°РЅРѕРІРёРІС€РёР№СЃВ¤ Р»Рё СѓСЂРѕРІРµРЅСЊ
 	long horizont;
 	friend class Well_3D;
 public:
@@ -213,8 +213,8 @@ public:
 
 class LabNumber;
 
-#include "../../laboratory/src/baselab.h"
-#include "../../laboratory/src/lab.h"
+#include "../../laboratory/src/BaseLab.h"
+#include "../../laboratory/src/Lab.h"
 
 class Well_Laboratory_Analize : public WellElement, public BaseLab
 {
@@ -354,7 +354,7 @@ struct wells_draw_list_item
 
 
 class Well_3D;
-// колонка гео элементов в скважине
+// РєРѕР»РѕРЅРєР° РіРµРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ СЃРєРІР°Р¶РёРЅРµ
 class WellColomn
 {
 
@@ -363,7 +363,7 @@ class WellColomn
 	DWORD well_colomn_version;
 
 	SurfDoc * m_pSurfDoc;
-	wells_draw_list_item * m_wdli;// указатель на ячейку из списка отрисовки скважины
+	wells_draw_list_item * m_wdli;// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° В¤С‡РµР№РєСѓ РёР· СЃРїРёСЃРєР° РѕС‚СЂРёСЃРѕРІРєРё СЃРєРІР°Р¶РёРЅС‹
 
 	void Init();
 	WellElement::type w_type;
@@ -404,7 +404,7 @@ public:
 	WellColomn(const WellColomn& ob);
 	WellColomn& operator=(const WellColomn& ob);
 
-	int m_wdli_id;//идентификатор ячейки из списка отрисовки скважины
+	int m_wdli_id;//РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ В¤С‡РµР№РєРё РёР· СЃРїРёСЃРєР° РѕС‚СЂРёСЃРѕРІРєРё СЃРєРІР°Р¶РёРЅС‹
 
 	WellElement::type GetType(){return w_type;}
 	void InitDoc(SurfDoc *pSurfDoc)

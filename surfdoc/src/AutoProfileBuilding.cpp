@@ -1,3 +1,4 @@
+#ifdef _MSC_VER
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
 #include <afx.h>
@@ -8,23 +9,25 @@
 #include <afxcmn.h>			// MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
+#endif // _MSC_VER
 #include <iostream>
 
 #define TRACE              printf
 
+#ifdef _MSC_VER
 #include "stdafx.h"
+#endif
 
-
-#include ".\autoprofilebuilding.h"
-#include ".\archive.h"
+#include "AutoProfileBuilding.h"
+#include "Archive.h"
 #include "winsurftree.h"
-#include "surfdoc.h"
+#include "SurfDoc.h"
 #include "../../winplot/src/winplot.h"
 #include "../../tools/src/errorexit.h"
 #include "../../array/src/interp.h"
-#include "..\..\array\src\ap.h"
-#include "..\..\array\src\fft.h"
-#include "..\..\array\src\matrixes.h"
+#include "../../array/src/ap.h"
+#include "../../array/src/fft.h"
+#include "../../array/src/matrixes.h"
 
 #include "../mylicense.h"
 
@@ -37,6 +40,7 @@
 
 #include "./../array/src/korrelation.h"
 
+#include "../../array/src/slau.h"
 
 extern char szPath[];
 extern char directory[];
@@ -539,7 +543,7 @@ void WriteDescription(FILE* stream, auto_build_parametrs & ab)
 	fprintf(stream, "%s\n",ab.num_col_filename);
 }
 
-#include "..\..\array\src\slau.h"
+
 void SaveMyGrid(char * name, long rows, long cols, vector<double> & sol)
 {
 	long rows_cols = rows*cols;

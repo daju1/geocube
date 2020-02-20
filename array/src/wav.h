@@ -1,6 +1,6 @@
 
 
-#include "vdouble.h"
+#include "Vdouble.h"
 
 
 #define WF_HAAR							0
@@ -13,8 +13,8 @@
 #define WF_DISCRETE_MEYER				7
 
 
-void WaveletFilters(int wf, // флаг типа вейвлетов
-	int order, // порядоак вейвлета
+void WaveletFilters(int wf, // С„Р»Р°Рі С‚РёРїР° РІРµР№РІР»РµС‚РѕРІ
+	int order, // РїРѕСЂСЏРґРѕР°Рє РІРµР№РІР»РµС‚Р°
 	int orderBiorthogonalDecomposition,
 	int& nd1, int& nd2, vdouble& d_h,
 	int& ngd1, int& ngd2, vdouble& d_g,

@@ -9,7 +9,7 @@ class ThePoint3D;
 class GeoSurface;
 class GridData;
 
-#include "..\..\array\src\vect.h"
+#include "../../array/src/vect.h"
 
 HTREEITEM AddItemToTree(HWND hwndTV, LPSTR lpszItem, BOOL fCheck, LPARAM lParam,
 						HTREEITEM hParent = TVI_ROOT, HTREEITEM hInsertAfter = TVI_LAST);

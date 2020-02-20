@@ -11,26 +11,26 @@
 
 #include "Object.h"
 #include "points.h"
-#include "..\..\array\src\vect.h"
+#include "../../array/src/vect.h"
 #include "ProfileAttachPoint.h"
 
 class Profile3D;
 
-// прересечение профилей
+// РїСЂРµСЂРµСЃРµС‡РµРЅРёРµ РїСЂРѕС„РёР»РµР№
 class ProfileIntersection
 {
 public:
-	double x,y;// мировые координаты пересечения профилей 
+	double x,y;// РјРёСЂРѕРІС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРµСЂРµСЃРµС‡РµРЅРёСЏ РїСЂРѕС„РёР»РµР№ 
 	double min_z, max_z;
-	double xv, yv; //GL координаты пересечения профилей
+	double xv, yv; //GL РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРµСЂРµСЃРµС‡РµРЅРёСЏ РїСЂРѕС„РёР»РµР№
 	double min_zv, max_zv;
 
-	vector<double> z; // мировые координаты пересечения линий
-	vector<double> zv; // GL координаты координаты пересечения линий
+	vector<double> z; // РјРёСЂРѕРІС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРµСЂРµСЃРµС‡РµРЅРёСЏ Р»РёРЅРёР№
+	vector<double> zv; // GL РєРѕРѕСЂРґРёРЅР°С‚С‹ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРµСЂРµСЃРµС‡РµРЅРёСЏ Р»РёРЅРёР№
 
-	string name; // имя пересекаемого профиля из класса Object
+	string name; // РёРјСЏ РїРµСЂРµСЃРµРєР°РµРјРѕРіРѕ РїСЂРѕС„РёР»СЏ РёР· РєР»Р°СЃСЃР° Object
 
-	vector<string> names; // имена пересекаемых линий
+	vector<string> names; // РёРјРµРЅР° РїРµСЂРµСЃРµРєР°РµРјС‹С… Р»РёРЅРёР№
 	vector<COLORREF> colors;
 
 	ProfileIntersection();
@@ -91,13 +91,13 @@ class BlnProfilePlane3D : public Object
 	void Drawing();
 public:
 	vect<ProfileIntersection> m_intersections;
-	// это полупрозрачные ломаные плоскости в трёхмерном пространстве, 
-	// символизирующие расположение ломанного листа разреза
+	// СЌС‚Рѕ РїРѕР»СѓРїСЂРѕР·СЂР°С‡РЅС‹Рµ Р»РѕРјР°РЅС‹Рµ РїР»РѕСЃРєРѕСЃС‚Рё РІ С‚СЂС‘С…РјРµСЂРЅРѕРј РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ, 
+	// СЃРёРјРІРѕР»РёР·РёСЂСѓСЋС‰РёРµ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ Р»РѕРјР°РЅРЅРѕРіРѕ Р»РёСЃС‚Р° СЂР°Р·СЂРµР·Р°
 	vect<CPoint3> 
 		m_vdplaneBlnProfiles,
 		m_vvplaneBlnProfiles;
 
-	int m_alpha; // коэффициент прозрачности
+	int m_alpha; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚Рё
 
 	size_t GetPointsNumber();
 	virtual void Draw();
@@ -175,7 +175,7 @@ public:
 	void clear(void);
 
 	//#####################################################
-	// вынести в статические члены класса
+	// РІС‹РЅРµСЃС‚Рё РІ СЃС‚Р°С‚РёС‡РµСЃРєРёРµ С‡Р»РµРЅС‹ РєР»Р°СЃСЃР°
 	static double step_x,  step_y,  step_z;
 	static double first_x, first_y, first_z;
 	static double last_x, last_y, last_z;
@@ -184,16 +184,16 @@ public:
 	//#####################################################
 protected:
 
-	// Массив описаний страниц блокнота
+	// РњР°СЃСЃРёРІ РѕРїРёСЃР°РЅРёР№ СЃС‚СЂР°РЅРёС† Р±Р»РѕРєРЅРѕС‚Р°
 	PROPSHEETPAGE   psheetPage[BlnProfilePlane3D_npages];
 
-	// Заголовок блокнота
+	// Р—Р°РіРѕР»РѕРІРѕРє Р±Р»РѕРєРЅРѕС‚Р°
 	PROPSHEETHEADER psheetHeader;
 
-	// Идентификаторы страниц блокнота
+	// РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂС‹ СЃС‚СЂР°РЅРёС† Р±Р»РѕРєРЅРѕС‚Р°
 	HPROPSHEETPAGE hPage[BlnProfilePlane3D_npages];
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID РїРѕ РёР·РІРµСЃС‚РЅРѕРјСѓ hwnd РѕРїСЂРµРґРµР»СЏРµС‚
+	//====== Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ
 //	static Cube4D * me;
 	static INT_PTR CALLBACK DlgProcDrawModes( HWND hDlg, UINT uMsg,
 		WPARAM wParam, LPARAM lParam );	

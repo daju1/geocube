@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../tools/src/listviewtab.h"
+#include "../../tools/src/ListViewTab.h"
 
 #define USE_LISTVIEW_STANDART_GE 1
 #if USE_LISTVIEW_STANDART_GE
@@ -22,7 +22,7 @@
 	) \
 	)
 class Archive;
-// прочностные характеристики грунта
+// РїСЂРѕС‡РЅРѕСЃС‚РЅС‹Рµ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РіСЂСѓРЅС‚Р°
 struct StrengthDescription
 {
 	DWORD m_strength_description_version;
@@ -31,15 +31,15 @@ struct StrengthDescription
 	void PrintfProperties();
 	bool Defined();
 
-	// модуль деформации грунта
+	// РјРѕРґСѓР»СЊ РґРµС„РѕСЂРјР°С†РёРё РіСЂСѓРЅС‚Р°
 	double deformation_modulus;
 	bool deformation_modulus_defined;
 
-	// угол внутреннего трения
+	// СѓРіРѕР» РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ С‚СЂРµРЅРёСЏ
 	double internal_friction_angle;
 	bool internal_friction_angle_defined;
 
-	// удельное сцепление грунта
+	// СѓРґРµР»СЊРЅРѕРµ СЃС†РµРїР»РµРЅРёРµ РіСЂСѓРЅС‚Р°
 	double specific_cohesion;
 	bool specific_cohesion_defined;
 
@@ -50,7 +50,7 @@ struct StrengthDescription
 
 
 };
-// Характеристики грунта
+// РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РіСЂСѓРЅС‚Р°
 struct GroundDescription
 {
 	DWORD m_ground_description_version;
@@ -58,119 +58,119 @@ struct GroundDescription
 	void PrintfProperties();
 
 /*
-// что даёт лаборатория
+// С‡С‚Рѕ РґР°С‘С‚ Р»Р°Р±РѕСЂР°С‚РѕСЂРёСЏ
 // ====================
-// влажность природная (доли ед.)                              .19
+// РІР»Р°Р¶РЅРѕСЃС‚СЊ РїСЂРёСЂРѕРґРЅР°СЏ (РґРѕР»Рё РµРґ.)                              .19
 
-// удельный вес частиц грунта,кн/м3                          26.68
-// удельный вес грунта,кн/м3                                 18.15
+// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ С‡Р°СЃС‚РёС† РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                          26.68
+// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                                 18.15
 
-// что рассчитывается по формулам
+// С‡С‚Рѕ СЂР°СЃСЃС‡РёС‚С‹РІР°РµС‚СЃСЏ РїРѕ С„РѕСЂРјСѓР»Р°Рј
 // ==============================
-// число пластичности                                          .13         ?
+// С‡РёСЃР»Рѕ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё                                          .13         ?
 
-// влажность водонасыщения (доли ед.)                          .26         ?
-// показатель текучести                                       -.08         ?
-// показатель текучести водонасыщ.грунта                       .48         ?
+// РІР»Р°Р¶РЅРѕСЃС‚СЊ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ (РґРѕР»Рё РµРґ.)                          .26         ?
+// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‡РµСЃС‚Рё                                       -.08         ?
+// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‡РµСЃС‚Рё РІРѕРґРѕРЅР°СЃС‹С‰.РіСЂСѓРЅС‚Р°                       .48         ?
 
-// удельный вес сухого грунта,кн/м3                          15.30         ?
-// удельный вес водонасыщенного грунта,кн/м3                 19.33         ?
-// удельный вес взвешенного в воде грунта,кн/м3               9.64         ?
-// пористость (доли ед.)                                       .43         ?
-// коэффициент пористости природного слож.доли ед.             .75         ?
+// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                          15.30         ?
+// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРЅРѕРіРѕ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                 19.33         ?
+// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІР·РІРµС€РµРЅРЅРѕРіРѕ РІ РІРѕРґРµ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3               9.64         ?
+// РїРѕСЂРёСЃС‚РѕСЃС‚СЊ (РґРѕР»Рё РµРґ.)                                       .43         ?
+// РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРѕСЂРёСЃС‚РѕСЃС‚Рё РїСЂРёСЂРѕРґРЅРѕРіРѕ СЃР»РѕР¶.РґРѕР»Рё РµРґ.             .75         ?
 
-// степень влажности                                           .69         ?
+// СЃС‚РµРїРµРЅСЊ РІР»Р°Р¶РЅРѕСЃС‚Рё                                           .69         ?
 
-// недостаток водонасыщения(доли ед.)                          .07         ?
-// полная влагоемкость                                         .28         ?
+// РЅРµРґРѕСЃС‚Р°С‚РѕРє РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ(РґРѕР»Рё РµРґ.)                          .07         ?
+// РїРѕР»РЅР°СЏ РІР»Р°РіРѕРµРјРєРѕСЃС‚СЊ                                         .28         ?
 
-// в супесях
- I модуль деформации грунта водон. состоян.в мпа              7.0          I
- I угол внутреннего трения в водонасыщ. сост., град.         24            I
- I удельное сцепление грунта в водонас. сост., мпа            0.017        I
+// РІ СЃСѓРїРµСЃСЏС…
+ I РјРѕРґСѓР»СЊ РґРµС„РѕСЂРјР°С†РёРё РіСЂСѓРЅС‚Р° РІРѕРґРѕРЅ. СЃРѕСЃС‚РѕСЏРЅ.РІ РјРїР°              7.0          I
+ I СѓРіРѕР» РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ С‚СЂРµРЅРёСЏ РІ РІРѕРґРѕРЅР°СЃС‹С‰. СЃРѕСЃС‚., РіСЂР°Рґ.         24            I
+ I СѓРґРµР»СЊРЅРѕРµ СЃС†РµРїР»РµРЅРёРµ РіСЂСѓРЅС‚Р° РІ РІРѕРґРѕРЅР°СЃ. СЃРѕСЃС‚., РјРїР°            0.017        I
  */
 
-	// удельный вес частиц грунта,кн/м3                          26.68
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ С‡Р°СЃС‚РёС† РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                          26.68
 	double specific_gravity_of_ground_particles;
 	bool specific_gravity_of_ground_particles_defined;
-	// удельный вес грунта,кн/м3                                 18.15
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                                 18.15
 	double specific_gravity_of_ground;
 	bool specific_gravity_of_ground_defined;
-	// удельный вес сухого грунта,кн/м3                          15.30
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ СЃСѓС…РѕРіРѕ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                          15.30
 	double specific_gravity_of_dry_ground;
 	bool specific_gravity_of_dry_ground_defined;
-	// удельный вес водонасыщенного грунта,кн/м3                 19.33
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРЅРѕРіРѕ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3                 19.33
 	double specific_gravity_of_water_saturated_ground;
 	bool specific_gravity_of_water_saturated_ground_defined;
-	// удельный вес взвешенного в воде грунта,кн/м3               9.64
+	// СѓРґРµР»СЊРЅС‹Р№ РІРµСЃ РІР·РІРµС€РµРЅРЅРѕРіРѕ РІ РІРѕРґРµ РіСЂСѓРЅС‚Р°,РєРЅ/Рј3               9.64
 	double specific_gravity_of_suspended_in_water_ground;
 	bool specific_gravity_of_suspended_in_water_ground_defined;
 
-	// пористость (доли ед.)                                       .43
+	// РїРѕСЂРёСЃС‚РѕСЃС‚СЊ (РґРѕР»Рё РµРґ.)                                       .43
 	double porosity;
 	bool porosity_defined;
-	// коэффициент пористости природного слож.доли ед.             .75
+	// РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРѕСЂРёСЃС‚РѕСЃС‚Рё РїСЂРёСЂРѕРґРЅРѕРіРѕ СЃР»РѕР¶.РґРѕР»Рё РµРґ.             .75
 	double natural_constitution_porosity_factor;
 	bool natural_constitution_porosity_factor_defined;
 
-	// влажность природная (доли ед.)                              .19
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РїСЂРёСЂРѕРґРЅР°СЏ (РґРѕР»Рё РµРґ.)                              .19
 	double natural_moisture;
 	bool natural_moisture_defined;
 
-	// влажность водонасыщения (доли ед.)                          .26    
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ (РґРѕР»Рё РµРґ.)                          .26    
 	double water_saturated_moisture;
 	bool water_saturated_moisture_defined;
 
-	// степень влажности                                           .69	
+	// СЃС‚РµРїРµРЅСЊ РІР»Р°Р¶РЅРѕСЃС‚Рё                                           .69	
 	double degree_of_moisture;
 	bool degree_of_moisture_defined;
-	// недостаток водонасыщения(доли ед.)                          .07
+	// РЅРµРґРѕСЃС‚Р°С‚РѕРє РІРѕРґРѕРЅР°СЃС‹С‰РµРЅРёСЏ(РґРѕР»Рё РµРґ.)                          .07
 	double lack_of_water_saturating;
 	bool lack_of_water_saturating_defined;
-	// полная влагоемкость                                         .28
+	// РїРѕР»РЅР°СЏ РІР»Р°РіРѕРµРјРєРѕСЃС‚СЊ                                         .28
 	double full_moisture_capacity;
 	bool full_moisture_capacity_defined;
 
 
-	// показатель текучести                                       -.08
+	// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‡РµСЃС‚Рё                                       -.08
 	double fluidity_index;
 	bool fluidity_index_defined;
-	// показатель текучести водонасыщ.грунта                       .48
+	// РїРѕРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‡РµСЃС‚Рё РІРѕРґРѕРЅР°СЃС‹С‰.РіСЂСѓРЅС‚Р°                       .48
 	double fluidity_index_of_water_saturated_ground;
 	bool fluidity_index_of_water_saturated_ground_defined;
 
-	// число пластичности                                          .13
+	// С‡РёСЃР»Рѕ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё                                          .13
 	double plasticity_index;
 	bool plasticity_index_defined;
 
-	// влажность на границе текучести (доли ед.)                   .22
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ С‚РµРєСѓС‡РµСЃС‚Рё (РґРѕР»Рё РµРґ.)                   .22
 	double moisture_on_fluidity_border;
 	bool moisture_on_fluidity_border_defined;
 	
-	// влажность на границе пластичности (доли ед.)                .17
+	// РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё (РґРѕР»Рё РµРґ.)                .17
 	double moisture_on_plasticity_border;
 	bool moisture_on_plasticity_border_defined;
 
 
 /*
- ¦ модуль деформации по снип 2.02.01-83 в мпа                27.0          ¦
- ¦ угол внутреннего трения по снип 2.02.01-83,град           34.           ¦
- ¦ удельное сцепление по снип 2.02.01-83, мпа                  .006        ¦
+ В¦ РјРѕРґСѓР»СЊ РґРµС„РѕСЂРјР°С†РёРё РїРѕ СЃРЅРёРї 2.02.01-83 РІ РјРїР°                27.0          В¦
+ В¦ СѓРіРѕР» РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ С‚СЂРµРЅРёСЏ РїРѕ СЃРЅРёРї 2.02.01-83,РіСЂР°Рґ           34.           В¦
+ В¦ СѓРґРµР»СЊРЅРѕРµ СЃС†РµРїР»РµРЅРёРµ РїРѕ СЃРЅРёРї 2.02.01-83, РјРїР°                  .006        В¦
 
- I модуль деформации грунта водон. состоян.в мпа              7.0          I
- I угол внутреннего трения в водонасыщ. сост., град.         24            I
- I удельное сцепление грунта в водонас. сост., мпа            0.017        I
+ I РјРѕРґСѓР»СЊ РґРµС„РѕСЂРјР°С†РёРё РіСЂСѓРЅС‚Р° РІРѕРґРѕРЅ. СЃРѕСЃС‚РѕСЏРЅ.РІ РјРїР°              7.0          I
+ I СѓРіРѕР» РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ С‚СЂРµРЅРёСЏ РІ РІРѕРґРѕРЅР°СЃС‹С‰. СЃРѕСЃС‚., РіСЂР°Рґ.         24            I
+ I СѓРґРµР»СЊРЅРѕРµ СЃС†РµРїР»РµРЅРёРµ РіСЂСѓРЅС‚Р° РІ РІРѕРґРѕРЅР°СЃ. СЃРѕСЃС‚., РјРїР°            0.017        I
  
- ¦ модуль деформации грунта заданн.состоян.в мпа              2.8          ¦
- ¦ угол внутреннего трения в заданном  сост.,град.           20.           ¦
- ¦ удельное сцепление грунта в заданном сост.,мпа              .028        ¦
+ В¦ РјРѕРґСѓР»СЊ РґРµС„РѕСЂРјР°С†РёРё РіСЂСѓРЅС‚Р° Р·Р°РґР°РЅРЅ.СЃРѕСЃС‚РѕСЏРЅ.РІ РјРїР°              2.8          В¦
+ В¦ СѓРіРѕР» РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ С‚СЂРµРЅРёСЏ РІ Р·Р°РґР°РЅРЅРѕРј  СЃРѕСЃС‚.,РіСЂР°Рґ.           20.           В¦
+ В¦ СѓРґРµР»СЊРЅРѕРµ СЃС†РµРїР»РµРЅРёРµ РіСЂСѓРЅС‚Р° РІ Р·Р°РґР°РЅРЅРѕРј СЃРѕСЃС‚.,РјРїР°              .028        В¦
 
- ¦ модуль деформации грунта природ.состоян.в мпа              3.5          ¦
+ В¦ РјРѕРґСѓР»СЊ РґРµС„РѕСЂРјР°С†РёРё РіСЂСѓРЅС‚Р° РїСЂРёСЂРѕРґ.СЃРѕСЃС‚РѕСЏРЅ.РІ РјРїР°              3.5          В¦
  
- ¦ коэффициент мк к модулю деформ.заданн. состоян.            1.00         ¦
- ¦ степень изменчивости сжимаемости по модулю деф.            1.25         ¦
- ¦ коэффициент бокового расширения (вета)                      .48         ¦
- ¦ коэффициент мк к модулю деформ.природн.состоян.            1.00         ¦
+ В¦ РєРѕСЌС„С„РёС†РёРµРЅС‚ РјРє Рє РјРѕРґСѓР»СЋ РґРµС„РѕСЂРј.Р·Р°РґР°РЅРЅ. СЃРѕСЃС‚РѕСЏРЅ.            1.00         В¦
+ В¦ СЃС‚РµРїРµРЅСЊ РёР·РјРµРЅС‡РёРІРѕСЃС‚Рё СЃР¶РёРјР°РµРјРѕСЃС‚Рё РїРѕ РјРѕРґСѓР»СЋ РґРµС„.            1.25         В¦
+ В¦ РєРѕСЌС„С„РёС†РёРµРЅС‚ Р±РѕРєРѕРІРѕРіРѕ СЂР°СЃС€РёСЂРµРЅРёСЏ (РІРµС‚Р°)                      .48         В¦
+ В¦ РєРѕСЌС„С„РёС†РёРµРЅС‚ РјРє Рє РјРѕРґСѓР»СЋ РґРµС„РѕСЂРј.РїСЂРёСЂРѕРґРЅ.СЃРѕСЃС‚РѕСЏРЅ.            1.00         В¦
 
 */
 
@@ -189,7 +189,7 @@ struct GroundDescription
 
 
 };
-// грунт
+// РіСЂСѓРЅС‚
 class CGround
 {
 	DWORD m_cground_version;
@@ -197,17 +197,17 @@ class CGround
 protected:
 	void Init();
 public:
-	// тип грунта
+	// С‚РёРї РіСЂСѓРЅС‚Р°
 	enum ground_type
 	{
 		Undefined_ground			= 0,
-		Sand						= 20,		//	Песок
-        SandyLoam					= 40,		//	супесь
-		Loam						= 60,		//	суглинок
-		Clay						= 80		//	Глина
+		Sand						= 20,		//	РџРµСЃРѕРє
+        SandyLoam					= 40,		//	СЃСѓРїРµСЃСЊ
+		Loam						= 60,		//	СЃСѓРіР»РёРЅРѕРє
+		Clay						= 80		//	Р“Р»РёРЅР°
 	};
-	// Gender - род мужской male женский female middle
-	// Quantity - число ед singular, множ plural
+	// Gender - СЂРѕРґ РјСѓР¶СЃРєРѕР№ male Р¶РµРЅСЃРєРёР№ female middle
+	// Quantity - С‡РёСЃР»Рѕ РµРґ singular, РјРЅРѕР¶ plural
 
 	enum Gender
 	{
@@ -227,14 +227,14 @@ public:
 
 	static const char * GrountTypeToString(CGround::ground_type t);
 	static const char * GrountTypeToStringRus(CGround::ground_type t);
-	// тип обводнения
+	// С‚РёРї РѕР±РІРѕРґРЅРµРЅРёСЏ
 	enum irrigation_type
 	{
 		undefined_irrigation_type	= 0,
-		dry							= 20,	// сухие 
-		little_moist				= 40,	// маловлажные 
-		moist						= 60,	// влажный
-		water_saturated				= 80	// насыщенные водой
+		dry							= 20,	// СЃСѓС…РёРµ 
+		little_moist				= 40,	// РјР°Р»РѕРІР»Р°Р¶РЅС‹Рµ 
+		moist						= 60,	// РІР»Р°Р¶РЅС‹Р№
+		water_saturated				= 80	// РЅР°СЃС‹С‰РµРЅРЅС‹Рµ РІРѕРґРѕР№
 	};
 	static const char * IrrigationTypeToString(CGround::irrigation_type t);
 	static const char * IrrigationTypeToStringRus(CGround::irrigation_type t);
@@ -246,16 +246,16 @@ protected:
 
 	bool read_normative_description;
 
-	//нормативные значения характеристик 
+	//РЅРѕСЂРјР°С‚РёРІРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє 
 	GroundDescription normative_description;
-	//расчетные значения характеристик
-	// при расчетах оснований:          
-	// по деформациям:
+	//СЂР°СЃС‡РµС‚РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє
+	// РїСЂРё СЂР°СЃС‡РµС‚Р°С… РѕСЃРЅРѕРІР°РЅРёР№:          
+	// РїРѕ РґРµС„РѕСЂРјР°С†РёСЏРј:
 	GroundDescription calculated_on_deformations_description;
-	// по несущей способности   
+	// РїРѕ РЅРµСЃСѓС‰РµР№ СЃРїРѕСЃРѕР±РЅРѕСЃС‚Рё   
 	GroundDescription calculated_on_carry_ability_description;
 
-	// прочностные характеристики
+	// РїСЂРѕС‡РЅРѕСЃС‚РЅС‹Рµ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё
 
 public:
 
@@ -297,33 +297,33 @@ inline CGround::irrigation_type operator++( CGround::irrigation_type &rs, int )
 {
    return rs = (CGround::irrigation_type)(rs + 20);
 }
-// песчаный грунт
+// РїРµСЃС‡Р°РЅС‹Р№ РіСЂСѓРЅС‚
 class CSandGround : public CGround
 {
 	DWORD m_sand_ground_version;
 protected:
 	void Init();
 public:
-	// тип песка по зернистости
+	// С‚РёРї РїРµСЃРєР° РїРѕ Р·РµСЂРЅРёСЃС‚РѕСЃС‚Рё
 	enum sand_type
 	{
 		undefined_sand_type			= 0,
-		gravelic					= 10,   // Гравелистые
-		coarse_grained				= 20,	// Крупные
-		medium_grained				= 30,	// Средней крупности
-		small_grained				= 40,	// Мелкие
-		powdered					= 50	// Пылеватые
+		gravelic					= 10,   // Р“СЂР°РІРµР»РёСЃС‚С‹Рµ
+		coarse_grained				= 20,	// РљСЂСѓРїРЅС‹Рµ
+		medium_grained				= 30,	// РЎСЂРµРґРЅРµР№ РєСЂСѓРїРЅРѕСЃС‚Рё
+		small_grained				= 40,	// РњРµР»РєРёРµ
+		powdered					= 50	// РџС‹Р»РµРІР°С‚С‹Рµ
 
 	};
 	static const char * SandTypeToString(CSandGround::sand_type t);
 	static const char * SandTypeToStringRus(CSandGround::sand_type t);
-	// плотность песка 
+	// РїР»РѕС‚РЅРѕСЃС‚СЊ РїРµСЃРєР° 
 	enum sand_strength 
 	{
 		undefined_sand_strength		= 0,
-		dense						= 20,	// плотные
-		medium_dense				= 40,	// средней плотности
-		looses						= 60	// рыхлые
+		dense						= 20,	// РїР»РѕС‚РЅС‹Рµ
+		medium_dense				= 40,	// СЃСЂРµРґРЅРµР№ РїР»РѕС‚РЅРѕСЃС‚Рё
+		looses						= 60	// СЂС‹С…Р»С‹Рµ
 	};
 	static const char * SandStrengthToString(CSandGround::sand_strength s);
 	static const char * SandStrengthToStringRus(CSandGround::sand_strength s);
@@ -350,32 +350,32 @@ inline CSandGround::sand_strength operator++( CSandGround::sand_strength &rs, in
 {
    return rs = (CSandGround::sand_strength)(rs + 20);
 }
-// пылевато-глинистый грунт
+// РїС‹Р»РµРІР°С‚Рѕ-РіР»РёРЅРёСЃС‚С‹Р№ РіСЂСѓРЅС‚
 class CClayGround : public CGround
 {
 	DWORD m_clay_ground_version;
 protected:
 	void Init();
 public:
-	// твёрдость глин
+	// С‚РІС‘СЂРґРѕСЃС‚СЊ РіР»РёРЅ
 	enum clay_solidity
 	{
 		undefined_clay_solidity		= 0,
-		solid						= 20,	// твёрдые
-		medium_solid				= 40,	// полутвёрдые
-		tight_plastic				= 60,	// тугопластичные
-		plastic						= 80,	// пластичные (только для супесей)
-		soft_plastic				= 100,	// мягкопластичные
-		fliud_plastic				= 120,	// текучепластичные
-		fliud						= 140	// текучие
+		solid						= 20,	// С‚РІС‘СЂРґС‹Рµ
+		medium_solid				= 40,	// РїРѕР»СѓС‚РІС‘СЂРґС‹Рµ
+		tight_plastic				= 60,	// С‚СѓРіРѕРїР»Р°СЃС‚РёС‡РЅС‹Рµ
+		plastic						= 80,	// РїР»Р°СЃС‚РёС‡РЅС‹Рµ (С‚РѕР»СЊРєРѕ РґР»СЏ СЃСѓРїРµСЃРµР№)
+		soft_plastic				= 100,	// РјСЏРіРєРѕРїР»Р°СЃС‚РёС‡РЅС‹Рµ
+		fliud_plastic				= 120,	// С‚РµРєСѓС‡РµРїР»Р°СЃС‚РёС‡РЅС‹Рµ
+		fliud						= 140	// С‚РµРєСѓС‡РёРµ
 	};
 	static const char * ClaySolidityToString(CClayGround::clay_solidity s);
 	static const char * ClaySolidityToStringRus(CClayGround::clay_solidity s);
-// что даёт лаборатория
+// С‡С‚Рѕ РґР°С‘С‚ Р»Р°Р±РѕСЂР°С‚РѕСЂРёСЏ
 
 /*
- ? влажность на границе текучести (доли ед.)                   .33         ? глинистые 
- ? влажность на границе пластичности (доли ед.)                .20         ?глинистые 
+ ? РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ С‚РµРєСѓС‡РµСЃС‚Рё (РґРѕР»Рё РµРґ.)                   .33         ? РіР»РёРЅРёСЃС‚С‹Рµ 
+ ? РІР»Р°Р¶РЅРѕСЃС‚СЊ РЅР° РіСЂР°РЅРёС†Рµ РїР»Р°СЃС‚РёС‡РЅРѕСЃС‚Рё (РґРѕР»Рё РµРґ.)                .20         ?РіР»РёРЅРёСЃС‚С‹Рµ 
  */
 protected:
 	clay_solidity m_clay_solidity;
@@ -393,7 +393,7 @@ inline CClayGround::clay_solidity operator++( CClayGround::clay_solidity &rs, in
 {
    return rs = (CClayGround::clay_solidity)(rs + 20);
 }
-// песок
+// РїРµСЃРѕРє
 class CSand : public CSandGround
 {
 	DWORD m_sand_version;
@@ -402,7 +402,7 @@ public:
 	CSand(){Init();}
 	virtual DWORD Serialize(Archive & ar);
 };
-//	супесь
+//	СЃСѓРїРµСЃСЊ
 class CSandyLoam : public CClayGround
 {
 	DWORD m_sandyloam_version;
@@ -411,7 +411,7 @@ public:
 	CSandyLoam(){Init();}
 	virtual DWORD Serialize(Archive & ar);
 };
-//	суглинок
+//	СЃСѓРіР»РёРЅРѕРє
 class CLoam : public CClayGround
 {
 	DWORD m_loam_version;
@@ -420,7 +420,7 @@ public:
 	CLoam(){Init();}
 	virtual DWORD Serialize(Archive & ar);
 };
-//	Глина
+//	Р“Р»РёРЅР°
 class CClay : public CClayGround
 {
 	DWORD m_clay_version;

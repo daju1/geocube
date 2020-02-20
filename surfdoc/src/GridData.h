@@ -1,8 +1,8 @@
 #pragma once
-#include "object.h"
-#include "objectList.h"
+#include "Object.h"
+#include "ObjectList.h"
 #include "points.h"
-#include "thepoint3D.h"
+#include "ThePoint3D.h"
 struct CubeSize;
 
 class gdiplus_map_view;
@@ -181,7 +181,7 @@ private:
 	char dat_filename[1024];
 	char grd_filename[1024];
 
-	vector<double> VX, VY, VZ;// векторы для построения гридов
+	vector<double> VX, VY, VZ;// РІРµРєС‚РѕСЂС‹ РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂРёРґРѕРІ
 
 	void write_surfer_anscii_mask_file(short zflag);
 	//void WriteTempCmd_001();

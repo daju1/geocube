@@ -10,6 +10,9 @@
 #endif // _MSC_VER > 1000
 //#include "raporto.h"
 
+
+#include "../../surfdoc/src/Object.h"
+
 template <class T> class vectItem
 {
 public:
@@ -76,7 +79,7 @@ public:
 	}
 };
 
-#include "..\..\surfdoc\src\Object.h"
+
 #if 1
 template <class T> class ObjectItem
 {

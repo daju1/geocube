@@ -1,14 +1,16 @@
 #if !defined(AFX_SURFDOC_H__5112A148_40FF_4E8D_9A93_12C6F8E2B994__INCLUDED_)
 #define AFX_SURFDOC_H__5112A148_40FF_4E8D_9A93_12C6F8E2B994__INCLUDED_
 
-#include "grid.h"
+#include "Grid.h"
 
 
 #include "../../commonOG.h"
 #include "palette.h"
-#include "..\..\array\src\sorting.h"
-#include "..\..\wintools\src\listfun.h"
-#include "..\..\array\src\vect.h"
+#include "../../array/src/sorting.h"
+#ifdef _MSC_VER
+#include "../../wintools/src/listfun.h"
+#endif
+#include "../../array/src/vect.h"
 
 
 #include "DrawListArray.h"
@@ -17,8 +19,8 @@
 #include "Poligon3D.h"
 #include "Surface3D.h"
 #include "GeoSurface.h"
-#include ".\geocatch.h"
-#include "Well_3D.h"
+#include "GeoCatch.h"
+#include "well_3D.h"
 #include "String3D.h"
 #include "BrokenPlane3D.h"
 #include "Sphere3D.h"
@@ -29,19 +31,19 @@
 #include "Bmp3D.h"
 #include "BmpProfile3D.h"
 #include "../../surfdefs.h"
-#include ".\griddata.h"
-#include ".\collection.h"
-#include ".\autoprofilebuilding.h"
-#include ".\fastcollection.h"
-#include ".\cube.h"
-#include ".\GeoElement.h"
+#include "GridData.h"
+#include "Collection.h"
+#include "AutoProfileBuilding.h"
+#include "FastCollection.h"
+#include "cube.h"
+#include "GeoElement.h"
 #include "BuroNabivSvaj.h"
 
 
-#include "layer.h"
-#include "../../laboratory/src/lab.h"
+#include "Layer.h"
+#include "../../laboratory/src/Lab.h"
 
-#include "../../tools/src/listviewtab.h"
+#include "../../tools/src/ListViewTab.h"
 
 
 #define USE_LISTVIEW_STANDART_LL 1
@@ -143,22 +145,22 @@ using namespace std ;
 
 struct TData3D
 {
-	//===== Порядок в нормализованном представлении числа
+	//===== РџРѕСЂСЏРґРѕРє РІ РЅРѕСЂРјР°Р»РёР·РѕРІР°РЅРЅРѕРј РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРё С‡РёСЃР»Р°
 	int Power;
-	//===== Флаг оси X
+	//===== Р¤Р»Р°Рі РѕСЃРё X
 	int axesFlag;
 	double
-		//======= Экстремумы
+		//======= Р­РєСЃС‚СЂРµРјСѓРјС‹
 		Min, Max,
-		//======= Множитель (10 в степени Power)
+		//======= РњРЅРѕР¶РёС‚РµР»СЊ (10 РІ СЃС‚РµРїРµРЅРё Power)
 		Factor,
-		//======= Шаг вдоль оси (мантисса)
+		//======= РЁР°Рі РІРґРѕР»СЊ РѕСЃРё (РјР°РЅС‚РёСЃСЃР°)
 		Step,
-		//======= Реальный шаг
+		//======= Р РµР°Р»СЊРЅС‹Р№ С€Р°Рі
 		dStep,
-		//======= Первая и последняя координаты (мантиссы)
+		//======= РџРµСЂРІР°СЏ Рё РїРѕСЃР»РµРґРЅСЏСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ (РјР°РЅС‚РёСЃСЃС‹)
 		Start, End,
-		//======= Первая и последняя координаты
+		//======= РџРµСЂРІР°СЏ Рё РїРѕСЃР»РµРґРЅСЏСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹
 		dStart, dEnd;
 };
 
@@ -187,7 +189,7 @@ public:
 	string current_filename;
 	virtual HTREEITEM AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s = NULL){return NULL;}
 
-	// набор колонок гео элементов в документе
+	// РЅР°Р±РѕСЂ РєРѕР»РѕРЅРѕРє РіРµРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РґРѕРєСѓРјРµРЅС‚Рµ
 	map<GeoElement::type, GeoColomn>	m_geo_colomns;
 	ObjectList							m_geo_colomns_ObjectList;
 
@@ -263,7 +265,7 @@ public:
 	void HydroProjavlenieToGridData(long horizont, bool ust, GridData * pData);
 	void HydroProjavlenieHowMany(map<long, long> &gorizonts, bool ust);
 
-	//====== Массив вершин поверхности
+	//====== РњР°СЃСЃРёРІ РІРµСЂС€РёРЅ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
 #if DFX_LAYER_FROM_OBJECT
 	vect<dxfConverter>					m_dxfConverters;
 	ObjectList							m_dxfConverters_ObjectList;
@@ -459,25 +461,25 @@ public:
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	int m_alpha;
-	int m_alpha_plane; // коэффициент прозрачности
-	int m_alpha_gdiplus_profiles; // коэффициент прозрачности
+	int m_alpha_plane; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚Рё
+	int m_alpha_gdiplus_profiles; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚Рё
 
 
-	GLdouble	m_fRangeX;		// Размер объекта вдоль X
-	GLdouble	m_fRangeY;		// Размер объекта вдоль Y
-	GLdouble	m_fRangeZ;		// Размер объекта вдоль Z
+	GLdouble	m_fRangeX;		// Р Р°Р·РјРµСЂ РѕР±СЉРµРєС‚Р° РІРґРѕР»СЊ X
+	GLdouble	m_fRangeY;		// Р Р°Р·РјРµСЂ РѕР±СЉРµРєС‚Р° РІРґРѕР»СЊ Y
+	GLdouble	m_fRangeZ;		// Р Р°Р·РјРµСЂ РѕР±СЉРµРєС‚Р° РІРґРѕР»СЊ Z
 
 	// View:
 
-	int			m_LightParam[11];// Параметры освещения
+	int			m_LightParam[11];// РџР°СЂР°РјРµС‚СЂС‹ РѕСЃРІРµС‰РµРЅРёСЏ
 
 // Implementation
 public:
-	//===== Данные, характеризующие данные вдоль осей
+	//===== Р”Р°РЅРЅС‹Рµ, С…Р°СЂР°РєС‚РµСЂРёР·СѓСЋС‰РёРµ РґР°РЅРЅС‹Рµ РІРґРѕР»СЊ РѕСЃРµР№
 	TData3D m_DataX, m_DataY, m_DataZ;
-	//===== Заполнение TData для любой из осей
+	//===== Р—Р°РїРѕР»РЅРµРЅРёРµ TData РґР»СЏ Р»СЋР±РѕР№ РёР· РѕСЃРµР№
 	void Scale(TData3D& data);
-	//===== Подготовка цифровой метки на оси
+	//===== РџРѕРґРіРѕС‚РѕРІРєР° С†РёС„СЂРѕРІРѕР№ РјРµС‚РєРё РЅР° РѕСЃРё
 	void MakeLabel(int axesFlag, double v, char* s, size_t len_s, char *spower, size_t len_spower);
 	void SurfDoc::InitSurfDoc(vdouble& x, vdouble& y, vdouble& z, int type = 0);
 	void SurfDoc::InitSurfDoc(vector<double>& x, vector<double>& y, vector<double>& z, int type = 0);
@@ -587,20 +589,20 @@ public:
 	void CutSurfs(double a, double b, double c, double d, 
 		bool toDrawTriaAndPoligones, bool positive, 
 		short type_of_cutline, int cutting_number,
-		CPoint2* pt1 = NULL, CPoint2* pt2 = NULL//две точки, 
-		//ограничивающие линию прамолинейного участка ломанного разреза
+		CPoint2* pt1 = NULL, CPoint2* pt2 = NULL//РґРІРµ С‚РѕС‡РєРё, 
+		//РѕРіСЂР°РЅРёС‡РёРІР°СЋС‰РёРµ Р»РёРЅРёСЋ РїСЂР°РјРѕР»РёРЅРµР№РЅРѕРіРѕ СѓС‡Р°СЃС‚РєР° Р»РѕРјР°РЅРЅРѕРіРѕ СЂР°Р·СЂРµР·Р°
 		, void * pBrokenPlane = NULL);
 	void CutFaults(double a, double b, double c, double d, 
 		bool toDrawTriaAndPoligones, bool positive, 
 		short type_of_cutline, int cutting_number,
-		CPoint2* pt1 = NULL, CPoint2* pt2 = NULL//две точки, 
-		//ограничивающие линию прамолинейного участка ломанного разреза
+		CPoint2* pt1 = NULL, CPoint2* pt2 = NULL//РґРІРµ С‚РѕС‡РєРё, 
+		//РѕРіСЂР°РЅРёС‡РёРІР°СЋС‰РёРµ Р»РёРЅРёСЋ РїСЂР°РјРѕР»РёРЅРµР№РЅРѕРіРѕ СѓС‡Р°СЃС‚РєР° Р»РѕРјР°РЅРЅРѕРіРѕ СЂР°Р·СЂРµР·Р°
 		, void * pBrokenPlane = NULL);
 	void CutGeoCatches(double a, double b, double c, double d, 
 		bool toDrawTriaAndPoligones, bool positive, 
 		short type_of_cutline, int cutting_number,
-		CPoint2* pt1 = NULL, CPoint2* pt2 = NULL//две точки, 
-		//ограничивающие линию прамолинейного участка ломанного разреза
+		CPoint2* pt1 = NULL, CPoint2* pt2 = NULL//РґРІРµ С‚РѕС‡РєРё, 
+		//РѕРіСЂР°РЅРёС‡РёРІР°СЋС‰РёРµ Р»РёРЅРёСЋ РїСЂР°РјРѕР»РёРЅРµР№РЅРѕРіРѕ СѓС‡Р°СЃС‚РєР° Р»РѕРјР°РЅРЅРѕРіРѕ СЂР°Р·СЂРµР·Р°
 		, void * pBrokenPlane = NULL);
 	void CutProfile(double a, double b, double c, double d, bool toDrawTriaAndPoligones, bool positive, bool useCutLines );
 	void Cutting();
@@ -708,17 +710,17 @@ public:
 	void DetermineUdolVnutrennegoTrenia();
 	void TestPesokOrGlina();
 
-	// загрузка входных файлов статического зондирования
+	// Р·Р°РіСЂСѓР·РєР° РІС…РѕРґРЅС‹С… С„Р°Р№Р»РѕРІ СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ Р·РѕРЅРґРёСЂРѕРІР°РЅРёСЏ
 	bool ReadZondInputFile(char *file);
 	int ParseZondInputFileLine(char* szBuff, int type_line, bool starting_parsing, int &i_point, int &n_zond_points, vector<string> & zond_points_names, int &i_glubina);
-	// загрузка результатов обработки программой ZOND статического зондирования
+	// Р·Р°РіСЂСѓР·РєР° СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ РѕР±СЂР°Р±РѕС‚РєРё РїСЂРѕРіСЂР°РјРјРѕР№ ZOND СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ Р·РѕРЅРґРёСЂРѕРІР°РЅРёСЏ
 	bool ReadZondOutputFile(char *file);
 	int ParseZondOutputFileLine(char* szBuff, int type_line);
-	// корректировка чередования глина - песок во входных файлах статического зондирования
+	// РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєР° С‡РµСЂРµРґРѕРІР°РЅРёСЏ РіР»РёРЅР° - РїРµСЃРѕРє РІРѕ РІС…РѕРґРЅС‹С… С„Р°Р№Р»Р°С… СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ Р·РѕРЅРґРёСЂРѕРІР°РЅРёСЏ
 	bool ReadZond_CorrectInput_File(char *file);
 	int ParseZond_CorrectInput_FileLine(char* szBuff, int type_line, bool starting_parsing, int &n_zond_points, int &i_glubina, vector<string> & zond_points_names);
 
-	// данные лабораторных анализов
+	// РґР°РЅРЅС‹Рµ Р»Р°Р±РѕСЂР°С‚РѕСЂРЅС‹С… Р°РЅР°Р»РёР·РѕРІ
 	wells_draw_list_item * m_wdli_laboratory;
 	void AddNewWellColomn_LaboratoryAnalizes();
 	Laboratory m_laboratory;		

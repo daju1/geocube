@@ -11,8 +11,8 @@
 
 #include "Object.h"
 #include "points.h"
-#include "..\..\array\src\vect.h"
-#include "..\..\array\src\vdouble.h"
+#include "../../array/src/vect.h"
+#include "../../array/src/Vdouble.h"
 #include "Grid.h"
 #include "ProfileAttachPoint.h"
 
@@ -21,19 +21,19 @@ class GridProfile3D : public Object
 	friend class SurfDoc;
 	void Drawing();
 public:
-	// ДВУХМЕРНЫЕ ПРОФИЛИ ПОМЕЩЁННЫЕ В ТРЁХМЕРНЫЙ КУБ
-	// профиль из вертикально расположенного грида
+	// Р”Р’РЈРҐРњР•Р РќР«Р• РџР РћР¤РР›Р РџРћРњР•Р©РЃРќРќР«Р• Р’ РўР РЃРҐРњР•Р РќР«Р™ РљРЈР‘
+	// РїСЂРѕС„РёР»СЊ РёР· РІРµСЂС‚РёРєР°Р»СЊРЅРѕ СЂР°СЃРїРѕР»РѕР¶РµРЅРЅРѕРіРѕ РіСЂРёРґР°
 	vect<CPoint3> m_vGridProfiles;
 	vect<CPoint4> m_vvGridProfiles;
 	vect<CPoint4> m_vdGridProfiles;
 
-	UINT	m_GridProfilesXSize;		// Текущий размер грида вдоль X
-	UINT	m_GridProfilesYSize;		// Текущий размер грида вдоль Y
-	// точка привязки профиля к карте
-	// массив таких точек привязки 
-	// необходим для функции перевода
-	// горизонтальной координаты профиля xPrifile
-	// в координаты карты xMap yMap
+	UINT	m_GridProfilesXSize;		// РўРµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ РіСЂРёРґР° РІРґРѕР»СЊ X
+	UINT	m_GridProfilesYSize;		// РўРµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ РіСЂРёРґР° РІРґРѕР»СЊ Y
+	// С‚РѕС‡РєР° РїСЂРёРІСЏР·РєРё РїСЂРѕС„РёР»СЏ Рє РєР°СЂС‚Рµ
+	// РјР°СЃСЃРёРІ С‚Р°РєРёС… С‚РѕС‡РµРє РїСЂРёРІСЏР·РєРё 
+	// РЅРµРѕР±С…РѕРґРёРј РґР»СЏ С„СѓРЅРєС†РёРё РїРµСЂРµРІРѕРґР°
+	// РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїСЂРѕС„РёР»СЏ xPrifile
+	// РІ РєРѕРѕСЂРґРёРЅР°С‚С‹ РєР°СЂС‚С‹ xMap yMap
 	vect<ProfileAttachPoint> m_vGridProfileMapAttaches;
 	double 
 		max_grid_profile_v,

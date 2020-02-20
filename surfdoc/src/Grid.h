@@ -9,7 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../../array/src/vdouble.h"
+#include "../../array/src/Vdouble.h"
 #include <iostream> 
 using namespace std;
 
@@ -318,9 +318,9 @@ struct key_grid
 {
 	long id_surf;
 	BYTE podoshva;
-	string key; //ключевое имя геоэлемента
-	string surfname; //имя поверхности подошвы этого геоэлемента
-	//Grid * grid;// грид подошвы геоэлемента
+	string key; //РєР»СЋС‡РµРІРѕРµ РёРјСЏ РіРµРѕСЌР»РµРјРµРЅС‚Р°
+	string surfname; //РёРјСЏ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё РїРѕРґРѕС€РІС‹ СЌС‚РѕРіРѕ РіРµРѕСЌР»РµРјРµРЅС‚Р°
+	//Grid * grid;// РіСЂРёРґ РїРѕРґРѕС€РІС‹ РіРµРѕСЌР»РµРјРµРЅС‚Р°
 	key_grid()
 	{
 		surfname = "";
