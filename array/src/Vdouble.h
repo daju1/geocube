@@ -14,6 +14,9 @@
 #include <math.h>
 #include "Vector.h"
 
+#include "tchar.h"
+#include "stdafx.h"
+
 double Median(double *p, int len); // Возврашает среднее арифметическое элементов вектора
 double Quantil(double qu, double *p, int len); 
 double Median_sort(double *p, int n); // Возврашает среднее арифметическое элементов вектора
