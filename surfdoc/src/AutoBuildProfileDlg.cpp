@@ -8836,7 +8836,7 @@ bool Dipol(int use_newton,
 		omega_A[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
 		omega_B[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
 	}
-#if 0
+#if 1
 	//послойная инициализация
 	for (long rr = 0; rr < mmd3.rows; rr++)
 	{

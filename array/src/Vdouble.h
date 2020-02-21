@@ -1990,16 +1990,16 @@ vdouble inline linterp(vdouble& x, vdouble& y, vdouble& xx)
 	yy.resize(nxx);
 	if (xx[0] < x[0])
 	{
-		char errstr[255];
-		sprintf_s(errstr, 255, "You must have min(x = %f) <= min(xx = %f)..", x[0], xx[0]);
-		MessageBox(0,errstr,"linterp",0);
+		TCHAR errstr[255];
+		stprintf_s(errstr, 255, _T("You must have min(x = %f) <= min(xx = %f).."), x[0], xx[0]);
+		MessageBox(0,errstr,_T("linterp"),0);
 		return vdouble();
 	}	
 	if (xx[nxx-1] > x[nx-1])
 	{
-		char errstr[255];
-		sprintf_s(errstr, 255, "You must have max(xx = %f) <= max(x = %f)..", xx[nxx-1], x[nx-1]);
-		MessageBox(0,errstr,"linterp",0);
+		TCHAR errstr[255];
+		stprintf_s(errstr, 255, _T("You must have max(xx = %f) <= max(x = %f).."), xx[nxx-1], x[nx-1]);
+		MessageBox(0,errstr,_T("linterp"),0);
 		return vdouble();
 	}
 	//

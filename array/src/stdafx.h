@@ -44,6 +44,13 @@ int MessageBox(void* hwnd, const char * title, const char * msg, int)
     }
 }
 #endif
+
+#ifdef _UNICODE
+#define stprintf_s _snwprintf_s
+#else
+#define stprintf_s sprintf_s
+#endif
+
 #include <stdio.h>
 #include <math.h>
 #include <algorithm>
