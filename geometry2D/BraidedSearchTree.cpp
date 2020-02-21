@@ -116,7 +116,7 @@ template<class T> T BraidedSearchTree<T>::find (T val)
 		return (n ? n->val : NULL);
 	return NULL;
 }
-template<class T> BOOL BraidedSearchTree<T>::_find (T val, BraidedNode<T> *& n)
+template<class T> bool BraidedSearchTree<T>::_find (T val, BraidedNode<T> *& n)
 {
   while (n) {
     int result = (*cmp) (val, n->val);
@@ -126,10 +126,10 @@ template<class T> BOOL BraidedSearchTree<T>::_find (T val, BraidedNode<T> *& n)
 	  n = n->rchild();
 	else {
       win=n;
-      return TRUE;
+      return true;
     }
   }
-  return FALSE;
+  return false;
 }
 
 /*

@@ -27,13 +27,13 @@ template<class T> BraidedNode<T>::BraidedNode<T>(BraidedNode<T>& n) : TreeNode<T
 template<class T>
 BraidedNode<T> *BraidedNode<T>::rchild (void)
 {
-  return (BraidedNode<T> *)_rchild;
+  return (BraidedNode<T> *)this->_rchild;
 }
 
 template<class T>
 BraidedNode<T> *BraidedNode<T>::lchild (void)
 {
-  return (BraidedNode<T> *) _lchild;
+  return (BraidedNode<T> *) this->_lchild;
 }
 
 template<class T>

@@ -119,7 +119,7 @@ template<class T> class TreeNode {
   TreeNode  *_rchild;
   T val;
  public:
-	 T Val(){return val;} // my test
+  T& Val() {return val;} // my test
   TreeNode(T);
   TreeNode(TreeNode& n);
   virtual ~TreeNode(void);

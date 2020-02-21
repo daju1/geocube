@@ -25,17 +25,17 @@ struct index_for_sort
 };
 
 
-int __cdecl compare_index_for_sort_decrease( const void *arg1, const void *arg2 );
-int __cdecl compare_index_for_sort( const void *arg1, const void *arg2 );
+int compare_index_for_sort_decrease( const void *arg1, const void *arg2 );
+int compare_index_for_sort( const void *arg1, const void *arg2 );
 
-int __cdecl compare_X( const void *arg1, const void *arg2 );
-int __cdecl compare_Y( const void *arg1, const void *arg2 );
+int compare_X( const void *arg1, const void *arg2 );
+int compare_Y( const void *arg1, const void *arg2 );
 
-int __cdecl compare4_X( const void *arg1, const void *arg2 );
-int __cdecl compare4_Y( const void *arg1, const void *arg2 );
-int __cdecl compare4_Z( const void *arg1, const void *arg2 );
+int compare4_X( const void *arg1, const void *arg2 );
+int compare4_Y( const void *arg1, const void *arg2 );
+int compare4_Z( const void *arg1, const void *arg2 );
 
-int __cdecl compare_int( const void *arg1, const void *arg2 );
+int compare_int( const void *arg1, const void *arg2 );
 void randpermute(int n, vector<int>& result);
 double Rand(double x);
 double Rand(double minBorder, double maxBorder);

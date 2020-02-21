@@ -15,13 +15,22 @@ TEMPLATE = app
 SOURCES += main.cpp\
         auto_build_3d.cpp \
     ./../surfdoc/src/AutoProfileBuilding.cpp \
-    ../surfdoc/src/AutoBuildProfileDlg.cpp
+    ../surfdoc/src/AutoBuildProfileDlg.cpp \
+    ../surfdoc/src/Archive.cpp \
+    ../array/src/Vdouble.cpp \
+    ../geometry2D/BraidedNode.cpp
 
 HEADERS  += auto_build_3d.h \
     ./../surfdoc/src/AutoProfileBuilding.h \
     picks_search.h \
     ../surfdoc/src/AutoBuildProfileDlg.h \
-    ../include/mywindows.h
+    ../include/mywindows.h \
+    ../array/src/Vdouble.h \
+    ../array/src/vect.h \
+    ../array/src/Vector.h \
+    ../array/src/VectItem.h \
+    ../array/src/wav.h \
+    ../geometry2D/BraidedNode.h
 
 FORMS    += auto_build_3d.ui
 

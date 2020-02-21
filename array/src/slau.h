@@ -366,7 +366,7 @@ public:
 	{
 		for(this->first();!this->isHead(); this->next())
 		{
-			this->win->val.val *= x;
+                        this->win->Val().val *= x;
 		}
 	}
 
@@ -379,7 +379,7 @@ public:
 			//if (c < x_size)//убрал проверку, чтобы вырубались непродуманные алгоритмы
 			//{
 				//this->val().val *= x[this->val().col];
-				this->win->val.val *= x[this->val().col];
+                                this->win->Val().val *= x[this->val().col];
 			//}
 		}
 	}
@@ -458,8 +458,8 @@ public:
 
 		for (i = 0; i < tree_size; i++)
 		{
-			long cc = long(vn[i]->val.col);
-			double value = vn[i]->val.val;
+                        long cc = long(vn[i]->Val().col);
+                        double value = vn[i]->Val().val;
 			ar << cc;
 			ar << value;
 		}
@@ -476,8 +476,8 @@ public:
 	{
 		if (n) 
 		{				
-			long cc = long(n->val.col);
-			double value = n->val.val;
+                        long cc = long(n->Val().col);
+                        double value = n->Val().val;
 			ar << cc;
 			ar << value;
 

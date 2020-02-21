@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include ".\archive.h"
-#include ".\points.h"
-#include ".\layer.h"
-#include ".\grid.h"
+#include "Archive.h"
+#include "points.h"
+#include "Layer.h"
+#include "Grid.h"
 #include "ProfileAttachPoint.h"
-#include ".\brokenplane3d.h"
+#include "BrokenPlane3D.h"
 
 bool Archive::OpenFileAsImport = false;
 
@@ -30,14 +30,14 @@ Archive::Archive(AFile * pFile, Archive::mode amode, int nBufSize, void * lpBuff
 		this->m_lpBuff = new unsigned char[this->m_nBufSize];
 		this->m_myBuff = true;
 	}
-	sumFlushedToFile	= 0;//Сколько байт сброшено в файл 
-	sumWroteToArchive	= 0;//Сколько байт записано в архив
+	sumFlushedToFile	= 0;//РЎРєРѕР»СЊРєРѕ Р±Р°Р№С‚ СЃР±СЂРѕС€РµРЅРѕ РІ С„Р°Р№Р» 
+	sumWroteToArchive	= 0;//РЎРєРѕР»СЊРєРѕ Р±Р°Р№С‚ Р·Р°РїРёСЃР°РЅРѕ РІ Р°СЂС…РёРІ
 
-	freeInBuffer		= this->m_nBufSize; //свободное место в буфере
-	wroteInBuffer		= 0; // занятое место в буфере
+	freeInBuffer		= this->m_nBufSize; //СЃРІРѕР±РѕРґРЅРѕРµ РјРµСЃС‚Рѕ РІ Р±СѓС„РµСЂРµ
+	wroteInBuffer		= 0; // Р·Р°РЅСЏС‚РѕРµ РјРµСЃС‚Рѕ РІ Р±СѓС„РµСЂРµ
 
-	readFromBuffer		= 0; // прочитано из буфера
-	remainedToReadFromBuffer		= 0; // осталось прочитать 
+	readFromBuffer		= 0; // РїСЂРѕС‡РёС‚Р°РЅРѕ РёР· Р±СѓС„РµСЂР°
+	remainedToReadFromBuffer		= 0; // РѕСЃС‚Р°Р»РѕСЃСЊ РїСЂРѕС‡РёС‚Р°С‚СЊ 
 }
 
 
@@ -47,7 +47,7 @@ Archive::~Archive(void)
 }
 DWORD Archive::ReWrite(unsigned char * from, DWORD to_BytesFromBegin, DWORD count)
 {
-	// три варианта
+	// С‚СЂРё РІР°СЂРёР°РЅС‚Р°
 	if (to_BytesFromBegin + count <= this->sumFlushedToFile)
 	{
 		return this->ReWriteToFile(from, to_BytesFromBegin, count);
@@ -70,7 +70,7 @@ DWORD Archive::ReWrite(unsigned char * from, DWORD to_BytesFromBegin, DWORD coun
 }
 DWORD Archive::ReWriteToBuffer(unsigned char * from, DWORD to_BytesFromBegin, DWORD count)
 {
-	// копируем в буфер	
+	// РєРѕРїРёСЂСѓРµРј РІ Р±СѓС„РµСЂ	
 	if (this && m_lpBuff && from) 
 	{
 		if (to_BytesFromBegin + count <= wroteInBuffer)
@@ -117,22 +117,22 @@ DWORD Archive::Write(unsigned char * from, DWORD count)
 DWORD Archive::WriteToBuffer(unsigned char * from, DWORD count)
 {
 	if (!IsStoring()) return 0;
-	bool full_buffer = freeInBuffer <= count; // заполнится ли входной буфер полностью
-	// определяем, сколько можно записать во входной буфер и замисываем
+	bool full_buffer = freeInBuffer <= count; // Р·Р°РїРѕР»РЅРёС‚СЃСЏ Р»Рё РІС…РѕРґРЅРѕР№ Р±СѓС„РµСЂ РїРѕР»РЅРѕСЃС‚СЊСЋ
+	// РѕРїСЂРµРґРµР»СЏРµРј, СЃРєРѕР»СЊРєРѕ РјРѕР¶РЅРѕ Р·Р°РїРёСЃР°С‚СЊ РІРѕ РІС…РѕРґРЅРѕР№ Р±СѓС„РµСЂ Рё Р·Р°РјРёСЃС‹РІР°РµРј
 	DWORD countToWrite = full_buffer ? freeInBuffer : count;
-	// копируем в буфер, сколько можно
+	// РєРѕРїРёСЂСѓРµРј РІ Р±СѓС„РµСЂ, СЃРєРѕР»СЊРєРѕ РјРѕР¶РЅРѕ
 	if (this && m_lpBuff && from) 
 		memcpy(m_lpBuff + wroteInBuffer, from, countToWrite);
-	// корректируем показатели заполненности буфера
+	// РєРѕСЂСЂРµРєС‚РёСЂСѓРµРј РїРѕРєР°Р·Р°С‚РµР»Рё Р·Р°РїРѕР»РЅРµРЅРЅРѕСЃС‚Рё Р±СѓС„РµСЂР°
 	freeInBuffer -= countToWrite;
 	wroteInBuffer += countToWrite;
-	// если буфер полностью заполнен
+	// РµСЃР»Рё Р±СѓС„РµСЂ РїРѕР»РЅРѕСЃС‚СЊСЋ Р·Р°РїРѕР»РЅРµРЅ
 	if (this && full_buffer)
 	{
-		// сбрасываем данные из буфера в файл
+		// СЃР±СЂР°СЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ РёР· Р±СѓС„РµСЂР° РІ С„Р°Р№Р»
 		this->Flush();
 	}
-	// возвращаем фактическое число записанных символов
+	// РІРѕР·РІСЂР°С‰Р°РµРј С„Р°РєС‚РёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ Р·Р°РїРёСЃР°РЅРЅС‹С… СЃРёРјРІРѕР»РѕРІ
 	return countToWrite;
 }
 DWORD Archive::Read(unsigned char * to, DWORD count)
@@ -164,21 +164,21 @@ DWORD Archive::Read(unsigned char * to, DWORD count)
 DWORD Archive::ReadFromBuffer(unsigned char * to, DWORD count)
 {
 //printf("DWORD Archive::ReadFromBuffer(unsigned char * to, DWORD count = %d)\n", count);
-	// "осталось прочитать из буфера" remainedToRead - это сколько 
-	// байт прочитано из файла в буфер, но не вычитано из буфера
-	// если remainedToRead == 0, тогда надо прочитать из файла в буфер,
-	// а в переменную remainedToRead записать - сколько на самом деле 
-	// прочитано из файла в буфер
+	// "РѕСЃС‚Р°Р»РѕСЃСЊ РїСЂРѕС‡РёС‚Р°С‚СЊ РёР· Р±СѓС„РµСЂР°" remainedToRead - СЌС‚Рѕ СЃРєРѕР»СЊРєРѕ 
+	// Р±Р°Р№С‚ РїСЂРѕС‡РёС‚Р°РЅРѕ РёР· С„Р°Р№Р»Р° РІ Р±СѓС„РµСЂ, РЅРѕ РЅРµ РІС‹С‡РёС‚Р°РЅРѕ РёР· Р±СѓС„РµСЂР°
+	// РµСЃР»Рё remainedToRead == 0, С‚РѕРіРґР° РЅР°РґРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ РёР· С„Р°Р№Р»Р° РІ Р±СѓС„РµСЂ,
+	// Р° РІ РїРµСЂРµРјРµРЅРЅСѓСЋ remainedToRead Р·Р°РїРёСЃР°С‚СЊ - СЃРєРѕР»СЊРєРѕ РЅР° СЃР°РјРѕРј РґРµР»Рµ 
+	// РїСЂРѕС‡РёС‚Р°РЅРѕ РёР· С„Р°Р№Р»Р° РІ Р±СѓС„РµСЂ
 	if (remainedToReadFromBuffer == 0) 
 	{
 //printf("DWORD Archive::ReadFromBuffer(remainedToReadFromBuffer == 0)\n");
 		if (this && this->m_pFile)
 			remainedToReadFromBuffer = this->m_pFile->Read(this->m_lpBuff, this->m_nBufSize);
 //printf("DWORD Archive::ReadFromBuffer(remainedToReadFromBuffer = %d)\n", remainedToReadFromBuffer);
-		// readFromBuffer - это позиция в буфере, с которой надо начинать считываение из буфера
-		// после заполнения буфера данными из файла устанавливаем этот указатель в нулевую позицию
+		// readFromBuffer - СЌС‚Рѕ РїРѕР·РёС†РёСЏ РІ Р±СѓС„РµСЂРµ, СЃ РєРѕС‚РѕСЂРѕР№ РЅР°РґРѕ РЅР°С‡РёРЅР°С‚СЊ СЃС‡РёС‚С‹РІР°РµРЅРёРµ РёР· Р±СѓС„РµСЂР°
+		// РїРѕСЃР»Рµ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р±СѓС„РµСЂР° РґР°РЅРЅС‹РјРё РёР· С„Р°Р№Р»Р° СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЌС‚РѕС‚ СѓРєР°Р·Р°С‚РµР»СЊ РІ РЅСѓР»РµРІСѓСЋ РїРѕР·РёС†РёСЋ
 		readFromBuffer = 0;
-		// если всё же из файла не удалось прочитать ни одного байта - выходим с результатом нуль
+		// РµСЃР»Рё РІСЃС‘ Р¶Рµ РёР· С„Р°Р№Р»Р° РЅРµ СѓРґР°Р»РѕСЃСЊ РїСЂРѕС‡РёС‚Р°С‚СЊ РЅРё РѕРґРЅРѕРіРѕ Р±Р°Р№С‚Р° - РІС‹С…РѕРґРёРј СЃ СЂРµР·СѓР»СЊС‚Р°С‚РѕРј РЅСѓР»СЊ
 		if (remainedToReadFromBuffer == 0)
 		{
 			printf("DWORD Archive::ReadFromBuffer(remainedToReadFromBuffer == 0) return 0; !!!!!!\n");
@@ -186,8 +186,8 @@ DWORD Archive::ReadFromBuffer(unsigned char * to, DWORD count)
 		}
 	}
 	
-	bool all_will_be_read = remainedToReadFromBuffer <= count; // всё ли будет прочитано
-	// устанавливаем сколько надо прочитать и читаем
+	bool all_will_be_read = remainedToReadFromBuffer <= count; // РІСЃС‘ Р»Рё Р±СѓРґРµС‚ РїСЂРѕС‡РёС‚Р°РЅРѕ
+	// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃРєРѕР»СЊРєРѕ РЅР°РґРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ Рё С‡РёС‚Р°РµРј
 	DWORD countToRead = all_will_be_read ? remainedToReadFromBuffer : count;
 	if (this && this->m_lpBuff && to)
 	{
@@ -195,7 +195,7 @@ DWORD Archive::ReadFromBuffer(unsigned char * to, DWORD count)
 	}
 	remainedToReadFromBuffer -= countToRead;
 	readFromBuffer += countToRead;
-	// возвращаем фактическое число прочитанных символов
+	// РІРѕР·РІСЂР°С‰Р°РµРј С„Р°РєС‚РёС‡РµСЃРєРѕРµ С‡РёСЃР»Рѕ РїСЂРѕС‡РёС‚Р°РЅРЅС‹С… СЃРёРјРІРѕР»РѕРІ
 //printf("DWORD Archive::ReadFromBuffer(return countToRead = %d)\n", countToRead);
 	return countToRead;
 }
@@ -204,7 +204,7 @@ void Archive::Flush(void)
 {
 	if (this->IsStoring())
 	{
-		// сбрасываем данные из буфера в файл
+		// СЃР±СЂР°СЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ РёР· Р±СѓС„РµСЂР° РІ С„Р°Р№Р»
 		if (this && this->m_lpBuff && this->m_pFile){
 			DWORD dwNumberOfBytesWritten = this->m_pFile->Write(this->m_lpBuff, wroteInBuffer);;
 			this->sumFlushedToFile += dwNumberOfBytesWritten;
@@ -213,9 +213,9 @@ void Archive::Flush(void)
 				throw "Can not write the file\ndisk space not enough";
 			
 			//this->m_pFile->Flush();
-			// устанавливаем показатели заполненности буфера
-			freeInBuffer = this->m_nBufSize;//свободное место во входном буфере
-			wroteInBuffer = 0; // занятое место во входном буфере
+			// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕРєР°Р·Р°С‚РµР»Рё Р·Р°РїРѕР»РЅРµРЅРЅРѕСЃС‚Рё Р±СѓС„РµСЂР°
+			freeInBuffer = this->m_nBufSize;//СЃРІРѕР±РѕРґРЅРѕРµ РјРµСЃС‚Рѕ РІРѕ РІС…РѕРґРЅРѕРј Р±СѓС„РµСЂРµ
+			wroteInBuffer = 0; // Р·Р°РЅСЏС‚РѕРµ РјРµСЃС‚Рѕ РІРѕ РІС…РѕРґРЅРѕРј Р±СѓС„РµСЂРµ
 		}
 	}
 }
@@ -227,8 +227,8 @@ void Archive::ClearReadBuffer(void)
 }
 void Archive::ClearWriteBuffer(void)
 {
-	freeInBuffer		= this->m_nBufSize; //свободное место в буфере
-	wroteInBuffer		= 0; // занятое место в буфере
+	freeInBuffer		= this->m_nBufSize; //СЃРІРѕР±РѕРґРЅРѕРµ РјРµСЃС‚Рѕ РІ Р±СѓС„РµСЂРµ
+	wroteInBuffer		= 0; // Р·Р°РЅСЏС‚РѕРµ РјРµСЃС‚Рѕ РІ Р±СѓС„РµСЂРµ
 }
 void Archive::Close(void)
 {

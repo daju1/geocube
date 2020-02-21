@@ -14,7 +14,7 @@
 #include <math.h>
 #include "Vector.h"
 
-#include "tchar.h"
+
 #include "stdafx.h"
 
 double Median(double *p, int len); // Возврашает среднее арифметическое элементов вектора

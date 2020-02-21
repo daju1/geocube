@@ -12,9 +12,11 @@
 #ifdef _MSC_VER
 #include <windows.h>
 #include <commctrl.h>
+#include "tchar.h"
 #else
 #include <stdarg.h>
 #include <stdio.h>
+#include "mywindows.h"
 inline int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...)
 {
     va_list ap;

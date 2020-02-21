@@ -91,7 +91,7 @@ template<class T> class BraidedSearchTree {
   int (*cmp) (T,T);        // функция сравнения
   //void _remove(TreeNode<T> * &);
   bool _remove(T, TreeNode<T> * &);
-  BOOL _find (T val, BraidedNode<T> *& );
+  bool _find (T val, BraidedNode<T> *& );
  public:
   BraidedSearchTree (int(*) (T,T) );
   ~BraidedSearchTree (void);
