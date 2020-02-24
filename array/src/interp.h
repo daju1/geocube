@@ -24,7 +24,6 @@ struct prostranstven_index
 	double y;
 	double z;
 };
-
 struct point_with_distance
 {	
 	double x;
@@ -33,16 +32,17 @@ struct point_with_distance
 	double dist;
 	double angle;
 
-	enum points_sort_mode {by_dist, by_angle};
-	static points_sort_mode s_points_sort_mode;
+
+        typedef enum points_sort_mode_t {by_dist, by_angle} points_sort_mode;
+        static points_sort_mode s_points_sort_mode;
 #if 1
 	bool operator<(const point_with_distance& rhs)
 	{
 		switch(point_with_distance::s_points_sort_mode)
 		{
-		case point_with_distance::points_sort_mode::by_dist:
+                case by_dist:
 			return dist < rhs.dist;
-		case point_with_distance::points_sort_mode::by_angle:
+                case by_angle:
 			return angle < rhs.angle;
 		}
 	}
@@ -50,9 +50,9 @@ struct point_with_distance
 	{
 		switch(point_with_distance::s_points_sort_mode)
 		{
-		case point_with_distance::points_sort_mode::by_dist:
+                case by_dist:
 			return dist > rhs.dist;
-		case point_with_distance::points_sort_mode::by_angle:
+                case by_angle:
 			return angle > rhs.angle;
 		}
 	}

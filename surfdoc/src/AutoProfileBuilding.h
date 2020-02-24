@@ -29,9 +29,9 @@ public:
 		bool (Object::* condition_fun)(),
 		void (* callback_fun)(Object* , WPARAM, LPARAM, void * ) );
 	void SetLayer(const Layer* layer);
-#endif
 	void Zoom(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean);
 	virtual bool UpdateExtremums();
+#endif
 	void Init(const AutoBuildProfile& bp)
 	{
 #if defined (_MSC_VER)
@@ -57,8 +57,10 @@ public:
 	virtual bool IsSelected(CPoint3 selected_view_pt,
 			double search_radius,
 			WhatSelected& ws);
+
 	AutoBuildProfile& AutoBuildProfile::operator=(const AutoBuildProfile& bp);
 	AutoBuildProfile(const AutoBuildProfile & bp);
+
 	AutoBuildProfile(SurfDoc* pSurfDoc);
 
 //	void AddInput(Primitive3D<CPoint3> * primitive);

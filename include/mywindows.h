@@ -9,6 +9,14 @@
 // https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types
 
 typedef int BOOL, *PBOOL, *LPBOOL;
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
 typedef unsigned char BYTE, *PBYTE, *LPBYTE;
 typedef BYTE BOOLEAN, *PBOOLEAN;
 typedef char CHAR, *PCHAR;
@@ -64,9 +72,9 @@ typedef wchar_t* LPWSTR, *PWSTR;
 
 typedef HANDLE HWND;
 typedef HANDLE HDC;
+typedef HANDLE HINSTANCE;
 
-
-
+#define FAR
 
 typedef struct tagPALETTEENTRY {
   BYTE peRed;
@@ -131,7 +139,7 @@ typedef struct tagLOGFONTW {
         #define LPCTSTR LPCSTR
         #define LOGFONT LOGFONTA
         #define TCHAR CHAR
-#define __TEXT(q) L
+#define __TEXT(q) q
 #endif /* _UNICODE */
 
 typedef TCHAR *PTCHAR;
@@ -169,6 +177,43 @@ typedef struct tagRECT {
 #define OPEN_EXISTING     3
 #define OPEN_ALWAYS       4
 #define TRUNCATE_EXISTING 5
+
+#define GENERIC_READ 1
+#define GENERIC_WRITE 2
+
+#define MB_OK               0x00000000L
+#define MB_OKCANCEL         0x00000001L
+#define MB_ABORTRETRYIGNORE 0x00000002L
+#define MB_YESNOCANCEL      0x00000003L
+#define MB_YESNO            0x00000004L
+#define MB_RETRYCANCEL      0x00000005L
+
+#define S_OK        ((HRESULT)0L)
+#define S_FALSE     ((HRESULT)1L)
+
+#define  FILE_BEGIN   0
+#define  FILE_CURRENT 1
+#define  FILE_END     2
+
+#define  HEAP_ZERO_MEMORY 0x00000008
+
+HANDLE GetProcessHeap()
+{
+    return NULL;
+}
+
+LPVOID HeapAlloc(HANDLE, DWORD /*dwFlags*/, size_t dwBytes)
+{
+    return malloc(dwBytes);
+}
+
+BOOL HeapFree(HANDLE, DWORD /*dwFlags*/, LPVOID lpMem)
+{
+    free(lpMem);
+    return TRUE;
+}
+
+
 
 //#endif //_MY_WINDOWS_H_
 

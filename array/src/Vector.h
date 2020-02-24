@@ -8,6 +8,7 @@
 #include <stdlib.h>
 //#include <windows.h>
 #include <assert.h>
+#include "Archive.h"
 
 template <class T> class Vector;
 
@@ -597,7 +598,6 @@ template <class T> void inline operator>>(const T &a, Vector<T>& v)
 	}
 	*(pr) = a;
 }
-class Archive;
 
 template <class T> Archive& operator <<(Archive& ar, Vector<T>& v)
 {
@@ -628,7 +628,11 @@ template <class T> Archive& operator >>(Archive& ar, Vector<T>& v)
 	}*/
 	// число элементов вектора
 	int len;
+#ifdef _MSC_VER
 	ar >> len;
+#else
+    ar.Read((unsigned char *)&len, sizeof(int));
+#endif
 	v.resize(len);
 	for (int i = 0; i < len; i++)
 		ar >> v[i];

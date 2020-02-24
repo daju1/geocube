@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include ".\afile.h"
-#include "..\..\tools\src\errorexit.h"
+#include "AFile.h"
+#include "../../tools/src/errorexit.h"
 
 AFile::AFile(void)
 {

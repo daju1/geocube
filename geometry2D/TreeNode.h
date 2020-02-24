@@ -8,7 +8,11 @@ void DoMyMethod(vector<double> & X,
 				vector<double> & signal,
 				string name);
 
+
+#ifdef _MSC_VER
+
 class sparse_row;
+
 // получить граф в виде полной структуры смежности 
 // или нижней структуры смежности 
 // ( в зависимости от значения переменной  bool to_form_full_structure ) 
@@ -101,7 +105,7 @@ bool Tichonov(size_t cols,
 			  vector<double> & b,
 			  vector<double> & x,
 			  vector<double> & valpha);
-
+#endif
 namespace geometry2D
 {
 	/*
@@ -120,26 +124,60 @@ template<class T> class TreeNode {
   T val;
  public:
   T& Val() {return val;} // my test
-  TreeNode(T);
-  TreeNode(TreeNode& n);
-  virtual ~TreeNode(void);
+  //TreeNode(T);
+  //TreeNode(TreeNode& n);
+  /*
+  Элементы данных _lchild и _rchild обозначают связи текущего узла с левым и правым потомками соответственно, а элемент данных val содержит сам элемент.
+  */
+  /*
+  Конструктор класса формирует двоичное дерево единичного размера — единственный внутренний узел имеет два пустых потомка, каждое из которых представлено нулем NULL:
+  */
+  TreeNode<T>(T v) :
+    val(v), _lchild(NULL), _rchild (NULL)
+  {
+  }
+
+  TreeNode<T>(TreeNode<T>& n)
+  : val(n.val), _lchild(n._lchild ? new TreeNode<T>(*n._lchild) : NULL), _rchild (n._rchild ? new TreeNode<T>(*n._rchild) : NULL)
+  {
+  }
+  /*
+  template<class T> TreeNode<T>::TreeNode<T>(T v)
+  {
+    val = v;
+    _lchild = NULL;
+    _rchild = NULL;
+  }*/
+
+  //virtual ~TreeNode(void);
+
+  /*
+  Деструктор ~TreeNode рекурсивно удаляет оба потомка текущего узла (если они существуют) перед уничтожением самого текущего узла:
+  */
+  virtual ~TreeNode(void)
+  {
+
+      if (_lchild) {delete _lchild; _lchild = NULL;}
+      if (_rchild) {delete _rchild; _rchild = NULL;}
+  }
+#ifdef _MSC_VER
   friend class SearchTree<T>;        // возможные пополнения
   friend class BraidedSearchTree<T>; // структуры
   friend class sparse_row; // структуры
-
+#endif
 	friend void ::DoMyMethod(vector<double> & X,
 				vector<double> & Y,
 				vector<double> & signal,
 				string name);
 
-
+#ifdef _MSC_VER
 	// получить граф в виде полной структуры смежности 
 	// или нижней структуры смежности 
 	// ( в зависимости от значения переменной  bool to_form_full_structure ) 
 	// из симметричной положительно определённой матрицы. 
 	// Формат получаемого графа в виде вектора разреженных строк
 
-	friend bool ::Graf_from_matrix(vector<sparse_row> & A, bool to_form_full_structure, vector<sparse_row> & G, vector<double> & diag);
+        friend bool ::Graf_from_matrix(vector<sparse_row> & A, bool to_form_full_structure, vector<sparse_row> & G, vector<double> & diag);
 
 	// теперь полученный граф преобразуем к форме хранения XADJ, ADJNCY
 	// этой же функцией можно преобразовывать и матрицу
@@ -208,12 +246,11 @@ template<class T> class TreeNode {
 			  vector<double> & b,
 			  vector<double> & x,
 			  vector<double> & valpha);
-
+#endif
 
 };
-/*
-Элементы данных _lchild и _rchild обозначают связи текущего узла с левым и правым потомками соответственно, а элемент данных val содержит сам элемент.
-*/
+
+
+
 } // namespace
 
-#include "./TreeNode.cpp"

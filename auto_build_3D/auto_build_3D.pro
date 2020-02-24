@@ -18,7 +18,9 @@ SOURCES += main.cpp\
     ../surfdoc/src/AutoBuildProfileDlg.cpp \
     ../surfdoc/src/Archive.cpp \
     ../array/src/Vdouble.cpp \
-    ../geometry2D/BraidedNode.cpp
+    ../geometry2D/BraidedNode.cpp \
+    ../array/src/slau.cpp \
+    ../surfdoc/src/AFile.cpp
 
 HEADERS  += auto_build_3d.h \
     ./../surfdoc/src/AutoProfileBuilding.h \
@@ -30,7 +32,15 @@ HEADERS  += auto_build_3d.h \
     ../array/src/Vector.h \
     ../array/src/VectItem.h \
     ../array/src/wav.h \
-    ../geometry2D/BraidedNode.h
+    ../geometry2D/BraidedNode.h \
+    ../array/src/slau.h \
+    ../geometry2D/TreeNode.h \
+    ../geometry2D/BraidedSearchTree.h \
+    ../surfdoc/src/Archive.h \
+    ../array/src/sparse_row.h \
+    ../array/src/sparse_row_element.h \
+    ../array/src/sparse_row_simple.h \
+    ../array/src/sparse_row_map.h
 
 FORMS    += auto_build_3d.ui
 

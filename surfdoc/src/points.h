@@ -69,7 +69,7 @@ public:
 };
 #pragma optimize( "dagtp", off )
 
-class CPoint3;
+//class CPoint3;
 // CPoint3 flags
 #define CPOINT3_FLAG_NONORMAL								0x00000001
 #define CPOINT3_FLAG_SELECTED								0x00000002

@@ -128,6 +128,10 @@ void inline operator>>(const double& a, vdouble& ob);
 
 #define VDOUBLE_MAX_DIMS				3
 
+vdouble dsequence(double d0, double dstep, double dend);
+vdouble dsequence(double d0, long Len, double dend);
+vdouble dsequence(double d0, double dstep, long Len);
+
 //#include <exception>
 struct LagerStruct;
 class vdouble // Класс массива вещественных чисел double
@@ -2540,18 +2544,26 @@ bool inline covar(vdouble& t,vdouble& v1, vdouble& v2,  vdouble& tcov, vdouble& 
 	int Len = v1.Length(),
 		L = Len/4;
 	double dt = t.DiffVector().Min();
-	vdouble C, D1, D2;
+    vdouble C;
 	double mean1 = v1.Mean();
 	double mean2 = v2.Mean();
 
-	C = conv(v1-mean1, fliplr(v2)-mean2);
+    vdouble v1_centred = v1 - mean1;
+    vdouble v2_fliped = fliplr(v2);
+    vdouble v2_fliped_and_centred = v2_fliped - mean2;
 
-	vdouble K1=C[sequence(Len-1, Len-2+L)];
-	vdouble K2=fliplr(dsequence(double(Len-L), 1.0, double(Len-1)));
+    C = conv(v1_centred, v2_fliped_and_centred);
+
+    Vector<int>  K1_indexes = sequence(Len-1, Len-2+L);
+
+    vdouble K1 = C[K1_indexes];
+    vdouble K2_seq = dsequence(double(Len-L), 1.0, double(Len-1));
+    vdouble K2=fliplr(K2_seq);
 #if 1
 
 	cov  = K1/K2;
 #else
+    vdouble D1, D2;
 	D1 = conv(v1-mean1, fliplr(v1)-mean1);
 	D2 = conv(v2-mean2, fliplr(v2)-mean2);
 	vdouble sigma1=sqrt(D1[sequence(Len-1, Len-2+L)]/K2);

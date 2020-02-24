@@ -75,6 +75,18 @@ public:
 
 };
 
+enum locals_algorithms
+{
+    the_simple					= 0,
+    on_the_second_derivatives	= 1
+};
+
+enum gradient_type
+{
+    the_dividitial				= 0,
+    the_differential			= 1
+};
+
 struct auto_build_parametrs
 {
 	// выводить из локалов в файл
@@ -97,11 +109,7 @@ struct auto_build_parametrs
 	bool use_window_cycles_algorithm_dima;
 	//######################################################
 	bool use_locals;
-	enum locals_algorithms
-	{
-		the_simple					= 0,
-		on_the_second_derivatives	= 1
-	}; 
+
 	locals_algorithms locals_algorithms_type;
 	//######################################################
 	bool use_window_cycles_after_locals;
@@ -128,11 +136,7 @@ struct auto_build_parametrs
 	//######################################################
 	//######################################################
 	//параметры фильтрации аномалий для оконносдвиговых алкгоритмов аномалий
-	enum gradient_type
-	{
-		the_dividitial				= 0,
-		the_differential			= 1
-	}; 
+
 	gradient_type m_gradient_type;
 	double limit_dima;// = 0.8, 
 	double limit_1;//= 0.9;
@@ -256,7 +260,7 @@ bool BuildingProfile2(vector<vector<vector<vector<korr_point> > > >& vvvvkp,
 					 char * filename
 				  );
 
-void Window_Cycle(auto_build_parametrs::gradient_type m_gradient_type,
+void Window_Cycle(gradient_type m_gradient_type,
 				  double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
 				  size_t icol, //номер колонки
@@ -392,7 +396,7 @@ void OutputFirstAlgorithm(double limit_1,
 						 );
 
 void Window_Cycle_Of_Signal_which_Done_By_Indexes(
-	auto_build_parametrs::gradient_type m_gradient_type,
+    gradient_type m_gradient_type,
 	double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
 		size_t icol, //номер колонки

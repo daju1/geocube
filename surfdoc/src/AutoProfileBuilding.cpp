@@ -17,6 +17,9 @@
 #include "stdafx.h"
 #include "AutoProfileBuilding.h"
 #include "Archive.h"
+
+#include "Grid.h"
+
 #if defined (_MSC_VER)
 #include "winsurftree.h"
 #include "SurfDoc.h"
@@ -40,6 +43,8 @@
 #include "./../array/src/korrelation.h"
 
 #include "../../array/src/slau.h"
+
+
 
 extern char szPath[];
 extern char directory[];
@@ -80,7 +85,7 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 		the_simple					= 0,
 		on_the_second_derivatives	= 1
 	};*/
-	ab.locals_algorithms_type = auto_build_parametrs::locals_algorithms::on_the_second_derivatives;
+    ab.locals_algorithms_type = on_the_second_derivatives;
 	//######################################################
 	ab.use_window_cycles_after_locals = true;
 	ab.use_window_cycles_algorithm_1_after_locals = false;
@@ -106,7 +111,7 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 	//######################################################
 	//######################################################
 	//параметры фильтрации аномалий для оконносдвиговых алкгоритмов аномалий
-	ab.m_gradient_type = auto_build_parametrs::gradient_type::the_dividitial;
+    ab.m_gradient_type = the_dividitial;
 
 	ab.limit_dima = 0.8,
 	ab.limit_1 = 0.9;
@@ -167,7 +172,7 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 		the_simple					= 0,
 		on_the_second_derivatives	= 1
 	};*/
-	ab.locals_algorithms_type = auto_build_parametrs::locals_algorithms::on_the_second_derivatives;
+    ab.locals_algorithms_type = on_the_second_derivatives;
 	//######################################################
 	ab.use_window_cycles_after_locals = true;
 	ab.use_window_cycles_algorithm_1_after_locals = false;
@@ -193,7 +198,7 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 	//######################################################
 	//######################################################
 	//параметры фильтрации аномалий для оконносдвиговых алкгоритмов аномалий
-	ab.m_gradient_type = auto_build_parametrs::gradient_type::the_dividitial;
+    ab.m_gradient_type = the_dividitial;
 
 	ab.limit_dima = 0.8,
 	ab.limit_1 = 0.9;
@@ -226,25 +231,29 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 
 AutoBuildProfile::AutoBuildProfile()
 {
-	m_pSurfDoc = NULL;
+#if defined (_MSC_VER)
+    m_pSurfDoc = NULL;
+#endif
 	OnCreate();
 }
-
+#if defined (_MSC_VER)
 AutoBuildProfile::AutoBuildProfile(SurfDoc* pSurfDoc)
 {
 	this->m_pSurfDoc				= pSurfDoc;
 	OnCreate();
 }
-
+#endif
 void AutoBuildProfile::OnCreate(void)
 {
+#if defined (_MSC_VER)
 	this->m_object_type = Object::object_type::auto_profile_building;
 	this->m_object_version = 1;
 	this->m_max_object_version = 1;
 
 	this->m_collections.OnCreate();
+#endif
 }
-
+#if defined (_MSC_VER)
 AutoBuildProfile::AutoBuildProfile(const AutoBuildProfile & bp)
 {
 	dynamic_cast<Object*>(this)->Init(bp);
@@ -262,7 +271,7 @@ AutoBuildProfile& AutoBuildProfile::operator=(const AutoBuildProfile& bp)
 
 	return *this;
 }
-
+#endif
 AutoBuildProfile::~AutoBuildProfile(void)
 {
 }
@@ -281,6 +290,8 @@ printf("AutoBuildProfile::AddInput\n");
 		}
 	}
 }*/
+
+#if defined (_MSC_VER)
 bool AutoBuildProfile::UpdateExtremums()
 {
 printf("AutoBuildProfile::UpdateExtremums\n");
@@ -468,6 +479,7 @@ Collection* AutoBuildProfile::CreateNewCollection(void)
 	this->m_collections_ObjectList.Init(this->m_collections, this);
 	return &this->m_collections.GetLastMsg();
 }
+
 Archive& operator <<(Archive& ar, AutoBuildProfile& ob)
 {
 //printf("Archive& operator <<(Archive& ar, AutoBuildProfile& ob)\n");
@@ -514,6 +526,7 @@ Archive& operator >>(Archive& ar, AutoBuildProfile& ob)
 //printf("Archive& operator >>(Archive& ar, AutoBuildProfile& ob) end\n");
 	return ar;
 }
+#endif
 
 #if !VIEW_ONLY_VERSION
 
@@ -878,6 +891,7 @@ void DoMyMethod(vector<double> & X,
 					{
 						MessageBox(0,str,"",0);
 					}
+#if defined (_MSC_VER)
 					catch (CException* pe)
 					{
 						// catch errors from WinINet
@@ -886,6 +900,7 @@ void DoMyMethod(vector<double> & X,
 						AfxMessageBox(szErr);
 						pe->Delete();
 					}
+#endif
 					catch(...)
 					{
 						MessageBox(0,"unknown error of archive read","",0);
@@ -3763,6 +3778,7 @@ void LoadingTheMatrix(vector<SparseRow>& m, long & cols)
 			{
 				MessageBox(0,str,"",0);
 			}
+#if defined (_MSC_VER)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet
@@ -3771,6 +3787,7 @@ void LoadingTheMatrix(vector<SparseRow>& m, long & cols)
 				AfxMessageBox(szErr);
 				pe->Delete();
 			}
+#endif
 			catch(...)
 			{
 				MessageBox(0,"unknown error of archive read","",0);
@@ -3954,6 +3971,7 @@ bool LoadMatrix(char * filename, vector<vector<double> > & m)
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -3962,6 +3980,7 @@ bool LoadMatrix(char * filename, vector<vector<double> > & m)
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -4026,6 +4045,7 @@ bool ApplyOperator(long signal_len,
 		{
 			MessageBox(0,str,"",0);
 		}
+#if defined (_MSC_VER)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -4034,6 +4054,7 @@ bool ApplyOperator(long signal_len,
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
+#endif
 		catch(...)
 		{
 			MessageBox(0,"unknown error of archive read","",0);
@@ -4124,6 +4145,7 @@ bool ApplyOperator(long signal_len,
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -4132,6 +4154,7 @@ bool ApplyOperator(long signal_len,
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -4221,6 +4244,7 @@ bool ApplyOperator(long signal_len,
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -4229,6 +4253,7 @@ bool ApplyOperator(long signal_len,
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -4329,6 +4354,7 @@ bool ApplyOperator_SparseOut(long signal_len,
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -4337,6 +4363,7 @@ bool ApplyOperator_SparseOut(long signal_len,
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -5293,6 +5320,7 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 		{
 			MessageBox(0,str,"",0);
 		}
+#if defined (_MSC_VER)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -5301,6 +5329,7 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
+#endif
 		catch(...)
 		{
 			MessageBox(0,"unknown error of archive read","",0);
@@ -5398,6 +5427,7 @@ void ErrorOfMinSqProblemSolving(const char * fn_operator, vector<double> & b, ve
 		{
 			MessageBox(0,str,"",0);
 		}
+#if defined (_MSC_VER)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -5406,6 +5436,7 @@ void ErrorOfMinSqProblemSolving(const char * fn_operator, vector<double> & b, ve
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
+#endif
 		catch(...)
 		{
 			MessageBox(0,"unknown error of archive read","",0);
@@ -5473,6 +5504,7 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 		{
 			MessageBox(0,str,"",0);
 		}
+#if defined (_MSC_VER)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -5481,6 +5513,7 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
+#endif
 		catch(...)
 		{
 			MessageBox(0,"unknown error of archive read","",0);
@@ -5612,6 +5645,7 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5620,6 +5654,7 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -5767,6 +5802,7 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5775,6 +5811,7 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -5846,6 +5883,7 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5854,6 +5892,7 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -5914,6 +5953,7 @@ bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & si
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5922,6 +5962,7 @@ bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & si
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -5999,6 +6040,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6007,6 +6049,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -6175,6 +6218,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 				MessageBox(0,str,"",0);
 				return false;
 			}
+#if defined (_MSC_VER)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet
@@ -6183,6 +6227,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 				AfxMessageBox(szErr);
 				pe->Delete();
 			}
+#endif
 			catch(...)
 			{
 				MessageBox(0,"unknown error of archive read","",0);
@@ -6204,6 +6249,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6212,6 +6258,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -6262,6 +6309,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6270,6 +6318,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -6468,6 +6517,7 @@ e_start_row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6476,6 +6526,7 @@ e_start_row_j:
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -6528,6 +6579,7 @@ e_start_row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6536,6 +6588,7 @@ e_start_row_j:
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -6587,6 +6640,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6595,6 +6649,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read 1","",0);
@@ -6824,6 +6879,7 @@ e_start__row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -6832,6 +6888,7 @@ e_start__row_j:
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read 2","",0);
@@ -6891,6 +6948,7 @@ e_start__row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -6899,6 +6957,7 @@ e_start__row_j:
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -7032,6 +7091,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7040,6 +7100,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read 1","",0);
@@ -7084,6 +7145,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -7092,6 +7154,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read 2","",0);
@@ -7148,6 +7211,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7156,6 +7220,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -7198,6 +7263,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7206,6 +7272,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -7243,6 +7310,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7251,6 +7319,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -7305,6 +7374,7 @@ bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed,
 		MessageBox(0,str,"",0);
 		return false;
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7313,6 +7383,7 @@ bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed,
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0, "unknown error of archive read 1","",0);
@@ -7524,6 +7595,7 @@ bool InverseProblemSolving_(char * fn_operator_wav, vector<double> & t, vector<d
 		{
 			MessageBox(0,str,"",0);
 		}
+#if defined (_MSC_VER)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet 
@@ -7532,6 +7604,7 @@ bool InverseProblemSolving_(char * fn_operator_wav, vector<double> & t, vector<d
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
+#endif
 		catch(...)
 		{
 			MessageBox(0,"unknown error of archive read","",0);
@@ -9678,6 +9751,7 @@ void LoadParameters (MyMethodsData& mmd)
 			{
 				MessageBox(0,str,"",0);
 			}
+#if defined (_MSC_VER)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet 
@@ -9686,6 +9760,7 @@ void LoadParameters (MyMethodsData& mmd)
 				AfxMessageBox(szErr);
 				pe->Delete();
 			}
+#endif
 			catch(...)
 			{
 				MessageBox(0,"unknown error of archive read","",0);
@@ -9760,6 +9835,7 @@ void LoadParameters (MyMethodsData3& mmd)
 			{
 				MessageBox(0,str,"",0);
 			}
+#if defined (_MSC_VER)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet 
@@ -9768,6 +9844,7 @@ void LoadParameters (MyMethodsData3& mmd)
 				AfxMessageBox(szErr);
 				pe->Delete();
 			}
+#endif
 			catch(...)
 			{
 				MessageBox(0,"unknown error of archive read","",0);
@@ -9784,7 +9861,7 @@ void LoadParameters (MyMethodsData3& mmd)
 	}
 }
 
-
+#if defined (_MSC_VER)
 void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 {
 	char buff[BUFF_SIZE];
@@ -9807,6 +9884,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -9815,6 +9893,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -9975,6 +10054,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 		{
 			MessageBox(0,str,"",0);
 		}
+#if defined (_MSC_VER)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet 
@@ -9983,6 +10063,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 			AfxMessageBox(szErr);
 			pe->Delete();
 		}
+#endif
 		catch(...)
 		{
 			MessageBox(0,"unknown error of archive read","",0);
@@ -10002,6 +10083,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 	if(hMetaFile)
 		DeleteEnhMetaFile(hMetaFile);
 }
+#endif
 void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd)
 {
 	char buff[BUFF_SIZE];
@@ -10024,6 +10106,7 @@ void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd)
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -10032,6 +10115,7 @@ void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd)
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -10093,6 +10177,7 @@ void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd)
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -10101,6 +10186,7 @@ void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd)
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -17707,7 +17793,7 @@ void BuildGrid(char * file_grd,
 		*p = '_';
 	}*/
 	printf("try to open file %s\n", file_grd);
-
+#if defined (_MSC_VER)
 	if (pcollection)
 	{
 		COLLEC_TION current_fast_collection;
@@ -17724,6 +17810,7 @@ void BuildGrid(char * file_grd,
 		printf("NOT pcollection on DoVerticalCorrelation !!!!!!!!!!!!!!!\n");
 	if (pcurrent_fast_collection)
 		prim.InitDoc((SurfDoc*)pcurrent_fast_collection->GetDoc());
+#endif
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
