@@ -356,8 +356,8 @@ LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 					
 					if (auto_build_dlg->m_ab.use_num_col)
 					{
-						char str[4096];
-						sprintf_s(str, 4096, "%s", auto_build_dlg->m_ab.num_col_filename);
+						TCHAR str[4096];
+						stprintf_s(str, 4096, _T("%s"), auto_build_dlg->m_ab.num_col_filename);
 						SetDlgItemText(auto_build_dlg->hDlg, IDC_EDIT_NUM_COLOMNS, str);
 					}
 						
@@ -2946,9 +2946,8 @@ void CalcDerivatives_dipol(long c_apply,
 					vector<double> & d2Gdk2,
 					vector<vector<double> > & temp_B,
 					vector<vector<double> > & temp52_B
-					 
 					 )
-{						
+{
 	short a, ia;
 	
 	long c0 = 0, cmax = -1;
@@ -3086,9 +3085,9 @@ void CalcDerivatives_dipol(long c_apply,
 					ax, ay, az,
 
 					ddet_dbeta_div_det_A,
-					ddet_domega_div_det_A,					
+					ddet_domega_div_det_A,
 					d2det_dbeta2_div_det_A,
-					d2det_domega2_div_det_A					
+					d2det_domega2_div_det_A
 					);
 
 				ddet_dbeta_domega_div_det(beta_B[c], omega_B[c], 
@@ -3096,9 +3095,9 @@ void CalcDerivatives_dipol(long c_apply,
 					ax, ay, az,
 
 					ddet_dbeta_div_det_B,
-					ddet_domega_div_det_B,					
+					ddet_domega_div_det_B,
 					d2det_dbeta2_div_det_B,
-					d2det_domega2_div_det_B					
+					d2det_domega2_div_det_B
 					);
 
 				double _p_A = p_A[a][r][c];

@@ -22,8 +22,8 @@ vdouble::vdouble()
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(vdouble& src) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(vdouble& src) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -46,8 +46,8 @@ vdouble::vdouble(const vdouble& src)
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(vdouble& src) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(vdouble& src) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -72,8 +72,8 @@ vdouble::vdouble(int _length)
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(int) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(int) - Not enough memory"),
+			_T("vdouble"), 0);
 		m_length = 0;
 
 		return;
@@ -99,8 +99,8 @@ vdouble::vdouble(double& array, int _length)
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(double& array, int _length) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(double& array, int _length) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -125,8 +125,8 @@ vdouble::vdouble(double array[], int _length)
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(double array[], int _length) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(double array[], int _length) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -149,8 +149,8 @@ vdouble::vdouble(int _length, const double& ra)
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(int _length, const double& ra) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(int _length, const double& ra) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -196,8 +196,8 @@ vdouble::vdouble(int rows, int cols) // Конструктор двумерной матрицы
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(int rows, int cols) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(int rows, int cols) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -224,8 +224,8 @@ vdouble::vdouble(int rows, int cols, int tabs) // Конструктор трёхмерной матрицы
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(int rows, int cols, int tabs) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(int rows, int cols, int tabs) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -256,8 +256,8 @@ vdouble::vdouble(Vector<int>& vsize) // Конструктор многомерной матрицы
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::vdouble(Vector<int>& vsize) - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::vdouble(Vector<int>& vsize) - Not enough memory"),
+			_T("vdouble"), 0);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -296,10 +296,10 @@ vdouble::resize(int _length)
 		{
 //WriteRaporto("vdouble::resize 6 ret\n");
 			m_length = 0;
-			char err[S_LEN];
-			sprintf_s(err, S_LEN, "vdouble::resize(int _length) - Not enough memory\n_length = %i",
+			TCHAR err[S_LEN];
+			stprintf_s(err, S_LEN, _T("vdouble::resize(int _length) - Not enough memory\n_length = %i"),
 				_length);
-			MessageBox(0,err,"",0);
+			MessageBox(0,err,_T(""),0);
 			m_length = 0;
 			return;
 		}
@@ -340,10 +340,10 @@ vdouble::resize(int _length, const double& ra)
 		if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 		{
 			m_length = 0;
-			char err[200];
-			sprintf(err,"vdouble::resize(int %d, const double %f) - Not enough memory\nm_length = %i",
+			TCHAR err[200];
+			stprintf_s(err, 200, _T("vdouble::resize(int %d, const double %f) - Not enough memory\nm_length = %i"),
 				_length, ra, m_length);
-			MessageBox(0,err,"vdouble",0);
+			MessageBox(0,err,_T("vdouble"),0);
 			return;
 		}
 		m_szMemory +=m_length*SD;
@@ -382,9 +382,9 @@ vdouble::resize(int rows, int cols) // двумерной матрицы
 		if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 		{
 			m_length = 0;
-			char str[512];
-			sprintf(str, "vdouble::resize(%d, %d) - Not enough memory", rows, cols);
-			MessageBox(0,str,"vdouble::resize",MB_OK | MB_ICONEXCLAMATION);
+			TCHAR str[512];
+			stprintf_s(str, 512, _T("vdouble::resize(%d, %d) - Not enough memory"), rows, cols);
+			MessageBox(0,str,_T("(vdouble::resize"),MB_OK | MB_ICONEXCLAMATION);
 			return;
 		}
 		m_szMemory +=m_length*SD;
@@ -418,9 +418,9 @@ vdouble::resize(int rows, int cols, const double& ra) // двумерной матрицы
 		{
 			m_length = 0;
 
-			char str[512];
-			sprintf(str, "vdouble::resize(%d, %d, %f) - Not enough memory", rows, cols, ra);
-			MessageBox(0,str,"vdouble::resize",MB_OK | MB_ICONEXCLAMATION);
+			TCHAR str[512];
+			stprintf_s(str, 512, _T("vdouble::resize(%d, %d, %f) - Not enough memory"), rows, cols, ra);
+			MessageBox(0,str, _T("vdouble::resize"),MB_OK | MB_ICONEXCLAMATION);
 
 			return;
 		}
@@ -457,9 +457,9 @@ vdouble::resize(int rows, int cols, int tabs) // Конструктор трёхмерной матрицы
 		if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 		{
 			m_length = 0;
-			char str[512];
-			sprintf(str, "vdouble::resize(%d, %d, %d) - Not enough memory", rows, cols, tabs);
-			MessageBox(0,str,"vdouble::resize",MB_OK | MB_ICONEXCLAMATION);
+			TCHAR str[512];
+			stprintf_s(str, 512, _T("vdouble::resize(%d, %d, %d) - Not enough memory"), rows, cols, tabs);
+			MessageBox(0,str,_T("vdouble::resize"),MB_OK | MB_ICONEXCLAMATION);
 			return;
 		}
 		m_szMemory +=m_length*SD;
@@ -502,9 +502,9 @@ vdouble::resize(Vector<int>& vsize) // Конструктор многомерной матрицы
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		char str[512];
-		sprintf(str, "vdouble::resize(Vector<int>& vsize) - Not enough memory");
-		MessageBox(0,str,"vdouble::resize",MB_OK | MB_ICONEXCLAMATION);
+		TCHAR str[512];
+		stprintf_s(str, 512, _T("vdouble::resize(Vector<int>& vsize) - Not enough memory"));
+		MessageBox(0,str,_T("vdouble::resize"),MB_OK | MB_ICONEXCLAMATION);
 		return;
 	}
 	m_szMemory +=m_length*SD;
@@ -706,7 +706,7 @@ int vdouble::Load(const char * filename)//
 	// открываем бинарный файл для чтения
 	if ((stream = fopen(filename,"rb")) == NULL)
 	{
-		MessageBox(0,"Cannot open file for write.\n","vdouble::Load(const char * filename)",0);
+		MessageBox(0,_T("Cannot open file for write.\n"),_T("vdouble::Load(const char * filename)"),0);
 		return -1;
 	}
 	// считываем длину вектора
@@ -760,7 +760,7 @@ char* vdouble::dispMatrix_str()
 {
 	if (m_dims != 2)
 	{
-		MessageBox(0,"Error using dispMatrix_str()\n(m_dims != 2)\n","vdouble",0);
+		MessageBox(0,_T("Error using dispMatrix_str()\n(m_dims != 2)\n"),_T("vdouble"),0);
 		return NULL;
 	}
 	int rows = m_size[0],
@@ -881,9 +881,9 @@ double& vdouble::operator[](int index)
 	}
 	catch (int& i)
 	{
-		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::operator[](int index): \n index = %i go away from massive of length = %i \n",i, m_length);
-		MessageBox(0,s,"",0);
+		TCHAR s[S_LEN];
+		stprintf_s(s, S_LEN, _T("Error using vdouble::operator[](int index): \n index = %i go away from massive of length = %i \n"),i, m_length);
+		MessageBox(0,s,_T(""),0);
 		static double iErr=NULL;
 		return iErr;
 	}
@@ -953,8 +953,8 @@ vdouble vdouble::operator[](Vector<int>& ind)
 	}
 	else
 	{
-		MessageBox(0, "Error using vdouble::operator[](Vector<int>& ind): index go away from massive\n",
-			"vdouble", 0);
+		MessageBox(0, _T("Error using vdouble::operator[](Vector<int>& ind): index go away from massive\n"),
+			_T("vdouble"), 0);
 		return vdouble (0);
 	}
 	return v;
@@ -989,26 +989,26 @@ double& vdouble::operator()(int row, int col)
 	{
 		static double iErr=NULL;
 		MessageBox(0,
-			"Error using vdouble::operator()(int row, int col):\n (m_dims != 2) \n",
-			"Error",0);
+			_T("Error using vdouble::operator()(int row, int col):\n (m_dims != 2) \n"),
+			_T("Error"),0);
 /*		AfxThrowUserException();*/
 		return iErr;
 	}
 	if (row <0 || row >= m_size[0])
 	{
 		static double iErr=NULL;
-		char errstr[255];
-		sprintf(errstr,"Error using vdouble::operator()(int row, int col): row (%d) go away from massive[0 %d] \n", row, m_size[0]);
-		MessageBox(0,errstr,"Error",0);
+		TCHAR errstr[255];
+		stprintf_s(errstr, 255, _T("Error using vdouble::operator()(int row, int col): row (%d) go away from massive[0 %d] \n"), row, m_size[0]);
+		MessageBox(0,errstr,_T("Error"),0);
 /*		AfxThrowUserException();*/
 		return iErr;
 	}
 	if (col <0 || col >= m_size[1])
 	{
 		static double iErr=NULL;
-		char errstr[255];
-		sprintf(errstr,"Error using vdouble::operator()(int row, int col): col (%d) go away from massive[0 %d] \n", col, m_size[1]);
-		MessageBox(0,errstr,"Error",0);
+		TCHAR errstr[255];
+		stprintf_s(errstr, 255, _T("Error using vdouble::operator()(int row, int col): col (%d) go away from massive[0 %d] \n"), col, m_size[1]);
+		MessageBox(0,errstr,_T("Error"),0);
 /*		AfxThrowUserException();*/
 		return iErr;
 	}
@@ -1059,7 +1059,7 @@ double& vdouble::operator()(Vector<int>& indexes)
 	if (m_dims != indexes.size)
 	{
 		static double iErr=NULL;
-		MessageBox(0, "Error using vdouble::operator()(Vector<int>& indexes):\n (m_dims != indexes.size) \n", "", 0);
+		MessageBox(0, _T("Error using vdouble::operator()(Vector<int>& indexes):\n (m_dims != indexes.size) \n"), _T(""), 0);
 		return iErr;
 	}
 	for (d = 0; d < m_dims;  d++)
@@ -1067,7 +1067,7 @@ double& vdouble::operator()(Vector<int>& indexes)
 		if (indexes[d] <0 || indexes[d] >= m_size[d])
 		{
 			static double iErr=NULL;
-			MessageBox(0, "Error using vdouble::operator()(Vector<int>& indexes): index go away from massive \n","", 0);
+			MessageBox(0, _T("Error using vdouble::operator()(Vector<int>& indexes): index go away from massive \n"),_T(""), 0);
 			return iErr;
 		}
 	}
@@ -1105,9 +1105,9 @@ vdouble& vdouble::operator=(const vdouble& rhs)
 //WriteRaporto("vdouble::operator= 4\n");
 		if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 		{
-			char s[S_LEN];
-			sprintf_s(s, S_LEN, "vdouble::operator=(vdouble& rhs) - Not enough memory\n m_length = %i", m_length);
-			MessageBox(0,s, "vdouble", 0);
+			TCHAR s[S_LEN];
+			stprintf_s(s, S_LEN, _T("vdouble::operator=(vdouble& rhs) - Not enough memory\n m_length = %i"), m_length);
+			MessageBox(0,s, _T("vdouble"), 0);
 			return *this;
 		}
 //WriteRaporto("vdouble::operator= 5\n");
@@ -2060,28 +2060,28 @@ void sortrows21(vdouble& x, vdouble& y, vdouble& z)
 	int len = x.Length();
 	if (len != y.Length() || len != z.Length() )
 	{
-		MessageBox(0,"len != y.Length() || len != z.Length()","sortrows21",0);
+		MessageBox(0,_T("len != y.Length() || len != z.Length()"),_T("sortrows21"),0);
 		return;
 	}
 	double *pSortX;
 	if ((pSortX = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,len*sizeof(double))) == NULL && len != 0)
 	{
-		MessageBox(0, "sortrows21 - Not enough memory",
-			"", 0);
+		MessageBox(0, _T("sortrows21 - Not enough memory"),
+			_T(""), 0);
 		return;
 	}
 	double *pSortY;
 	if ((pSortY = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,len*sizeof(double))) == NULL && len != 0)
 	{
-		MessageBox(0, "sortrows21 - Not enough memory",
-			"", 0);
+		MessageBox(0, _T("sortrows21 - Not enough memory"),
+			_T(""), 0);
 		return;
 	}
 	double *pSortZ;
 	if ((pSortZ = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,len*sizeof(double))) == NULL && len != 0)
 	{
-		MessageBox(0, "sortrows21 - Not enough memory",
-			"", 0);
+		MessageBox(0, _T("sortrows21 - Not enough memory"),
+			_T(""), 0);
 		return;
 	}
 	int i;
@@ -2209,8 +2209,8 @@ double Median_sort(double *p, int n) // Возврашает среднее арифметическое элемен
 	double *pSort;
 	if ((pSort = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,n*SD)) == NULL && n != 0)
 	{
-		MessageBox(0, "vdouble::Median() - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::Median() - Not enough memory"),
+			_T("vdouble"), 0);
 		return 0.0;
 	}
 
@@ -2291,8 +2291,8 @@ double Quantil(double qu, double *p, int len)
 	double *pn;
 	if ((pn = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,N*SD)) == NULL && len != 0)
 	{
-		MessageBox(0, "vdouble::Median() - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::Median() - Not enough memory"),
+			_T("vdouble"), 0);
 		return 0.0;
 	}
 	// zero of histogramm registers
@@ -2376,8 +2376,8 @@ double Median(double *p, int len) // Возврашает среднее арифметическое элементов
 	double *pn;
 	if ((pn = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,N*SD)) == NULL && len != 0)
 	{
-		MessageBox(0, "vdouble::Median() - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::Median() - Not enough memory"),
+			_T("vdouble"), 0);
 		return 0.0;
 	}
 	// zero of histogramm registers
@@ -2496,8 +2496,8 @@ double vdouble::Median_sort() // Возврашает среднее арифметическое элементов век
 	if ((pSort = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 		m_length = 0;
-		MessageBox(0, "vdouble::Median() - Not enough memory",
-			"vdouble", 0);
+		MessageBox(0, _T("vdouble::Median() - Not enough memory"),
+			_T("vdouble"), 0);
 		return 0.0;
 	}
 
@@ -2882,12 +2882,12 @@ double vdouble::ScalarProduct(vdouble& rhs)
 {
 	if  (rhs.m_length != m_length)
 	{
-		char errstr[1023];
-		sprintf (errstr,"%s\n%s\n%d != %d",
-			"Error using vdouble::ScalarProduct(): ",
-			"the lengthes of the vectors must be the same",
+		TCHAR errstr[1024];
+		stprintf_s (errstr, 1024, _T("%s\n%s\n%d != %d\n"),
+			_T("Error using vdouble::ScalarProduct():\n"),
+			_T("the lengthes of the vectors must be the same"),
 			rhs.m_length, m_length);
-		MessageBox(0,errstr, "Error", 0);
+		MessageBox(0,errstr, _T("Error"), 0);
 		ExitProcess(0);
 		return 0;
 	}
@@ -3757,17 +3757,17 @@ vdouble vdouble::MatrixProduct(vdouble& x)
 {
 	if (this->m_dims != 2)
 	{
-		char str[512];
-		sprintf(str, "Error using double::MatrixProduct(vdouble& x) (m_dims(%d) != 2)", this->m_dims);
-		MessageBox(0, str,"Error", MB_OK | MB_ICONEXCLAMATION);
+		TCHAR str[512];
+		stprintf_s(str, 512, _T("Error using double::MatrixProduct(vdouble& x) (m_dims(%d) != 2)"), this->m_dims);
+		MessageBox(0, str,_T("Error"), MB_OK | MB_ICONEXCLAMATION);
 		return vdouble();
 	}
 	if (m_size[1] != x.m_length)
 	{
-		char str[512];
-		sprintf(str, "Error using double::MatrixProduct(vdouble& x)\n Size of vector muct be equial to matrix\nm_size[1]=%d x.m_length=%d", m_size[1], x.m_length);
+		TCHAR str[512];
+		stprintf_s(str, 512, _T("Error using double::MatrixProduct(vdouble& x)\n Size of vector muct be equial to matrix\nm_size[1]=%d x.m_length=%d"), m_size[1], x.m_length);
 		MessageBox(0, str,
-			"Error", MB_OK | MB_ICONEXCLAMATION);
+			_T("Error"), MB_OK | MB_ICONEXCLAMATION);
 		return vdouble();
 	}
 	int rows = m_size[0],

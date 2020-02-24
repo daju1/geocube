@@ -2470,9 +2470,9 @@ bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x)
 	x = dsequence(-epsilon+mi + .5*dx, dx, ma + epsilon - .5*dx);
 	if (x.m_length != N)
 	{
-		char str[250];
-		sprintf_s( str, 250, "x1.m_length%d ~= N%d",x.m_length, N);
-		MessageBox(0, str,"hist2",0);
+		TCHAR str[250];
+		stprintf_s( str, 250, _T("x1.m_length%d ~= N%d"),x.m_length, N);
+		MessageBox(0, str,_T("hist2"),0);
 		return false;
 	}
 
@@ -2492,7 +2492,7 @@ bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble&
 
 	if (v1.m_length != v2.m_length)
 	{
-		MessageBox(0, "length(v1)~=length(v2)","hist2",0);
+		MessageBox(0, _T("length(v1)~=length(v2)"),_T("hist2"),0);
 		return false;
 	}
 
@@ -2510,16 +2510,16 @@ bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble&
 	x2 = dsequence(-epsilon+mi2 + .5*dx2, dx2, ma2 + epsilon - .5*dx2);
 	if (x1.m_length != n1)
 	{
-		char str[250];
-		sprintf_s( str, 250, "x1.m_length%d ~= n1%d",x1.m_length, n1);
-		MessageBox(0, str,"hist2",0);
+		TCHAR str[250];
+		stprintf_s( str, 250, _T("x1.m_length%d ~= n1%d"),x1.m_length, n1);
+		MessageBox(0, str,_T("hist2"),0);
 		return false;
 	}
 	if (x2.m_length != n2)
 	{
-		char str[250];
-		sprintf_s( str, 250, "x2.m_length%d ~= n2%d",x2.m_length, n2);
-		MessageBox(0, str,"hist2",0);
+		TCHAR str[250];
+		stprintf_s( str, 250, _T("x2.m_length%d ~= n2%d"),x2.m_length, n2);
+		MessageBox(0, str,_T("hist2"),0);
 		return false;
 	}
 
