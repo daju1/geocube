@@ -188,7 +188,7 @@ int cmpCol (sparse_row_element<double> e1,sparse_row_element<double> e2)
 	if(e1.col > e2.col) return +1;
 	return 0;
 }
-bool sparse_row_greater ( const sparse_row& elem1, const sparse_row& elem2 )
+bool sparse_row_greater ( sparse_row& elem1, sparse_row& elem2 )
 {
 	elem1.first();
 	elem2.first();

@@ -8,7 +8,7 @@ void DoMyMethod(vector<double> & X,
 				vector<double> & signal,
 				string name);
 
-#include "sparse_row_element.h"
+#include "./../array/src/sparse_row_element.h"
 
 
 #ifdef _MSC_VER

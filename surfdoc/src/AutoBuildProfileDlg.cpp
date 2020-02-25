@@ -280,8 +280,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.locals_algorithms_type = 
-						auto_build_parametrs::locals_algorithms::the_simple;
+					auto_build_dlg->m_ab.locals_algorithms_type = the_simple;
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_CHECK_USE_PEREGIB_KRUTIZNA_QUANTIL), false);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_EDIT_PEREGIB_KRUTIZNA_QUANTIL), false);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_STATIC_PEREGIB_KRUTIZNA_QUANTIL), false);
@@ -292,8 +291,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.locals_algorithms_type = 
-						auto_build_parametrs::locals_algorithms::on_the_second_derivatives;
+					auto_build_dlg->m_ab.locals_algorithms_type = on_the_second_derivatives;
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_CHECK_USE_PEREGIB_KRUTIZNA_QUANTIL), true);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_EDIT_PEREGIB_KRUTIZNA_QUANTIL), true);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_STATIC_PEREGIB_KRUTIZNA_QUANTIL), true);
@@ -304,8 +302,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.m_gradient_type = 
-						auto_build_parametrs::gradient_type::the_dividitial;
+					auto_build_dlg->m_ab.m_gradient_type = the_dividitial;
 				}
 			}
 			break;
@@ -313,8 +310,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.m_gradient_type = 
-						auto_build_parametrs::gradient_type::the_differential;
+					auto_build_dlg->m_ab.m_gradient_type = the_differential;
 				}
 			}
 			break;		
@@ -486,8 +482,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.locals_algorithms_type = 
-						auto_build_parametrs::locals_algorithms::the_simple;
+					auto_build_dlg->m_ab.locals_algorithms_type = the_simple;
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_CHECK_USE_PEREGIB_KRUTIZNA_QUANTIL), false);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_EDIT_PEREGIB_KRUTIZNA_QUANTIL), false);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_STATIC_PEREGIB_KRUTIZNA_QUANTIL), false);
@@ -498,8 +493,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.locals_algorithms_type = 
-						auto_build_parametrs::locals_algorithms::on_the_second_derivatives;
+					auto_build_dlg->m_ab.locals_algorithms_type = on_the_second_derivatives;
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_CHECK_USE_PEREGIB_KRUTIZNA_QUANTIL), true);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_EDIT_PEREGIB_KRUTIZNA_QUANTIL), true);
 					ShowWindow(GetDlgItem(auto_build_dlg->hDlg, IDC_STATIC_PEREGIB_KRUTIZNA_QUANTIL), true);
@@ -510,8 +504,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.m_gradient_type = 
-						auto_build_parametrs::gradient_type::the_dividitial;
+					auto_build_dlg->m_ab.m_gradient_type = the_dividitial;
 				}
 			}
 			break;
@@ -519,8 +512,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->m_ab.m_gradient_type = 
-						auto_build_parametrs::gradient_type::the_differential;
+					auto_build_dlg->m_ab.m_gradient_type = the_differential;
 				}
 			}
 			break;		
@@ -809,7 +801,7 @@ void AutoBuildProfileDlg::OnInitDialog()
 
 	switch (this->m_ab.m_gradient_type)
 	{
-	case auto_build_parametrs::gradient_type::the_dividitial:
+	case the_dividitial:
 		{
 			CheckRadioButton( hDlg,
 				IDC_RADIO4,
@@ -817,7 +809,7 @@ void AutoBuildProfileDlg::OnInitDialog()
 				IDC_RADIO4);
 		}
 		break;
-	case auto_build_parametrs::gradient_type::the_differential:
+	case the_differential:
 		{
 			CheckRadioButton( hDlg,
 				IDC_RADIO4,
@@ -1088,7 +1080,7 @@ void AutoBuildProfileDlg::ShowWindows_RelatedWith_CheckUseLocals()
 		
 	switch (this->m_ab.locals_algorithms_type)
 	{
-	case auto_build_parametrs::locals_algorithms::the_simple:
+	case the_simple:
 		{
 			CheckRadioButton( hDlg,
 				IDC_RADIO1,
@@ -1101,7 +1093,7 @@ void AutoBuildProfileDlg::ShowWindows_RelatedWith_CheckUseLocals()
 		}
 
 		break;
-	case auto_build_parametrs::locals_algorithms::on_the_second_derivatives:
+	case on_the_second_derivatives:
 		{
 			CheckRadioButton( hDlg,
 				IDC_RADIO1,
@@ -1589,7 +1581,7 @@ void AutoBuildProfileDlg1::ShowWindows_RelatedWith_CheckUseLocals()
 		
 	switch (this->m_ab.locals_algorithms_type)
 	{
-	case auto_build_parametrs::locals_algorithms::the_simple:
+	case the_simple:
 		{
 			CheckRadioButton( hDlg,
 				IDC_RADIO1,
@@ -1602,7 +1594,7 @@ void AutoBuildProfileDlg1::ShowWindows_RelatedWith_CheckUseLocals()
 		}
 
 		break;
-	case auto_build_parametrs::locals_algorithms::on_the_second_derivatives:
+	case on_the_second_derivatives:
 		{
 			CheckRadioButton( hDlg,
 				IDC_RADIO1,

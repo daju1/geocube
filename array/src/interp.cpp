@@ -34,7 +34,7 @@ using namespace Gdiplus;
 using namespace geometry2D;
 
 
-point_with_distance::points_sort_mode point_with_distance::s_points_sort_mode = point_with_distance::points_sort_mode::by_dist;
+point_with_distance::points_sort_mode point_with_distance::s_points_sort_mode = by_dist;
 
 
 extern HINSTANCE hInst;   // текущий экземпляр

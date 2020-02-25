@@ -7,6 +7,7 @@ using namespace geometry2D;
 int cmpCol (sparse_row_element<double> e1, sparse_row_element<double> e2);
 
 #define SPARSE_ROW_EX 0
+#include "../../surfdoc/src/Archive.h"
 
 //#define SparseRowDictionary RandomizedSearchTree
 #define SparseRowDictionary BraidedSearchTree
@@ -265,7 +266,7 @@ public:
 };
 
 // Return whether first element is greater than the second
-bool sparse_row_greater (const sparse_row& elem1, const sparse_row& elem2 );
+bool sparse_row_greater (sparse_row& elem1, sparse_row& elem2 );
 
 
 #endif // SPARSE_ROW_H

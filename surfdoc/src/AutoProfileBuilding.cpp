@@ -14524,7 +14524,7 @@ printf("start of locals block\n");
 			vector<vector<size_t> > vvi_lock_min;
 			vector<vector<size_t> > vvi_lock_max; 
 			//size_t nMaxLevels = 5;
-			if (ab.locals_algorithms_type == auto_build_parametrs::locals_algorithms::on_the_second_derivatives)
+			if (ab.locals_algorithms_type == on_the_second_derivatives)
 			{
 				Filtration(
 					ab.allow_sd_limit_quantil, 
@@ -15247,7 +15247,7 @@ void MakeLinePointPair(
 #endif
 
 
-void Window_Cycle(auto_build_parametrs::gradient_type m_gradient_type, 
+void Window_Cycle(gradient_type m_gradient_type, 
 				  double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
 				  size_t icol, //номер колонки
@@ -15451,13 +15451,13 @@ printf("Window_Cycle start\n");
 					double grad = (in[i+1]+minimum_of_signal-min_v)/(in[i]+minimum_of_signal-min_v);
 					switch (m_gradient_type)
 					{
-					case auto_build_parametrs::gradient_type::the_dividitial:
+					case the_dividitial:
 						{
 							//rg[i] =  v[c][i+1]/v[c][i];
 							grad = (in[i+1]+minimum_of_signal-min_v)/(in[i]+minimum_of_signal-min_v);
 						}
 						break;
-					case auto_build_parametrs::gradient_type::the_differential:
+					case the_differential:
 						{
 							//rg[i] = (v[c][i+1]-v[c][i]) / (t[i+1]-t[i]);
 #if SOURCE_COORDINATES_3D
@@ -15981,7 +15981,7 @@ void OutputFirstAlgorithm(double limit_1,
 }
 
 void Window_Cycle_Of_Signal_which_Done_By_Indexes(
-		auto_build_parametrs::gradient_type m_gradient_type,
+		gradient_type m_gradient_type,
 		double limit_dima, double limit_1,
 #if SOURCE_COORDINATES_3D_ICOL_J1_J2
 		size_t icol, //номер колонки

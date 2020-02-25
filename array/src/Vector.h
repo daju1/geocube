@@ -8,7 +8,11 @@
 #include <stdlib.h>
 //#include <windows.h>
 #include <assert.h>
-#include "Archive.h"
+#ifdef _MSC_VER
+class Archive;
+#else
+#include "../../surfdoc/src/Archive.h"
+#endif
 
 template <class T> class Vector;
 

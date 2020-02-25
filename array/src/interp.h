@@ -33,8 +33,8 @@ struct point_with_distance
 	double angle;
 
 
-        typedef enum points_sort_mode_t {by_dist, by_angle} points_sort_mode;
-        static points_sort_mode s_points_sort_mode;
+	enum points_sort_mode {by_dist, by_angle};
+	static points_sort_mode s_points_sort_mode;
 #if 1
 	bool operator<(const point_with_distance& rhs)
 	{

@@ -403,6 +403,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\sparse_row.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\sparse_row_element.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\sparse_row_map.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\sparse_row_simple.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\spline3.h"
 				>
 			</File>
