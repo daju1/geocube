@@ -188,6 +188,8 @@ typedef struct tagRECT {
 #define MB_YESNO            0x00000004L
 #define MB_RETRYCANCEL      0x00000005L
 
+#define MB_ICONEXCLAMATION  0x00000030L
+
 #define S_OK        ((HRESULT)0L)
 #define S_FALSE     ((HRESULT)1L)
 
@@ -261,6 +263,8 @@ BOOL DeleteFileA(
 #define CreateDirectory CreateDirectoryA
 #define DeleteFile DeleteFileA
 #endif
+
+#define _LDBL_RADIX 2
 
 
 

@@ -4,8 +4,9 @@
 #include "Layer.h"
 #include "Grid.h"
 #include "ProfileAttachPoint.h"
+#if defined (_MSC_VER)
 #include "BrokenPlane3D.h"
-
+#endif
 bool Archive::OpenFileAsImport = false;
 
 Archive::Archive(AFile * pFile, Archive::mode amode, int nBufSize, void * lpBuff)
@@ -351,6 +352,7 @@ Archive& Archive::operator <<(bool b)
 	Write((unsigned char *)&b, sizeof(bool));
 	return *this;
 }
+#if defined (_MSC_VER)
 Archive& Archive::operator <<(ULONGLONG dwdw)
 {
 	Write((unsigned char *)&dwdw, sizeof(ULONGLONG));
@@ -361,7 +363,7 @@ Archive& Archive::operator <<(LONGLONG dwdw)
 	Write((unsigned char *)&dwdw, sizeof(LONGLONG));
 	return *this;
 }
-
+#endif
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Archive& Archive::operator >>(BYTE& by)
@@ -450,6 +452,7 @@ Archive& Archive::operator >>(bool& b)
 	//printf("Archive& Archive::operator >>(const bool& b = %d)\n", b);
 	return *this;
 }
+#if defined (_MSC_VER)
 Archive& Archive::operator >>(ULONGLONG& dwdw)
 {
 	Read((unsigned char *)&dwdw, sizeof(ULONGLONG));
@@ -460,6 +463,7 @@ Archive& Archive::operator >>(LONGLONG& dwdw)
 	Read((unsigned char *)&dwdw, sizeof(LONGLONG));
 	return *this;
 }
+#endif
 //------------------------------------------------------
 
 Archive& operator <<(Archive& ar, CPoint4& point)
@@ -501,7 +505,7 @@ Archive& operator <<(Archive& ar, ProfileAttachPoint& pa)
 	ar << pa.yMap;
 	return ar;
 }
-
+#if defined (_MSC_VER)
 Archive& operator <<(Archive& ar, SurfLineIntersectPoint& p)
 {
 	ar << p.i_surf1;
@@ -523,7 +527,7 @@ Archive& operator <<(Archive& ar, SurfLineIntersectPoint& p)
 
 	return ar;
 }
-
+#endif
 Archive& operator <<(Archive& ar, TWO& two)
 {
 	ar << two.i1;
@@ -577,6 +581,7 @@ Archive& operator >>(Archive& ar, ProfileAttachPoint& pa)
 	ar >> pa.yMap;
 	return ar;
 }
+#if defined (_MSC_VER)
 Archive& operator >>(Archive& ar, SurfLineIntersectPoint& p)
 {
 	ar >> p.i_surf1;
@@ -598,6 +603,7 @@ Archive& operator >>(Archive& ar, SurfLineIntersectPoint& p)
 
 	return ar;
 }
+#endif
 Archive& operator >>(Archive& ar, TWO& two)
 {
 	ar >> two.i1;

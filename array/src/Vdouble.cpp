@@ -1,7 +1,7 @@
 #pragma once 
 
 #include "StdAfx.h"
-#include "vdouble.h"
+#include "Vdouble.h"
 #include "factorial.h"
 #include "lagerfun.h"
 #include "sequence.h"
@@ -166,7 +166,7 @@ vdouble::vdouble(int _length, const double& ra)
 	MessageBox(0,str, "vdouble(int _length, const double& ra)",0);
 #endif
 }
-vdouble inline zeros(int _length)// Создаёт вектор заданной длины из нулей
+vdouble inline zeros(int _length)// РЎРѕР·РґР°С‘С‚ РІРµРєС‚РѕСЂ Р·Р°РґР°РЅРЅРѕР№ РґР»РёРЅС‹ РёР· РЅСѓР»РµР№
 {
 	vdouble z = vdouble (_length);
 	double *p; p = z.pD;
@@ -174,7 +174,7 @@ vdouble inline zeros(int _length)// Создаёт вектор заданной длины из нулей
 		*(p + i) = 0.0;
 	return z;
 }
-vdouble inline ones(int _length) // Создаёт вектор заданной длины из единиц
+vdouble inline ones(int _length) // РЎРѕР·РґР°С‘С‚ РІРµРєС‚РѕСЂ Р·Р°РґР°РЅРЅРѕР№ РґР»РёРЅС‹ РёР· РµРґРёРЅРёС†
 {
 	vdouble z = vdouble (_length);
 	double *p; p = z.pD;
@@ -182,7 +182,7 @@ vdouble inline ones(int _length) // Создаёт вектор заданной длины из единиц
 		*(p + i) = 1.0;
 	return z;
 }
-vdouble::vdouble(int rows, int cols) // Конструктор двумерной матрицы
+vdouble::vdouble(int rows, int cols) // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РґРІСѓРјРµСЂРЅРѕР№ РјР°С‚СЂРёС†С‹
 {
 	m_dims = 2;
 //	m_size.resize(m_dims);
@@ -209,7 +209,7 @@ vdouble::vdouble(int rows, int cols) // Конструктор двумерной матрицы
 #endif
 }
 
-vdouble::vdouble(int rows, int cols, int tabs) // Конструктор трёхмерной матрицы
+vdouble::vdouble(int rows, int cols, int tabs) // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ С‚СЂС‘С…РјРµСЂРЅРѕР№ РјР°С‚СЂРёС†С‹
 {
 	m_dims = 3;
 //	m_size.resize(m_dims);
@@ -237,7 +237,7 @@ vdouble::vdouble(int rows, int cols, int tabs) // Конструктор трёхмерной матрицы
 #endif
 }
 
-vdouble::vdouble(Vector<int>& vsize) // Конструктор многомерной матрицы
+vdouble::vdouble(Vector<int>& vsize) // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РјРЅРѕРіРѕРјРµСЂРЅРѕР№ РјР°С‚СЂРёС†С‹
 {
 	m_dims = 
 		vsize.Size() <= m_nMaxDims ?
@@ -365,7 +365,7 @@ vdouble::resize(int _length, const double& ra)
 }
 
 void
-vdouble::resize(int rows, int cols) // двумерной матрицы
+vdouble::resize(int rows, int cols) // РґРІСѓРјРµСЂРЅРѕР№ РјР°С‚СЂРёС†С‹
 {
 	if (m_length != rows * cols)
 	{
@@ -384,7 +384,7 @@ vdouble::resize(int rows, int cols) // двумерной матрицы
 			m_length = 0;
 			TCHAR str[512];
 			stprintf_s(str, 512, _T("vdouble::resize(%d, %d) - Not enough memory"), rows, cols);
-			MessageBox(0,str,_T("(vdouble::resize"),MB_OK | MB_ICONEXCLAMATION);
+            MessageBox(0,str,_T("(vdouble::resize"), MB_OK | MB_ICONEXCLAMATION);
 			return;
 		}
 		m_szMemory +=m_length*SD;
@@ -404,7 +404,7 @@ vdouble::resize(int rows, int cols) // двумерной матрицы
 }
 
 void
-vdouble::resize(int rows, int cols, const double& ra) // двумерной матрицы
+vdouble::resize(int rows, int cols, const double& ra) // РґРІСѓРјРµСЂРЅРѕР№ РјР°С‚СЂРёС†С‹
 {
 	if (m_length != rows * cols)
 	{
@@ -444,7 +444,7 @@ vdouble::resize(int rows, int cols, const double& ra) // двумерной матрицы
 }
 
 void
-vdouble::resize(int rows, int cols, int tabs) // Конструктор трёхмерной матрицы
+vdouble::resize(int rows, int cols, int tabs) // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ С‚СЂС‘С…РјРµСЂРЅРѕР№ РјР°С‚СЂРёС†С‹
 {
 	if (m_length != rows * cols * tabs)
 	{
@@ -479,7 +479,7 @@ vdouble::resize(int rows, int cols, int tabs) // Конструктор трёхмерной матрицы
 #endif
 }
 void
-vdouble::resize(Vector<int>& vsize) // Конструктор многомерной матрицы
+vdouble::resize(Vector<int>& vsize) // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РјРЅРѕРіРѕРјРµСЂРЅРѕР№ РјР°С‚СЂРёС†С‹
 {
 	if (m_length > 0)
 		if (pD)
@@ -517,7 +517,7 @@ vdouble::resize(Vector<int>& vsize) // Конструктор многомерной матрицы
 
 }
 
-void vdouble::OnDestroy() // Деструктор выполняет освобождение памяти
+void vdouble::OnDestroy() // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ РІС‹РїРѕР»РЅСЏРµС‚ РѕСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё
 {
 #if TEST_VDOUBLE_MSG_MEMORY
 	MessageBox(0,"", "~vdouble()",0);
@@ -532,7 +532,7 @@ void vdouble::OnDestroy() // Деструктор выполняет освобождение памяти
 	m_szMemory -=m_length*SD;
 	m_length = 0;
 }
-vdouble::~vdouble() // Деструктор выполняет освобождение памяти
+vdouble::~vdouble() // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ РІС‹РїРѕР»РЅСЏРµС‚ РѕСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё
 {
 	OnDestroy();
 }
@@ -542,7 +542,7 @@ int vdouble::_printf(const char *name, bool asIntegers)//
 
 	printf("name = %s\n", name );
 	printf("m_length = %d\n", m_length );
-	// Записываем данные
+	// Р—Р°РїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ
 	if (this->m_dims == 2)
 	{
 		int r,c,i,
@@ -596,13 +596,13 @@ int vdouble::_printf(const char *name, bool asIntegers)//
 		}
 	}
 	printf("\n\n");
-	// закрываем файл
+	// Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 	return 0;
 }
 int vdouble::Write(const char * filename, const char *mode, const char *name , bool asIntegers)//
 {
 	FILE *stream;
-	// открываем бинарный файл для записи
+	// РѕС‚РєСЂС‹РІР°РµРј Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё
 	if ((stream = fopen(filename, mode)) == NULL)
 	{
 //		AfxMessageBox("Cannot open file for write.\n");
@@ -610,7 +610,7 @@ int vdouble::Write(const char * filename, const char *mode, const char *name , b
 	}
 	fprintf(stream, "name = %s\n", name );
 	fprintf(stream, "m_length = %d\n", m_length );
-	// Записываем данные
+	// Р—Р°РїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ
 	if (this->m_dims == 2)
 	{
 		int r,c,i,
@@ -664,7 +664,7 @@ int vdouble::Write(const char * filename, const char *mode, const char *name , b
 		}
 	}
 	fprintf(stream, "\n\n");
-	// закрываем файл
+	// Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 	fclose(stream);
 	return 0;
 }
@@ -672,7 +672,7 @@ int vdouble::Save(const char * filename)//
 {
 	int result;
 	FILE *stream;
-	// открываем бинарный файл для записи
+	// РѕС‚РєСЂС‹РІР°РµРј Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё
 	if ((stream = fopen(filename,"wb")) == NULL)
 	{
 //		AfxMessageBox("Cannot open file for write.\n");
@@ -680,15 +680,15 @@ int vdouble::Save(const char * filename)//
 	}
 	size_t wrote;
 
-	// Записываем длину вектора
+	// Р—Р°РїРёСЃС‹РІР°РµРј РґР»РёРЅСѓ РІРµРєС‚РѕСЂР°
 	wrote = fwrite(&m_length, sizeof(int), 1, stream);
-	// Записываем размерность 
+	// Р—Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ 
 	wrote = fwrite(&m_dims, sizeof(int), 1, stream);
-	// Записываем размеры по каждой размерности
+	// Р—Р°РїРёСЃС‹РІР°РµРј СЂР°Р·РјРµСЂС‹ РїРѕ РєР°Р¶РґРѕР№ СЂР°Р·РјРµСЂРЅРѕСЃС‚Рё
 	wrote = fwrite(m_size, sizeof(int), m_dims, stream);
-	// Записываем данные
+	// Р—Р°РїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ
 	wrote = fwrite(pD, sizeof(double), m_length, stream);
-	// закрываем файл
+	// Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 	fclose(stream);
 	if ((int)wrote == m_length)
 		result = 0;
@@ -703,32 +703,32 @@ int vdouble::Load(const char * filename)//
 {
 	int result;
 	FILE *stream;
-	// открываем бинарный файл для чтения
+	// РѕС‚РєСЂС‹РІР°РµРј Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ
 	if ((stream = fopen(filename,"rb")) == NULL)
 	{
 		MessageBox(0,_T("Cannot open file for write.\n"),_T("vdouble::Load(const char * filename)"),0);
 		return -1;
 	}
-	// считываем длину вектора
+	// СЃС‡РёС‚С‹РІР°РµРј РґР»РёРЅСѓ РІРµРєС‚РѕСЂР°
 	size_t read;
 	read = fread(&m_length, sizeof(int), 1, stream);
-	// считываем размерность
+	// СЃС‡РёС‚С‹РІР°РµРј СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ
 	read = fread(&m_dims, sizeof(int), 1, stream);
-	// размеры по каждой размерности
+	// СЂР°Р·РјРµСЂС‹ РїРѕ РєР°Р¶РґРѕР№ СЂР°Р·РјРµСЂРЅРѕСЃС‚Рё
 //	m_size.resize(m_dims);
 	read = fread(m_size, sizeof(int), m_dims, stream);
-	// выделяем в виртуальной памяти место для вектора
+	// РІС‹РґРµР»СЏРµРј РІ РІРёСЂС‚СѓР°Р»СЊРЅРѕР№ РїР°РјСЏС‚Рё РјРµСЃС‚Рѕ РґР»СЏ РІРµРєС‚РѕСЂР°
 	if ((pD = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
 //		AfxMessageBox("vdouble::vdouble(int, const double) - Not enough memory");
-		// закрываем файл
+		// Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 		fclose(stream);
 //		AfxThrowMemoryException();
 		return -1;
 	}
-	// считываем данные из файла в виртуальную память
+	// СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»Р° РІ РІРёСЂС‚СѓР°Р»СЊРЅСѓСЋ РїР°РјСЏС‚СЊ
 	read = fread(pD, sizeof(double), m_length, stream);
-	// закрываем файл
+	// Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 	fclose(stream);
 	if ((int)read == m_length)
 		result = 0;
@@ -1366,16 +1366,16 @@ vdouble& vdouble::operator-=(const double& ra)
 	return *this;
 }
 //////////////////////////////////////////////////////////////
-void vdouble::Resetting() // Обнуляет все элементы вектора
+void vdouble::Resetting() // РћР±РЅСѓР»СЏРµС‚ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР°
 {
 	for(int i=0;i<m_length;i++)
 		*(pD+i) = 0.0;
 }
-double& vdouble::End() // Возвращает последний элемент вектора
+double& vdouble::End() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	return pD[m_length - 1];
 }
-double& vdouble::End(int n) // Возвращает последний элемент вектора
+double& vdouble::End(int n) // Р’РѕР·РІСЂР°С‰Р°РµС‚ РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	if (n > 0 || n <= - m_length)
 	{
@@ -1384,7 +1384,7 @@ double& vdouble::End(int n) // Возвращает последний элемент вектора
 	}
 	return pD[m_length - 1 + n];
 }
-vdouble vdouble::Select(Vector<int>& indexes) // Возвращает новый вектор, выбирая элементы из данного вектора
+vdouble vdouble::Select(Vector<int>& indexes) // Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРІС‹Р№ РІРµРєС‚РѕСЂ, РІС‹Р±РёСЂР°СЏ СЌР»РµРјРµРЅС‚С‹ РёР· РґР°РЅРЅРѕРіРѕ РІРµРєС‚РѕСЂР°
 {
 	vdouble slt;
 	for (int i = 0; i < indexes.size; i++)
@@ -1394,7 +1394,7 @@ vdouble vdouble::Select(Vector<int>& indexes) // Возвращает новый вектор, выбира
 	}
 	return slt;
 }
-vdouble vdouble::Select(Vector<bool>& vbl) // Возвращает новый вектор, выбирая элементы из данного вектора
+vdouble vdouble::Select(Vector<bool>& vbl) // Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРІС‹Р№ РІРµРєС‚РѕСЂ, РІС‹Р±РёСЂР°СЏ СЌР»РµРјРµРЅС‚С‹ РёР· РґР°РЅРЅРѕРіРѕ РІРµРєС‚РѕСЂР°
 {
 	if (vbl.size != m_length)
 	{
@@ -1414,7 +1414,7 @@ vdouble vdouble::Select(Vector<bool>& vbl) // Возвращает новый вектор, выбирая э
 	}
 	return slt;
 }
-void vdouble::LocalMaximums(vdouble& LocMax, Vector<int>& indexes) // Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMaximums(vdouble& LocMax, Vector<int>& indexes) // Р¤РѕСЂРјРёСЂСѓРµС‚ РІРµРєС‚РѕСЂ Р»РѕРєР°Р»СЊРЅС‹С… РјР°РєСЃРёРјСѓРјРѕРІ Рё С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РёС… РёРЅРґРµРєСЃРѕРІ
 {
 	int i;
 	if (m_length < 3)
@@ -1462,7 +1462,7 @@ void vdouble::LocalMaximums(vdouble& LocMax, Vector<int>& indexes) // Формирует 
 	}
 #endif
 }
-void vdouble::LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes)// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes)// Р¤РѕСЂРјРёСЂСѓРµС‚ РІРµРєС‚РѕСЂ Р»РѕРєР°Р»СЊРЅС‹С… РјР°РєСЃРёРјСѓРјРѕРІ Рё С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РёС… РёРЅРґРµРєСЃРѕРІ
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1527,7 +1527,7 @@ void vdouble::LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes)// Форм
 
 #endif
 }
-void vdouble::LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes)// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes)// Р¤РѕСЂРјРёСЂСѓРµС‚ РІРµРєС‚РѕСЂ Р»РѕРєР°Р»СЊРЅС‹С… РјР°РєСЃРёРјСѓРјРѕРІ Рё С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РёС… РёРЅРґРµРєСЃРѕРІ
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1589,7 +1589,7 @@ void vdouble::LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& inde
 		}
 	}
 }
-void vdouble::LocalMinimums(vdouble& LocMin, Vector<int>& indexes)// Формирует вектор локальных минимумов и целочисленный вектор их индексов
+void vdouble::LocalMinimums(vdouble& LocMin, Vector<int>& indexes)// Р¤РѕСЂРјРёСЂСѓРµС‚ РІРµРєС‚РѕСЂ Р»РѕРєР°Р»СЊРЅС‹С… РјРёРЅРёРјСѓРјРѕРІ Рё С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РёС… РёРЅРґРµРєСЃРѕРІ
 {
 	int i;
 	if (m_length < 3)
@@ -1637,7 +1637,7 @@ void vdouble::LocalMinimums(vdouble& LocMin, Vector<int>& indexes)// Формирует в
 	}
 #endif
 }
-void vdouble::LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes)// Формирует вектор локальных минимумов и целочисленный вектор их индексов
+void vdouble::LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes)// Р¤РѕСЂРјРёСЂСѓРµС‚ РІРµРєС‚РѕСЂ Р»РѕРєР°Р»СЊРЅС‹С… РјРёРЅРёРјСѓРјРѕРІ Рё С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РёС… РёРЅРґРµРєСЃРѕРІ
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1696,7 +1696,7 @@ void vdouble::LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes)// Форм
 	}
 #endif
 }
-void vdouble::LocalMinimumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes)// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMinimumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes)// Р¤РѕСЂРјРёСЂСѓРµС‚ РІРµРєС‚РѕСЂ Р»РѕРєР°Р»СЊРЅС‹С… РјР°РєСЃРёРјСѓРјРѕРІ Рё С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РёС… РёРЅРґРµРєСЃРѕРІ
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1891,7 +1891,7 @@ bool vdouble::IsEndDecreaseDown(int n)
 	return answer;
 }
 */
-double vdouble::Max(int iFirst, int iLast) // Возвращает мaксимальный элемент вектора
+double vdouble::Max(int iFirst, int iLast) // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјaРєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	if(m_length == 0)
 		return 0.0;
@@ -1910,7 +1910,7 @@ double vdouble::Max(int iFirst, int iLast) // Возвращает мaксимальный элемент ве
 		_Max = _Max > *(pD+i) ? _Max : *(pD+i);
 	return _Max;
 }
-double vdouble::Max() // Возвращает мaксимальный элемент вектора
+double vdouble::Max() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјaРєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	double _Max = 0.0;
 	if(m_length == 0)
@@ -1920,7 +1920,7 @@ double vdouble::Max() // Возвращает мaксимальный элемент вектора
 		_Max = _Max > *(pD+i) ? _Max : *(pD+i);
 	return _Max;
 }
-double vdouble::Min(int iFirst, int iLast) // Возвращает минимальный элемент вектора
+double vdouble::Min(int iFirst, int iLast) // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	double _Min = 0.0;
 	if(m_length == 0)
@@ -1939,7 +1939,7 @@ double vdouble::Min(int iFirst, int iLast) // Возвращает минимальный элемент век
 		_Min = _Min < *(pD+i) ? _Min : *(pD+i);
 	return _Min;
 }
-double vdouble::MinFromTo(int i1, int i2) // Возвращает минимальный элемент вектора
+double vdouble::MinFromTo(int i1, int i2) // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	double _Min = 0.0;
 	if(m_length == 0)
@@ -1958,7 +1958,7 @@ double vdouble::MinFromTo(int i1, int i2) // Возвращает минимальный элемент вект
 		_Min = _Min < *(pD+i) ? _Min : *(pD+i);
 	return _Min;
 }
-double vdouble::MaxFromTo(int i1, int i2) // Возвращает минимальный элемент вектора
+double vdouble::MaxFromTo(int i1, int i2) // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	double _Max = 0.0;
 	if(m_length == 0)
@@ -1977,7 +1977,7 @@ double vdouble::MaxFromTo(int i1, int i2) // Возвращает минимальный элемент вект
 		_Max = _Max > *(pD+i) ? _Max : *(pD+i);
 	return _Max;
 }
-double vdouble::Min() // Возвращает минимальный элемент вектора
+double vdouble::Min() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	double _Min = 0.0;
 	if(m_length == 0)
@@ -1987,7 +1987,7 @@ double vdouble::Min() // Возвращает минимальный элемент вектора
 		_Min = _Min < *(pD+i) ? _Min : *(pD+i);
 	return _Min;
 }
-double vdouble::MinPositive() // Возвращает минимальный положительный элемент вектора
+double vdouble::MinPositive() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	double _Min;
 	bool started = false;
@@ -2011,7 +2011,7 @@ double vdouble::MinPositive() // Возвращает минимальный положительный элемент ве
 	else
 		return 0.0;
 }
-double vdouble::MaxAbs() // Возвращает мaксимальный по абсолютному значению элемент вектора
+double vdouble::MaxAbs() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјaРєСЃРёРјР°Р»СЊРЅС‹Р№ РїРѕ Р°Р±СЃРѕР»СЋС‚РЅРѕРјСѓ Р·РЅР°С‡РµРЅРёСЋ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2021,7 +2021,7 @@ double vdouble::MaxAbs() // Возвращает мaксимальный по абсолютному значению элем
 		_MaxAbs = _MaxAbs > fabs(*(pD+i)) ? _MaxAbs : fabs(*(pD+i));
 	return _MaxAbs;
 }
-double vdouble::MinAbs() // Возвращает минимальный по абсолютному значению элемент вектора
+double vdouble::MinAbs() // Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РїРѕ Р°Р±СЃРѕР»СЋС‚РЅРѕРјСѓ Р·РЅР°С‡РµРЅРёСЋ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2031,7 +2031,7 @@ double vdouble::MinAbs() // Возвращает минимальный по абсолютному значению элеме
 		_MinAbs = _MinAbs < fabs(*(pD+i)) ? _MinAbs : fabs(*(pD+i));
 	return _MinAbs;
 }
-double vdouble::Mean() // Возврашает среднее арифметическое элементов вектора
+double vdouble::Mean() // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if (!m_length)
 		return 0.0;
@@ -2041,7 +2041,7 @@ double vdouble::Mean() // Возврашает среднее арифметическое элементов вектора
 		_Sum += *(pD+i);
 	return _Sum/m_length;
 }
-double vdouble::Mean(int realElementsNumber) // Возврашает среднее арифметическое realElementsNumber элементов вектора
+double vdouble::Mean(int realElementsNumber) // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ realElementsNumber СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if (m_length == 0 || realElementsNumber == 0)
 		return 0.0;
@@ -2139,7 +2139,7 @@ void sortrows21(vdouble& x, vdouble& y, vdouble& z)
 			}
 		}
 	}
-	// теперь сортируем по x
+	// С‚РµРїРµСЂСЊ СЃРѕСЂС‚РёСЂСѓРµРј РїРѕ x
 	bool sortedX = false;
 	while(!sortedX)
 	{
@@ -2202,7 +2202,7 @@ void sortrows21(vdouble& x, vdouble& y, vdouble& z)
 		HeapFree(GetProcessHeap(), 0,pSortZ);
 
 }
-double Median_sort(double *p, int n) // Возврашает среднее арифметическое элементов вектора
+double Median_sort(double *p, int n) // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if (n<1)
 		return 0.0;
@@ -2333,22 +2333,22 @@ double Quantil(double qu, double *p, int len)
 	// the part for left and for right sum
 	double d1 = double (nsum1) / double (nsum);
 	double d2 = double (nsum2) / double (nsum);
-	// приближения слева и справа искомого квантиля
+	// РїСЂРёР±Р»РёР¶РµРЅРёСЏ СЃР»РµРІР° Рё СЃРїСЂР°РІР° РёСЃРєРѕРјРѕРіРѕ РєРІР°РЅС‚РёР»СЏ
 	double x1 = min + double(i1) * (max - min) / double(N-1);
 	double x2 = min + double(i2) * (max - min) / double(N-1);
 
 	if (pn)
 		HeapFree(GetProcessHeap(), 0, pn);
 
-	// доля гистограммы, не учтённая в правой и в левой сумме (1.0-d2-d1)
-	// разница между приближениями искомого квантиля (x2-x1)
-	// (qu-d1) - доля гистограммы, которую надо прибавить к левой сумме, 
-	// чтобы получилось деление гистограммы в соответствие с квантилем
+	// РґРѕР»СЏ РіРёСЃС‚РѕРіСЂР°РјРјС‹, РЅРµ СѓС‡С‚С‘РЅРЅР°СЏ РІ РїСЂР°РІРѕР№ Рё РІ Р»РµРІРѕР№ СЃСѓРјРјРµ (1.0-d2-d1)
+	// СЂР°Р·РЅРёС†Р° РјРµР¶РґСѓ РїСЂРёР±Р»РёР¶РµРЅРёСЏРјРё РёСЃРєРѕРјРѕРіРѕ РєРІР°РЅС‚РёР»СЏ (x2-x1)
+	// (qu-d1) - РґРѕР»СЏ РіРёСЃС‚РѕРіСЂР°РјРјС‹, РєРѕС‚РѕСЂСѓСЋ РЅР°РґРѕ РїСЂРёР±Р°РІРёС‚СЊ Рє Р»РµРІРѕР№ СЃСѓРјРјРµ, 
+	// С‡С‚РѕР±С‹ РїРѕР»СѓС‡РёР»РѕСЃСЊ РґРµР»РµРЅРёРµ РіРёСЃС‚РѕРіСЂР°РјРјС‹ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ СЃ РєРІР°РЅС‚РёР»РµРј
 
 	return x1 + (x2-x1)*(qu-d1)/(1.0-d2-d1);
 }
 
-double Median(double *p, int len) // Возврашает среднее арифметическое элементов вектора
+double Median(double *p, int len) // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	// find min and max of diapazon
 	int i;
@@ -2429,7 +2429,7 @@ double Median(double *p, int len) // Возврашает среднее арифметическое элементов
 	return median;
 }
 
-double vdouble::Median() // Возврашает среднее арифметическое элементов вектора
+double vdouble::Median() // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if (!m_length)
 		return 0.0;
@@ -2486,7 +2486,7 @@ double vdouble::Median() // Возврашает среднее арифметическое элементов вектора
 }
 
 
-double vdouble::Median_sort() // Возврашает среднее арифметическое элементов вектора
+double vdouble::Median_sort() // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСЂРµРґРЅРµРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if (!m_length)
 		return 0.0;
@@ -2549,7 +2549,7 @@ double vdouble::Median_sort() // Возврашает среднее арифметическое элементов век
 
 	return median;
 }
-double vdouble::Root_mean_square_Dismissal() // Возврашает среднеквадратичное отклонение
+double vdouble::Root_mean_square_Dismissal() // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2560,7 +2560,7 @@ double vdouble::Root_mean_square_Dismissal() // Возврашает среднеквадратичное от
 		_SquareSum += pow(*(pD+i) - _mean, 2.0);
 	return sqrt( _SquareSum / (m_length - 1) );
 }
-double vdouble::Sum() // Возврашает сумму элементов вектора
+double vdouble::Sum() // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСѓРјРјСѓ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2570,7 +2570,7 @@ double vdouble::Sum() // Возврашает сумму элементов вектора
 		_Sum += *(pD+i);
 	return _Sum;
 }
-double vdouble::SquareSum() // Возврашает сумму квадратов элементов вектора
+double vdouble::SquareSum() // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСѓРјРјСѓ РєРІР°РґСЂР°С‚РѕРІ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2584,7 +2584,7 @@ double vdouble::SquareSum() // Возврашает сумму квадратов элементов вектора
 	}
 	return _SquareSum;
 }
-double vdouble::SquareSumFrom(int i0) // Возврашает сумму квадратов элементов вектора
+double vdouble::SquareSumFrom(int i0) // Р’РѕР·РІСЂР°С€Р°РµС‚ СЃСѓРјРјСѓ РєРІР°РґСЂР°С‚РѕРІ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2605,7 +2605,7 @@ double vdouble::SquareSumFrom(int i0) // Возврашает сумму квадратов элементов ве
 	}
 	return _SquareSum;
 }
-void vdouble::push_back(double a) // Добавляет элемент в конец вектора
+void vdouble::push_back(double a) // Р”РѕР±Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РєРѕРЅРµС† РІРµРєС‚РѕСЂР°
 {
 	m_length++;
 	double *pD2;
@@ -2622,7 +2622,7 @@ void vdouble::push_back(double a) // Добавляет элемент в конец вектора
 	if (m_length >= 2) HeapFree(GetProcessHeap(), 0,pD);
 	pD=pD2;
 }
-void vdouble::push_front(double a) // Добавляет элемент в начало вектора
+void vdouble::push_front(double a) // Р”РѕР±Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РЅР°С‡Р°Р»Рѕ РІРµРєС‚РѕСЂР°
 {
 	m_length++;
 	double *pD2;
@@ -2641,7 +2641,7 @@ void vdouble::push_front(double a) // Добавляет элемент в начало вектора
 }
 
 
-void vdouble::DeleteEnd() // Удаляет 1 последний элемент вектора
+void vdouble::DeleteEnd() // РЈРґР°Р»СЏРµС‚ 1 РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	m_length--;
 	double *pD2;
@@ -2657,7 +2657,7 @@ void vdouble::DeleteEnd() // Удаляет 1 последний элемент вектора
 	if (m_length >= 0) HeapFree(GetProcessHeap(), 0,pD);
 	pD=pD2;
 }
-void vdouble::DeleteEnd(int n) // Удаляет n последних элементов вектора
+void vdouble::DeleteEnd(int n) // РЈРґР°Р»СЏРµС‚ n РїРѕСЃР»РµРґРЅРёС… СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°
 {
 	if (n > m_length)
 	{
@@ -2679,7 +2679,7 @@ void vdouble::DeleteEnd(int n) // Удаляет n последних элементов вектора
     HeapFree(GetProcessHeap(), 0,pD);
 	pD=pD2;
 }
-void vdouble::DeleteElement(int index) // Удаляет index-ный элемент вектора
+void vdouble::DeleteElement(int index) // РЈРґР°Р»СЏРµС‚ index-РЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР°
 {
 	int i;
 	if (index > m_length-1 || index < 0)
@@ -2704,7 +2704,7 @@ void vdouble::DeleteElement(int index) // Удаляет index-ный элемент вектора
 	HeapFree(GetProcessHeap(), 0,pD);
 	pD=pD2;
 }
-void vdouble::DeleteElements(Vector<bool>& vbl) // Удаляет элементы вектора
+void vdouble::DeleteElements(Vector<bool>& vbl) // РЈРґР°Р»СЏРµС‚ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР°
 {
 	if (m_length != vbl.size)
 	{
@@ -2734,7 +2734,7 @@ void vdouble::DeleteElements(Vector<bool>& vbl) // Удаляет элементы вектора
 	HeapFree(GetProcessHeap(), 0,pD);
 	pD=pD2;
 }
-void vdouble::DeleteAll() // Удаляет все элементы вектора
+void vdouble::DeleteAll() // РЈРґР°Р»СЏРµС‚ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РІРµРєС‚РѕСЂР°
 {
 	if (m_length >= 1)
 	{
@@ -2752,7 +2752,7 @@ void vdouble::DeleteAll() // Удаляет все элементы вектора
 		pD=pD2;
 	}
 }
-vdouble vdouble::CumMeanSquareSum() // Возврашает вектор кумулятивных сумм, усреднённых по номеру элемента
+vdouble vdouble::CumMeanSquareSum() // Р’РѕР·РІСЂР°С€Р°РµС‚ РІРµРєС‚РѕСЂ РєСѓРјСѓР»СЏС‚РёРІРЅС‹С… СЃСѓРјРј, СѓСЃСЂРµРґРЅС‘РЅРЅС‹С… РїРѕ РЅРѕРјРµСЂСѓ СЌР»РµРјРµРЅС‚Р°
 {
 	int len = m_length;
 	vdouble cms = vdouble(len);
@@ -2767,7 +2767,7 @@ vdouble vdouble::CumMeanSquareSum() // Возврашает вектор кумулятивных сумм, усре
 	}
 	return cms;
 }
-vdouble vdouble::CumMeanSquareSumFrom(int i0) // Возврашает вектор кумулятивных сумм, усреднённых по номеру элемента, начиная с i0
+vdouble vdouble::CumMeanSquareSumFrom(int i0) // Р’РѕР·РІСЂР°С€Р°РµС‚ РІРµРєС‚РѕСЂ РєСѓРјСѓР»СЏС‚РёРІРЅС‹С… СЃСѓРјРј, СѓСЃСЂРµРґРЅС‘РЅРЅС‹С… РїРѕ РЅРѕРјРµСЂСѓ СЌР»РµРјРµРЅС‚Р°, РЅР°С‡РёРЅР°СЏ СЃ i0
 {
 	int len = m_length - i0;
 	vdouble cms = vdouble(len);
@@ -2782,7 +2782,7 @@ vdouble vdouble::CumMeanSquareSumFrom(int i0) // Возврашает вектор кумулятивных 
 	}
 	return cms;
 }
-vdouble vdouble::CumSum() // Возврашает вектор кумулятивных сумм
+vdouble vdouble::CumSum() // Р’РѕР·РІСЂР°С€Р°РµС‚ РІРµРєС‚РѕСЂ РєСѓРјСѓР»СЏС‚РёРІРЅС‹С… СЃСѓРјРј
 {
 	int len = m_length;
 	vdouble cms = vdouble(len);
@@ -2797,7 +2797,7 @@ vdouble vdouble::CumSum() // Возврашает вектор кумулятивных сумм
 	return cms;
 }
 
-vdouble vdouble::CumMeanSum() // Возврашает вектор кумулятивных сумм, усреднённых по номеру элемента
+vdouble vdouble::CumMeanSum() // Р’РѕР·РІСЂР°С€Р°РµС‚ РІРµРєС‚РѕСЂ РєСѓРјСѓР»СЏС‚РёРІРЅС‹С… СЃСѓРјРј, СѓСЃСЂРµРґРЅС‘РЅРЅС‹С… РїРѕ РЅРѕРјРµСЂСѓ СЌР»РµРјРµРЅС‚Р°
 {
 	int len = m_length;
 	vdouble cms = vdouble(len);
@@ -2812,7 +2812,7 @@ vdouble vdouble::CumMeanSum() // Возврашает вектор кумулятивных сумм, усреднённы
 	}
 	return cms;
 }
-vdouble vdouble::CumMeanSumFrom(int i0) // Возврашает вектор кумулятивных сумм, усреднённых по номеру элемента, начиная с i0
+vdouble vdouble::CumMeanSumFrom(int i0) // Р’РѕР·РІСЂР°С€Р°РµС‚ РІРµРєС‚РѕСЂ РєСѓРјСѓР»СЏС‚РёРІРЅС‹С… СЃСѓРјРј, СѓСЃСЂРµРґРЅС‘РЅРЅС‹С… РїРѕ РЅРѕРјРµСЂСѓ СЌР»РµРјРµРЅС‚Р°, РЅР°С‡РёРЅР°СЏ СЃ i0
 {
 	int len = m_length - i0;
 	vdouble cms = vdouble(len);
@@ -2827,7 +2827,7 @@ vdouble vdouble::CumMeanSumFrom(int i0) // Возврашает вектор кумулятивных сумм, 
 	}
 	return cms;
 }
-vdouble vdouble::DiffVector()// Вектор конечных разностей (возвращает вектор на 1 короче)
+vdouble vdouble::DiffVector()// Р’РµРєС‚РѕСЂ РєРѕРЅРµС‡РЅС‹С… СЂР°Р·РЅРѕСЃС‚РµР№ (РІРѕР·РІСЂР°С‰Р°РµС‚ РІРµРєС‚РѕСЂ РЅР° 1 РєРѕСЂРѕС‡Рµ)
 {
 	if (m_length < 2)
 	{
@@ -2847,7 +2847,7 @@ vdouble vdouble::DiffVector()// Вектор конечных разностей (возвращает вектор на 
 	}
 	return Diff;
 }
-vdouble vdouble::SumVector()//Вектор конечных сумм (сумм в соседних точках) - возвр. вект. на 1 короче
+vdouble vdouble::SumVector()//Р’РµРєС‚РѕСЂ РєРѕРЅРµС‡РЅС‹С… СЃСѓРјРј (СЃСѓРјРј РІ СЃРѕСЃРµРґРЅРёС… С‚РѕС‡РєР°С…) - РІРѕР·РІСЂ. РІРµРєС‚. РЅР° 1 РєРѕСЂРѕС‡Рµ
 {
 	if (m_length < 2)
 	{
@@ -2888,7 +2888,7 @@ double vdouble::ScalarProduct(vdouble& rhs)
 			_T("the lengthes of the vectors must be the same"),
 			rhs.m_length, m_length);
 		MessageBox(0,errstr, _T("Error"), 0);
-		ExitProcess(0);
+        //ExitProcess(0);
 		return 0;
 	}
 	double *p1, *p2;
@@ -2961,7 +2961,7 @@ void vdouble::FourierTransform(vdouble& t,
 }
 
 /*
-//============Функции Лаггер - спектральных преобразований ============
+//============Р¤СѓРЅРєС†РёРё Р›Р°РіРіРµСЂ - СЃРїРµРєС‚СЂР°Р»СЊРЅС‹С… РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёР№ ============
 vdouble LagerPolynom(const int& n, const double& alpha, const double& beta, vdouble& t)
 {
 	switch(n)
@@ -3039,23 +3039,23 @@ double vdouble::LagerAlphaDeterminition(double& tend, double& EnergyPart)
 	vdouble vInt, poly, vInt_tend, c, vderiv;
 	int vIntLen, i, j,  N, result;
 	double m, f, alpha;
-	// Полиномиальные коэффициенты произведения полинома Лаггера самого на себя
+	// РџРѕР»РёРЅРѕРјРёР°Р»СЊРЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РїРѕР»РёРЅРѕРјР° Р›Р°РіРіРµСЂР° СЃР°РјРѕРіРѕ РЅР° СЃРµР±СЏ
 	poly = conv(*this,*this);
-	// интегрирование выражения 
+	// РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёРµ РІС‹СЂР°Р¶РµРЅРёСЏ 
 	// poly.PolynomValues(alpha * t) * exp(-2 * alpha * t) * 2 * alpha;
-	// по переменной t
-	// в пределах от 0 до tend даёт значение EnergyPart
+	// РїРѕ РїРµСЂРµРјРµРЅРЅРѕР№ t
+	// РІ РїСЂРµРґРµР»Р°С… РѕС‚ 0 РґРѕ tend РґР°С‘С‚ Р·РЅР°С‡РµРЅРёРµ EnergyPart
 	vInt = poly;
 	vIntLen = vInt.Length();
 	for (i = 0; i < vIntLen; i++)
 	{
-		vInt[i] /= -1; //коэффициент перед переменной интегрирования в экспоненте
+		vInt[i] /= -1; //РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРµСЂРµРґ РїРµСЂРµРјРµРЅРЅРѕР№ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ РІ СЌРєСЃРїРѕРЅРµРЅС‚Рµ
 		if (i < vIntLen - 1)
 			vInt[i + 1] -= vInt[i] * (vIntLen - i - 1) / 2;
 	}
-	// Теперь мы имеем трансцендентное уравнение
+	// РўРµРїРµСЂСЊ РјС‹ РёРјРµРµРј С‚СЂР°РЅСЃС†РµРЅРґРµРЅС‚РЅРѕРµ СѓСЂР°РІРЅРµРЅРёРµ
 	// EnergyPart = vInt.PolynomValue(alpha * tend) * exp( - 2 * alpha * tend) - vInt.PolynomValue(0);
-	// которое надо решить относительно alpha
+	// РєРѕС‚РѕСЂРѕРµ РЅР°РґРѕ СЂРµС€РёС‚СЊ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ alpha
 
 /*	
 vdouble vEnergyPart = vInt.PolynomValues(alpha * vtend) * exp( - 2 * alpha * vtend) - vInt.PolynomValue(0);
@@ -3064,7 +3064,7 @@ fprintf(stderr,"\nvEnergyPart = ");vEnergyPart.disp();
 EnergyPart = vInt.PolynomValue(alpha * tend) * exp( - 2 * alpha * tend) - vInt.PolynomValue(0);
 fprintf(stderr,"\nEnergyPart = %g", EnergyPart);
 //*/	
-	// сперва внесём tend в коэффициенты полинома vInt
+	// СЃРїРµСЂРІР° РІРЅРµСЃС‘Рј tend РІ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° vInt
 	vInt_tend = vInt;
 	m = 1.0;
 	for (i = vIntLen - 1; i >= 0 ; i--)
@@ -3083,35 +3083,35 @@ fprintf(stderr, "valpha = ");valpha.disp();
 fprintf(stderr, "vInt_tend = ");vInt_tend.disp();
 fprintf(stderr, "vInt = ");vInt.disp();
 //*/
-	// имеем трансцендентное уравнение
+	// РёРјРµРµРј С‚СЂР°РЅСЃС†РµРЅРґРµРЅС‚РЅРѕРµ СѓСЂР°РІРЅРµРЅРёРµ
 	// vInt_tend.PolynomValue(alpha) * exp( - 2 * valpha * tend) - (vInt.PolynomValue(0) + EnergyPart) = 0.0;
-	// которое решаем путём разложения левой части в степенной ряд по alpha
+	// РєРѕС‚РѕСЂРѕРµ СЂРµС€Р°РµРј РїСѓС‚С‘Рј СЂР°Р·Р»РѕР¶РµРЅРёСЏ Р»РµРІРѕР№ С‡Р°СЃС‚Рё РІ СЃС‚РµРїРµРЅРЅРѕР№ СЂСЏРґ РїРѕ alpha
 
-	// разлагаем левую часть в степенной ряд
-	N = 100; // степень полинома разложения экспоненты
+	// СЂР°Р·Р»Р°РіР°РµРј Р»РµРІСѓСЋ С‡Р°СЃС‚СЊ РІ СЃС‚РµРїРµРЅРЅРѕР№ СЂСЏРґ
+	N = 100; // СЃС‚РµРїРµРЅСЊ РїРѕР»РёРЅРѕРјР° СЂР°Р·Р»РѕР¶РµРЅРёСЏ СЌРєСЃРїРѕРЅРµРЅС‚С‹
 	c = vdouble(N);
-	m = 1.0; // Коэффициент перед экспонентой
+	m = 1.0; // РљРѕСЌС„С„РёС†РёРµРЅС‚ РїРµСЂРµРґ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№
 	f = 1.0;
-	j = 0; //порядок производной
+	j = 0; //РїРѕСЂСЏРґРѕРє РїСЂРѕРёР·РІРѕРґРЅРѕР№
 	double alpha0 = 0;
-	// Значение ф-ции в alpha0
+	// Р—РЅР°С‡РµРЅРёРµ С„-С†РёРё РІ alpha0
 	c[N - 1] = vInt_tend.PolynomValue(alpha0) * exp( - 2 * alpha0 * tend) - (vInt.PolynomValue(0) + EnergyPart);
 	j++;
 	f *= (double)j;
 
-	// Значение первой производной в alpha0
+	// Р—РЅР°С‡РµРЅРёРµ РїРµСЂРІРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№ РІ alpha0
 	vderiv = (- 2 * tend * vInt_tend).PolynomSumming(vInt_tend.PolynomDerivative());
 	c[N - 2] = vderiv.PolynomValue(alpha0) * exp( - 2 * alpha0 * tend);
 	j++;
 	f *= (double)j;
 
-	// Значения второй и следующих производных в alpha0
+	// Р—РЅР°С‡РµРЅРёСЏ РІС‚РѕСЂРѕР№ Рё СЃР»РµРґСѓСЋС‰РёС… РїСЂРѕРёР·РІРѕРґРЅС‹С… РІ alpha0
 	for (i = N - 3; i >= 0 ; i--)
 	{
 		vderiv = (- 2 * tend * vderiv).PolynomSumming(vderiv.PolynomDerivative());
-		c[i] = vderiv.PolynomValue(alpha0) * exp( - 2 * alpha0 * tend) / f;// Коэффициент интерполирующего полинома
+		c[i] = vderiv.PolynomValue(alpha0) * exp( - 2 * alpha0 * tend) / f;// РљРѕСЌС„С„РёС†РёРµРЅС‚ РёРЅС‚РµСЂРїРѕР»РёСЂСѓСЋС‰РµРіРѕ РїРѕР»РёРЅРѕРјР°
 		j++;
-		f *= (double)j;// Факториал
+		f *= (double)j;// Р¤Р°РєС‚РѕСЂРёР°Р»
 		}
 //fprintf(stderr, "c = ");
 //c.disp();
@@ -3142,7 +3142,7 @@ fprintf(stderr, "Difference = ");
 //		fprintf(stderr, " alpha after Newton = %g\tEnergyPart = %g\n\n", alpha,EnergyPart);
 	return alpha;
 }
-vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag_of_Inf, Vector<vdouble>& koefs, char * sNumDen, char * sRoots) // Вычисление коэффициентов Лагерра
+vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag_of_Inf, Vector<vdouble>& koefs, char * sNumDen, char * sRoots) // Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Р›Р°РіРµСЂСЂР°
 {
 	int i, q;
 	char s[1024];
@@ -3161,11 +3161,11 @@ vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag
 		temp1, temp2,
 		*pdt, *pdt_1,
 		*plager0, *plager1, *plager2, *pl_, lni, *pl0, *pl1, *pl2,
-		*vpl[3], // Массив трёх указателей
+		*vpl[3], // РњР°СЃСЃРёРІ С‚СЂС‘С… СѓРєР°Р·Р°С‚РµР»РµР№
 		an, bn, cn, dn,
-		d, // Дискриминант //Максимально допустимые:
-		goal_Error = 10.0, // среднеквадратичная ошибка реконструкции
-		goal_Max_diff = 10.0; //максимальная ошибка реконструкции
+		d, // Р”РёСЃРєСЂРёРјРёРЅР°РЅС‚ //РњР°РєСЃРёРјР°Р»СЊРЅРѕ РґРѕРїСѓСЃС‚РёРјС‹Рµ:
+		goal_Error = 10.0, // СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅР°СЏ РѕС€РёР±РєР° СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё
+		goal_Max_diff = 10.0; //РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РѕС€РёР±РєР° СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё
 	bool GoodRekonstr;
 	
 	int order,
@@ -3193,7 +3193,7 @@ vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag
 	if ((plager2 = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,len*SD)) == NULL){MEMORY_ERROR}
 	if ((ptau = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,len*SD)) == NULL){MEMORY_ERROR}
 
-	//   Вычисление коэффициентов интегрированием
+	//   Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёРµРј
 	for (i = 0; i< len; i++)
 		*(ptau + i) = *(pt + i) - t0;
 
@@ -3237,26 +3237,26 @@ vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag
 		for(i = 1; i < len; i++)
 		{
 			ti = *(ptau + i);
-			lni = LagerPolynom(q,alpha,beta,ti); // полином без экспоненты exp(-(alpha+beta)*t) и без нормирующего множителя sqrt(2.0*alpha)
-			temp2 = *(pf + i) * lni * exp((beta - alpha) * ti); //  произведение сигнала на полином и на объединённые экспоненту и вес 
+			lni = LagerPolynom(q,alpha,beta,ti); // РїРѕР»РёРЅРѕРј Р±РµР· СЌРєСЃРїРѕРЅРµРЅС‚С‹ exp(-(alpha+beta)*t) Рё Р±РµР· РЅРѕСЂРјРёСЂСѓСЋС‰РµРіРѕ РјРЅРѕР¶РёС‚РµР»СЏ sqrt(2.0*alpha)
+			temp2 = *(pf + i) * lni * exp((beta - alpha) * ti); //  РїСЂРѕРёР·РІРµРґРµРЅРёРµ СЃРёРіРЅР°Р»Р° РЅР° РїРѕР»РёРЅРѕРј Рё РЅР° РѕР±СЉРµРґРёРЅС‘РЅРЅС‹Рµ СЌРєСЃРїРѕРЅРµРЅС‚Сѓ Рё РІРµСЃ 
 			*(pl_ + i) = lni;
-			Q += (temp1 + temp2) * ( *(pdt_1 + i) );// интегрирование методом трапеций
+			Q += (temp1 + temp2) * ( *(pdt_1 + i) );// РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґРѕРј С‚СЂР°РїРµС†РёР№
 			temp1 = temp2;
 		}
-		Q *= sqrt(alpha / 2.0); // умножение коэффициента на нормирующий множитель sqrt(2.0*alpha) и деление на 2
+		Q *= sqrt(alpha / 2.0); // СѓРјРЅРѕР¶РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РЅР° РЅРѕСЂРјРёСЂСѓСЋС‰РёР№ РјРЅРѕР¶РёС‚РµР»СЊ sqrt(2.0*alpha) Рё РґРµР»РµРЅРёРµ РЅР° 2
 
-		// полиномиальные коэффициенты полинома Лагерра
+		// РїРѕР»РёРЅРѕРјРёР°Р»СЊРЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° Р›Р°РіРµСЂСЂР°
 		vLag[q] = vLagerPolynom(q);
-		// вычисление поправки интегрирования от tend до бесконечности
+		// РІС‹С‡РёСЃР»РµРЅРёРµ РїРѕРїСЂР°РІРєРё РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ РѕС‚ tend РґРѕ Р±РµСЃРєРѕРЅРµС‡РЅРѕСЃС‚Рё
 		
-		// Вектор Полинома интеграла
+		// Р’РµРєС‚РѕСЂ РџРѕР»РёРЅРѕРјР° РёРЅС‚РµРіСЂР°Р»Р°
 		vInt = vLag[q];
 		vIntLen = vInt.m_length;
-		// вычисление полинома интеграла
+		// РІС‹С‡РёСЃР»РµРЅРёРµ РїРѕР»РёРЅРѕРјР° РёРЅС‚РµРіСЂР°Р»Р°
 		for ( i = 0; i < vIntLen; i++)
 		{
 			
-			vInt[i] /= beta - alpha; // коэффициент перед переменной интегрирования в экспоненте
+			vInt[i] /= beta - alpha; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРµСЂРµРґ РїРµСЂРµРјРµРЅРЅРѕР№ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ РІ СЌРєСЃРїРѕРЅРµРЅС‚Рµ
 			if (i + 1 < vIntLen)
 				vInt[i + 1] -= vInt[i] * (vIntLen - i - 1);
 		}
@@ -3276,13 +3276,13 @@ vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag
 //WriteRaporto("LagerQuotients 5\n");
 
 	//=============================================================
-	// Реконструкция сигнала путём обратного преобразования Лапласа
+	// Р РµРєРѕРЅСЃС‚СЂСѓРєС†РёСЏ СЃРёРіРЅР°Р»Р° РїСѓС‚С‘Рј РѕР±СЂР°С‚РЅРѕРіРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ Р›Р°РїР»Р°СЃР°
 	vdouble f_rek;
 	InvLaplace(num, den, t, f_rek, koefs, sRoots);
 
 //WriteRaporto("LagerQuotients 6\n");
 
-	// Вычисление среднеквадратичной ошибки реконструкции
+	// Р’С‹С‡РёСЃР»РµРЅРёРµ СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕР№ РѕС€РёР±РєРё СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё
 	vdouble diffrence = *this - f_rek;
 	double Error_rek, Max_diff;
 	Error_rek = sqrt(diffrence.SquareSum() / m_length);
@@ -3358,7 +3358,7 @@ vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag
 			vrek[0] = -2.0 / dn;; vrek[1] = bn;
 			Q = 0.0;
 			ti = *ptau;
-			lni = (an * ti + bn) * (*pl1) - cn * (*pl0);// рекурентное вычисление значения полинома в точке ti
+			lni = (an * ti + bn) * (*pl1) - cn * (*pl0);// СЂРµРєСѓСЂРµРЅС‚РЅРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»РёРЅРѕРјР° РІ С‚РѕС‡РєРµ ti
 			temp1 = *pf * lni * exp((beta - alpha) * ti);
 			*pl2 = lni;
 //WriteRaporto("LagerQuotients 11\n");
@@ -3375,21 +3375,21 @@ vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag
 			}
 //WriteRaporto("LagerQuotients 13\n");
 			Q *= sqrt(alpha / 2.0); vQ.push_back(Q);
-			// рекурентное вычисление полиномиальных коэффициентов полинома Лагерра
+			// СЂРµРєСѓСЂРµРЅС‚РЅРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ РїРѕР»РёРЅРѕРјРёР°Р»СЊРЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕР»РёРЅРѕРјР° Р›Р°РіРµСЂСЂР°
 			vLag[0] = vLag[1]; vLag[1] = vLag[2];
 //WriteRaporto("LagerQuotients 14\n");
 			vLag[2] = conv(vLag[1], vrek).PolynomSumming( - cn * vLag[0]);
 //WriteRaporto("LagerQuotients 15\n");
 //fprintf(stderr, "Polynmial quotients of %i order of LagerPolynom is = ", order * 2 + q - 1);
 //vLag[2].disp();
-			// вычисление поправки интегрирования от tend до бесконечности
+			// РІС‹С‡РёСЃР»РµРЅРёРµ РїРѕРїСЂР°РІРєРё РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ РѕС‚ tend РґРѕ Р±РµСЃРєРѕРЅРµС‡РЅРѕСЃС‚Рё
 			vInt = vLag[2];
 			vIntLen = vInt.m_length;
-			// вычисление полинома интеграла
+			// РІС‹С‡РёСЃР»РµРЅРёРµ РїРѕР»РёРЅРѕРјР° РёРЅС‚РµРіСЂР°Р»Р°
 			for ( i = 0; i < vIntLen; i++)
 			{
 				
-				vInt[i] /= beta - alpha; // коэффициент перед переменной интегрирования в экспоненте
+				vInt[i] /= beta - alpha; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРµСЂРµРґ РїРµСЂРµРјРµРЅРЅРѕР№ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ РІ СЌРєСЃРїРѕРЅРµРЅС‚Рµ
 				if (i + 1 < vIntLen)
 					vInt[i + 1] -= vInt[i] * (vIntLen - i - 1);
 			}
@@ -3412,11 +3412,11 @@ vdouble vdouble::LagerQuotients(int i0, vdouble& t, LagerStruct& lgstr, int flag
 //WriteRaporto("LagerQuotients 19\n");
 
 		//=============================================================
-		// Реконструкция сигнала путём обратного преобразования Лапласа
+		// Р РµРєРѕРЅСЃС‚СЂСѓРєС†РёСЏ СЃРёРіРЅР°Р»Р° РїСѓС‚С‘Рј РѕР±СЂР°С‚РЅРѕРіРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ Р›Р°РїР»Р°СЃР°
 		vdouble f_rek;
 		InvLaplace(num, den, t, f_rek, koefs, sRoots);
 //WriteRaporto("LagerQuotients 20\n");
-		// Вычисление среднеквадратичной ошибки реконструкции
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕР№ РѕС€РёР±РєРё СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё
 		vdouble diffrence = *this - f_rek;
 		double Error_rek, Max_diff;
 		Error_rek = sqrt(diffrence.SquareSum() / m_length);
@@ -3639,13 +3639,13 @@ int vdouble::InvLaplace(vdouble& num, vdouble& den, vdouble&t, vdouble& f_rekons
 	int result = 0, res, i;
 	double xD_, yD_, mD_, xN, yN, xk, yk, x, y;
 //WriteRaporto("InvLaplace 1 3\n");
-	vdouble droots_den, deriv_den; // Действительные корни знаменателя и производная его
+	vdouble droots_den, deriv_den; // Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РєРѕСЂРЅРё Р·РЅР°РјРµРЅР°С‚РµР»СЏ Рё РїСЂРѕРёР·РІРѕРґРЅР°СЏ РµРіРѕ
 //WriteRaporto("InvLaplace 1 4\n");
-	Vector<complex> croots_den; //Комплексные корни знаменателя
+	Vector<complex> croots_den; //РљРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 //WriteRaporto("InvLaplace 1 5\n");
-	deriv_den = den.PolynomDerivative(); //производная знаменателя
+	deriv_den = den.PolynomDerivative(); //РїСЂРѕРёР·РІРѕРґРЅР°СЏ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 //WriteRaporto("InvLaplace 1 6\n");
-	f_rekonstr = zeros(t.m_length); // реконструируемый сигнал
+	f_rekonstr = zeros(t.m_length); // СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂСѓРµРјС‹Р№ СЃРёРіРЅР°Р»
 	// ============== Roots of denominator ==========================
 	Vector<int> order_dr, order_cr;
 //WriteRaporto("InvLaplace 2\n");
@@ -3674,19 +3674,19 @@ int vdouble::InvLaplace(vdouble& num, vdouble& den, vdouble&t, vdouble& f_rekons
 		sprintf(s, "Complex roots(%i):\n", croots_den.size);
 		strcat(sRoots, s);
 	}
-//суммируем оригиналы от комплексных корней
+//СЃСѓРјРјРёСЂСѓРµРј РѕСЂРёРіРёРЅР°Р»С‹ РѕС‚ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 	for (i = 0; i < croots_den.size; i++)
 	{
-		complex N, D_, z; // комплексное значение числителя и производной знаменателя
-		// комплексный корень
+		complex N, D_, z; // РєРѕРјРїР»РµРєСЃРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ Рё РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
+		// РєРѕРјРїР»РµРєСЃРЅС‹Р№ РєРѕСЂРµРЅСЊ
 		x = croots_den[i].x;
 		y = croots_den[i].y;
 		z.x = x;
 		z.y = y;
-		// Вычисление коэффициента перед экспонентой
-		N = num.PolynomValue(z);// Значение числителя в корне
-		D_ = deriv_den.PolynomValue(z);// Значение производной знаменателя в корне
-		// Деление значения числителя на значение производной знаменателя
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РїРµСЂРµРґ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№
+		N = num.PolynomValue(z);// Р—РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ РІ РєРѕСЂРЅРµ
+		D_ = deriv_den.PolynomValue(z);// Р—РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ РІ РєРѕСЂРЅРµ
+		// Р”РµР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С‡РёСЃР»РёС‚РµР»СЏ РЅР° Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 		xD_ = D_.x; yD_ = D_.y;
 		mD_ = xD_ * xD_ + yD_ * yD_;
 		xN = N.x;
@@ -3722,16 +3722,16 @@ int vdouble::InvLaplace(vdouble& num, vdouble& den, vdouble&t, vdouble& f_rekons
 		sprintf(s, "Real roots(%i):\n", droots_den.m_length);
 		strcat(sRoots, s);
 	}
-	//суммируем оригиналы от действительных корней
+	//СЃСѓРјРјРёСЂСѓРµРј РѕСЂРёРіРёРЅР°Р»С‹ РѕС‚ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
 	for (i = 0; i < droots_den.m_length; i++)
 	{
-		double N, D_; // действительное значение числителя и производной знаменателя
-		// комплексный корень
+		double N, D_; // РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ Рё РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
+		// РєРѕРјРїР»РµРєСЃРЅС‹Р№ РєРѕСЂРµРЅСЊ
 		x = droots_den[i];
-		// Вычисление коэффициента перед экспонентой
-		N = num.PolynomValue(x);// Значение числителя в корне
-		D_ = deriv_den.PolynomValue(x);// Значение производной знаменателя в корне
-		// Деление значения числителя на значение производной знаменателя
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РїРµСЂРµРґ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№
+		N = num.PolynomValue(x);// Р—РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ РІ РєРѕСЂРЅРµ
+		D_ = deriv_den.PolynomValue(x);// Р—РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ РІ РєРѕСЂРЅРµ
+		// Р”РµР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С‡РёСЃР»РёС‚РµР»СЏ РЅР° Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 		xk = N / D_;
 		// ================= exp ============
 		f_rekonstr += xk * exp(x * t);
@@ -3752,7 +3752,7 @@ int vdouble::InvLaplace(vdouble& num, vdouble& den, vdouble&t, vdouble& f_rekons
 
 
 
-//============ Функции Линейной алгебры ============
+//============ Р¤СѓРЅРєС†РёРё Р›РёРЅРµР№РЅРѕР№ Р°Р»РіРµР±СЂС‹ ============
 vdouble vdouble::MatrixProduct(vdouble& x)
 {
 	if (this->m_dims != 2)
@@ -3791,7 +3791,7 @@ vdouble vdouble::MatrixProduct(vdouble& x)
 
 
 vdouble vdouble::MatrixWithMatrixProduct(vdouble& M)
-// Матричное произведение матрицы размера R1 x C1 на матрицу размера R2 x C2 причём C1 = R2
+// РњР°С‚СЂРёС‡РЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РјР°С‚СЂРёС†С‹ СЂР°Р·РјРµСЂР° R1 x C1 РЅР° РјР°С‚СЂРёС†Сѓ СЂР°Р·РјРµСЂР° R2 x C2 РїСЂРёС‡С‘Рј C1 = R2
 {
 	if (m_dims != 2)
 	{
@@ -3911,7 +3911,7 @@ vdouble vdouble::TichonovOld(vdouble& b)
 		i, r, c,
 		rows = m_size[0],
 		cols = m_size[1],
-		MaxNotTurned = 10;// число итераций на которые действует отмена настройки
+		MaxNotTurned = 10;// С‡РёСЃР»Рѕ РёС‚РµСЂР°С†РёР№ РЅР° РєРѕС‚РѕСЂС‹Рµ РґРµР№СЃС‚РІСѓРµС‚ РѕС‚РјРµРЅР° РЅР°СЃС‚СЂРѕР№РєРё
 	vdouble x, E = vdouble(rows), d2Fdx2 = vdouble(cols);
 	double delta, 
 		alpha, 
@@ -3942,7 +3942,7 @@ vdouble vdouble::TichonovOld(vdouble& b)
 		M.sls_det(b0,x,det);
 		px = x.pD;
 		//return x;
-		// Вектор невязки
+		// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 		for (r = 0; r < rows; r++)
 		{
 			int rcols = r * cols;
@@ -3950,14 +3950,14 @@ vdouble vdouble::TichonovOld(vdouble& b)
 			for (c = 0; c < cols; c++)
 				*(pE + r) += *(px + c) * *(pD + c + rcols);
 		}
-		// Приближение
+		// РџСЂРёР±Р»РёР¶РµРЅРёРµ
 		delta = sqrt(E.SquareSum());
 	}
 	else
 	{
 		x = ones(cols);
 		px = x.pD;
-		// Вектор невязки
+		// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 		for (r = 0; r < rows; r++)
 		{
 			int rcols = r * cols;
@@ -3965,15 +3965,15 @@ vdouble vdouble::TichonovOld(vdouble& b)
 			for (c = 0; c < cols; c++)
 				*(pE + r) += *(px + c) * *(pD + c + rcols);
 		}
-		// Приближение
+		// РџСЂРёР±Р»РёР¶РµРЅРёРµ
 		delta = sqrt(E.SquareSum());
-		// Регуляризационный коэффициент
+		// Р РµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 		alpha = delta;
 	}
-	// Регуляризационный коэффициент
+	// Р РµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 	alpha = 0.0;
 	p2 = d2Fdx2.pD;
-	//Вычисление второй производной
+	//Р’С‹С‡РёСЃР»РµРЅРёРµ РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 	for (c = 0; c < cols; c++)
 	{
 		*(p2 + c) = alpha;
@@ -3985,7 +3985,7 @@ vdouble vdouble::TichonovOld(vdouble& b)
 		}
 		*(p2 + c) *= 2.0;
 	}
-	//Цикл подстройки
+	//Р¦РёРєР» РїРѕРґСЃС‚СЂРѕР№РєРё
 
 
 	int q = 0;
@@ -3993,10 +3993,10 @@ vdouble vdouble::TichonovOld(vdouble& b)
 	{
 		q++;
 		abs2grad = 0;
-		// Перебираем все элементы x
+		// РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЌР»РµРјРµРЅС‚С‹ x
 		for (c = 0; c < cols; c++)
 		{
-			// Вычисляем первую производную
+			// Р’С‹С‡РёСЃР»СЏРµРј РїРµСЂРІСѓСЋ РїСЂРѕРёР·РІРѕРґРЅСѓСЋ
 			dFdx = alpha * *(px + c);
 			for (r = 0; r < rows; r++)
 			{
@@ -4008,9 +4008,9 @@ vdouble vdouble::TichonovOld(vdouble& b)
 			abs2grad += dFdx * dFdx;
 
 
-			//Подстраиваем элемент вектора x
+			//РџРѕРґСЃС‚СЂР°РёРІР°РµРј СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° x
 			*(px + c) -= 0.9 * dFdx / *(p2 + c);
-			// Вектор невязки
+			// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 			for (r = 0; r < rows; r++)
 			{
 				int rcols = r * cols;
@@ -4030,14 +4030,14 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 	{
 		MessageBox(0, "Error using double::Tichonov(vdouble& b) (m_dims != 2)",
 			"Error",0);
-		ExitProcess(0);
+        //ExitProcess(0);
 		return vdouble();
 	}
 	if (m_size[0] < 1 || m_size[1] < 1)
 	{
 		MessageBox(0, "Error using double::Tichonov(vdouble& b)\n Size < 1",
 			"Error",0);
-		ExitProcess(0);
+        //ExitProcess(0);
 		return vdouble();
 	}
 	if (m_size[0] != b.m_length)
@@ -4045,7 +4045,7 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 		char str[1024];
 		sprintf(str, "Error using double::Tichonov(vdouble& b)\nSize of vector %i must be equial to size of matrix = %i %i", b.m_length,m_size[0],m_size[1]);
 		MessageBox(0, str,"Error",0);
-		ExitProcess(0);
+        //ExitProcess(0);
 		return vdouble();
 	}
 	int 
@@ -4055,33 +4055,33 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 //		max_epochs = 2,
 //		maxq = 10000 / max_epochs,
 		maxq = 1000, //
-		MaxNotTurned = 10;// число итераций на которые действует отмена настройки
-	double delta, // Приближение - норма векторав невязки
-		alpha, // регуляризационный коэффициент
+		MaxNotTurned = 10;// С‡РёСЃР»Рѕ РёС‚РµСЂР°С†РёР№ РЅР° РєРѕС‚РѕСЂС‹Рµ РґРµР№СЃС‚РІСѓРµС‚ РѕС‚РјРµРЅР° РЅР°СЃС‚СЂРѕР№РєРё
+	double delta, // РџСЂРёР±Р»РёР¶РµРЅРёРµ - РЅРѕСЂРјР° РІРµРєС‚РѕСЂР°РІ РЅРµРІСЏР·РєРё
+		alpha, // СЂРµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 		alpha_old, // 
 		xS, //
-		part = 0.01, // доля от нормы вектора невязки, какую должен составлять регуляризационный коэффициент
+		part = 0.01, // РґРѕР»СЏ РѕС‚ РЅРѕСЂРјС‹ РІРµРєС‚РѕСЂР° РЅРµРІСЏР·РєРё, РєР°РєСѓСЋ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚Р°РІР»СЏС‚СЊ СЂРµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 		part_down = 0.1, //
-		mindFdx = 1.0e-12, // минимальное значение изменения функционала - ниже которого отменяется настройка для элемента решения на заданное число итераций
+		mindFdx = 1.0e-12, // РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РёР·РјРµРЅРµРЅРёСЏ С„СѓРЅРєС†РёРѕРЅР°Р»Р° - РЅРёР¶Рµ РєРѕС‚РѕСЂРѕРіРѕ РѕС‚РјРµРЅСЏРµС‚СЃСЏ РЅР°СЃС‚СЂРѕР№РєР° РґР»СЏ СЌР»РµРјРµРЅС‚Р° СЂРµС€РµРЅРёСЏ РЅР° Р·Р°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ РёС‚РµСЂР°С†РёР№
 		mindFdx_down = 0.1, //
-		inertio = 0.4, // инерционный коэффициент
-		minetha = 0.4, // минимальное значение коэффициента скорости обучения
-		maxetha = 1.3, // максимальное значение коэффициента скорости обучения
-		little_up = 1.3, // параметры подстройки коэффициента скорости обучения
+		inertio = 0.4, // РёРЅРµСЂС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
+		minetha = 0.4, // РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРєРѕСЂРѕСЃС‚Рё РѕР±СѓС‡РµРЅРёСЏ
+		maxetha = 1.3, // РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРєРѕСЂРѕСЃС‚Рё РѕР±СѓС‡РµРЅРёСЏ
+		little_up = 1.3, // РїР°СЂР°РјРµС‚СЂС‹ РїРѕРґСЃС‚СЂРѕР№РєРё РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРєРѕСЂРѕСЃС‚Рё РѕР±СѓС‡РµРЅРёСЏ
 		little_down = 0.82, //
 		much_down = 0.49, //
-		etha0 = 1.2, // начальное значение коэффициента скорости обучения
-		F, // функционал
+		etha0 = 1.2, // РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° СЃРєРѕСЂРѕСЃС‚Рё РѕР±СѓС‡РµРЅРёСЏ
+		F, // С„СѓРЅРєС†РёРѕРЅР°Р»
 		*pdx, *petha, *pvF, *pdF,*pdFdx,
 		*pE, *pb, *px, *pb0, *pM, *p2;
-	vdouble x, // вектор решения
-		E(rows), // вектор невязки
-		dFdx(cols), // отношения производных функционала по элементу вектора решения
-		d2Fdx2(cols), // вектор второйпроизводной функционала по элементам решения
-		dx(cols), // вектор величины подстройки весов на текущей итерации
-		etha(cols, etha0), // вектор коэффициентов скорости обучения
-		dF(cols), // вектор изменения функционала при подстройке каждого элемента решения
-		vF(cols); // вектор функционала
+	vdouble x, // РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
+		E(rows), // РІРµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
+		dFdx(cols), // РѕС‚РЅРѕС€РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С… С„СѓРЅРєС†РёРѕРЅР°Р»Р° РїРѕ СЌР»РµРјРµРЅС‚Сѓ РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ
+		d2Fdx2(cols), // РІРµРєС‚РѕСЂ РІС‚РѕСЂРѕР№РїСЂРѕРёР·РІРѕРґРЅРѕР№ С„СѓРЅРєС†РёРѕРЅР°Р»Р° РїРѕ СЌР»РµРјРµРЅС‚Р°Рј СЂРµС€РµРЅРёСЏ
+		dx(cols), // РІРµРєС‚РѕСЂ РІРµР»РёС‡РёРЅС‹ РїРѕРґСЃС‚СЂРѕР№РєРё РІРµСЃРѕРІ РЅР° С‚РµРєСѓС‰РµР№ РёС‚РµСЂР°С†РёРё
+		etha(cols, etha0), // РІРµРєС‚РѕСЂ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЃРєРѕСЂРѕСЃС‚Рё РѕР±СѓС‡РµРЅРёСЏ
+		dF(cols), // РІРµРєС‚РѕСЂ РёР·РјРµРЅРµРЅРёСЏ С„СѓРЅРєС†РёРѕРЅР°Р»Р° РїСЂРё РїРѕРґСЃС‚СЂРѕР№РєРµ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СЂРµС€РµРЅРёСЏ
+		vF(cols); // РІРµРєС‚РѕСЂ С„СѓРЅРєС†РёРѕРЅР°Р»Р°
 	pb = b.pD;
 	pE = E.pD;
 	pdx = dx.pD;
@@ -4089,55 +4089,55 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 	pdF = dF.pD;
 	pdFdx = dFdx.pD;
 	petha = etha.pD;
-	// флаг настройки каждого элемента
+	// С„Р»Р°Рі РЅР°СЃС‚СЂРѕР№РєРё РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 	Vector<bool> ToTurn; 
 	ToTurn.resize(cols,true);
 
 	bool 
-		NotFailed, // флаг того что настройка всех элементов оказалась удачной
-		ToTurnAnyElement; // флаг необходимости настройки хоть одного элемента вектора решения
+		NotFailed, // С„Р»Р°Рі С‚РѕРіРѕ С‡С‚Рѕ РЅР°СЃС‚СЂРѕР№РєР° РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РѕРєР°Р·Р°Р»Р°СЃСЊ СѓРґР°С‡РЅРѕР№
+		ToTurnAnyElement; // С„Р»Р°Рі РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РЅР°СЃС‚СЂРѕР№РєРё С…РѕС‚СЊ РѕРґРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ
 	
 	if (rows >= cols)
 	{
 
 		vdouble M;
-		M.resize(cols, cols); // Выделяем память под квадратную матрицу
+		M.resize(cols, cols); // Р’С‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРІР°РґСЂР°С‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 		vdouble b0;
-		b0.resize(cols); // Выделяем память под  соответствующий вектор
+		b0.resize(cols); // Р’С‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ  СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РІРµРєС‚РѕСЂ
 		pb0 = b0.pD;
 		pM = M.pD;
-		int len = cols * cols; // число строк равно числу столбцов
-		// формируем квадратную матрицу из верхней части решаемой матрицы
+		int len = cols * cols; // С‡РёСЃР»Рѕ СЃС‚СЂРѕРє СЂР°РІРЅРѕ С‡РёСЃР»Сѓ СЃС‚РѕР»Р±С†РѕРІ
+		// С„РѕСЂРјРёСЂСѓРµРј РєРІР°РґСЂР°С‚РЅСѓСЋ РјР°С‚СЂРёС†Сѓ РёР· РІРµСЂС…РЅРµР№ С‡Р°СЃС‚Рё СЂРµС€Р°РµРјРѕР№ РјР°С‚СЂРёС†С‹
 		for (i = 0; i < len; i++)
 			*(pM + i) = *(pD + i);
-		// соответствующий отрезок вектора правых частей
+		// СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РѕС‚СЂРµР·РѕРє РІРµРєС‚РѕСЂР° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
 		for (i = 0; i < cols; i++)
 			*(pb0 + i) = *(pb + i);
 
-		// Полученную систему линейных уравнений решаем методом Гаусса - получаем первое приближение решения
+		// РџРѕР»СѓС‡РµРЅРЅСѓСЋ СЃРёСЃС‚РµРјСѓ Р»РёРЅРµР№РЅС‹С… СѓСЂР°РІРЅРµРЅРёР№ СЂРµС€Р°РµРј РјРµС‚РѕРґРѕРј Р“Р°СѓСЃСЃР° - РїРѕР»СѓС‡Р°РµРј РїРµСЂРІРѕРµ РїСЂРёР±Р»РёР¶РµРЅРёРµ СЂРµС€РµРЅРёСЏ
 		double det;
 		M.sls_det(b0,x,det);
 		px = x.pD;
 		//return x;
-		// Вектор невязки
+		// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 		for (r = 0; r < rows; r++)
 		{
 			int rcols = r * cols;
-			*(pE + r) = - *(pb + r); // элемент вектора правых частей со знакомминус
+			*(pE + r) = - *(pb + r); // СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ СЃРѕ Р·РЅР°РєРѕРјРјРёРЅСѓСЃ
 			for (c = 0; c < cols; c++)
-				*(pE + r) += *(px + c) * *(pD + c + rcols); // суммируем поэлементно произведения искомого вектора на строку
+				*(pE + r) += *(px + c) * *(pD + c + rcols); // СЃСѓРјРјРёСЂСѓРµРј РїРѕСЌР»РµРјРµРЅС‚РЅРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РёСЃРєРѕРјРѕРіРѕ РІРµРєС‚РѕСЂР° РЅР° СЃС‚СЂРѕРєСѓ
 		}
-		// Приближение
+		// РџСЂРёР±Р»РёР¶РµРЅРёРµ
 		delta = sqrt(E.SquareSum());
-		// Регуляризационный коэффициент
+		// Р РµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 		alpha = 0.0;
 
 	}
-	else // если система недоопределена
+	else // РµСЃР»Рё СЃРёСЃС‚РµРјР° РЅРµРґРѕРѕРїСЂРµРґРµР»РµРЅР°
 	{
-		x = ones(cols); // инициализируем вектор решения единицами
+		x = ones(cols); // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ РµРґРёРЅРёС†Р°РјРё
 		px = x.pD;
-		// Вектор невязки
+		// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 		for (r = 0; r < rows; r++)
 		{
 			int rcols = r * cols;
@@ -4145,18 +4145,18 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 			for (c = 0; c < cols; c++)
 				*(pE + r) += *(px + c) * *(pD + c + rcols);
 		}
-		// Приближение
+		// РџСЂРёР±Р»РёР¶РµРЅРёРµ
 		delta = sqrt(E.SquareSum());
-		// Регуляризационный коэффициент
+		// Р РµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 		alpha = delta;
 	}
-	//Цикл подстройки
+	//Р¦РёРєР» РїРѕРґСЃС‚СЂРѕР№РєРё
 //	bool AlphaNonZero = true;
 //	for (int epoch = 1; epoch <= max_epochs; epoch++)
 //	{
 //		alpha = 0.0;
 	p2 = d2Fdx2.pD;
-	//Вычисление второй производной
+	//Р’С‹С‡РёСЃР»РµРЅРёРµ РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 	for (c = 0; c < cols; c++)
 	{
 		*(p2 + c) = 0.0;// alpha;
@@ -4173,11 +4173,11 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 	do
 	{
 		q++;
-		NotFailed = true; // флаг того что настройка всех элементов оказалась удачной
-		ToTurnAnyElement = false; // флаг необходимости настройки хоть одного элемента вектора решения
+		NotFailed = true; // С„Р»Р°Рі С‚РѕРіРѕ С‡С‚Рѕ РЅР°СЃС‚СЂРѕР№РєР° РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РѕРєР°Р·Р°Р»Р°СЃСЊ СѓРґР°С‡РЅРѕР№
+		ToTurnAnyElement = false; // С„Р»Р°Рі РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РЅР°СЃС‚СЂРѕР№РєРё С…РѕС‚СЊ РѕРґРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ
 		alpha_old = alpha;
-		// Приближение
-		// Регуляризационный коэффициент
+		// РџСЂРёР±Р»РёР¶РµРЅРёРµ
+		// Р РµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 		if (AlphaNonZero)
 		{
 			xS = E.SquareSum() / x.SquareSum();
@@ -4186,17 +4186,17 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 		}
 		else
 			alpha = 0.;
-		// Поправка второй производной
+		// РџРѕРїСЂР°РІРєР° РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 		for (c = 0; c < cols; c++)
 			*(p2 + c) += 2.0*(alpha - alpha_old);
 
-		// Перебираем все элементы x
+		// РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЌР»РµРјРµРЅС‚С‹ x
 		for (c = 0; c < cols; c++)
 		{
 			if ( ToTurn[c] || q % MaxNotTurned == 0)
 			{
 				ToTurnAnyElement = true;
-				// Вычисляем первую производную
+				// Р’С‹С‡РёСЃР»СЏРµРј РїРµСЂРІСѓСЋ РїСЂРѕРёР·РІРѕРґРЅСѓСЋ
 				*(pdFdx + c) = alpha * *(px + c);
 				for (r = 0; r < rows; r++)
 				{
@@ -4217,7 +4217,7 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 				//
 				if (q > 1)
 				{
-					// вычисляем максимум и минимум модуля отношения первой ко второй производных функционала по элементам вектора решения
+					// РІС‹С‡РёСЃР»СЏРµРј РјР°РєСЃРёРјСѓРј Рё РјРёРЅРёРјСѓРј РјРѕРґСѓР»СЏ РѕС‚РЅРѕС€РµРЅРёСЏ РїРµСЂРІРѕР№ РєРѕ РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅС‹С… С„СѓРЅРєС†РёРѕРЅР°Р»Р° РїРѕ СЌР»РµРјРµРЅС‚Р°Рј РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ
 					bool first = true;
 					double min, max, cur;
 					int TurnedElements = 0;
@@ -4243,37 +4243,37 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 					if (TurnedElements > 2)
 					{
 						cur = fabs(*(pdFdx + c));
-						if (cur == min)	// изменение функционала (<0) минимально по абсолютной величине - т.о. минимально по модулю
+						if (cur == min)	// РёР·РјРµРЅРµРЅРёРµ С„СѓРЅРєС†РёРѕРЅР°Р»Р° (<0) РјРёРЅРёРјР°Р»СЊРЅРѕ РїРѕ Р°Р±СЃРѕР»СЋС‚РЅРѕР№ РІРµР»РёС‡РёРЅРµ - С‚.Рѕ. РјРёРЅРёРјР°Р»СЊРЅРѕ РїРѕ РјРѕРґСѓР»СЋ
 						{
-							// немного уменьшаем коэффициент скорости подстройки
+							// РЅРµРјРЅРѕРіРѕ СѓРјРµРЅСЊС€Р°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРєРѕСЂРѕСЃС‚Рё РїРѕРґСЃС‚СЂРѕР№РєРё
 							*(petha + c) *= little_down;
-							// не вышли ли за пределы нижней границы?
+							// РЅРµ РІС‹С€Р»Рё Р»Рё Р·Р° РїСЂРµРґРµР»С‹ РЅРёР¶РЅРµР№ РіСЂР°РЅРёС†С‹?
 							*(petha + c) = *(petha + c) < minetha ? minetha : *(petha + c);
 						}
-						else if (cur == max) // изменение функционала (<0) минимально по абсолютной величине - т.о. минимально  по модулю
+						else if (cur == max) // РёР·РјРµРЅРµРЅРёРµ С„СѓРЅРєС†РёРѕРЅР°Р»Р° (<0) РјРёРЅРёРјР°Р»СЊРЅРѕ РїРѕ Р°Р±СЃРѕР»СЋС‚РЅРѕР№ РІРµР»РёС‡РёРЅРµ - С‚.Рѕ. РјРёРЅРёРјР°Р»СЊРЅРѕ  РїРѕ РјРѕРґСѓР»СЋ
 						{
-							// немного увеличиваем коэффициент скорости подстройки
+							// РЅРµРјРЅРѕРіРѕ СѓРІРµР»РёС‡РёРІР°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРєРѕСЂРѕСЃС‚Рё РїРѕРґСЃС‚СЂРѕР№РєРё
 							*(petha + c) *= little_up;
-							// не вышли ли за пределы верхней границы?
+							// РЅРµ РІС‹С€Р»Рё Р»Рё Р·Р° РїСЂРµРґРµР»С‹ РІРµСЂС…РЅРµР№ РіСЂР°РЅРёС†С‹?
 							*(petha + c) = *(petha + c) > maxetha ? maxetha : *(petha + c);
 						}
 					}
 				}
 
 
-				// Алгоритм подстройки с использованием инерционного члена
+				// РђР»РіРѕСЂРёС‚Рј РїРѕРґСЃС‚СЂРѕР№РєРё СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РёРЅРµСЂС†РёРѕРЅРЅРѕРіРѕ С‡Р»РµРЅР°
 				if (q == 1)
 					*(pdx + c) = *(petha + c) * *(pdFdx + c);
-				else // используем инерционный член
+				else // РёСЃРїРѕР»СЊР·СѓРµРј РёРЅРµСЂС†РёРѕРЅРЅС‹Р№ С‡Р»РµРЅ
 				{
-					// предыдущий прирост умножаем на инерционный коэффициент
+					// РїСЂРµРґС‹РґСѓС‰РёР№ РїСЂРёСЂРѕСЃС‚ СѓРјРЅРѕР¶Р°РµРј РЅР° РёРЅРµСЂС†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 					*(pdx + c) *= inertio; 
-					// результат суммируем с текущим приростом элемента вектора решения
+					// СЂРµР·СѓР»СЊС‚Р°С‚ СЃСѓРјРјРёСЂСѓРµРј СЃ С‚РµРєСѓС‰РёРј РїСЂРёСЂРѕСЃС‚РѕРј СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ
 					*(pdx + c) += *(petha + c) * *(pdFdx + c);
 				}
-				//Подстраиваем элемент вектора x
+				//РџРѕРґСЃС‚СЂР°РёРІР°РµРј СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° x
 				*(px + c) -= *(pdx + c);
-				// Вектор невязки
+				// Р’РµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 				for (r = 0; r < rows; r++)
 				{
 					int rcols = r * cols;
@@ -4282,20 +4282,20 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 						*(pE + r) += *(px + C) * *(pD + C + rcols);
 				}
 #if 1
-				// вычисляем функционал после подстройки очередного элемента вектора решения
+				// РІС‹С‡РёСЃР»СЏРµРј С„СѓРЅРєС†РёРѕРЅР°Р» РїРѕСЃР»Рµ РїРѕРґСЃС‚СЂРѕР№РєРё РѕС‡РµСЂРµРґРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ
 				F = E.SquareSum() + alpha * x.SquareSum();
 				if (q > 1)
 				{
-					// вектор изменения функционала за текущую итерацию
+					// РІРµРєС‚РѕСЂ РёР·РјРµРЅРµРЅРёСЏ С„СѓРЅРєС†РёРѕРЅР°Р»Р° Р·Р° С‚РµРєСѓС‰СѓСЋ РёС‚РµСЂР°С†РёСЋ
 					*(pdF + c) = F - *(pvF + c);
-					if ( *(pdF + c) > 0) // функционал вырос - текущая подстройка неудаяная
+					if ( *(pdF + c) > 0) // С„СѓРЅРєС†РёРѕРЅР°Р» РІС‹СЂРѕСЃ - С‚РµРєСѓС‰Р°СЏ РїРѕРґСЃС‚СЂРѕР№РєР° РЅРµСѓРґР°СЏРЅР°СЏ
 					{
-						// восстанавливаем предыдущее значение инерционного члена
+						// РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїСЂРµРґС‹РґСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РёРЅРµСЂС†РёРѕРЅРЅРѕРіРѕ С‡Р»РµРЅР°
 						*(pdx + c) -= *(petha + c) * *(pdFdx + c);
 						*(pdx + c) /= inertio;
-						// отменяем текущее изменение элемента вектора решения
+						// РѕС‚РјРµРЅСЏРµРј С‚РµРєСѓС‰РµРµ РёР·РјРµРЅРµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІРµРєС‚РѕСЂР° СЂРµС€РµРЅРёСЏ
 						*(px + c) += *(petha + c) * *(pdFdx + c);
-						// заново вычисляем вектор невязки
+						// Р·Р°РЅРѕРІРѕ РІС‹С‡РёСЃР»СЏРµРј РІРµРєС‚РѕСЂ РЅРµРІСЏР·РєРё
 						for (r = 0; r < rows; r++)
 						{
 							int rcols = r * cols;
@@ -4303,34 +4303,34 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 							for (int C = 0; C < cols; C++)
 								*(pE + r) += *(px + C) * *(pD + C + rcols);
 						}
-						// восстанавливаем прежнее значение функционала
+						// РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїСЂРµР¶РЅРµРµ Р·РЅР°С‡РµРЅРёРµ С„СѓРЅРєС†РёРѕРЅР°Р»Р°
 						F = *(pvF + c);
-						// изменение функционала = 0
+						// РёР·РјРµРЅРµРЅРёРµ С„СѓРЅРєС†РёРѕРЅР°Р»Р° = 0
 						*(pdF + c) = 0; 
 						ToTurn[c] = true;
 						NotFailed = false;
-						if (*(petha + c) == minetha) // minetha завышено
+						if (*(petha + c) == minetha) // minetha Р·Р°РІС‹С€РµРЅРѕ
 						{
 							minetha *= little_down;
 						}
-						if (*(petha + c) == maxetha) // maxetha завышено
+						if (*(petha + c) == maxetha) // maxetha Р·Р°РІС‹С€РµРЅРѕ
 						{
 							maxetha *= little_down;
 						}
-						// радикально уменьшаем коэффициент скорости подстройки
+						// СЂР°РґРёРєР°Р»СЊРЅРѕ СѓРјРµРЅСЊС€Р°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРєРѕСЂРѕСЃС‚Рё РїРѕРґСЃС‚СЂРѕР№РєРё
 						*(petha + c) *= much_down;
 
-						// не вышли ли за пределы нижней границы?
+						// РЅРµ РІС‹С€Р»Рё Р»Рё Р·Р° РїСЂРµРґРµР»С‹ РЅРёР¶РЅРµР№ РіСЂР°РЅРёС†С‹?
 						*(petha + c) = *(petha + c) < minetha ? minetha : *(petha + c);
 					}
 				}
-				// Запоминаем вычисленный функционал в вектор
+				// Р—Р°РїРѕРјРёРЅР°РµРј РІС‹С‡РёСЃР»РµРЅРЅС‹Р№ С„СѓРЅРєС†РёРѕРЅР°Р» РІ РІРµРєС‚РѕСЂ
 				*(pvF + c)  = F;
 #endif
 				
 			}
 		}
-		// По достижении минимизации функционала или половины числа итераций обнуляем регуляризационный коэффициент
+		// РџРѕ РґРѕСЃС‚РёР¶РµРЅРёРё РјРёРЅРёРјРёР·Р°С†РёРё С„СѓРЅРєС†РёРѕРЅР°Р»Р° РёР»Рё РїРѕР»РѕРІРёРЅС‹ С‡РёСЃР»Р° РёС‚РµСЂР°С†РёР№ РѕР±РЅСѓР»СЏРµРј СЂРµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 		if (AlphaNonZero && (!ToTurnAnyElement || q > maxq / 2 ))
 		{
 			AlphaNonZero = false;
@@ -4370,7 +4370,7 @@ int vdouble::pinv(vdouble& PinvMatrix)
 	if (m_dims != 2)
 	{
 		MessageBox(0, "Error using double::pinv(vdouble& PinvMatrix) (m_dims != 2)","Error", 0);
-		ExitProcess(0);
+        //ExitProcess(0);
 		return -1;
 	}
 	int rows = m_size[0], 
@@ -4477,11 +4477,11 @@ vdouble vdouble::LinearInterp()
 }
 #if 0
 void vdouble::Derivatives(vdouble& t, double dt,
-						vdouble& pinvT, // матрица - фильтр для вычисления производных, вычисленная псевдообращением матрицы временных интервалов
+						vdouble& pinvT, // РјР°С‚СЂРёС†Р° - С„РёР»СЊС‚СЂ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С…, РІС‹С‡РёСЃР»РµРЅРЅР°СЏ РїСЃРµРІРґРѕРѕР±СЂР°С‰РµРЅРёРµРј РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
 						  vdouble& tau, 
 						  vdouble& ma, vdouble& d1, vdouble& d2, 
 						  int nPoints, int interp_order, bool uniform,
-						  bool isEnd, int nPredict)// Первая и вторая производная
+						  bool isEnd, int nPredict)// РџРµСЂРІР°СЏ Рё РІС‚РѕСЂР°СЏ РїСЂРѕРёР·РІРѕРґРЅР°СЏ
 {
 	int deriv_order = 2;
 	if (m_length != t.m_length)
@@ -4539,7 +4539,7 @@ void vdouble::Derivatives(vdouble& t, double dt,
 	vdouble T, x, v;// error, dd;
 	if (isEnd)
 	{
-		// Если длины векторов СС и производных не соответствуют необходимой, то эти вектора вычисляются заново
+		// Р•СЃР»Рё РґР»РёРЅС‹ РІРµРєС‚РѕСЂРѕРІ РЎРЎ Рё РїСЂРѕРёР·РІРѕРґРЅС‹С… РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‚ РЅРµРѕР±С…РѕРґРёРјРѕР№, С‚Рѕ СЌС‚Рё РІРµРєС‚РѕСЂР° РІС‹С‡РёСЃР»СЏСЋС‚СЃСЏ Р·Р°РЅРѕРІРѕ
 		if (Len != tau.m_length
 			|| Len != ma.m_length 
 			|| Len != d1.m_length
@@ -4553,7 +4553,7 @@ void vdouble::Derivatives(vdouble& t, double dt,
 		d1.resize(Len);
 		d2.resize(Len);
 	}
-	// матрица временных интервалов, возведённых в степень столбца
+	// РјР°С‚СЂРёС†Р° РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ, РІРѕР·РІРµРґС‘РЅРЅС‹С… РІ СЃС‚РµРїРµРЅСЊ СЃС‚РѕР»Р±С†Р°
 	T.resize(nPoints,N);pT = T.pD;
 	CString filename;
 	if (nPredict == 0)
@@ -4572,11 +4572,11 @@ void vdouble::Derivatives(vdouble& t, double dt,
 		if (pinvT.m_size[0] != N || pinvT.m_size[1] != nPoints)
 			NewPinvT = true;
 	}
-	// формирование матрицы временных интервалов
-	qt = 2 / dt / (nPoints - 1); // коэффициент растяжки полиномов по оси времени
+	// С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
+	qt = 2 / dt / (nPoints - 1); // РєРѕСЌС„С„РёС†РёРµРЅС‚ СЂР°СЃС‚СЏР¶РєРё РїРѕР»РёРЅРѕРјРѕРІ РїРѕ РѕСЃРё РІСЂРµРјРµРЅРё
 	if (uniform)
 	{
-		// формирование матрицы временных интервалов на равномерной сетке
+		// С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ РЅР° СЂР°РІРЅРѕРјРµСЂРЅРѕР№ СЃРµС‚РєРµ
 		for (r = 0; r < nPoints; r++)
 		{
 			rN = r * N;
@@ -4613,7 +4613,7 @@ void vdouble::Derivatives(vdouble& t, double dt,
 
 	int j0;
 	if (isEnd)
-		j0 = Len - 1; // вычисляется лишь крайний элемент
+		j0 = Len - 1; // РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ Р»РёС€СЊ РєСЂР°Р№РЅРёР№ СЌР»РµРјРµРЅС‚
 	else 
 		j0 = 0;
 
@@ -4621,9 +4621,9 @@ void vdouble::Derivatives(vdouble& t, double dt,
 	{
 		pt = t.pD + j;
 		tend = *(t.pD + j + nPoints - 1);
-		// участок сигнала для интерполяции полиномами
+		// СѓС‡Р°СЃС‚РѕРє СЃРёРіРЅР°Р»Р° РґР»СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 		v = this->operator[](sequence(j, j + nPoints-1));
-		// формирование матрицы временных интервалов на неравномерной сетке
+		// С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ РЅР° РЅРµСЂР°РІРЅРѕРјРµСЂРЅРѕР№ СЃРµС‚РєРµ
 		if (!uniform)
 		{
 			for (int r = 0; r < nPoints; r++)
@@ -4633,19 +4633,19 @@ void vdouble::Derivatives(vdouble& t, double dt,
 				for(int c = 1; c <= interp_order; c++)
 					*(pT + rN + c) = pow((*(pt + r) - tend)*qt,(double)c);
 			}
-			// коэффициенты интерполяции полиномами
+			// РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 			x = T.Tichonov(v);
 		}
 		else
 		{
-			// коэффициенты интерполяции полиномами
+			// РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 			x = pinvT.MatrixProduct(v);
 		}
-		if (isEnd) // обновление векторов со сдвигом
+		if (isEnd) // РѕР±РЅРѕРІР»РµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ СЃРѕ СЃРґРІРёРіРѕРј
 		{
 			tau << tend;
 			ma << x[0];
-			// вычисление производных в точке для которой локальная абцисса равна нулю
+			// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅС‹С… РІ С‚РѕС‡РєРµ РґР»СЏ РєРѕС‚РѕСЂРѕР№ Р»РѕРєР°Р»СЊРЅР°СЏ Р°Р±С†РёСЃСЃР° СЂР°РІРЅР° РЅСѓР»СЋ
 			d1 << x[1] * qt;
 			d2 << x[2] * 2 * qt * qt;
 		}
@@ -4653,15 +4653,15 @@ void vdouble::Derivatives(vdouble& t, double dt,
 		{
 			tau[j] = tend;
 			ma[j] = x[0];
-			// вычисление производных в точке для которой локальная абцисса равна нулю
+			// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅС‹С… РІ С‚РѕС‡РєРµ РґР»СЏ РєРѕС‚РѕСЂРѕР№ Р»РѕРєР°Р»СЊРЅР°СЏ Р°Р±С†РёСЃСЃР° СЂР°РІРЅР° РЅСѓР»СЋ
 			d1[j] = x[1] * qt;
 			d2[j] = x[2] * 2 * qt * qt;
-			// ошибка интерполяции текущего участка сигнала
+			// РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё С‚РµРєСѓС‰РµРіРѕ СѓС‡Р°СЃС‚РєР° СЃРёРіРЅР°Р»Р°
 			//dd = T.MatrixProduct(x) - v;
 			//error[j] = 100 * sqrt(dd.SquareSum() / v.SquareSum());
 		}
 	}
-	//  средняя ошибка интерполяции
+	//  СЃСЂРµРґРЅСЏСЏ РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 //	CString errmean;
 //	errmean.Format("ErrorMean = %g", error.Mean());
 //	AfxMessageBox(errmean);
@@ -4673,9 +4673,9 @@ void vdouble::Derivatives(vdouble& t, double dt,
 
 }
 void vdouble::Derivative(vdouble& t, 
-						vdouble& pinvT, // матрица - фильтр для вычисления производных, вычисленная псевдообращением матрицы временных интервалов
+						vdouble& pinvT, // РјР°С‚СЂРёС†Р° - С„РёР»СЊС‚СЂ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С…, РІС‹С‡РёСЃР»РµРЅРЅР°СЏ РїСЃРµРІРґРѕРѕР±СЂР°С‰РµРЅРёРµРј РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
 						 double& ma, double& d1, double& d2, 
-						 int interp_order)// Первая и вторая производная
+						 int interp_order)// РџРµСЂРІР°СЏ Рё РІС‚РѕСЂР°СЏ РїСЂРѕРёР·РІРѕРґРЅР°СЏ
 {
 //	WriteRaporto((CString)" vdouble::Derivative:\t");
 	if (m_length != t.m_length)
@@ -4729,21 +4729,21 @@ void vdouble::Derivative(vdouble& t,
 	ma = x[0];
 	d1 = x[1] * qt;
 	d2 = x[2] * 2 * qt * qt;
-		// ошибка интерполяции текущего участка сигнала
+		// РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё С‚РµРєСѓС‰РµРіРѕ СѓС‡Р°СЃС‚РєР° СЃРёРіРЅР°Р»Р°
 //	vdouble dd = T.MatrixProduct(x) - *this;
 //	double	error = 100 * sqrt(dd.SquareSum() / this->SquareSum());
 
 //	WriteRaporto((CString)" vdouble::Derivative End\n");
-	//  средняя ошибка интерполяции
+	//  СЃСЂРµРґРЅСЏСЏ РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 //	CString errmean;
-//	errmean.Format("ошибка интерполяции = %g", error);
+//	errmean.Format("РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё = %g", error);
 //	AfxMessageBox(errmean);
 //	AfxMessageBox("T = " + T.dispMatrix_str());
 //	AfxMessageBox("x = " + x.disp_str());
 }
 void vdouble::NEMA(vdouble& t, vdouble& tau, 
 				   vdouble& ema,  
-				   vdouble& nema, int nPoints) //Нормированная Экспоненциальная скользящая средняя
+				   vdouble& nema, int nPoints) //РќРѕСЂРјРёСЂРѕРІР°РЅРЅР°СЏ Р­РєСЃРїРѕРЅРµРЅС†РёР°Р»СЊРЅР°СЏ СЃРєРѕР»СЊР·СЏС‰Р°СЏ СЃСЂРµРґРЅСЏСЏ
 {
 	if (m_length != t.m_length)
 	{
@@ -4787,7 +4787,7 @@ void vdouble::NEMA(vdouble& t, vdouble& tau,
 	}
 }
 
-void vdouble::EMA(vdouble& t, vdouble& tau, vdouble& ema, int nPoints) //Экспоненциальная скользящая средняя
+void vdouble::EMA(vdouble& t, vdouble& tau, vdouble& ema, int nPoints) //Р­РєСЃРїРѕРЅРµРЅС†РёР°Р»СЊРЅР°СЏ СЃРєРѕР»СЊР·СЏС‰Р°СЏ СЃСЂРµРґРЅСЏСЏ
 {
 	if (m_length != t.m_length)
 	{
@@ -4826,18 +4826,18 @@ void vdouble::EMA(vdouble& t, vdouble& tau, vdouble& ema, int nPoints) //Экспоне
 	}
 
 }
-int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы времени для сигнала
-						vdouble& pinvT, // матрица - фильтр для вычисления производных, вычисленная псевдообращением матрицы временных интервалов
-						 vdouble& tDeriv, // вектор шкалы времени для производной - выходной параметр
-						 vdouble& DerivativesMatrix, // матрица производных размерностью tDeriv.m_lenght x deriv_order - выходной параметр
-						 int& i1, int& i2, // индексы первого и крайнего элементов вектора времени производных по шкале времени сигнала
-						 int interp_order, // порядок интерполяционного полинома
-						 int deriv_order, // порядок высшей производной
-						 int nPoints, // число точек временного окна
-						 double& qt, // коэффициент растяжки полиномов по оси времени - передаётся в функцию Derivative
-						 bool uniform)// флаг равномерности временной сетки
+int vdouble::Derivatives(vdouble& t, // РІРµС‚РѕСЂ СЃРёРіРЅР°Р»Р° *this Рё РІРµРєС‚РѕСЂ С€РєР°Р»С‹ РІСЂРµРјРµРЅРё РґР»СЏ СЃРёРіРЅР°Р»Р°
+						vdouble& pinvT, // РјР°С‚СЂРёС†Р° - С„РёР»СЊС‚СЂ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С…, РІС‹С‡РёСЃР»РµРЅРЅР°СЏ РїСЃРµРІРґРѕРѕР±СЂР°С‰РµРЅРёРµРј РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
+						 vdouble& tDeriv, // РІРµРєС‚РѕСЂ С€РєР°Р»С‹ РІСЂРµРјРµРЅРё РґР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№ - РІС‹С…РѕРґРЅРѕР№ РїР°СЂР°РјРµС‚СЂ
+						 vdouble& DerivativesMatrix, // РјР°С‚СЂРёС†Р° РїСЂРѕРёР·РІРѕРґРЅС‹С… СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊСЋ tDeriv.m_lenght x deriv_order - РІС‹С…РѕРґРЅРѕР№ РїР°СЂР°РјРµС‚СЂ
+						 int& i1, int& i2, // РёРЅРґРµРєСЃС‹ РїРµСЂРІРѕРіРѕ Рё РєСЂР°Р№РЅРµРіРѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР° РІСЂРµРјРµРЅРё РїСЂРѕРёР·РІРѕРґРЅС‹С… РїРѕ С€РєР°Р»Рµ РІСЂРµРјРµРЅРё СЃРёРіРЅР°Р»Р°
+						 int interp_order, // РїРѕСЂСЏРґРѕРє РёРЅС‚РµСЂРїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР°
+						 int deriv_order, // РїРѕСЂСЏРґРѕРє РІС‹СЃС€РµР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+						 int nPoints, // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІСЂРµРјРµРЅРЅРѕРіРѕ РѕРєРЅР°
+						 double& qt, // РєРѕСЌС„С„РёС†РёРµРЅС‚ СЂР°СЃС‚СЏР¶РєРё РїРѕР»РёРЅРѕРјРѕРІ РїРѕ РѕСЃРё РІСЂРµРјРµРЅРё - РїРµСЂРµРґР°С‘С‚СЃСЏ РІ С„СѓРЅРєС†РёСЋ Derivative
+						 bool uniform)// С„Р»Р°Рі СЂР°РІРЅРѕРјРµСЂРЅРѕСЃС‚Рё РІСЂРµРјРµРЅРЅРѕР№ СЃРµС‚РєРё
 {
-	// Данная функция производит полный цикл вычисления производных
+	// Р”Р°РЅРЅР°СЏ С„СѓРЅРєС†РёСЏ РїСЂРѕРёР·РІРѕРґРёС‚ РїРѕР»РЅС‹Р№ С†РёРєР» РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С…
 	if (m_length != t.m_length)
 	{
 		CString errstr;
@@ -4883,9 +4883,9 @@ int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы време
 
 	int Len = m_length - nPoints + 1,
 		N = interp_order + 1,
-		db = nPoints / 2, // число индексов ведущего временного хвоста
+		db = nPoints / 2, // С‡РёСЃР»Рѕ РёРЅРґРµРєСЃРѕРІ РІРµРґСѓС‰РµРіРѕ РІСЂРµРјРµРЅРЅРѕРіРѕ С…РІРѕСЃС‚Р°
 		r, c, j, rN;
-	//  номера первой и крайней точек вектора времени производной по шкале исходного сигнала
+	//  РЅРѕРјРµСЂР° РїРµСЂРІРѕР№ Рё РєСЂР°Р№РЅРµР№ С‚РѕС‡РµРє РІРµРєС‚РѕСЂР° РІСЂРµРјРµРЅРё РїСЂРѕРёР·РІРѕРґРЅРѕР№ РїРѕ С€РєР°Р»Рµ РёСЃС…РѕРґРЅРѕРіРѕ СЃРёРіРЅР°Р»Р°
 	i1 = db;
 	i2 = Len + db - 1;
 
@@ -4893,13 +4893,13 @@ int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы време
 	tDeriv.resize(Len);
 	DerivativesMatrix.resize(Len,deriv_order);
 	pDeriv = DerivativesMatrix.pD;
-	// матрица временных интервалов, возведённых в степень столбца
+	// РјР°С‚СЂРёС†Р° РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ, РІРѕР·РІРµРґС‘РЅРЅС‹С… РІ СЃС‚РµРїРµРЅСЊ СЃС‚РѕР»Р±С†Р°
 	T.resize(nPoints,N);pT = T.pD;
 	error.resize(Len);
 	//
 	vdouble d_t = t.DiffVector();
 	double mindt = d_t.Min();
-	qt = 4 / mindt / (nPoints - 1); // коэффициент растяжки полиномов по оси времени
+	qt = 4 / mindt / (nPoints - 1); // РєРѕСЌС„С„РёС†РёРµРЅС‚ СЂР°СЃС‚СЏР¶РєРё РїРѕР»РёРЅРѕРјРѕРІ РїРѕ РѕСЃРё РІСЂРµРјРµРЅРё
 	//
 	bool NewPinvT = false;
 	if (pinvT.m_length == 0)
@@ -4911,11 +4911,11 @@ int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы време
 		if (pinvT.m_size[0] != N || pinvT.m_size[1] != nPoints)
 			NewPinvT = true;
 	}
-	// если сетка равномерная формируем матрицу временных интервалов заранее до применения цикла
+	// РµСЃР»Рё СЃРµС‚РєР° СЂР°РІРЅРѕРјРµСЂРЅР°СЏ С„РѕСЂРјРёСЂСѓРµРј РјР°С‚СЂРёС†Сѓ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ Р·Р°СЂР°РЅРµРµ РґРѕ РїСЂРёРјРµРЅРµРЅРёСЏ С†РёРєР»Р°
 	if (uniform && NewPinvT)
 	{
 		double dtqt = mindt * qt;
-		// формирование матрицы временных интервалов на равномерной сетке
+		// С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ РЅР° СЂР°РІРЅРѕРјРµСЂРЅРѕР№ СЃРµС‚РєРµ
 		for (r = 0; r < nPoints; r++)
 		{
 			rN = r * N;
@@ -4932,9 +4932,9 @@ int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы време
 		pt = t.pD + j;
 		t_center = *(pt + db);
 		tDeriv[j] = t_center;
-		// участок сигнала для интерполяции полиномами
+		// СѓС‡Р°СЃС‚РѕРє СЃРёРіРЅР°Р»Р° РґР»СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 		v = this->operator[](sequence(j, j + nPoints-1));
-		// формирование матрицы временных интервалов на неравномерной сетке
+		// С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ РЅР° РЅРµСЂР°РІРЅРѕРјРµСЂРЅРѕР№ СЃРµС‚РєРµ
 		if (!uniform)
 		{
 			for (int r = 0; r < nPoints; r++)
@@ -4944,25 +4944,25 @@ int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы време
 				for(int c = 1; c <= interp_order; c++)
 					*(pT + rN + c) = pow((*(pt + r) - t_center)*qt,(double)c);
 			}
-			// коэффициенты интерполяции полиномами
+			// РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 			x = T.Tichonov(v);
 		}
 		else
 		{
-			// коэффициенты интерполяции полиномами
+			// РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 			x = pinvT.MatrixProduct(v);
 		}
-		// ошибка интерполяции текущего участка сигнала
+		// РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё С‚РµРєСѓС‰РµРіРѕ СѓС‡Р°СЃС‚РєР° СЃРёРіРЅР°Р»Р°
 //		dd = v - T.MatrixProduct(x) ;
 //		error[j] = 100 * sqrt(dd.SquareSum() / v.SquareSum());
-		// вычисление производных в точке для которой локальная абцисса равна нулю
+		// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅС‹С… РІ С‚РѕС‡РєРµ РґР»СЏ РєРѕС‚РѕСЂРѕР№ Р»РѕРєР°Р»СЊРЅР°СЏ Р°Р±С†РёСЃСЃР° СЂР°РІРЅР° РЅСѓР»СЋ
 		for (int ord = 1; ord <= deriv_order; ord++)
 		//	DerivativesMatrix(j,ord - 1) = x[ord] * (double)fact(ord) * pow(qt,(double)ord);
 			*(pDeriv + j*deriv_order + ord - 1) = x[ord] * (double)fact(ord) * pow(qt,(double)ord);
-		// Объяснение сущности предыдущей формулы -
-		// получаем коэффициенты первой производной от интерполирующего полинома
-		// и вычисляем значение производной в нуле 
-		// и так для всех требующихся порядков производных
+		// РћР±СЉСЏСЃРЅРµРЅРёРµ СЃСѓС‰РЅРѕСЃС‚Рё РїСЂРµРґС‹РґСѓС‰РµР№ С„РѕСЂРјСѓР»С‹ -
+		// РїРѕР»СѓС‡Р°РµРј РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРµСЂРІРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№ РѕС‚ РёРЅС‚РµСЂРїРѕР»РёСЂСѓСЋС‰РµРіРѕ РїРѕР»РёРЅРѕРјР°
+		// Рё РІС‹С‡РёСЃР»СЏРµРј Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ РІ РЅСѓР»Рµ 
+		// Рё С‚Р°Рє РґР»СЏ РІСЃРµС… С‚СЂРµР±СѓСЋС‰РёС…СЃСЏ РїРѕСЂСЏРґРєРѕРІ РїСЂРѕРёР·РІРѕРґРЅС‹С…
 		//	for (int ord = 1; ord <= deriv_order; ord++)
 		//	{
 		//		x = x.PolynomDerivative();
@@ -4970,7 +4970,7 @@ int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы време
 		//		DerivativesMatrix(j,ord - 1) = x.PolynomValue(0.0);
 		//	}
 	}
-	//  средняя ошибка интерполяции
+	//  СЃСЂРµРґРЅСЏСЏ РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 //	CString errmean;
 //	errmean.Format("ErrorMean = %g", error.Mean());
 //	AfxMessageBox(errmean);
@@ -4982,22 +4982,22 @@ int vdouble::Derivatives(vdouble& t, // ветор сигнала *this и вектор шкалы време
 	return 0;
 
 }
-int vdouble::Derivative(vdouble& t, // ветор сигнала *this и вектор шкалы времени для сигнала
-						vdouble& pinvT, // матрица - фильтр для вычисления производных, вычисленная псевдообращением матрицы временных интервалов
-						 vdouble& tDeriv, // вектор шкалы времени для производной - выходной параметр
-						 vdouble& DerivativesMatrix, // матрица производных размерностью tDeriv.m_lenght x deriv_order - выходной параметр
-						 int& i1, int& i2, // индексы первого и крайнего элементов вектора времени производных по шкале времени сигнала
-						 int interp_order, // порядок интерполяционного полинома
-						 int deriv_order, // порядок высшей производной
-						 int nPoints, // число точек временного окна
-						 double& qt) // коэффициент растяжки полиномов по оси времени - передаётся из прежде вызванной функции Derivatives
+int vdouble::Derivative(vdouble& t, // РІРµС‚РѕСЂ СЃРёРіРЅР°Р»Р° *this Рё РІРµРєС‚РѕСЂ С€РєР°Р»С‹ РІСЂРµРјРµРЅРё РґР»СЏ СЃРёРіРЅР°Р»Р°
+						vdouble& pinvT, // РјР°С‚СЂРёС†Р° - С„РёР»СЊС‚СЂ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С…, РІС‹С‡РёСЃР»РµРЅРЅР°СЏ РїСЃРµРІРґРѕРѕР±СЂР°С‰РµРЅРёРµРј РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
+						 vdouble& tDeriv, // РІРµРєС‚РѕСЂ С€РєР°Р»С‹ РІСЂРµРјРµРЅРё РґР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№ - РІС‹С…РѕРґРЅРѕР№ РїР°СЂР°РјРµС‚СЂ
+						 vdouble& DerivativesMatrix, // РјР°С‚СЂРёС†Р° РїСЂРѕРёР·РІРѕРґРЅС‹С… СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊСЋ tDeriv.m_lenght x deriv_order - РІС‹С…РѕРґРЅРѕР№ РїР°СЂР°РјРµС‚СЂ
+						 int& i1, int& i2, // РёРЅРґРµРєСЃС‹ РїРµСЂРІРѕРіРѕ Рё РєСЂР°Р№РЅРµРіРѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР° РІСЂРµРјРµРЅРё РїСЂРѕРёР·РІРѕРґРЅС‹С… РїРѕ С€РєР°Р»Рµ РІСЂРµРјРµРЅРё СЃРёРіРЅР°Р»Р°
+						 int interp_order, // РїРѕСЂСЏРґРѕРє РёРЅС‚РµСЂРїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР°
+						 int deriv_order, // РїРѕСЂСЏРґРѕРє РІС‹СЃС€РµР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+						 int nPoints, // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІСЂРµРјРµРЅРЅРѕРіРѕ РѕРєРЅР°
+						 double& qt) // РєРѕСЌС„С„РёС†РёРµРЅС‚ СЂР°СЃС‚СЏР¶РєРё РїРѕР»РёРЅРѕРјРѕРІ РїРѕ РѕСЃРё РІСЂРµРјРµРЅРё - РїРµСЂРµРґР°С‘С‚СЃСЏ РёР· РїСЂРµР¶РґРµ РІС‹Р·РІР°РЅРЅРѕР№ С„СѓРЅРєС†РёРё Derivatives
 {
-	// Эта функция вызывается строго после применения к векторам 
-	// сигнала и времени оператора vdouble << double
-	// В результате применеия этой функции происходит 
-	// смещение по оси времени на один элемент 
-	// в массивах производных и в соответствующей шкале времени 
-	// с обновлением поздних элементов этих массивов
+	// Р­С‚Р° С„СѓРЅРєС†РёСЏ РІС‹Р·С‹РІР°РµС‚СЃСЏ СЃС‚СЂРѕРіРѕ РїРѕСЃР»Рµ РїСЂРёРјРµРЅРµРЅРёСЏ Рє РІРµРєС‚РѕСЂР°Рј 
+	// СЃРёРіРЅР°Р»Р° Рё РІСЂРµРјРµРЅРё РѕРїРµСЂР°С‚РѕСЂР° vdouble << double
+	// Р’ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РїСЂРёРјРµРЅРµРёСЏ СЌС‚РѕР№ С„СѓРЅРєС†РёРё РїСЂРѕРёСЃС…РѕРґРёС‚ 
+	// СЃРјРµС‰РµРЅРёРµ РїРѕ РѕСЃРё РІСЂРµРјРµРЅРё РЅР° РѕРґРёРЅ СЌР»РµРјРµРЅС‚ 
+	// РІ РјР°СЃСЃРёРІР°С… РїСЂРѕРёР·РІРѕРґРЅС‹С… Рё РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ С€РєР°Р»Рµ РІСЂРµРјРµРЅРё 
+	// СЃ РѕР±РЅРѕРІР»РµРЅРёРµРј РїРѕР·РґРЅРёС… СЌР»РµРјРµРЅС‚РѕРІ СЌС‚РёС… РјР°СЃСЃРёРІРѕРІ
 //	WriteRaporto((CString)" vdouble::Derivative:\t");
 	if (m_length != t.m_length)
 	{
@@ -5014,8 +5014,8 @@ int vdouble::Derivative(vdouble& t, // ветор сигнала *this и вектор шкалы времен
 	vdouble x, v, T, dd;
 	pt = t.pD;
 	pDeriv = DerivativesMatrix.pD;
-	// смещение по оси времени на один элемент 
-	// в массивах производных  
+	// СЃРјРµС‰РµРЅРёРµ РїРѕ РѕСЃРё РІСЂРµРјРµРЅРё РЅР° РѕРґРёРЅ СЌР»РµРјРµРЅС‚ 
+	// РІ РјР°СЃСЃРёРІР°С… РїСЂРѕРёР·РІРѕРґРЅС‹С…  
 	for (j = 0; j < Len - 1; j ++)
 	{
 		for (int ord = 0; ord < deriv_order; ord++)
@@ -5025,7 +5025,7 @@ int vdouble::Derivative(vdouble& t, // ветор сигнала *this и вектор шкалы времен
 	j = Len - 1;
 	pt = t.pD + j;
 	t_center = *(pt + db);
-	// -//- и в соответствующей шкале времени
+	// -//- Рё РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ С€РєР°Р»Рµ РІСЂРµРјРµРЅРё
 	tDeriv << t_center;
 	//
 	bool NewPinvT = false;
@@ -5038,7 +5038,7 @@ int vdouble::Derivative(vdouble& t, // ветор сигнала *this и вектор шкалы времен
 		if (pinvT.m_size[0] != N || pinvT.m_size[1] != nPoints)
 			NewPinvT = true;
 	}
-	// формирование матрицы временных интервалов
+	// С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
 	if (NewPinvT)
 	{
 		T.resize(nPoints,N);pT = T.pD;
@@ -5051,32 +5051,32 @@ int vdouble::Derivative(vdouble& t, // ветор сигнала *this и вектор шкалы времен
 		}
 		T.pinv(pinvT);
 	}
-	// участок сигнала для интерполяции полиномами
+	// СѓС‡Р°СЃС‚РѕРє СЃРёРіРЅР°Р»Р° РґР»СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 	v = this->operator[](sequence(j, j + nPoints-1));
-	// коэффициенты интерполяции полиномами
+	// РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё РїРѕР»РёРЅРѕРјР°РјРё
 	x = pinvT.MatrixProduct(v);
-	// ошибка интерполяции текущего участка сигнала
+	// РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё С‚РµРєСѓС‰РµРіРѕ СѓС‡Р°СЃС‚РєР° СЃРёРіРЅР°Р»Р°
 //	dd = T.MatrixProduct(x) - v;
 //	error = 100 * sqrt(dd.SquareSum() / v.SquareSum());
-	// вычисление производных в точке для которой локальная абцисса равна нулю
+	// РІС‹С‡РёСЃР»РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅС‹С… РІ С‚РѕС‡РєРµ РґР»СЏ РєРѕС‚РѕСЂРѕР№ Р»РѕРєР°Р»СЊРЅР°СЏ Р°Р±С†РёСЃСЃР° СЂР°РІРЅР° РЅСѓР»СЋ
 	for (int ord = 1; ord <= deriv_order; ord++)
 		*(pDeriv + j*deriv_order + ord - 1) = x[ord] * (double)fact(ord) * pow(qt,(double)ord);
-	//  средняя ошибка интерполяции
+	//  СЃСЂРµРґРЅСЏСЏ РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 //	CString errmean;
-//	errmean.Format("ошибка интерполяции = %g", error);
+//	errmean.Format("РѕС€РёР±РєР° РёРЅС‚РµСЂРїРѕР»СЏС†РёРё = %g", error);
 //	AfxMessageBox(errmean);
 	return 0;
 }
-int vdouble::diff_Wp(vdouble& t, // ветор сигнала *this и вектор шкалы времени для сигнала
-	vdouble& pinvT, // матрица - фильтр для вычисления производных, вычисленная псевдообращением матрицы временных интервалов
-	int denom_order, // порядок знаменателя передаточной функции
-	int nPoints, // число точек временного окна для вычисления производной
-	bool uniform, // флаг равномерной временной шкалы
-	vdouble& denom, // коэффициенты знаменателя передаточной функции
-	vdouble& num, // коэффициенты числителя передаточной функции
-	vdouble& f_reconstr, // реконструированный сигнал
-	double& er_deriv, // ошибка разложения сигнала по базису его производных
-	double& er_reconstr)// ошибка реконтрукции сигнала
+int vdouble::diff_Wp(vdouble& t, // РІРµС‚РѕСЂ СЃРёРіРЅР°Р»Р° *this Рё РІРµРєС‚РѕСЂ С€РєР°Р»С‹ РІСЂРµРјРµРЅРё РґР»СЏ СЃРёРіРЅР°Р»Р°
+	vdouble& pinvT, // РјР°С‚СЂРёС†Р° - С„РёР»СЊС‚СЂ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С…, РІС‹С‡РёСЃР»РµРЅРЅР°СЏ РїСЃРµРІРґРѕРѕР±СЂР°С‰РµРЅРёРµРј РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
+	int denom_order, // РїРѕСЂСЏРґРѕРє Р·РЅР°РјРµРЅР°С‚РµР»СЏ РїРµСЂРµРґР°С‚РѕС‡РЅРѕР№ С„СѓРЅРєС†РёРё
+	int nPoints, // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІСЂРµРјРµРЅРЅРѕРіРѕ РѕРєРЅР° РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	bool uniform, // С„Р»Р°Рі СЂР°РІРЅРѕРјРµСЂРЅРѕР№ РІСЂРµРјРµРЅРЅРѕР№ С€РєР°Р»С‹
+	vdouble& denom, // РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ Р·РЅР°РјРµРЅР°С‚РµР»СЏ РїРµСЂРµРґР°С‚РѕС‡РЅРѕР№ С„СѓРЅРєС†РёРё
+	vdouble& num, // РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ С‡РёСЃР»РёС‚РµР»СЏ РїРµСЂРµРґР°С‚РѕС‡РЅРѕР№ С„СѓРЅРєС†РёРё
+	vdouble& f_reconstr, // СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹Р№ СЃРёРіРЅР°Р»
+	double& er_deriv, // РѕС€РёР±РєР° СЂР°Р·Р»РѕР¶РµРЅРёСЏ СЃРёРіРЅР°Р»Р° РїРѕ Р±Р°Р·РёСЃСѓ РµРіРѕ РїСЂРѕРёР·РІРѕРґРЅС‹С…
+	double& er_reconstr)// РѕС€РёР±РєР° СЂРµРєРѕРЅС‚СЂСѓРєС†РёРё СЃРёРіРЅР°Р»Р°
 {
 	int num_order = denom_order - 1,
 		i1, i2,
@@ -5086,32 +5086,32 @@ int vdouble::diff_Wp(vdouble& t, // ветор сигнала *this и вектор шкалы времени д
 	vdouble tDeriv,
 		DerivativesMatrix,
 		v, dd;
-	this->Derivatives(t, // ветор сигнала *this и вектор шкалы времени для сигнала
-		pinvT, // матрица - фильтр для вычисления производных, вычисленная псевдообращением матрицы временных интервалов
-		tDeriv, // вектор шкалы времени для производной - выходной параметр
-		DerivativesMatrix, // матрица производных размерностью tDeriv.m_lenght x deriv_order - выходной параметр
-		i1, i2, // индексы первого и крайнего элементов вектора времени производных по шкале времени сигнала
-		interp_order, // порядок интерполяционного полинома
-		deriv_order, // порядок высшей производной
-		nPoints, // число точек временного окна
-		qt, // коэффициент растяжки полиномов по оси времени - передаётся в функцию Derivative
+	this->Derivatives(t, // РІРµС‚РѕСЂ СЃРёРіРЅР°Р»Р° *this Рё РІРµРєС‚РѕСЂ С€РєР°Р»С‹ РІСЂРµРјРµРЅРё РґР»СЏ СЃРёРіРЅР°Р»Р°
+		pinvT, // РјР°С‚СЂРёС†Р° - С„РёР»СЊС‚СЂ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґРЅС‹С…, РІС‹С‡РёСЃР»РµРЅРЅР°СЏ РїСЃРµРІРґРѕРѕР±СЂР°С‰РµРЅРёРµРј РјР°С‚СЂРёС†С‹ РІСЂРµРјРµРЅРЅС‹С… РёРЅС‚РµСЂРІР°Р»РѕРІ
+		tDeriv, // РІРµРєС‚РѕСЂ С€РєР°Р»С‹ РІСЂРµРјРµРЅРё РґР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№ - РІС‹С…РѕРґРЅРѕР№ РїР°СЂР°РјРµС‚СЂ
+		DerivativesMatrix, // РјР°С‚СЂРёС†Р° РїСЂРѕРёР·РІРѕРґРЅС‹С… СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊСЋ tDeriv.m_lenght x deriv_order - РІС‹С…РѕРґРЅРѕР№ РїР°СЂР°РјРµС‚СЂ
+		i1, i2, // РёРЅРґРµРєСЃС‹ РїРµСЂРІРѕРіРѕ Рё РєСЂР°Р№РЅРµРіРѕ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР° РІСЂРµРјРµРЅРё РїСЂРѕРёР·РІРѕРґРЅС‹С… РїРѕ С€РєР°Р»Рµ РІСЂРµРјРµРЅРё СЃРёРіРЅР°Р»Р°
+		interp_order, // РїРѕСЂСЏРґРѕРє РёРЅС‚РµСЂРїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР°
+		deriv_order, // РїРѕСЂСЏРґРѕРє РІС‹СЃС€РµР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		nPoints, // С‡РёСЃР»Рѕ С‚РѕС‡РµРє РІСЂРµРјРµРЅРЅРѕРіРѕ РѕРєРЅР°
+		qt, // РєРѕСЌС„С„РёС†РёРµРЅС‚ СЂР°СЃС‚СЏР¶РєРё РїРѕР»РёРЅРѕРјРѕРІ РїРѕ РѕСЃРё РІСЂРµРјРµРЅРё - РїРµСЂРµРґР°С‘С‚СЃСЏ РІ С„СѓРЅРєС†РёСЋ Derivative
 		uniform);
-	// кусок сигнала с отрезанными хвостами в соответствии со шкалой времени для производной
+	// РєСѓСЃРѕРє СЃРёРіРЅР°Р»Р° СЃ РѕС‚СЂРµР·Р°РЅРЅС‹РјРё С…РІРѕСЃС‚Р°РјРё РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃРѕ С€РєР°Р»РѕР№ РІСЂРµРјРµРЅРё РґР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 	v = this->operator[](sequence(i1,i2));
-	// вычисление коэффициентов разложения сигнала 
-	// по базису его производных
-	// этими коэффициентами инициализируем знаменатель передаточной функции
+	// РІС‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ СЂР°Р·Р»РѕР¶РµРЅРёСЏ СЃРёРіРЅР°Р»Р° 
+	// РїРѕ Р±Р°Р·РёСЃСѓ РµРіРѕ РїСЂРѕРёР·РІРѕРґРЅС‹С…
+	// СЌС‚РёРјРё РєРѕСЌС„С„РёС†РёРµРЅС‚Р°РјРё РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Р·РЅР°РјРµРЅР°С‚РµР»СЊ РїРµСЂРµРґР°С‚РѕС‡РЅРѕР№ С„СѓРЅРєС†РёРё
 	denom = DerivativesMatrix.Tichonov( -v );
-	// ошибка разложения сигнала по базису его производных
+	// РѕС€РёР±РєР° СЂР°Р·Р»РѕР¶РµРЅРёСЏ СЃРёРіРЅР°Р»Р° РїРѕ Р±Р°Р·РёСЃСѓ РµРіРѕ РїСЂРѕРёР·РІРѕРґРЅС‹С…
 	dd = v + DerivativesMatrix.MatrixProduct(denom);
 	er_deriv = 100 * sqrt( dd.SquareSum() / v.SquareSum() );
-	// реконструкция коэффициентов числителя
+	// СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЏ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ С‡РёСЃР»РёС‚РµР»СЏ
 	denom.b_reconstructor(num, tDeriv, v, t[0]);
-	// реконструированный сигнал
+	// СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹Р№ СЃРёРіРЅР°Р»
 	Vector<vdouble> koefs;
 	CString sRoots;
 	InvLaplace(num, denom, t, f_reconstr, koefs, sRoots);
-	// ошибка реконтрукции сигнала
+	// РѕС€РёР±РєР° СЂРµРєРѕРЅС‚СЂСѓРєС†РёРё СЃРёРіРЅР°Р»Р°
 	dd = f_reconstr - *this;
 	er_reconstr = 100 * sqrt( dd.SquareSum() / this->SquareSum() );
 	double de = denom.End();
@@ -5139,11 +5139,11 @@ double vdouble::det()
 	{
 		_det = 0.0;
 	}
-	//=============== Формирование верхнетреугольной матрицы =============
-	for ( c = 0; c < n_1; c ++) // Перебираем столбцы с левого по предпоследний
+	//=============== Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ РІРµСЂС…РЅРµС‚СЂРµСѓРіРѕР»СЊРЅРѕР№ РјР°С‚СЂРёС†С‹ =============
+	for ( c = 0; c < n_1; c ++) // РџРµСЂРµР±РёСЂР°РµРј СЃС‚РѕР»Р±С†С‹ СЃ Р»РµРІРѕРіРѕ РїРѕ РїСЂРµРґРїРѕСЃР»РµРґРЅРёР№
 	{
-	//========== Проверка отсутствия нуля на главной диагонали ======
-		if(*(p + c*n1) == 0) //Если диагональный элемент нулевой
+	//========== РџСЂРѕРІРµСЂРєР° РѕС‚СЃСѓС‚СЃС‚РІРёСЏ РЅСѓР»СЏ РЅР° РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё ======
+		if(*(p + c*n1) == 0) //Р•СЃР»Рё РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РЅСѓР»РµРІРѕР№
 		{
 			r = c + 1;
 			while(*(p + r*n + c) == 0.0  && r < n)
@@ -5161,11 +5161,11 @@ double vdouble::det()
 				if ( cc == n)
 				{
 					HeapFree(GetProcessHeap(), 0,p);
-					return 0.0; // столбец или строка из нулевых элементов
+					return 0.0; // СЃС‚РѕР»Р±РµС† РёР»Рё СЃС‚СЂРѕРєР° РёР· РЅСѓР»РµРІС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 				}
 				else
 				{
-					// Осуществляем перестановку столбцов: c-тый и сс-тый
+					// РћСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїРµСЂРµСЃС‚Р°РЅРѕРІРєСѓ СЃС‚РѕР»Р±С†РѕРІ: c-С‚С‹Р№ Рё СЃСЃ-С‚С‹Р№
 					double temp, *pc, *pcc;
 					pc = p + c;
 					pcc = p + cc;
@@ -5180,7 +5180,7 @@ double vdouble::det()
 			}
 			else
 			{
-				// Осуществляем перестановку строк : r-тую и с-тую
+				// РћСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїРµСЂРµСЃС‚Р°РЅРѕРІРєСѓ СЃС‚СЂРѕРє : r-С‚СѓСЋ Рё СЃ-С‚СѓСЋ
 				double temp;
 				pcn = p + c*n; prn = p + r*n;
 				for (i = 0; i < n; i++)
@@ -5193,14 +5193,14 @@ double vdouble::det()
 				_det *= -1.0;
 			}
 		}
-		//====== Конец проверки отсутствия нуля на главной диагонали ======
-		aii = *(p + c*n1); // Элемент на главной диагонали
+		//====== РљРѕРЅРµС† РїСЂРѕРІРµСЂРєРё РѕС‚СЃСѓС‚СЃС‚РІРёСЏ РЅСѓР»СЏ РЅР° РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё ======
+		aii = *(p + c*n1); // Р­Р»РµРјРµРЅС‚ РЅР° РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё
 		pcn = p + c*n;
-		for (r = c + 1; r < n; r++) // по текущему столбцу вниз, начиная с поддиагонального эл-та
+		for (r = c + 1; r < n; r++) // РїРѕ С‚РµРєСѓС‰РµРјСѓ СЃС‚РѕР»Р±С†Сѓ РІРЅРёР·, РЅР°С‡РёРЅР°СЏ СЃ РїРѕРґРґРёР°РіРѕРЅР°Р»СЊРЅРѕРіРѕ СЌР»-С‚Р°
 		{
 			prn = p + r*n;
-			mult = *(prn + c) / aii; // Множитель для корректировки r-той строки
-			for (i = c; i < n; i++) // Добавляем к r-той строке с-тую, умноженную на корректирующий множитель
+			mult = *(prn + c) / aii; // РњРЅРѕР¶РёС‚РµР»СЊ РґР»СЏ РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєРё r-С‚РѕР№ СЃС‚СЂРѕРєРё
+			for (i = c; i < n; i++) // Р”РѕР±Р°РІР»СЏРµРј Рє r-С‚РѕР№ СЃС‚СЂРѕРєРµ СЃ-С‚СѓСЋ, СѓРјРЅРѕР¶РµРЅРЅСѓСЋ РЅР° РєРѕСЂСЂРµРєС‚РёСЂСѓСЋС‰РёР№ РјРЅРѕР¶РёС‚РµР»СЊ
 				*(prn + i) -= mult * *(pcn + i);
 		}
 	}
@@ -5240,13 +5240,13 @@ void WriteMatrix(const char * filename, const char * mode, const char * name, in
 {
 
 	FILE *stream;
-	// открываем бинарный файл для записи
+	// РѕС‚РєСЂС‹РІР°РµРј Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё
 	if ((stream = fopen(filename, mode)) == NULL)
 	{
  		MessageBox(0,"Cannot open file for write.\n", "WriteMatrix", 0);
 		return;
 	}
-	// Записываем данные
+	// Р—Р°РїРёСЃС‹РІР°РµРј РґР°РЅРЅС‹Рµ
 	int r,c,i;
 	bool asIntegers = false;
 	fprintf(stream, "name = %s\n", name );
@@ -5275,7 +5275,7 @@ void WriteMatrix(const char * filename, const char * mode, const char * name, in
 		fprintf(stream, "\n");
 	}
 	fprintf(stream, "\n\n");
-	// закрываем файл
+	// Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»
 	fclose(stream);
 }
 void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion)
@@ -5321,13 +5321,13 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 	{
 		_det = 0.0;
 	}
-	//=============== Формирование верхнетреугольной матрицы =============
-	for ( c = 0; c < n_1; c ++) // Перебираем столбцы с левого по предпоследний
+	//=============== Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ РІРµСЂС…РЅРµС‚СЂРµСѓРіРѕР»СЊРЅРѕР№ РјР°С‚СЂРёС†С‹ =============
+	for ( c = 0; c < n_1; c ++) // РџРµСЂРµР±РёСЂР°РµРј СЃС‚РѕР»Р±С†С‹ СЃ Р»РµРІРѕРіРѕ РїРѕ РїСЂРµРґРїРѕСЃР»РµРґРЅРёР№
 	{
 		//WriteMatrix("d:\\sls_test.txt","at","p",n,n,p);
 		//WriteMatrix("d:\\sls_test.txt","at","pb",n,1,pb);
-		//========== Проверка отсутствия нуля на главной диагонали ======
-		if(*(p + c*n1) == 0) //Если диагональный элемент нулевой
+		//========== РџСЂРѕРІРµСЂРєР° РѕС‚СЃСѓС‚СЃС‚РІРёСЏ РЅСѓР»СЏ РЅР° РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё ======
+		if(*(p + c*n1) == 0) //Р•СЃР»Рё РґРёР°РіРѕРЅР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РЅСѓР»РµРІРѕР№
 		{
 			r = c + 1;
 			while(*(p + r*n + c) == 0.0  && r < n)
@@ -5349,7 +5349,7 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 				}
 				else
 				{
-					// Осуществляем перестановку столбцов: c-тый и сс-тый
+					// РћСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїРµСЂРµСЃС‚Р°РЅРѕРІРєСѓ СЃС‚РѕР»Р±С†РѕРІ: c-С‚С‹Р№ Рё СЃСЃ-С‚С‹Р№
 					double temp, *pc, *pcc;
 					pc = p + c;
 					pcc = p + cc;
@@ -5368,12 +5368,12 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 
 					_det *= -1.0;	
 				}
-				//WriteMatrix("d:\\sls_test.txt","at","после перестановки столбцов \np",n,n,p);
+				//WriteMatrix("d:\\sls_test.txt","at","РїРѕСЃР»Рµ РїРµСЂРµСЃС‚Р°РЅРѕРІРєРё СЃС‚РѕР»Р±С†РѕРІ \np",n,n,p);
 				//WriteMatrix("d:\\sls_test.txt","at","pb",n,1,pb);
 			}
 			else
 			{
-				// Осуществляем перестановку строк : r-тую и с-тую
+				// РћСЃСѓС‰РµСЃС‚РІР»СЏРµРј РїРµСЂРµСЃС‚Р°РЅРѕРІРєСѓ СЃС‚СЂРѕРє : r-С‚СѓСЋ Рё СЃ-С‚СѓСЋ
 				double temp;
 				pcn = p + c*n + c; 
 				prn = p + r*n + c;
@@ -5384,7 +5384,7 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 					*prn = temp;
 					pcn++; prn++;
 				}
-				// соответственно переставляем элементы столбца правых частей
+				// СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ РїРµСЂРµСЃС‚Р°РІР»СЏРµРј СЌР»РµРјРµРЅС‚С‹ СЃС‚РѕР»Р±С†Р° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
 				pcn = pb + c; 
 				prn = pb + r;
 
@@ -5394,23 +5394,23 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 
 
 				_det *= -1.0;
-				//WriteMatrix("d:\\sls_test.txt","at","после перестановки строк \np",n,n,p);
+				//WriteMatrix("d:\\sls_test.txt","at","РїРѕСЃР»Рµ РїРµСЂРµСЃС‚Р°РЅРѕРІРєРё СЃС‚СЂРѕРє \np",n,n,p);
 				//WriteMatrix("d:\\sls_test.txt","at","pb",n,1,pb);
 			}
 		}
-		//====== Конец проверки отсутствия нуля на главной диагонали ======
-		aii = *(p + c*n1); // Элемент на главной диагонали
+		//====== РљРѕРЅРµС† РїСЂРѕРІРµСЂРєРё РѕС‚СЃСѓС‚СЃС‚РІРёСЏ РЅСѓР»СЏ РЅР° РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё ======
+		aii = *(p + c*n1); // Р­Р»РµРјРµРЅС‚ РЅР° РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё
 		pcn = p + c*n;
-		for (r = c + 1; r < n; r++) // по текущему столбцу вниз, начиная с поддиагонального эл-та
+		for (r = c + 1; r < n; r++) // РїРѕ С‚РµРєСѓС‰РµРјСѓ СЃС‚РѕР»Р±С†Сѓ РІРЅРёР·, РЅР°С‡РёРЅР°СЏ СЃ РїРѕРґРґРёР°РіРѕРЅР°Р»СЊРЅРѕРіРѕ СЌР»-С‚Р°
 		{
 			prn = p + r*n;
-			mult = *(prn + c) / aii; // Множитель для корректировки r-той строки
+			mult = *(prn + c) / aii; // РњРЅРѕР¶РёС‚РµР»СЊ РґР»СЏ РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєРё r-С‚РѕР№ СЃС‚СЂРѕРєРё
 			for (i = c; i < n; i++) 
 			{
-				// Добавляем к r-той строке с-тую, умноженную на корректирующий множитель
+				// Р”РѕР±Р°РІР»СЏРµРј Рє r-С‚РѕР№ СЃС‚СЂРѕРєРµ СЃ-С‚СѓСЋ, СѓРјРЅРѕР¶РµРЅРЅСѓСЋ РЅР° РєРѕСЂСЂРµРєС‚РёСЂСѓСЋС‰РёР№ РјРЅРѕР¶РёС‚РµР»СЊ
 				*(prn + i) -= mult * *(pcn + i);
 			}				
-			// Добавляем к r-тому элементу вектора правых частей  строке с-тый, умноженную на тот же множитель
+			// Р”РѕР±Р°РІР»СЏРµРј Рє r-С‚РѕРјСѓ СЌР»РµРјРµРЅС‚Сѓ РІРµРєС‚РѕСЂР° РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№  СЃС‚СЂРѕРєРµ СЃ-С‚С‹Р№, СѓРјРЅРѕР¶РµРЅРЅСѓСЋ РЅР° С‚РѕС‚ Р¶Рµ РјРЅРѕР¶РёС‚РµР»СЊ
 			*(pb + r) -= mult * *(pb + c);
 		}
 	}
@@ -5429,7 +5429,7 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 		{
 			double *p_, *pn_1;
 			int rn;
-			// Алгебраическое дополнение к временной матрице
+			// РђР»РіРµР±СЂР°РёС‡РµСЃРєРѕРµ РґРѕРїРѕР»РЅРµРЅРёРµ Рє РІСЂРµРјРµРЅРЅРѕР№ РјР°С‚СЂРёС†Рµ
 			vdouble Ann = vdouble(n_1,n_1);
 			p_ = Ann.pD; i = 0;
 			for (r = 0; r < n_1; r++)
@@ -5497,7 +5497,7 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 	if (test_sls)
 	{
 		vdouble delta = this->MatrixProduct(x)-b;
-		if (log10(delta.SquareSum()) > (-6) ) //допустимая точность шестой знак после запятой
+		if (log10(delta.SquareSum()) > (-6) ) //РґРѕРїСѓСЃС‚РёРјР°СЏ С‚РѕС‡РЅРѕСЃС‚СЊ С€РµСЃС‚РѕР№ Р·РЅР°Рє РїРѕСЃР»Рµ Р·Р°РїСЏС‚РѕР№
 		{
 			char str[255];
 			sprintf(str,"log10(delta.SquareSum()) = %lf", log10(delta.SquareSum()));
@@ -5510,7 +5510,7 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 	return;
 }
 
-vdouble vdouble::PolynomDerivative()//Возвращает вектор полинома первой производной
+vdouble vdouble::PolynomDerivative()//Р’РѕР·РІСЂР°С‰Р°РµС‚ РІРµРєС‚РѕСЂ РїРѕР»РёРЅРѕРјР° РїРµСЂРІРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 {
 	int len, i;
 	double *p, k;
@@ -5533,7 +5533,7 @@ vdouble vdouble::PolynomDerivative()//Возвращает вектор полинома первой производ
 	}
 	return deriv;
 }
-vdouble vdouble::PolynomSumming(vdouble& v) // Суммирование полиномов
+vdouble vdouble::PolynomSumming(vdouble& v) // РЎСѓРјРјРёСЂРѕРІР°РЅРёРµ РїРѕР»РёРЅРѕРјРѕРІ
 {
 	int malen, milen, vlen, i;
 	double *pmi, *pma, *ps;
@@ -5543,7 +5543,7 @@ vdouble vdouble::PolynomSumming(vdouble& v) // Суммирование полиномов
 
 	malen = bl ? m_length : vlen;
 	milen = bl ? vlen : m_length;
-	// Указатели на конец векторов
+	// РЈРєР°Р·Р°С‚РµР»Рё РЅР° РєРѕРЅРµС† РІРµРєС‚РѕСЂРѕРІ
 	pma   = bl ? pD + m_length - 1 : v.pD + vlen - 1;
 	pmi   = bl ? v.pD + vlen - 1 : pD + m_length - 1;
 
@@ -5557,7 +5557,7 @@ vdouble vdouble::PolynomSumming(vdouble& v) // Суммирование полиномов
 	return s;
 }
 
-void vdouble::PolynomDivide(const vdouble& divisor, vdouble& quotient, vdouble& remainder)// Производит деление на полином
+void vdouble::PolynomDivide(const vdouble& divisor, vdouble& quotient, vdouble& remainder)// РџСЂРѕРёР·РІРѕРґРёС‚ РґРµР»РµРЅРёРµ РЅР° РїРѕР»РёРЅРѕРј
 {
 	int dlen, qlen, rlen, iq, id, dlen_1, nnz;
 	double *pd, *pq, *pr, *ptemp, qu;
@@ -5589,7 +5589,7 @@ void vdouble::PolynomDivide(const vdouble& divisor, vdouble& quotient, vdouble& 
 	nnz = inz.size;
 	if (nnz == 0)
 	{
-		//Все элементы нулевые
+		//Р’СЃРµ СЌР»РµРјРµРЅС‚С‹ РЅСѓР»РµРІС‹Рµ
 		remainder = vdouble(0);
 	}
 	else
@@ -5597,35 +5597,35 @@ void vdouble::PolynomDivide(const vdouble& divisor, vdouble& quotient, vdouble& 
 		remainder = remainder[sequence(inz[0], remainder.m_length - 1)];
 	}
 }
-int vdouble::PolynomDivideIntoThree_member(double& b, double c)// Производит деление на полином
+int vdouble::PolynomDivideIntoThree_member(double& b, double c)// РџСЂРѕРёР·РІРѕРґРёС‚ РґРµР»РµРЅРёРµ РЅР° РїРѕР»РёРЅРѕРј
 {
-	// производит деление полинома на трёхчлен, 
-	// в котором первый коэффициент a равен 1,0,
-	// второй коэффициент b неизвестен, - подлежит определению,
-	// так чтобы полином делился нацело на трёхчлен
-	// третий коэффициент c задаётся как аргумент функции.
-	// В случае, если для данного полинома возможно подобрать 
-	// трёхчлен с заданным третим коэффициентом ( это означает, что
-	// произведение двух корней полинома равно c)
-	// то функция возвращает 0 и определяет значение второго коэффициента
-	// b, зная который можно найти два соответствующие корня:
-	// комплексно сопряжённые или действительные, 
-	// в случае неудачи при вычислениях функция возвращает -1
-	// а в случае, если задаваемое число c не равно произведению 
-	// двух корней полинома функция возвращает +1
+	// РїСЂРѕРёР·РІРѕРґРёС‚ РґРµР»РµРЅРёРµ РїРѕР»РёРЅРѕРјР° РЅР° С‚СЂС‘С…С‡Р»РµРЅ, 
+	// РІ РєРѕС‚РѕСЂРѕРј РїРµСЂРІС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚ a СЂР°РІРµРЅ 1,0,
+	// РІС‚РѕСЂРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚ b РЅРµРёР·РІРµСЃС‚РµРЅ, - РїРѕРґР»РµР¶РёС‚ РѕРїСЂРµРґРµР»РµРЅРёСЋ,
+	// С‚Р°Рє С‡С‚РѕР±С‹ РїРѕР»РёРЅРѕРј РґРµР»РёР»СЃСЏ РЅР°С†РµР»Рѕ РЅР° С‚СЂС‘С…С‡Р»РµРЅ
+	// С‚СЂРµС‚РёР№ РєРѕСЌС„С„РёС†РёРµРЅС‚ c Р·Р°РґР°С‘С‚СЃСЏ РєР°Рє Р°СЂРіСѓРјРµРЅС‚ С„СѓРЅРєС†РёРё.
+	// Р’ СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РґР»СЏ РґР°РЅРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР° РІРѕР·РјРѕР¶РЅРѕ РїРѕРґРѕР±СЂР°С‚СЊ 
+	// С‚СЂС‘С…С‡Р»РµРЅ СЃ Р·Р°РґР°РЅРЅС‹Рј С‚СЂРµС‚РёРј РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРј ( СЌС‚Рѕ РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ
+	// РїСЂРѕРёР·РІРµРґРµРЅРёРµ РґРІСѓС… РєРѕСЂРЅРµР№ РїРѕР»РёРЅРѕРјР° СЂР°РІРЅРѕ c)
+	// С‚Рѕ С„СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‰Р°РµС‚ 0 Рё РѕРїСЂРµРґРµР»СЏРµС‚ Р·РЅР°С‡РµРЅРёРµ РІС‚РѕСЂРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
+	// b, Р·РЅР°СЏ РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РЅРѕ РЅР°Р№С‚Рё РґРІР° СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ РєРѕСЂРЅСЏ:
+	// РєРѕРјРїР»РµРєСЃРЅРѕ СЃРѕРїСЂСЏР¶С‘РЅРЅС‹Рµ РёР»Рё РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ, 
+	// РІ СЃР»СѓС‡Р°Рµ РЅРµСѓРґР°С‡Рё РїСЂРё РІС‹С‡РёСЃР»РµРЅРёСЏС… С„СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‰Р°РµС‚ -1
+	// Р° РІ СЃР»СѓС‡Р°Рµ, РµСЃР»Рё Р·Р°РґР°РІР°РµРјРѕРµ С‡РёСЃР»Рѕ c РЅРµ СЂР°РІРЅРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЋ 
+	// РґРІСѓС… РєРѕСЂРЅРµР№ РїРѕР»РёРЅРѕРјР° С„СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‰Р°РµС‚ +1
 	int qlen, iq, id;
 	vdouble qu;
-	// Предвтавляем второй коэффициент ках бином (1.0 0.0), зависящий от p
+	// РџСЂРµРґРІС‚Р°РІР»СЏРµРј РІС‚РѕСЂРѕР№ РєРѕСЌС„С„РёС†РёРµРЅС‚ РєР°С… Р±РёРЅРѕРј (1.0 0.0), Р·Р°РІРёСЃСЏС‰РёР№ РѕС‚ p
 	vdouble p(2); p[0] = 1.0; p[1] = 0.0;
-	// Делитель представляем в виде трёхмерного массива полиномов, зависящих от p
+	// Р”РµР»РёС‚РµР»СЊ РїСЂРµРґСЃС‚Р°РІР»СЏРµРј РІ РІРёРґРµ С‚СЂС‘С…РјРµСЂРЅРѕРіРѕ РјР°СЃСЃРёРІР° РїРѕР»РёРЅРѕРјРѕРІ, Р·Р°РІРёСЃСЏС‰РёС… РѕС‚ p
 	Vector<vdouble> divisor = Vector<vdouble>(3);
 	divisor[0] = 1.0;
 	divisor[1] = p; // - p;
 	divisor[2] = c;
-	// Частное представляем в виде массива полиномов, зависящих от p
+	// Р§Р°СЃС‚РЅРѕРµ РїСЂРµРґСЃС‚Р°РІР»СЏРµРј РІ РІРёРґРµ РјР°СЃСЃРёРІР° РїРѕР»РёРЅРѕРјРѕРІ, Р·Р°РІРёСЃСЏС‰РёС… РѕС‚ p
 	qlen = m_length - 2;
 	Vector<vdouble> quotient = Vector<vdouble>(qlen);
-	// Остаток представляем в виде двухмерного массива полиномов, зависящих от p
+	// РћСЃС‚Р°С‚РѕРє РїСЂРµРґСЃС‚Р°РІР»СЏРµРј РІ РІРёРґРµ РґРІСѓС…РјРµСЂРЅРѕРіРѕ РјР°СЃСЃРёРІР° РїРѕР»РёРЅРѕРјРѕРІ, Р·Р°РІРёСЃСЏС‰РёС… РѕС‚ p
 	Vector<vdouble> remainder = Vector<vdouble>(2);
 	Vector<vdouble> temp = Vector<vdouble>(3);
 	for (id = 0; id < 2; id++)
@@ -5641,7 +5641,7 @@ int vdouble::PolynomDivideIntoThree_member(double& b, double c)// Производит дел
 	for (id = 0; id < 2; id++)
 		remainder[id] = temp[id];
 
-	// Наибольший общий делитель двух полиномов
+	// РќР°РёР±РѕР»СЊС€РёР№ РѕР±С‰РёР№ РґРµР»РёС‚РµР»СЊ РґРІСѓС… РїРѕР»РёРЅРѕРјРѕРІ
 	vdouble divider;
 /*
 	fprintf(stderr,  "remainder[0].disp();";
@@ -5657,7 +5657,7 @@ int vdouble::PolynomDivideIntoThree_member(double& b, double c)// Производит дел
 	{
 		if (remainder[0].PolynomGreatestCommonDivider(remainder[1], divider) < 0)
 		{
-			// Ошибка определения наибольшего общего делителя двух полиномов
+			// РћС€РёР±РєР° РѕРїСЂРµРґРµР»РµРЅРёСЏ РЅР°РёР±РѕР»СЊС€РµРіРѕ РѕР±С‰РµРіРѕ РґРµР»РёС‚РµР»СЏ РґРІСѓС… РїРѕР»РёРЅРѕРјРѕРІ
 			fprintf(stderr,"Error in PolynomDivideIntoThree_member() during PolynomGreatestCommonDivider()\n");
 			return -1;
 		}
@@ -5667,7 +5667,7 @@ int vdouble::PolynomDivideIntoThree_member(double& b, double c)// Производит дел
 		divider = divider / divider[0];
 		if (divider.m_length < 2)
 		{
-			// Заданное число с не соответствует произведению двух корней
+			// Р—Р°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ СЃ РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ РїСЂРѕРёР·РІРµРґРµРЅРёСЋ РґРІСѓС… РєРѕСЂРЅРµР№
 			return 1;
 		}
 		if (divider.m_length == 2)
@@ -5678,16 +5678,16 @@ int vdouble::PolynomDivideIntoThree_member(double& b, double c)// Производит дел
 		{
 			if (divider.m_length == 3)
 			{
-				// Ищем корни трёхчлена
+				// РС‰РµРј РєРѕСЂРЅРё С‚СЂС‘С…С‡Р»РµРЅР°
 				double D = divider[1] * divider[1] - 4.0 * divider[2];
 				if (D < 0.0)
 				{
-					// комплексная пара корней
+					// РєРѕРјРїР»РµРєСЃРЅР°СЏ РїР°СЂР° РєРѕСЂРЅРµР№
 					return 1;
 				}
 				else
 				{
-					//действительные корни
+					//РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РєРѕСЂРЅРё
 					double sqrtD = sqrt(D);
 					b = (- divider[1] + sqrtD) / 2.0;
 				}
@@ -5711,7 +5711,7 @@ int vdouble::PolynomDivideIntoThree_member(double& b, double c)// Производит дел
 	return 0;
 }
 
-int vdouble::PolynomRootsSimple(vdouble& prs, vdouble& D)// Вычленяет кратные корни, получая полином с простыми корнями и соответствующий множитель
+int vdouble::PolynomRootsSimple(vdouble& prs, vdouble& D)// Р’С‹С‡Р»РµРЅСЏРµС‚ РєСЂР°С‚РЅС‹Рµ РєРѕСЂРЅРё, РїРѕР»СѓС‡Р°СЏ РїРѕР»РёРЅРѕРј СЃ РїСЂРѕСЃС‚С‹РјРё РєРѕСЂРЅСЏРјРё Рё СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РјРЅРѕР¶РёС‚РµР»СЊ
 {
 	int result, q = 0;
 	double epsilon = 0.1,
@@ -5761,7 +5761,7 @@ int vdouble::PolynomRootsSimple(vdouble& prs, vdouble& D)// Вычленяет кратные ко
 		Success = true;
 	if (!Success)
 	{
-		result = -1;// Необходимо изменить начальное значение epsilon
+		result = -1;// РќРµРѕР±С…РѕРґРёРјРѕ РёР·РјРµРЅРёС‚СЊ РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ epsilon
 		prs = *this; D = 1.0;
 	}
 	else
@@ -5770,7 +5770,7 @@ int vdouble::PolynomRootsSimple(vdouble& prs, vdouble& D)// Вычленяет кратные ко
 	}
 	return result;
 }
-int vdouble::PolynomGreatestCommonDivider(vdouble& v, vdouble& divider)// Наибольший общий делитель двух полиномов
+int vdouble::PolynomGreatestCommonDivider(vdouble& v, vdouble& divider)// РќР°РёР±РѕР»СЊС€РёР№ РѕР±С‰РёР№ РґРµР»РёС‚РµР»СЊ РґРІСѓС… РїРѕР»РёРЅРѕРјРѕРІ
 {
 	//The greatest common divider
 	bool bl, 
@@ -5784,7 +5784,7 @@ int vdouble::PolynomGreatestCommonDivider(vdouble& v, vdouble& divider)// Наибол
 		mepsilon = sqrt(10.0);
 
 
-	// Указатели на объекты векторов большей и меньшей длины
+	// РЈРєР°Р·Р°С‚РµР»Рё РЅР° РѕР±СЉРµРєС‚С‹ РІРµРєС‚РѕСЂРѕРІ Р±РѕР»СЊС€РµР№ Рё РјРµРЅСЊС€РµР№ РґР»РёРЅС‹
 	vdouble *pvma, *pvmi;
 	bl = m_length > vlen;
 	pvma = bl ? this : &v;
@@ -5816,7 +5816,7 @@ int vdouble::PolynomGreatestCommonDivider(vdouble& v, vdouble& divider)// Наибол
 		}
 		if (divider.m_length > 0)
 		{
-			// Проверки 
+			// РџСЂРѕРІРµСЂРєРё 
 			pvma->PolynomDivide(divider,quot,rem1);
 			if ( !(rem1.m_length == 0 || rem1.is_zeros(control_epsilon) ) )
 			{	
@@ -5846,20 +5846,20 @@ int vdouble::PolynomGreatestCommonDivider(vdouble& v, vdouble& divider)// Наибол
 	while(go);
 	if (!Success)
 	{
-		result = -1; // необходимо уменьшить начальное epsilon
+		result = -1; // РЅРµРѕР±С…РѕРґРёРјРѕ СѓРјРµРЅСЊС€РёС‚СЊ РЅР°С‡Р°Р»СЊРЅРѕРµ epsilon
 	}
 	else
 	{	result = 0;
-		// Приведение к удобному виду
+		// РџСЂРёРІРµРґРµРЅРёРµ Рє СѓРґРѕР±РЅРѕРјСѓ РІРёРґСѓ
 		if (divider[0] != 0.0)
 			divider = divider / divider[0];
 	}
 	return result;
 }
 
-double vdouble::PolynomValue(const double& a)// Возвращает значение полинома для заданной точки
+double vdouble::PolynomValue(const double& a)// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїРѕР»РёРЅРѕРјР° РґР»СЏ Р·Р°РґР°РЅРЅРѕР№ С‚РѕС‡РєРё
 {
-	// Алгоритм Горнера
+	// РђР»РіРѕСЂРёС‚Рј Р“РѕСЂРЅРµСЂР°
 	double b;
 	b = *pD;
 	for (int i = 1; i < m_length; i++)
@@ -5869,7 +5869,7 @@ double vdouble::PolynomValue(const double& a)// Возвращает значение полинома для
 	}
 	return b;
 }
-complex vdouble::PolynomValue(complex& z)// Возвращает значение полинома для заданной точки
+complex vdouble::PolynomValue(complex& z)// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїРѕР»РёРЅРѕРјР° РґР»СЏ Р·Р°РґР°РЅРЅРѕР№ С‚РѕС‡РєРё
 {
 	complex b;
 	double x, y, zx, zy;
@@ -5888,9 +5888,9 @@ complex vdouble::PolynomValue(complex& z)// Возвращает значение полинома для зад
 	}
 	return b;
 }
-vdouble vdouble::PolynomValues(vdouble& v)// Возвращает массив значений полинома для заданного массива точек 
+vdouble vdouble::PolynomValues(vdouble& v)// Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ Р·РЅР°С‡РµРЅРёР№ РїРѕР»РёРЅРѕРјР° РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° С‚РѕС‡РµРє 
 {
-	// Алгоритм Горнера
+	// РђР»РіРѕСЂРёС‚Рј Р“РѕСЂРЅРµСЂР°
 	vdouble b;
 	b = vdouble(v.m_length,*pD);
 	for (int i = 1; i < m_length; i++)
@@ -5901,7 +5901,7 @@ vdouble vdouble::PolynomValues(vdouble& v)// Возвращает массив значений полинома
 	return b;
 }
 
-Vector<double> vdouble::PolynomDerivativesValue(const double& a, int N)// Возвращает значение полинома и его производных порядка до N включительно для заданной точки. Если N = 0, вычисляет производные всех возможных порядков. Обобщенный метод Горнера
+Vector<double> vdouble::PolynomDerivativesValue(const double& a, int N)// Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїРѕР»РёРЅРѕРјР° Рё РµРіРѕ РїСЂРѕРёР·РІРѕРґРЅС‹С… РїРѕСЂСЏРґРєР° РґРѕ N РІРєР»СЋС‡РёС‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РґР°РЅРЅРѕР№ С‚РѕС‡РєРё. Р•СЃР»Рё N = 0, РІС‹С‡РёСЃР»СЏРµС‚ РїСЂРѕРёР·РІРѕРґРЅС‹Рµ РІСЃРµС… РІРѕР·РјРѕР¶РЅС‹С… РїРѕСЂСЏРґРєРѕРІ. РћР±РѕР±С‰РµРЅРЅС‹Р№ РјРµС‚РѕРґ Р“РѕСЂРЅРµСЂР°
 {
 	if (N < 1 || N > m_length)
 		N = m_length;
@@ -5926,7 +5926,7 @@ Vector<double> vdouble::PolynomDerivativesValue(const double& a, int N)// Возвра
 	}
 	return pdv;
 }
-Vector<vdouble> vdouble::PolynomDerivativesValues(vdouble& v, int N)//Возвращает массивы значений полинома и его производных порядка до N включительно для заданного массива точек. Если N = 0, вычисляет производные всех возможных порядков.  Обобщенный метод Горнера
+Vector<vdouble> vdouble::PolynomDerivativesValues(vdouble& v, int N)//Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІС‹ Р·РЅР°С‡РµРЅРёР№ РїРѕР»РёРЅРѕРјР° Рё РµРіРѕ РїСЂРѕРёР·РІРѕРґРЅС‹С… РїРѕСЂСЏРґРєР° РґРѕ N РІРєР»СЋС‡РёС‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ РјР°СЃСЃРёРІР° С‚РѕС‡РµРє. Р•СЃР»Рё N = 0, РІС‹С‡РёСЃР»СЏРµС‚ РїСЂРѕРёР·РІРѕРґРЅС‹Рµ РІСЃРµС… РІРѕР·РјРѕР¶РЅС‹С… РїРѕСЂСЏРґРєРѕРІ.  РћР±РѕР±С‰РµРЅРЅС‹Р№ РјРµС‚РѕРґ Р“РѕСЂРЅРµСЂР°
 {
 	if (N < 1 || N > m_length)
 		N = m_length;
@@ -5951,9 +5951,9 @@ Vector<vdouble> vdouble::PolynomDerivativesValues(vdouble& v, int N)//Возвращает
 	}
 	return pdv;
 }
-vdouble vdouble::PolynomSubsVariable(const double& a)// Производит замену переменной y = x - a 
+vdouble vdouble::PolynomSubsVariable(const double& a)// РџСЂРѕРёР·РІРѕРґРёС‚ Р·Р°РјРµРЅСѓ РїРµСЂРµРјРµРЅРЅРѕР№ y = x - a 
 {
-	// Обобщенный метод Горнера
+	// РћР±РѕР±С‰РµРЅРЅС‹Р№ РјРµС‚РѕРґ Р“РѕСЂРЅРµСЂР°
 	int i, n, N, N_1;
 	N = m_length; N_1 = N - 1;
 	vdouble w(N);
@@ -5967,14 +5967,14 @@ vdouble vdouble::PolynomSubsVariable(const double& a)// Производит замену переме
 			w[n] *= a; w[n] += w[n + 1]; 
 		}
 	}
-	//Удаление ведущих нулей
+	//РЈРґР°Р»РµРЅРёРµ РІРµРґСѓС‰РёС… РЅСѓР»РµР№
 	Vector<int> inz = Find(w != 0);
 	w = w[sequence(inz[0], w.m_length - 1)];
-	//Возвращает вектор полинома с замещённой переменной
+	//Р’РѕР·РІСЂР°С‰Р°РµС‚ РІРµРєС‚РѕСЂ РїРѕР»РёРЅРѕРјР° СЃ Р·Р°РјРµС‰С‘РЅРЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№
 	return w;
 }
 int vdouble::roots(vdouble& droot, Vector<complex>& croot,
-				   Vector<int>& order_dr, Vector<int>& order_cr)// Вычисляет корни действительного полинома - действительные и комплексные, отдельно - кратные
+				   Vector<int>& order_dr, Vector<int>& order_cr)// Р’С‹С‡РёСЃР»СЏРµС‚ РєРѕСЂРЅРё РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР° - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ Рё РєРѕРјРїР»РµРєСЃРЅС‹Рµ, РѕС‚РґРµР»СЊРЅРѕ - РєСЂР°С‚РЅС‹Рµ
 {
 	int i, nnz, inz_end, order_r0, drlen, crlen, D_old_len, 
 		result, res = 0;
@@ -5992,7 +5992,7 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 	vdouble unsolved = vdouble(0);
 
 	vdouble c = *this;
-	// индексы ненулевых элементов
+	// РёРЅРґРµРєСЃС‹ РЅРµРЅСѓР»РµРІС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 	Vector<int> inz = Find(c != 0.0);
 	nnz = inz.size;
 	if (nnz == 0)
@@ -6001,10 +6001,10 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 		return 0;
 	}
 	inz_end = inz.End();
-	// кратность нулевого корня
+	// РєСЂР°С‚РЅРѕСЃС‚СЊ РЅСѓР»РµРІРѕРіРѕ РєРѕСЂРЅСЏ
 	order_r0 = m_length - 1 - inz_end;
-	// Выделение лидирующих нулей и удаление их
-	// Выделение замыкающих корней и сохранение их в векторе корней
+	// Р’С‹РґРµР»РµРЅРёРµ Р»РёРґРёСЂСѓСЋС‰РёС… РЅСѓР»РµР№ Рё СѓРґР°Р»РµРЅРёРµ РёС…
+	// Р’С‹РґРµР»РµРЅРёРµ Р·Р°РјС‹РєР°СЋС‰РёС… РєРѕСЂРЅРµР№ Рё СЃРѕС…СЂР°РЅРµРЅРёРµ РёС… РІ РІРµРєС‚РѕСЂРµ РєРѕСЂРЅРµР№
 	c = c[sequence(inz[0], inz_end)];
 	c = c / c[0];
 	double epsilon_control = 1.0e-2,
@@ -6016,12 +6016,12 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 
 	if (c.m_length > 1)
 	{
-		// Вычленение кратных корней
+		// Р’С‹С‡Р»РµРЅРµРЅРёРµ РєСЂР°С‚РЅС‹С… РєРѕСЂРЅРµР№
 		c.PolynomRootsSimple(prs,D);
 		vdouble deriv = prs.PolynomDerivative();
 		//=========
 		bool flag = true;
-		double A = 0.0; //Действительная поправка
+		double A = 0.0; //Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ РїРѕРїСЂР°РІРєР°
 		vdouble solved;
 		solved = 1.0;
 		vdouble v = prs;
@@ -6042,11 +6042,11 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 			if (v.m_length == 3)
 			{
 				double Discr;
-				// Ищем корни трёхчлена
+				// РС‰РµРј РєРѕСЂРЅРё С‚СЂС‘С…С‡Р»РµРЅР°
 				Discr = v[1] * v[1] - 4.0 * v[2] * v[0];
 				if (Discr < 0.0)
 				{
-					// комплексная пара корней
+					// РєРѕРјРїР»РµРєСЃРЅР°СЏ РїР°СЂР° РєРѕСЂРЅРµР№
 					x = - v[1] / 2.0 / v[0];
 					y = sqrt(fabs(Discr)) / 2.0 / v[0];
 					z.x = x; z.y = y; croot.push_back(z);
@@ -6054,7 +6054,7 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 				}
 				else
 				{
-					//действительные корни
+					//РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РєРѕСЂРЅРё
 					double sqrtD = sqrt(Discr);
 					for (int j = 0; j < 2; j++)
 					{
@@ -6088,14 +6088,14 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 			
 				int sol = 0;
 
-				//Сохранение решения с учётом действительной поправки
+				//РЎРѕС…СЂР°РЅРµРЅРёРµ СЂРµС€РµРЅРёСЏ СЃ СѓС‡С‘С‚РѕРј РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕР№ РїРѕРїСЂР°РІРєРё
 				for ( i = 0; i < d_r.m_length; i++)
 				{
 					x = (d_r[i] + A);
 
-					// Настройка
+					// РќР°СЃС‚СЂРѕР№РєР°
 					prs.PolynomNewtonRoot(x);
-					// Проверка
+					// РџСЂРѕРІРµСЂРєР°
 					e = fabs(prs.PolynomValue(x)) / fabs(deriv.PolynomValue(x));
 					if (e < epsilon_control)
 					{
@@ -6121,10 +6121,10 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 					y = c_r[i].y;
 					z.x = x; z.y = y;
 
-					// Настройка
+					// РќР°СЃС‚СЂРѕР№РєР°
 					prs.PolynomNewtonRoot(z);
 
-					// Проверка
+					// РџСЂРѕРІРµСЂРєР°
 					zf = prs.PolynomValue(z);
 					zdf = deriv.PolynomValue(z);
 					mf = zf.x * zf.x + zf.y * zf.y;
@@ -6153,29 +6153,29 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 				prs.PolynomDivide(solved, unsolved, rem);
 
 				
-				// Удаление ведущих нулей в нерешенном остатке полинома
+				// РЈРґР°Р»РµРЅРёРµ РІРµРґСѓС‰РёС… РЅСѓР»РµР№ РІ РЅРµСЂРµС€РµРЅРЅРѕРј РѕСЃС‚Р°С‚РєРµ РїРѕР»РёРЅРѕРјР°
 				inz = Find(unsolved != 0.0);
 				unsolved = unsolved[sequence(inz[0], unsolved.m_length - 1)];
 				unsolved = unsolved / unsolved[0];
 				
 
-				//Назначение нового полинома для решения (если надо с заменой переменной)
-				if (result == 0) // найдены все корни
+				//РќР°Р·РЅР°С‡РµРЅРёРµ РЅРѕРІРѕРіРѕ РїРѕР»РёРЅРѕРјР° РґР»СЏ СЂРµС€РµРЅРёСЏ (РµСЃР»Рё РЅР°РґРѕ СЃ Р·Р°РјРµРЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№)
+				if (result == 0) // РЅР°Р№РґРµРЅС‹ РІСЃРµ РєРѕСЂРЅРё
 				{
-					flag = false; //выход из цикла
+					flag = false; //РІС‹С…РѕРґ РёР· С†РёРєР»Р°
 				}
-				if (result == 1) // найден по меньшей мере один корень
+				if (result == 1) // РЅР°Р№РґРµРЅ РїРѕ РјРµРЅСЊС€РµР№ РјРµСЂРµ РѕРґРёРЅ РєРѕСЂРµРЅСЊ
 				{
 					q3 = 0; q2 = 0;
 					A = 0.0;
 					v = unsolved;
 				}
-				//корни трудноотделяемы 
-				if (result == 2) //и есть указание на наличие комплексных корней
+				//РєРѕСЂРЅРё С‚СЂСѓРґРЅРѕРѕС‚РґРµР»СЏРµРјС‹ 
+				if (result == 2) //Рё РµСЃС‚СЊ СѓРєР°Р·Р°РЅРёРµ РЅР° РЅР°Р»РёС‡РёРµ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 				{
 					q2++;
 					q3 = 0;
-					//замена переменной
+					//Р·Р°РјРµРЅР° РїРµСЂРµРјРµРЅРЅРѕР№
 					if (q2%2==1)
 					{
 						A = pow(unsolved.End(),1.0 /( (double)unsolved.m_length -1.0));
@@ -6187,14 +6187,14 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 						v = unsolved.PolynomSubsVariable(A);
 					}
 				}
-				if (result == 3) // другие варианты
+				if (result == 3) // РґСЂСѓРіРёРµ РІР°СЂРёР°РЅС‚С‹
 				{
 					int N = 10;
 								
 					q3++; q2 = 0;
 					if (q3%N==1)
 					{
-						//замена переменной
+						//Р·Р°РјРµРЅР° РїРµСЂРµРјРµРЅРЅРѕР№
 						A = pow(unsolved.End(), 1.0 /( (double)unsolved.m_length -1.0));
 						v = unsolved.PolynomSubsVariable(A);
 					}
@@ -6206,7 +6206,7 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 
 					if (q3%N==3)
 					{
-						//замена переменной
+						//Р·Р°РјРµРЅР° РїРµСЂРµРјРµРЅРЅРѕР№
 						A = - pow(unsolved.End(),1.0 /( (double)unsolved.m_length -1.0));
 						v = unsolved.PolynomSubsVariable(A);
 					}
@@ -6217,7 +6217,7 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 					}
 					if (q3%N > 4)
 					{
-						//замена переменной используя генератор случайных чисел
+						//Р·Р°РјРµРЅР° РїРµСЂРµРјРµРЅРЅРѕР№ РёСЃРїРѕР»СЊР·СѓСЏ РіРµРЅРµСЂР°С‚РѕСЂ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
 						double minAbs, maxAbs, dAbs, a;
 						minAbs = unsolved.MinAbsRoots();
 						maxAbs = 10.0 * minAbs;// unsolved.MaxAbsRoots();
@@ -6247,11 +6247,11 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 		drlen = droot.m_length;
 		crlen = croot.size;
 		//==========
-		// кратность действительных корней
+		// РєСЂР°С‚РЅРѕСЃС‚СЊ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
 		order_dr = Vector<int>(drlen);
 		for ( i = 0; i < drlen; i++)
 			order_dr[i] = 1;
-		// кратность комплексных корней
+		// РєСЂР°С‚РЅРѕСЃС‚СЊ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 		order_cr = Vector<int>(crlen);
 		for ( i = 0; i < crlen; i++)
 			order_cr[i] = 1;
@@ -6261,7 +6261,7 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 		D_old_len = D.m_length + 1;
 		while(D.m_length > 1 && (D_old_len != D.m_length) )
 		{
-			//Вычисление кратности действительных и комплексных корней
+			//Р’С‹С‡РёСЃР»РµРЅРёРµ РєСЂР°С‚РЅРѕСЃС‚Рё РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… Рё РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 			D_old_len = D.m_length;
 			for ( i = 0; i < drlen; i++)
 			{
@@ -6302,26 +6302,26 @@ int vdouble::roots(vdouble& droot, Vector<complex>& croot,
 }
 
 
-int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved,const double& epsilon_control)//Вычисляет действительные и комплексные корни действительного полинома методом Лобачевского - Греффе (для полиномов с вычленёнными кратными корнями)
+int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved,const double& epsilon_control)//Р’С‹С‡РёСЃР»СЏРµС‚ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ Рё РєРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР° РјРµС‚РѕРґРѕРј Р›РѕР±Р°С‡РµРІСЃРєРѕРіРѕ - Р“СЂРµС„С„Рµ (РґР»СЏ РїРѕР»РёРЅРѕРјРѕРІ СЃ РІС‹С‡Р»РµРЅС‘РЅРЅС‹РјРё РєСЂР°С‚РЅС‹РјРё РєРѕСЂРЅСЏРјРё)
 {
 	dr = vdouble(0);
 	cr = Vector<complex>(0);
 	long double lepsilon = 1.0e-4;
 	double maxLoops = 15.0;
 	Vector<int> inz;// 
-	// Максимально допустимый десятичный логарифм для данной машинной точности
+	// РњР°РєСЃРёРјР°Р»СЊРЅРѕ РґРѕРїСѓСЃС‚РёРјС‹Р№ РґРµСЃСЏС‚РёС‡РЅС‹Р№ Р»РѕРіР°СЂРёС„Рј РґР»СЏ РґР°РЅРЅРѕР№ РјР°С€РёРЅРЅРѕР№ С‚РѕС‡РЅРѕСЃС‚Рё
 	long double maxlog10 = LDBL_MAX_EXP * log10l(_LDBL_RADIX);
-	Vector<bool> fd,// Флаг отделившихся действительных корней
-		fsr, // Флаг удовлетворительного отделения корней
-		fc;	//Флаг пары комплексных корней
+	Vector<bool> fd,// Р¤Р»Р°Рі РѕС‚РґРµР»РёРІС€РёС…СЃСЏ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
+		fsr, // Р¤Р»Р°Рі СѓРґРѕРІР»РµС‚РІРѕСЂРёС‚РµР»СЊРЅРѕРіРѕ РѕС‚РґРµР»РµРЅРёСЏ РєРѕСЂРЅРµР№
+		fc;	//Р¤Р»Р°Рі РїР°СЂС‹ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 	long double *pa, *pai, *pd, *pdi, *pl, *pli, *pbd, *pbdi;
 	Vector<long double>a, d, l, bd;
 	int i, j, j2, len, result;
 	bool *pfd, *pfdi, *pfc, *pfci,
 		stopRoots, stopDigits, toQuadri, stopMaxLoops, NonSelectedRoots, toSolve;
-	long double b,//квадрат исходного коэффициента
-		c, //дополнительная удвоенная сумма
-		e, //относительная величина удвоенных сумм
+	long double b,//РєРІР°РґСЂР°С‚ РёСЃС…РѕРґРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
+		c, //РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ СѓРґРІРѕРµРЅРЅР°СЏ СЃСѓРјРјР°
+		e, //РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅР°СЏ РІРµР»РёС‡РёРЅР° СѓРґРІРѕРµРЅРЅС‹С… СЃСѓРјРј
 		maxlog, 
 		tlog;
 	double pw, log_abs_r, e1, e2, x, y, p, D, sqrtD, q,
@@ -6330,18 +6330,18 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 	vdouble quot, rem, A, v, deriv,  solved;
 	solved = 1.0;
 	complex z, zf, zdf;
-	// Коэффициенты текущего полинома
+	// РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ С‚РµРєСѓС‰РµРіРѕ РїРѕР»РёРЅРѕРјР°
 	v = *this / *pD;
-	vdouble dd = vdouble(2); dd[0] = 1.0;// Вектор бинома удаляемого действительного корня
-	vdouble ddd = vdouble(3); ddd[0] = 1.0;// Вектор трёхчлена удаляемой пары комплексных корней
+	vdouble dd = vdouble(2); dd[0] = 1.0;// Р’РµРєС‚РѕСЂ Р±РёРЅРѕРјР° СѓРґР°Р»СЏРµРјРѕРіРѕ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ РєРѕСЂРЅСЏ
+	vdouble ddd = vdouble(3); ddd[0] = 1.0;// Р’РµРєС‚РѕСЂ С‚СЂС‘С…С‡Р»РµРЅР° СѓРґР°Р»СЏРµРјРѕР№ РїР°СЂС‹ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 
-	//============= решение текущего полинома ========================
-	//длина и указатель текущего полинома
+	//============= СЂРµС€РµРЅРёРµ С‚РµРєСѓС‰РµРіРѕ РїРѕР»РёРЅРѕРјР° ========================
+	//РґР»РёРЅР° Рё СѓРєР°Р·Р°С‚РµР»СЊ С‚РµРєСѓС‰РµРіРѕ РїРѕР»РёРЅРѕРјР°
 	len = v.m_length; pv = v.pD;
-	a = Vector<long double>(len);// Вектор исходных коэффициентов
-	d = Vector<long double>(len);// Вектор квадрированных коэффициентов
-	bd = Vector<long double>(len);// Отношение квадрата предыдущего коэффициента к итоговому
-	l = Vector<long double>(len);// Вектор десятичных логарифмов
+	a = Vector<long double>(len);// Р’РµРєС‚РѕСЂ РёСЃС…РѕРґРЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
+	d = Vector<long double>(len);// Р’РµРєС‚РѕСЂ РєРІР°РґСЂРёСЂРѕРІР°РЅРЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
+	bd = Vector<long double>(len);// РћС‚РЅРѕС€РµРЅРёРµ РєРІР°РґСЂР°С‚Р° РїСЂРµРґС‹РґСѓС‰РµРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° Рє РёС‚РѕРіРѕРІРѕРјСѓ
+	l = Vector<long double>(len);// Р’РµРєС‚РѕСЂ РґРµСЃСЏС‚РёС‡РЅС‹С… Р»РѕРіР°СЂРёС„РјРѕРІ
 	fd = Vector<bool>(len);
 	fsr = Vector<bool>(len);
 	fc = Vector<bool>(len);
@@ -6352,7 +6352,7 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 	pl = l.data;
 	pfd = fd.data;
 	pfc = fc.data;
-	//копирование текущего полинома в вектор исходных коэффициентов
+	//РєРѕРїРёСЂРѕРІР°РЅРёРµ С‚РµРєСѓС‰РµРіРѕ РїРѕР»РёРЅРѕРјР° РІ РІРµРєС‚РѕСЂ РёСЃС…РѕРґРЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	for (i = 0; i < len; i++)
 	{
 		*(pa + i) = (long double)(*(pv + i));
@@ -6360,11 +6360,11 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 		fsr[i] = false;
 	}
 	
-	vdouble cr2 = vdouble(0);// Квадраты модулей отделённых комплексных пар корней
-	vdouble dr2 = vdouble(0);// Произведения двух плохо отделимых действительных корней
+	vdouble cr2 = vdouble(0);// РљРІР°РґСЂР°С‚С‹ РјРѕРґСѓР»РµР№ РѕС‚РґРµР»С‘РЅРЅС‹С… РєРѕРјРїР»РµРєСЃРЅС‹С… РїР°СЂ РєРѕСЂРЅРµР№
+	vdouble dr2 = vdouble(0);// РџСЂРѕРёР·РІРµРґРµРЅРёСЏ РґРІСѓС… РїР»РѕС…Рѕ РѕС‚РґРµР»РёРјС‹С… РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
 
-	//цикл квадрирования корней текущего полинома:
-	pw = -1.0; // Показатель степени 2
+	//С†РёРєР» РєРІР°РґСЂРёСЂРѕРІР°РЅРёСЏ РєРѕСЂРЅРµР№ С‚РµРєСѓС‰РµРіРѕ РїРѕР»РёРЅРѕРјР°:
+	pw = -1.0; // РџРѕРєР°Р·Р°С‚РµР»СЊ СЃС‚РµРїРµРЅРё 2
 	do
 	{
 		pw +=1.0;
@@ -6381,13 +6381,13 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 			pfdi = pfd + i;
 			pfci = pfc + i;
 
-			//Квадрат исходного коэффициента
+			//РљРІР°РґСЂР°С‚ РёСЃС…РѕРґРЅРѕРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 			b = * pai * *pai;
-			//Дополнительные удвоенные суммы
+			//Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СѓРґРІРѕРµРЅРЅС‹Рµ СЃСѓРјРјС‹
 			c = 0.0;
 			for (j = 1; j < j2; j++)
 				c += ((long double)(2*pow(-1.0,j))) * *(pai - j) * *(pai + j);
-			//Итоговый коэффициент
+			//РС‚РѕРіРѕРІС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚
 			*pdi = b + c;
 			if (*pdi != 0.0)
 			{
@@ -6397,32 +6397,32 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 			{
 				*pbdi = 0.0;
 			}
-			//Вычисление флагов отделения корней
+			//Р’С‹С‡РёСЃР»РµРЅРёРµ С„Р»Р°РіРѕРІ РѕС‚РґРµР»РµРЅРёСЏ РєРѕСЂРЅРµР№
 			if (b != 0)
 			{
-				//Относительная величина удвоенных сумм
+				//РћС‚РЅРѕСЃРёС‚РµР»СЊРЅР°СЏ РІРµР»РёС‡РёРЅР° СѓРґРІРѕРµРЅРЅС‹С… СЃСѓРјРј
 				e = c / b;
-				//Флаг действительного корня
+				//Р¤Р»Р°Рі РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ РєРѕСЂРЅСЏ
 				*pfdi = fabsl(e) < lepsilon || fabs(*pbdi - 1.0) < 0.1;
-				//Флаг пары комплексных корней - коэффициент меняет знак
+				//Р¤Р»Р°Рі РїР°СЂС‹ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№ - РєРѕСЌС„С„РёС†РёРµРЅС‚ РјРµРЅСЏРµС‚ Р·РЅР°Рє
 				*pfci = (*pfci || *pdi < 0.0) && pw > 3.0 && !(*pfdi);
 			}
 			else
 			{
-				//Флаг действительного корня
+				//Р¤Р»Р°Рі РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ РєРѕСЂРЅСЏ
 				*pfdi = false;
 			}
 			stopRoots = stopRoots && (*pfdi || *pfci);
 			if (*pdi != 0.0)
 			{
-				*pli = log10l(fabsl(*pdi));//десятичный логарифм
+				*pli = log10l(fabsl(*pdi));//РґРµСЃСЏС‚РёС‡РЅС‹Р№ Р»РѕРіР°СЂРёС„Рј
 			}
 			else
 			{
 				*pli = 0.0;
 			}
 		}
-		// Вычисления флага ограничения машинной точности
+		// Р’С‹С‡РёСЃР»РµРЅРёСЏ С„Р»Р°РіР° РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РјР°С€РёРЅРЅРѕР№ С‚РѕС‡РЅРѕСЃС‚Рё
 		maxlog = 0.0;
 		for ( i = 0; i< len; i++)
 		{
@@ -6440,7 +6440,7 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 //  a.disp();
 		if (toQuadri)
 		{
-			//Присвоение исходным коэффициентам квадрированных значений
+			//РџСЂРёСЃРІРѕРµРЅРёРµ РёСЃС…РѕРґРЅС‹Рј РєРѕСЌС„С„РёС†РёРµРЅС‚Р°Рј РєРІР°РґСЂРёСЂРѕРІР°РЅРЅС‹С… Р·РЅР°С‡РµРЅРёР№
 			a = d;
 		}
 		else
@@ -6456,7 +6456,7 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 				{
 					count++;
 					pli = pl + i;
-					// Логарифмируем исходные коэффициенты на последней итерации
+					// Р›РѕРіР°СЂРёС„РјРёСЂСѓРµРј РёСЃС…РѕРґРЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РЅР° РїРѕСЃР»РµРґРЅРµР№ РёС‚РµСЂР°С†РёРё
 					*pli = log10l(*(pa + i));
 					if (nonfirst)
 					{
@@ -6487,23 +6487,23 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 
 	if(!NonSelectedRoots)
 	{
-		// Вычисление действительных корней
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
 		for ( i = 1; i < len; i++)
 		{
 			if (fd[i - 1] && fd[i])
 			{
-				// корень действительный
+				// РєРѕСЂРµРЅСЊ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Р№
 				log_abs_r = ((double)(l[i] - l[i - 1])) / pow(2.0, pw);
 				abs_r = pow(10.0,log_abs_r);
 //				fprintf( stderr, "abs_r = %g \n",abs_r);
-				// Определение знака корня методом подстановки в текущий полином
-				deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+				// РћРїСЂРµРґРµР»РµРЅРёРµ Р·РЅР°РєР° РєРѕСЂРЅСЏ РјРµС‚РѕРґРѕРј РїРѕРґСЃС‚Р°РЅРѕРІРєРё РІ С‚РµРєСѓС‰РёР№ РїРѕР»РёРЅРѕРј
+				deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 				e1 = fabs(v.PolynomValue(abs_r)) / fabs(deriv.PolynomValue(abs_r));
 				e2 = fabs(v.PolynomValue( - abs_r)) / fabs(deriv.PolynomValue( - abs_r));
 				x = e1 < e2 ? abs_r : - abs_r;
-				// Уточнение значения корня методом Ньютона
+				// РЈС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 				this->PolynomNewtonRoot(x);
-				// Проверка
+				// РџСЂРѕРІРµСЂРєР°
 				e = fabs(v.PolynomValue(x)) / fabs(deriv.PolynomValue(x));
 				if (e < epsilon_control)
 				{
@@ -6524,7 +6524,7 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 						if (result == 0)
 						{
 							x = - dd[1];
-							// Проверка
+							// РџСЂРѕРІРµСЂРєР°
 							e = fabs(v.PolynomValue(x)) / fabs(deriv.PolynomValue(x));
 							if (e < epsilon_control)
 							{
@@ -6542,13 +6542,13 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 				}
 			}
 		}
-		//Вычисление модуля произведения двух плохо отделимых действительных корней
-		// Вычисление хорошо отделимых комплексных корней
+		//Р’С‹С‡РёСЃР»РµРЅРёРµ РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РґРІСѓС… РїР»РѕС…Рѕ РѕС‚РґРµР»РёРјС‹С… РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
+		// Р’С‹С‡РёСЃР»РµРЅРёРµ С…РѕСЂРѕС€Рѕ РѕС‚РґРµР»РёРјС‹С… РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 		for ( i = 2; i < len; i++)
 		{
 			if (fd[i - 2] && !fd[i - 1] && fd[i])
 			{
-				// квадрат модуля пары комплексных корней либо модуль произведения действительных корней
+				// РєРІР°РґСЂР°С‚ РјРѕРґСѓР»СЏ РїР°СЂС‹ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№ Р»РёР±Рѕ РјРѕРґСѓР»СЊ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
 				log_abs_r = ((double)(l[i] - l[i - 2])) / pow(2.0, pw);
 				abs_r = pow(10.0,log_abs_r);
 				result = v.PolynomDivideIntoThree_member(p, abs_r);
@@ -6564,7 +6564,7 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 				}
 				if (result > 0)
 				{
-					//Пробуем деление на трёхчлен с отрицательным значением третьего коэффициента
+					//РџСЂРѕР±СѓРµРј РґРµР»РµРЅРёРµ РЅР° С‚СЂС‘С…С‡Р»РµРЅ СЃ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј С‚СЂРµС‚СЊРµРіРѕ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 					result = v.PolynomDivideIntoThree_member(p, - abs_r);
 					if (result < 0)
 					{
@@ -6614,21 +6614,21 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 				}
 				if (toSolve)
 				{
-					// Ищем корни трёхчлена
+					// РС‰РµРј РєРѕСЂРЅРё С‚СЂС‘С…С‡Р»РµРЅР°
 					D = p*p - 4.0 * q;
 					if (D < 0.0)
 					{
-						// комплексная пара корней
+						// РєРѕРјРїР»РµРєСЃРЅР°СЏ РїР°СЂР° РєРѕСЂРЅРµР№
 						x = - p / 2.0;
 						y = sqrt(fabs(D)) / 2.0;
 						z.x = x;
 						z.y = y;
-						// Настройка комплексных корней методом Ньютона
+						// РќР°СЃС‚СЂРѕР№РєР° РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 						this->PolynomNewtonRoot(z);
 						x = z.x; y = z.y;
-						// Проверка
+						// РџСЂРѕРІРµСЂРєР°
 						zf = v.PolynomValue(z);
-						deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+						deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 						zdf = deriv.PolynomValue(z);
 						mf = zf.x * zf.x + zf.y * zf.y;
 						mdf = zdf.x * zdf.x + zdf.y * zdf.y;
@@ -6647,15 +6647,15 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 					}
 					else
 					{
-						//действительные корни
+						//РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РєРѕСЂРЅРё
 						sqrtD = sqrt(D);
 						for (j = 0; j < 2; j++)
 						{
 							x = j == 0 ? (- p + sqrtD) / 2.0  : (- p - sqrtD) / 2.0;
-							// Уточнение значения корня методом Ньютона
+							// РЈС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 							this->PolynomNewtonRoot(x);
-							// Проверка
-							deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+							// РџСЂРѕРІРµСЂРєР°
+							deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 							e = fabs(v.PolynomValue(x)) / fabs(deriv.PolynomValue(x));
 							if (e < epsilon_control)
 							{
@@ -6681,7 +6681,7 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 //fprintf(stderr, " unsolved in LobGreff  = ") ;unsolved.disp();
 	if (true/*NonSelectedRoots && !IsComplexRoots*/)
 	{
-		// близкие по модулю действительные корни
+		// Р±Р»РёР·РєРёРµ РїРѕ РјРѕРґСѓР»СЋ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РєРѕСЂРЅРё
 		Vector<int> inzfd = Find(fd); // indexes of nonzeros of fd
 		int ord;
 		long double binom_quot, binom_quot1, binom_quot2;
@@ -6689,7 +6689,7 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 
 		for (i = 1; i < inzfd.size; i++)
 		{
-			// порядок 
+			// РїРѕСЂСЏРґРѕРє 
 			ord = inzfd[i] - inzfd[i - 1];
 			if (ord > 1)
 			{
@@ -6708,13 +6708,13 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 						log_abs_r = ((double)( (l[j] - log10l(binom_quot2) ) - (l[j - 1] - log10l(binom_quot1) ) )) / pow(2.0, pw);
 						abs_r = pow(10.0,log_abs_r);
 						//======
-						// Определение знака корня методом подстановки в текущий полином
+						// РћРїСЂРµРґРµР»РµРЅРёРµ Р·РЅР°РєР° РєРѕСЂРЅСЏ РјРµС‚РѕРґРѕРј РїРѕРґСЃС‚Р°РЅРѕРІРєРё РІ С‚РµРєСѓС‰РёР№ РїРѕР»РёРЅРѕРј
 						e1 = fabs(unsolved.PolynomValue(abs_r)) / fabs(deriv.PolynomValue(abs_r));
 						e2 = fabs(unsolved.PolynomValue( - abs_r)) / fabs(deriv.PolynomValue( - abs_r));
 						x = e1 < e2 ? abs_r : - abs_r;
-						// Уточнение значения корня методом Ньютона
+						// РЈС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 						this->PolynomNewtonRoot(x);dd[1] = - x;
-						// Проверка
+						// РџСЂРѕРІРµСЂРєР°
 						deriv = unsolved.PolynomDerivative();
 						e = fabs(unsolved.PolynomValue(x)) / fabs(deriv.PolynomValue(x));
 						if (e < epsilon_control)
@@ -6777,18 +6777,18 @@ int vdouble::Lobachevski_Greffe_roots(vdouble& dr, Vector<complex>& cr, vdouble&
 
 	int unsolvlen = unsolved.m_length;
 	if (unsolvlen < 2 && Find(abs(solved - *this) > epsilon_control).size == 0)
-		result = 0;// найдены все корни
+		result = 0;// РЅР°Р№РґРµРЅС‹ РІСЃРµ РєРѕСЂРЅРё
 	else
 	{
 		if (unsolvlen < len)
-			result = 1;		// найден по меньшей мере один корень
-		if (unsolvlen == len) // не найден ни один корень
+			result = 1;		// РЅР°Р№РґРµРЅ РїРѕ РјРµРЅСЊС€РµР№ РјРµСЂРµ РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+		if (unsolvlen == len) // РЅРµ РЅР°Р№РґРµРЅ РЅРё РѕРґРёРЅ РєРѕСЂРµРЅСЊ
 		{
 			
 			if (NonSelectedRoots && IsComplexRoots)
-				result = 2;// корни неотделимы и есть указание на комплексные корни
+				result = 2;// РєРѕСЂРЅРё РЅРµРѕС‚РґРµР»РёРјС‹ Рё РµСЃС‚СЊ СѓРєР°Р·Р°РЅРёРµ РЅР° РєРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё
 			else
-				result = 3;// другие случаи
+				result = 3;// РґСЂСѓРіРёРµ СЃР»СѓС‡Р°Рё
 
 
 		}
@@ -6830,7 +6830,7 @@ fprintf(stderr, "for solve = "); pvsol->disp();
 }
 int vdouble::Bernulli_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved, const double& depsilon)
 {
-	//Вычисляет действительные и комплексные корни действительного полинома методом Бернулли (для полиномов с вычленёнными кратными корнями)
+	//Р’С‹С‡РёСЃР»СЏРµС‚ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ Рё РєРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР° РјРµС‚РѕРґРѕРј Р‘РµСЂРЅСѓР»Р»Рё (РґР»СЏ РїРѕР»РёРЅРѕРјРѕРІ СЃ РІС‹С‡Р»РµРЅС‘РЅРЅС‹РјРё РєСЂР°С‚РЅС‹РјРё РєРѕСЂРЅСЏРјРё)
 	int result, i, len, len1, len0, k, k1, k2, k3, maxLoops = 100000, mink = 4, j, j2, inv = 0, unsolvlen;
 	double mjuk, tk, Sk, Sk_1, x, y, xx, e, mf, mdf, c,
 		epsilon_control = 1.0e-5,
@@ -7046,10 +7046,10 @@ int vdouble::Bernulli_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved,
 					else
 						x = j == 0 ? xx : - xx;
 
-					// Уточнение значения корня методом Ньютона
+					// РЈС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 					this->PolynomNewtonRoot(x);
-					// Проверка
-					deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+					// РџСЂРѕРІРµСЂРєР°
+					deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 					e = fabs(v.PolynomValue(x)) / fabs(deriv.PolynomValue(x));
 					if (e < epsilon_control)
 					{
@@ -7082,12 +7082,12 @@ int vdouble::Bernulli_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved,
 					}
 					z.x = x;
 					z.y = y;
-					// Настройка комплексных корней методом Ньютона
+					// РќР°СЃС‚СЂРѕР№РєР° РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 					this->PolynomNewtonRoot(z);
 					x = z.x; y = z.y;
-					// Проверка
+					// РџСЂРѕРІРµСЂРєР°
 					zf = v.PolynomValue(z);
-					deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+					deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 					zdf = deriv.PolynomValue(z);
 					mf = zf.x * zf.x + zf.y * zf.y;
 					mdf = zdf.x * zdf.x + zdf.y * zdf.y;
@@ -7117,13 +7117,13 @@ int vdouble::Bernulli_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved,
 		unsolved = v;
 		unsolvlen = unsolved.m_length;
 		if (unsolvlen < 2/* && Find(abs(solved - *this) > depsilon).size == 0*/)
-			result = 0;// найдены все корни
+			result = 0;// РЅР°Р№РґРµРЅС‹ РІСЃРµ РєРѕСЂРЅРё
 		else
 		{
 			if (unsolvlen < len1)
-				result = 1;		// найден по меньшей мере один корень
-			if (unsolvlen == len1) // не найден ни один корень
-				result = 2;// корни неотделимы и есть указание на комплексные корни
+				result = 1;		// РЅР°Р№РґРµРЅ РїРѕ РјРµРЅСЊС€РµР№ РјРµСЂРµ РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+			if (unsolvlen == len1) // РЅРµ РЅР°Р№РґРµРЅ РЅРё РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+				result = 2;// РєРѕСЂРЅРё РЅРµРѕС‚РґРµР»РёРјС‹ Рё РµСЃС‚СЊ СѓРєР°Р·Р°РЅРёРµ РЅР° РєРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё
 		}
 		inversed ^= true;
 		if ( (result == 2 && inv > 1) || result == 0)
@@ -7133,19 +7133,19 @@ int vdouble::Bernulli_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved,
 	unsolved = v;
 	unsolvlen = unsolved.m_length;
 	if (unsolvlen < 2)
-		result = 0;// найдены все корни
+		result = 0;// РЅР°Р№РґРµРЅС‹ РІСЃРµ РєРѕСЂРЅРё
 	else
 	{
 		if (unsolvlen < len0)
-			result = 1;		// найден по меньшей мере один корень
-		if (unsolvlen == len0) // не найден ни один корень
-			result = 3;// корни неотделимы и есть указание на комплексные корни
+			result = 1;		// РЅР°Р№РґРµРЅ РїРѕ РјРµРЅСЊС€РµР№ РјРµСЂРµ РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+		if (unsolvlen == len0) // РЅРµ РЅР°Р№РґРµРЅ РЅРё РѕРґРёРЅ РєРѕСЂРµРЅСЊ
+			result = 3;// РєРѕСЂРЅРё РЅРµРѕС‚РґРµР»РёРјС‹ Рё РµСЃС‚СЊ СѓРєР°Р·Р°РЅРёРµ РЅР° РєРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё
 	}
 	return result;
 }
 int vdouble::BernulliMinRealRoot(vdouble& dr, const double& depsilon)
 {
-	//Вычисляет минимальный по модулю действительный корень действительного полинома методом Бернулли (для полиномов с вычленёнными кратными корнями)
+	//Р’С‹С‡РёСЃР»СЏРµС‚ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РїРѕ РјРѕРґСѓР»СЋ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Р№ РєРѕСЂРµРЅСЊ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР° РјРµС‚РѕРґРѕРј Р‘РµСЂРЅСѓР»Р»Рё (РґР»СЏ РїРѕР»РёРЅРѕРјРѕРІ СЃ РІС‹С‡Р»РµРЅС‘РЅРЅС‹РјРё РєСЂР°С‚РЅС‹РјРё РєРѕСЂРЅСЏРјРё)
 	int result, i, len, len1, len0, k, k1, k2, k3, maxLoops = 100000, mink = 4, j, j2, inv = 0;
 	double mjuk, tk, Sk, Sk_1, x, y, xx, e, mf, mdf, c,
 		epsilon_control = 1.0e-3,
@@ -7347,10 +7347,10 @@ Vector<complex>	cr = Vector<complex>(0);
 					x = j == 0 ? 1.0 / xx : - 1.0 / xx;
 				else
 					x = j == 0 ? xx : - xx;
-				// Уточнение значения корня методом Ньютона
+				// РЈС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 				this->PolynomNewtonRoot(x);
-				// Проверка
-				deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+				// РџСЂРѕРІРµСЂРєР°
+				deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 				e = fabs(v.PolynomValue(x)) / fabs(deriv.PolynomValue(x));
 				if (e < epsilon_control)
 				{
@@ -7384,12 +7384,12 @@ Vector<complex>	cr = Vector<complex>(0);
 				}
 				z.x = x;
 				z.y = y;
-				// Настройка комплексных корней методом Ньютона
+				// РќР°СЃС‚СЂРѕР№РєР° РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№ РјРµС‚РѕРґРѕРј РќСЊСЋС‚РѕРЅР°
 				this->PolynomNewtonRoot(z);
 				x = z.x; y = z.y;
-				// Проверка
+				// РџСЂРѕРІРµСЂРєР°
 				zf = v.PolynomValue(z);
-				deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+				deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 				zdf = deriv.PolynomValue(z);
 				mf = zf.x * zf.x + zf.y * zf.y;
 				mdf = zdf.x * zdf.x + zdf.y * zdf.y;
@@ -7421,7 +7421,7 @@ Vector<complex>	cr = Vector<complex>(0);
 	if (dr.m_length < 1)
 		result = -1;
 	else
-		result = 0;// найден корень
+		result = 0;// РЅР°Р№РґРµРЅ РєРѕСЂРµРЅСЊ
 	return result;
 }
 int vdouble::PolynomNewtonRoot(complex& z, const double& epsilon)
@@ -7430,24 +7430,24 @@ int vdouble::PolynomNewtonRoot(complex& z, const double& epsilon)
 		q = 0;
 	double x, y, xd, yd, xdz, ydz, md, min_md, mf, mf0;
 	complex zn, fz, fdz;
-	vdouble deriv = PolynomDerivative();// Коэффициенты полинома производной
-	zn = z;// текущее значение корня
+	vdouble deriv = PolynomDerivative();// РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	zn = z;// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЂРЅСЏ
 	double depsilon = epsilon * epsilon;
 	
-	fz = PolynomValue(zn);// текущее значение функции
-	fdz = deriv.PolynomValue(zn);// текущее значение производной
+	fz = PolynomValue(zn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ С„СѓРЅРєС†РёРё
+	fdz = deriv.PolynomValue(zn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 	x = fz.x; y = fz.y; xd = fdz.x; yd = fdz.y;
-	md = xd * xd + yd * yd; // квадрат модуля производной
-	min_md = md;// минимум квадрата модуля производной
-	mf0 = x * x + y * y;// Начальное значение квадрата модуля функции
+	md = xd * xd + yd * yd; // РєРІР°РґСЂР°С‚ РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	min_md = md;// РјРёРЅРёРјСѓРј РєРІР°РґСЂР°С‚Р° РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	mf0 = x * x + y * y;// РќР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРІР°РґСЂР°С‚Р° РјРѕРґСѓР»СЏ С„СѓРЅРєС†РёРё
 	bool go = true;
 	do
 	{
 		q++;
-		// Деление значения функции на значение производной
+		// Р”РµР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё РЅР° Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 		xdz = ( x * xd + y * yd) / md;
 		ydz = ( xd * y - x * yd) / md;
-		// Поправка значения корня
+		// РџРѕРїСЂР°РІРєР° Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ
 		if (fabs(xdz) >= fabs(zn.x))
 		{
 			do
@@ -7466,61 +7466,61 @@ int vdouble::PolynomNewtonRoot(complex& z, const double& epsilon)
 		}
 		zn.x -= xdz; zn.y -= ydz;
 
-		fz = PolynomValue(zn);// текущее значение функции
-		fdz = deriv.PolynomValue(zn);// текущее значение производной
+		fz = PolynomValue(zn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ С„СѓРЅРєС†РёРё
+		fdz = deriv.PolynomValue(zn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 		x = fz.x; y = fz.y; xd = fdz.x; yd = fdz.y;
-		md = xd * xd + yd * yd; // квадрат модуля производной
-		min_md = min_md < md ? min_md : md;// минимум квадрата модуля производной
-		mf = x * x + y * y;// квадрат модуля значения функции
+		md = xd * xd + yd * yd; // РєРІР°РґСЂР°С‚ РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		min_md = min_md < md ? min_md : md;// РјРёРЅРёРјСѓРј РєРІР°РґСЂР°С‚Р° РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		mf = x * x + y * y;// РєРІР°РґСЂР°С‚ РјРѕРґСѓР»СЏ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё
 	}
 	while(mf / min_md > depsilon && q < maxLoops && go);
 	int result;
 	if (mf0 >= mf && mf / min_md <= depsilon)
 	{
-		z = zn;	//уточнение значения корня в случае 
-		result = 0;  // Успеха выполнения функции
+		z = zn;	//СѓС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РІ СЃР»СѓС‡Р°Рµ 
+		result = 0;  // РЈСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ С„СѓРЅРєС†РёРё
 	}
 	else
 	{
 		if (mf0 >= mf && mf / min_md > depsilon)
 		{
-			z = zn;	//уточнение значения корня в случае 
-			result = 1;  // Успеха выполнения функции, 
-						// но всё же заданная точность не достигнута
+			z = zn;	//СѓС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РІ СЃР»СѓС‡Р°Рµ 
+			result = 1;  // РЈСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ С„СѓРЅРєС†РёРё, 
+						// РЅРѕ РІСЃС‘ Р¶Рµ Р·Р°РґР°РЅРЅР°СЏ С‚РѕС‡РЅРѕСЃС‚СЊ РЅРµ РґРѕСЃС‚РёРіРЅСѓС‚Р°
 		}
 	}
 	if (mf0 < mf)
 	{
-		result = -1; // Неудача 
+		result = -1; // РќРµСѓРґР°С‡Р° 
 	}
 //	fprintf(stderr, " mf0 = %g, mf = %g,e = %g, q = %i\n", mf0, mf, sqrt(mf / min_md), q);
 	return result;
 }
 int vdouble::TranscendentNewtonRoot(double& x, double k, vdouble& v, const double& epsilon)
 {
-	// имеем трансцендентное уравнение
+	// РёРјРµРµРј С‚СЂР°РЅСЃС†РµРЅРґРµРЅС‚РЅРѕРµ СѓСЂР°РІРЅРµРЅРёРµ
 	// this->PolynomValue(x) * exp(k * x) + v.PolynomValue(x) = 0.0;
 	int maxLoops = 1000,
 		q = 0;
 	double md, min_md, mf, mf0, xn, fx, fdx, dxn;
-	vdouble deriv1 = PolynomDerivative();// Коэффициенты полинома производной
-	vdouble deriv2 = v.PolynomDerivative();// Коэффициенты полинома производной
-	xn = x;// текущее значение корня
+	vdouble deriv1 = PolynomDerivative();// РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	vdouble deriv2 = v.PolynomDerivative();// РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	xn = x;// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЂРЅСЏ
 
-	fx = PolynomValue(xn) * exp(k * xn) + v.PolynomValue(xn);// текущее значение функции
+	fx = PolynomValue(xn) * exp(k * xn) + v.PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ С„СѓРЅРєС†РёРё
 	fdx = (PolynomValue(xn) * k + 
 		deriv1.PolynomValue(xn)) * exp(k * xn) + 
-		deriv2.PolynomValue(xn);// текущее значение производной
-	md = fabs(fdx); // модуль производной
-	min_md = md;// минимум модуля производной
-	mf0 = fabs(fx);// модуль значения функции
+		deriv2.PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	md = fabs(fdx); // РјРѕРґСѓР»СЊ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	min_md = md;// РјРёРЅРёРјСѓРј РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	mf0 = fabs(fx);// РјРѕРґСѓР»СЊ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё
 	do
 	{
 //		if(q%50==0)
 //fprintf(stderr," x = %g, fx = %g, fdx = %g, q = %i\n\n", xn,fx, fdx, q);
 		q++;
-		// Деление значения функции на значение производной
-		// Поправка значения корня
+		// Р”РµР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё РЅР° Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		// РџРѕРїСЂР°РІРєР° Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ
 		dxn = fx / fdx;
 		if (fabs(dxn) >= fabs(xn))
 		{
@@ -7531,36 +7531,36 @@ int vdouble::TranscendentNewtonRoot(double& x, double k, vdouble& v, const doubl
 			while (fabs(dxn) >= fabs(xn));
 		}
 		xn -= dxn;
-		fx = PolynomValue(xn) * exp(k * xn) + v.PolynomValue(xn);// текущее значение функции
+		fx = PolynomValue(xn) * exp(k * xn) + v.PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ С„СѓРЅРєС†РёРё
 		fdx = (PolynomValue(xn) * k + 
 			deriv1.PolynomValue(xn)) * exp(k * xn) + 
-			deriv2.PolynomValue(xn);// текущее значение производной
+			deriv2.PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 //if (fabs(fdx)<0.1)
 //fprintf(stderr,"fdx = (%g + %g) * %g + %g\n",PolynomValue(xn) * k, deriv1.PolynomValue(xn), exp(k * xn), deriv2.PolynomValue(xn));
-		md = fabs(fdx); // модуль производной
-		min_md = min_md < md ? min_md : md;// минимум модуля производной
-		mf = fabs(fx);// модуль значения функции
+		md = fabs(fdx); // РјРѕРґСѓР»СЊ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		min_md = min_md < md ? min_md : md;// РјРёРЅРёРјСѓРј РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		mf = fabs(fx);// РјРѕРґСѓР»СЊ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё
 	}
 	while(mf / min_md > epsilon && q < maxLoops);
 	int result;
 	if (mf0 >= mf && mf / min_md <= epsilon)
 	{
-		x = xn;	//уточнение значения корня в случае 
-		result = 0; // Успеха выполнения функции
+		x = xn;	//СѓС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РІ СЃР»СѓС‡Р°Рµ 
+		result = 0; // РЈСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ С„СѓРЅРєС†РёРё
 	}
 	else
 	{
 		if (mf0 >= mf && mf / min_md > epsilon)
 		{
-			x = xn;	//уточнение значения корня в случае 
-			result = 1; // Успеха выполнения функции, 
-						// но всё же заданная точность не достигнута
+			x = xn;	//СѓС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РІ СЃР»СѓС‡Р°Рµ 
+			result = 1; // РЈСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ С„СѓРЅРєС†РёРё, 
+						// РЅРѕ РІСЃС‘ Р¶Рµ Р·Р°РґР°РЅРЅР°СЏ С‚РѕС‡РЅРѕСЃС‚СЊ РЅРµ РґРѕСЃС‚РёРіРЅСѓС‚Р°
 
 		}
 	}
 	if (mf0 < mf)
 	{
-		result = -1; // Неудача 
+		result = -1; // РќРµСѓРґР°С‡Р° 
 	}
 //	fprintf(stderr, " mf0 = %g, mf = %g,e = %g, q = %i\n", mf0, mf, mf / min_md,q);
 	return result;
@@ -7570,19 +7570,19 @@ int vdouble::PolynomNewtonRoot(double& dr, const double& epsilon)
 	int maxLoops = 100,
 		q = 0;
 	double md, min_md, mf, mf0, xn, fx, fdx, dxn;
-	vdouble deriv = PolynomDerivative();// Коэффициенты полинома производной
-	xn = dr;// текущее значение корня
+	vdouble deriv = PolynomDerivative();// РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	xn = dr;// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РєРѕСЂРЅСЏ
 
-	fx = PolynomValue(xn);// текущее значение функции
-	fdx = deriv.PolynomValue(xn);// текущее значение производной
-	md = fabs(fdx); // модуль производной
-	min_md = md;// минимум модуля производной
-	mf0 = fabs(fx);// модуль значения функции
+	fx = PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ С„СѓРЅРєС†РёРё
+	fdx = deriv.PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	md = fabs(fdx); // РјРѕРґСѓР»СЊ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	min_md = md;// РјРёРЅРёРјСѓРј РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+	mf0 = fabs(fx);// РјРѕРґСѓР»СЊ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё
 	do
 	{
 		q++;
-		// Деление значения функции на значение производной
-		// Поправка значения корня
+		// Р”РµР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё РЅР° Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		// РџРѕРїСЂР°РІРєР° Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ
 		dxn = fx / fdx;
 		if (fabs(dxn) >= fabs(xn))
 		{
@@ -7593,40 +7593,40 @@ int vdouble::PolynomNewtonRoot(double& dr, const double& epsilon)
 			while (fabs(dxn) >= fabs(xn));
 		}
 		xn -= dxn;
-		fx = PolynomValue(xn);// текущее значение функции
-		fdx = deriv.PolynomValue(xn);// текущее значение производной
+		fx = PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ С„СѓРЅРєС†РёРё
+		fdx = deriv.PolynomValue(xn);// С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 
-		md = fabs(fdx); // модуль производной
-		min_md = min_md < md ? min_md : md;// минимум модуля производной
-		mf = fabs(fx);// модуль значения функции
+		md = fabs(fdx); // РјРѕРґСѓР»СЊ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		min_md = min_md < md ? min_md : md;// РјРёРЅРёРјСѓРј РјРѕРґСѓР»СЏ РїСЂРѕРёР·РІРѕРґРЅРѕР№
+		mf = fabs(fx);// РјРѕРґСѓР»СЊ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё
 	}
 	while(mf / min_md > epsilon && q < maxLoops);
 	int result;
 	if (mf0 >= mf && mf / min_md <= epsilon)
 	{
-		dr = xn;	//уточнение значения корня в случае 
-		result = 0; // Успеха выполнения функции
+		dr = xn;	//СѓС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РІ СЃР»СѓС‡Р°Рµ 
+		result = 0; // РЈСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ С„СѓРЅРєС†РёРё
 	}
 	else
 	{
 		if (mf0 >= mf && mf / min_md > epsilon)
 		{
-			dr = xn;	//уточнение значения корня в случае 
-			result = 1; // Успеха выполнения функции, 
-						// но всё же заданная точность не достигнута
+			dr = xn;	//СѓС‚РѕС‡РЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РєРѕСЂРЅСЏ РІ СЃР»СѓС‡Р°Рµ 
+			result = 1; // РЈСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ С„СѓРЅРєС†РёРё, 
+						// РЅРѕ РІСЃС‘ Р¶Рµ Р·Р°РґР°РЅРЅР°СЏ С‚РѕС‡РЅРѕСЃС‚СЊ РЅРµ РґРѕСЃС‚РёРіРЅСѓС‚Р°
 
 		}
 	}
 	if (mf0 < mf)
 	{
-		result = -1; // Неудача 
+		result = -1; // РќРµСѓРґР°С‡Р° 
 	}
 //	fprintf(stderr, " mf0 = %g, mf = %g,e = %g, q = %i\n", mf0, mf, mf / min_md,q);
 	return result;
 }
 int vdouble::PolynomLinaThree_memberDivider(double& p, double& q)
 {
-	// нахождение квадратичного делителя заданного многочлена методом Лина
+	// РЅР°С…РѕР¶РґРµРЅРёРµ РєРІР°РґСЂР°С‚РёС‡РЅРѕРіРѕ РґРµР»РёС‚РµР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ РјРЅРѕРіРѕС‡Р»РµРЅР° РјРµС‚РѕРґРѕРј Р›РёРЅР°
 	vdouble v, qu, r, d1, d2, deriv;
 	vdouble d0 = vdouble(3); d0[0] = 1.0; d0[1] = p; d0[2] = q;
 	Vector<int> inz;
@@ -7666,7 +7666,7 @@ int vdouble::PolynomLinaThree_memberDivider(double& p, double& q)
 			z1.x = - d1[1] / 2.0; z1.y = sqrt(fabs(D1)) / 2.0;
 			z2.x = - d2[1] / 2.0; z2.y = sqrt(fabs(D2)) / 2.0;
 
-			// дельта-квадрат Процесс Эйткена для улучшения сходимости
+			// РґРµР»СЊС‚Р°-РєРІР°РґСЂР°С‚ РџСЂРѕС†РµСЃСЃ Р­Р№С‚РєРµРЅР° РґР»СЏ СѓР»СѓС‡С€РµРЅРёСЏ СЃС…РѕРґРёРјРѕСЃС‚Рё
 			// z_2 = z2 - (z2 - z1)^2 / (z0 + z2 - 2*z1);
 			znam.x = z0.x + z2.x - 2.0 * z1.x;
 			znam.y = z0.y + z2.y - 2.0 * z1.y;
@@ -7681,9 +7681,9 @@ int vdouble::PolynomLinaThree_memberDivider(double& p, double& q)
 			z_2.x = z2.x + (znam.x * chisl.x + znam.y * chisl.y) / c;
 			z_2.y = z2.y + (znam.x * chisl.y - chisl.x * znam.y) / c;
 
-			// Проверка
+			// РџСЂРѕРІРµСЂРєР°
 			zf = v.PolynomValue(z_2);
-			deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+			deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 			zdf = deriv.PolynomValue(z_2);
 			mf = zf.x * zf.x + zf.y * zf.y;
 			mdf = zdf.x * zdf.x + zdf.y * zdf.y;
@@ -7710,11 +7710,11 @@ int vdouble::PolynomLinaThree_memberDivider(double& p, double& q)
 				x2 = (- d2[1] + sqrt(D2)) / 2.0; 
 				y2 = (- d2[1] - sqrt(D2)) / 2.0; 
 				
-				// дельта-квадрат Процесс Эйткена для улучшения сходимости
+				// РґРµР»СЊС‚Р°-РєРІР°РґСЂР°С‚ РџСЂРѕС†РµСЃСЃ Р­Р№С‚РєРµРЅР° РґР»СЏ СѓР»СѓС‡С€РµРЅРёСЏ СЃС…РѕРґРёРјРѕСЃС‚Рё
 				x_2 = x2 - (x2 - x1) * (x2 - x1) / (x0 + x2 - 2*x1);
 				y_2 = y2 - (y2 - y1) * (y2 - y1) / (y0 + y2 - 2*y1);
 				// Verification
-				deriv = v.PolynomDerivative();//Коэффициенты полинома производной
+				deriv = v.PolynomDerivative();//РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° РїСЂРѕРёР·РІРѕРґРЅРѕР№
 				ex = fabs(v.PolynomValue(x_2)) / fabs(deriv.PolynomValue(x_2));
 				ey = fabs(v.PolynomValue(y_2)) / fabs(deriv.PolynomValue(y_2));
 				if ( ex < epsilon && ey < epsilon )
@@ -7731,8 +7731,8 @@ int vdouble::PolynomLinaThree_memberDivider(double& p, double& q)
 			}
 			else
 			{
-				// Смесь комплексных и действительных квадратичных делителей 
-				// Процесс Эйткена применять нельзя
+				// РЎРјРµСЃСЊ РєРѕРјРїР»РµРєСЃРЅС‹С… Рё РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРІР°РґСЂР°С‚РёС‡РЅС‹С… РґРµР»РёС‚РµР»РµР№ 
+				// РџСЂРѕС†РµСЃСЃ Р­Р№С‚РєРµРЅР° РїСЂРёРјРµРЅСЏС‚СЊ РЅРµР»СЊР·СЏ
 				d0 = d2; D0 = D2;
 			}
 		}
@@ -7743,7 +7743,7 @@ int vdouble::PolynomLinaThree_memberDivider(double& p, double& q)
 }
 int vdouble::PolynomLinaDivider(vdouble& d)
 {
-	// нахождение делителя любой степени заданного многочлена методом Лина
+	// РЅР°С…РѕР¶РґРµРЅРёРµ РґРµР»РёС‚РµР»СЏ Р»СЋР±РѕР№ СЃС‚РµРїРµРЅРё Р·Р°РґР°РЅРЅРѕРіРѕ РјРЅРѕРіРѕС‡Р»РµРЅР° РјРµС‚РѕРґРѕРј Р›РёРЅР°
 	vdouble v, q, r, d0, d1, dd;
 	Vector<int> inz;
 	v = *this;
@@ -7831,11 +7831,11 @@ vdouble vdouble::vLagerPolynom(int n)
 
 double vdouble::LagerAlphaDeterm(int maxOrder, double tend, double EnergyPart)
 {
-	// Функция аналитически вычисляет значение альфа, 
-	// удовлетворяющее условию, что на участке от нуля 
-	// до верхнего предела интегрирования tend умещается 
-	// EnergyPart от суммарной энергии полинома 
-	// максимального порядка maxOrder, вычисленной с весом
+	// Р¤СѓРЅРєС†РёСЏ Р°РЅР°Р»РёС‚РёС‡РµСЃРєРё РІС‹С‡РёСЃР»СЏРµС‚ Р·РЅР°С‡РµРЅРёРµ Р°Р»СЊС„Р°, 
+	// СѓРґРѕРІР»РµС‚РІРѕСЂСЏСЋС‰РµРµ СѓСЃР»РѕРІРёСЋ, С‡С‚Рѕ РЅР° СѓС‡Р°СЃС‚РєРµ РѕС‚ РЅСѓР»СЏ 
+	// РґРѕ РІРµСЂС…РЅРµРіРѕ РїСЂРµРґРµР»Р° РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ tend СѓРјРµС‰Р°РµС‚СЃСЏ 
+	// EnergyPart РѕС‚ СЃСѓРјРјР°СЂРЅРѕР№ СЌРЅРµСЂРіРёРё РїРѕР»РёРЅРѕРјР° 
+	// РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ РїРѕСЂСЏРґРєР° maxOrder, РІС‹С‡РёСЃР»РµРЅРЅРѕР№ СЃ РІРµСЃРѕРј
 	double alpha, dn, cn, bn;
 	int q;
 	Vector<vdouble> vLag(3);
@@ -7843,20 +7843,20 @@ double vdouble::LagerAlphaDeterm(int maxOrder, double tend, double EnergyPart)
 	int n, order;
 	for (q = 0; q < 3; q++)
 	{
-		// полиномиальные коэффициенты полинома Лагерра
+		// РїРѕР»РёРЅРѕРјРёР°Р»СЊРЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїРѕР»РёРЅРѕРјР° Р›Р°РіРµСЂСЂР°
 		vLag[q] = vLagerPolynom(q);
 		alpha = vLag[q].LagerAlphaDeterminition(tend, EnergyPart);
 /*
-		// разлагаем экспоненту в степенной ряд
-	//	N = vIntLen + 10; // степень полинома разложения экспоненты
+		// СЂР°Р·Р»Р°РіР°РµРј СЌРєСЃРїРѕРЅРµРЅС‚Сѓ РІ СЃС‚РµРїРµРЅРЅРѕР№ СЂСЏРґ
+	//	N = vIntLen + 10; // СЃС‚РµРїРµРЅСЊ РїРѕР»РёРЅРѕРјР° СЂР°Р·Р»РѕР¶РµРЅРёСЏ СЌРєСЃРїРѕРЅРµРЅС‚С‹
 		c = vdouble(N);
-		m = 1.0; // Коэффициент перед экспонентой
+		m = 1.0; // РљРѕСЌС„С„РёС†РёРµРЅС‚ РїРµСЂРµРґ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№
 		f = 1.0;
-		j = 0; //порядок производной
+		j = 0; //РїРѕСЂСЏРґРѕРє РїСЂРѕРёР·РІРѕРґРЅРѕР№
 		for (i = N - 1; i >= 0 ; i--)
 		{
-			c[i] = m / f;// Коэффициент интерполирующего полинома
-			m *= -2.0 * tend; // Умножение на коэффициент внутри экспоненты
+			c[i] = m / f;// РљРѕСЌС„С„РёС†РёРµРЅС‚ РёРЅС‚РµСЂРїРѕР»РёСЂСѓСЋС‰РµРіРѕ РїРѕР»РёРЅРѕРјР°
+			m *= -2.0 * tend; // РЈРјРЅРѕР¶РµРЅРёРµ РЅР° РєРѕСЌС„С„РёС†РёРµРЅС‚ РІРЅСѓС‚СЂРё СЌРєСЃРїРѕРЅРµРЅС‚С‹
 			j++;
 			f *= (double)j;
 		}
@@ -7877,10 +7877,10 @@ double vdouble::LagerAlphaDeterm(int maxOrder, double tend, double EnergyPart)
 			bn = ((double)(2*n-1)) / dn;
 			cn = ((double)(n-1)) / dn;
 			vrek[0] = -2.0 / dn;; vrek[1] = bn;
-			// рекурентное вычисление полиномиальных коэффициентов полинома Лагерра
+			// СЂРµРєСѓСЂРµРЅС‚РЅРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ РїРѕР»РёРЅРѕРјРёР°Р»СЊРЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РїРѕР»РёРЅРѕРјР° Р›Р°РіРµСЂСЂР°
 			vLag[0] = vLag[1]; vLag[1] = vLag[2];
 			vLag[2] = conv(vLag[1], vrek).PolynomSumming( - cn * vLag[0]);
-			// вычисление поправки интегрирования от tend до бесконечности
+			// РІС‹С‡РёСЃР»РµРЅРёРµ РїРѕРїСЂР°РІРєРё РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ РѕС‚ tend РґРѕ Р±РµСЃРєРѕРЅРµС‡РЅРѕСЃС‚Рё
 			alpha = vLag[2].LagerAlphaDeterminition(tend,EnergyPart);
 		}
 	}
@@ -8003,30 +8003,30 @@ void vdouble::Rand(double minBorder, double maxBorder)
 #if 0
 int vdouble::b_reconstructor(vdouble& b, vdouble& tt, vdouble& xx, double t0)
 {
-	// реконструкция коэффициентов числителя передаточной функции 
-	// по  известному знаменателю (*this)  
-	// а также по отклику на delta - импульс в момент t0
+	// СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЏ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ С‡РёСЃР»РёС‚РµР»СЏ РїРµСЂРµРґР°С‚РѕС‡РЅРѕР№ С„СѓРЅРєС†РёРё 
+	// РїРѕ  РёР·РІРµСЃС‚РЅРѕРјСѓ Р·РЅР°РјРµРЅР°С‚РµР»СЋ (*this)  
+	// Р° С‚Р°РєР¶Рµ РїРѕ РѕС‚РєР»РёРєСѓ РЅР° delta - РёРјРїСѓР»СЊСЃ РІ РјРѕРјРµРЅС‚ t0
 	int Len = tt.m_length;
 	if (xx.m_length != tt.m_length)
 	{
 		CString strerr;
-		strerr.Format("Еrror during vdouble::b_reconstructor: \n (xx.m_length (%i) != tt.m_length (%i))", 
+		strerr.Format("Р•rror during vdouble::b_reconstructor: \n (xx.m_length (%i) != tt.m_length (%i))", 
 			xx.m_length, tt.m_length);
 		AfxMessageBox(strerr);
 		AfxThrowUserException();
 	}
-	// При вычислении обратного преобразования Лапласа достаточно вічислить корни знаменателя только один раз
+	// РџСЂРё РІС‹С‡РёСЃР»РµРЅРёРё РѕР±СЂР°С‚РЅРѕРіРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ Р›Р°РїР»Р°СЃР° РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІС–С‡РёСЃР»РёС‚СЊ РєРѕСЂРЅРё Р·РЅР°РјРµРЅР°С‚РµР»СЏ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЂР°Р·
 	// vdouble numerator = *this;
 	int result = 0, 
 		b_len = m_length - 1,
 		res, 
 		i;
 	double xD_, yD_, mD_, xN, yN, xk, yk, x, y, *pM, *pM_ord;
-	vdouble droots_den, // Действительные корни знаменателя 
-		deriv_den,  // и производная его
-		f_reconstr; // реконструкция сигнала
-	Vector<complex> croots_den; //Комплексные корни знаменателя
-	deriv_den = this->PolynomDerivative(); //производная знаменателя
+	vdouble droots_den, // Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅС‹Рµ РєРѕСЂРЅРё Р·РЅР°РјРµРЅР°С‚РµР»СЏ 
+		deriv_den,  // Рё РїСЂРѕРёР·РІРѕРґРЅР°СЏ РµРіРѕ
+		f_reconstr; // СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёСЏ СЃРёРіРЅР°Р»Р°
+	Vector<complex> croots_den; //РљРѕРјРїР»РµРєСЃРЅС‹Рµ РєРѕСЂРЅРё Р·РЅР°РјРµРЅР°С‚РµР»СЏ
+	deriv_den = this->PolynomDerivative(); //РїСЂРѕРёР·РІРѕРґРЅР°СЏ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 	// ============== Roots of denominator ==========================
 	Vector<int> order_dr, order_cr;
 	res = this->roots(droots_den, croots_den,order_dr, order_cr);
@@ -8053,20 +8053,20 @@ int vdouble::b_reconstructor(vdouble& b, vdouble& tt, vdouble& xx, double t0)
 	{
 		numerator.resize(b_len, 0.0);
 		numerator[ord] = 1.0;
-		f_reconstr.resize(Len, 0.0); // реконструируемый сигнал
-		//суммируем оригиналы от комплексных корней
+		f_reconstr.resize(Len, 0.0); // СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂСѓРµРјС‹Р№ СЃРёРіРЅР°Р»
+		//СЃСѓРјРјРёСЂСѓРµРј РѕСЂРёРіРёРЅР°Р»С‹ РѕС‚ РєРѕРјРїР»РµРєСЃРЅС‹С… РєРѕСЂРЅРµР№
 		for (i = 0; i < croots_den.size; i++)
 		{
-			complex N, D_, z; // комплексное значение числителя и производной знаменателя
-			// комплексный корень
+			complex N, D_, z; // РєРѕРјРїР»РµРєСЃРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ Рё РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
+			// РєРѕРјРїР»РµРєСЃРЅС‹Р№ РєРѕСЂРµРЅСЊ
 			x = croots_den[i].x;
 			y = croots_den[i].y;
 			z.x = x;
 			z.y = y;
-			// Вычисление коэффициента перед экспонентой
-			N = numerator.PolynomValue(z);// Значение числителя в корне
-			D_ = deriv_den.PolynomValue(z);// Значение производной знаменателя в корне
-			// Деление значения числителя на значение производной знаменателя
+			// Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РїРµСЂРµРґ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№
+			N = numerator.PolynomValue(z);// Р—РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ РІ РєРѕСЂРЅРµ
+			D_ = deriv_den.PolynomValue(z);// Р—РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ РІ РєРѕСЂРЅРµ
+			// Р”РµР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С‡РёСЃР»РёС‚РµР»СЏ РЅР° Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 			xD_ = D_.x; yD_ = D_.y;
 			mD_ = xD_ * xD_ + yD_ * yD_;
 			xN = N.x;
@@ -8083,16 +8083,16 @@ int vdouble::b_reconstructor(vdouble& b, vdouble& tt, vdouble& xx, double t0)
 			// xf = xk * xe - yk * ye;
 			f_reconstr += 2.0 * (xk * cos(y * t) - yk * sin(y * t)) * exp(x * t);
 		}
-		//суммируем оригиналы от действительных корней
+		//СЃСѓРјРјРёСЂСѓРµРј РѕСЂРёРіРёРЅР°Р»С‹ РѕС‚ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… РєРѕСЂРЅРµР№
 		for (i = 0; i < droots_den.m_length; i++)
 		{
-			double N, D_; // действительное значение числителя и производной знаменателя
-			// комплексный корень
+			double N, D_; // РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ Рё РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
+			// РєРѕРјРїР»РµРєСЃРЅС‹Р№ РєРѕСЂРµРЅСЊ
 			x = droots_den[i];
-			// Вычисление коэффициента перед экспонентой
-			N = numerator.PolynomValue(x);// Значение числителя в корне
-			D_ = deriv_den.PolynomValue(x);// Значение производной знаменателя в корне
-			// Деление значения числителя на значение производной знаменателя
+			// Р’С‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РїРµСЂРµРґ СЌРєСЃРїРѕРЅРµРЅС‚РѕР№
+			N = numerator.PolynomValue(x);// Р—РЅР°С‡РµРЅРёРµ С‡РёСЃР»РёС‚РµР»СЏ РІ РєРѕСЂРЅРµ
+			D_ = deriv_den.PolynomValue(x);// Р—РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ РІ РєРѕСЂРЅРµ
+			// Р”РµР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С‡РёСЃР»РёС‚РµР»СЏ РЅР° Р·РЅР°С‡РµРЅРёРµ РїСЂРѕРёР·РІРѕРґРЅРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЏ
 			xk = N / D_;
 			// ================= exp ============
 			f_reconstr += xk * exp(x * t);
@@ -8135,7 +8135,7 @@ int vdouble::b_reconstructor(vdouble& b, vdouble& tt, vdouble& xx, double t0)
 //DEL 	if (len_s < 0)
 //DEL 	{
 //DEL 		char s[1024];
-//DEL 		sprintf(s, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения", 
+//DEL 		sprintf(s, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 //DEL 			len_s);
 //DEL 		MessageBox(0, s, "vdouble::dwt", 0);
 //DEL 		return 0;
@@ -8157,12 +8157,12 @@ int vdouble::b_reconstructor(vdouble& b, vdouble& tt, vdouble& xx, double t0)
 //DEL 
 //DEL 	int ind, i, j/*, k ,
 //DEL 		ind0 = m_length%2 */ ;
-//DEL 	// центральные коэффициенты
+//DEL 	// С†РµРЅС‚СЂР°Р»СЊРЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
 //DEL 	for (i = m_length - 1; i >= len_h-1; i -= 2)// && k >= 0
 //DEL 	{
 //DEL 		*ptsd = *(pt + i - len_h + 1);
-//DEL 		ind = i;// индекс сигнала, используемый в операции свёртки
-//DEL 		for (j = len_h - 1; j >= 0; j--)// индекс элемента вейвлет фильтра
+//DEL 		ind = i;// РёРЅРґРµРєСЃ СЃРёРіРЅР°Р»Р°, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РІ РѕРїРµСЂР°С†РёРё СЃРІС‘СЂС‚РєРё
+//DEL 		for (j = len_h - 1; j >= 0; j--)// РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РІРµР№РІР»РµС‚ С„РёР»СЊС‚СЂР°
 //DEL 		{
 //DEL 			if (ind < 0)
 //DEL 			{
@@ -8229,15 +8229,15 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 	}
 	int len_h = dh.m_length,
 		len_s_right = 1,
-		// длина разложения определяется 
-		// сколько раз фильтр может полностью 
-		// уложиться на сигнале со сдвигом 2 
+		// РґР»РёРЅР° СЂР°Р·Р»РѕР¶РµРЅРёСЏ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ 
+		// СЃРєРѕР»СЊРєРѕ СЂР°Р· С„РёР»СЊС‚СЂ РјРѕР¶РµС‚ РїРѕР»РЅРѕСЃС‚СЊСЋ 
+		// СѓР»РѕР¶РёС‚СЊСЃСЏ РЅР° СЃРёРіРЅР°Р»Рµ СЃРѕ СЃРґРІРёРіРѕРј 2 
 		len_s = (m_length - len_h)/2 + 1;
 
 	if (len_s < 0)
 	{
 		char s[1024];
-		sprintf(s, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения", 
+		sprintf(s, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 			len_s);
 		MessageBox(0, s, "vdouble::dwt 2", 0);
 		return 0;
@@ -8245,9 +8245,9 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 	double 
 		*ps, 
 		*ph;
-	// выделяем память под коэффициенты 
-	// и их временные отметки 
-	// и обнуляем коэффициенты
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ 
+	// Рё РёС… РІСЂРµРјРµРЅРЅС‹Рµ РѕС‚РјРµС‚РєРё 
+	// Рё РѕР±РЅСѓР»СЏРµРј РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
 	tsd.resize(len_s);
 	s.resize(len_s, 0.0);
 	int
@@ -8256,39 +8256,39 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 
 	ph = dh.pD; 
 	pt = t.data;
-	// устанавливаем динамические указатели 
-	// на конец вектора коэффициентов и их временных отметок
+	// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґРёРЅР°РјРёС‡РµСЃРєРёРµ СѓРєР°Р·Р°С‚РµР»Рё 
+	// РЅР° РєРѕРЅРµС† РІРµРєС‚РѕСЂР° РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Рё РёС… РІСЂРµРјРµРЅРЅС‹С… РѕС‚РјРµС‚РѕРє
 	ptsd = tsd.data + len_s - 1;
 	ps = s.pD + len_s - 1;
 
 	int ind, i, j/*, k */,
-		// если при укладке фильтра на сигнале 
-		// остаётся один элемент, то мы это должны учесть.
+		// РµСЃР»Рё РїСЂРё СѓРєР»Р°РґРєРµ С„РёР»СЊС‚СЂР° РЅР° СЃРёРіРЅР°Р»Рµ 
+		// РѕСЃС‚Р°С‘С‚СЃСЏ РѕРґРёРЅ СЌР»РµРјРµРЅС‚, С‚Рѕ РјС‹ СЌС‚Рѕ РґРѕР»Р¶РЅС‹ СѓС‡РµСЃС‚СЊ.
 		ind0 = (m_length - len_h)%2;
-	// центральные коэффициенты
-	for (i = m_length - 1; i >= len_h-1; i -= 2)// движемся по сигналу с конца на начало с шагом 2
+	// С†РµРЅС‚СЂР°Р»СЊРЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
+	for (i = m_length - 1; i >= len_h-1; i -= 2)// РґРІРёР¶РµРјСЃСЏ РїРѕ СЃРёРіРЅР°Р»Сѓ СЃ РєРѕРЅС†Р° РЅР° РЅР°С‡Р°Р»Рѕ СЃ С€Р°РіРѕРј 2
 	{
-		// временная привязка вейвлет коэффициента - к началу фильтра ?
+		// РІСЂРµРјРµРЅРЅР°СЏ РїСЂРёРІСЏР·РєР° РІРµР№РІР»РµС‚ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° - Рє РЅР°С‡Р°Р»Сѓ С„РёР»СЊС‚СЂР° ?
 		*ptsd = *(pt + i - len_h + 1);
-		ind = i;// индекс сигнала, используемый в операции свёртки
-		for (j = len_h - 1; j >= 0; j--)// индекс элемента вейвлет фильтра
+		ind = i;// РёРЅРґРµРєСЃ СЃРёРіРЅР°Р»Р°, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РІ РѕРїРµСЂР°С†РёРё СЃРІС‘СЂС‚РєРё
+		for (j = len_h - 1; j >= 0; j--)// РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РІРµР№РІР»РµС‚ С„РёР»СЊС‚СЂР°
 		{
-			// производим свёртку фильтра с сигналом
+			// РїСЂРѕРёР·РІРѕРґРёРј СЃРІС‘СЂС‚РєСѓ С„РёР»СЊС‚СЂР° СЃ СЃРёРіРЅР°Р»РѕРј
 			if (ind < 0)
 			{
-				// на всякий случай если индекс выйдет за пределы
+				// РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№ РµСЃР»Рё РёРЅРґРµРєСЃ РІС‹Р№РґРµС‚ Р·Р° РїСЂРµРґРµР»С‹
 				*ps  += *(ph + j) * *pD;
 			}
 			else
 			{
 				if (ind < m_length)
 				{
-					// основная точка свёртки
+					// РѕСЃРЅРѕРІРЅР°СЏ С‚РѕС‡РєР° СЃРІС‘СЂС‚РєРё
 					*ps  += *(ph + j) * *(pD + ind);
 				}
 				else
 				{
-					// на всякий случай если индекс выйдет за пределы
+					// РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№ РµСЃР»Рё РёРЅРґРµРєСЃ РІС‹Р№РґРµС‚ Р·Р° РїСЂРµРґРµР»С‹
 					*ps  += *(ph + j) * *(pD + m_length - 1);
 				}
 			}
@@ -8354,7 +8354,7 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 //DEL 	if (len_s < 0)
 //DEL 	{
 //DEL 		char s[200];
-//DEL 		wsprintf(s,"Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения", 
+//DEL 		wsprintf(s,"Error using vdouble::dwt():\nlen_s(%i) < 0\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 //DEL 			len_s);
 //DEL 		MessageBox(0,s, "dwt 3", 0);
 //DEL 		return 0;
@@ -8391,8 +8391,8 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 //DEL 			else
 //DEL 				*pts = *(pt - 1 + m_length) + dt*(it-m_length+1);
 //DEL 		}
-//DEL 		ind = i;// индекс сигнала, используемый в операции свёртки
-//DEL 		for (j = len_h - 1; j >= 0; j--)// индекс элемента вейвлет фильтра
+//DEL 		ind = i;// РёРЅРґРµРєСЃ СЃРёРіРЅР°Р»Р°, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РІ РѕРїРµСЂР°С†РёРё СЃРІС‘СЂС‚РєРё
+//DEL 		for (j = len_h - 1; j >= 0; j--)// РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РІРµР№РІР»РµС‚ С„РёР»СЊС‚СЂР°
 //DEL 		{
 //DEL 			if (ind < 0)
 //DEL 				*ps  += *(ph + j) * *pD;
@@ -8420,8 +8420,8 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 //DEL 			else
 //DEL 				*ptd = *(pt - 1 + m_length) + dt*(it-m_length+1);
 //DEL 		}
-//DEL 		ind = i;// индекс сигнала, используемый в операции свёртки
-//DEL 		for (j = len_h - 1; j >= 0; j--)// индекс элемента вейвлет фильтра
+//DEL 		ind = i;// РёРЅРґРµРєСЃ СЃРёРіРЅР°Р»Р°, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РІ РѕРїРµСЂР°С†РёРё СЃРІС‘СЂС‚РєРё
+//DEL 		for (j = len_h - 1; j >= 0; j--)// РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РІРµР№РІР»РµС‚ С„РёР»СЊС‚СЂР°
 //DEL 		{
 //DEL 			if (ind < 0)
 //DEL 				*pd  += *(pg + j) * *pD;
@@ -8507,24 +8507,24 @@ int vdouble::dwt(int J,
 	}
 	int len_h = dh.m_length;
 
-	// конечный индекс сигнала, используемый на первом шаге свёртки
-	// его нужно задать так чтобы нулевой элемент фильтра 
-	// при движении фильтра влево (с шагом два) 
-	// совпал с начальным индексом сигнала
+	// РєРѕРЅРµС‡РЅС‹Р№ РёРЅРґРµРєСЃ СЃРёРіРЅР°Р»Р°, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РЅР° РїРµСЂРІРѕРј С€Р°РіРµ СЃРІС‘СЂС‚РєРё
+	// РµРіРѕ РЅСѓР¶РЅРѕ Р·Р°РґР°С‚СЊ С‚Р°Рє С‡С‚РѕР±С‹ РЅСѓР»РµРІРѕР№ СЌР»РµРјРµРЅС‚ С„РёР»СЊС‚СЂР° 
+	// РїСЂРё РґРІРёР¶РµРЅРёРё С„РёР»СЊС‚СЂР° РІР»РµРІРѕ (СЃ С€Р°РіРѕРј РґРІР°) 
+	// СЃРѕРІРїР°Р» СЃ РЅР°С‡Р°Р»СЊРЅС‹Рј РёРЅРґРµРєСЃРѕРј СЃРёРіРЅР°Р»Р°
 	int i0 = 
-		m_length - 1	// от индекс крайнего правого элемента сигнала
-		+ right_h		// сдвигаем фильтр вправо на величину правого хвоста
+		m_length - 1	// РѕС‚ РёРЅРґРµРєСЃ РєСЂР°Р№РЅРµРіРѕ РїСЂР°РІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СЃРёРіРЅР°Р»Р°
+		+ right_h		// СЃРґРІРёРіР°РµРј С„РёР»СЊС‚СЂ РІРїСЂР°РІРѕ РЅР° РІРµР»РёС‡РёРЅСѓ РїСЂР°РІРѕРіРѕ С…РІРѕСЃС‚Р°
 						
 		+ ((abs(len_h-right_h)%2) ^ (m_length%2));	// 
-												// сдвигаем фильтр на единицу вправо 
-												// если:
-												// 1){длина сигнала нечётна}
-												// XOR (исключающее или
-												// 2)(len_s-right_h) - это рабочая часть фильтра 
-												// в правом положении. 
-												// Если она нечётна
+												// СЃРґРІРёРіР°РµРј С„РёР»СЊС‚СЂ РЅР° РµРґРёРЅРёС†Сѓ РІРїСЂР°РІРѕ 
+												// РµСЃР»Рё:
+												// 1){РґР»РёРЅР° СЃРёРіРЅР°Р»Р° РЅРµС‡С‘С‚РЅР°}
+												// XOR (РёСЃРєР»СЋС‡Р°СЋС‰РµРµ РёР»Рё
+												// 2)(len_s-right_h) - СЌС‚Рѕ СЂР°Р±РѕС‡Р°СЏ С‡Р°СЃС‚СЊ С„РёР»СЊС‚СЂР° 
+												// РІ РїСЂР°РІРѕРј РїРѕР»РѕР¶РµРЅРёРё. 
+												// Р•СЃР»Рё РѕРЅР° РЅРµС‡С‘С‚РЅР°
 
-												// если оба чётны или оба нечётны, тогда не сдвигаем фильтр
+												// РµСЃР»Рё РѕР±Р° С‡С‘С‚РЅС‹ РёР»Рё РѕР±Р° РЅРµС‡С‘С‚РЅС‹, С‚РѕРіРґР° РЅРµ СЃРґРІРёРіР°РµРј С„РёР»СЊС‚СЂ
 		
 
 	int istop = len_h-1-left_h;
@@ -8536,9 +8536,9 @@ int vdouble::dwt(int J,
 */
 	int
 #if 0
-		// длина разложения определяется 
-		// сколько раз фильтр без левого и правого хвоста может полностью 
-		// уложиться на сигнале со сдвигом 2 
+		// РґР»РёРЅР° СЂР°Р·Р»РѕР¶РµРЅРёСЏ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ 
+		// СЃРєРѕР»СЊРєРѕ СЂР°Р· С„РёР»СЊС‚СЂ Р±РµР· Р»РµРІРѕРіРѕ Рё РїСЂР°РІРѕРіРѕ С…РІРѕСЃС‚Р° РјРѕР¶РµС‚ РїРѕР»РЅРѕСЃС‚СЊСЋ 
+		// СѓР»РѕР¶РёС‚СЊСЃСЏ РЅР° СЃРёРіРЅР°Р»Рµ СЃРѕ СЃРґРІРёРіРѕРј 2 
 		len_s = (m_length - len_h + left_h + right_h)/2 + 1 ;
 #else
 		len_s = (i0-istop+2)/2;
@@ -8547,7 +8547,7 @@ int vdouble::dwt(int J,
 	if (len_s <= 0)
 	{
 		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения", 
+		sprintf_s(s, S_LEN, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 			len_s);
 		MessageBox(0,s, "dwt 4", 0);
 		return 0;
@@ -8560,9 +8560,9 @@ int vdouble::dwt(int J,
 		*pts,  
 		*pt;
 
-	// выделяем память под коэффициенты 
-	// и их временные отметки 
-	// и обнуляем коэффициенты
+	// РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ 
+	// Рё РёС… РІСЂРµРјРµРЅРЅС‹Рµ РѕС‚РјРµС‚РєРё 
+	// Рё РѕР±РЅСѓР»СЏРµРј РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
 	ts.resize(len_s);
 	s.resize(len_s, 0.0);
 
@@ -8573,25 +8573,25 @@ int vdouble::dwt(int J,
 
 	ph	= dh.pD; 
 	pt	= t.data;
-	// устанавливаем динамические указатели 
-	// на конец вектора коэффициентов и их временных отметок
+	// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґРёРЅР°РјРёС‡РµСЃРєРёРµ СѓРєР°Р·Р°С‚РµР»Рё 
+	// РЅР° РєРѕРЅРµС† РІРµРєС‚РѕСЂР° РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Рё РёС… РІСЂРµРјРµРЅРЅС‹С… РѕС‚РјРµС‚РѕРє
 	pts = ts.data + len_s - 1;
 	ps	= s.pD + len_s - 1;
 
 	int ind, i, j, it;
 
 
-	// движемся по сигналу с конца на начало с шагом 2
+	// РґРІРёР¶РµРјСЃСЏ РїРѕ СЃРёРіРЅР°Р»Сѓ СЃ РєРѕРЅС†Р° РЅР° РЅР°С‡Р°Р»Рѕ СЃ С€Р°РіРѕРј 2
 	for (i = i0; i >= istop; i -= 2)
 	{
-		// временная привязка вейвлет коэффициента - к началу фильтра ?
-		// нет!!!
-		// временной индекс вейвлет коэффициента должен быть 
-		// равен нулю, в том элементарном шаге свёртки, когда
-		// нулевой индекс фильтра находится напротив 
-		// нулевого индекса сигнала
+		// РІСЂРµРјРµРЅРЅР°СЏ РїСЂРёРІСЏР·РєР° РІРµР№РІР»РµС‚ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° - Рє РЅР°С‡Р°Р»Сѓ С„РёР»СЊС‚СЂР° ?
+		// РЅРµС‚!!!
+		// РІСЂРµРјРµРЅРЅРѕР№ РёРЅРґРµРєСЃ РІРµР№РІР»РµС‚ РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ 
+		// СЂР°РІРµРЅ РЅСѓР»СЋ, РІ С‚РѕРј СЌР»РµРјРµРЅС‚Р°СЂРЅРѕРј С€Р°РіРµ СЃРІС‘СЂС‚РєРё, РєРѕРіРґР°
+		// РЅСѓР»РµРІРѕР№ РёРЅРґРµРєСЃ С„РёР»СЊС‚СЂР° РЅР°С…РѕРґРёС‚СЃСЏ РЅР°РїСЂРѕС‚РёРІ 
+		// РЅСѓР»РµРІРѕРіРѕ РёРЅРґРµРєСЃР° СЃРёРіРЅР°Р»Р°
 		// 
-		// это индекс временной шкалы
+		// СЌС‚Рѕ РёРЅРґРµРєСЃ РІСЂРµРјРµРЅРЅРѕР№ С€РєР°Р»С‹
 		it = i - len_h + 1;
 
 		if (it < 0)
@@ -8620,8 +8620,8 @@ int vdouble::dwt(int J,
 			}
 		}
 
-		ind = i;// индекс сигнала, используемый в операции свёртки
-		for (j = len_h - 1; j >= 0; j--)// индекс элемента вейвлет фильтра
+		ind = i;// РёРЅРґРµРєСЃ СЃРёРіРЅР°Р»Р°, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РІ РѕРїРµСЂР°С†РёРё СЃРІС‘СЂС‚РєРё
+		for (j = len_h - 1; j >= 0; j--)// РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РІРµР№РІР»РµС‚ С„РёР»СЊС‚СЂР°
 		{
 			if (ind < 0)
 				*ps  += *(ph + j) * *pD;
@@ -8695,7 +8695,7 @@ int vdouble::idwt(int J,
 	if (len1_2+(left+right)/2 < 0)
 	{
 		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Выберите меньший уровень разложения", 
+		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 			len1_2+(left+right)/2);
 		MessageBox(0,s,"",0);
 		return 0;
@@ -8887,7 +8887,7 @@ int vdouble::idwt_(
 	if (len1_2+(left+right)/2 < 0)
 	{
 		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\len_s - len_h/2- len_h\%2+1+(left+right)/2(%d) < 0\n Выберите меньший уровень разложения", 
+		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\len_s - len_h/2- len_h\%2+1+(left+right)/2(%d) < 0\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 			len1_2+(left+right)/2);
 		MessageBox(0,s,"",0);
 		return 0;
@@ -8980,7 +8980,7 @@ int vdouble::idwt(
 	if (len1_2+(left+right)/2 < 0)
 	{
 		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Выберите меньший уровень разложения", 
+		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 			len1_2+(left+right)/2);
 		MessageBox(0,s,"",0);
 		return 0;
@@ -9070,7 +9070,7 @@ int vdouble::idwt(
 //DEL 	if (len_s < len_h/2)
 //DEL 	{
 //DEL 		char s[255];
-//DEL 		sprintf(s,"Error using vdouble::idwt():\nlen_s(%i) < len_h/2(%i)\n Выберите меньший уровень разложения", 
+//DEL 		sprintf(s,"Error using vdouble::idwt():\nlen_s(%i) < len_h/2(%i)\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 //DEL 			len_s, len_h/2);
 //DEL 		MessageBox(0, s, "vdouble::idwt", 0);
 //DEL 		return 0;
@@ -9180,12 +9180,12 @@ int vdouble::idwt(int J, Vector<int>& ts, Vector<int>&  tau, vdouble &rh, vdoubl
 	if (len_s < len_h/2)
 	{
 		char s[255];
-		sprintf(s,"Error using vdouble::idwt():\nlen_s(%i) < len_h/2(%i)\n Выберите меньший уровень разложения", 
+		sprintf(s,"Error using vdouble::idwt():\nlen_s(%i) < len_h/2(%i)\n Р’С‹Р±РµСЂРёС‚Рµ РјРµРЅСЊС€РёР№ СѓСЂРѕРІРµРЅСЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ", 
 			len_s, len_h/2);
 		MessageBox(0, s, "vdouble::idwt", 0);
 		return 0;
 	}
-	// половина длины реконструкции
+	// РїРѕР»РѕРІРёРЅР° РґР»РёРЅС‹ СЂРµРєРѕРЅСЃС‚СЂСѓРєС†РёРё
 	int len1_2 = len_s - len_h/2
 #if TEST_IDWT
 		- len_h%2 
@@ -9293,11 +9293,11 @@ int vdouble::idwt(int J, Vector<int>& ts, Vector<int>&  tau, vdouble &rh, vdoubl
 
 /*
 int vdouble::WaveletDecomposition(
-	  int wf, // флаг вейвлета
-	  int order, // порядок вейвлета
-	  int& maxLevel, // максимальный уровенть разложения
-	  Vector<vdouble>& vd, // контейнер для хранения d- коэффициентов на каждом уровне декомпозиции
-	  Vector<vdouble>& vs) // контейнер для хранения s- коэффициентов на каждом уровне декомпозиции
+	  int wf, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	  int order, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	  int& maxLevel, // РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅС‚СЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
+	  Vector<vdouble>& vd, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ d- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
+	  Vector<vdouble>& vs) // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ s- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 {
 WriteRaporto((CString)"WaveletDecomposition()\n");
 
@@ -9322,11 +9322,11 @@ int left = len_h/2+2;
 	vd.resize(maxLevel);
 	vs.resize(maxLevel);
 
-	vdouble d0,// обнулённые в центре d- коэффициентов, необходимые для восстановления высокочастотной составляющей сигнала на каждом уровне декомпозиции
-		d1;// обнулённые с хвостов d- коэффициентов, необходимые для восстановления низкочастотной составляющей сигнала, отделённой на каждом уровне декомпозиции
+	vdouble d0,// РѕР±РЅСѓР»С‘РЅРЅС‹Рµ РІ С†РµРЅС‚СЂРµ d- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ, РЅРµРѕР±С…РѕРґРёРјС‹Рµ РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅРѕР№ СЃРѕСЃС‚Р°РІР»СЏСЋС‰РµР№ СЃРёРіРЅР°Р»Р° РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
+		d1;// РѕР±РЅСѓР»С‘РЅРЅС‹Рµ СЃ С…РІРѕСЃС‚РѕРІ d- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ, РЅРµРѕР±С…РѕРґРёРјС‹Рµ РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅРѕР№ СЃРѕСЃС‚Р°РІР»СЏСЋС‰РµР№ СЃРёРіРЅР°Р»Р°, РѕС‚РґРµР»С‘РЅРЅРѕР№ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 	vdouble s0;
-	// Производим декомпозицию сигнала - получаем s- и d- коэффициенты
-	// на каждом уровне разложения
+	// РџСЂРѕРёР·РІРѕРґРёРј РґРµРєРѕРјРїРѕР·РёС†РёСЋ СЃРёРіРЅР°Р»Р° - РїРѕР»СѓС‡Р°РµРј s- Рё d- РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
+	// РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 WriteRaporto((CString)"WaveletDecomposition(resize)\n");
 	vdouble current = *this;
 WriteRaporto((CString)"WaveletDecomposition(*this)\n");
@@ -9342,22 +9342,22 @@ WriteRaporto((CString)"WaveletDecomposition({})\n");
 */
 
 int vdouble::WaveletDecomposition(vdouble* pt,
-	  int wf, // флаг вейвлета
-	  int order, // порядок вейвлета
-	  int orderBiorthogonalDecomposition, // порядок вейвлета
-	  int maxLevel, // максимальный уровенть разложения
+	  int wf, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	  int order, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	  int orderBiorthogonalDecomposition, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
+	  int maxLevel, // РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅС‚СЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	  Vector<Vector<int> >& vtau_s_ind, 
 	  Vector<vdouble>& vtau_s,
-	  Vector<vdouble>& vs, // контейнер для хранения s- коэффициентов на каждом уровне декомпозиции
+	  Vector<vdouble>& vs, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ s- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 	  Vector<Vector<int> >& vtau_d_ind, 
 	  Vector<vdouble>& vtau_d,
-	  Vector<vdouble>& vd, // контейнер для хранения d- коэффициентов на каждом уровне декомпозиции
+	  Vector<vdouble>& vd, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ d- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 	  Vector<Vector<int> >& vtau_S_ind, 
 	  Vector<vdouble>& vtau_S,
-	  Vector<vdouble>& vSlow, // контейнер для хранения низкочастотной составляющей сигнала на каждом уровне разложения
+	  Vector<vdouble>& vSlow, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅРѕР№ СЃРѕСЃС‚Р°РІР»СЏСЋС‰РµР№ СЃРёРіРЅР°Р»Р° РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	  Vector<Vector<int> >& vtau_F_ind,
 	  Vector<vdouble>& vtau_F,
-	  Vector<vdouble>& vFast) // контейнер для хранения высокочастотных составляющих сигнала, отделённых на каждом уровне разложения
+	  Vector<vdouble>& vFast) // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёС… СЃРёРіРЅР°Р»Р°, РѕС‚РґРµР»С‘РЅРЅС‹С… РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 {
 	int i, j;
 	if (pt && m_length != pt->m_length)
@@ -9409,8 +9409,8 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 	vFast.resize(maxLevel);
 
 	vdouble v0_s, v0_d;
-	// Производим декомпозицию сигнала - получаем s- и d- коэффициенты
-	// на каждом уровне разложения
+	// РџСЂРѕРёР·РІРѕРґРёРј РґРµРєРѕРјРїРѕР·РёС†РёСЋ СЃРёРіРЅР°Р»Р° - РїРѕР»СѓС‡Р°РµРј s- Рё d- РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
+	// РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	vdouble 
 		* current;
 	Vector<int>	
@@ -9419,8 +9419,8 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 	current_t_ind = &t_ind;
 	for(int j = 0; j < maxLevel; j++)
 	{
-		// этот вариант предусмотрен для случая биортогональных фильтров 
-		// у которых длина высокочастотного и низкочастотного фильтра наравная
+		// СЌС‚РѕС‚ РІР°СЂРёР°РЅС‚ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅ РґР»СЏ СЃР»СѓС‡Р°СЏ Р±РёРѕСЂС‚РѕРіРѕРЅР°Р»СЊРЅС‹С… С„РёР»СЊС‚СЂРѕРІ 
+		// Сѓ РєРѕС‚РѕСЂС‹С… РґР»РёРЅР° РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅРѕРіРѕ Рё РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅРѕРіРѕ С„РёР»СЊС‚СЂР° РЅР°СЂР°РІРЅР°СЏ
 		if(!current->dwt(*current_t_ind, vtau_s_ind[j], dh,vs[j]))
 			return 0;
 		if(!current->dwt(*current_t_ind, vtau_d_ind[j], dg,vd[j]))
@@ -9468,7 +9468,7 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 			//==========================================
 		}
 	}
-	// Производим восстановление низкочастотных и высокочастотных составляющих сигнала на каждом уровне разложения
+	// РџСЂРѕРёР·РІРѕРґРёРј РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… Рё РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёС… СЃРёРіРЅР°Р»Р° РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	for (int J = maxLevel - 1; J >= 0; J--)
 	{
 		vdouble 
@@ -9555,19 +9555,19 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 	  int right_h,
 	  int left_g,
 	  int right_g,
-	  int maxLevel, // максимальный уровенть разложения
+	  int maxLevel, // РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅС‚СЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	  Vector<Vector<int> >& vtau_s_ind, 
 	  Vector<vdouble>& vtau_s,
-	  Vector<vdouble>& vs, // контейнер для хранения s- коэффициентов на каждом уровне декомпозиции
+	  Vector<vdouble>& vs, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ s- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 	  Vector<Vector<int> >& vtau_d_ind, 
 	  Vector<vdouble>& vtau_d,
-	  Vector<vdouble>& vd, // контейнер для хранения d- коэффициентов на каждом уровне декомпозиции
+	  Vector<vdouble>& vd, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ d- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 	  Vector<Vector<int> >& vtau_S_ind, 
 	  Vector<vdouble>& vtau_S,
-	  Vector<vdouble>& vSlow, // контейнер для хранения низкочастотной составляющей сигнала на каждом уровне разложения
+	  Vector<vdouble>& vSlow, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅРѕР№ СЃРѕСЃС‚Р°РІР»СЏСЋС‰РµР№ СЃРёРіРЅР°Р»Р° РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	  Vector<Vector<int> >& vtau_F_ind,
 	  Vector<vdouble>& vtau_F,
-	  Vector<vdouble>& vFast) // контейнер для хранения высокочастотных составляющих сигнала, отделённых на каждом уровне разложения
+	  Vector<vdouble>& vFast) // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёС… СЃРёРіРЅР°Р»Р°, РѕС‚РґРµР»С‘РЅРЅС‹С… РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 {
 	int i, j;
 	if (pt && m_length != pt->m_length)
@@ -9614,15 +9614,15 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 		* current_t_ind;
 	current = this,
 	current_t_ind = &t_ind;
-	// Производим декомпозицию сигнала - получаем s- и d- коэффициенты
-	// на каждом уровне разложения
+	// РџСЂРѕРёР·РІРѕРґРёРј РґРµРєРѕРјРїРѕР·РёС†РёСЋ СЃРёРіРЅР°Р»Р° - РїРѕР»СѓС‡Р°РµРј s- Рё d- РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
+	// РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 printf("decomposition starts current->Length() = %d\n", current->Length());
 	for(j = 0; j < maxLevel; j++)
 	{
 
 
-		// этот вариант предусмотрен для случая биортогональных фильтров 
-		// у которых длина высокочастотного и низкочастотного фильтра неравная
+		// СЌС‚РѕС‚ РІР°СЂРёР°РЅС‚ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅ РґР»СЏ СЃР»СѓС‡Р°СЏ Р±РёРѕСЂС‚РѕРіРѕРЅР°Р»СЊРЅС‹С… С„РёР»СЊС‚СЂРѕРІ 
+		// Сѓ РєРѕС‚РѕСЂС‹С… РґР»РёРЅР° РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅРѕРіРѕ Рё РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅРѕРіРѕ С„РёР»СЊС‚СЂР° РЅРµСЂР°РІРЅР°СЏ
 		if(!current->dwt(j, *current_t_ind, left_h, right_h, dh,
 			vtau_s_ind[j], vs[j]))
 			return 0;
@@ -9677,7 +9677,7 @@ printf("decomposition starts current->Length() = %d\n", current->Length());
 
 printf("reconstruction starts\n");
 
-	// Производим восстановление низкочастотных и высокочастотных составляющих сигнала на каждом уровне разложения
+	// РџСЂРѕРёР·РІРѕРґРёРј РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… Рё РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёС… СЃРёРіРЅР°Р»Р° РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	for (int J = maxLevel - 1; J >= 0; J--)
 	{
 		vdouble 
@@ -9768,19 +9768,19 @@ int vdouble::WaveletDecomposition1(vdouble* pt,
 	  int right_h,
 	  int left_g,
 	  int right_g,
-	  int maxLevel, // максимальный уровенть разложения
+	  int maxLevel, // РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅС‚СЊ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	  Vector<Vector<int> >& vtau_s_ind, 
 	  Vector<vdouble>& vtau_s,
-	  Vector<vdouble>& vs, // контейнер для хранения s- коэффициентов на каждом уровне декомпозиции
+	  Vector<vdouble>& vs, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ s- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 	  Vector<Vector<int> >& vtau_d_ind, 
 	  Vector<vdouble>& vtau_d,
-	  Vector<vdouble>& vd, // контейнер для хранения d- коэффициентов на каждом уровне декомпозиции
+	  Vector<vdouble>& vd, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ d- РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ РґРµРєРѕРјРїРѕР·РёС†РёРё
 	  Vector<Vector<int> >& vtau_S_ind, 
 	  Vector<vdouble>& vtau_S,
-	  Vector<vdouble>& vSlow, // контейнер для хранения низкочастотной составляющей сигнала на каждом уровне разложения
+	  Vector<vdouble>& vSlow, // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅРѕР№ СЃРѕСЃС‚Р°РІР»СЏСЋС‰РµР№ СЃРёРіРЅР°Р»Р° РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	  Vector<Vector<int> >& vtau_F_ind,
 	  Vector<vdouble>& vtau_F,
-	  Vector<vdouble>& vFast) // контейнер для хранения высокочастотных составляющих сигнала, отделённых на каждом уровне разложения
+	  Vector<vdouble>& vFast) // РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёС… СЃРёРіРЅР°Р»Р°, РѕС‚РґРµР»С‘РЅРЅС‹С… РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 {
 	int i, j;
 	if (pt && m_length != pt->m_length)
@@ -9827,8 +9827,8 @@ int vdouble::WaveletDecomposition1(vdouble* pt,
 		* current_t_ind;
 	current = this,
 	current_t_ind = &t_ind;
-	// Производим декомпозицию сигнала - получаем s- и d- коэффициенты
-	// на каждом уровне разложения
+	// РџСЂРѕРёР·РІРѕРґРёРј РґРµРєРѕРјРїРѕР·РёС†РёСЋ СЃРёРіРЅР°Р»Р° - РїРѕР»СѓС‡Р°РµРј s- Рё d- РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
+	// РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 printf("decomposition starts current->Length() = %d\n", current->Length());
 printf("left_h %d right_h %d left_g %d right_g %d\n",
 	   left_h, right_h, left_g, right_g);
@@ -9854,8 +9854,8 @@ if (ans == 'y' || ans == 'Y')
 
 	for(j = 0; j < maxLevel; j++)
 	{
-		// этот вариант предусмотрен для случая биортогональных фильтров 
-		// у которых длина высокочастотного и низкочастотного фильтра неравная
+		// СЌС‚РѕС‚ РІР°СЂРёР°РЅС‚ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅ РґР»СЏ СЃР»СѓС‡Р°СЏ Р±РёРѕСЂС‚РѕРіРѕРЅР°Р»СЊРЅС‹С… С„РёР»СЊС‚СЂРѕРІ 
+		// Сѓ РєРѕС‚РѕСЂС‹С… РґР»РёРЅР° РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅРѕРіРѕ Рё РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅРѕРіРѕ С„РёР»СЊС‚СЂР° РЅРµСЂР°РІРЅР°СЏ
 		if(!current->dwt(j, *current_t_ind, left_h, right_h, dh,
 			vtau_s_ind[j], vs[j]))
 			return 0;
@@ -9933,7 +9933,7 @@ if (ans == 'y' || ans == 'Y')
 
 printf("reconstruction starts\n");
 
-	// Производим восстановление низкочастотных и высокочастотных составляющих сигнала на каждом уровне разложения
+	// РџСЂРѕРёР·РІРѕРґРёРј РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РЅРёР·РєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… Рё РІС‹СЃРѕРєРѕС‡Р°СЃС‚РѕС‚РЅС‹С… СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёС… СЃРёРіРЅР°Р»Р° РЅР° РєР°Р¶РґРѕРј СѓСЂРѕРІРЅРµ СЂР°Р·Р»РѕР¶РµРЅРёСЏ
 	for (int J = maxLevel - 1; J >= 0; J--)
 	{
 		vdouble 
@@ -10076,8 +10076,8 @@ void w_fipsi(vdouble& fh,vdouble& fg,
 
 }
 int WaveletGetLeftRight(
-	  int& wf, // флаг вейвлета
-	  int& order, // порядок вейвлета
+	  int& wf, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	  int& order, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 	  int& orderBiorthogonalDecomposition,
 	  vdouble& dh,
 	  vdouble& dg, 
@@ -10098,10 +10098,10 @@ int WaveletGetLeftRight(
 		ngr1,ngr2,rg,
 		n00,m00);
 
-	// Находим хвосты фильтра, которые нужно обрубить справа фильтра и слева фильтра, чтобы число коэффициентов было кратно двум, а число реконструированных элемекнтов сигнал аудваивалось
-	// Для этого надо соблюсти следующие условия:
-	// левый и правый хвосты должны быть чётными
-	// их сумма должна быть на два меньше длины фильтра
+	// РќР°С…РѕРґРёРј С…РІРѕСЃС‚С‹ С„РёР»СЊС‚СЂР°, РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ РѕР±СЂСѓР±РёС‚СЊ СЃРїСЂР°РІР° С„РёР»СЊС‚СЂР° Рё СЃР»РµРІР° С„РёР»СЊС‚СЂР°, С‡С‚РѕР±С‹ С‡РёСЃР»Рѕ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ Р±С‹Р»Рѕ РєСЂР°С‚РЅРѕ РґРІСѓРј, Р° С‡РёСЃР»Рѕ СЂРµРєРѕРЅСЃС‚СЂСѓРёСЂРѕРІР°РЅРЅС‹С… СЌР»РµРјРµРєРЅС‚РѕРІ СЃРёРіРЅР°Р» Р°СѓРґРІР°РёРІР°Р»РѕСЃСЊ
+	// Р”Р»СЏ СЌС‚РѕРіРѕ РЅР°РґРѕ СЃРѕР±Р»СЋСЃС‚Рё СЃР»РµРґСѓСЋС‰РёРµ СѓСЃР»РѕРІРёСЏ:
+	// Р»РµРІС‹Р№ Рё РїСЂР°РІС‹Р№ С…РІРѕСЃС‚С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ С‡С‘С‚РЅС‹РјРё
+	// РёС… СЃСѓРјРјР° РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РЅР° РґРІР° РјРµРЅСЊС€Рµ РґР»РёРЅС‹ С„РёР»СЊС‚СЂР°
 
 	vdouble dh2    = pow(dh,2.0);
 	vdouble dg2    = pow(dg,2.0);
@@ -10148,8 +10148,8 @@ int WaveletGetLeftRight(
 }
 
 int WaveletEpsilon(
-	  int& wf, // флаг вейвлета
-	  int& order, // порядок вейвлета
+	  int& wf, // С„Р»Р°Рі РІРµР№РІР»РµС‚Р°
+	  int& order, // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 	  int& orderBiorthogonalDecomposition,
 	  double& wEpsilon,
 	  vdouble& dh,
@@ -10171,7 +10171,7 @@ int WaveletEpsilon(
 		ngr1,ngr2,rg,
 		n00,m00);
 
-	// Находим хвосты фильтра, которые можно обрубить теряя не более epsilon точности
+	// РќР°С…РѕРґРёРј С…РІРѕСЃС‚С‹ С„РёР»СЊС‚СЂР°, РєРѕС‚РѕСЂС‹Рµ РјРѕР¶РЅРѕ РѕР±СЂСѓР±РёС‚СЊ С‚РµСЂСЏСЏ РЅРµ Р±РѕР»РµРµ epsilon С‚РѕС‡РЅРѕСЃС‚Рё
 	vdouble dh2    = pow(dh,2.0);
 	vdouble dg2    = pow(dg,2.0);
 	vdouble fdh2   = fliplr(dh2);

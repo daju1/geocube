@@ -26,6 +26,8 @@ using namespace std;
 #include "../../resource.h"
 #ifdef _MSC_VER
 #include "SurfDoc.h"
+#else
+#include <QDateTime>
 #endif
 #include "../mylicense.h"
 #include "../../auto_build_3D/picks_search.h"
@@ -3651,6 +3653,7 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 {
 	if(this->OpenFileDialog())
 	{
+#if defined (_MSC_VER)
 		SetDlgItemText(hDlg,IDC_DIRECTORY2, this->directory);
 
 		strcpy(this->szPath,this->directory);
@@ -3660,6 +3663,8 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 						DDL_READWRITE );
 		if (IDOK == MessageBox( hDlg, this->szPath, "Directory Selected",
 					MB_OKCANCEL | MB_ICONINFORMATION ))
+#else
+#endif
 		{
 			HandlingOfInputFiles();
 		}
@@ -3797,12 +3802,16 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		return false;
 	}
 
-	SYSTEMTIME time;
-	GetLocalTime(&time);
-			
-	char common_directory[4096];			
-	sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);			
-	printf("common_directory = %s\n\n",common_directory);
+    char common_directory[4096];
+#if defined (_MSC_VER)
+    SYSTEMTIME time;
+    GetLocalTime(&time);
+    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
+#else
+    QDateTime time = QDateTime::currentDateTime();
+    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.date().year(), time.date().month(), time.date().day(), time.time().hour(), time.time().minute(),time.time().second());
+#endif
+    printf("common_directory = %s\n\n",common_directory);
 
 	if (!CreateDirectory(common_directory,NULL))
 	{
@@ -3826,14 +3835,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	}
 	//**********************************************
 
-
+#if defined (_MSC_VER)
 	this->m_files_in_dir.nFilesInDirectory = SendDlgItemMessage( hDlg, IDC_LIST2, LB_GETCOUNT, 0, 0);
 	//память не освобождена!!!!
 	this->m_files_in_dir.vFileNameLengthes = (int *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		sizeof( int ) *  this->m_files_in_dir.nFilesInDirectory);
 	this->m_files_in_dir.vFileNames = (char **)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		sizeof( char * ) *  this->m_files_in_dir.nFilesInDirectory);
-
+#else
+#endif
 	int cols;
 	vector<string> names_of_colomns;
 	vector<size_t> original_col_numbers;
@@ -3906,6 +3916,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 	for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
 	{
+#if defined (_MSC_VER)
 		this->m_files_in_dir.vFileNameLengthes[iFile] = SendDlgItemMessage( hDlg, 
 			IDC_LIST2, LB_GETTEXTLEN, (WPARAM) iFile, 0)+1;
 		this->m_files_in_dir.vFileNames[iFile] = (char *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -3913,6 +3924,8 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 		if (LB_ERR!=SendDlgItemMessage( hDlg, 
 			IDC_LIST2, LB_GETTEXT, (WPARAM) iFile, (LPARAM)(this->m_files_in_dir.vFileNames[iFile])))
+#else
+#endif
 		{
 			char sz_path_of_file[4096];			
 			sprintf(sz_path_of_file, "%s\\%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
@@ -4226,10 +4239,10 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				fclose(stream);
 			}
 		}
-		else
-		{
-		}
-	}
+        //else
+        //{
+        //}
+    }
 
 	// центруем сигналы по каждому профилю отдельно
 	// а затем прибавляем общую среднюю
@@ -7041,8 +7054,10 @@ function write_eas(filename,data,header,line1);
 	}
 #endif
 
+#if defined (_MSC_VER)
 	Beep(200, 1000);
-	MessageBox(hDlg, "OK!!!", "AutoBuildProfileDlg::HandlingOfInputFiles",0);
+#endif
+    MessageBox(NULL, "OK!!!", "AutoBuildProfileDlg::HandlingOfInputFiles",0);
 
 	return true;
 }
@@ -7064,11 +7079,15 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		return false;
 	}
 
-	SYSTEMTIME time;
+    char common_directory[4096];
+#if defined (_MSC_VER)
+    SYSTEMTIME time;
 	GetLocalTime(&time);
-			
-	char common_directory[4096];			
-	sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);			
+    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
+#else
+    QDateTime time = QDateTime::currentDateTime();
+    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.date().year(), time.date().month(), time.date().day(), time.time().hour(), time.time().minute(),time.time().second());
+#endif
 	printf("common_directory = %s\n\n",common_directory);
 
 	if (!CreateDirectory(common_directory,NULL))
@@ -7093,14 +7112,16 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 	//**********************************************
 
-
+#if defined (_MSC_VER)
 	this->m_files_in_dir.nFilesInDirectory = SendDlgItemMessage( hDlg, IDC_LIST2, LB_GETCOUNT, 0, 0);
 	//память не освобождена!!!!
 	this->m_files_in_dir.vFileNameLengthes = (int *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		sizeof( int ) *  this->m_files_in_dir.nFilesInDirectory);
 	this->m_files_in_dir.vFileNames = (char **)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 		sizeof( char * ) *  this->m_files_in_dir.nFilesInDirectory);
-
+#else
+    // TODO
+#endif
 	int cols;
 	vector<string> names_of_colomns;
 	vector<size_t> original_col_numbers;
@@ -7145,6 +7166,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	///////////////////////////////////
 	//cout << "Enter normal of which antenn X or Y is parallel to profile (or to fly of airplane)" << endl;
 	//cin >> parallel_to_profile_antenn_normal;
+#if defined (_MSC_VER)
 	if (BST_CHECKED == IsDlgButtonChecked(hDlg, IDC_RADIO_parallel_to_profile_antenn_normal_X))
 	{
 		when_to_swap = 0;
@@ -7153,6 +7175,10 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		when_to_swap = 1;
 	}
+#else
+    // TODO
+    when_to_swap = 0;
+#endif
 
 
 	int use_time_col = AutoBuildProfile::ab.use_time_colomn;
@@ -7161,6 +7187,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 	for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
 	{
+#if defined (_MSC_VER)
 		this->m_files_in_dir.vFileNameLengthes[iFile] = SendDlgItemMessage( hDlg, 
 			IDC_LIST2, LB_GETTEXTLEN, (WPARAM) iFile, 0)+1;
 		this->m_files_in_dir.vFileNames[iFile] = (char *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -7168,6 +7195,9 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 		if (LB_ERR!=SendDlgItemMessage( hDlg, 
 			IDC_LIST2, LB_GETTEXT, (WPARAM) iFile, (LPARAM)(this->m_files_in_dir.vFileNames[iFile])))
+#else
+        // TODO
+#endif
 		{
 			char sz_path_of_file[4096];			
 			sprintf(sz_path_of_file, "%s\\%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
@@ -7481,9 +7511,9 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 				fclose(stream);
 			}
 		}
-		else
-		{
-		}
+        //else
+        //{
+        //}
 	}
 
 	// центруем сигналы по каждому профилю отдельно
@@ -7669,21 +7699,32 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 
 
-	bool to_set_mean_of_profiles_to_zero = 
-		IsDlgButtonChecked( hDlg, IDC_CHECK_to_set_mean_of_profiles_to_zero) == BST_CHECKED;
+    bool to_set_mean_of_profiles_to_zero = false;
+
+#if defined (_MSC_VER)
+    to_set_mean_of_profiles_to_zero = IsDlgButtonChecked( hDlg, IDC_CHECK_to_set_mean_of_profiles_to_zero) == BST_CHECKED;
 	//cout << "Enter to_set_mean_of_profiles_to_zero 0 1 ?" << endl;
 	//cin >> to_set_mean_of_profiles_to_zero;
+#else
+    // TODO
+    to_set_mean_of_profiles_to_zero = false;
+#endif
 
 	
 
 
 	if (to_set_mean_of_profiles_to_zero)
 	{
-		bool to_set_mean_value_to_profile = 
+        bool to_set_mean_value_to_profile = false;
+#if defined (_MSC_VER)
+        to_set_mean_value_to_profile =
 			IsDlgButtonChecked( hDlg, IDC_CHECK_to_set_mean_value_to_profile) == BST_CHECKED;
 		//cout << "Enter to_set_mean_value_to_profile 0 1 ?" << endl;
 		//cin >> to_set_mean_value_to_profile;
-
+#else
+        // TODO
+        to_set_mean_value_to_profile = false;
+#endif
 		
 		if (to_set_mean_value_to_profile)
 		{
@@ -7728,10 +7769,16 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 
-	bool to_recenter_profiles = 
+    bool to_recenter_profiles = false;
+#if defined (_MSC_VER)
+    to_recenter_profiles =
 		IsDlgButtonChecked( hDlg, IDC_CHECK_to_recenter_profiles) == BST_CHECKED;
 	//cout << "Enter to_recenter_profiles 0 1 ?" << endl;
 	//cin >> to_recenter_profiles;
+#else
+    // TODO
+    to_recenter_profiles = false;
+#endif
 
 	if (to_recenter_profiles || to_set_mean_of_profiles_to_zero)
 	{
@@ -7825,16 +7872,28 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		//cout << "Enter Do you need coordinate preobrazovanie" << endl;
 		//cin >> mmd3.to_povorot;
-		mmd3.to_povorot = 
+        mmd3.to_povorot = true;
+#if defined (_MSC_VER)
+        mmd3.to_povorot =
 			IsDlgButtonChecked( hDlg, IDC_CHECK_to_povorot) == BST_CHECKED;
+#else
+        // TODO
+        mmd3.to_povorot = true;
+#endif
 
 		if (mmd3.to_povorot)
 		{	
 			//cout << "Enter Do you need coordinate projection output?" << endl << 
 			//	"(1 - yes, 0 - output will be in profile length)" << endl;
 			//cin >> mmd3.need_crd_projection;
-			mmd3.need_crd_projection = 
+            mmd3.need_crd_projection = true;
+#if defined (_MSC_VER)
+            mmd3.need_crd_projection =
 				IsDlgButtonChecked( hDlg, IDC_CHECK_need_crd_projection) == BST_CHECKED;
+#else
+            // TODO
+            mmd3.need_crd_projection = true;
+#endif
 
 
 
@@ -7988,15 +8047,18 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	//cout << "1 - with diagramm of 3 antenns and nonpolarized sources" << endl;
 	//cout << "2 - --//-- and with assumption that tg delta much more than one" << endl;
 	//cin >> type;
-
+#if defined (_MSC_VER)
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_TYPE_1) == BST_CHECKED)
 		type = 1;
 	else 
 		type = 2;
-
+#else
+    // TODO
+    type = 1;
+#endif
 
 	double z0 = 0.0, z_min = 0.0, DZ = 0.0;
-
+#if defined (_MSC_VER)
 	char str[128];
 	GetDlgItemText(this->hDlg, IDC_EDIT_Altitude_z0, str, 127);
 	z0 = atof(str);
@@ -8005,7 +8067,11 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	GetDlgItemText(this->hDlg, IDC_EDIT_Altitude_z_min, str, 127);
 	z_min = atof(str);
 	cout << "z_min = " << z_min << " m" << endl;
-
+#else
+    // TODO
+    z0   = 130;
+    z_min = -2870;
+#endif
 
 	DZ = z0 - z_min;
 	cout << "DZ = " << DZ << " m" << endl;
@@ -8076,19 +8142,26 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		//cout << "Enter min_value (small positive, for example from 1e-16 to 0.03)" << endl;
 		//cin >> mmd3.min_value;
 		mmd3.min_value = 0.0;
-
+#if defined (_MSC_VER)
 		//cout << "Enter dx/DZ=dy/DZ (for example 2)" << endl;
 		//cin >> mmd3.dx_and_dy_per_DZ;
 		GetDlgItemText(this->hDlg, IDC_EDIT_dx_and_dy_per_DZ, str, 127);
-		mmd3.dx_and_dy_per_DZ = atof(str);		
+        mmd3.dx_and_dy_per_DZ = atof(str);
+#else
+        // TODO
+        mmd3.dx_and_dy_per_DZ = 2.0;
+#endif
 
+#if defined (_MSC_VER)
 		//cout << "Enter granicy_kak_glubina?  0 - no 1 - yes" << endl;
 		mmd3.granicy_kak_glubina = IsDlgButtonChecked(hDlg, IDC_CHECK_granicy_kak_glubina) == BST_CHECKED;
-
+#else
+        mmd3.granicy_kak_glubina = false;
+#endif
 
 
 // here calculi operator  by mean[c]
-
+#if defined (_MSC_VER)
 		//cout << "Enter rows" << endl;
 		//cin >> mmd3.rows;
 		GetDlgItemText(this->hDlg, IDC_EDIT_ROWS, str, 127);
@@ -8108,6 +8181,12 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		//cin >> mmd3.iter_save;
 		GetDlgItemText(this->hDlg, IDC_EDIT_ITER_SAVE, str, 127);
 		mmd3.iter_save = atoi(str);
+#else
+        mmd3.rows = 30;
+        mmd3.cols = 30;
+        mmd3.pages = 30;
+        mmd3.iter_save = 100;
+#endif
 
 		//cout << "Parameters of power distribution model (w0 w05 w1 w2)" << endl;
 		//cout << "number means W ~ w0*h^0 + w05*h^0.5 + w1*h^1 + w2*h^2" << endl;
@@ -8136,10 +8215,13 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			mmd3.k_oslablenie = 0.0;
 			//cout << "Enter k_oslablenie (po naprjazhonnosti polja, for example 0.00023025 -> 1.999 dB/km by power), (m^-1)" << endl;
 			//cin >> mmd3.k_oslablenie;
-			
+#if defined (_MSC_VER)
 			GetDlgItemText(this->hDlg, IDC_EDIT_k_oslablenie, str, 127);
 			mmd3.k_oslablenie = atof(str);
-
+#else
+            // TODO
+            mmd3.k_oslablenie = 0.00023025;
+#endif
 			inv_k_oslablenie = 1.0 / mmd3.k_oslablenie;
 		#else
 			inv_k_oslablenie = 100;
@@ -8260,19 +8342,31 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 //}
 
 	bool lamp = true;
-
+#if defined (_MSC_VER)
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_LAMP) == BST_CHECKED)
 		lamp = true;
 	else 
 		lamp = false;
+#else
+    // TODO
+    lamp = false;
+#endif
 
 	//тестируем на уменьшенной площади
 	vector<double> pX, pY, pZ, pModul;
 	vector<vector<anten_direction> > pA;
 	vector<vector<double> > pW;
 
-	bool to_frec = IsDlgButtonChecked(hDlg, IDC_CHECK_FREC) == BST_CHECKED;
-	int use_newton = 0;//IsDlgButtonChecked(hDlg, IDC_CHECK_NEWTON) == BST_CHECKED;
+    bool to_frec = false;
+#if defined (_MSC_VER)
+    to_frec = IsDlgButtonChecked(hDlg, IDC_CHECK_FREC) == BST_CHECKED;
+#else
+    // TODO
+    to_frec = false;
+#endif
+
+    int use_newton = 0;
+#if defined (_MSC_VER)
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_SPUSK) == BST_CHECKED) 
 	{
 		use_newton = 0;
@@ -8285,15 +8379,27 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		use_newton = 2;
 	}
+#else
+    // TODO
+    use_newton = 1;
+#endif
 
-
+#if defined (_MSC_VER)
 	bool apply_dgdni = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdni) == BST_CHECKED;	   
 	bool apply_dgdKTi = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdKTi) == BST_CHECKED;
 	bool apply_dgdep = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdep) == BST_CHECKED;
 	bool apply_dgdbeta = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdbeta) == BST_CHECKED;
 	bool apply_dgdomega = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdomega) == BST_CHECKED;
 	bool apply_B = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_B) == BST_CHECKED;
-
+#else
+    // TODO
+    bool apply_dgdni    = true;
+    bool apply_dgdKTi   = true;
+    bool apply_dgdep    = false;
+    bool apply_dgdbeta  = true;
+    bool apply_dgdomega = false;
+    bool apply_B        = false;
+#endif
 
 	if (lamp)
 	{
@@ -8303,8 +8409,13 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 			//cout << "To get each frec? [1 2 .. 10 ... ]" << endl;
 			//cin >> frec;
+#if defined (_MSC_VER)
 			GetDlgItemText(this->hDlg, IDC_EDIT_frec, str, 127);
 			frec = atoi(str);
+#else
+            // TODO
+            frec = 8;
+#endif
 
 			GetPartOfData(frec,
 				vX,vY,vZ, A, vModul, W,
@@ -8368,22 +8479,29 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		if (to_frec)
 		{
 			int frec = 1;
-
+#if defined (_MSC_VER)
 			//cout << "To get each frec? [1 2 .. 10 ... ]" << endl;
 			//cin >> frec;
 			GetDlgItemText(this->hDlg, IDC_EDIT_frec, str, 127);
 			frec = atoi(str);
-
+#else
+            // TODO
+            frec = 8;
+#endif
 			GetPartOfData(frec,
 				vX,vY,vZ, A, vModul, W,
 				pX,pY,pZ,pA, pModul,pW);	
 
 			// массив коэффициентов симметризации
 			vector<vector<double> > S(3);
-
+#if defined (_MSC_VER)
 			bool init_by_lamp = IsDlgButtonChecked(hDlg, IDC_CHECK_TO_INIT_BY_LAMP) == BST_CHECKED;
 			//cout << "Enter init_by_lamp" << endl;
 			//cin >> init_by_lamp;
+#else
+            // TODO
+            bool init_by_lamp = false;
+#endif
 
 			
 
@@ -8443,8 +8561,12 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			// массив коэффициентов симметризации
 			vector<vector<double> > S(3);
-
+#if defined (_MSC_VER)
 			bool init_by_lamp = IsDlgButtonChecked(hDlg, IDC_CHECK_TO_INIT_BY_LAMP) == BST_CHECKED;
+#else
+            // TODO
+            bool init_by_lamp = false;
+#endif
 
 			if (init_by_lamp)
 			{
@@ -8501,7 +8623,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 #if defined (_MSC_VER)
 	Beep(200, 1000);
 #endif
-	MessageBox(hDlg, "OK!!!", "AutoBuildProfileDlg::HandlingOfInputFiles",0);
+    MessageBox(NULL, "OK!!!", "AutoBuildProfileDlg::HandlingOfInputFiles",0);
 
 	return true;
 }

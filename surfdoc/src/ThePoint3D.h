@@ -19,7 +19,7 @@ class ThePoint3D  : public Primitive3D <CPoint3>
 protected:
 	void Init(const ThePoint3D& ob);
 public:
-	long id_point; //идентификатор точки при сохранения гриддаты в базу
+	long id_point; //РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ С‚РѕС‡РєРё РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёСЏ РіСЂРёРґРґР°С‚С‹ РІ Р±Р°Р·Сѓ
 	void Init(SurfDoc * pSurfDoc, CPoint3 pt);
 	virtual void PropertiesDialog();
 	ThePoint3D();
@@ -32,6 +32,7 @@ public:
 	ThePoint3D& operator=(const ThePoint3D& ob);
 
 	bool OnProfile(Profile3D * on);
+#if defined (_MSC_VER)
 	void DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view * v, Profile3D * on);
 
 
@@ -40,7 +41,7 @@ public:
 			WhatSelected& ws);
 
 	virtual HTREEITEM AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s);
-
+#endif
 	/*virtual*/ DWORD Serialize(Archive& ar);
 	friend Archive& operator <<(Archive& ar, ThePoint3D& ob);
 	friend Archive& operator >>(Archive& ar, ThePoint3D& ob);

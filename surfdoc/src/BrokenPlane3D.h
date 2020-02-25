@@ -10,8 +10,9 @@
 #endif // _MSC_VER > 1000
 
 #include "../../surfdefs.h"
-
+#if defined (_MSC_VER)
 #include "ObjectList.h"
+#endif
 #include "ThePoint3D.h"
 #include "Line3D.h"
 #include "Poligon3D.h"
