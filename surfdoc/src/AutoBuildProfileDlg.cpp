@@ -3,12 +3,14 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+#ifdef _MSC_VER
 #include <cderr.h>
+#endif
 #include <vector>
 using namespace std;
 
 #include "../../alglib-3.1.0/cpp/src/specialfunctions.h"
-
+#include "Grid.h"
 
 #if !VIEW_ONLY_VERSION
 #include "AutoBuildProfileDlg.h"
@@ -17,10 +19,10 @@ using namespace std;
 #include "../../array/src/Vdouble.h"
 #include "../../array/src/interp.h"
 #include "../../array/src/matrixes.h"
-
+#ifdef _MSC_VER
 #include "../../winplot/src/winplot.h"
 #include "../../wintools/src/winsurf.h"
-
+#endif
 #include "../../resource.h"
 #ifdef _MSC_VER
 #include "SurfDoc.h"
@@ -28,6 +30,7 @@ using namespace std;
 #include "../mylicense.h"
 #include "../../auto_build_3D/picks_search.h"
 #include "./../array/src/slau.h"
+#include "cube.h"
 
 
 //////////////////////////////////////////////////////////////////////
@@ -232,6 +235,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 
 Grid4 * CreateProfileGrid3D( MyMethodsData3 & mmd );
 
+#ifdef _MSC_VER
 WNDPROC wpOrigAutoBuildProfileWndProc; 
 
 LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
@@ -254,6 +258,7 @@ LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
     return CallWindowProc(wpOrigAutoBuildProfileWndProc, hwnd, uMsg, 
         wParam, lParam); 
 } 
+
 
 LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
@@ -658,7 +663,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 	}
 	return( TRUE );
 }
-
+#endif
 //коэффициент корреляции
 bool CorrelationCoefficient(vector<double> & v1, vector<double> & v2, double & k, double & Cov)
 {
@@ -701,6 +706,8 @@ bool CorrelationCoefficient(vector<double> & v1, vector<double> & v2, double & k
 
 
 bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & signal, vector<double> & v_korr, vector<double> & v_cov);
+
+#ifdef _MSC_VER
 AutoBuildProfileDlg::AutoBuildProfileDlg(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab) : m_ab(ab)
 {
 	p_auto_build_profile = auto_build_profile;
@@ -1629,6 +1636,7 @@ void AutoBuildProfileDlg1::OnDestroy()
 {
 
 }
+#endif
 
 void GetMinMaxXYOfData(
 				   vector<double> & X,
@@ -6622,6 +6630,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			}
 			break;
 #endif
+#if defined (_MSC_VER)
 		case 8:
 			{
 #ifdef _DEBUG
@@ -6698,6 +6707,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 			}
 			break;
+#endif
 			//write eas
 		case 9:
 			{
@@ -8488,8 +8498,9 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 
 
-
+#if defined (_MSC_VER)
 	Beep(200, 1000);
+#endif
 	MessageBox(hDlg, "OK!!!", "AutoBuildProfileDlg::HandlingOfInputFiles",0);
 
 	return true;
@@ -11377,6 +11388,7 @@ bool Lamp(int use_newton,
 	delete cubes;
 #endif
 }
+#if defined (_MSC_VER)
 bool AutoBuildProfileDlg0::OpenFileDialog(void)
 {
     HRESULT hr = S_OK;
@@ -11528,6 +11540,7 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 	// Display the Open dialog box. 
 	return false;
 }
+#endif
 
 
 

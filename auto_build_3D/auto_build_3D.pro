@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     ../array/src/Vdouble.cpp \
     ../geometry2D/BraidedNode.cpp \
     ../array/src/slau.cpp \
-    ../surfdoc/src/AFile.cpp
+    ../surfdoc/src/AFile.cpp \
+    ../tools/src/filedlg_qt.cpp \
+    ../tools/src/errorexit.cpp
 
 HEADERS  += auto_build_3d.h \
     ./../surfdoc/src/AutoProfileBuilding.h \

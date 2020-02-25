@@ -10,15 +10,21 @@
 #endif // _MSC_VER > 1000
 
 #include "palette.h"
+#if defined (_MSC_VER)
 #include "ObjectList.h"
+#endif
 #include "../../array/src/vect.h"
 #include "../../surfdefs.h"
 #include "Grid.h"
+#include "Primitive3D.h"
 
 
 class SurfDoc;
-
+#if defined (_MSC_VER)
 #define CUBE4D_AS_PRIMITIVE 0
+#else
+#define CUBE4D_AS_PRIMITIVE 1
+#endif
 
 #define Cube4D_npages 5
 
@@ -26,7 +32,7 @@ class Cube4D
 #if CUBE4D_AS_PRIMITIVE
 	: public Primitive3D <CPoint4>
 #else
-	: public Object
+        : public Object
 #endif
 {
 	APalette m_palette;
@@ -85,6 +91,7 @@ public:
 	bool draw_as_vol_render;
 
 protected:
+#if defined (_MSC_VER)
 	// Массив описаний страниц блокнота
 	PROPSHEETPAGE   psheetPage[Cube4D_npages];
 
@@ -112,7 +119,7 @@ protected:
 	static int CALLBACK Cube4D::PropSheetProc(HWND hwndDlg,
 								   UINT uMsg,
 								   LPARAM lParam);
-
+#endif
 	void Init(const Cube4D& ob);
 
 public:
@@ -164,9 +171,10 @@ public:
 #endif
 	void InitThin(LPSURFER7GRID4SECTION grid4Section, COLORREF color);
 	void Init(LPSURFER7GRID4SECTION grid4Section, COLORREF color);
+#if defined (_MSC_VER)
 	virtual HTREEITEM AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s = "");
 	void FillContextMenu(HMENU& hMenu);
-
+#endif
 	bool SaveAs3DGrid(const char * file);
 	bool SaveAsVTK(const char * file);
 	bool SaveAsDxf_OfOneIsoSurface(const char * outfile);
@@ -190,7 +198,7 @@ public:
 	virtual void PropertiesDialog();
 	COLORREF GetColor(double z);
 	void DrawQuadsNumbers();
-	Cube4D::Cube4D();
+        Cube4D();
 	Cube4D(SurfDoc * pSurfDoc);
 	BOOL GetPoint(int iz, int iy, int ix, CPoint4 *pt);
 	virtual ~Cube4D();
@@ -239,7 +247,8 @@ public:
 	// самый внешний вект = контейнер для характеристик каждой поверхности
 	// первый вложенный вектор = массив для каждой клетки текущей поверхности
 	// второй вложенный вектор = массив точек сечения плоскостью текущей клетки текущей поверхности
-	vect<VXYZ_VECTOR <VXYZ_VECTOR <CPoint3> > > vxyz; 
+        vect<VXYZ_VECTOR <VXYZ_VECTOR <CPoint3> > > vxyz;
+#if defined (_MSC_VER)
 	// самый внешний вект = контейнер для характеристик каждой поверхности
 	// вложенный вектор = массив для каждой клетки текущей поверхности
 	// структура QuadCutting, характеризуящая каждую клетку 
@@ -249,19 +258,21 @@ public:
 	vect<Vector <QuadCutting> > vQuadCutting;
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+#endif
 
 
 	int Produce3DSurferGrid7(double cut_plane_d[4], SURFER7GRIDSECTION & gridSection);
 	void Produce3DSurferGrid7_YZ(double cut_plane_d[4], SURFER7GRIDSECTION & gridSection);
 	void Produce3DSurferGrid7_XZ(double cut_plane_d[4], SURFER7GRIDSECTION & gridSection);
 	void Produce3DSurferGrid7_XY(double cut_plane_d[4], SURFER7GRIDSECTION & gridSection);
-	
+#if defined (_MSC_VER)
 	void Projection(Karotazh& karotazh);
+#endif
 	bool Projection(CPoint3 & pt, double & v);
 	
 		
 	void OnCreate(void);
+#if defined (_MSC_VER)
 	virtual bool IsSelected(CPoint3 selected_view_pt, 
 			double search_radius,
 			WhatSelected& ws)
@@ -269,7 +280,7 @@ public:
 		//search_radius = fabs(search_radius);
 		return false;
 	}
-
+#endif
 	/*virtual*/ DWORD Serialize(Archive& ar);
 	friend Archive& operator <<(Archive& ar, Cube4D& ob);
 	friend Archive& operator >>(Archive& ar, Cube4D& ob);

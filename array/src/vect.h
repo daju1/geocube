@@ -221,6 +221,7 @@ public:
 #endif
  		return retCount;
 	}
+#if defined (_MSC_VER)
 	size_t AddMsg(size_t len, Object::object_type ob_type)
 	{
 		size_t retCount;
@@ -265,6 +266,7 @@ public:
 #endif
  		return retCount;
 	}
+#endif
 	size_t CreateNewVect()
 	{
 		size_t retCount_vect;
@@ -1434,7 +1436,7 @@ template <class T> Archive& operator >>(Archive& ar, vect<T, vectItem<T> >& v)
 	return ar;
 
 }
-
+#if defined (_MSC_VER)
 template <class T> Archive& operator <<(Archive& ar, vect<T, ObjectItem<T> >& v)
 {
 //printf("Archive& operator <<(Archive& ar, vect<T, ObjectItem<T> >& v)\n");
@@ -1546,6 +1548,6 @@ template <class T> Archive& operator >>(Archive& ar, vect<T, ObjectItem<T> >& v)
 	return ar;
 
 }
-
+#endif
 
 #endif

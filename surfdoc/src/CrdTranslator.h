@@ -1,5 +1,12 @@
 #pragma once
-
+enum crd_translation_mode
+{
+        crd_translation_mode_xyz = 0,
+        crd_translation_mode_yz,
+        crd_translation_mode_xz,
+        crd_translation_mode_xy,
+        crd_translation_mode_along_plane
+};
 class CrdTranslator
 {
 public:
@@ -14,39 +21,32 @@ public:
 	double maxY;
 	double maxZ;
 
-	enum crd_translation_mode
-	{
-		xyz = 0,
-		yz,
-		xz,
-		xy,
-		along_plane
-	};
+
 
 	crd_translation_mode m_crd_translation_mode;
 
 	CrdTranslator()
 	{
-		m_crd_translation_mode = CrdTranslator::crd_translation_mode::xyz;
+                m_crd_translation_mode = crd_translation_mode_xyz;
 	}
 
 	void DoTranslation(double x1, double y1, double z1, double& x2, double& y2, double& z2)
 	{
 		switch(m_crd_translation_mode)
 		{
-		case CrdTranslator::crd_translation_mode::xyz:
+                case crd_translation_mode_xyz:
 			DoTranslation_XYZ(x1, y1, z1, x2, y2, z2);
 			break;
-		case CrdTranslator::crd_translation_mode::yz:
+                case crd_translation_mode_yz:
 			DoTranslation_YZ(x1, y1, z1, x2, y2, z2);
 			break;
-		case CrdTranslator::crd_translation_mode::xz:
+                case crd_translation_mode_xz:
 			DoTranslation_XZ(x1, y1, z1, x2, y2, z2);
 			break;
-		case CrdTranslator::crd_translation_mode::xy:
+                case crd_translation_mode_xy:
 			DoTranslation_XY(x1, y1, z1, x2, y2, z2);
 			break;
-		case CrdTranslator::crd_translation_mode::along_plane:
+                case crd_translation_mode_along_plane:
 			DoTranslation_along_plane(x1, y1, z1, x2, y2, z2);
 			break;
 		}
@@ -82,7 +82,7 @@ private:
 		double cosinus = sqrt(a*a + b*b + c*c) / sqrt(a*a + b*b);
 		double x0, y0; 
 		{
-			// запись bln файла в координатах плоскости сечения
+			// Р·Р°РїРёСЃСЊ bln С„Р°Р№Р»Р° РІ РєРѕРѕСЂРґРёРЅР°С‚Р°С… РїР»РѕСЃРєРѕСЃС‚Рё СЃРµС‡РµРЅРёСЏ
 			if (a != 0.0 && b != 0)
 			{
 				if(fabs(a) < fabs(b))

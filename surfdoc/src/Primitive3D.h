@@ -11,18 +11,23 @@
 
 #include "../../surfdefs.h"
 #include "stdafx.h"
+#if defined (_MSC_VER)
 #include "Object.h"
-
+#endif
 #include "points.h"
 #include "../../tools/src/filedlg.h"
 #include "Archive.h"
 #include "./CrdTranslator.h"
+#include <GL/gl.h>
 
 extern int ChooseSurfColor(HWND hwndOwner, COLORREF& color);
 
 extern char directory[];
 class Profile3D;
-template <class T> class Primitive3D : public Object
+template <class T> class Primitive3D
+#if defined (_MSC_VER)
+        : public Object
+#endif
 {
 	friend class FastCollection;
 	friend class Surface3D;
@@ -40,6 +45,10 @@ public:
 	PRIMITIVE_POINTS_TYPE(T) m_vdPoints;
 	PRIMITIVE_POINTS_TYPE(T) m_vvPoints;
 	COLORREF m_color;
+#if !defined (_MSC_VER)
+        CPoint3 m_ptMax;
+        CPoint3 m_ptMin;
+#endif
 	void Init(const Primitive3D& ob)
 	{
 		this->m_alpha		= ob.m_alpha;
@@ -77,7 +86,12 @@ public:
 public:
 	Primitive3D(const Primitive3D& ob)
 	{
+#if defined (_MSC_VER)
 		dynamic_cast<Object*>(this)->Init(ob);
+#else
+            this->m_ptMax = ob.m_ptMax;
+            this->m_ptMin = ob.m_ptMin;
+#endif
 		this->Init(ob);
 	}
 	//====== Операция присвоения
@@ -85,8 +99,12 @@ public:
 	{
 		if (this == &ob)
 			return *this;
-
+#if defined (_MSC_VER)
 		dynamic_cast<Object*>(this)->Init(ob);
+#else
+            this->m_ptMax = ob.m_ptMax;
+            this->m_ptMin = ob.m_ptMin;
+#endif
 		this->Init(ob);
 
 		return *this;
@@ -103,7 +121,9 @@ public:
 		m_alpha = 255;
 		m_FillMode = GL_FILL;
 		m_nPoints	= 0;
+#if defined (_MSC_VER)
 		this->m_object_type = Object::object_type::primitive3d;
+#endif
 		this->m_primitive_version = 1;
 	}
 	GLenum  GetFillMode()
@@ -130,6 +150,7 @@ public:
 	{
 		m_alpha = alpha;
 	}
+#if defined (_MSC_VER)
 	virtual void Draw();/*
 	{
 		if (m_pSurfDoc)
@@ -157,6 +178,7 @@ public:
 	{
 		this->SetLayer_NonVirtual(layer);
 	}
+#endif
 	void Primitive_Serialize(Archive& ar)
 	{
 //printf("void Primitive_Serialize(Archive& ar)\n");
@@ -168,22 +190,19 @@ public:
 			{
 			case 1:
 				{
-//printf("Archive& operator <<(Archive& ar, Primitive3D<T>& primitive) 1\n");
 					ar << this->m_alpha;
-//printf("this->m_alpha = %d\n", this->m_alpha );
 					ar << this->m_color;
-//printf("this->m_color = %d\n", this->m_color );
 					ar << this->m_FillMode;
-//printf("this->m_FillModer = %d\n", this->m_FillMode );
 
 					ar << this->m_nPoints;
-//printf("this->m_nPoints = %d\n", this->m_nPoints);
 					ar << this->m_vdPoints;
 				}
 				break;
 			default:
 				{
+#if defined (_MSC_VER)
 					throw VersionException(version, VersionException::cannot_store, this->m_object_type);
+#endif
 				}
 				break;
 			}
@@ -197,17 +216,12 @@ public:
 			{
 			case 1:
 				{
-//printf("Archive& operator >>(Archive& ar, Primitive3D<T>& primitive) 1\n");
 					this->Free();
 					ar >> this->m_alpha;
-//printf("this->m_alpha = %d\n", this->m_alpha );
 					ar >> this->m_color;
-//printf("this->m_color = %d\n", this->m_color );
 					ar >> this->m_FillMode;
-//printf("this->m_FillModer = %d\n", this->m_FillMode );
 
 					ar >> this->m_nPoints;
-//printf("this->m_nPoints = %d\n", this->m_nPoints);
 					this->AllocPoints(this->m_nPoints);
 					ar >> this->m_vdPoints;
 				}
@@ -215,7 +229,9 @@ public:
 			default:
 				{
 					printf("Primitive_Serialize(Archive& ar) throw!!!\n");
+#if defined (_MSC_VER)
 					throw VersionException(this->m_primitive_version, VersionException::cannot_load, this->m_object_type);
+#endif
 				}
 				break;
 			}
@@ -254,8 +270,8 @@ public:
 		{
 		
 			//printf("\t\tInsert(if (i_where %u > 0 && i_where <= this->m_nPoints %u))\n", i_where, this->m_nPoints);
-			vector<T>::iterator iter_v = m_vvPoints.begin();
-			vector<T>::iterator iter_d = m_vdPoints.begin();
+                        typename vector<T>::iterator iter_v = m_vvPoints.begin();
+                        typename vector<T>::iterator iter_d = m_vdPoints.begin();
 			m_vvPoints.insert(iter_v+i_where, pt);
 			m_vdPoints.insert(iter_d+i_where, pt);
 			m_nPoints++;
@@ -266,8 +282,8 @@ public:
 	{
 		if (i < m_nPoints && i >= 0)
 		{
-			vector<T>::iterator iter_v;
-			vector<T>::iterator iter_d;
+                        typename vector<T>::iterator iter_v;
+                        typename vector<T>::iterator iter_d;
 			size_t j = 0;
 			for(iter_v = m_vvPoints.begin(), iter_d = m_vdPoints.begin(); 
 				iter_v != m_vvPoints.end() && iter_d != m_vdPoints.end(); 
@@ -285,8 +301,8 @@ public:
 	}
 	virtual void FreeMiddlePoints()
 	{
-		vector<T>::iterator iter_v;
-		vector<T>::iterator iter_d;
+                typename vector<T>::iterator iter_v;
+                typename vector<T>::iterator iter_d;
 		size_t i = 0;
 		for(iter_v = m_vvPoints.begin()+1, iter_d = m_vdPoints.begin()+1; 
 			iter_v != m_vvPoints.end() && iter_d != m_vdPoints.end() && i+2 < this->m_nPoints; 
@@ -300,7 +316,7 @@ public:
 	size_t GetVisiblePointsNumber()
 	{
 		size_t n = 0;
-		vector<T>::iterator iter_d;
+                typename vector<T>::iterator iter_d;
 		for(iter_d = m_vdPoints.begin(); iter_d != m_vdPoints.end(); ++iter_d)
 		{
 			if ((*iter_d).bVisible)
@@ -312,8 +328,8 @@ public:
 	}
 	virtual void ShowUnvisible()
 	{
-		vector<T>::iterator iter_v;
-		vector<T>::iterator iter_d;
+                typename vector<T>::iterator iter_v;
+                typename vector<T>::iterator iter_d;
 		for(iter_v = m_vvPoints.begin(), iter_d = m_vdPoints.begin(); 
 			iter_v != m_vvPoints.end() && iter_d != m_vdPoints.end(); 
 			iter_v++, iter_d++)
@@ -326,8 +342,8 @@ public:
 	}
 	virtual void HideUnvisible()
 	{
-		vector<T>::iterator iter_v;
-		vector<T>::iterator iter_d;
+                typename vector<T>::iterator iter_v;
+                typename vector<T>::iterator iter_d;
 		for(iter_v = m_vvPoints.begin(), iter_d = m_vdPoints.begin(); 
 			iter_v != m_vvPoints.end() && iter_d != m_vdPoints.end(); 
 			iter_v++, iter_d++)
@@ -344,8 +360,8 @@ public:
 	virtual bool UnClose(int pos);
 	bool IsClosed()
 	{
-		vector<T>::iterator iter_v;
-		vector<T>::iterator iter_d;
+                typename vector<T>::iterator iter_v;
+                typename vector<T>::iterator iter_d;
 		
 		iter_v = m_vvPoints.begin();
 		iter_d = m_vdPoints.begin(); 
@@ -361,8 +377,8 @@ public:
 	}
 	void EraseAllUnvisible()
 	{
-		vector<T>::iterator iter_v = m_vvPoints.begin();
-		vector<T>::iterator iter_d = m_vdPoints.begin();
+                typename vector<T>::iterator iter_v = m_vvPoints.begin();
+                typename vector<T>::iterator iter_d = m_vdPoints.begin();
 		while (iter_v != m_vvPoints.end() && iter_d != m_vdPoints.end())
 		{
 			if (!(*iter_d).bVisible)
@@ -382,8 +398,8 @@ public:
 	{
 		bool status = false;
 		TCHAR lpstrFile[256];
-		TCHAR filter[] =  
-			TEXT("AutoCAD DXF(*.dxf)\0*.dxf\0")
+                TCHAR filter[] =
+                        TEXT("AutoCAD DXF(*.dxf)\0*.dxf\0")
 			TEXT("Golden Software Blanking (*.bln)\0*.bln\0")
 			TEXT("Golden Software Data (*.dat)\0*.dat\0")
 			TEXT("All Files (*.*)\0*.*\0");
@@ -395,7 +411,9 @@ public:
 			return status;
 		if (nFilterIndex == 1)
 		{
+#if defined (_MSC_VER)
 			status = this->Object::SaveAsDxf(lpstrFile,NULL);
+#endif
 		}
 		else
 		{

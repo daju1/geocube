@@ -5,7 +5,7 @@
 #include "../../mylicense.h"
 
 //extern /*UINT_PTR*/unsigned int CALLBACK DlgProcSaveMesh(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
-extern HINSTANCE hInst;   // текущий экземпляр
+extern HINSTANCE hInst;   // С‚РµРєСѓС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
 
 
 

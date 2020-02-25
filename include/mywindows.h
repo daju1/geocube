@@ -197,6 +197,15 @@ typedef struct tagRECT {
 
 #define  HEAP_ZERO_MEMORY 0x00000008
 
+#define IDOK     1
+#define IDCANCEL 2
+#define IDABORT  3
+#define IDRETRY  4
+#define IDIGNORE 5
+#define IDYES    6
+#define IDNO     7
+
+
 HANDLE GetProcessHeap()
 {
     return NULL;
@@ -212,6 +221,46 @@ BOOL HeapFree(HANDLE, DWORD /*dwFlags*/, LPVOID lpMem)
     free(lpMem);
     return TRUE;
 }
+#include <QDir>
+
+#ifdef _UNICODE
+BOOL CreateDirectoryW(
+  LPCWSTR                lpPathName,
+  void *  //LPSECURITY_ATTRIBUTES lpSecurityAttributes
+)
+{
+    QDir().mkdir(QStringW(lpPathName));
+    return TRUE;
+}
+BOOL DeleteFileW(
+  LPCWSTR lpFileName
+)
+{
+    QFile file (lpFileName);
+    file.remove();
+}
+#define CreateDirectory CreateDirectoryW
+#define DeleteFile DeleteFileW
+#else
+BOOL CreateDirectoryA(
+  LPCSTR                lpPathName,
+  void *   //LPSECURITY_ATTRIBUTES lpSecurityAttributes
+)
+{
+    QDir().mkdir(QString(lpPathName));
+    return TRUE;
+}
+
+BOOL DeleteFileA(
+  LPCSTR lpFileName
+)
+{
+    QFile file (lpFileName);
+    file.remove();
+}
+#define CreateDirectory CreateDirectoryA
+#define DeleteFile DeleteFileA
+#endif
 
 
 

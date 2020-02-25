@@ -24,13 +24,14 @@
 #include "winsurftree.h"
 #include "SurfDoc.h"
 #include "../../winplot/src/winplot.h"
-#include "../../tools/src/errorexit.h"
 #endif
+#include "../../tools/src/errorexit.h"
 #include "../../array/src/interp.h"
 #include "../../array/src/ap.h"
 #include "../../array/src/fft.h"
 #include "../../array/src/matrixes.h"
-
+#include "../../tools/src/readfile.h"
+#include "../../tools/src/filedlg.h"
 #include "../mylicense.h"
 
 
@@ -4509,7 +4510,8 @@ printf("w_fi lenh = %d\n", lenh);
 		P.resize(2*lenh - 1, 0.0);
 		for (int i = 0; i < lenh;i++)
 			P[2*i] = fh[i];
-		FI=2*conv(P,FI);
+        FI = conv(P,FI);
+        FI *= 2;
 	}
 	else
 	{
@@ -4519,7 +4521,8 @@ printf("w_fi lenh = %d\n", lenh);
 			P.resize(pow_two*(lenh - 1) + 1, 0.0);
 			for (int i = 0; i < lenh;i++)
 				P[pow_two*i] = fh[i];
-			FI=2*conv(P,FI);
+            FI=conv(P,FI);
+            FI *= 2;
 		}
 
 		int pow_two = (int)pow(2.0, (d-1));
@@ -4528,7 +4531,8 @@ printf("w_fi lenh = %d\n", lenh);
 		for (int i = 0; i < lenh;i++)
 			P[pow_two*i] = fh[i];
 
-		FI=2*conv(P,FI);
+        FI=conv(P,FI);
+        FI *= 2;
 
 	}
 printf("w_fi end\n", d);
@@ -6071,13 +6075,13 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
-
+#if defined (_MSC_VER)
 	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
-
+#endif
 	try
 	{	// формируем заголовок выходного файла
 		ar2 << rows;
@@ -6085,12 +6089,13 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 		for(long i = 0; i < rows; i++)
 		{
+#if defined (_MSC_VER)
 			time_current = GetCurrentTime();
 			time_eplased = time_current - time_pre_current;
 			time_pre_current = time_current;
 
 			printf("Holesski %ld %ld, time_eplased = %0.3f %d sec\n", i,rows, double(time_eplased)/1000.0, (time_current - time_start)/1000);
-
+#endif
 			sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, i);
 
 			AFile fi;
@@ -6324,23 +6329,24 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 		MessageBox(0,"unknown error of archive read","",0);
 		return false;
 	}
-
+#if defined (_MSC_VER)
 	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
-
+#endif
 	try
 	{
 		for(long j = 0; j < rows; j++)
 		{
+#if defined (_MSC_VER)
 			time_current = GetCurrentTime();
 			time_eplased = time_current - time_pre_current;
 			time_pre_current = time_current;
 
 			printf("Holesski3 %ld %ld, time_eplased = %0.3f %d sec\n", j,rows, double(time_eplased)/1000.0, (time_current - time_start)/1000);
-
+#endif
 			// считываем очередную строку из входного файла
 
 			sparse_row row_j; row_j.clear();
@@ -6655,13 +6661,13 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 		MessageBox(0,"unknown error of archive read 1","",0);
 		return false;
 	}
-
+#if defined (_MSC_VER)
 	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
-
+#endif
 	vector<sparse_row> m;
 	m.clear();
 
@@ -6669,12 +6675,13 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 	{
 		for(long j = 0; j < rows; j++)
 		{
+#if defined (_MSC_VER)
 			time_current = GetCurrentTime();
 			time_eplased = time_current - time_pre_current;
 			time_pre_current = time_current;
 
 			printf("Holesski3 %ld %ld, time_eplased = %0.3f %d sec\n", j,rows, double(time_eplased)/1000.0, (time_current - time_start)/1000);
-
+#endif
 			// считываем очередную строку из входного файла
 
 			sparse_row row__j; row__j.clear();
@@ -7106,13 +7113,13 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,"unknown error of archive read 1","",0);
 		return false;
 	}
-
+#if defined (_MSC_VER)
 	DWORD 
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
-    
+#endif
 
 	int rows_rows = rows*rows;
 	double * a = new double[rows*rows];
@@ -12255,7 +12262,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		if (vvvvkp.size() > 0)
 			if (vvvvkp[0].size() > 0)
 				prof_interval.i2 = vvvvkp[0][0].size()-1;
-
+#if defined (_MSC_VER)
 		prof_interval.layer = NULL;
 		SurfDoc * doc = NULL;
 		if (p_auto_build_profile)
@@ -12264,7 +12271,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		{
 			prof_interval.layer = doc->AddNewLayer(filename);
 		}
-
+#endif
 		strcpy(prof_interval.dir, dir_out);
 		profile_intervals.push_back(prof_interval);
 		prof_interval.i1 = prof_interval.i2+1;
@@ -13503,9 +13510,11 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 							printf("can not open file: \n%s\n", lpstrFile);
 							ErrorPrint("fopen");
 						}
+#if defined (_MSC_VER)
 						static KohonenDlg * khd = new KohonenDlg(vX, vY, vZ, MM, filename, true);		// ...right after the dialog is closed?
 
 						if (khd != NULL) delete khd;
+#endif
 					}
 				}
 			}
@@ -14172,10 +14181,11 @@ printf("r = %u rows = %d\n", r, rows);
 					}
 				}
 			}
-
+#if defined (_MSC_VER)
 			static KohonenDlg * khd = new KohonenDlg(vX, vY, vZ, MM, filename, true);		// ...right after the dialog is closed?
 
 			if (khd != NULL) delete khd;
+#endif
 
 		}
 	}
@@ -15045,7 +15055,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		if (vvvvkp.size() > 0)
 			if (vvvvkp[0].size() > 0)
 				prof_interval.i2 = vvvvkp[0][0].size()-1;
-
+#if defined (_MSC_VER)
 		prof_interval.layer = NULL;
 		SurfDoc * doc = NULL;
 		if (p_auto_build_profile)
@@ -15054,7 +15064,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		{
 			prof_interval.layer = doc->AddNewLayer(filename);
 		}
-
+#endif
 		strcpy(prof_interval.dir, dir_out);
 		profile_intervals.push_back(prof_interval);
 		prof_interval.i1 = prof_interval.i2+1;
@@ -15125,6 +15135,7 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				// а сразу все профили в функции UseWholeDirectory
 				//vector<vector<korr_point> > vvkp;
 				//vvkp.clear();
+#if defined (_MSC_VER)
 #if MANY_COLLECTIONS_ON_EACH_COL
 				Collection *pcollection = NULL;
 				if (p_auto_build_profile)
@@ -15139,6 +15150,9 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 					pcollection = p_auto_build_profile->CreateNewCollection();
 					p_auto_build_profile->m_collections.GetLastMsg().SetName(name);
 				}
+#endif
+#else
+                void *pcollection = NULL;
 #endif
 
 				// проводим корреляцию между столбцами
@@ -16277,13 +16291,13 @@ void LocalsMaker(
 			double naklon = r_/delta_t;
 
 			int ans = IDYES;
-
+#if defined (_MSC_VER)
 			if (false)
 			{
 				WinPlot(X,in, i1, i2);
 				ans = MessageBox(0, "Add This?","LocalsMaker", MB_YESNOCANCEL);
 			}
-
+#endif
 			if (ans == IDCANCEL)
 				return;
 
@@ -16444,13 +16458,13 @@ void SticksMaker(
 			double naklon = r_/delta_t;
 
 			int ans = IDYES;
-
+#if defined (_MSC_VER)
 			if (false)
 			{
 				WinPlot(X,in, i1, i2);
 				ans = MessageBox(0, "Add This?","LocalsMaker", MB_YESNOCANCEL);
 			}
-
+#endif
 			if (ans == IDCANCEL)
 				return;
 
@@ -16519,8 +16533,9 @@ void SticksMaker(
 		}
 	}
 }
+#if defined (_MSC_VER)
 #define COLLEC_TION FastCollection
-
+#endif
 
 void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина окна - это два плеча плюс один
 							   int step,
@@ -17053,7 +17068,11 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 		reverse1, reverse2);*/
 }
 void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
+#if defined (_MSC_VER)
 						   Collection * pcollection,
+#else
+                           void * pcollection,
+#endif
 						   vector<vert_korr_points> * vvkp,
 						   vector<profile_interval> & profile_intervals,
 						   vector<string> * pnames_of_colomns,
@@ -17129,15 +17148,14 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 		if (current_profile_number < profile_intervals.size())
 			current_profile_interval = &profile_intervals[current_profile_number];
 
-
+#if defined (_MSC_VER)
 		COLLEC_TION * pcurrent_fast_collection = NULL;
-
 
 		CPoint3 pt;
 		pt.bVisible = true;
 		//Sphere3D prim;
 		ThePoint3D prim;
-
+#endif
 
 		// выделяем память под корреляционную матрицу
 		//double **M = AllocDoubleMat(max_size, (*vvkp).size());
@@ -17177,7 +17195,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 		}
 		printf("try to open file %s\n", file_dat);
 		dat = fopen(file_dat, "wt");
-
+#if defined (_MSC_VER)
 		if (pcollection)
 		{
 			COLLEC_TION current_fast_collection;
@@ -17195,6 +17213,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 			printf("NOT pcollection on DoVerticalCorrelation !!!!!!!!!!!!!!!\n");
 		if (pcurrent_fast_collection)
 			prim.InitDoc((SurfDoc*)pcurrent_fast_collection->GetDoc());
+#endif
 		///////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////
@@ -17244,7 +17263,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 						}
 						printf("try to open file %s\n", file_dat);
 						dat = fopen(file_dat, "wt");
-
+#if defined (_MSC_VER)
 						if (pcollection)
 						{
 							COLLEC_TION current_fast_collection;
@@ -17259,6 +17278,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 						}
 						else
 							printf("NOT pcollection on DoVerticalCorrelation !!!!!!!!!!!!!!!\n");
+#endif
 					}
 				}
 			}
@@ -17372,6 +17392,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 						(vkp_0.vkp[ind+1].korr_k2 < vkp_0.vkp[ind].korr_k2 && vkp_0.vkp[ind-1].korr_k2 < vkp_0.vkp[ind].korr_k2)*/
 						)
 					{
+#if defined (_MSC_VER)
 						if (pcurrent_fast_collection)
 						{
 							COLORREF color = 0;
@@ -17390,6 +17411,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 							prim.InitPoint(pt,color);
 							pcurrent_fast_collection->AddObject(&prim);
 						}
+#endif
 					}
 				}
 			}
@@ -17398,8 +17420,10 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 
 
 		printf("\n");
+#if defined (_MSC_VER)
 		if (pcurrent_fast_collection)
 			pcurrent_fast_collection->InitObjectList();
+#endif
 #if 0
 		//
 		Grid grid;
@@ -17702,15 +17726,15 @@ void BuildGrid(char * file_grd,
 //	if (current_profile_number < profile_intervals.size())
 //		current_profile_interval = &profile_intervals[current_profile_number];
 
-
+#if defined (_MSC_VER)
 	COLLEC_TION * pcurrent_fast_collection = NULL;
-
 
 	CPoint3 pt;
 	pt.bVisible = true;
+
 	//Sphere3D prim;
 	ThePoint3D prim;
-
+#endif
 
 	// выделяем память под корреляционную матрицу
 	//double **M = AllocDoubleMat(max_size, (*vvkp).size());
@@ -17868,9 +17892,10 @@ if (pcurrent_fast_collection)
 
 
 	printf("\n");
+#if defined (_MSC_VER)
 	if (pcurrent_fast_collection)
 		pcurrent_fast_collection->InitObjectList();
-
+#endif
 }
 
 
@@ -17900,13 +17925,13 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 #ifdef _MSC_VER
 	COLLEC_TION * pcurrent_fast_collection = NULL;
-#endif
+
 
 	CPoint3 pt;
 	pt.bVisible = true;
 	//Sphere3D prim;
 	ThePoint3D prim;
-
+#endif
 
 	// выделяем память под корреляционную матрицу
 	//double **M = AllocDoubleMat(max_size, (*vvkp).size());
@@ -18146,8 +18171,10 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 
 	printf("\n");
+#if defined (_MSC_VER)
 	if (pcurrent_fast_collection)
 		pcurrent_fast_collection->InitObjectList();
+#endif
 #if 0
 	//
 	Grid grid;

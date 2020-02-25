@@ -9,8 +9,6 @@ void DoMyMethod(vector<double> & X,
 				string name);
 
 
-#ifdef _MSC_VER
-
 class sparse_row;
 
 // получить граф в виде полной структуры смежности 
@@ -105,7 +103,7 @@ bool Tichonov(size_t cols,
 			  vector<double> & b,
 			  vector<double> & x,
 			  vector<double> & valpha);
-#endif
+
 namespace geometry2D
 {
 	/*
@@ -170,7 +168,6 @@ template<class T> class TreeNode {
 				vector<double> & signal,
 				string name);
 
-#ifdef _MSC_VER
 	// получить граф в виде полной структуры смежности 
 	// или нижней структуры смежности 
 	// ( в зависимости от значения переменной  bool to_form_full_structure ) 
@@ -246,7 +243,6 @@ template<class T> class TreeNode {
 			  vector<double> & b,
 			  vector<double> & x,
 			  vector<double> & valpha);
-#endif
 
 };
 

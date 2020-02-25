@@ -498,6 +498,8 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 void DoVerticalCorrelation(int wlen,// = 100;//длина окна корреляции
 #ifdef _MSC_VER
                            Collection * pcollection,
+#else
+                           void * pcollection,
 #endif
 						   vector<vert_korr_points> * vvkp, 
 						   vector<profile_interval> & profile_intervals,

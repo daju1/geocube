@@ -6,6 +6,7 @@
 #endif
 #include "../../auto_build_3D/picks_search.h"
 //#include "AutoBuildProfileDlg.h"
+#include "../../surfdoc/src/Archive.h"
 
 class AutoBuildProfile
 #ifdef _MSC_VER

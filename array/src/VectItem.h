@@ -10,8 +10,9 @@
 #endif // _MSC_VER > 1000
 //#include "raporto.h"
 
-
+#if defined (_MSC_VER)
 #include "../../surfdoc/src/Object.h"
+#endif
 
 template <class T> class vectItem
 {
@@ -79,7 +80,7 @@ public:
 	}
 };
 
-
+#if defined (_MSC_VER)
 #if 1
 template <class T> class ObjectItem
 {
@@ -311,8 +312,6 @@ public:
 };
 
 
-
-
-
+#endif
 #endif
 #endif // !defined(AFX_VECTITEM_H__56D40E3E_9B18_4C13_B123_2517F9725EFD__INCLUDED_)

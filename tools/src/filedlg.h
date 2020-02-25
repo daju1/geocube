@@ -1,6 +1,10 @@
 #ifndef FILE_DLG_INCLUDED
 #define FILE_DLG_INCLUDED
+#if defined (_MSC_VER)
 //#include <windows.h>
+#else
+#include <mywindows.h>
+#endif
 struct SSavePlotData
 {
     BOOL bSaveSelectedOnly;
@@ -28,7 +32,9 @@ HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterI
 
 HRESULT OpenFileDlg(HWND hWnd, LPCTSTR lpstrFilter, LPTSTR lpstrFile = NULL);
 HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
+#if defined (_MSC_VER)
 HRESULT SavePlot(HWND hWnd, HENHMETAFILE hMetaFile, LPCTSTR lpstrFile);
+#endif
 bool BroseDirDlg(HWND hWnd, char * dir);
 
 #endif
