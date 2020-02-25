@@ -125,6 +125,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logger", "logger\vc\Logger.vcproj", "{296335CC-C44A-4BB6-B1AF-971C44B29641}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TezeyCon2003", "TezeyCon2003.vcproj", "{427392D6-C266-4CC7-BEE6-268AED0509FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F945E76B-4C49-4DF8-AC9F-45E945FDA9B9} = {F945E76B-4C49-4DF8-AC9F-45E945FDA9B9}
+		{B1E70CB6-4C53-47E9-9E01-39310886454D} = {B1E70CB6-4C53-47E9-9E01-39310886454D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
