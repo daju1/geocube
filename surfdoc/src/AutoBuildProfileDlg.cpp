@@ -561,8 +561,8 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 					
 					if (auto_build_dlg->m_ab.use_num_col)
 					{
-						char str[4096];
-						sprintf_s(str, 4096, "%s", auto_build_dlg->m_ab.num_col_filename);
+						TCHAR str[4096];
+						stprintf_s(str, 4096, _T("%s"), auto_build_dlg->m_ab.num_col_filename);
 						SetDlgItemText(auto_build_dlg->hDlg, IDC_EDIT_NUM_COLOMNS, str);
 					}
 						
@@ -731,31 +731,31 @@ AutoBuildProfileDlg::~AutoBuildProfileDlg()
 
 void AutoBuildProfileDlg::OnInitDialog()
 {
-	char str[1024];
+	TCHAR str[1024];
 	///////////////////////////////////////////////
-	sprintf(str, "%f", this->m_ab.k);
+	stprintf_s(str, 1024, _T("%f"), this->m_ab.k);
 	SetDlgItemText(this->hDlg, IDC_EDIT_GLUBINA_K, str);
 	///////////////////////////////////////////////
-	sprintf(str, "%f", this->m_ab.quantil_naklony);
+	stprintf_s(str, 1024, _T("%f"), this->m_ab.quantil_naklony);
 	SetDlgItemText(this->hDlg, IDC_EDIT_NAKLON_QUANTIL, str);
 	///////////////////////////////////////////////
-	sprintf(str, "%f", this->m_ab.peregib_krutizna_quantil);
+	stprintf_s(str,1024,  _T("%f"), this->m_ab.peregib_krutizna_quantil);
 	SetDlgItemText(this->hDlg, IDC_EDIT_PEREGIB_KRUTIZNA_QUANTIL, str);
 	///////////////////////////////////////////////
-	sprintf(str, "%f", this->m_ab.win_velonsity);
+	stprintf_s(str, 1024, _T("%f"), this->m_ab.win_velonsity);
 	SetDlgItemText(this->hDlg, IDC_EDIT_WIN_STEP_VELONSITY, str);
 	///////////////////////////////////////////////
-	sprintf(str, "%f", this->m_ab.minimum_of_signal);
+	stprintf_s(str, 1024, _T("%f"), this->m_ab.minimum_of_signal);
 	SetDlgItemText(this->hDlg, IDC_EDIT_MINIMUM_OF_SIGNAL, str);
 	///////////////////////////////////////////////
-	sprintf(str, "%f", this->m_ab.limit_dima);
+	stprintf_s(str, 1024, _T("%f"), this->m_ab.limit_dima);
 	SetDlgItemText(this->hDlg, IDC_EDIT_LIMIT_DIMA, str);
 	///////////////////////////////////////////////
-	sprintf(str, "%f", this->m_ab.limit_1);
+	stprintf_s(str, 1024, _T("%f"), this->m_ab.limit_1);
 	SetDlgItemText(this->hDlg, IDC_EDIT_LIMIT_1, str);
 	///////////////////////////////////////////////
 
-	sprintf(str, "%d", this->m_ab.n);
+	stprintf_s(str, 1024, _T("%d"), this->m_ab.n);
 	SetDlgItemText(this->hDlg, IDC_EDIT_POVTOR_ZAPRET, str);
 	///////////////////////////////////////////////
 
@@ -786,7 +786,7 @@ void AutoBuildProfileDlg::OnInitDialog()
 	CheckDlgButton(this->hDlg, IDC_CHECK_USE_NUM_COL, this->m_ab.use_num_col);
 	ShowWindow(GetDlgItem(this->hDlg, IDC_EDIT_NUM_COLOMNS), this->m_ab.use_num_col);
 	ShowWindow(GetDlgItem(this->hDlg, IDC_BUTTON_BROSE_NUM_COLOMNS), this->m_ab.use_num_col);
-	sprintf(str, "%s", this->m_ab.num_col_filename);
+	stprintf_s(str, 1024, _T("%s"), this->m_ab.num_col_filename);
 	SetDlgItemText(this->hDlg, IDC_EDIT_NUM_COLOMNS, str);
 	///////////////////////////////////////////////
 	CheckDlgButton(this->hDlg, IDC_CHECK_USE_WHOLE_DIRECTORY, this->m_ab.use_whole_directory);
@@ -836,7 +836,7 @@ void AutoBuildProfileDlg::OnInitDialog()
 
 	for(size_t j = 0; j < 3; j++)
 	{
-		sprintf(str, "%u", j);
+		stprintf_s(str, 1024, _T("%u"), j);
 		SendDlgItemMessage( hDlg, IDC_COMBO_LOCALS_START_J , CB_ADDSTRING, 0, (LPARAM)str);
 		SendDlgItemMessage( hDlg, IDC_COMBO_LOCALS_START_J2, CB_ADDSTRING, 0, (LPARAM)str);
 	}
@@ -1623,9 +1623,9 @@ void AutoBuildProfileDlg1::ShowWindows_RelatedWith_CheckUseLocals()
 void AutoBuildProfileDlg1::OnButtonBroseNumColomn()
 {
 	if (::OpenFileDlg(hDlg, 
-		"Data (*.dat)\0*.dat\0"
-		"CSV (*.csv)\0*.csv\0"
-		"All files \0*.*\0") == S_OK)
+		_T("Data (*.dat)\0*.dat\0")
+		_T("CSV (*.csv)\0*.csv\0")
+		_T("All files \0*.*\0")) == S_OK)
 
 	{
 		strcpy(this->m_ab.num_col_filename,::szPath);

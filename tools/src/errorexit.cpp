@@ -17,11 +17,11 @@ void ErrorExit(LPTSTR lpszFunction, bool toExitProcess)
         (LPTSTR) &lpMsgBuf,
         0, NULL );
 
-    sprintf_s(szBuf, BUF_LEN,
-        "%s failed with error %d: %s", 
+    stprintf_s(szBuf, BUF_LEN,
+        _T("%s failed with error %d: %s"), 
         lpszFunction, dw, lpMsgBuf); 
  
-    MessageBox(NULL, szBuf, "Error", MB_OK); 
+    MessageBox(NULL, szBuf, _T("Error"), MB_OK); 
 
     LocalFree(lpMsgBuf);
 	if(toExitProcess)
@@ -44,8 +44,8 @@ void ErrorPrint(LPTSTR lpszFunction)
         (LPTSTR) &lpMsgBuf,
         0, NULL );
 
-    sprintf_s(szBuf, BUF_LEN,
-		"Error: %s failed with error %d: %s\n", 
+    stprintf_s(szBuf, BUF_LEN,
+		_T("Error: %s failed with error %d: %s\n"), 
         lpszFunction, dw, lpMsgBuf); 
  
     printf(szBuf); 

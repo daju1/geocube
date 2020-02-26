@@ -69,7 +69,7 @@ DWORD AFile::Read(LPVOID lpBuffer, DWORD dwNumberOfBytesToRead)
 	else
 	{
 //printf("DWORD AFile::Read(return 0)\n");
-		ErrorPrint("ReadFile");
+		ErrorPrint(_T("ReadFile"));
 		return 0;
 	}
 }

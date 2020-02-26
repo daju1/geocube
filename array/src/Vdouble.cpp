@@ -4028,23 +4028,23 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 {
 	if (m_dims != 2)
 	{
-		MessageBox(0, "Error using double::Tichonov(vdouble& b) (m_dims != 2)",
-			"Error",0);
+		MessageBox(0, _T("Error using double::Tichonov(vdouble& b) (m_dims != 2)"),
+			_T("Error"),0);
         //ExitProcess(0);
 		return vdouble();
 	}
 	if (m_size[0] < 1 || m_size[1] < 1)
 	{
-		MessageBox(0, "Error using double::Tichonov(vdouble& b)\n Size < 1",
-			"Error",0);
+		MessageBox(0, _T("Error using double::Tichonov(vdouble& b)\n Size < 1"),
+			_T("Error"),0);
         //ExitProcess(0);
 		return vdouble();
 	}
 	if (m_size[0] != b.m_length)
 	{
-		char str[1024];
-		sprintf(str, "Error using double::Tichonov(vdouble& b)\nSize of vector %i must be equial to size of matrix = %i %i", b.m_length,m_size[0],m_size[1]);
-		MessageBox(0, str,"Error",0);
+		TCHAR str[1024];
+		stprintf_s(str, 1024, _T("Error using double::Tichonov(vdouble& b)\nSize of vector %i must be equial to size of matrix = %i %i"), b.m_length,m_size[0],m_size[1]);
+		MessageBox(0, str,_T("Error"),0);
         //ExitProcess(0);
 		return vdouble();
 	}
@@ -4369,7 +4369,7 @@ int vdouble::pinv(vdouble& PinvMatrix)
 {
 	if (m_dims != 2)
 	{
-		MessageBox(0, "Error using double::pinv(vdouble& PinvMatrix) (m_dims != 2)","Error", 0);
+		MessageBox(0, _T("Error using double::pinv(vdouble& PinvMatrix) (m_dims != 2)"), _T("Error"), 0);
         //ExitProcess(0);
 		return -1;
 	}
@@ -5243,7 +5243,7 @@ void WriteMatrix(const char * filename, const char * mode, const char * name, in
 	// открываем бинарный файл для записи
 	if ((stream = fopen(filename, mode)) == NULL)
 	{
- 		MessageBox(0,"Cannot open file for write.\n", "WriteMatrix", 0);
+ 		MessageBox(0, _T("Cannot open file for write.\n"),  _T("WriteMatrix"), 0);
 		return;
 	}
 	// Записываем данные
@@ -5293,16 +5293,16 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 	//=========================================================
 	if (n*n != m_length)
 	{
-		char strerr[255];
-		sprintf(strerr, "Error using det(): n*n (%d) != m_length (%d)\n" , n, m_length);
-		MessageBox(0,strerr,"sls_det",0);
+		TCHAR strerr[255];
+		stprintf_s(strerr, 255,  _T("Error using det(): n*n (%d) != m_length (%d)\n") , n, m_length);
+		MessageBox(0,strerr, _T("sls_det"), 0);
 		return;
 	}
 	if (n != b.m_length)
 	{
-		char strerr[255];
-		sprintf(strerr, "Error using det(): n (%d) != b.m_length (%d)\n", n, b.m_length);
-		MessageBox(0,strerr,"sls_det",0);
+		TCHAR strerr[255];
+		stprintf_s(strerr, 255, _T("Error using det(): n (%d) != b.m_length (%d)\n"), n, b.m_length);
+		MessageBox(0,strerr, _T("sls_det"),0);
 		return;
 	}
 	//this->Write("d:\\sls_test.txt","wt", "M", false);
@@ -8220,11 +8220,11 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 {
 	if (m_length != t.Size())
 	{
-		char str[255];
-		sprintf(str, "Error using vdouble::dwt()\n"
-			"m_length(%i) != t.Size(%i)",
+		TCHAR str[255];
+		stprintf_s(str, 255, _T("Error using vdouble::dwt()\n")
+			_T("m_length(%i) != t.Size(%i)"),
 			m_length, t.Size());
-		MessageBox(0, str, "vdouble::dwt 2", 0);
+		MessageBox(0, str, _T("vdouble::dwt 2"), 0);
 		return 0;
 	}
 	int len_h = dh.m_length,
@@ -8236,10 +8236,10 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 
 	if (len_s < 0)
 	{
-		char s[1024];
-		sprintf(s, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения", 
+		TCHAR s[1024];
+		stprintf_s(s, 1024, _T("Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения"), 
 			len_s);
-		MessageBox(0, s, "vdouble::dwt 2", 0);
+		MessageBox(0, s, _T("vdouble::dwt 2"), 0);
 		return 0;
 	}
 	double 
@@ -8311,9 +8311,9 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 			}
 			else
 			{
-				char str[255];
-				sprintf(str, "i = %d tsd[i] (%d) !> tsd[i-1] (%d)",i,  tsd[i],  tsd[i-1]);
-				MessageBox(0, str, "dwt 2 test tsd", 0);
+				TCHAR str[255];
+				stprintf_s(str, 255, _T("i = %d tsd[i] (%d) !> tsd[i-1] (%d)"), i,  tsd[i],  tsd[i-1]);
+				MessageBox(0, str, _T("dwt 2 test tsd"), 0);
 			}
 		}
 
@@ -8498,11 +8498,11 @@ int vdouble::dwt(int J,
 {
 	if (m_length != t.Size())
 	{
-		char str[S_LEN];
-		sprintf_s(str, S_LEN, "Error using vdouble::dwt()\n"
-			"m_length(%i) != t.Size(%i)",
+		TCHAR str[S_LEN];
+		stprintf_s(str, S_LEN, _T("Error using vdouble::dwt()\n")
+			_T("m_length(%i) != t.Size(%i)"),
 			m_length, t.Size());
-		MessageBox(0,str, "dwt 4",0);
+		MessageBox(0,str, _T("dwt 4"),0);
 		return 0;
 	}
 	int len_h = dh.m_length;
@@ -8546,10 +8546,10 @@ int vdouble::dwt(int J,
 
 	if (len_s <= 0)
 	{
-		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения", 
+		TCHAR s[S_LEN];
+		stprintf_s(s, S_LEN, _T("Error using vdouble::dwt():\nlen_s(%i) < 0\n Выберите меньший уровень разложения"), 
 			len_s);
-		MessageBox(0,s, "dwt 4", 0);
+		MessageBox(0,s, _T("dwt 4"), 0);
 		return 0;
 	}
 	double 
@@ -8655,9 +8655,9 @@ int vdouble::dwt(int J,
 				/*for (int ii = 0; ii < ts.Size(); ii++)
 					printf("%d ", ts[ii]);
 				printf("\n");*/
-				char str[255];
-				sprintf(str, "J = %d\ni = %d ts[i] (%d) !> ts[i-1] (%d)",J, i,  ts[i],  ts[i-1]);
-				MessageBox(0, str, "dwt 4 test ts", 0);
+				TCHAR str[255];
+				stprintf_s(str, 255, _T("J = %d\ni = %d ts[i] (%d) !> ts[i-1] (%d)"),J, i,  ts[i],  ts[i-1]);
+				MessageBox(0, str, _T("dwt 4 test ts"), 0);
 			}
 		}
 
@@ -8679,10 +8679,10 @@ int vdouble::idwt(int J,
 
 	if (len_s != ts.Size())
 	{
-		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s(%i) != ts.Size(%i)", 
+		TCHAR s[S_LEN];
+		stprintf_s(s, S_LEN, _T("Error using vdouble::idwt():\nlen_s(%i) != ts.Size(%i)"), 
 			len_s, ts.Size());
-		MessageBox(0,s,"", 0);
+		MessageBox(0,s,_T(""), 0);
 		return -1;
 	}
 	int len1_2 = len_s - len_h/2
@@ -8694,10 +8694,10 @@ int vdouble::idwt(int J,
 
 	if (len1_2+(left+right)/2 < 0)
 	{
-		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Выберите меньший уровень разложения", 
+		TCHAR s[S_LEN];
+		stprintf_s(s, S_LEN, _T("Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Выберите меньший уровень разложения"), 
 			len1_2+(left+right)/2);
-		MessageBox(0,s,"",0);
+		MessageBox(0,s,_T(""),0);
 		return 0;
 	}
 #if 1
@@ -8771,13 +8771,13 @@ int i = 0;
 			}
 
 			if (2*k+2*(right/2) < 0)
-				MessageBox(0,"2*k+right < 0","",0);
+				MessageBox(0,_T("2*k+right < 0"),_T(""),0);
 
 			if (2*k+2*(right/2)+1 >= m_length)
 			{
-				char str[255];
-				sprintf(str, "2*k(%d)+2*right(%d)/2+1(%d) >= m_length(%d)",k,right,2*k+2*(right/2)+1, m_length);
-				MessageBox(0,str,"",0);
+				TCHAR str[255];
+				stprintf_s(str, 255, _T("2*k(%d)+2*right(%d)/2+1(%d) >= m_length(%d)"),k,right,2*k+2*(right/2)+1, m_length);
+				MessageBox(0,str,_T(""),0);
 			}
 
 #if TEST_IDWT		
@@ -8854,9 +8854,9 @@ int i = 0;
 			}
 			else
 			{
-				char str[255];
-				sprintf(str, "J = %d\ni = %d new_t[i] (%d) !> new_t[i-1] (%d)",J, i, new_t[i],  new_t[i-1]);
-				MessageBox(0, str, "idwt 1", 0);
+				TCHAR str[255];
+				stprintf_s(str, 255, _T("J = %d\ni = %d new_t[i] (%d) !> new_t[i-1] (%d)"),J, i, new_t[i],  new_t[i-1]);
+				MessageBox(0, str, _T("idwt 1"), 0);
 			}
 		}
 
@@ -8979,10 +8979,10 @@ int vdouble::idwt(
 
 	if (len1_2+(left+right)/2 < 0)
 	{
-		char s[S_LEN];
-		sprintf_s(s, S_LEN, "Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Выберите меньший уровень разложения", 
+		TCHAR s[S_LEN];
+		stprintf_s(s, S_LEN, _T("Error using vdouble::idwt():\nlen_s - len_h/2- len_h%%2+1+(left+right)/2(%d) < 0\n Выберите меньший уровень разложения"), 
 			len1_2+(left+right)/2);
-		MessageBox(0,s,"",0);
+		MessageBox(0,s,_T(""),0);
 		return 0;
 	}
 	this->resize(2 * (len1_2+(left+right)/2), 0.0);
@@ -9169,20 +9169,20 @@ int vdouble::idwt(int J, Vector<int>& ts, Vector<int>&  tau, vdouble &rh, vdoubl
 
 	if (len_s != ts.size)
 	{
-		char s[255];
-		sprintf(s,"Error using vdouble::idwt():\nlen_s(%i) != ts.size(%i)", 
+		TCHAR s[255];
+		stprintf_s(s, 255,_T("Error using vdouble::idwt():\nlen_s(%i) != ts.size(%i)"), 
 			len_s,ts.size);
-		MessageBox(0, s, "vdouble::idwt", 0);
+		MessageBox(0, s, _T("vdouble::idwt"), 0);
 		return 0;
 
 	}
 
 	if (len_s < len_h/2)
 	{
-		char s[255];
-		sprintf(s,"Error using vdouble::idwt():\nlen_s(%i) < len_h/2(%i)\n Выберите меньший уровень разложения", 
+		TCHAR s[255];
+		stprintf_s(s, 255, _T("Error using vdouble::idwt():\nlen_s(%i) < len_h/2(%i)\n Выберите меньший уровень разложения"), 
 			len_s, len_h/2);
-		MessageBox(0, s, "vdouble::idwt", 0);
+		MessageBox(0, s, _T("vdouble::idwt"), 0);
 		return 0;
 	}
 	// половина длины реконструкции
@@ -9264,9 +9264,9 @@ int vdouble::idwt(int J, Vector<int>& ts, Vector<int>&  tau, vdouble &rh, vdoubl
 			}
 			else
 			{
-				char str[255];
-				sprintf(str, "i = %d tau[i] (%d) !> tau[i-1] (%d)", i, tau[i],  tau[i-1]);
-				MessageBox(0, str, "idwt 3", 0);
+				TCHAR str[255];
+				stprintf_s(str, 255, _T("i = %d tau[i] (%d) !> tau[i-1] (%d)"), i, tau[i],  tau[i-1]);
+				MessageBox(0, str, _T("idwt 3"), 0);
 			}
 		}
 
@@ -9362,11 +9362,11 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 	int i, j;
 	if (pt && m_length != pt->m_length)
 	{
-		char str[255];
-		sprintf(str,"Error using vdouble::WaveletDecomposition()\n"
-			"m_length(%i) != pt->m_length(%i)",
+		TCHAR str[255];
+		stprintf_s(str, 255, _T("Error using vdouble::WaveletDecomposition()\n")
+			_T("m_length(%i) != pt->m_length(%i)"),
 			m_length, pt->m_length);
-		MessageBox(0,str,"WaveletDecomposition",0);
+		MessageBox(0,str,_T("WaveletDecomposition"),0);
 		return 0;
 	}
 
@@ -9572,11 +9572,11 @@ int vdouble::WaveletDecomposition(vdouble* pt,
 	int i, j;
 	if (pt && m_length != pt->m_length)
 	{
-		char str[S_LEN];
-		sprintf_s(str, S_LEN, "Error using vdouble::WaveletDecomposition()\n"
-			"m_length(%i) != pt->m_length(%i)",
+		TCHAR str[S_LEN];
+		stprintf_s(str, S_LEN, _T("Error using vdouble::WaveletDecomposition()\n")
+			_T("m_length(%i) != pt->m_length(%i)"),
 			m_length, pt->m_length);
-		MessageBox(0,str,"",0);
+		MessageBox(0,str,_T(""),0);
 		return -1;
 	}
 
@@ -9785,11 +9785,11 @@ int vdouble::WaveletDecomposition1(vdouble* pt,
 	int i, j;
 	if (pt && m_length != pt->m_length)
 	{
-		char str[S_LEN];
-		sprintf_s(str, S_LEN, "Error using vdouble::WaveletDecomposition()\n"
-			"m_length(%i) != pt->m_length(%i)",
+		TCHAR str[S_LEN];
+		stprintf_s(str, S_LEN, _T("Error using vdouble::WaveletDecomposition()\n")
+			_T("m_length(%i) != pt->m_length(%i)"),
 			m_length, pt->m_length);
-		MessageBox(0,str,"",0);
+		MessageBox(0,str,_T(""),0);
 		return -1;
 	}
 

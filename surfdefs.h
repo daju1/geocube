@@ -39,7 +39,11 @@
 #define PRIMITIVE_POINTS_PTR_BEGIN			.begin()
 #else
 #define PRIMITIVE_POINTS_TYPE(type)			vector<type>
+#if defined (_MSC_VER)
+#define PRIMITIVE_POINTS_PTR(type)			vector<type>::iterator
+#else
 #define PRIMITIVE_POINTS_PTR(type)			typename vector<type>::iterator
+#endif
 #define PRIMITIVE_POINTS_ALLOC(v, n, type)	v.resize(n)
 #define PRIMITIVE_POINTS_FREE(v)			v.clear()
 #define PRIMITIVE_POINTS_PTR_BEGIN			.begin()

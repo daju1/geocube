@@ -7,7 +7,7 @@ bool InitTranslator(CrdTranslator& translator, SSaveProfData &sprData)
 	{
 		case SAVE_PROFILE_3D_XYZ:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xyz;
+				translator.m_crd_translation_mode = crd_translation_mode_xyz;
 			}
 			break;
 		case SAVE_PROFILE_WITH_PROFILE_LEN:
@@ -31,17 +31,17 @@ bool InitTranslator(CrdTranslator& translator, SSaveProfData &sprData)
 			break;
 		case SAVE_PROFILE_WITH_NORTH_PROJECTION:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::yz;
+				translator.m_crd_translation_mode = crd_translation_mode_yz;
 			}
 			break;
 		case SAVE_PROFILE_WITH_EAST_PROJECTION:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xz;
+				translator.m_crd_translation_mode = crd_translation_mode_xz;
 			}
 			break;
 		case SAVE_PROFILE_WITH_GORIZONTAL_PROJECTION:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xy;
+				translator.m_crd_translation_mode = crd_translation_mode_xy;
 			}
 			break;
 		case SAVE_PROFILE_AUTO_SELECT_PROJECTION:
@@ -80,7 +80,7 @@ bool InitTranslator(CrdTranslator& translator, SSaveProfData &sprData,
 	{
 		case SAVE_PROFILE_3D_XYZ:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xyz;
+				translator.m_crd_translation_mode = crd_translation_mode_xyz;
 			}
 			break;
 		case SAVE_PROFILE_WITH_PROFILE_LEN:
@@ -98,22 +98,22 @@ bool InitTranslator(CrdTranslator& translator, SSaveProfData &sprData,
 				translator.maxY = maxY;
 				translator.maxZ = maxZ;
 
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::along_plane;
+				translator.m_crd_translation_mode = crd_translation_mode_along_plane;
 			}
 			break;
 		case SAVE_PROFILE_WITH_NORTH_PROJECTION:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::yz;
+				translator.m_crd_translation_mode = crd_translation_mode_yz;
 			}
 			break;
 		case SAVE_PROFILE_WITH_EAST_PROJECTION:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xz;
+				translator.m_crd_translation_mode = crd_translation_mode_xz;
 			}
 			break;
 		case SAVE_PROFILE_WITH_GORIZONTAL_PROJECTION:
 			{
-				translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xy;
+				translator.m_crd_translation_mode = crd_translation_mode_xy;
 			}
 			break;
 		case SAVE_PROFILE_AUTO_SELECT_PROJECTION:
@@ -122,17 +122,17 @@ bool InitTranslator(CrdTranslator& translator, SSaveProfData &sprData,
 				if (fabs(c) >= fabs(a) && fabs(c) >= fabs(b))
 				{
 					// доминирует направление вдоль оси Z
-					translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xy;
+					translator.m_crd_translation_mode = crd_translation_mode_xy;
 				}
 				else if (fabs(a) >= fabs(b) && fabs(a) >= fabs(c))
 				{
 					// доминирует направление вдоль оси X
-					translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::yz;
+					translator.m_crd_translation_mode = crd_translation_mode_yz;
 				}
 				else if (fabs(b) >= fabs(a) && fabs(b) >= fabs(c))
 				{
 					// доминирует направление вдоль оси Y
-					translator.m_crd_translation_mode = CrdTranslator::crd_translation_mode::xz;
+					translator.m_crd_translation_mode = crd_translation_mode_xz;
 				}
 			}
 			break;

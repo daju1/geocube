@@ -1,7 +1,7 @@
 #ifndef FILE_DLG_INCLUDED
 #define FILE_DLG_INCLUDED
 #if defined (_MSC_VER)
-//#include <windows.h>
+#include <windows.h>
 #else
 #include <mywindows.h>
 #endif

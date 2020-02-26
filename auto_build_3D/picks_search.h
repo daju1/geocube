@@ -103,7 +103,7 @@ struct auto_build_parametrs
 	bool use_num_col;	//использовать ли номера колонок
 	int  tcols;			// число кооординатных колонок: 2 если XY 3 если XYZ
 	bool use_time_colomn; // идёт лии за координатными колонками колонка времени
-	char num_col_filename[1024];
+	TCHAR num_col_filename[1024];
 	//######################################################
 	bool use_window_cycles_algorithm_1;
 	bool use_window_cycles_algorithm_dima;
