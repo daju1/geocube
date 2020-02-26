@@ -674,7 +674,7 @@ int WaveletGetLeftRight(
 	  int& right_g);
 
 //##1
-vdouble inline operator+(vdouble& ob1, vdouble& ob2)
+vdouble inline operator+(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
@@ -703,7 +703,7 @@ vdouble inline operator+(vdouble& ob1, vdouble& ob2)
 	return tempOb;
 }
 
-vdouble inline operator+(const double& a, vdouble& ob)
+vdouble inline operator+(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -721,7 +721,7 @@ vdouble inline operator+(const double& a, vdouble& ob)
 	return tempOb;
 }
 
-vdouble inline operator+(vdouble& ob, const double& a)
+vdouble inline operator+(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -740,7 +740,7 @@ vdouble inline operator+(vdouble& ob, const double& a)
 }
 //////////////////////////////////////////////////////////////
 //1
-vdouble inline operator-(vdouble& ob1, vdouble& ob2)
+vdouble inline operator-(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
@@ -771,7 +771,7 @@ vdouble inline operator-(vdouble& ob1, vdouble& ob2)
 
 //3
 
-vdouble inline operator-(const double& a, vdouble& ob2)
+vdouble inline operator-(const double& a, const vdouble& ob2)
 {
 	int len = ob2.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -792,7 +792,7 @@ vdouble inline operator-(const double& a, vdouble& ob2)
 
 //5
 
-vdouble inline operator-(vdouble& ob, const double& a)
+vdouble inline operator-(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
