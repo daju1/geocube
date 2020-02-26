@@ -870,7 +870,7 @@ bool vdouble::is_zeros(const double& epsilon)
 	return flag;
 }
 
-double& vdouble::operator[](int index)
+double& vdouble::operator[](int index) const
 {
 	try 
 	{
@@ -1371,11 +1371,11 @@ void vdouble::Resetting() // Обнуляет все элементы векто
 	for(int i=0;i<m_length;i++)
 		*(pD+i) = 0.0;
 }
-double& vdouble::End() // Возвращает последний элемент вектора
+double& vdouble::End() const // Возвращает последний элемент вектора
 {
 	return pD[m_length - 1];
 }
-double& vdouble::End(int n) // Возвращает последний элемент вектора
+double& vdouble::End(int n) const// Возвращает последний элемент вектора
 {
 	if (n > 0 || n <= - m_length)
 	{
@@ -2827,7 +2827,7 @@ vdouble vdouble::CumMeanSumFrom(int i0) // Возврашает вектор к�
 	}
 	return cms;
 }
-vdouble vdouble::DiffVector()// Вектор конечных разностей (возвращает вектор на 1 короче)
+vdouble vdouble::DiffVector() const // Вектор конечных разностей (возвращает вектор на 1 короче)
 {
 	if (m_length < 2)
 	{
@@ -2847,7 +2847,7 @@ vdouble vdouble::DiffVector()// Вектор конечных разностей
 	}
 	return Diff;
 }
-vdouble vdouble::SumVector()//Вектор конечных сумм (сумм в соседних точках) - возвр. вект. на 1 короче
+vdouble vdouble::SumVector() const //Вектор конечных сумм (сумм в соседних точках) - возвр. вект. на 1 короче
 {
 	if (m_length < 2)
 	{
@@ -2867,7 +2867,7 @@ vdouble vdouble::SumVector()//Вектор конечных сумм (сумм �
 	}
 	return Mean;
 }
-double vdouble::Trapz(vdouble& t)
+double vdouble::Trapz(const vdouble& t)
 {
 	if (m_length != t.m_length)
 	{
@@ -2878,7 +2878,7 @@ double vdouble::Trapz(vdouble& t)
 	return SumVector().ScalarProduct(t.DiffVector()) / 2;
 }
 //////////////////////////////////////////////////////////////
-double vdouble::ScalarProduct(vdouble& rhs)
+double vdouble::ScalarProduct(const vdouble& rhs)
 {
 	if  (rhs.m_length != m_length)
 	{
@@ -2902,7 +2902,7 @@ double vdouble::ScalarProduct(vdouble& rhs)
 	return _ScalarProduct;
 }
 
-double vdouble::ScalarProductFrom(int i0, vdouble& rhs)
+double vdouble::ScalarProductFrom(int i0, const vdouble& rhs)
 {
 	int len = rhs.m_length;
 	if  (rhs.m_length + i0 != m_length)
@@ -2923,7 +2923,7 @@ double vdouble::ScalarProductFrom(int i0, vdouble& rhs)
 	}
 	return _ScalarProduct;
 }
-void vdouble::FourierTransform(vdouble& t, 
+void vdouble::FourierTransform(const vdouble& t,
 					  vdouble& omega, vdouble& A, 
 					  vdouble& fi )
 {

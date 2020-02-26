@@ -36,29 +36,29 @@ extern void FreeIntegerMat(int ** v);
 class vdouble;
 
 
-vdouble inline operator+(vdouble& ob1, vdouble& ob2);
-vdouble inline operator+(const double& a, vdouble& ob2);
-vdouble inline operator+(vdouble& ob1, const double& a);
+vdouble inline operator+(const vdouble& ob1, const vdouble& ob2);
+vdouble inline operator+(const double& a, const vdouble& ob2);
+vdouble inline operator+(const vdouble& ob1, const double& a);
 
-vdouble inline operator-(vdouble& ob1, vdouble& ob2);
-vdouble inline operator-(const double& a, vdouble& ob2);
-vdouble inline operator-(vdouble& ob1, const double& a);
+vdouble inline operator-(const vdouble& ob1, const vdouble& ob2);
+vdouble inline operator-(const double& a, const vdouble& ob2);
+vdouble inline operator-(const vdouble& ob1, const double& a);
 /*
 vdouble inline operator^(vdouble& ob1, vdouble& ob2);
 vdouble inline operator^(const double& a, vdouble& ob2);
 vdouble inline operator^(vdouble& ob1, const double& a);
 	*/
-vdouble inline pow(vdouble& ob1, vdouble& ob2);
-vdouble inline pow(const double& a, vdouble& ob2);
-vdouble inline pow(vdouble& ob1, const double& a);
+vdouble inline pow(const vdouble& ob1, const vdouble& ob2);
+vdouble inline pow(const double& a, const vdouble& ob2);
+vdouble inline pow(const vdouble& ob1, const double& a);
 
-vdouble inline operator*(vdouble& ob1, vdouble& ob2);
-vdouble inline operator*(const double& a, vdouble& ob2);
-vdouble inline operator*(vdouble& ob1, const double& a);
+vdouble inline operator*(const vdouble& ob1, const vdouble& ob2);
+vdouble inline operator*(const double& a, const vdouble& ob2);
+vdouble inline operator*(const vdouble& ob1, const double& a);
 
-vdouble inline operator/(vdouble& ob1, vdouble& ob2);
-vdouble inline operator/(const double& a, vdouble& ob2);
-vdouble inline operator/(vdouble& ob1, const double& a);
+vdouble inline operator/(const vdouble& ob1, const vdouble& ob2);
+vdouble inline operator/(const double& a, const vdouble& ob2);
+vdouble inline operator/(const vdouble& ob1, const double& a);
 
 //vdouble inline operator,(vdouble& ob1, vdouble& ob2);
 //vdouble inline operator,(const double& a, vdouble& ob2);
@@ -67,31 +67,31 @@ vdouble inline operator/(vdouble& ob1, const double& a);
 
 
 	
-vdouble inline operator+(vdouble& ob);
-vdouble inline operator-(vdouble& ob);
+vdouble inline operator+(const vdouble& ob);
+vdouble inline operator-(const vdouble& ob);
 
-vdouble inline log(vdouble& ob);
-vdouble inline log10(vdouble& ob);
-vdouble inline abs(vdouble& ob);
+vdouble inline log(const vdouble& ob);
+vdouble inline log10(const vdouble& ob);
+vdouble inline abs(const vdouble& ob);
 
-vdouble inline acos(vdouble& ob);
-vdouble inline asin(vdouble& ob);
-vdouble inline atan(vdouble& ob);
-vdouble inline atan2(vdouble& x, vdouble& y);
+vdouble inline acos(const vdouble& ob);
+vdouble inline asin(const vdouble& ob);
+vdouble inline atan(const vdouble& ob);
+vdouble inline atan2(const vdouble& x, const vdouble& y);
 
-vdouble inline cos(vdouble& ob);
-vdouble inline cosh(vdouble& ob);
-vdouble inline sin(vdouble& ob);
-vdouble inline sinh(vdouble& ob);
-vdouble inline tan(vdouble& ob);
-vdouble inline tanh(vdouble& ob);
-vdouble inline exp(vdouble& ob);
-vdouble inline sqrt(vdouble& ob);
+vdouble inline cos(const vdouble& ob);
+vdouble inline cosh(const vdouble& ob);
+vdouble inline sin(const vdouble& ob);
+vdouble inline sinh(const vdouble& ob);
+vdouble inline tan(const vdouble& ob);
+vdouble inline tanh(const vdouble& ob);
+vdouble inline exp(const vdouble& ob);
+vdouble inline sqrt(const vdouble& ob);
 
-vdouble inline floor(vdouble& ob);
-vdouble inline ceil(vdouble& ob);
+vdouble inline floor(const vdouble& ob);
+vdouble inline ceil(const vdouble& ob);
 
-vdouble inline linterp(vdouble& x, vdouble& y, vdouble& xx);
+vdouble inline linterp(const vdouble& x, const vdouble& y, vdouble& xx);
 bool inline hist(vdouble& v, vdouble&  n, vdouble& x);
 bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x);
 bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2);
@@ -217,7 +217,7 @@ public:
 	bool is_zeros(); // Истина, если все элементы - равны нулю
 	bool is_zeros(const double& epsilon);// Истина, если модуль всех элементов не превышает epsilon
 
-	double& operator[](int index); // Возвращает элемент по заданному индексу
+    double& operator[](int index) const; // Возвращает элемент по заданному индексу
 	vdouble operator[](Vector<int>& ind); // Возвращает вектор-отрезок по заданныму массиву индексов
 	vdouble operator()(Vector<int>& vrows, Vector<int>& vcols);
 //	vdouble vdouble::operator[](Vector<Vector<int> >& ind); // Возвращает массив-отрезок по заданныму массиву индексов по каждой размерности
@@ -258,9 +258,9 @@ public:
 	friend vdouble inline pow(const double& a, vdouble& ob2);
 	friend vdouble inline pow(vdouble& ob1, const double& a);
 
-	friend vdouble inline operator*(vdouble& ob1, vdouble& ob2);
-	friend vdouble inline operator*(const double& a, vdouble& ob2);
-	friend vdouble inline operator*(vdouble& ob1, const double& a);
+    friend vdouble inline operator*(const vdouble& ob1, const vdouble& ob2);
+    friend vdouble inline operator*(const double& a, const vdouble& ob2);
+    friend vdouble inline operator*(const vdouble& ob1, const double& a);
 
 	friend vdouble inline operator/(vdouble& ob1, vdouble& ob2);
 	friend vdouble inline operator/(const double& a, vdouble& ob2);
@@ -399,8 +399,8 @@ static vdouble append(vdouble& ob, const double& a)
 //	friend int SaveAsSurferGrid7(char gridfilename[], vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
 
 	void Resetting(); // Обнуляет все элементы вектора
-	double& End(); // Возвращает последний элемент вектора
-	double& End(int n); // Возвращает n- ый элемент вектора с конца
+    double& End() const; // Возвращает последний элемент вектора
+    double& End(int n) const; // Возвращает n- ый элемент вектора с конца
 		// n < 0
 	vdouble Select(Vector<int>& indexes); // Возвращает новый вектор, выбирая элементы из данного вектора
 	vdouble Select(Vector<bool>& vbl); // Возвращает новый вектор, выбирая элементы из данного вектора
@@ -448,13 +448,13 @@ static vdouble append(vdouble& ob, const double& a)
 	vdouble CumSum(); // Возврашает вектор кумулятивных сумм
 	vdouble CumMeanSum(); // Возврашает вектор кумулятивных сумм, усреднённых по номеру элемента
 	vdouble CumMeanSumFrom(int i0); // Возврашает вектор кумулятивных сумм, усреднённых по номеру элемента, начиная с i0
-	vdouble DiffVector();// Вектор конечных разностей (возвращает вектор на 1 короче)
-	vdouble SumVector();//Вектор конечных сумм (сумм в соседних точках) - возвр. вект. на 1 короче
-	double Trapz(vdouble& t); // Интегрирование методом трапеций на неравномерной временной сетке
+    vdouble DiffVector() const;// Вектор конечных разностей (возвращает вектор на 1 короче)
+    vdouble SumVector() const;//Вектор конечных сумм (сумм в соседних точках) - возвр. вект. на 1 короче
+    double Trapz(const vdouble& t); // Интегрирование методом трапеций на неравномерной временной сетке
 
-	double ScalarProduct(vdouble& rhs); // Возвращает скалярное произведение на вектор в аргументе
-	double ScalarProductFrom(int i0, vdouble& rhs); // Возвращает скалярное произведение на вектор в аргументе начиная с указанного номера элемента
-	void FourierTransform(vdouble& t, vdouble& omega, vdouble& A, vdouble& fi ); // Фурье преобразование
+    double ScalarProduct(const vdouble& rhs); // Возвращает скалярное произведение на вектор в аргументе
+    double ScalarProductFrom(int i0, const vdouble& rhs); // Возвращает скалярное произведение на вектор в аргументе начиная с указанного номера элемента
+    void FourierTransform(const vdouble& t, vdouble& omega, vdouble& A, vdouble& fi ); // Фурье преобразование
 
 	//============ Функции Лаггер - спектральных преобразований ============
 	vdouble vLagerPolynom(int n);
@@ -950,7 +950,7 @@ vdouble inline pow(vdouble& ob, const double& a)
 }
 ///////////////////////////////
 //1
-vdouble inline operator*(vdouble& ob1, vdouble& ob2)
+vdouble inline operator*(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
@@ -981,7 +981,7 @@ vdouble inline operator*(vdouble& ob1, vdouble& ob2)
 }
 
 //3
-vdouble inline operator*(const double& a, vdouble& ob)
+vdouble inline operator*(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -999,7 +999,7 @@ vdouble inline operator*(const double& a, vdouble& ob)
 	return tempOb;
 }
 //4
-vdouble inline operator*(vdouble& ob, const double& a)
+vdouble inline operator*(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
