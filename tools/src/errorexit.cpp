@@ -1,6 +1,6 @@
 #include "../StdAfx.h"
 #include "errorexit.h"
-
+#if defined (_MSC_VER)
 void ErrorExit(LPTSTR lpszFunction, bool toExitProcess) 
 {
 #define BUF_LEN 200
@@ -79,3 +79,5 @@ void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess)
 	if(toExitProcess)
 		ExitProcess(dwLastError); 
 }
+#else
+#endif

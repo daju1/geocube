@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     ../array/src/slau.cpp \
     ../surfdoc/src/AFile.cpp \
     ../tools/src/filedlg_qt.cpp \
-    ../tools/src/errorexit.cpp
+    ../tools/src/errorexit.cpp \
+    ../array/src/matrixes.cpp \
+    ../src/mywindows.cpp
 
 HEADERS  += auto_build_3d.h \
     ./../surfdoc/src/AutoProfileBuilding.h \

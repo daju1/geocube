@@ -2,9 +2,9 @@
 #define COMMON_INCLUDED_
 
 //#define _WIN32_WINNT 0x0501
-
+#if defined (_MSC_VER)
 #include <windows.h>
-
+#endif
 //#define USE_PICK_FILTER
 #pragma warning (disable:4786)
 #include <list>
@@ -113,9 +113,11 @@ typedef struct
 
 #include <math.h>
 #include <stdio.h>
+#if defined (_MSC_VER)
 #include <tchar.h>
 #include <io.h>
 #include <commctrl.h>
+#endif
 
 #include "resource.h"
 

@@ -1,9 +1,11 @@
-//#ifdef _MY_WINDOWS_H_
-//#define _MY_WINDOWS_H_
+#ifndef _MY_WINDOWS_H_
+#define _MY_WINDOWS_H_
 
 #pragma once
 
 #include <stdint.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 // https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/efda8314-6e41-4837-8299-38ba0ee04b92
 // https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types
@@ -208,105 +210,50 @@ typedef struct tagRECT {
 #define IDNO     7
 
 
-HANDLE GetProcessHeap()
-{
-    return NULL;
-}
+HANDLE GetProcessHeap();
 
-LPVOID HeapAlloc(HANDLE, DWORD /*dwFlags*/, size_t dwBytes)
-{
-    return malloc(dwBytes);
-}
+LPVOID HeapAlloc(HANDLE, DWORD /*dwFlags*/, size_t dwBytes);
 
-BOOL HeapFree(HANDLE, DWORD /*dwFlags*/, LPVOID lpMem)
-{
-    free(lpMem);
-    return TRUE;
-}
-#include <QDir>
+BOOL HeapFree(HANDLE, DWORD /*dwFlags*/, LPVOID lpMem);
+;
 
 #ifdef _UNICODE
 BOOL CreateDirectoryW(
   LPCWSTR                lpPathName,
   void *  //LPSECURITY_ATTRIBUTES lpSecurityAttributes
-)
-{
-    QDir().mkdir(QStringW(lpPathName));
-    return TRUE;
-}
+);
 BOOL DeleteFileW(
   LPCWSTR lpFileName
-)
-{
-    QFile file (lpFileName);
-    file.remove();
-    return TRUE;
-}
+);
 #define CreateDirectory CreateDirectoryW
 #define DeleteFile DeleteFileW
 #else
 BOOL CreateDirectoryA(
   LPCSTR                lpPathName,
   void *   //LPSECURITY_ATTRIBUTES lpSecurityAttributes
-)
-{
-    QDir().mkdir(QString(lpPathName));
-    return TRUE;
-}
+);
 
 BOOL DeleteFileA(
   LPCSTR lpFileName
-)
-{
-    QFile file (lpFileName);
-    file.remove();
-    return TRUE;
-}
+);
 #define CreateDirectory CreateDirectoryA
 #define DeleteFile DeleteFileA
 #endif
 
 #define _LDBL_RADIX 2
 
-inline int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...)
-{
-    va_list ap;
-    va_start(ap, format);
-    int result = vsnprintf(buffer, sizeOfBuffer, format, ap);
-    va_end(ap);
-    return result;
-}
+inline int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...);
 
 template<size_t sizeOfBuffer>
-inline int sprintf_s(char (&buffer)[sizeOfBuffer], const char* format, ...)
-{
-    va_list ap;
-    va_start(ap, format);
-    int result = vsnprintf(buffer, sizeOfBuffer, format, ap);
-    va_end(ap);
-    return result;
-}
+inline int sprintf_s(char (&buffer)[sizeOfBuffer], const char* format, ...);
 
 #include <qmessagebox.h>
-int MessageBox(void* /*hwnd*/, const char * title, const char * msg, int /*flags*/)
-{
-    QMessageBox mb(QMessageBox::Information, title, msg,  QMessageBox::Ok | QMessageBox::Cancel);
-    if(mb.exec() == QMessageBox::Ok)
-    {
+int MessageBox(void* /*hwnd*/, const char * title, const char * msg, int /*flags*/);
 
-    }
-    return 0;
-}
-
-int AfxMessageBox(const char * msg )
-{
-    QMessageBox mb(QMessageBox::Information, "", msg,  QMessageBox::Ok);
-    mb.exec();
-    return 0;
-}
+int AfxMessageBox(const char * msg );
 
 
-//#endif //_MY_WINDOWS_H_
+#endif //_MY_WINDOWS_H_
 
 
 

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AFile.h"
 #include "../../tools/src/errorexit.h"
-
+#if defined (_MSC_VER)
 AFile::AFile(void)
 {
 	m_hFile = NULL;
@@ -96,3 +96,7 @@ LONG AFile::Seek(long lOff, DWORD dwMoveMethod)
 	// dwMoveMethod : FILE_BEGIN or FILE_CURRENT or FILE_END
 	return SetFilePointer(this->m_hFile, lOff, 0, dwMoveMethod);
 }
+
+#else
+
+#endif
