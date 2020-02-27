@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     ../surfdoc/src/AutoBuildProfileDlg.cpp \
     ../surfdoc/src/Archive.cpp \
     ../array/src/Vdouble.cpp \
-    ../geometry2D/BraidedNode.cpp \
     ../array/src/slau.cpp \
     ../surfdoc/src/AFile.cpp \
     ../tools/src/filedlg_qt.cpp \

@@ -1,5 +1,6 @@
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
+#if defined (_MSC_VER)
 #include <afx.h>
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
@@ -7,18 +8,21 @@
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>			// MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
-
+#endif
 #include <iostream>
 
 #define TRACE              printf
 
+#if defined (_MSC_VER)
 #include <windows.h>
 #include <gdiplus.h>
 using namespace Gdiplus;
-
+#endif
 #include "StdAfx.h"
 #include "slau.h"
 #include "sorting.h"
+
+#include "../../surfdoc/src/Grid.h"
 
 class sparse_col_element
 {
@@ -4620,6 +4624,7 @@ bool tria_solve_of_down_and_up(const char * fn_L, const char * fn_U, vector<doub
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -4628,6 +4633,7 @@ bool tria_solve_of_down_and_up(const char * fn_L, const char * fn_U, vector<doub
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -4743,6 +4749,7 @@ bool tria_solve_of_down_and_up(const char * fn_L, const char * fn_U, vector<doub
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -4751,6 +4758,7 @@ bool tria_solve_of_down_and_up(const char * fn_L, const char * fn_U, vector<doub
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -4942,6 +4950,7 @@ bool tria_solve_of_down_and_up(const char * fn_Lt, vector<double> b, vector<doub
 	{
 		MessageBox(0,str,"",0);
 	}
+#if defined (_MSC_VER)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -4950,6 +4959,7 @@ bool tria_solve_of_down_and_up(const char * fn_Lt, vector<double> b, vector<doub
 		AfxMessageBox(szErr);
 		pe->Delete();
 	}
+#endif
 	catch(...)
 	{
 		MessageBox(0,"unknown error of archive read","",0);
@@ -4963,7 +4973,7 @@ bool tria_solve_of_down_and_up(const char * fn_Lt, vector<double> b, vector<doub
 
 
 }
-#include "..\..\surfdoc\src\Grid.h"
+
 extern char directory[];
 struct sparse_row_store
 {
@@ -5172,21 +5182,27 @@ void SaveSparseMatrixAsGrid(vector<sparse_row > & m, size_t cols, const char *na
 bool solve_using_Holesski_tria_matrixes(vector<sparse_row > Lt, vector<double> & B, vector<double> & x)
 {
 	vector<double> y;
-
+#if defined (_MSC_VER)
 	DWORD 
 		time_eplased,
 		time_start = GetCurrentTime(),
 		time_current,
 		time_pre_current = time_start;
-
+#else
+    // TODO
+#endif
 	if (Holesski(Lt))
 	//if (Holesski3(Lt))
 	{
+#if defined (_MSC_VER)
 		time_current = GetCurrentTime();
 		time_eplased = time_current - time_pre_current;
 		time_pre_current = time_current;
-
-		printf("solve_using_Holesski_tria_matrixes, time_eplased on Holesski %d %d millisec\n", time_eplased, time_current - time_start);
+        printf("solve_using_Holesski_tria_matrixes, time_eplased on Holesski %d %d millisec\n", time_eplased, time_current - time_start);
+#else
+        // TODO
+        printf("solve_using_Holesski_tria_matrixes\n");
+#endif
 
 		if (tria_solve_of_down(Lt, B, y))
 		{
@@ -5205,9 +5221,10 @@ bool solve_using_Holesski_tria_matrixes_(vector<sparse_row > Lt, vector<double> 
 	printf("solve_using_Holesski_tria_matrixes_\n");
 
 
-	StoreMatrix("At.smf", Lt, Lt.size());	
+    StoreMatrix("At.smf", Lt, Lt.size());
+#if defined (_MSC_VER)
 	SparseStructureToMetafile("At.smf", "At.emf");
-
+#endif
 	vector<sparse_row> G;
 	vector<double> diag;
 	vector<int> xadj, adjncy;
@@ -5244,15 +5261,17 @@ bool solve_using_Holesski_tria_matrixes_(vector<sparse_row > Lt, vector<double> 
 	}
 		
 	StoreMatrix("At2.smf", Lt2, Lt2.size());
+#if defined (_MSC_VER)
 	SparseStructureToMetafile("At2.smf", "At2.emf");
-	
+#endif
 	vector<double> y;
 
 	if (Holesski(Lt2))
 	{
 		StoreMatrix("Lt2.smf", Lt2, Lt2.size());
+#if defined (_MSC_VER)
 		SparseStructureToMetafile("Lt2.smf", "Lt2.emf");
-		
+#endif
 		if (tria_solve_of_down(Lt2, Bp, y))
 		{
 			vector<double> xp;

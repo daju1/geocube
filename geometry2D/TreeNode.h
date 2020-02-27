@@ -158,9 +158,10 @@ template<class T> class TreeNode {
       if (_lchild) {delete _lchild; _lchild = NULL;}
       if (_rchild) {delete _rchild; _rchild = NULL;}
   }
-#ifdef _MSC_VER
+
   friend class SearchTree<T>;        // возможные пополнения
   friend class BraidedSearchTree<T>; // структуры
+#ifdef _MSC_VER
   friend class sparse_row; // структуры
 #endif
 	friend void ::DoMyMethod(vector<double> & X,

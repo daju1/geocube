@@ -3,7 +3,10 @@
 #define _SLAU_H_
 #ifdef _MSC_VER
 #include <windows.h>
+#else
+#include <mywindows.h>
 #endif
+
 #include <stdio.h>
 #include <math.h>
 
