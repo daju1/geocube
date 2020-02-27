@@ -98,8 +98,8 @@ public:
 	{
 		Free(); 
 	}
-	int Size() { return size; }  // Возвращает длину вектора
-	T Max() // Возвращает мaксимальный элемент вектора
+    int Size() const { return size; }  // Возвращает длину вектора
+    T Max() const // Возвращает мaксимальный элемент вектора
 	{
 		T _Max;
 		_Max=*(data);
@@ -107,7 +107,7 @@ public:
 			_Max = _Max > *(data+i) ? _Max : *(data+i);
 		return _Max;
 	}
-	T Min() // Возвращает минимальный элемент вектора
+    T Min() const // Возвращает минимальный элемент вектора
 	{
 		T _Min;
 		_Min=*(data);
@@ -358,28 +358,28 @@ public:
 		return *this;
 	}
 
-	friend Vector<int> inline Find(Vector<bool>& vbl);
-	friend Vector<bool> inline operator!(Vector<bool>& vb);
+    friend Vector<int> inline Find(const Vector<bool>& vbl);
+    friend Vector<bool> inline operator!(const Vector<bool>& vb);
 
-	friend Vector<bool> inline operator||(Vector<bool>& vb, bool& bl);
-	friend Vector<bool> inline operator||(bool& bl, Vector<bool>& vb);
-	friend Vector<bool> inline operator||(Vector<bool>& vb1, Vector<bool>& vb2);
+    friend Vector<bool> inline operator||(const Vector<bool>& vb, const bool& bl);
+    friend Vector<bool> inline operator||(const bool& bl, const Vector<bool>& vb);
+    friend Vector<bool> inline operator||(const Vector<bool>& vb1, const Vector<bool>& vb2);
 
-	friend Vector<bool> inline operator&&(Vector<bool>& vb, bool& bl);
-	friend Vector<bool> inline operator&&(bool& bl, Vector<bool>& vb);
-	friend Vector<bool> inline operator&&(Vector<bool>& vb1, Vector<bool>& vb2);
+    friend Vector<bool> inline operator&&(const Vector<bool>& vb, const bool& bl);
+    friend Vector<bool> inline operator&&(const bool& bl, const Vector<bool>& vb);
+    friend Vector<bool> inline operator&&(const Vector<bool>& vb1, const Vector<bool>& vb2);
 	//=================== Логические операторы =============================
 	//////////////////////////////////////////////////////////////
-	friend Vector<bool> inline operator>(Vector<int>& ob1, Vector<int>& ob2);
-	friend Vector<bool> inline operator>(const int& a, Vector<int>& ob);
-	friend Vector<bool> inline operator>(Vector<int>& ob, const int& a);
+    friend Vector<bool> inline operator>(const Vector<int>& ob1, const Vector<int>& ob2);
+    friend Vector<bool> inline operator>(const int& a, const Vector<int>& ob);
+    friend Vector<bool> inline operator>(const Vector<int>& ob, const int& a);
 
-	friend void inline operator<<(Vector<T>& v, const T& a);
-	friend void inline operator>>(const T& a, Vector<T>& v);
+//	friend void inline operator<<(Vector<T>& v, const T& a);
+//	friend void inline operator>>(const T& a, Vector<T>& v);
 
 };
 //====== Внешняя реализация тела конструктора
-Vector<int> inline Find(Vector<bool>& vbl)
+Vector<int> inline Find(const Vector<bool>& vbl)
 {
 	int sz = vbl.size;
 	int i, len = 0;
@@ -402,7 +402,7 @@ Vector<int> inline Find(Vector<bool>& vbl)
 }
 
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator!(Vector<bool>& vb)
+Vector<bool> inline operator!(const Vector<bool>& vb)
 {
 	int sz = vb.size;
 	Vector<bool> vbl(sz);
@@ -416,7 +416,7 @@ Vector<bool> inline operator!(Vector<bool>& vb)
 	return vbl;
 }
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator||(Vector<bool>& vb, bool& bl)
+Vector<bool> inline operator||(const Vector<bool>& vb, const bool& bl)
 {
 	int sz = vb.size;
 	Vector<bool> vbl(sz);
@@ -430,7 +430,7 @@ Vector<bool> inline operator||(Vector<bool>& vb, bool& bl)
 	return vbl;
 }
 
-Vector<bool> inline operator||(bool& bl, Vector<bool>& vb)
+Vector<bool> inline operator||(const bool& bl, const Vector<bool>& vb)
 {
 	int sz = vb.size;
 	Vector<bool> vbl(sz);
@@ -444,7 +444,7 @@ Vector<bool> inline operator||(bool& bl, Vector<bool>& vb)
 	return vbl;
 }
 
-Vector<bool> inline operator||(Vector<bool>& vb1, Vector<bool>& vb2)
+Vector<bool> inline operator||(const Vector<bool>& vb1, const Vector<bool>& vb2)
 {
 	int sz = vb1.size;
 	if (sz != vb2.size)
@@ -468,7 +468,7 @@ Vector<bool> inline operator||(Vector<bool>& vb1, Vector<bool>& vb2)
 }
 
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator&&(Vector<bool>& vb, bool& bl)
+Vector<bool> inline operator&&(const Vector<bool>& vb, const bool& bl)
 {
 	int sz = vb.size;
 	Vector<bool> vbl(sz);
@@ -482,7 +482,7 @@ Vector<bool> inline operator&&(Vector<bool>& vb, bool& bl)
 	return vbl;
 }
 
-Vector<bool> inline operator&&(bool& bl, Vector<bool>& vb)
+Vector<bool> inline operator&&(const bool& bl, const Vector<bool>& vb)
 {
 	int sz = vb.size;
 	Vector<bool> vbl(sz);
@@ -496,7 +496,7 @@ Vector<bool> inline operator&&(bool& bl, Vector<bool>& vb)
 	return vbl;
 }
 
-Vector<bool> inline operator&&(Vector<bool>& vb1, Vector<bool>& vb2)
+Vector<bool> inline operator&&(const Vector<bool>& vb1, const Vector<bool>& vb2)
 {
 	int sz = vb1.size;
 	if (sz != vb2.size)
@@ -520,7 +520,7 @@ Vector<bool> inline operator&&(Vector<bool>& vb1, Vector<bool>& vb2)
 }
 //=================== Логические операторы =============================
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator>(Vector<int>& ob1, Vector<int>& ob2)
+Vector<bool> inline operator>(const Vector<int>& ob1, const Vector<int>& ob2)
 {
 	int len = ob1.size;
 	if (len != ob2.size)
@@ -544,7 +544,7 @@ Vector<bool> inline operator>(Vector<int>& ob1, Vector<int>& ob2)
 	return vbl;
 }
 
-Vector<bool> inline operator>(const int& a, Vector<int>& ob)
+Vector<bool> inline operator>(const int& a, const Vector<int>& ob)
 {
 	int len = ob.size;
 	Vector<bool> vbl(len);
@@ -559,7 +559,7 @@ Vector<bool> inline operator>(const int& a, Vector<int>& ob)
 	return vbl;
 }
 
-Vector<bool> inline operator>(Vector<int>& ob, const int& a)
+Vector<bool> inline operator>(const Vector<int>& ob, const int& a)
 {
 	int len = ob.size;
 	Vector<bool> vbl(len);
@@ -574,7 +574,7 @@ Vector<bool> inline operator>(Vector<int>& ob, const int& a)
 	return vbl;
 }
 //////////////////////////////////////////////////////////////
-template <class T> void inline operator<<(Vector<T>& v, const T& a)
+template <class T> void inline operator<<(const Vector<T>& v, const T& a)
 {
 	int len_1 = v.size - 1;
 	if ( len_1 < 0)
@@ -588,7 +588,7 @@ template <class T> void inline operator<<(Vector<T>& v, const T& a)
 	}
 	*(pr + len_1) = a;
 }
-template <class T> void inline operator>>(const T &a, Vector<T>& v)
+template <class T> void inline operator>>(const T &a, const Vector<T>& v)
 {
 	int len_1 = v.size - 1;
 	if ( len_1 < 0)

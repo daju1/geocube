@@ -37,7 +37,7 @@ inline int sprintf_s(char (&buffer)[sizeOfBuffer], const char* format, ...)
 }
 
 #include <qmessagebox.h>
-int MessageBox(void* hwnd, const char * title, const char * msg, int flags)
+int MessageBox(void* /*hwnd*/, const char * title, const char * msg, int /*flags*/)
 {
     QMessageBox mb(QMessageBox::Information, title, msg,  QMessageBox::Ok | QMessageBox::Cancel);
     if(mb.exec() == QMessageBox::Ok)

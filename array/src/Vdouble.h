@@ -44,9 +44,9 @@ vdouble inline operator-(const vdouble& ob1, const vdouble& ob2);
 vdouble inline operator-(const double& a, const vdouble& ob2);
 vdouble inline operator-(const vdouble& ob1, const double& a);
 /*
-vdouble inline operator^(vdouble& ob1, vdouble& ob2);
-vdouble inline operator^(const double& a, vdouble& ob2);
-vdouble inline operator^(vdouble& ob1, const double& a);
+vdouble inline operator^(const vdouble& ob1, const vdouble& ob2);
+vdouble inline operator^(const double& a, const vdouble& ob2);
+vdouble inline operator^(const vdouble& ob1, const double& a);
 	*/
 vdouble inline pow(const vdouble& ob1, const vdouble& ob2);
 vdouble inline pow(const double& a, const vdouble& ob2);
@@ -60,9 +60,9 @@ vdouble inline operator/(const vdouble& ob1, const vdouble& ob2);
 vdouble inline operator/(const double& a, const vdouble& ob2);
 vdouble inline operator/(const vdouble& ob1, const double& a);
 
-//vdouble inline operator,(vdouble& ob1, vdouble& ob2);
-//vdouble inline operator,(const double& a, vdouble& ob2);
-//vdouble inline operator,(vdouble& ob1, const double& a);
+//vdouble inline operator,(const vdouble& ob1, const vdouble& ob2);
+//vdouble inline operator,(const double& a, const vdouble& ob2);
+//vdouble inline operator,(const vdouble& ob1, const double& a);
 
 
 
@@ -97,31 +97,31 @@ bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x);
 bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2);
 bool inline covar(vdouble& t,vdouble& v1, vdouble& v2,  vdouble& tcov, vdouble& cov);
 
-Vector<bool> inline operator>(vdouble& ob1, vdouble& ob2);
-Vector<bool> inline operator>(const double& a, vdouble& ob);
-Vector<bool> inline operator>(vdouble& ob, const double& a);
+Vector<bool> inline operator>(const vdouble& ob1, const vdouble& ob2);
+Vector<bool> inline operator>(const double& a, const vdouble& ob);
+Vector<bool> inline operator>(const vdouble& ob, const double& a);
 
-Vector<bool> inline operator>=(vdouble& ob1, vdouble& ob2);
-Vector<bool> inline operator>=(const double& a, vdouble& ob);
-Vector<bool> inline operator>=(vdouble& ob, const double& a);
+Vector<bool> inline operator>=(const vdouble& ob1, const vdouble& ob2);
+Vector<bool> inline operator>=(const double& a, const vdouble& ob);
+Vector<bool> inline operator>=(const vdouble& ob, const double& a);
 
-Vector<bool> inline operator<(vdouble& ob1, vdouble& ob2);
-Vector<bool> inline operator<(const double& a, vdouble& ob);
-Vector<bool> inline operator<(vdouble& ob, const double& a);
+Vector<bool> inline operator<(const vdouble& ob1, const vdouble& ob2);
+Vector<bool> inline operator<(const double& a, const vdouble& ob);
+Vector<bool> inline operator<(const vdouble& ob, const double& a);
 
-Vector<bool> inline operator<=(vdouble& ob1, vdouble& ob2);
-Vector<bool> inline operator<=(const double& a, vdouble& ob);
-Vector<bool> inline operator<=(vdouble& ob, const double& a);
+Vector<bool> inline operator<=(const vdouble& ob1, const vdouble& ob2);
+Vector<bool> inline operator<=(const double& a, const vdouble& ob);
+Vector<bool> inline operator<=(const vdouble& ob, const double& a);
 
-Vector<bool> inline operator==(vdouble& ob1, vdouble& ob2);
-Vector<bool> inline operator==(const double& a, vdouble& ob);
-Vector<bool> inline operator==(vdouble& ob, const double& a);
+Vector<bool> inline operator==(const vdouble& ob1, const vdouble& ob2);
+Vector<bool> inline operator==(const double& a, const vdouble& ob);
+Vector<bool> inline operator==(const vdouble& ob, const double& a);
 
-Vector<bool> inline operator!=(vdouble& ob1, vdouble& ob2);
-Vector<bool> inline operator!=(const double& a, vdouble& ob);
-Vector<bool> inline operator!=(vdouble& ob, const double& a);
+Vector<bool> inline operator!=(const vdouble& ob1, const vdouble& ob2);
+Vector<bool> inline operator!=(const double& a, const vdouble& ob);
+Vector<bool> inline operator!=(const vdouble& ob, const double& a);
 	
-vdouble inline fliplr(vdouble& ob);
+vdouble inline fliplr(const vdouble& ob);
 
 void inline operator<<(vdouble& ob, const double& a);
 void inline operator>>(const double& a, vdouble& ob);
@@ -204,8 +204,8 @@ public:
 	friend vdouble inline zeros(int _length);// Создаёт вектор заданной длины из нулей
 	friend vdouble inline ones(int _length); // Создаёт вектор заданной длины из единиц
 
-	int Length(){return m_length;} // Возвращает длину вектора
-	bool IsGorizontal(){return m_isgorizontal;} // Возвращает флаг горизонтальности
+    int Length() const {return m_length;} // Возвращает длину вектора
+    bool IsGorizontal()const {return m_isgorizontal;} // Возвращает флаг горизонтальности
 	
 	void disp(); // Выводит значения элементов в консольное окно
 	void dispWithIndex();
@@ -217,15 +217,15 @@ public:
 	bool is_zeros(); // Истина, если все элементы - равны нулю
 	bool is_zeros(const double& epsilon);// Истина, если модуль всех элементов не превышает epsilon
 
-    double& operator[](int index) const; // Возвращает элемент по заданному индексу
-	vdouble operator[](Vector<int>& ind); // Возвращает вектор-отрезок по заданныму массиву индексов
-	vdouble operator()(Vector<int>& vrows, Vector<int>& vcols);
+    double& operator[](const int index) const; // Возвращает элемент по заданному индексу
+    vdouble operator[](const Vector<int>& ind) const; // Возвращает вектор-отрезок по заданныму массиву индексов
+    vdouble operator()(const Vector<int>& vrows, const Vector<int>& vcols) const;
 //	vdouble vdouble::operator[](Vector<Vector<int> >& ind); // Возвращает массив-отрезок по заданныму массиву индексов по каждой размерности
-	double& operator()(int index); // Возвращает элемент по заданному индексу
+    double& operator()(const int index) const; // Возвращает элемент по заданному индексу
 
-	double& operator()(int row,int col); // Возвращает элемент двумерной матрицы по заданному индексу
-	double& operator()(int row, int col, int tab); // Возвращает элемент трёхмерной матрицы по заданным индексам строки и столбца
-	double& operator()(Vector<int>& indexes); // Возвращает элемент трёхмерной матрицы по заданным индексам строки и столбца
+    double& operator()(const int row, const int col) const ; // Возвращает элемент двумерной матрицы по заданному индексу
+    double& operator()(const int row, const int col, const int tab) const ; // Возвращает элемент трёхмерной матрицы по заданным индексам строки и столбца
+    double& operator()(const Vector<int>& indexes) const ; // Возвращает элемент трёхмерной матрицы по заданным индексам строки и столбца
 
 	vdouble& operator=(const vdouble& rhs); // Перегруженный оператор присваивания
 	vdouble& operator=(const double& ra);
@@ -242,34 +242,34 @@ public:
 	vdouble& operator/=(const vdouble& rhs);// Поэлементное деление на вектор аргумента с присваиванием
 	vdouble& operator/=(const double& ra);// Деление на вещественное число с присваиванием
 
-	friend vdouble inline operator+(vdouble& ob1, vdouble& ob2);
-	friend vdouble inline operator+(const double& a, vdouble& ob2);
-	friend vdouble inline operator+(vdouble& ob1, const double& a);
+    friend vdouble inline operator+(const vdouble& ob1, const vdouble& ob2);
+    friend vdouble inline operator+(const double& a, const vdouble& ob2);
+    friend vdouble inline operator+(const vdouble& ob1, const double& a);
 
-	friend vdouble inline operator-(vdouble& ob1, vdouble& ob2);
-	friend vdouble inline operator-(const double& a, vdouble& ob2);
-	friend vdouble inline operator-(vdouble& ob1, const double& a);
+    friend vdouble inline operator-(const vdouble& ob1, const vdouble& ob2);
+    friend vdouble inline operator-(const double& a, const vdouble& ob2);
+    friend vdouble inline operator-(const vdouble& ob1, const double& a);
 /*
 	friend vdouble inline operator^(vdouble& ob1, vdouble& ob2);
 	friend vdouble inline operator^(const double& a, vdouble& ob2);
 	friend vdouble inline operator^(vdouble& ob1, const double& a);
 	*/
-	friend vdouble inline pow(vdouble& ob1, vdouble& ob2);
-	friend vdouble inline pow(const double& a, vdouble& ob2);
-	friend vdouble inline pow(vdouble& ob1, const double& a);
+    friend vdouble inline pow(const vdouble& ob1, const vdouble& ob2);
+    friend vdouble inline pow(const double& a, const vdouble& ob2);
+    friend vdouble inline pow(const vdouble& ob1, const double& a);
 
     friend vdouble inline operator*(const vdouble& ob1, const vdouble& ob2);
     friend vdouble inline operator*(const double& a, const vdouble& ob2);
     friend vdouble inline operator*(const vdouble& ob1, const double& a);
 
-	friend vdouble inline operator/(vdouble& ob1, vdouble& ob2);
-	friend vdouble inline operator/(const double& a, vdouble& ob2);
-	friend vdouble inline operator/(vdouble& ob1, const double& a);
+    friend vdouble inline operator/(const vdouble& ob1, const vdouble& ob2);
+    friend vdouble inline operator/(const double& a, const vdouble& ob2);
+    friend vdouble inline operator/(const vdouble& ob1, const double& a);
 
 //	friend vdouble inline operator,(vdouble& ob1, vdouble& ob2);
 //	friend vdouble inline operator,(const double& a, vdouble& ob2);
 //	friend vdouble inline operator,(vdouble& ob1, const double& a);
-static vdouble append(vdouble& ob1, vdouble& ob2)
+static vdouble append(const vdouble& ob1, const vdouble& ob2)
 {
 	int i, len1 = ob1.m_length;
 	int len = len1 + ob2.m_length;
@@ -293,7 +293,7 @@ static vdouble append(vdouble& ob1, vdouble& ob2)
 	return tempOb;
 }
 //3
-static vdouble append(const double& a, vdouble& ob)
+static vdouble append(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length + 1;
 	vdouble tempOb;tempOb.resize(len);
@@ -312,7 +312,7 @@ static vdouble append(const double& a, vdouble& ob)
 	return tempOb;
 }
 //5
-static vdouble append(vdouble& ob, const double& a)
+static vdouble append(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	vdouble tempOb=vdouble(len+1);
@@ -330,69 +330,69 @@ static vdouble append(vdouble& ob, const double& a)
 		tempOb.m_size[d] = ob.m_size[d];
 	return tempOb;
 }	
-	friend vdouble inline operator+(vdouble& ob);
-	friend vdouble inline operator-(vdouble& ob);
+    friend vdouble inline operator+(const vdouble& ob);
+    friend vdouble inline operator-(const vdouble& ob);
 
-	friend vdouble inline log(vdouble& ob);
-	friend vdouble inline log10(vdouble& ob);
-	friend vdouble inline abs(vdouble& ob);
+    friend vdouble inline log(const vdouble& ob);
+	friend vdouble inline log10(const vdouble& ob);
+    friend vdouble inline abs(const vdouble& ob);
 
-	friend vdouble inline acos(vdouble& ob);
-	friend vdouble inline asin(vdouble& ob);
-	friend vdouble inline atan(vdouble& ob);
-	friend vdouble inline atan2(vdouble& x, vdouble& y);
+    friend vdouble inline acos(const vdouble& ob);
+    friend vdouble inline asin(const vdouble& ob);
+    friend vdouble inline atan(const vdouble& ob);
+    friend vdouble inline atan2(const vdouble& x, const vdouble& y);
 
-	friend vdouble inline cos(vdouble& ob);
-	friend vdouble inline cosh(vdouble& ob);
-	friend vdouble inline sin(vdouble& ob);
-	friend vdouble inline sinh(vdouble& ob);
-	friend vdouble inline tan(vdouble& ob);
-	friend vdouble inline tanh(vdouble& ob);
-	friend vdouble inline exp(vdouble& ob);
-	friend vdouble inline sqrt(vdouble& ob);
+    friend vdouble inline cos(const vdouble& ob);
+    friend vdouble inline cosh(const vdouble& ob);
+    friend vdouble inline sin(const vdouble& ob);
+    friend vdouble inline sinh(const vdouble& ob);
+    friend vdouble inline tan(const vdouble& ob);
+    friend vdouble inline tanh(const vdouble& ob);
+    friend vdouble inline exp(const vdouble& ob);
+    friend vdouble inline sqrt(const vdouble& ob);
 
-	friend vdouble inline floor(vdouble& ob);
-	friend vdouble inline ceil(vdouble& ob);
+    friend vdouble inline floor(const vdouble& ob);
+    friend vdouble inline ceil(const vdouble& ob);
 
-	friend vdouble inline linterp(vdouble& x, vdouble& y, vdouble& xx);
-	friend bool inline hist(vdouble& v, vdouble&  n, vdouble& x);
-	friend bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x);
-	friend bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2);
-	friend bool inline covar(vdouble& t,vdouble& v1, vdouble& v2,  vdouble& tcov, vdouble& cov);
+    friend vdouble inline linterp(const vdouble& x, const vdouble& y, vdouble& xx);
+    friend bool inline hist(const vdouble& v, vdouble&  n, const vdouble& x);
+    friend bool inline hist(const vdouble& v, int N, vdouble&  n, vdouble& x);
+    friend bool inline hist2(const vdouble& v1, const vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2);
+    friend bool inline covar(const vdouble& t, const vdouble& v1, const vdouble& v2,  vdouble& tcov, vdouble& cov);
 
-	friend Vector<bool> inline operator>(vdouble& ob1, vdouble& ob2);
-	friend Vector<bool> inline operator>(const double& a, vdouble& ob);
-	friend Vector<bool> inline operator>(vdouble& ob, const double& a);
+    friend Vector<bool> inline operator>(const vdouble& ob1, const vdouble& ob2);
+    friend Vector<bool> inline operator>(const double& a, const vdouble& ob);
+    friend Vector<bool> inline operator>(const vdouble& ob, const double& a);
 
-	friend Vector<bool> inline operator>=(vdouble& ob1, vdouble& ob2);
-	friend Vector<bool> inline operator>=(const double& a, vdouble& ob);
-	friend Vector<bool> inline operator>=(vdouble& ob, const double& a);
+    friend Vector<bool> inline operator>=(const vdouble& ob1, const vdouble& ob2);
+    friend Vector<bool> inline operator>=(const double& a, const vdouble& ob);
+    friend Vector<bool> inline operator>=(const vdouble& ob, const double& a);
 
-	friend Vector<bool> inline operator<(vdouble& ob1, vdouble& ob2);
-	friend Vector<bool> inline operator<(const double& a, vdouble& ob);
-	friend Vector<bool> inline operator<(vdouble& ob, const double& a);
+    friend Vector<bool> inline operator<(const vdouble& ob1, const vdouble& ob2);
+    friend Vector<bool> inline operator<(const double& a, const vdouble& ob);
+    friend Vector<bool> inline operator<(const vdouble& ob, const double& a);
 
-	friend Vector<bool> inline operator<=(vdouble& ob1, vdouble& ob2);
-	friend Vector<bool> inline operator<=(const double& a, vdouble& ob);
-	friend Vector<bool> inline operator<=(vdouble& ob, const double& a);
+    friend Vector<bool> inline operator<=(const vdouble& ob1, const vdouble& ob2);
+    friend Vector<bool> inline operator<=(const double& a, const vdouble& ob);
+    friend Vector<bool> inline operator<=(const vdouble& ob, const double& a);
 
-	friend Vector<bool> inline operator==(vdouble& ob1, vdouble& ob2);
-	friend Vector<bool> inline operator==(const double& a, vdouble& ob);
-	friend Vector<bool> inline operator==(vdouble& ob, const double& a);
+    friend Vector<bool> inline operator==(const vdouble& ob1, const vdouble& ob2);
+    friend Vector<bool> inline operator==(const double& a, const vdouble& ob);
+    friend Vector<bool> inline operator==(const vdouble& ob, const double& a);
 
-	friend Vector<bool> inline operator!=(vdouble& ob1, vdouble& ob2);
-	friend Vector<bool> inline operator!=(const double& a, vdouble& ob);
-	friend Vector<bool> inline operator!=(vdouble& ob, const double& a);
+    friend Vector<bool> inline operator!=(const vdouble& ob1, const vdouble& ob2);
+    friend Vector<bool> inline operator!=(const double& a, const vdouble& ob);
+    friend Vector<bool> inline operator!=(const vdouble& ob, const double& a);
 	
-	friend vdouble inline fliplr(vdouble& ob);
+    friend vdouble inline fliplr(const vdouble& ob);
 
-	friend void inline operator<<(vdouble& ob, const double& a);
+    friend void inline operator<<(const vdouble& ob, const double& a);
 	friend void inline operator>>(const double& a, vdouble& ob);
 
 //	friend void inline operator<<(CArchive& ar, vdouble& v);
 //	friend void inline operator>>(CArchive& ar, vdouble& v);
 
-	friend vdouble inline conv(vdouble& v1, vdouble& v2);
+    friend vdouble inline conv(const vdouble& v1, const vdouble& v2);
 	friend vdouble dsequence(double d0, double dstep, double dend);
 	friend vdouble dsequence(double d0, long Len, double dend);
 	friend vdouble dsequence(double d0, double dstep, long Len);
@@ -404,37 +404,37 @@ static vdouble append(vdouble& ob, const double& a)
 		// n < 0
 	vdouble Select(Vector<int>& indexes); // Возвращает новый вектор, выбирая элементы из данного вектора
 	vdouble Select(Vector<bool>& vbl); // Возвращает новый вектор, выбирая элементы из данного вектора
-	void LocalMaximums(vdouble& LocMax, Vector<int>& indexes); // Формирует вектор локальных максимумов и целочисленный вектор их индексов
-	void LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes);// Формирует вектор локальных максимумов и целочисленный вектор их индексов
-	void LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes);// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+    void LocalMaximums(vdouble& LocMax, Vector<int>& indexes) const; // Формирует вектор локальных максимумов и целочисленный вектор их индексов
+    void LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes) const;// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+    void LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes) const;// Формирует вектор локальных максимумов и целочисленный вектор их индексов
 
-	void LocalMinimums(vdouble& LocMin, Vector<int>& indexes);// Формирует вектор локальных минимумов и целочисленный вектор их индексов
-	void LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes);// Формирует вектор локальных минимумов и целочисленный вектор их индексов
-	void LocalMinimumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes);// Формирует вектор локальных максимумов и целочисленный вектор их индексов
-	bool IsEndLocalMin(int n = 3);
-	bool IsEndLocalMax(int n = 3);
-	bool IsEndDecreaseDown(int n = 3);
-	bool IsEndGrowUp(int n = 3);
+    void LocalMinimums(vdouble& LocMin, Vector<int>& indexes) const;// Формирует вектор локальных минимумов и целочисленный вектор их индексов
+    void LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes) const;// Формирует вектор локальных минимумов и целочисленный вектор их индексов
+    void LocalMinimumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes) const;// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+    bool IsEndLocalMin(int n = 3) const;
+    bool IsEndLocalMax(int n = 3) const;
+    bool IsEndDecreaseDown(int n = 3) const;
+    bool IsEndGrowUp(int n = 3) const;
 
-	double Max(); // Возвращает мaксимальный элемент вектора
-	double Max(int iFirst, int iLast); // Возвращает мaксимальный элемент вектора
-	double Min(); // Возвращает минимальный элемент вектора
-	double MinPositive(); // Возвращает минимальный положительный элемент вектора
-	double Min(int iFirst, int iLast); // Возвращает минимальный элемент вектора
-	double MaxFrom(int j);
-	double MinFrom(int j);
-	double MaxFromTo(int i1, int i2); // Возвращает минимальный элемент вектора
-	double MinFromTo(int i1, int i2); // Возвращает минимальный элемент вектора
-	double MaxAbs(); // Возвращает мaксимальный по абсолютному значению элемент вектора
-	double MinAbs(); // Возвращает минимальный по абсолютному значению элемент вектора
-	double Mean(); // Возврашает среднее арифметическое элементов вектора
-	double Mean(int realElementsNumber); // Возврашает среднее арифметическое realElementsNumber элементов вектора
-	double Median(); // Возврашает среднее арифметическое элементов вектора
-	double Median_sort(); // Возврашает среднее арифметическое элементов вектора
-	double Root_mean_square_Dismissal(); // Возврашает среднеквадратичное отклонение
-	double Sum(); // Возврашает сумму элементов вектора
-	double SquareSum(); // Возврашает сумму квадратов элементов вектора
-	double SquareSumFrom(int i0); // Возврашает сумму квадратов элементов вектора, начиная с i0
+    double Max() const; // Возвращает мaксимальный элемент вектора
+    double Max(int iFirst, int iLast) const; // Возвращает мaксимальный элемент вектора
+    double Min() const; // Возвращает минимальный элемент вектора
+    double MinPositive() const; // Возвращает минимальный положительный элемент вектора
+    double Min(int iFirst, int iLast) const; // Возвращает минимальный элемент вектора
+    double MaxFrom(int j) const;
+    double MinFrom(int j) const;
+    double MaxFromTo(int i1, int i2) const; // Возвращает минимальный элемент вектора
+    double MinFromTo(int i1, int i2) const; // Возвращает минимальный элемент вектора
+    double MaxAbs() const; // Возвращает мaксимальный по абсолютному значению элемент вектора
+    double MinAbs() const; // Возвращает минимальный по абсолютному значению элемент вектора
+    double Mean() const; // Возврашает среднее арифметическое элементов вектора
+    double Mean(int realElementsNumber) const; // Возврашает среднее арифметическое realElementsNumber элементов вектора
+    double Median() const; // Возврашает среднее арифметическое элементов вектора
+    double Median_sort() const; // Возврашает среднее арифметическое элементов вектора
+    double Root_mean_square_Dismissal() const; // Возврашает среднеквадратичное отклонение
+    double Sum() const; // Возврашает сумму элементов вектора
+    double SquareSum() const; // Возврашает сумму квадратов элементов вектора
+    double SquareSumFrom(int i0) const; // Возврашает сумму квадратов элементов вектора, начиная с i0
 	void push_back(double a);// Добавляет элемент в конец вектора
 	void push_front(double a); // Добавляет элемент в начало вектора
 	void DeleteEnd(); // Удаляет 1 последний элемент вектора
@@ -529,8 +529,8 @@ static vdouble append(vdouble& ob, const double& a)
 	void sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion = false);//Решение линейной системы уравнений методом Гаусса
 //	vdouble A(int j); // Алгебраическое дополнение
 
-	vdouble PolynomDerivative();//Возвращает вектор полинома первой производной
-	vdouble PolynomSumming(vdouble& v); // Суммирование полиномов
+    vdouble PolynomDerivative() const;//Возвращает вектор полинома первой производной
+    vdouble PolynomSumming(const vdouble& v) const; // Суммирование полиномов
 	void PolynomDivide(const vdouble& divisor, vdouble& quotient, vdouble& remainder);// Производит деление на полином
 	int PolynomDivideIntoThree_member(double& b, double c);// Производит деление полинома на трёхчлен, в котором второй коэффициент b подлежит определению,
 	int PolynomRootsSimple(vdouble& prs, vdouble& D);// Вычленяет кратные корни, получая полином с простыми корнями и соответствующий множитель
@@ -814,7 +814,7 @@ vdouble inline operator-(const vdouble& ob, const double& a)
 //////////////////////////////////////////////////////////////
 /*
 //1
-vdouble inline operator^(vdouble& ob1, vdouble& ob2)
+vdouble inline operator^(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
@@ -844,7 +844,7 @@ vdouble inline operator^(vdouble& ob1, vdouble& ob2)
 }
 
 //3
-vdouble inline operator^(const double& a, vdouble& ob)
+vdouble inline operator^(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -863,7 +863,7 @@ vdouble inline operator^(const double& a, vdouble& ob)
 }
 
 //5
-vdouble inline operator^(vdouble& ob, const double& a)
+vdouble inline operator^(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -884,7 +884,7 @@ vdouble inline operator^(vdouble& ob, const double& a)
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 //1
-vdouble inline pow(vdouble& ob1, vdouble& ob2)
+vdouble inline pow(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
@@ -913,7 +913,7 @@ vdouble inline pow(vdouble& ob1, vdouble& ob2)
 	return tempOb;
 }
 //3
-vdouble inline pow(const double& a, vdouble& ob)
+vdouble inline pow(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -931,7 +931,7 @@ vdouble inline pow(const double& a, vdouble& ob)
 	return tempOb;
 }
 //5
-vdouble inline pow(vdouble& ob, const double& a)
+vdouble inline pow(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1019,7 +1019,7 @@ vdouble inline operator*(const vdouble& ob, const double& a)
 ///////////////////////////////
 ///////////////////////////////
 //1
-vdouble inline operator/(vdouble& ob1, vdouble& ob2)
+vdouble inline operator/(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
@@ -1048,7 +1048,7 @@ vdouble inline operator/(vdouble& ob1, vdouble& ob2)
 	return tempOb;
 }
 //3
-vdouble inline operator/(const double& a, vdouble& ob)
+vdouble inline operator/(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1066,9 +1066,9 @@ vdouble inline operator/(const double& a, vdouble& ob)
 	return tempOb;
 }
 //5
-vdouble inline operator/(vdouble& ob, const double& a)
+vdouble inline operator/(const vdouble& ob, const double& a)
 {
-//	ob.WriteRaporto((CString)" operator/(vdouble& ob, const double& a) \t");
+//	ob.WriteRaporto((CString)" operator/(const vdouble& ob, const double& a) \t");
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
 	tempOb.m_isgorizontal=ob.m_isgorizontal;
@@ -1090,7 +1090,7 @@ vdouble inline operator/(vdouble& ob, const double& a)
 //1
 
 /*
-vdouble inline operator,(vdouble& ob1, vdouble& ob2)
+vdouble inline operator,(const vdouble& ob1, const vdouble& ob2)
 {
 	int len1 = ob1.m_length;
 	int len = len1 + ob2.m_length;
@@ -1114,7 +1114,7 @@ vdouble inline operator,(vdouble& ob1, vdouble& ob2)
 	return tempOb;
 }
 //3
-vdouble inline operator,(const double& a, vdouble& ob)
+vdouble inline operator,(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length + 1;
 	vdouble tempOb;tempOb.resize(len);
@@ -1133,7 +1133,7 @@ vdouble inline operator,(const double& a, vdouble& ob)
 	return tempOb;
 }
 //5
-vdouble inline operator,(vdouble& ob, const double& a)
+vdouble inline operator,(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	vdouble tempOb=vdouble(len+1);
@@ -1154,7 +1154,7 @@ vdouble inline operator,(vdouble& ob, const double& a)
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline operator+(vdouble& ob)
+vdouble inline operator+(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1173,7 +1173,7 @@ vdouble inline operator+(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline operator-(vdouble& ob)
+vdouble inline operator-(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1191,7 +1191,7 @@ vdouble inline operator-(vdouble& ob)
 	return tempOb;
 }
 //////////////////////////////////////////////////////////////
-vdouble inline log(vdouble& ob)
+vdouble inline log(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1210,7 +1210,7 @@ vdouble inline log(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline log10(vdouble& ob)
+vdouble inline log10(const vdouble& ob)
 {
 	int i, len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1264,7 +1264,7 @@ vdouble inline log10(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline abs(vdouble& ob)
+vdouble inline abs(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1283,7 +1283,7 @@ vdouble inline abs(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline acos(vdouble& ob)
+vdouble inline acos(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1302,7 +1302,7 @@ vdouble inline acos(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline asin(vdouble& ob)
+vdouble inline asin(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1321,7 +1321,7 @@ vdouble inline asin(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline atan(vdouble& ob)
+vdouble inline atan(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1340,7 +1340,7 @@ vdouble inline atan(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 
-vdouble inline atan2(vdouble& x, vdouble& y)
+vdouble inline atan2(const vdouble& x, const vdouble& y)
 {
 	int len = x.m_length;
 	if (len != y.m_length)
@@ -1371,7 +1371,7 @@ vdouble inline atan2(vdouble& x, vdouble& y)
 }
 
 //////////////////////////////////////////////////////////////
-vdouble inline cos(vdouble& ob)
+vdouble inline cos(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1390,7 +1390,7 @@ vdouble inline cos(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline cosh(vdouble& ob)
+vdouble inline cosh(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1409,7 +1409,7 @@ vdouble inline cosh(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline sin(vdouble& ob)
+vdouble inline sin(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1428,7 +1428,7 @@ vdouble inline sin(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline sinh(vdouble& ob)
+vdouble inline sinh(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1447,7 +1447,7 @@ vdouble inline sinh(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline tan(vdouble& ob)
+vdouble inline tan(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1466,7 +1466,7 @@ vdouble inline tan(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline tanh(vdouble& ob)
+vdouble inline tanh(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1485,7 +1485,7 @@ vdouble inline tanh(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline sqrt(vdouble& ob)
+vdouble inline sqrt(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1505,7 +1505,7 @@ vdouble inline sqrt(vdouble& ob)
 //////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////
-vdouble inline exp(vdouble& ob)
+vdouble inline exp(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1524,7 +1524,7 @@ vdouble inline exp(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline floor(vdouble& ob)
+vdouble inline floor(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1543,7 +1543,7 @@ vdouble inline floor(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-vdouble inline ceil(vdouble& ob)
+vdouble inline ceil(const vdouble& ob)
 {
 	int len = ob.m_length;
 	vdouble tempOb;tempOb.resize(len);
@@ -1562,12 +1562,12 @@ vdouble inline ceil(vdouble& ob)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator>(vdouble& ob1, vdouble& ob2)
+Vector<bool> inline operator>(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
 	{
-//		fprintf(stderr,"Error using vdouble operator>(vdouble& ob1, vdouble& ob2):\n");
+//		fprintf(stderr,"Error using vdouble operator>(const vdouble& ob1, const vdouble& ob2):\n");
 //		fprintf(stderr,"Lengthes of compared vectors = %i, %i must be equial",
 //			ob1.m_length, ob2.m_length);
 		Vector<bool> vb_err;
@@ -1585,7 +1585,7 @@ Vector<bool> inline operator>(vdouble& ob1, vdouble& ob2)
 	}
 	return vbl;
 }
-Vector<bool> inline operator>(const double& a, vdouble& ob)
+Vector<bool> inline operator>(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1600,7 +1600,7 @@ Vector<bool> inline operator>(const double& a, vdouble& ob)
 	return vbl;
 }
 
-Vector<bool> inline operator>(vdouble& ob, const double& a)
+Vector<bool> inline operator>(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1616,12 +1616,12 @@ Vector<bool> inline operator>(vdouble& ob, const double& a)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator>=(vdouble& ob1, vdouble& ob2)
+Vector<bool> inline operator>=(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
 	{
-//		fprintf(stderr,"Error using vdouble operator>=(vdouble& ob1, vdouble& ob2):\n");
+//		fprintf(stderr,"Error using vdouble operator>=(const vdouble& ob1, const vdouble& ob2):\n");
 //		fprintf(stderr,"Lengthes of compared vectors = %i, %i must be equial",
 //			ob1.m_length, ob2.m_length);
 		Vector<bool> vb_err;
@@ -1639,7 +1639,7 @@ Vector<bool> inline operator>=(vdouble& ob1, vdouble& ob2)
 	}
 	return vbl;
 }
-Vector<bool> inline operator>=(const double& a, vdouble& ob)
+Vector<bool> inline operator>=(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1654,7 +1654,7 @@ Vector<bool> inline operator>=(const double& a, vdouble& ob)
 	return vbl;
 }
 
-Vector<bool> inline operator>=(vdouble& ob, const double& a)
+Vector<bool> inline operator>=(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1670,12 +1670,12 @@ Vector<bool> inline operator>=(vdouble& ob, const double& a)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator<(vdouble& ob1, vdouble& ob2)
+Vector<bool> inline operator<(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
 	{
-//		fprintf(stderr,"Error using vdouble operator<(vdouble& ob1, vdouble& ob2):\n");
+//		fprintf(stderr,"Error using vdouble operator<(const vdouble& ob1, const vdouble& ob2):\n");
 //		fprintf(stderr,"Lengthes of compared vectors = %i, %i must be equial",
 //			ob1.m_length, ob2.m_length);
 		Vector<bool> vb_err;
@@ -1693,7 +1693,7 @@ Vector<bool> inline operator<(vdouble& ob1, vdouble& ob2)
 	}
 	return vbl;
 }
-Vector<bool> inline operator<(const double& a, vdouble& ob)
+Vector<bool> inline operator<(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1708,7 +1708,7 @@ Vector<bool> inline operator<(const double& a, vdouble& ob)
 	return vbl;
 }
 
-Vector<bool> inline operator<(vdouble& ob, const double& a)
+Vector<bool> inline operator<(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1724,12 +1724,12 @@ Vector<bool> inline operator<(vdouble& ob, const double& a)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator<=(vdouble& ob1, vdouble& ob2)
+Vector<bool> inline operator<=(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
 	{
-//		fprintf(stderr,"Error using vdouble operator<=(vdouble& ob1, vdouble& ob2):\n");
+//		fprintf(stderr,"Error using vdouble operator<=(const vdouble& ob1, const vdouble& ob2):\n");
 //		fprintf(stderr,"Lengthes of compared vectors = %i, %i must be equial",
 //			ob1.m_length, ob2.m_length);
 		Vector<bool> vb_err;
@@ -1747,7 +1747,7 @@ Vector<bool> inline operator<=(vdouble& ob1, vdouble& ob2)
 	}
 	return vbl;
 }
-Vector<bool> inline operator<=(const double& a, vdouble& ob)
+Vector<bool> inline operator<=(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1762,7 +1762,7 @@ Vector<bool> inline operator<=(const double& a, vdouble& ob)
 	return vbl;
 }
 
-Vector<bool> inline operator<=(vdouble& ob, const double& a)
+Vector<bool> inline operator<=(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1777,12 +1777,12 @@ Vector<bool> inline operator<=(vdouble& ob, const double& a)
 	return vbl;
 }
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator==(vdouble& ob1, vdouble& ob2)
+Vector<bool> inline operator==(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
 	{
-//		fprintf(stderr,"Error using vdouble operator==(vdouble& ob1, vdouble& ob2):\n");
+//		fprintf(stderr,"Error using vdouble operator==(const vdouble& ob1, const vdouble& ob2):\n");
 //		fprintf(stderr,"Lengthes of compared vectors = %i, %i must be equial",
 //			ob1.m_length, ob2.m_length);
 		Vector<bool> vb_err;
@@ -1800,7 +1800,7 @@ Vector<bool> inline operator==(vdouble& ob1, vdouble& ob2)
 	}
 	return vbl;
 }
-Vector<bool> inline operator==(const double& a, vdouble& ob)
+Vector<bool> inline operator==(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1815,7 +1815,7 @@ Vector<bool> inline operator==(const double& a, vdouble& ob)
 	return vbl;
 }
 
-Vector<bool> inline operator==(vdouble& ob, const double& a)
+Vector<bool> inline operator==(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1831,12 +1831,12 @@ Vector<bool> inline operator==(vdouble& ob, const double& a)
 }
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-Vector<bool> inline operator!=(vdouble& ob1, vdouble& ob2)
+Vector<bool> inline operator!=(const vdouble& ob1, const vdouble& ob2)
 {
 	int len = ob1.m_length;
 	if (len != ob2.m_length)
 	{
-//		fprintf(stderr,"Error using vdouble operator!=(vdouble& ob1, vdouble& ob2):\n");
+//		fprintf(stderr,"Error using vdouble operator!=(const vdouble& ob1, const vdouble& ob2):\n");
 //		fprintf(stderr,"Lengthes of compared vectors = %i, %i must be equial",
 //			ob1.m_length, ob2.m_length);
 		Vector<bool> vb_err;
@@ -1854,7 +1854,7 @@ Vector<bool> inline operator!=(vdouble& ob1, vdouble& ob2)
 	}
 	return vbl;
 }
-Vector<bool> inline operator!=(const double& a, vdouble& ob)
+Vector<bool> inline operator!=(const double& a, const vdouble& ob)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1869,7 +1869,7 @@ Vector<bool> inline operator!=(const double& a, vdouble& ob)
 	return vbl;
 }
 
-Vector<bool> inline operator!=(vdouble& ob, const double& a)
+Vector<bool> inline operator!=(const vdouble& ob, const double& a)
 {
 	int len = ob.m_length;
 	Vector<bool> vbl(len);
@@ -1884,7 +1884,7 @@ Vector<bool> inline operator!=(vdouble& ob, const double& a)
 	return vbl;
 }
 //////////////////////////////////////////////////////////////
-vdouble inline fliplr(vdouble& ob)
+vdouble inline fliplr(const vdouble& ob)
 {
 	vdouble v;
 	int len = ob.m_length;
@@ -1900,7 +1900,7 @@ vdouble inline fliplr(vdouble& ob)
 	return v;
 }
 //////////////////////////////////////////////////////////////
-void inline operator<<(vdouble& ob, const double& a)
+void inline operator<<(const vdouble& ob, const double& a)
 {
 	int len_1 = ob.m_length - 1;
 	if ( len_1 < 0)
@@ -1928,7 +1928,7 @@ void inline operator>>(const double& a, vdouble& ob)
 	}
 	*(pr) = a;
 }
-vdouble inline conv(vdouble& v1, vdouble& v2)
+vdouble inline conv(const vdouble& v1, const vdouble& v2)
 {
 	int len, len1, len2, i, j, milen, malen;
 	double *pc, *pci, *pmai, *pmi, *pma;
@@ -1969,7 +1969,7 @@ vdouble inline conv(vdouble& v1, vdouble& v2)
 	return c;
 	
 }
-vdouble inline linterp(vdouble& x, vdouble& y, vdouble& xx)
+vdouble inline linterp(const vdouble& x, const vdouble& y, vdouble& xx)
 {
 	//LINTERP Linear interpolation.
 	//
@@ -2439,7 +2439,7 @@ void inline localevaluate ( int npages, int nrows, int ncols,
 
 
 
-bool inline hist(vdouble& v, vdouble&  n, vdouble& x)
+bool inline hist(const vdouble& v, vdouble&  n, const vdouble& x)
 {
 
 	double 
@@ -2461,7 +2461,7 @@ bool inline hist(vdouble& v, vdouble&  n, vdouble& x)
 	}
 	return true;
 }
-bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x)
+bool inline hist(const vdouble& v, int N, vdouble&  n, vdouble& x)
 {
 
 	double epsilon = 0.000001,
@@ -2491,7 +2491,7 @@ bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x)
 	}
 	return true;
 }
-bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2)
+bool inline hist2(const vdouble& v1, const vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2)
 {
 
 	if (v1.m_length != v2.m_length)
@@ -2539,7 +2539,7 @@ bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble&
 	}
 	return true;
 }
-bool inline covar(vdouble& t,vdouble& v1, vdouble& v2,  vdouble& tcov, vdouble& cov)
+bool inline covar(const vdouble& t, const vdouble& v1, const vdouble& v2,  vdouble& tcov, vdouble& cov)
 {
 	int Len = v1.Length(),
 		L = Len/4;

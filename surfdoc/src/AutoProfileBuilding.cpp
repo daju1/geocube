@@ -4495,9 +4495,9 @@ void GetWaveletFilters(Wavelet3D& w3)
 
 
 }
-void w_fi(vdouble& fh, int d, vdouble& FI)
+void w_fi(const vdouble& fh, int d, vdouble& FI)
 {
-printf("w_fi(vdouble& fh, int d = %d, vdouble& FI)\n", d);
+printf("w_fi(const vdouble& fh, int d = %d, vdouble& FI)\n", d);
 	vdouble P;
 	FI = fh*2;
 	int lenh = fh.Length();
@@ -4510,8 +4510,7 @@ printf("w_fi lenh = %d\n", lenh);
 		P.resize(2*lenh - 1, 0.0);
 		for (int i = 0; i < lenh;i++)
 			P[2*i] = fh[i];
-        FI = conv(P,FI);
-        FI *= 2;
+        FI = 2 * conv(P,FI);
 	}
 	else
 	{
@@ -4521,8 +4520,7 @@ printf("w_fi lenh = %d\n", lenh);
 			P.resize(pow_two*(lenh - 1) + 1, 0.0);
 			for (int i = 0; i < lenh;i++)
 				P[pow_two*i] = fh[i];
-            FI=conv(P,FI);
-            FI *= 2;
+            FI = 2 * conv(P,FI);
 		}
 
 		int pow_two = (int)pow(2.0, (d-1));
@@ -4531,9 +4529,7 @@ printf("w_fi lenh = %d\n", lenh);
 		for (int i = 0; i < lenh;i++)
 			P[pow_two*i] = fh[i];
 
-        FI=conv(P,FI);
-        FI *= 2;
-
+        FI = 2 * conv(P,FI);
 	}
 printf("w_fi end\n", d);
 }
@@ -7068,6 +7064,7 @@ e_start__row_j:
 		}
 
     }
+#undef a_ref
     return true;
 } /* afg1d_c */
 
@@ -7337,7 +7334,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 	ar2.Close();
 	f2.Close();
 	///////////////////////////////////////////////////////////////////////
-
+#undef a_ref
 	delete[] a;
 	delete[] p;
 	return true;

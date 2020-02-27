@@ -42,7 +42,10 @@ HEADERS  += auto_build_3d.h \
     ../array/src/sparse_row.h \
     ../array/src/sparse_row_element.h \
     ../array/src/sparse_row_simple.h \
-    ../array/src/sparse_row_map.h
+    ../array/src/sparse_row_map.h \
+    ../array/src/interp.h \
+    ../array/src/ap.h \
+    ../array/src/stdafx.h
 
 FORMS    += auto_build_3d.ui
 

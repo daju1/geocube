@@ -170,4 +170,4 @@ class CPoint3;
 int getTriangulationContour(vector<double>& x, vector<double>& y, int ftf, bool use_biss, double len_biss, Line3D * outline, CPoint3 * base_point );
 
 int correct_dublicate(vector<double>& x, vector<double>& y, vector<double>& z);
-#endif _INTERP_H_
+#endif //_INTERP_H_

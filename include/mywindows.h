@@ -240,6 +240,7 @@ BOOL DeleteFileW(
 {
     QFile file (lpFileName);
     file.remove();
+    return TRUE;
 }
 #define CreateDirectory CreateDirectoryW
 #define DeleteFile DeleteFileW
@@ -259,6 +260,7 @@ BOOL DeleteFileA(
 {
     QFile file (lpFileName);
     file.remove();
+    return TRUE;
 }
 #define CreateDirectory CreateDirectoryA
 #define DeleteFile DeleteFileA

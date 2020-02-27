@@ -889,7 +889,7 @@ double& vdouble::operator[](int index) const
 	}
 	return pD[index];
 }
-vdouble vdouble::operator()(Vector<int>& vrows, Vector<int>& vcols)
+vdouble vdouble::operator()(const Vector<int>& vrows, const Vector<int>& vcols) const
 {
 	if (m_dims != 2)
 	{
@@ -931,7 +931,7 @@ vdouble vdouble::operator()(Vector<int>& vrows, Vector<int>& vcols)
 
 	return v;
 }
-vdouble vdouble::operator[](Vector<int>& ind)
+vdouble vdouble::operator[](const Vector<int>& ind) const
 {
 	int len, i;
 	len = ind.size;
@@ -962,7 +962,7 @@ vdouble vdouble::operator[](Vector<int>& ind)
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 //
-double& vdouble::operator()(int index)
+double& vdouble::operator()(const int index) const
 {
 	try 
 	{
@@ -983,7 +983,7 @@ double& vdouble::operator()(int index)
 	}
 	return pD[index];
 }
-double& vdouble::operator()(int row, int col)
+double& vdouble::operator()(const int row, const int col) const
 {
 	if (m_dims != 2)
 	{
@@ -1017,7 +1017,7 @@ double& vdouble::operator()(int row, int col)
 
 	return *(pD + i);
 }
-double& vdouble::operator()(int row, int col, int tab)
+double& vdouble::operator()(const int row, const int col, const int tab) const
 {
 	if (m_dims != 3)
 	{
@@ -1053,7 +1053,7 @@ double& vdouble::operator()(int row, int col, int tab)
 	return *(pD + i);
 }
 #if 1
-double& vdouble::operator()(Vector<int>& indexes)
+double& vdouble::operator()(const Vector<int>& indexes) const
 {
 	int d;
 	if (m_dims != indexes.size)
@@ -1414,7 +1414,7 @@ vdouble vdouble::Select(Vector<bool>& vbl) // Возвращает новый в
 	}
 	return slt;
 }
-void vdouble::LocalMaximums(vdouble& LocMax, Vector<int>& indexes) // Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMaximums(vdouble& LocMax, Vector<int>& indexes) const // Формирует вектор локальных максимумов и целочисленный вектор их индексов
 {
 	int i;
 	if (m_length < 3)
@@ -1462,7 +1462,7 @@ void vdouble::LocalMaximums(vdouble& LocMax, Vector<int>& indexes) // Форми
 	}
 #endif
 }
-void vdouble::LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes)// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes) const// Формирует вектор локальных максимумов и целочисленный вектор их индексов
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1527,7 +1527,7 @@ void vdouble::LocalMaximums(int n, vdouble& LocMax, Vector<int>& indexes)// Фо
 
 #endif
 }
-void vdouble::LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes)// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes) const// Формирует вектор локальных максимумов и целочисленный вектор их индексов
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1589,7 +1589,7 @@ void vdouble::LocalMaximumsWithBorders(int n, vdouble& LocMax, Vector<int>& inde
 		}
 	}
 }
-void vdouble::LocalMinimums(vdouble& LocMin, Vector<int>& indexes)// Формирует вектор локальных минимумов и целочисленный вектор их индексов
+void vdouble::LocalMinimums(vdouble& LocMin, Vector<int>& indexes) const// Формирует вектор локальных минимумов и целочисленный вектор их индексов
 {
 	int i;
 	if (m_length < 3)
@@ -1637,7 +1637,7 @@ void vdouble::LocalMinimums(vdouble& LocMin, Vector<int>& indexes)// Форми�
 	}
 #endif
 }
-void vdouble::LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes)// Формирует вектор локальных минимумов и целочисленный вектор их индексов
+void vdouble::LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes) const// Формирует вектор локальных минимумов и целочисленный вектор их индексов
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1696,7 +1696,7 @@ void vdouble::LocalMinimums(int n, vdouble& LocMin, Vector<int>& indexes)// Фо
 	}
 #endif
 }
-void vdouble::LocalMinimumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes)// Формирует вектор локальных максимумов и целочисленный вектор их индексов
+void vdouble::LocalMinimumsWithBorders(int n, vdouble& LocMax, Vector<int>& indexes) const// Формирует вектор локальных максимумов и целочисленный вектор их индексов
 {
 	int i;
 	int wind_length = 2*n+1;
@@ -1758,7 +1758,7 @@ void vdouble::LocalMinimumsWithBorders(int n, vdouble& LocMax, Vector<int>& inde
 		}
 	}
 }
-bool vdouble::IsEndLocalMin(int n)
+bool vdouble::IsEndLocalMin(int n) const
 {
 	if (m_length - n - 1 < 0)
 		return false;
@@ -1781,7 +1781,7 @@ bool vdouble::IsEndLocalMin(int n)
 	}
 	return Answer;
 }
-bool vdouble::IsEndLocalMax(int n)
+bool vdouble::IsEndLocalMax(int n) const
 {
 	if (m_length - n - 1 < 0)
 		return false;
@@ -1891,7 +1891,7 @@ bool vdouble::IsEndDecreaseDown(int n)
 	return answer;
 }
 */
-double vdouble::Max(int iFirst, int iLast) // Возвращает мaксимальный элемент вектора
+double vdouble::Max(int iFirst, int iLast) const  // Возвращает мaксимальный элемент вектора
 {
 	if(m_length == 0)
 		return 0.0;
@@ -1910,7 +1910,7 @@ double vdouble::Max(int iFirst, int iLast) // Возвращает мaксима
 		_Max = _Max > *(pD+i) ? _Max : *(pD+i);
 	return _Max;
 }
-double vdouble::Max() // Возвращает мaксимальный элемент вектора
+double vdouble::Max() const  // Возвращает мaксимальный элемент вектора
 {
 	double _Max = 0.0;
 	if(m_length == 0)
@@ -1920,7 +1920,7 @@ double vdouble::Max() // Возвращает мaксимальный элеме
 		_Max = _Max > *(pD+i) ? _Max : *(pD+i);
 	return _Max;
 }
-double vdouble::Min(int iFirst, int iLast) // Возвращает минимальный элемент вектора
+double vdouble::Min(int iFirst, int iLast) const // Возвращает минимальный элемент вектора
 {
 	double _Min = 0.0;
 	if(m_length == 0)
@@ -1939,7 +1939,7 @@ double vdouble::Min(int iFirst, int iLast) // Возвращает минима�
 		_Min = _Min < *(pD+i) ? _Min : *(pD+i);
 	return _Min;
 }
-double vdouble::MinFromTo(int i1, int i2) // Возвращает минимальный элемент вектора
+double vdouble::MinFromTo(int i1, int i2) const // Возвращает минимальный элемент вектора
 {
 	double _Min = 0.0;
 	if(m_length == 0)
@@ -1958,7 +1958,7 @@ double vdouble::MinFromTo(int i1, int i2) // Возвращает минимал
 		_Min = _Min < *(pD+i) ? _Min : *(pD+i);
 	return _Min;
 }
-double vdouble::MaxFromTo(int i1, int i2) // Возвращает минимальный элемент вектора
+double vdouble::MaxFromTo(int i1, int i2) const // Возвращает минимальный элемент вектора
 {
 	double _Max = 0.0;
 	if(m_length == 0)
@@ -1977,7 +1977,7 @@ double vdouble::MaxFromTo(int i1, int i2) // Возвращает минимал
 		_Max = _Max > *(pD+i) ? _Max : *(pD+i);
 	return _Max;
 }
-double vdouble::Min() // Возвращает минимальный элемент вектора
+double vdouble::Min() const // Возвращает минимальный элемент вектора
 {
 	double _Min = 0.0;
 	if(m_length == 0)
@@ -1987,7 +1987,7 @@ double vdouble::Min() // Возвращает минимальный элеме�
 		_Min = _Min < *(pD+i) ? _Min : *(pD+i);
 	return _Min;
 }
-double vdouble::MinPositive() // Возвращает минимальный положительный элемент вектора
+double vdouble::MinPositive() const // Возвращает минимальный положительный элемент вектора
 {
 	double _Min;
 	bool started = false;
@@ -2011,7 +2011,7 @@ double vdouble::MinPositive() // Возвращает минимальный п�
 	else
 		return 0.0;
 }
-double vdouble::MaxAbs() // Возвращает мaксимальный по абсолютному значению элемент вектора
+double vdouble::MaxAbs() const // Возвращает мaксимальный по абсолютному значению элемент вектора
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2021,7 +2021,7 @@ double vdouble::MaxAbs() // Возвращает мaксимальный по а
 		_MaxAbs = _MaxAbs > fabs(*(pD+i)) ? _MaxAbs : fabs(*(pD+i));
 	return _MaxAbs;
 }
-double vdouble::MinAbs() // Возвращает минимальный по абсолютному значению элемент вектора
+double vdouble::MinAbs() const // Возвращает минимальный по абсолютному значению элемент вектора
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2031,7 +2031,7 @@ double vdouble::MinAbs() // Возвращает минимальный по а�
 		_MinAbs = _MinAbs < fabs(*(pD+i)) ? _MinAbs : fabs(*(pD+i));
 	return _MinAbs;
 }
-double vdouble::Mean() // Возврашает среднее арифметическое элементов вектора
+double vdouble::Mean() const // Возврашает среднее арифметическое элементов вектора
 {
 	if (!m_length)
 		return 0.0;
@@ -2041,7 +2041,7 @@ double vdouble::Mean() // Возврашает среднее арифметич
 		_Sum += *(pD+i);
 	return _Sum/m_length;
 }
-double vdouble::Mean(int realElementsNumber) // Возврашает среднее арифметическое realElementsNumber элементов вектора
+double vdouble::Mean(int realElementsNumber) const // Возврашает среднее арифметическое realElementsNumber элементов вектора
 {
 	if (m_length == 0 || realElementsNumber == 0)
 		return 0.0;
@@ -2429,7 +2429,7 @@ double Median(double *p, int len) // Возврашает среднее ари�
 	return median;
 }
 
-double vdouble::Median() // Возврашает среднее арифметическое элементов вектора
+double vdouble::Median() const // Возврашает среднее арифметическое элементов вектора
 {
 	if (!m_length)
 		return 0.0;
@@ -2486,7 +2486,7 @@ double vdouble::Median() // Возврашает среднее арифмети
 }
 
 
-double vdouble::Median_sort() // Возврашает среднее арифметическое элементов вектора
+double vdouble::Median_sort() const// Возврашает среднее арифметическое элементов вектора
 {
 	if (!m_length)
 		return 0.0;
@@ -2495,7 +2495,6 @@ double vdouble::Median_sort() // Возврашает среднее арифм�
  //  vector <double> v1;
 	if ((pSort = (double*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,m_length*SD)) == NULL && m_length != 0)
 	{
-		m_length = 0;
 		MessageBox(0, _T("vdouble::Median() - Not enough memory"),
 			_T("vdouble"), 0);
 		return 0.0;
@@ -2549,7 +2548,7 @@ double vdouble::Median_sort() // Возврашает среднее арифм�
 
 	return median;
 }
-double vdouble::Root_mean_square_Dismissal() // Возврашает среднеквадратичное отклонение
+double vdouble::Root_mean_square_Dismissal() const // Возврашает среднеквадратичное отклонение
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2560,7 +2559,7 @@ double vdouble::Root_mean_square_Dismissal() // Возврашает средн�
 		_SquareSum += pow(*(pD+i) - _mean, 2.0);
 	return sqrt( _SquareSum / (m_length - 1) );
 }
-double vdouble::Sum() // Возврашает сумму элементов вектора
+double vdouble::Sum() const // Возврашает сумму элементов вектора
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2570,7 +2569,7 @@ double vdouble::Sum() // Возврашает сумму элементов ве
 		_Sum += *(pD+i);
 	return _Sum;
 }
-double vdouble::SquareSum() // Возврашает сумму квадратов элементов вектора
+double vdouble::SquareSum() const // Возврашает сумму квадратов элементов вектора
 {
 	if(m_length == 0)
 		return 0.0;
@@ -2584,7 +2583,7 @@ double vdouble::SquareSum() // Возврашает сумму квадрато�
 	}
 	return _SquareSum;
 }
-double vdouble::SquareSumFrom(int i0) // Возврашает сумму квадратов элементов вектора
+double vdouble::SquareSumFrom(int i0) const // Возврашает сумму квадратов элементов вектора
 {
 	if(m_length == 0)
 		return 0.0;
@@ -5510,7 +5509,7 @@ void vdouble::sls_det(vdouble& b, vdouble& x, double& _det, bool PrivateDesigion
 	return;
 }
 
-vdouble vdouble::PolynomDerivative()//Возвращает вектор полинома первой производной
+vdouble vdouble::PolynomDerivative() const //Возвращает вектор полинома первой производной
 {
 	int len, i;
 	double *p, k;
@@ -5533,7 +5532,7 @@ vdouble vdouble::PolynomDerivative()//Возвращает вектор поли
 	}
 	return deriv;
 }
-vdouble vdouble::PolynomSumming(vdouble& v) // Суммирование полиномов
+vdouble vdouble::PolynomSumming(const vdouble& v) const // Суммирование полиномов
 {
 	int malen, milen, vlen, i;
 	double *pmi, *pma, *ps;
