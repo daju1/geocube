@@ -217,11 +217,13 @@ public:
 	bool is_zeros(); // Истина, если все элементы - равны нулю
 	bool is_zeros(const double& epsilon);// Истина, если модуль всех элементов не превышает epsilon
 
-    double& operator[](const int index) const; // Возвращает элемент по заданному индексу
+    const double& operator[](const int index) const; // Возвращает элемент по заданному индексу
+    double& operator[](const int index); // Возвращает элемент по заданному индексу
     vdouble operator[](const Vector<int>& ind) const; // Возвращает вектор-отрезок по заданныму массиву индексов
     vdouble operator()(const Vector<int>& vrows, const Vector<int>& vcols) const;
 //	vdouble vdouble::operator[](Vector<Vector<int> >& ind); // Возвращает массив-отрезок по заданныму массиву индексов по каждой размерности
-    double& operator()(const int index) const; // Возвращает элемент по заданному индексу
+    const double& operator()(const int index) const; // Возвращает элемент по заданному индексу
+    double& operator()(const int index); // Возвращает элемент по заданному индексу
 
     double& operator()(const int row, const int col) const ; // Возвращает элемент двумерной матрицы по заданному индексу
     double& operator()(const int row, const int col, const int tab) const ; // Возвращает элемент трёхмерной матрицы по заданным индексам строки и столбца

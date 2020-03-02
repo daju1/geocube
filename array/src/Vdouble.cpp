@@ -870,19 +870,24 @@ bool vdouble::is_zeros(const double& epsilon)
 	return flag;
 }
 
-double& vdouble::operator[](int index) const
+const double& vdouble::operator[](int index) const
 {
-	try 
-	{
-		if (index <0 || index >= m_length)
-		{
-			throw index;
-		}
-	}
-	catch (int& i)
+	if (index <0 || index >= m_length)
 	{
 		TCHAR s[S_LEN];
-		stprintf_s(s, S_LEN, _T("Error using vdouble::operator[](int index): \n index = %i go away from massive of length = %i \n"),i, m_length);
+		stprintf_s(s, S_LEN, _T("Error using vdouble::operator[](int index): \n index = %i go away from massive of length = %i \n"),index, m_length);
+		MessageBox(0,s,_T(""),0);
+		static double iErr=NULL;
+		return iErr;
+	}
+	return pD[index];
+}
+double& vdouble::operator[](int index)
+{
+	if (index <0 || index >= m_length)
+	{
+		TCHAR s[S_LEN];
+		stprintf_s(s, S_LEN, _T("Error using vdouble::operator[](int index): \n index = %i go away from massive of length = %i \n"),index, m_length);
 		MessageBox(0,s,_T(""),0);
 		static double iErr=NULL;
 		return iErr;
@@ -962,22 +967,25 @@ vdouble vdouble::operator[](const Vector<int>& ind) const
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 //
-double& vdouble::operator()(const int index) const
+const double& vdouble::operator()(const int index) const
 {
-	try 
+	if (index < 0 || index >= m_length)
 	{
-		if (index <0 || index >= m_length)
-		{
-			throw index;
-		}
+		char s[1024];
+		stprintf_s(s, 1024, _T("Error using vdouble::operator[](int index): \n index = %i go away from massive \n"), index);
+		MessageBox(0, s, _T(""), 0);
+		static double iErr=NULL;
+		return iErr;
 	}
-	catch (int& i)
+	return pD[index];
+}
+double& vdouble::operator()(const int index)
+{
+	if (index < 0 || index >= m_length)
 	{
-/*		CString s;
-		s.Format("Error using vdouble::operator[](int index): \n index = %i go away from massive \n",i);
-		AfxMessageBox(s);
-		AfxThrowUserException();*/
-		i;
+		char s[1024];
+		stprintf_s(s, 1024, _T("Error using vdouble::operator[](int index): \n index = %i go away from massive \n"), index);
+		MessageBox(0, s, _T(""), 0);
 		static double iErr=NULL;
 		return iErr;
 	}

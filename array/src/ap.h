@@ -1,13 +1,17 @@
 #ifndef AP_H
 #define AP_H
 
-//#define M_PI 3.14159265357989
 
 #include <stdlib.h>
 #include <math.h>
 #include <vector>
 using namespace std;
 
+#ifndef M_PI
+//#define M_PI 3.14159265357989
+#define M_PI 3.14159265358979323846
+           //3,14159265358979323846 2643383279 5028841971 6939937510
+#endif
 /********************************************************************
 ÎÏÈÑÀÍÈÅ ÊËÀÑÑÎÂ-ÌÀÑÑÈÂÎÂ
 
