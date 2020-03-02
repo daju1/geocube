@@ -20,9 +20,9 @@ class Archive;
 
 template <class T> class Vector;
 
-Vector<bool> inline operator>(Vector<int>& ob1, Vector<int>& ob2);
-Vector<bool> inline operator>(const int& a, Vector<int>& ob);
-Vector<bool> inline operator>(Vector<int>& ob, const int& a);
+Vector<bool> inline operator>(const Vector<int>& ob1, const Vector<int>& ob2);
+Vector<bool> inline operator>(const int& a, const Vector<int>& ob);
+Vector<bool> inline operator>(const Vector<int>& ob, const int& a);
 
 
 /*

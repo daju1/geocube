@@ -97,7 +97,8 @@ HEADERS  += auto_build_3d.h \
     ../geometry2D/RandomizedSearchTree.h \
     ../geometry2D/SearchTree.h \
     ../geometry2D/Vertex.h \
-    ../geometry2D/VertexEx.h
+    ../geometry2D/VertexEx.h \
+    ../surfdoc/src/Grid.h
 
 FORMS    += auto_build_3d.ui
 

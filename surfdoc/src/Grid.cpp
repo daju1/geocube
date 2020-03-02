@@ -93,7 +93,7 @@ int CGrid::SetVisiblePointsInContour()
 	return ::SetVisiblePointsInContour(hwndParent,xi, yi, xc, yc, visible);
 }
 
-int CGrid::SaveAsSurferGrid7(LPCTSTR lpstrFile)
+int CGrid::SaveAsSurferGrid7(LPTSTR lpstrFile)
 {
 	return ::SaveAsSurferGrid7(hwndParent, lpstrFile, xi, yi, zi, visible);
 }

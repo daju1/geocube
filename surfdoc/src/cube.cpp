@@ -59,6 +59,11 @@ Cube4D::Cube4D(SurfDoc * pSurfDoc)
 	OnCreate();
 }
 #endif
+
+Cube4D::~Cube4D()
+{
+//	MessageBox(0,"~Cube4D()","",0);
+}
 void Cube4D::OnCreate(void)
 {
 #if defined (_MSC_VER)
@@ -897,10 +902,9 @@ BOOL Cube4D::GetPoint(int iz, int iy, int ix, CPoint4 *pt)
 
 }
 #endif
-Cube4D::~Cube4D()
-{
-//	MessageBox(0,"~Cube4D()","",0);
-}
+
+
+
 #if defined (_MSC_VER)
 HTREEITEM Cube4D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {

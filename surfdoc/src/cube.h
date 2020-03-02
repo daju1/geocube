@@ -43,13 +43,13 @@ class Cube4D
 #if CUBE4D_AS_PRIMITIVE
 	double  m_vMax, m_vMin;
 #endif
-
+#if defined (_MSC_VER)
 	void DrawingOfManyIsoSurfaces();
 	void DrawingOfOneIsoSurface();
 	void DrawingAsScatterPlot();
 
 	virtual void Drawing();
-
+#endif
 	//void DrawGDIplusOfOneIsoSurface(gdiplus_map_view * v, Profile3D * on);
 	//void DrawGDIplusOfManyIsoSurfaces(gdiplus_map_view * v, Profile3D * on);
 	//void DrawGDIplusAsScatterPlot(gdiplus_map_view * v, Profile3D * on);
@@ -204,8 +204,10 @@ public:
 
 	Cube4D& operator=(const Cube4D& ob);
 	Cube4D (const Cube4D& ob);
+#if defined (_MSC_VER)
 	virtual void PropertiesDialog();
 	COLORREF GetColor(double z);
+#endif
 	void DrawQuadsNumbers();
         Cube4D();
 #if defined (_MSC_VER)
@@ -244,8 +246,9 @@ public:
 		int& ix, int& iy, int& iz);
 
 
-
+#if defined (_MSC_VER)
 	virtual bool UpdateExtremums();
+#endif
 	void Zoom(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean);
 	void ZoomInv(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean);
 	void ZoomInv(unsigned int ipoint, double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean);

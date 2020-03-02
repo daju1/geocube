@@ -386,7 +386,7 @@ int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile,
 					  double zMin, // minimum Z value within the grid
 					  double zMax, // maximum Z value within the grid
 					  double ** z, int ** visible);
-int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
+int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
 int ImportSurfer7Grid(char *file, Grid* pgrid, bool to_allocate = true);
 int ImportSurfer7Grid4(char *file, Grid4* pgrid);
 int ImportDigitalModel(Grid* pgrid,
@@ -421,7 +421,7 @@ public:
 	double GetXMax();
 	double GetXMin();
 	HWND hwndParent;
-	int SaveAsSurferGrid7( LPCTSTR lpstrFile);
+    int SaveAsSurferGrid7( LPTSTR lpstrFile);
 	int SetVisiblePointsInContour();
 	int ReadContourBlnFile();
 	void Init(Grid* pGrid);
