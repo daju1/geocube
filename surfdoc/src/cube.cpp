@@ -3,18 +3,25 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+#if defined (_MSC_VER)
 #include "SurfDoc.h"
+#endif
 //#include "raporto.h"
-#include "DrawScene.h"
+#if defined (_MSC_VER)
 #include "colormap.h"
 #include "DrawScene.h"
 #include "../../winplot/src/winplot.h"
+#else
+#include "mywindows.h"
+#endif
 #include "../../array/src/matrixes.h"
-#include "distance3d.h"
+#include "distance3D.h"
 #include "./cube.h"
 #include "./iso.h"
 //#include "errorexit.h"
+#if defined (_MSC_VER)
 #include "prsht.h"
+#endif
 
 #include <vector>
 #include <algorithm>
@@ -26,37 +33,44 @@ extern bool getNorm(double v1[3], double v2[3], double out[3]);
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-extern HINSTANCE hInst;   // текущий экземпляр
+extern HINSTANCE hInst;   // С‚РµРєСѓС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
 //Cube4D::draw_mode Cube4D::s_draw_mode = Cube4D::draw_mode::one_isosurface;
+#if defined (_MSC_VER)
 Cube4D::draw_mode Cube4D::s_draw_mode = Cube4D::draw_mode::many_isosurfaces;
+#endif
 SSaveProfData Cube4D::sprData;
 
 
-
-#include "../../wintools\src\project.h"
-#include "../../wintools\src\win32_map_views.h"
+#if defined (_MSC_VER)
+#include "../../wintools/src/project.h"
+#include "../../wintools/src/win32_map_views.h"
+#endif
 
 Cube4D::Cube4D()
 {
 	Init();
 	OnCreate();
 }
-
+#if defined (_MSC_VER)
 Cube4D::Cube4D(SurfDoc * pSurfDoc)
 {
 	Init();
 	m_pSurfDoc			= pSurfDoc;
 	OnCreate();
 }
+#endif
 void Cube4D::OnCreate(void)
 {
+#if defined (_MSC_VER)
 	this->m_object_type = Object::object_type::cube4d;
 	this->m_object_version = 2;
 	this->m_max_object_version = 2;
+#endif
 }
 void Cube4D::Init()
 {
 //	this->m_izolines.OnCreate();
+#if defined (_MSC_VER)
 	m_nColormap			= 0;
 	m_bInverseColormap	= false;
 	m_bUseColormap		= true;
@@ -64,10 +78,11 @@ void Cube4D::Init()
 	m_pSurfDoc = NULL;
 	
 	vQuadCutting.OnCreate(0);
+#endif
 	vxyz.OnCreate(0);
-
+#if defined (_MSC_VER)
 	APalette::InitPalette(&this->m_palette, this->m_nColormap);
-
+#endif
 #if !CUBE4D_AS_PRIMITIVE
 
 	this->m_color = 0;
@@ -115,6 +130,7 @@ void Cube4D::Init()
 }
 void Cube4D::Init(const Cube4D &ob)
 {
+#if defined (_MSC_VER)
 	m_palette			= ob.m_palette;
 	m_nColormap			= ob.m_nColormap;
 
@@ -122,7 +138,7 @@ void Cube4D::Init(const Cube4D &ob)
 	m_bInverseColormap	= ob.m_bInverseColormap;
 
 	m_pSurfDoc			= ob.m_pSurfDoc;
-
+#endif
 #if CUBE4D_AS_PRIMITIVE
 	m_leny				= ob.m_leny;
 	m_lenx				= ob.m_lenx;
@@ -179,6 +195,7 @@ void Cube4D::Init(const Cube4D &ob)
 #if CUBE4D_AS_PRIMITIVE
 bool Cube4D::MakeGridSection(LPSURFER7GRID4SECTION grid4Section)
 {
+    size_t i;
 	if (this->GetPointsNumber())
 	{
 		grid4Section->nRow = m_leny;
@@ -197,7 +214,7 @@ bool Cube4D::MakeGridSection(LPSURFER7GRID4SECTION grid4Section)
 		grid4Section->Rotation = 0.0;// not currently used;
 
 		bool start = true;
-		for(size_t i = 0; i < this->GetPointsNumber(); i++)
+        for(i = 0; i < this->GetPointsNumber(); i++)
 		{
 			if (start)
 			{
@@ -349,9 +366,10 @@ printf("this->lattice.grid4Section.vMin = %f\n", this->lattice.grid4Section.vMin
 	//this->m_min_isolevel = this->lattice.grid4Section.vMin;
 	//this->m_max_isolevel = this->lattice.grid4Section.vMax;
 	//this->m_step_isolevel = (this->m_max_isolevel - this->m_min_isolevel) / this->m_nIsolevels;
-
+#if defined (_MSC_VER)
 	this->ScaleIsolevels();
 	this->UpdateIsolevels(true);
+#endif
 }
 void Cube4D::InitThin(LPSURFER7GRID4SECTION grid4Section, COLORREF color)
 {		
@@ -429,24 +447,25 @@ printf("this->lattice.grid4Section.vMin = %f\n", this->lattice.grid4Section.vMin
 	//this->m_min_isolevel = this->lattice.grid4Section.vMin;
 	//this->m_max_isolevel = this->lattice.grid4Section.vMax;
 	//this->m_step_isolevel = (this->m_max_isolevel - this->m_min_isolevel) / this->m_nIsolevels;
-
+#if defined (_MSC_VER)
 	this->ScaleIsolevels();
 	this->UpdateIsolevels(true);
+#endif
 }
 #endif
 void gScaleCubeIsolevels (double span, double& step)
 {
-	//===== Переменная span определяет диапазон изменения
-	//===== значаний одной из координат точек графика
-	//===== Вычисляем порядок числа, описывающего диапазон
+	//===== РџРµСЂРµРјРµРЅРЅР°СЏ span РѕРїСЂРµРґРµР»СЏРµС‚ РґРёР°РїР°Р·РѕРЅ РёР·РјРµРЅРµРЅРёСЏ
+	//===== Р·РЅР°С‡Р°РЅРёР№ РѕРґРЅРѕР№ РёР· РєРѕРѕСЂРґРёРЅР°С‚ С‚РѕС‡РµРє РіСЂР°С„РёРєР°
+	//===== Р’С‹С‡РёСЃР»СЏРµРј РїРѕСЂСЏРґРѕРє С‡РёСЃР»Р°, РѕРїРёСЃС‹РІР°СЋС‰РµРіРѕ РґРёР°РїР°Р·РѕРЅ
 	int power = int(floor(log10(span)));
-	//===== Множитель (zoom factor)
+	//===== РњРЅРѕР¶РёС‚РµР»СЊ (zoom factor)
 	double factor = pow(10.0, (double)power);
-	//===== Мантисса диапазона (теперь 1 < span < 10)
+	//===== РњР°РЅС‚РёСЃСЃР° РґРёР°РїР°Р·РѕРЅР° (С‚РµРїРµСЂСЊ 1 < span < 10)
 	span /= factor;
 
 
-	//===== Выбираем стандартный шаг сетки
+	//===== Р’С‹Р±РёСЂР°РµРј СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ С€Р°Рі СЃРµС‚РєРё
 	if (span<1.99)
 		step=.2;
 	else if (span<2.49)
@@ -458,26 +477,26 @@ void gScaleCubeIsolevels (double span, double& step)
 	else
 		step = 5.;
 
-	//===== Возвращаем реальный шаг сетки (step*10^power)
+	//===== Р’РѕР·РІСЂР°С‰Р°РµРј СЂРµР°Р»СЊРЅС‹Р№ С€Р°Рі СЃРµС‚РєРё (step*10^power)
 	step *= factor; 
 }
 
 
-
+#if defined (_MSC_VER)
 void Cube4D::ScaleIsolevels()
 {
 printf("Cube4D::ScaleIsolevels()\n");
 
 	double Max = this->lattice.grid4Section.vMax;
 	double Min = this->lattice.grid4Section.vMin;
-	//===== С пустой последовательностью не работаем
+	//===== РЎ РїСѓСЃС‚РѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊСЋ РЅРµ СЂР°Р±РѕС‚Р°РµРј
 
-	//===== Максимальная амплитуда двух экстремумов 
+	//===== РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ Р°РјРїР»РёС‚СѓРґР° РґРІСѓС… СЌРєСЃС‚СЂРµРјСѓРјРѕРІ 
 	double ext = max(fabs(Min),fabs(Max));
 #if 0
-	//===== Искусственно увеличиваем порядок экстремума
-	//===== на 3 единицы, так как мы хотим покрыть 7 порядков,
-	//===== не переходя к экспоненцеальной форме чисел 
+	//===== РСЃРєСѓСЃСЃС‚РІРµРЅРЅРѕ СѓРІРµР»РёС‡РёРІР°РµРј РїРѕСЂСЏРґРѕРє СЌРєСЃС‚СЂРµРјСѓРјР°
+	//===== РЅР° 3 РµРґРёРЅРёС†С‹, С‚Р°Рє РєР°Рє РјС‹ С…РѕС‚РёРј РїРѕРєСЂС‹С‚СЊ 7 РїРѕСЂСЏРґРєРѕРІ,
+	//===== РЅРµ РїРµСЂРµС…РѕРґСЏ Рє СЌРєСЃРїРѕРЅРµРЅС†РµР°Р»СЊРЅРѕР№ С„РѕСЂРјРµ С‡РёСЃРµР» 
 	double power = ext > 0.? log10(ext) + 3. : 0.;	
 	double Power = int(floor(power/7.));
 #else
@@ -486,32 +505,32 @@ printf("Cube4D::ScaleIsolevels()\n");
 #endif
 
 
-	//===== Если число не укладывается в этот диапазон
+	//===== Р•СЃР»Рё С‡РёСЃР»Рѕ РЅРµ СѓРєР»Р°РґС‹РІР°РµС‚СЃСЏ РІ СЌС‚РѕС‚ РґРёР°РїР°Р·РѕРЅ
 	if (Power != 0)
-		//===== то мы восстанавливаем значение порядка
+		//===== С‚Рѕ РјС‹ РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ РїРѕСЂСЏРґРєР°
 		Power = int(floor(power)) - 3;
-	//===== Реальный множитель
+	//===== Р РµР°Р»СЊРЅС‹Р№ РјРЅРѕР¶РёС‚РµР»СЊ
 	double Factor = pow(10.,Power);
 
 
-	//===== Диапазон изменения мантиссы
+	//===== Р”РёР°РїР°Р·РѕРЅ РёР·РјРµРЅРµРЅРёСЏ РјР°РЅС‚РёСЃСЃС‹
 	double span = (Max - Min)/Factor;
-	//===== Если он нулевой,
+	//===== Р•СЃР»Рё РѕРЅ РЅСѓР»РµРІРѕР№,
 	if (span == 0.)
-		span = 0.5; // то искусственно раздвигаем график
+		span = 0.5; // С‚Рѕ РёСЃРєСѓСЃСЃС‚РІРµРЅРЅРѕ СЂР°Р·РґРІРёРіР°РµРј РіСЂР°С„РёРє
 
-	//===== Подбираем стандартный шаг для координатной сетки
+	//===== РџРѕРґР±РёСЂР°РµРј СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ С€Р°Рі РґР»СЏ РєРѕРѕСЂРґРёРЅР°С‚РЅРѕР№ СЃРµС‚РєРё
 	double Step;
 	gScaleCubeIsolevels (span, Step);
 
 printf("Cube4D::ScaleIsolevels() Step = %f %e\n", Step, Step);
 
-	//===== Шаг с учетом искусственных преобразований
+	//===== РЁР°Рі СЃ СѓС‡РµС‚РѕРј РёСЃРєСѓСЃСЃС‚РІРµРЅРЅС‹С… РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёР№
 	double dStep = Step * Factor;
 printf("Cube4D::ScaleIsolevels() dStep = %f %e\n", dStep, dStep);
 
-	//===== Начальная линия сетки должна быть кратна шагу
-	//===== и быть меньше минимума
+	//===== РќР°С‡Р°Р»СЊРЅР°СЏ Р»РёРЅРёСЏ СЃРµС‚РєРё РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РєСЂР°С‚РЅР° С€Р°РіСѓ
+	//===== Рё Р±С‹С‚СЊ РјРµРЅСЊС€Рµ РјРёРЅРёРјСѓРјР°
 	//double dStart = dStep * int(floor(Min/dStep));
 	double dStart = dStep * int(ceil(Min/dStep));
 	double Start = dStart/Factor;
@@ -540,7 +559,7 @@ if (nn > 1000)
 
 	double End;
 #if 1
-	//===== Вычисляем последнюю линию сетки
+	//===== Р’С‹С‡РёСЃР»СЏРµРј РїРѕСЃР»РµРґРЅСЋСЋ Р»РёРЅРёСЋ СЃРµС‚РєРё
 	//for (double End = Start;
 	//	End < Min/Factor + span-1e-10;  
 	//	End += Step)
@@ -564,7 +583,7 @@ if (nn > 1000)
 	this->m_nIsolevels  = (dEnd - dStart) / dStep + 1;
 printf("Cube4D::ScaleIsolevels() end\n");
 }
-
+#endif
 
 void Cube4D::Produce3DSurferGrid7_YZ(double plane[4], SURFER7GRIDSECTION & grid)
 {
@@ -576,7 +595,7 @@ void Cube4D::Produce3DSurferGrid7_YZ(double plane[4], SURFER7GRIDSECTION & grid)
 	//else if (fabs(plane[0]) >= fabs(plane[1]) && fabs(plane[0]) >= fabs(plane[2]))
 	if (fabs(plane[0]) > 1e-16 && fabs(lattice.grid4Section.xSize) > 1e-16)
 	{
-		// доминирует направление вдоль оси X
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРґРѕР»СЊ РѕСЃРё X
 		if (grid.nCol == lattice.grid4Section.nRow && grid.nRow == lattice.grid4Section.nPag && grid.z)
 		{
 		}
@@ -635,7 +654,7 @@ void Cube4D::Produce3DSurferGrid7_XZ(double plane[4], SURFER7GRIDSECTION & grid)
 	//else if (fabs(plane[1]) >= fabs(plane[0]) && fabs(plane[1]) >= fabs(plane[2]))
 	if (fabs(plane[1]) > 1e-16 && fabs(lattice.grid4Section.ySize) > 1e-16)
 	{
-		// доминирует направление вдоль оси Y
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРґРѕР»СЊ РѕСЃРё Y
 		if (grid.nCol == lattice.grid4Section.nCol && grid.nRow == lattice.grid4Section.nPag && grid.z)
 		{
 		}
@@ -698,7 +717,7 @@ void Cube4D::Produce3DSurferGrid7_XY(double plane[4], SURFER7GRIDSECTION & grid)
 	//if (fabs(plane[2]) >= fabs(plane[0]) && fabs(plane[2]) >= fabs(plane[1]))
 	if (fabs(plane[2]) > 1e-16 && fabs(lattice.grid4Section.zSize) > 1e-16)
 	{
-		// доминирует направление вдоль оси Z
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРґРѕР»СЊ РѕСЃРё Z
 		if (grid.nCol == lattice.grid4Section.nCol && grid.nRow == lattice.grid4Section.nRow && grid.z)
 		{
 		}
@@ -748,28 +767,28 @@ void Cube4D::Produce3DSurferGrid7_XY(double plane[4], SURFER7GRIDSECTION & grid)
 }
 int Cube4D::Produce3DSurferGrid7(double plane[4], SURFER7GRIDSECTION & grid)
 {
-	// определяем преимущественное направление вектора нормали к плоскости
+	// РѕРїСЂРµРґРµР»СЏРµРј РїСЂРµРёРјСѓС‰РµСЃС‚РІРµРЅРЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё Рє РїР»РѕСЃРєРѕСЃС‚Рё
 	if (fabs(plane[2]) >= fabs(plane[0]) && fabs(plane[2]) >= fabs(plane[1]))
 	{
-		// доминирует направление вектора нормали вдоль оси Z
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё РІРґРѕР»СЊ РѕСЃРё Z
 		this->Produce3DSurferGrid7_XY(plane, grid);
 		return 3;
 	}
 	else if (fabs(plane[0]) >= fabs(plane[1]) && fabs(plane[0]) >= fabs(plane[2]))
 	{
-		// доминирует направление вектора нормали вдоль оси X
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё РІРґРѕР»СЊ РѕСЃРё X
 		this->Produce3DSurferGrid7_YZ(plane, grid);
 		return 1;
 	}
 	else if (fabs(plane[1]) >= fabs(plane[0]) && fabs(plane[1]) >= fabs(plane[2]))
 	{
-		// доминирует направление вектора нормали вдоль оси Y
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅРѕСЂРјР°Р»Рё РІРґРѕР»СЊ РѕСЃРё Y
 		this->Produce3DSurferGrid7_XZ(plane, grid);
 		return 2;
 	}
 	return 0;
 }
-
+#if defined (_MSC_VER)
 void Cube4D::Projection(Karotazh& karotazh)
 {
 	//if (well
@@ -790,7 +809,7 @@ void Cube4D::Projection(Karotazh& karotazh)
 
 	}
 }
-
+#endif
 bool Cube4D::Projection(CPoint3 & pt, double & v)
 {
 	// x = lattice.grid4Section.xLL + c * lattice.grid4Section.xSize;
@@ -882,7 +901,7 @@ Cube4D::~Cube4D()
 {
 //	MessageBox(0,"~Cube4D()","",0);
 }
-
+#if defined (_MSC_VER)
 HTREEITEM Cube4D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
 printf("Cube4D::AddItem_ToTree(HTREEITEM h1 = 0x%08x)\t\"%s\"\n", h1, this->GetName().c_str());
@@ -899,6 +918,7 @@ printf("Cube4D::AddItem_ToTree(HTREEITEM h1 = 0x%08x)\t\"%s\"\n", h1, this->GetN
 	return AddItemToTree(hwndTV, szItemText, pObject, h1); 
 	//=============================================================
 }
+
 void Cube4D::FillContextMenu(HMENU& hMenu)
 {
 	this->Object::FillContextMenu(hMenu);
@@ -908,6 +928,7 @@ void Cube4D::FillContextMenu(HMENU& hMenu)
 	AppendMenu( hMenu, MFT_SEPARATOR, 0, NULL );
 #endif /*!VIEW_ONLY_VERSION*/
 }
+#endif
 bool Cube4D::SaveAs()
 {
 	bool status = false;
@@ -915,7 +936,11 @@ bool Cube4D::SaveAs()
 	char file[2048];
 	file[0] = '\0';
 	strcpy(file, this->name.c_str());
-	if (SaveFileDlg(this->m_pSurfDoc ? this->m_pSurfDoc->hSurfWnd : NULL, file,
+    if (SaveFileDlg(
+#if defined (_MSC_VER)
+                this->m_pSurfDoc ? this->m_pSurfDoc->hSurfWnd :
+#endif
+                NULL, file,
 		"Cube 3D grid(*.cub)\0*.cub\0"
 		"VTK(*.vtk)\0*.vtk\0"
 		"IsoSurface 3D Dxf(*.dxf)\0*.dxf\0"
@@ -933,7 +958,9 @@ bool Cube4D::SaveAs()
 			status = SaveAsVTK(file);
 			break;
 		case 3:
+#if defined (_MSC_VER)
 			status = SaveAsDxf_OfOneIsoSurface(file);
+#endif
 			break;
 		case 4:
 			status = SaveAsSurferClices(1);
@@ -956,7 +983,7 @@ void Cube4D::Produce3DSurferGrid7_XY(long pp, SURFER7GRIDSECTION & grid)
 	grid.Rotation = 0.0;
 	//if (fabs(plane[2]) >= fabs(plane[0]) && fabs(plane[2]) >= fabs(plane[1]))
 	{
-		// доминирует направление вдоль оси Z
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРґРѕР»СЊ РѕСЃРё Z
 		if (grid.nCol == lattice.grid4Section.nCol && grid.nRow == lattice.grid4Section.nRow)
 		{
 		}
@@ -995,7 +1022,7 @@ void Cube4D::Produce3DSurferGrid7_XZ(long rr, SURFER7GRIDSECTION & grid)
 	grid.Rotation = 0.0;
 	//else if (fabs(plane[1]) >= fabs(plane[0]) && fabs(plane[1]) >= fabs(plane[2]))
 	{
-		// доминирует направление вдоль оси Y
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРґРѕР»СЊ РѕСЃРё Y
 		if (grid.nCol == lattice.grid4Section.nCol && grid.nRow == lattice.grid4Section.nPag)
 		{
 		}
@@ -1034,7 +1061,7 @@ void Cube4D::Produce3DSurferGrid7_YZ(long cc, SURFER7GRIDSECTION & grid)
 	grid.Rotation = 0.0;
 	//else if (fabs(plane[0]) >= fabs(plane[1]) && fabs(plane[0]) >= fabs(plane[2]))
 	{
-		// доминирует направление вдоль оси X
+		// РґРѕРјРёРЅРёСЂСѓРµС‚ РЅР°РїСЂР°РІР»РµРЅРёРµ РІРґРѕР»СЊ РѕСЃРё X
 		if (grid.nCol == lattice.grid4Section.nRow && grid.nRow == lattice.grid4Section.nPag)
 		{
 		}
@@ -1069,10 +1096,17 @@ void Cube4D::Produce3DSurferGrid7_YZ(long cc, SURFER7GRIDSECTION & grid)
 bool Cube4D::SaveAsSurferClices(int nProjection)
 {
 
-	static Grid grid;// грид для построения и сохранения разреза куба
+	static Grid grid;// РіСЂРёРґ РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ СЂР°Р·СЂРµР·Р° РєСѓР±Р°
 
 	TCHAR lpstrFile[4098];	
-	char my_name[1024]; sprintf(my_name, this->GetName().c_str());
+    char my_name[1024];
+    sprintf(my_name,
+#if defined (_MSC_VER)
+            this->GetName().c_str()
+#else
+            this->name.c_str()
+#endif
+                                );
 	char * p = NULL; 	
 	p = strrchr (my_name,'/');
 	if (p == NULL)
@@ -1209,6 +1243,7 @@ bool Cube4D::SaveAsSurferClicesYZ(const char * outfile, Grid & grid, double y_t_
 	return true;
 }
 
+#if defined (_MSC_VER)
 bool Cube4D::SaveAsDxf_OfOneIsoSurface(const char * outfile)
 {			
 	bool view = false;
@@ -1234,8 +1269,11 @@ bool Cube4D::SaveAsDxf_OfOneIsoSurface(const char * outfile)
 
 	double mu = (m_isolevel - this->lattice.grid4Section.vMin)/(this->lattice.grid4Section.vMax - this->lattice.grid4Section.vMin);
 	int alpha = int(255.0);
+#if defined (_MSC_VER)
 	COLORREF c = this->m_palette.GetColor(mu);		
-	
+#else
+    COLORREF c = 0;
+#endif
 	bool useblock = false;
 	char layername[1024];
 
@@ -1243,6 +1281,7 @@ bool Cube4D::SaveAsDxf_OfOneIsoSurface(const char * outfile)
 	sprintf(layername, "isosurface\0", m_isolevel);
 	return IzoSurface_save_as_3D_dxf(outfile, useblock, layername,  m_isolevel, &this->lattice, c, view);
 }
+#endif
 
 bool Cube4D::SaveAsGrid_OfOneIsoSurface(const char * outfile)
 {			
@@ -1269,8 +1308,11 @@ bool Cube4D::SaveAsGrid_OfOneIsoSurface(const char * outfile)
 
 	double mu = (m_isolevel - this->lattice.grid4Section.vMin)/(this->lattice.grid4Section.vMax - this->lattice.grid4Section.vMin);
 	int alpha = int(255.0);
+#if defined (_MSC_VER)
 	COLORREF c = this->m_palette.GetColor(mu);		
-
+#else
+    COLORREF c = 0;
+#endif
 	Grid grid;
 
 	grid.faultSection.nTraces = 0;
@@ -1465,7 +1507,7 @@ void Cube4D::Drawing()
 		{
 
 
-			//====== Размеры изображаемого объекта
+			//====== Р Р°Р·РјРµСЂС‹ РёР·РѕР±СЂР°Р¶Р°РµРјРѕРіРѕ РѕР±СЉРµРєС‚Р°
 			UINT	nx = m_lenx-1,
 					ny = m_leny-1,
 					nz = m_lenz-1;
@@ -1495,19 +1537,19 @@ void Cube4D::Drawing()
 			{
 				for (UINT y=0;  y<m_leny;  y++)
 				{
-					//====== Цикл прохода вдоль оси X
+					//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РІРґРѕР»СЊ РѕСЃРё X
 					for (UINT x=0;  x<m_lenx;  x++)
 					{
-						// i, j, k, n - 4 индекса вершин примитива при
-						// обходе в направлении против часовой стрелки
+						// i, j, k, n - 4 РёРЅРґРµРєСЃР° РІРµСЂС€РёРЅ РїСЂРёРјРёС‚РёРІР° РїСЂРё
+						// РѕР±С…РѕРґРµ РІ РЅР°РїСЂР°РІР»РµРЅРёРё РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
 
 						int	j = i + 
-							nx + 1,	// Индекс узла с большим Z
+							nx + 1,	// РРЅРґРµРєСЃ СѓР·Р»Р° СЃ Р±РѕР»СЊС€РёРј Z
 
-							k = j+1,			// Индекс узла по диагонали
-							n = i+1; 			// Индекс узла справа
+							k = j+1,			// РРЅРґРµРєСЃ СѓР·Р»Р° РїРѕ РґРёР°РіРѕРЅР°Р»Рё
+							n = i+1; 			// РРЅРґРµРєСЃ СѓР·Р»Р° СЃРїСЂР°РІР°
 
-						//=== Выбор координат 4-х вершин из контейнера
+						//=== Р’С‹Р±РѕСЂ РєРѕРѕСЂРґРёРЅР°С‚ 4-С… РІРµСЂС€РёРЅ РёР· РєРѕРЅС‚РµР№РЅРµСЂР°
 						double
 							xi = ptv[i].x,
 							yi = ptv[i].y,
@@ -1570,7 +1612,7 @@ void Cube4D::Drawing()
 
 							GLUquadricObj* pSphere = gluNewQuadric();
 							gluQuadricDrawStyle(pSphere, GLU_FILL);
-							glPushMatrix();//перейдём к новым координатам, сохранив старые
+							glPushMatrix();//РїРµСЂРµР№РґС‘Рј Рє РЅРѕРІС‹Рј РєРѕРѕСЂРґРёРЅР°С‚Р°Рј, СЃРѕС…СЂР°РЅРёРІ СЃС‚Р°СЂС‹Рµ
 							
 							glTranslated(
 								xi, 
@@ -1589,8 +1631,8 @@ void Cube4D::Drawing()
 								radius, 
 								m_pSurfDoc->m_sphere_slices, //The number of subdivisions around the z-axis (similar to lines of longitude). 					
 								m_pSurfDoc->m_sphere_stacks  //The number of subdivisions along the z-axis (similar to lines of latitude). 
-								) ;//рисуем сферу 
-							glPopMatrix(); //возвращаемся к старым координатам 
+								) ;//СЂРёСЃСѓРµРј СЃС„РµСЂСѓ 
+							glPopMatrix(); //РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ Рє СЃС‚Р°СЂС‹Рј РєРѕРѕСЂРґРёРЅР°С‚Р°Рј 
 							gluDeleteQuadric(pSphere);
 #endif
 						}
@@ -1605,24 +1647,24 @@ void Cube4D::Drawing()
 #if 0
 			VERT *Vert = new VERT[(nx+1)*(ny+1)];
 			QUAD *Quad = new QUAD[nx*ny];
-			//====== Цикл прохода по слоям изображения (ось Z)
+			//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РїРѕ СЃР»РѕСЏРј РёР·РѕР±СЂР°Р¶РµРЅРёСЏ (РѕСЃСЊ Z)
 			for (UINT z=0, i=0;  z<nz;  z++, i++)
 			{
 				for (UINT y=0;  y<ny;  y++, i++)
 				{
-					//====== Цикл прохода вдоль оси X
+					//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РІРґРѕР»СЊ РѕСЃРё X
 					for (UINT x=0;  x<nx;  x++, i++)
 					{
-						// i, j, k, n - 4 индекса вершин примитива при
-						// обходе в направлении против часовой стрелки
+						// i, j, k, n - 4 РёРЅРґРµРєСЃР° РІРµСЂС€РёРЅ РїСЂРёРјРёС‚РёРІР° РїСЂРё
+						// РѕР±С…РѕРґРµ РІ РЅР°РїСЂР°РІР»РµРЅРёРё РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
 
 						int	j = i + 
-							nx + 1,	// Индекс узла с большим Z
+							nx + 1,	// РРЅРґРµРєСЃ СѓР·Р»Р° СЃ Р±РѕР»СЊС€РёРј Z
 
-							k = j+1,			// Индекс узла по диагонали
-							n = i+1; 			// Индекс узла справа
+							k = j+1,			// РРЅРґРµРєСЃ СѓР·Р»Р° РїРѕ РґРёР°РіРѕРЅР°Р»Рё
+							n = i+1; 			// РРЅРґРµРєСЃ СѓР·Р»Р° СЃРїСЂР°РІР°
 
-						//=== Выбор координат 4-х вершин из контейнера
+						//=== Р’С‹Р±РѕСЂ РєРѕРѕСЂРґРёРЅР°С‚ 4-С… РІРµСЂС€РёРЅ РёР· РєРѕРЅС‚РµР№РЅРµСЂР°
 						double
 							xi = ptv[i].x,
 							yi = ptv[i].y,
@@ -1657,24 +1699,24 @@ void Cube4D::Drawing()
 			}
 
 
-			//====== Задание адресов трех массивов (вершин,
-			//====== нормалей и цветов),
-			//====== а также шага перемещения по ним
+			//====== Р—Р°РґР°РЅРёРµ Р°РґСЂРµСЃРѕРІ С‚СЂРµС… РјР°СЃСЃРёРІРѕРІ (РІРµСЂС€РёРЅ,
+			//====== РЅРѕСЂРјР°Р»РµР№ Рё С†РІРµС‚РѕРІ),
+			//====== Р° С‚Р°РєР¶Рµ С€Р°РіР° РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРѕ РЅРёРј
 			glVertexPointer(3, GL_PRECISION, sizeof(VERT), &Vert->v);
 			glNormalPointer(GL_PRECISION, sizeof(VERT), &Vert->n);
 			glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(VERT),
 															&Vert->c);
 	//WriteRaporto("Cube4D pre glNewList\n");
 			//m_nglListNumber = m_pSurfDoc->m_DrawListArray.glNewList();
-			//====== Установка режима заполнения
-			//====== внутренних точек полигонов
+			//====== РЈСЃС‚Р°РЅРѕРІРєР° СЂРµР¶РёРјР° Р·Р°РїРѕР»РЅРµРЅРёСЏ
+			//====== РІРЅСѓС‚СЂРµРЅРЅРёС… С‚РѕС‡РµРє РїРѕР»РёРіРѕРЅРѕРІ
 			GLint oldPolygonMode[2];
 			glGetIntegerv(GL_POLYGON_MODE, oldPolygonMode);
 			glPolygonMode(GL_FRONT_AND_BACK, GetFillMode());
 
 			//WriteRaporto("Cube4D post glNewList\n");
 
-			//====== Формирование списка рисующих команд
+			//====== Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ СЃРїРёСЃРєР° СЂРёСЃСѓСЋС‰РёС… РєРѕРјР°РЅРґ
 			//if (!m_bQuad)
 			//	glDrawElements(GL_QUAD_STRIP, 4*q/*nx*ny*4*/,
 			//						GL_UNSIGNED_INT, Quad);
@@ -1685,7 +1727,7 @@ void Cube4D::Drawing()
 			glPolygonMode(GL_FRONT_AND_BACK, oldPolygonMode[1]);
 			//glEndList();
 			
-			//== Освобождение памяти, так как список сформирован
+			//== РћСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё, С‚Р°Рє РєР°Рє СЃРїРёСЃРѕРє СЃС„РѕСЂРјРёСЂРѕРІР°РЅ
 			delete [] Vert;
 			delete [] Quad;
 #endif
@@ -1778,6 +1820,8 @@ void Cube4D::DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view
 }
 
 */
+
+#if defined (_MSC_VER)
 void Cube4D::Drawing()
 {
 	printf("Cube4D::Drawing()\n");
@@ -1912,7 +1956,7 @@ void Cube4D::DrawingAsScatterPlot()
 						::glColor3ub(GetRValue(color),GetGValue(color),GetBValue(color));
 						//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 						//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-						//====== Наносим цифровую метку
+						//====== РќР°РЅРѕСЃРёРј С†РёС„СЂРѕРІСѓСЋ РјРµС‚РєСѓ
 						// sprintf(str, "X %s", spower);
 						// move 
 						glRasterPos3d(x,y,z); 
@@ -1947,10 +1991,11 @@ void Cube4D::ReDraw(void)
 	glEndList();
 }
 #endif
+#endif
 #if CUBE4D_AS_PRIMITIVE
 void Cube4D::DrawQuadsNumbers()
 {
-	//====== Размеры изображаемого объекта
+	//====== Р Р°Р·РјРµСЂС‹ РёР·РѕР±СЂР°Р¶Р°РµРјРѕРіРѕ РѕР±СЉРµРєС‚Р°
 	UINT	nx = m_lenx-1,
 			ny = m_leny-1,
 			nz = m_lenz-1;
@@ -1967,24 +2012,24 @@ void Cube4D::DrawQuadsNumbers()
 	ptd = m_vdPoints PRIMITIVE_POINTS_PTR_BEGIN;
 
 
-	//====== Цикл прохода по слоям изображения (ось Z)
+	//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РїРѕ СЃР»РѕСЏРј РёР·РѕР±СЂР°Р¶РµРЅРёСЏ (РѕСЃСЊ Z)
 	for (UINT z=0, i=0;  z<nz;  z++, i++)
 	{
 		for (UINT y=0;  y<ny;  y++, i++)
 		{
-			//====== Цикл прохода вдоль оси X
+			//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РІРґРѕР»СЊ РѕСЃРё X
 			for (UINT x=0;  x<nx;  x++, i++)
 			{
-				// i, j, k, n - 4 индекса вершин примитива при
-				// обходе в направлении против часовой стрелки
+				// i, j, k, n - 4 РёРЅРґРµРєСЃР° РІРµСЂС€РёРЅ РїСЂРёРјРёС‚РёРІР° РїСЂРё
+				// РѕР±С…РѕРґРµ РІ РЅР°РїСЂР°РІР»РµРЅРёРё РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
 
 				int	j = i + 
-					nx + 1,	// Индекс узла с большим Z
+					nx + 1,	// РРЅРґРµРєСЃ СѓР·Р»Р° СЃ Р±РѕР»СЊС€РёРј Z
 
-					k = j+1,			// Индекс узла по диагонали
-					n = i+1; 			// Индекс узла справа
+					k = j+1,			// РРЅРґРµРєСЃ СѓР·Р»Р° РїРѕ РґРёР°РіРѕРЅР°Р»Рё
+					n = i+1; 			// РРЅРґРµРєСЃ СѓР·Р»Р° СЃРїСЂР°РІР°
 
-				//=== Выбор координат 4-х вершин из контейнера
+				//=== Р’С‹Р±РѕСЂ РєРѕРѕСЂРґРёРЅР°С‚ 4-С… РІРµСЂС€РёРЅ РёР· РєРѕРЅС‚РµР№РЅРµСЂР°
 
 				bool 
 					bi = ptv[i].bVisible,
@@ -1995,7 +2040,7 @@ void Cube4D::DrawQuadsNumbers()
 				if (bi || bj || bk | bn)
 	//			if (bi && bj && bk && bn)
 				{
-					// подписываем номера клеток
+					// РїРѕРґРїРёСЃС‹РІР°РµРј РЅРѕРјРµСЂР° РєР»РµС‚РѕРє
 					CPoint3 pt3;
 
 					pt3.x = (ptd[i].x + ptd[j].x + ptd[k].x + ptd[n].x ) / 4;
@@ -2012,6 +2057,8 @@ void Cube4D::DrawQuadsNumbers()
 }
 
 #endif
+
+#if defined (_MSC_VER)
 COLORREF Cube4D::GetColor(double v)
 {
 	COLORREF surfColor;
@@ -2082,11 +2129,11 @@ void Cube4D::UpdateIsolevels(bool update_one)
 }
 int Cube4D::GetAlphaSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID РїРѕ РёР·РІРµСЃС‚РЅРѕРјСѓ hwnd РѕРїСЂРµРґРµР»СЏРµС‚
+	//====== Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== Р’С‹СЏСЃРЅСЏРµРј РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РѕРєРЅР° СЃРїСЂР°РІР°
 	case IDC_SLIDER_CUBE_ISOLEVEL:
 		nID = IDC_EDIT_CUBE_ISOLEVEL;
 		return 0;
@@ -2141,7 +2188,7 @@ static Cube4D * me;
 
 
 				//me->ReDraw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				//RECT rect;
 				//GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				//InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2152,7 +2199,7 @@ static Cube4D * me;
 				me->draw_as_one_isosurface = IsDlgButtonChecked( hDlg, IDC_CHECK_ISOSURFACE) == BST_CHECKED;
 				PropSheet_Changed(::GetParent(hDlg),hDlg);
 				//me->ReDraw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				//RECT rect;
 				//GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				//InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2163,7 +2210,7 @@ static Cube4D * me;
 				me->draw_as_many_isosurfaces = IsDlgButtonChecked( hDlg, IDC_CHECK_MANY_ISOSURFACES) == BST_CHECKED;
 				PropSheet_Changed(::GetParent(hDlg),hDlg);
 				//me->ReDraw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				//RECT rect;
 				//GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				//InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2191,7 +2238,7 @@ static Cube4D * me;
 					{
 						printf("PSN_APPLY\n");
 						me->ReDraw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 						RECT rect;
 						GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 						InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2268,7 +2315,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static Cube4D * me;
-	static int m_Pos[11]; 			// Массив позиций ползунков
+	static int m_Pos[11]; 			// РњР°СЃСЃРёРІ РїРѕР·РёС†РёР№ РїРѕР»Р·СѓРЅРєРѕРІ
 	switch( uMsg )
 	{
     case WM_INITDIALOG :
@@ -2305,45 +2352,45 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° Р°РєС‚РёРІРЅРѕРіРѕ РїРѕР»Р·СѓРЅРєР°
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== РћРїСЂРµРґРµР»СЏРµРј РёРЅРґРµРєСЃ РІ РјР°СЃСЃРёРІРµ РїРѕР·РёС†РёР№ РїРѕР»Р·СѓРЅРєРѕРІ
 				int num = GetAlphaSliderNum(hwnd, nID);
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== РђРЅР°Р»РёР·РёСЂСѓРµРј РєРѕРґ СЃРѕР±С‹С‚РёСЏ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// РЈРїСЂР°РІР»РµРЅРёРµ РјС‹С€СЊСЋ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// РљР»Р°РІРёС€Р° Home
 					delta = -1000;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// РљР»Р°РІРёС€Р° End
 					delta = +1000;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// РљР»Р°РІРёС€Р° <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// РљР»Р°РІРёС€Р° ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// РљР»Р°РІРёС€Р° PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// РљР»Р°РІРёС€Р° PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// РћР±С‰Р°СЏ РІРµС‚РІСЊ
+					//====== РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ СЂРµРіСѓР»СЏС‚РѕСЂР°
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== РћРіСЂР°РЅРёС‡РµРЅРёСЏ
 					m_Pos[num] = newPos<0 ? 0 : newPos>1000 ? 1000 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -2356,15 +2403,15 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 				double mu;
 					
 				char s[1024];
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј РїР°СЂР°РјРµС‚СЂ lp Рё
+				//====== СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РµРіРѕ РІ РїРѕР»РѕР¶РµРЅРёРµ nPos
 				switch (num)
 				{
 				case 0:
 					{
 						mu = double(m_Pos[num]) / 1000.0;
 						me->m_isolevel = mu * v_range + me->lattice.grid4Section.vMin;
-						//====== Синхронизируем текстовый аналог позиции
+						//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 						sprintf (s, "%f", me->m_isolevel);
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 					}
@@ -2372,7 +2419,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 				case 1:
 					{
 						me->m_opacity = double(m_Pos[num]) / 1000.0;
-						//====== Синхронизируем текстовый аналог позиции
+						//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 						sprintf (s, "%f", me->m_opacity);
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 					}
@@ -2381,7 +2428,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 					{
 						mu = double(m_Pos[num]) / 1000.0;
 						me->m_isolevels[me->m_iso_ind] = mu * v_range + me->lattice.grid4Section.vMin;
-						//====== Синхронизируем текстовый аналог позиции
+						//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 						sprintf (s, "%f", me->m_isolevels[me->m_iso_ind]);
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 					}
@@ -2389,7 +2436,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 				}
 
 				me->ReDraw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				RECT rect;
 				GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2402,7 +2449,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 		{
 		case IDC_INIT_SURF_ALPHA_SLIDER :
 			{
-				//=== Добываем Windows-описатель окна ползунка
+				//=== Р”РѕР±С‹РІР°РµРј Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° РїРѕР»Р·СѓРЅРєР°
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_CUBE_ISOLEVEL);
 
 				SendMessage(    // returns LRESULT in lResult
@@ -2429,9 +2476,9 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 				(WPARAM) true,          // = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 1000)              // = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== РџСЂРѕС…РѕРґ РїРѕ РІСЃРµРј СЂРµРіСѓР»РёСЂРѕРІРєР°Рј
 				//for (int i=0; i<2; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== Р—Р°РїРѕР»РЅСЏРµРј С‚СЂР°РЅСЃРїРѕСЂС‚РЅС‹Р№ РјР°СЃСЃРёРІ pPos
 				double v_range = me->lattice.grid4Section.vMax - me->lattice.grid4Section.vMin;
 				double mu = (me->m_isolevel - me->lattice.grid4Section.vMin) / v_range;
 					
@@ -2440,7 +2487,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 				mu = (me->m_isolevels[me->m_iso_ind] - me->lattice.grid4Section.vMin) / v_range;
 				m_Pos[2] = int(mu*1000.0);
 
-				//====== Массив идентификаторов ползунков
+				//====== РњР°СЃСЃРёРІ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РїРѕР»Р·СѓРЅРєРѕРІ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_CUBE_ISOLEVEL,
@@ -2448,17 +2495,17 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 					IDC_SLIDER_CUBE_ISOLEVEL2
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РїРѕ РІСЃРµРј СЂРµРіСѓР»СЏС‚РѕСЂР°Рј
 				for (int i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
-					//=== Добываем Windows-описатель окна ползунка
+					//=== Р”РѕР±С‹РІР°РµРј Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° РїРѕР»Р·СѓРЅРєР°
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== РћРїСЂРµРґРµР»СЏРµРј РµРіРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ
 					int num = Cube4D::GetAlphaSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// РўСЂРµР±СѓРµРј СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїРѕР»Р·СѓРЅРѕРє РІ РїРѕР»РѕР¶РµРЅРёРµ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					char s[1024];
@@ -2466,21 +2513,21 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 					{
 					case 0:
 						{
-							//====== Синхронизируем текстовый аналог позиции
+							//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 							sprintf (s, "%f", me->m_isolevel);
 							SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 						}
 						break;
 					case 1:
 						{
-							//====== Синхронизируем текстовый аналог позиции
+							//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 							sprintf (s, "%f", me->m_opacity);
 							SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 						}
 						break;
 					case 2:
 						{
-							//====== Синхронизируем текстовый аналог позиции
+							//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 							sprintf (s, "%f", me->m_isolevels[me->m_iso_ind]);
 							SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 						}
@@ -2550,7 +2597,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 
 				SendMessage(hDlg,WM_COMMAND,IDC_INIT_SURF_ALPHA_SLIDER,0);			
 				me->ReDraw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				RECT rect;
 				GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2625,7 +2672,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 
 				SendMessage(hDlg,WM_COMMAND,IDC_INIT_SURF_ALPHA_SLIDER,0);	
 				me->ReDraw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				RECT rect;
 				GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2654,7 +2701,7 @@ INT_PTR CALLBACK Cube4D::DlgProcIsosurfaces( HWND hDlg, UINT uMsg,
 					{
 						//printf("PSN_APPLY\n");
 						me->ReDraw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 						RECT rect;
 						GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 						InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2731,7 +2778,7 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static Cube4D * me;
-	static int m_Pos[11]; 			// Массив позиций ползунков
+	static int m_Pos[11]; 			// РњР°СЃСЃРёРІ РїРѕР·РёС†РёР№ РїРѕР»Р·СѓРЅРєРѕРІ
 	switch( uMsg )
 	{
     case WM_INITDIALOG :
@@ -2753,45 +2800,45 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° Р°РєС‚РёРІРЅРѕРіРѕ РїРѕР»Р·СѓРЅРєР°
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== РћРїСЂРµРґРµР»СЏРµРј РёРЅРґРµРєСЃ РІ РјР°СЃСЃРёРІРµ РїРѕР·РёС†РёР№ РїРѕР»Р·СѓРЅРєРѕРІ
 				int num = GetAlphaSliderNum(hwnd, nID);
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== РђРЅР°Р»РёР·РёСЂСѓРµРј РєРѕРґ СЃРѕР±С‹С‚РёСЏ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// РЈРїСЂР°РІР»РµРЅРёРµ РјС‹С€СЊСЋ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// РљР»Р°РІРёС€Р° Home
 					delta = -255;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// РљР»Р°РІРёС€Р° End
 					delta = +255;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// РљР»Р°РІРёС€Р° <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// РљР»Р°РІРёС€Р° ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// РљР»Р°РІРёС€Р° PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// РљР»Р°РІРёС€Р° PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// РћР±С‰Р°СЏ РІРµС‚РІСЊ
+					//====== РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ СЂРµРіСѓР»СЏС‚РѕСЂР°
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== РћРіСЂР°РЅРёС‡РµРЅРёСЏ
 					m_Pos[num] = newPos<0 ? 0 : newPos>255 ? 255 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -2799,8 +2846,8 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 					return (TRUE);
 				}
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј РїР°СЂР°РјРµС‚СЂ lp Рё
+				//====== СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РµРіРѕ РІ РїРѕР»РѕР¶РµРЅРёРµ nPos
 				switch (num)
 				{
 				case 2:
@@ -2809,7 +2856,7 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 				}
 
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 				char s[1024];
 				sprintf (s,"%d",m_Pos[num]);
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
@@ -2817,7 +2864,7 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				//me->m_pSurfDoc->ZoomView();
 				me->m_pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				RECT rect;
 				GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2830,7 +2877,7 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 		{
 		case IDC_INIT_SURF_ALPHA_SLIDER :
 			{
-				//=== Добываем Windows-описатель окна ползунка
+				//=== Р”РѕР±С‹РІР°РµРј Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° РїРѕР»Р·СѓРЅРєР°
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_CUBE_ALPHA);
 
 				SendMessage(    // returns LRESULT in lResult
@@ -2839,34 +2886,34 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 				(WPARAM) true,          // = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 255)              // = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== РџСЂРѕС…РѕРґ РїРѕ РІСЃРµРј СЂРµРіСѓР»РёСЂРѕРІРєР°Рј
 				//for (int i=0; i<2; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== Р—Р°РїРѕР»РЅСЏРµРј С‚СЂР°РЅСЃРїРѕСЂС‚РЅС‹Р№ РјР°СЃСЃРёРІ pPos
 					m_Pos[2] = me->m_alpha;
 
-				//====== Массив идентификаторов ползунков
+				//====== РњР°СЃСЃРёРІ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РїРѕР»Р·СѓРЅРєРѕРІ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_CUBE_ALPHA,
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РїРѕ РІСЃРµРј СЂРµРіСѓР»СЏС‚РѕСЂР°Рј
 				for (int i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
-					//=== Добываем Windows-описатель окна ползунка
+					//=== Р”РѕР±С‹РІР°РµРј Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° РїРѕР»Р·СѓРЅРєР°
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== РћРїСЂРµРґРµР»СЏРµРј РµРіРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ
 					int num = Cube4D::GetAlphaSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// РўСЂРµР±СѓРµРј СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїРѕР»Р·СѓРЅРѕРє РІ РїРѕР»РѕР¶РµРЅРёРµ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					char s[1024];
-					//====== Готовим текстовый аналог текущей позиции
+					//====== Р“РѕС‚РѕРІРёРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё
 					sprintf (s,"%d",m_Pos[i]);
-					//====== Помещаем текст в окно справа от ползунка
+					//====== РџРѕРјРµС‰Р°РµРј С‚РµРєСЃС‚ РІ РѕРєРЅРѕ СЃРїСЂР°РІР° РѕС‚ РїРѕР»Р·СѓРЅРєР°
 					SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 				}
 			}
@@ -2897,7 +2944,7 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 
 				me->m_pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				RECT rect;
 				GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -2926,7 +2973,7 @@ INT_PTR CALLBACK Cube4D::DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 					{
 						//printf("PSN_APPLY\n");
 						me->ReDraw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 						RECT rect;
 						GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 						InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3262,7 +3309,7 @@ INT_PTR CALLBACK  Cube4D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
 				
 				me->m_pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				RECT rect;
 				GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3291,7 +3338,7 @@ INT_PTR CALLBACK  Cube4D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
 					{
 						//printf("PSN_APPLY\n");
 						me->ReDraw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 						RECT rect;
 						GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 						InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3367,11 +3414,11 @@ INT_PTR CALLBACK  Cube4D::DlgProcSurfPalette( HWND hDlg, UINT uMsg,
 }
 int Cube4D::GetCutsPlaneSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID РїРѕ РёР·РІРµСЃС‚РЅРѕРјСѓ hwnd РѕРїСЂРµРґРµР»СЏРµС‚
+	//====== Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЌР»РµРјРµРЅС‚Р° СѓРїСЂР°РІР»РµРЅРёСЏ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== Р’С‹СЏСЃРЅСЏРµРј РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РѕРєРЅР° СЃРїСЂР°РІР°
 	case IDC_SLIDER_CUT_PLANE:
 		nID = IDC_EDIT_SURF_CUTS_PLANE_D;
 		return 0;
@@ -3383,12 +3430,12 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 {
 	//static LPSURFCUTSPLANEDLGDATA lpSurfCutsPlaneDlgMem;
 	static Cube4D * me;
-	static double m_Pos[11]; 			// Массив позиций ползунков
+	static double m_Pos[11]; 			// РњР°СЃСЃРёРІ РїРѕР·РёС†РёР№ РїРѕР»Р·СѓРЅРєРѕРІ
 	static unsigned int lastCommand;
 	static double min_Dd, max_Dd;
 	static double min_Dv, max_Dv;
 	
-	static Grid grid;// грид для построения и сохранения разреза куба
+	static Grid grid;// РіСЂРёРґ РґР»СЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ СЂР°Р·СЂРµР·Р° РєСѓР±Р°
 	
 
 	switch( uMsg )
@@ -3412,45 +3459,45 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° Р°РєС‚РёРІРЅРѕРіРѕ РїРѕР»Р·СѓРЅРєР°
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== РћРїСЂРµРґРµР»СЏРµРј РёРЅРґРµРєСЃ РІ РјР°СЃСЃРёРІРµ РїРѕР·РёС†РёР№ РїРѕР»Р·СѓРЅРєРѕРІ
 				int num = GetCutsPlaneSliderNum(hwnd, nID);
 				double delta, newPos;
 
-				//====== Анализируем код события
+				//====== РђРЅР°Р»РёР·РёСЂСѓРµРј РєРѕРґ СЃРѕР±С‹С‚РёСЏ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// РЈРїСЂР°РІР»РµРЅРёРµ РјС‹С€СЊСЋ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// РљР»Р°РІРёС€Р° Home
 					delta = -100;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// РљР»Р°РІРёС€Р° End
 					delta = +100;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// РљР»Р°РІРёС€Р° <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// РљР»Р°РІРёС€Р° ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// РљР»Р°РІРёС€Р° PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// РљР»Р°РІРёС€Р° PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// РћР±С‰Р°СЏ РІРµС‚РІСЊ
+					//====== РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ СЂРµРіСѓР»СЏС‚РѕСЂР°
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== РћРіСЂР°РЅРёС‡РµРЅРёСЏ
 					m_Pos[num] = newPos<0 ? 0 : newPos>20000.0 ? 20000.0 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -3468,13 +3515,13 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 				me->m_pSurfDoc->GetMinMaxDPlaneCoef(true, min_Dv, max_Dv);
 				me->m_pSurfDoc->GetMinMaxDPlaneCoef(false, min_Dd, max_Dd);
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј РїР°СЂР°РјРµС‚СЂ lp Рё
+				//====== СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РµРіРѕ РІ РїРѕР»РѕР¶РµРЅРёРµ nPos
 				double mu = m_Pos[num]/20000.0;
 				me->m_pSurfDoc->m_cut_plane_v[3] =  mu * (max_Dv - min_Dv) + min_Dv;
 				me->m_pSurfDoc->m_cut_plane_d[3] =  mu * (max_Dd - min_Dd) + min_Dd;
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі РїРѕР·РёС†РёРё
 				char s[1024];
 				sprintf (s,"%lf",cut_plane[3]);
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
@@ -3486,7 +3533,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 					sprintf (s,"%lf",- me->m_pSurfDoc->m_cut_plane_d[3] / me->m_pSurfDoc->m_cut_plane_d[2]);
 					SetDlgItemText(hDlg, IDC_EDIT_CUBE_GORIZONTAL_CUTTING_ALTITUDE, (LPCTSTR)s);
 				}
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 #if 0
 				SendMessage(hDlg,WM_COMMAND,IDC_BUTTON_DRAW_SURF_CUTS_PLANE,1);
 				SendMessage(hDlg,WM_COMMAND,lastCommand,0);
@@ -3540,7 +3587,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 				GLdouble * cut_plane;
 				cut_plane = me->m_pSurfDoc->m_cut_plane_v;
 				//*****************************************************
-				//=== Добываем Windows-описатель окна ползунка
+				//=== Р”РѕР±С‹РІР°РµРј Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° РїРѕР»Р·СѓРЅРєР°
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_CUT_PLANE);
 
 				SendMessage(    // returns LRESULT in lResult
@@ -3549,35 +3596,35 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 				(WPARAM) true,          // = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 20000)              // = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== РџСЂРѕС…РѕРґ РїРѕ РІСЃРµРј СЂРµРіСѓР»РёСЂРѕРІРєР°Рј
 				for (int i=0; i<1; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== Р—Р°РїРѕР»РЅСЏРµРј С‚СЂР°РЅСЃРїРѕСЂС‚РЅС‹Р№ РјР°СЃСЃРёРІ pPos
 					m_Pos[i] = 20000.0*(cut_plane[3] - min_Dv) / (max_Dv - min_Dv);
-				//====== Массив идентификаторов ползунков
+				//====== РњР°СЃСЃРёРІ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РїРѕР»Р·СѓРЅРєРѕРІ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_CUT_PLANE
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== Р¦РёРєР» РїСЂРѕС…РѕРґР° РїРѕ РІСЃРµРј СЂРµРіСѓР»СЏС‚РѕСЂР°Рј
 				for (int i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
-					//=== Добываем Windows-описатель окна ползунка
+					//=== Р”РѕР±С‹РІР°РµРј Windows-РѕРїРёСЃР°С‚РµР»СЊ РѕРєРЅР° РїРѕР»Р·СѓРЅРєР°
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== РћРїСЂРµРґРµР»СЏРµРј РµРіРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ
 					int num = GetCutsPlaneSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// РўСЂРµР±СѓРµРј СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РїРѕР»Р·СѓРЅРѕРє РІ РїРѕР»РѕР¶РµРЅРёРµ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE, (LPARAM)m_Pos[i]);
 
 					if (i == 0)
 					{
 						char s[1024];
-						//====== Готовим текстовый аналог текущей позиции
+						//====== Р“РѕС‚РѕРІРёРј С‚РµРєСЃС‚РѕРІС‹Р№ Р°РЅР°Р»РѕРі С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё
 						sprintf (s, "%8.3f", cut_plane[3]);
-						//====== Помещаем текст в окно справа от ползунка
+						//====== РџРѕРјРµС‰Р°РµРј С‚РµРєСЃС‚ РІ РѕРєРЅРѕ СЃРїСЂР°РІР° РѕС‚ РїРѕР»Р·СѓРЅРєР°
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 					}
 				}
@@ -3645,7 +3692,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 				//if (lParam == 0)
 				{
 					SendMessage(hDlg,WM_COMMAND,IDC_INIT_SURF_CUTS_SLIDER,0);
-					//====== Перерисовываем Вид с учетом изменений
+					//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 					RECT rect;
 					GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 					InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3755,7 +3802,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 				if (lParam == 0)
 				{
 					SendMessage(hDlg,WM_COMMAND,IDC_INIT_SURF_CUTS_SLIDER,0);
-					//====== Перерисовываем Вид с учетом изменений
+					//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 					RECT rect;
 					GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 					InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3767,7 +3814,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 				glDeleteLists(FIRST_HARD_LIST+2,1);
 				me->m_pSurfDoc->m_bDrawCutPlane = false;
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 				RECT rect;
 				GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 				InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3852,7 +3899,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 //				GLdouble * cut_plane ;
 				//if (me->m_pSurfDoc->m_bFastCutting)
 				//{
-					//====== Перерисовываем Вид с учетом изменений
+					//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 					RECT rect;
 					GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 					InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3866,7 +3913,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 					me->m_pSurfDoc->ZoomViewCutlinesPolygones();
 					//DrawScene(me->m_pSurfDoc);
 					me->m_pSurfDoc->DrawCutPlaneLines();
-					//====== Перерисовываем Вид с учетом изменений
+					//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 					RECT rect;
 					GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 					InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -3899,7 +3946,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 					{
 						//printf("PSN_APPLY\n");
 						me->ReDraw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== РџРµСЂРµСЂРёСЃРѕРІС‹РІР°РµРј Р’РёРґ СЃ СѓС‡РµС‚РѕРј РёР·РјРµРЅРµРЅРёР№
 						RECT rect;
 						GetClientRect(me->m_pSurfDoc->hSurfWnd,&rect);
 						InvalidateRect(me->m_pSurfDoc->hSurfWnd,&rect, true);
@@ -4027,7 +4074,7 @@ void Cube4D::PropertiesDialog()
 {
     // Ensure that the common control DLL is loaded. 
 	// InitCommonControls(); 
-	// Инициализируем страницы блокнота  
+	// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃС‚СЂР°РЅРёС†С‹ Р±Р»РѕРєРЅРѕС‚Р°  
 
 
 	psheetPage[0].dwSize = sizeof(PROPSHEETPAGE);
@@ -4039,8 +4086,8 @@ void Cube4D::PropertiesDialog()
 	psheetPage[0].pfnDlgProc = Cube4D::DlgProcDrawModes;
 	psheetPage[0].pszTitle = "Draw Modes";
 	psheetPage[0].lParam = (LPARAM)this;
-	// Добавляем страницу в блокнот, сохраняя ее
-	// идентификатор в массиве hPage
+	// Р”РѕР±Р°РІР»СЏРµРј СЃС‚СЂР°РЅРёС†Сѓ РІ Р±Р»РѕРєРЅРѕС‚, СЃРѕС…СЂР°РЅСЏСЏ РµРµ
+	// РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РІ РјР°СЃСЃРёРІРµ hPage
 	hPage[0] = CreatePropertySheetPage(&psheetPage[0]);
 
 
@@ -4101,7 +4148,7 @@ void Cube4D::PropertiesDialog()
 	hPage[2] = CreatePropertySheetPage(&psheetPage[2]);
 #endif
 
-	// Инициализируем заголовок блокнота
+	// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє Р±Р»РѕРєРЅРѕС‚Р°
 	psheetHeader.dwSize = sizeof(PROPSHEETHEADER);
 	psheetHeader.hInstance = hInst;
 	psheetHeader.pszIcon = MAKEINTRESOURCE(IDI_APPICONSM);
@@ -4115,7 +4162,7 @@ void Cube4D::PropertiesDialog()
 		sizeof(psheetPage) / sizeof(PROPSHEETPAGE);
 	psheetHeader.phpage = (HPROPSHEETPAGE FAR  *)&hPage[0];
 
-	// Создаем и отображаем блокнот
+	// РЎРѕР·РґР°РµРј Рё РѕС‚РѕР±СЂР°Р¶Р°РµРј Р±Р»РѕРєРЅРѕС‚
 	PropertySheet(&psheetHeader);
 
 	//For a modeless property sheet, your message loop should use 
@@ -4127,13 +4174,16 @@ void Cube4D::PropertiesDialog()
 
 
 }
-//====== Операция присвоения
+#endif
+//====== РћРїРµСЂР°С†РёСЏ РїСЂРёСЃРІРѕРµРЅРёСЏ
 Cube4D& Cube4D::operator=(const Cube4D& ob)
 {
 	if (this == &ob)
 		return *this;
-
+#if defined (_MSC_VER)
 	dynamic_cast<Object*>(this)->Init(ob);
+#else
+#endif
 #if CUBE4D_AS_PRIMITIVE
 	dynamic_cast<Primitive3D<CPoint4>*  >(this)->Init(ob);
 #endif
@@ -4144,7 +4194,10 @@ Cube4D& Cube4D::operator=(const Cube4D& ob)
 
 Cube4D::Cube4D(const Cube4D &ob)
 {
+#if defined (_MSC_VER)
 	dynamic_cast<Object*>(this)->Init(ob);
+#else
+#endif
 #if CUBE4D_AS_PRIMITIVE
 	dynamic_cast<Primitive3D<CPoint4>*  >(this)->Init(ob);
 #endif
@@ -4191,6 +4244,7 @@ bool Cube4D::UpdateExtremums()
 	return !start;
 }
 #else
+#if defined (_MSC_VER)
 bool Cube4D::UpdateExtremums()
 {
 	m_ptMin.x = m_ptMax.x = this->lattice.grid4Section.xLL;
@@ -4213,6 +4267,7 @@ bool Cube4D::UpdateExtremums()
 
 	return true;
 }
+#endif
 #endif
 #if CUBE4D_AS_PRIMITIVE
 void Cube4D::Zoom(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean)
@@ -4270,7 +4325,7 @@ void Cube4D::CutAndDisvisible(bool positive, double a, double b, double c, doubl
 {
 	for (UINT ipoint = 0; ipoint < m_nPoints; ipoint++)
 	{
-		// растояние от точки до плоскости
+		// СЂР°СЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё РґРѕ РїР»РѕСЃРєРѕСЃС‚Рё
 		double r = 
 			a*m_vdPoints[ipoint].x+
 			b*m_vdPoints[ipoint].y+
@@ -4403,6 +4458,8 @@ bool Cube4D::GetQuadIndex(
 
 
 #endif
+
+#if defined (_MSC_VER)
 DWORD Cube4D::Serialize(Archive& ar)
 {
 	printf("Cube4D::Serialize(Archive& ar)\n");
@@ -4523,3 +4580,4 @@ Archive& operator >>(Archive& ar, Cube4D& ob)
 //printf("Archive& operator >>(Archive& ar, Cube4D& ob) end\n");
 	return ar;
 }
+#endif

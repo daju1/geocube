@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include ".\listnode.h"
+#include "./ListNode.h"
 
 namespace geometry2D
 {

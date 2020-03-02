@@ -1,10 +1,10 @@
 #include "StdAfx.h"
 #include "wav.h"
-#include "vdouble.h"
+#include "Vdouble.h"
 
 
-void WaveletFilters(int wf, // флаг типа вейвлетов
-	int order, // порядоак вейвлета
+void WaveletFilters(int wf, // С„Р»Р°Рі С‚РёРїР° РІРµР№РІР»РµС‚РѕРІ
+	int order, // РїРѕСЂСЏРґРѕР°Рє РІРµР№РІР»РµС‚Р°
 	int orderBiorthogonalDecomposition,
 	int& nd1, int& nd2, vdouble& d_h,
 	int& ngd1, int& ngd2, vdouble& d_g,
@@ -173,7 +173,7 @@ void WaveletFilters(int wf, // флаг типа вейвлетов
 		default:
 			{
 				/*
-				//eval(menuauxiliar1); wx=wx+10; // порядок вейвлета
+				//eval(menuauxiliar1); wx=wx+10; // РїРѕСЂСЏРґРѕРє РІРµР№РІР»РµС‚Р°
 				dh=dbaux(wx);
 				ch=cumsum(dh);ch=ch(1:end-1);
 				ch1=fliplr(cumsum(fliplr(dh)));ch1=ch1(1:end-1);
@@ -880,8 +880,8 @@ void WaveletFilters(int wf, // флаг типа вейвлетов
 	*/
 }
 
-void WaveletNames(int wf, // флаг типа вейвлетов
-	int order, // порядоак вейвлета
+void WaveletNames(int wf, // С„Р»Р°Рі С‚РёРїР° РІРµР№РІР»РµС‚РѕРІ
+	int order, // РїРѕСЂСЏРґРѕР°Рє РІРµР№РІР»РµС‚Р°
 	int orderBiorthogonalDecomposition,
 	char * name)
 {

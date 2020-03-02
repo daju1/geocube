@@ -7,6 +7,10 @@
 #if defined (_MSC_VER)
 #include "BrokenPlane3D.h"
 #endif
+#ifdef _MSC_VER
+#else
+#include "mywindows.h"
+#endif
 bool Archive::OpenFileAsImport = false;
 
 Archive::Archive(AFile * pFile, Archive::mode amode, int nBufSize, void * lpBuff)

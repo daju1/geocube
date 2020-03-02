@@ -1,19 +1,19 @@
 
 
-
+#ifdef _MSC_VER
 #include <windows.h>
 #include <gdiplus.h>
 using namespace Gdiplus;
-
+#endif
 #include "StdAfx.h"
 
 #include "interp.h"
-#include "..\..\array\src\sorting.h"
-#include "..\..\array\src\vect.h"
-#include "..\..\surfdoc\src\Grid.h"
-#include "../../surfdoc/src/line3d.h"
+#include "../../array/src/sorting.h"
+#include "../../array/src/vect.h"
+#include "../../surfdoc/src/Grid.h"
+#include "../../surfdoc/src/Line3D.h"
 #include "matrixes.h"
-#include "vdouble.h"
+#include "Vdouble.h"
 #include "sorting.h"
 #include "slau.h"
 
@@ -34,10 +34,10 @@ using namespace Gdiplus;
 using namespace geometry2D;
 
 
-point_with_distance::points_sort_mode point_with_distance::s_points_sort_mode = by_dist;
+points_sort_mode point_with_distance::s_points_sort_mode = point_with_distance_points_sort_mode_by_dist;
 
 
-extern HINSTANCE hInst;   // текущий экземпляр
+extern HINSTANCE hInst;   // С‚РµРєСѓС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
 
 
 int cubicInterp3(int nx, int ny, int nz, double ***x,double ***y,double ***z,double ***v, 
@@ -1477,7 +1477,7 @@ size_t do_quads_indexation(size_t len,
 {
 	if (grid)
 	{
-		//пространственная индексация - делим площадку на клетки и в каждую клетку складываем координаты попадающих в неё точек
+		//РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅР°СЏ РёРЅРґРµРєСЃР°С†РёСЏ - РґРµР»РёРј РїР»РѕС‰Р°РґРєСѓ РЅР° РєР»РµС‚РєРё Рё РІ РєР°Р¶РґСѓСЋ РєР»РµС‚РєСѓ СЃРєР»Р°РґС‹РІР°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕРїР°РґР°СЋС‰РёС… РІ РЅРµС‘ С‚РѕС‡РµРє
 		w.resize(m_1);
 		for (long ii = 0; ii < m_1; ii++)
 		{
@@ -1523,28 +1523,28 @@ size_t do_quads_indexation(size_t len,
 
 size_t remove_repeate_points(double myeps, vector<vector<vector<COORDINATES> > >& w, long m_1, long n_1)
 {
-	// убираем повторяющиеся точки
+	// СѓР±РёСЂР°РµРј РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ С‚РѕС‡РєРё
 
-	//Рассмотрим основные этапы предложенного способа. 
-	//На этапе обработки совпадающих точек в XY-пространстве 
-	//учитывается соотношение объема ис-ходных данных и объема 
-	//восстановленной сети. Если это соотношение невели-ко, то в 
-	//целях минимизации временных затрат целесообразно разрядить 
-	//исход-ную сеть точек без существенного ущерба для точности 
-	//восстановления. Эта обработка особенно необходима в случае 
-	//кластерного расположения исходных точек. Для этого можно 
-	//удалить точки, расстояние между которым превышает заданное 
-	//значение.
-	//Суть предложенного алгоритма удаления совпадающих точек: 
-	//для каждой точки исходного набора выполняется поиск точек, 
-	//попадающих в окружность с центром в этой точке и заданным 
-	//радиусом. В исходный набор точек вносится новая точка с 
-	//усредненными XY-координатами (для текущей точки и 
-	//найден-ной группы точек) и значением признака, 
-	//вычисленным по выбранному прави-лу. Текущая точка 
-	//и найденная группа точек из исходного набора исключаются. 
-	//Алгоритм продолжает свою работу до тех пор, пока не дойдет 
-	//до конца исход-ного набора точек.
+	//Р Р°СЃСЃРјРѕС‚СЂРёРј РѕСЃРЅРѕРІРЅС‹Рµ СЌС‚Р°РїС‹ РїСЂРµРґР»РѕР¶РµРЅРЅРѕРіРѕ СЃРїРѕСЃРѕР±Р°. 
+	//РќР° СЌС‚Р°РїРµ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРІРїР°РґР°СЋС‰РёС… С‚РѕС‡РµРє РІ XY-РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµ 
+	//СѓС‡РёС‚С‹РІР°РµС‚СЃСЏ СЃРѕРѕС‚РЅРѕС€РµРЅРёРµ РѕР±СЉРµРјР° РёСЃ-С…РѕРґРЅС‹С… РґР°РЅРЅС‹С… Рё РѕР±СЉРµРјР° 
+	//РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ СЃРµС‚Рё. Р•СЃР»Рё СЌС‚Рѕ СЃРѕРѕС‚РЅРѕС€РµРЅРёРµ РЅРµРІРµР»Рё-РєРѕ, С‚Рѕ РІ 
+	//С†РµР»СЏС… РјРёРЅРёРјРёР·Р°С†РёРё РІСЂРµРјРµРЅРЅС‹С… Р·Р°С‚СЂР°С‚ С†РµР»РµСЃРѕРѕР±СЂР°Р·РЅРѕ СЂР°Р·СЂСЏРґРёС‚СЊ 
+	//РёСЃС…РѕРґ-РЅСѓСЋ СЃРµС‚СЊ С‚РѕС‡РµРє Р±РµР· СЃСѓС‰РµСЃС‚РІРµРЅРЅРѕРіРѕ СѓС‰РµСЂР±Р° РґР»СЏ С‚РѕС‡РЅРѕСЃС‚Рё 
+	//РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ. Р­С‚Р° РѕР±СЂР°Р±РѕС‚РєР° РѕСЃРѕР±РµРЅРЅРѕ РЅРµРѕР±С…РѕРґРёРјР° РІ СЃР»СѓС‡Р°Рµ 
+	//РєР»Р°СЃС‚РµСЂРЅРѕРіРѕ СЂР°СЃРїРѕР»РѕР¶РµРЅРёСЏ РёСЃС…РѕРґРЅС‹С… С‚РѕС‡РµРє. Р”Р»СЏ СЌС‚РѕРіРѕ РјРѕР¶РЅРѕ 
+	//СѓРґР°Р»РёС‚СЊ С‚РѕС‡РєРё, СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РєРѕС‚РѕСЂС‹Рј РїСЂРµРІС‹С€Р°РµС‚ Р·Р°РґР°РЅРЅРѕРµ 
+	//Р·РЅР°С‡РµРЅРёРµ.
+	//РЎСѓС‚СЊ РїСЂРµРґР»РѕР¶РµРЅРЅРѕРіРѕ Р°Р»РіРѕСЂРёС‚РјР° СѓРґР°Р»РµРЅРёСЏ СЃРѕРІРїР°РґР°СЋС‰РёС… С‚РѕС‡РµРє: 
+	//РґР»СЏ РєР°Р¶РґРѕР№ С‚РѕС‡РєРё РёСЃС…РѕРґРЅРѕРіРѕ РЅР°Р±РѕСЂР° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРѕРёСЃРє С‚РѕС‡РµРє, 
+	//РїРѕРїР°РґР°СЋС‰РёС… РІ РѕРєСЂСѓР¶РЅРѕСЃС‚СЊ СЃ С†РµРЅС‚СЂРѕРј РІ СЌС‚РѕР№ С‚РѕС‡РєРµ Рё Р·Р°РґР°РЅРЅС‹Рј 
+	//СЂР°РґРёСѓСЃРѕРј. Р’ РёСЃС…РѕРґРЅС‹Р№ РЅР°Р±РѕСЂ С‚РѕС‡РµРє РІРЅРѕСЃРёС‚СЃСЏ РЅРѕРІР°СЏ С‚РѕС‡РєР° СЃ 
+	//СѓСЃСЂРµРґРЅРµРЅРЅС‹РјРё XY-РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё (РґР»СЏ С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРё Рё 
+	//РЅР°Р№РґРµРЅ-РЅРѕР№ РіСЂСѓРїРїС‹ С‚РѕС‡РµРє) Рё Р·РЅР°С‡РµРЅРёРµРј РїСЂРёР·РЅР°РєР°, 
+	//РІС‹С‡РёСЃР»РµРЅРЅС‹Рј РїРѕ РІС‹Р±СЂР°РЅРЅРѕРјСѓ РїСЂР°РІРё-Р»Сѓ. РўРµРєСѓС‰Р°СЏ С‚РѕС‡РєР° 
+	//Рё РЅР°Р№РґРµРЅРЅР°СЏ РіСЂСѓРїРїР° С‚РѕС‡РµРє РёР· РёСЃС…РѕРґРЅРѕРіРѕ РЅР°Р±РѕСЂР° РёСЃРєР»СЋС‡Р°СЋС‚СЃСЏ. 
+	//РђР»РіРѕСЂРёС‚Рј РїСЂРѕРґРѕР»Р¶Р°РµС‚ СЃРІРѕСЋ СЂР°Р±РѕС‚Сѓ РґРѕ С‚РµС… РїРѕСЂ, РїРѕРєР° РЅРµ РґРѕР№РґРµС‚ 
+	//РґРѕ РєРѕРЅС†Р° РёСЃС…РѕРґ-РЅРѕРіРѕ РЅР°Р±РѕСЂР° С‚РѕС‡РµРє.
 	
 	for (long ii = 0; ii < m_1; ii++)
 	{
@@ -1554,11 +1554,11 @@ e_start_of_cell:
 			printf ("W[%d][%d].size()=%d\n", ii, jj, w[ii][jj].size());
 			for (long k = 0; k < (long)w[ii][jj].size(); k++)
 			{
-				// тут мы выбрали текущую точку
+				// С‚СѓС‚ РјС‹ РІС‹Р±СЂР°Р»Рё С‚РµРєСѓС‰СѓСЋ С‚РѕС‡РєСѓ
 				// printf ("W[%d][%d].size()=%d\t", ii, jj, W[ii][jj].size());
 				vector<prostranstven_index> V;
 				V.clear();
-				// будем искать расстояния от текущей точки до точек, попадающих в её квадрат и в соседние квадраты
+				// Р±СѓРґРµРј РёСЃРєР°С‚СЊ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РѕС‚ С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРё РґРѕ С‚РѕС‡РµРє, РїРѕРїР°РґР°СЋС‰РёС… РІ РµС‘ РєРІР°РґСЂР°С‚ Рё РІ СЃРѕСЃРµРґРЅРёРµ РєРІР°РґСЂР°С‚С‹
 				for (long ii_ = ii - 1; ii_ <= ii + 1; ii_++)
 				{
 					for (long jj_ = jj - 1; jj_ <= jj + 1; jj_++)
@@ -1597,7 +1597,7 @@ e_start_of_cell:
 				//printf ("V.size() = %d\n",V.size());
 				if (V.size() > 0)
 				{
-					// усредняем совпадающие точки
+					// СѓСЃСЂРµРґРЅСЏРµРј СЃРѕРІРїР°РґР°СЋС‰РёРµ С‚РѕС‡РєРё
 					double mean_X = w[ii][jj][k].x;
 					double mean_Y = w[ii][jj][k].y;
 					double mean_Z = w[ii][jj][k].z;
@@ -1617,7 +1617,7 @@ e_start_of_cell:
 					w[ii][jj][k].y = mean_Y;
 					w[ii][jj][k].z = mean_Z;
 
-					// удаляем точки
+					// СѓРґР°Р»СЏРµРј С‚РѕС‡РєРё
 					for (int iv = (int)V.size()-1; iv >= 0; iv--)
 					{
 						vector<COORDINATES>::iterator ic;
@@ -1636,7 +1636,7 @@ e_start_of_cell:
 						
 					}
 
-					// и возвращаемся к началу цикла обработки клетки
+					// Рё РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ Рє РЅР°С‡Р°Р»Сѓ С†РёРєР»Р° РѕР±СЂР°Р±РѕС‚РєРё РєР»РµС‚РєРё
 					goto e_start_of_cell;
 				}
 			}
@@ -1690,9 +1690,9 @@ bool get_quads_points(double x_i, double y_j, long ii, long jj, vector<vector<ve
 }
 void get_quads_contour_points(long r, double x_i, double y_j, long ii, long jj, vector<vector<vector<COORDINATES> > >& w, long m_1, long n_1, vector<point_with_distance>& pts)
 {
-	//обход по контуру с плечом r вокруг точки
+	//РѕР±С…РѕРґ РїРѕ РєРѕРЅС‚СѓСЂСѓ СЃ РїР»РµС‡РѕРј r РІРѕРєСЂСѓРі С‚РѕС‡РєРё
 
-	// четыре цикла
+	// С‡РµС‚С‹СЂРµ С†РёРєР»Р°
 	long iii,jjj;
 
 	iii = ii + r;
@@ -1836,7 +1836,7 @@ double Green_fun(double x_i, double y_j, double delta_phi,
 	{
 
 		//vector<point_with_distance>::iterator it_stop = pts.begin()+use_points;
-		point_with_distance::s_points_sort_mode = point_with_distance::points_sort_mode::by_angle;
+        point_with_distance::s_points_sort_mode = point_with_distance_points_sort_mode_by_angle;
 		std::sort(pts.begin(), pts.begin()+_use_points);
 
 //		double distN;
@@ -1989,7 +1989,7 @@ double dist_fun(double x_i, double y_j, double pw, double delta_phi,
 	{
 
 		//vector<point_with_distance>::iterator it_stop = pts.begin()+use_points;
-		point_with_distance::s_points_sort_mode = point_with_distance::points_sort_mode::by_angle;
+        point_with_distance::s_points_sort_mode = point_with_distance_points_sort_mode_by_angle;
 		std::sort(pts.begin(), pts.begin()+use_points);
 
 		double distN;
@@ -2052,7 +2052,7 @@ double dist_fun(double x_i, double y_j, double pw, double add_pw, double delta_p
 	{
 
 		//vector<point_with_distance>::iterator it_stop = pts.begin()+use_points;
-		point_with_distance::s_points_sort_mode = point_with_distance::points_sort_mode::by_angle;
+        point_with_distance::s_points_sort_mode = point_with_distance_points_sort_mode_by_angle;
 		std::sort(pts.begin(), pts.begin()+use_points);
 
 		double distN;
@@ -2074,7 +2074,7 @@ double dist_fun(double x_i, double y_j, double pw, double add_pw, double delta_p
 
 		double dist_diapazon = max_dist - min_dist;
 
-		double c = 1.0 / dist_diapazon; // коэффициент перед логистической сигмоидой
+		double c = 1.0 / dist_diapazon; // РєРѕСЌС„С„РёС†РёРµРЅС‚ РїРµСЂРµРґ Р»РѕРіРёСЃС‚РёС‡РµСЃРєРѕР№ СЃРёРіРјРѕРёРґРѕР№
 
 		for (size_t i = 0; i < use_points; i++)
 		{
@@ -2332,26 +2332,26 @@ bool fill_grid(Grid * grid,
 
 				pts.clear();
 
-				point_with_distance::s_points_sort_mode = point_with_distance::points_sort_mode::by_dist;
+                point_with_distance::s_points_sort_mode = point_with_distance_points_sort_mode_by_dist;
 					
 				size_t npts = 0;
 
 				for (long r = 0;;r++)
 				{
-					// максимальный допустимый радиус, внутри которого мы можем брать точки
-					// это нужно вследствие двух причин: непрямоугольности 
-					// (в общем случае) клетки и удалённости угловых частей прямоугольника
-					// максимальный допустимый радиус должен быть равен минимальному ребру прямоугольника
+					// РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РґРѕРїСѓСЃС‚РёРјС‹Р№ СЂР°РґРёСѓСЃ, РІРЅСѓС‚СЂРё РєРѕС‚РѕСЂРѕРіРѕ РјС‹ РјРѕР¶РµРј Р±СЂР°С‚СЊ С‚РѕС‡РєРё
+					// СЌС‚Рѕ РЅСѓР¶РЅРѕ РІСЃР»РµРґСЃС‚РІРёРµ РґРІСѓС… РїСЂРёС‡РёРЅ: РЅРµРїСЂСЏРјРѕСѓРіРѕР»СЊРЅРѕСЃС‚Рё 
+					// (РІ РѕР±С‰РµРј СЃР»СѓС‡Р°Рµ) РєР»РµС‚РєРё Рё СѓРґР°Р»С‘РЅРЅРѕСЃС‚Рё СѓРіР»РѕРІС‹С… С‡Р°СЃС‚РµР№ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°
+					// РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РґРѕРїСѓСЃС‚РёРјС‹Р№ СЂР°РґРёСѓСЃ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СЂР°РІРµРЅ РјРёРЅРёРјР°Р»СЊРЅРѕРјСѓ СЂРµР±СЂСѓ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°
 					double max_R = min_quad_size * (r + 1);
 					get_quads_contour_points(r, x_i, y_j, ii, jj, w, m_1, n_1, pts);
 
 					std::sort(pts.begin(), pts.end());
 
-					// теперь ищем сколько и какие точки попадают внутрь 
-					// максимального допустимого радиуса
+					// С‚РµРїРµСЂСЊ РёС‰РµРј СЃРєРѕР»СЊРєРѕ Рё РєР°РєРёРµ С‚РѕС‡РєРё РїРѕРїР°РґР°СЋС‚ РІРЅСѓС‚СЂСЊ 
+					// РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ РґРѕРїСѓСЃС‚РёРјРѕРіРѕ СЂР°РґРёСѓСЃР°
 					
 					npts = 0;
-// что быстрее???
+// С‡С‚Рѕ Р±С‹СЃС‚СЂРµРµ???
 #if 0
 
 					for (vector<point_with_distance>::iterator ipts = pts.begin();
@@ -2374,11 +2374,11 @@ bool fill_grid(Grid * grid,
 						break;
 				}
 
-				//здесь мы нашли некоторое количество use_points ближайших точек
+				//Р·РґРµСЃСЊ РјС‹ РЅР°С€Р»Рё РЅРµРєРѕС‚РѕСЂРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ use_points Р±Р»РёР¶Р°Р№С€РёС… С‚РѕС‡РµРє
 				size_t use_points = npts < max_len ? npts : max_len;
 
-				// тут мы можем выбрать тот или иной алгоритм 
-				// вычисления z_value - значения в текущей точке сетки 
+				// С‚СѓС‚ РјС‹ РјРѕР¶РµРј РІС‹Р±СЂР°С‚СЊ С‚РѕС‚ РёР»Рё РёРЅРѕР№ Р°Р»РіРѕСЂРёС‚Рј 
+				// РІС‹С‡РёСЃР»РµРЅРёСЏ z_value - Р·РЅР°С‡РµРЅРёСЏ РІ С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРµ СЃРµС‚РєРё 
 
 				double z_value = 0;
 
@@ -2402,7 +2402,7 @@ bool fill_grid(Grid * grid,
 				}
 
 
-				// полученное значение z_value записываем в грид
+				// РїРѕР»СѓС‡РµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ z_value Р·Р°РїРёСЃС‹РІР°РµРј РІ РіСЂРёРґ
 				grid->gridSection.z[jj][ii] = z_value;
 				if (z_value != BLANK_VALUE)
 				{
@@ -2419,7 +2419,7 @@ int griddata_2(HWND hwndParent, vector<double>& x, vector<double>& y, vector<dou
 			 Grid * grid, void * _param, bool to_allocate)
 
 {					
-	// ищем max_len ближайших точек
+	// РёС‰РµРј max_len Р±Р»РёР¶Р°Р№С€РёС… С‚РѕС‡РµРє
 	size_t max_len = 8;
 	griddata_2_param * param = reinterpret_cast<griddata_2_param *>(_param);
 	
@@ -2469,25 +2469,25 @@ int griddata_2(HWND hwndParent, vector<double>& x, vector<double>& y, vector<dou
 		double min_z = DBL_MAX;
 		double max_z = -DBL_MAX;
 
-		//координаты чётырёх углов площадки
+		//РєРѕРѕСЂРґРёРЅР°С‚С‹ С‡С‘С‚С‹СЂС‘С… СѓРіР»РѕРІ РїР»РѕС‰Р°РґРєРё
 		double x0 = grid->gridSection.xLL;
 		double y0 = grid->gridSection.yLL;
 		double xm = grid->gridSection.xLL + (grid->gridSection.nCol-1)*grid->gridSection.xSize;
 		double yn = grid->gridSection.yLL + (grid->gridSection.nRow-1)*grid->gridSection.ySize;
 		
-		//Площадь плошадки
+		//РџР»РѕС‰Р°РґСЊ РїР»РѕС€Р°РґРєРё
 		double S = fabs((xm-x0)*(yn-y0));
 
-		//средняя плотность точек
+		//СЃСЂРµРґРЅСЏСЏ РїР»РѕС‚РЅРѕСЃС‚СЊ С‚РѕС‡РµРє
 		double plotnost_t = double(len) / S;
 
-		//матожидание расстояния между каждой точкой и ближайшей к ней соседней
+		//РјР°С‚РѕР¶РёРґР°РЅРёРµ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РјРµР¶РґСѓ РєР°Р¶РґРѕР№ С‚РѕС‡РєРѕР№ Рё Р±Р»РёР¶Р°Р№С€РµР№ Рє РЅРµР№ СЃРѕСЃРµРґРЅРµР№
 		double delta_ma = 0.5 / sqrt(plotnost_t);
 
-		// радиус внутри которого ищем ближайшие точки
+		// СЂР°РґРёСѓСЃ РІРЅСѓС‚СЂРё РєРѕС‚РѕСЂРѕРіРѕ РёС‰РµРј Р±Р»РёР¶Р°Р№С€РёРµ С‚РѕС‡РєРё
 		double R = delta_ma*5.0;
 
-		//пространственная индексация - делим площадку на клетки и в каждую клетку складываем координаты попадающих в неё точек
+		//РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅР°СЏ РёРЅРґРµРєСЃР°С†РёСЏ - РґРµР»РёРј РїР»РѕС‰Р°РґРєСѓ РЅР° РєР»РµС‚РєРё Рё РІ РєР°Р¶РґСѓСЋ РєР»РµС‚РєСѓ СЃРєР»Р°РґС‹РІР°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕРїР°РґР°СЋС‰РёС… РІ РЅРµС‘ С‚РѕС‡РµРє
 		vector<vector<vector<COORDINATES> > > W;
 		size_t start_size = do_quads_indexation(len, x, y, z, grid, W, m_1, n_1);
 
@@ -2497,7 +2497,7 @@ int griddata_2(HWND hwndParent, vector<double>& x, vector<double>& y, vector<dou
 		//myeps *= 0.005;
 		printf("myeps = %f\n", myeps);
 
-		// убираем повторяющиеся точки
+		// СѓР±РёСЂР°РµРј РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ С‚РѕС‡РєРё
 		size_t end_size = remove_repeate_points(myeps, W, m_1, n_1);
 
 		printf("start_size = %u end_size =%u\n", start_size, end_size);
@@ -2559,12 +2559,12 @@ bool get_tria_points(geometry2D::PolygonEx* p, double x_i, double y_j, vector<do
 	return false;
 }
 
-/*double GetValue(int order, vector<double> & sol,	// формируемая матрица
+/*double GetValue(int order, vector<double> & sol,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols, 
-					  vector<double> & z,			// отметки высот
-					  geometry2D::Point pt,		// дополнительная точка, 
-					  // которая должна удовлетворять 
-					  // уравнению кубической интерполяции
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
+					  geometry2D::Point pt,		// РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ С‚РѕС‡РєР°, 
+					  // РєРѕС‚РѕСЂР°СЏ РґРѕР»Р¶РЅР° СѓРґРѕРІР»РµС‚РІРѕСЂСЏС‚СЊ 
+					  // СѓСЂР°РІРЅРµРЅРёСЋ РєСѓР±РёС‡РµСЃРєРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 					  PolygonEx * p,
 					  vector<Point> &base_points
 					  )
@@ -2580,7 +2580,7 @@ bool get_tria_points(geometry2D::PolygonEx* p, double x_i, double y_j, vector<do
 			break;
 	}
 
-	geometry2D::Point ptj;		// базовая точка
+	geometry2D::Point ptj;		// Р±Р°Р·РѕРІР°СЏ С‚РѕС‡РєР°
 	size_t index = p->index;
 	ptj = base_points[index];
 	size_t index_9 = index*nk;
@@ -2607,28 +2607,28 @@ bool get_tria_points(geometry2D::PolygonEx* p, double x_i, double y_j, vector<do
 	case 2:
 		{
 			zz = z[ptj.index] +
-				sol[index_9+0] * ( pt.x - ptj.x) + //с1
-				sol[index_9+1] * ( pt.y - ptj.y) + //с2
+				sol[index_9+0] * ( pt.x - ptj.x) + //СЃ1
+				sol[index_9+1] * ( pt.y - ptj.y) + //СЃ2
 				
-				sol[index_9+2] * (pt.x - ptj.x) * (pt.x - ptj.x) +//с3
-				sol[index_9+3] * (pt.x - ptj.x) * (pt.y - ptj.y) +//с4
-				sol[index_9+4] * (pt.y - ptj.y) * (pt.y - ptj.y);//с5				
+				sol[index_9+2] * (pt.x - ptj.x) * (pt.x - ptj.x) +//СЃ3
+				sol[index_9+3] * (pt.x - ptj.x) * (pt.y - ptj.y) +//СЃ4
+				sol[index_9+4] * (pt.y - ptj.y) * (pt.y - ptj.y);//СЃ5				
 		}
 		break;	
 	case 3:
 		{
 			zz = z[ptj.index] +
-				sol[index_9+0] * ( pt.x - ptj.x) + //с1
-				sol[index_9+1] * ( pt.y - ptj.y) + //с2
+				sol[index_9+0] * ( pt.x - ptj.x) + //СЃ1
+				sol[index_9+1] * ( pt.y - ptj.y) + //СЃ2
 				
-				sol[index_9+2] * (pt.x - ptj.x) * (pt.x - ptj.x) +//с3
-				sol[index_9+3] * (pt.x - ptj.x) * (pt.y - ptj.y) +//с4
-				sol[index_9+4] * (pt.y - ptj.y) * (pt.y - ptj.y) +//с5
+				sol[index_9+2] * (pt.x - ptj.x) * (pt.x - ptj.x) +//СЃ3
+				sol[index_9+3] * (pt.x - ptj.x) * (pt.y - ptj.y) +//СЃ4
+				sol[index_9+4] * (pt.y - ptj.y) * (pt.y - ptj.y) +//СЃ5
 				
-				sol[index_9+5] * (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.x - ptj.x) +//с6
-				sol[index_9+6] * (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.y - ptj.y) +//с7
-				sol[index_9+7] * (pt.x - ptj.x) * (pt.y - ptj.y) * (pt.y - ptj.y) +//с8
-				sol[index_9+8] * (pt.y - ptj.y) * (pt.y - ptj.y) * (pt.y - ptj.y);//с9
+				sol[index_9+5] * (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.x - ptj.x) +//СЃ6
+				sol[index_9+6] * (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.y - ptj.y) +//СЃ7
+				sol[index_9+7] * (pt.x - ptj.x) * (pt.y - ptj.y) * (pt.y - ptj.y) +//СЃ8
+				sol[index_9+8] * (pt.y - ptj.y) * (pt.y - ptj.y) * (pt.y - ptj.y);//СЃ9
 		}
 		break;
 	}
@@ -2638,18 +2638,18 @@ bool get_tria_points(geometry2D::PolygonEx* p, double x_i, double y_j, vector<do
 
 double GetValue_(int N_trias, int order_t, int order_c, 
 				 size_t nk_t, size_t nk_c,				 
-				 vector<double> & sol,	// формируемая матрица
+				 vector<double> & sol,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols, 
-					  vector<double> & z,			// отметки высот
-					  geometry2D::Point pt,		// дополнительная точка, 
-					  // которая должна удовлетворять 
-					  // уравнению кубической интерполяции
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
+					  geometry2D::Point pt,		// РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ С‚РѕС‡РєР°, 
+					  // РєРѕС‚РѕСЂР°СЏ РґРѕР»Р¶РЅР° СѓРґРѕРІР»РµС‚РІРѕСЂСЏС‚СЊ 
+					  // СѓСЂР°РІРЅРµРЅРёСЋ РєСѓР±РёС‡РµСЃРєРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 					  PolygonEx * p,
 					  vector<geometry2D::Point> &base_points
 					  )
 {
 
-	geometry2D::Point ptj;		// базовая точка
+	geometry2D::Point ptj;		// Р±Р°Р·РѕРІР°СЏ С‚РѕС‡РєР°
 	size_t index = p->index;
 	ptj = base_points[index];
 	size_t index_10 = (int)index < N_trias ? index*nk_t : N_trias*nk_t + (index-N_trias)*nk_c;
@@ -2674,60 +2674,60 @@ double GetValue_(int N_trias, int order_t, int order_c,
 		{
 			zz = 
 				sol[index_10+0] +
-				sol[index_10+1] * dx + //с1
-				sol[index_10+2] * dy ; //с2		
+				sol[index_10+1] * dx + //СЃ1
+				sol[index_10+2] * dy ; //СЃ2		
 		}
 		break;	
 	case 2:
 		{
 			zz = 
 				sol[index_10+0] +
-				sol[index_10+1] * dx + //с1
-				sol[index_10+2] * dy + //с2
+				sol[index_10+1] * dx + //СЃ1
+				sol[index_10+2] * dy + //СЃ2
 				
-				sol[index_10+3] * dx * dx +//с3
-				sol[index_10+4] * dx * dy +//с4
-				sol[index_10+5] * dy * dy;//с5				
+				sol[index_10+3] * dx * dx +//СЃ3
+				sol[index_10+4] * dx * dy +//СЃ4
+				sol[index_10+5] * dy * dy;//СЃ5				
 		}
 		break;	
 	case 3:
 		{
 			zz = 
 				sol[index_10+0] +
-				sol[index_10+1] * dx + //с1
-				sol[index_10+2] * dy + //с2
+				sol[index_10+1] * dx + //СЃ1
+				sol[index_10+2] * dy + //СЃ2
 				
-				sol[index_10+3] * dx * dx +//с3
-				sol[index_10+4] * dx * dy +//с4
-				sol[index_10+5] * dy * dy +//с5
+				sol[index_10+3] * dx * dx +//СЃ3
+				sol[index_10+4] * dx * dy +//СЃ4
+				sol[index_10+5] * dy * dy +//СЃ5
 				
-				sol[index_10+6] * dx * dx * dx +//с6
-				sol[index_10+7] * dx * dx * dy +//с7
-				sol[index_10+8] * dx * dy * dy +//с8
-				sol[index_10+9] * dy * dy * dy ;//с9
+				sol[index_10+6] * dx * dx * dx +//СЃ6
+				sol[index_10+7] * dx * dx * dy +//СЃ7
+				sol[index_10+8] * dx * dy * dy +//СЃ8
+				sol[index_10+9] * dy * dy * dy ;//СЃ9
 		}
 		break;
 	case 4:
 		{
 			zz = 
 				sol[index_10+0] +
-				sol[index_10+1] * dx + //с1
-				sol[index_10+2] * dy + //с2
+				sol[index_10+1] * dx + //СЃ1
+				sol[index_10+2] * dy + //СЃ2
 				
-				sol[index_10+3] * dx * dx +//с3
-				sol[index_10+4] * dx * dy +//с4
-				sol[index_10+5] * dy * dy +//с5
+				sol[index_10+3] * dx * dx +//СЃ3
+				sol[index_10+4] * dx * dy +//СЃ4
+				sol[index_10+5] * dy * dy +//СЃ5
 				
-				sol[index_10+6] * dx * dx * dx +//с6
-				sol[index_10+7] * dx * dx * dy +//с7
-				sol[index_10+8] * dx * dy * dy +//с8
-				sol[index_10+9] * dy * dy * dy +//с9
+				sol[index_10+6] * dx * dx * dx +//СЃ6
+				sol[index_10+7] * dx * dx * dy +//СЃ7
+				sol[index_10+8] * dx * dy * dy +//СЃ8
+				sol[index_10+9] * dy * dy * dy +//СЃ9
 
-				sol[index_10+10] * dx * dx * dx * dx +//с10
-				sol[index_10+11] * dx * dx * dx * dy +//с11
-				sol[index_10+12] * dx * dx * dy * dy +//с12
-				sol[index_10+13] * dx * dy * dy * dy +//с13
-				sol[index_10+14] * dy * dy * dy * dy ;//с14
+				sol[index_10+10] * dx * dx * dx * dx +//СЃ10
+				sol[index_10+11] * dx * dx * dx * dy +//СЃ11
+				sol[index_10+12] * dx * dx * dy * dy +//СЃ12
+				sol[index_10+13] * dx * dy * dy * dy +//СЃ13
+				sol[index_10+14] * dy * dy * dy * dy ;//СЃ14
 		}
 		break;
 	}
@@ -2738,18 +2738,18 @@ double GetValue_(int N_trias, int order_t, int order_c,
 #define USE_SECOND_DERIVATIVES_EQUATIONS 1
 /*
 void AddRowsToEquation(int order, 
-					   vector<sparse_row> & M,	// формируемая матрица
+					   vector<sparse_row> & M,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols, 
-					  vector<double> & B,			// формируемый вектор правых частей
-					  vector<double> & z,			// отметки высот
+					  vector<double> & B,			// С„РѕСЂРјРёСЂСѓРµРјС‹Р№ РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
 					  PolygonEx * p,
 					  vector<Point> &base_points
 					  )
 {
-	geometry2D::Point ptj;		// базовая точка
-	geometry2D::Point pt;		// дополнительная точка, 
-					  // которая должна удовлетворять 
-					  // уравнению кубической интерполяции
+	geometry2D::Point ptj;		// Р±Р°Р·РѕРІР°СЏ С‚РѕС‡РєР°
+	geometry2D::Point pt;		// РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ С‚РѕС‡РєР°, 
+					  // РєРѕС‚РѕСЂР°СЏ РґРѕР»Р¶РЅР° СѓРґРѕРІР»РµС‚РІРѕСЂСЏС‚СЊ 
+					  // СѓСЂР°РІРЅРµРЅРёСЋ РєСѓР±РёС‡РµСЃРєРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 
 
 	size_t nk;
@@ -2791,7 +2791,7 @@ void AddRowsToEquation(int order,
 		//AddRowToEquation(M, cols, B, z, ptj, pt, index_9);			
 		if (pt != ptj && pt.index > -1 && pt.index < z.size())
 		{			
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			
 			sparse_row row; 
 			row.clear();
@@ -2799,17 +2799,17 @@ void AddRowsToEquation(int order,
 			switch(order)
 			{
 			case 3:
-				row.put(index_9+5, (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.x - ptj.x));//с6
-				row.put(index_9+6, (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.y - ptj.y));//с7
-				row.put(index_9+7, (pt.x - ptj.x) * (pt.y - ptj.y) * (pt.y - ptj.y));//с8
-				row.put(index_9+8, (pt.y - ptj.y) * (pt.y - ptj.y) * (pt.y - ptj.y));//с9
+				row.put(index_9+5, (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.x - ptj.x));//СЃ6
+				row.put(index_9+6, (pt.x - ptj.x) * (pt.x - ptj.x) * (pt.y - ptj.y));//СЃ7
+				row.put(index_9+7, (pt.x - ptj.x) * (pt.y - ptj.y) * (pt.y - ptj.y));//СЃ8
+				row.put(index_9+8, (pt.y - ptj.y) * (pt.y - ptj.y) * (pt.y - ptj.y));//СЃ9
 			case 2:
-				row.put(index_9+0, pt.x - ptj.x);//с1
-				row.put(index_9+1, pt.y - ptj.y);//с2
+				row.put(index_9+0, pt.x - ptj.x);//СЃ1
+				row.put(index_9+1, pt.y - ptj.y);//СЃ2
 
-				row.put(index_9+2, (pt.x - ptj.x) * (pt.x - ptj.x));//с3
-				row.put(index_9+3, (pt.x - ptj.x) * (pt.y - ptj.y));//с4
-				row.put(index_9+4, (pt.y - ptj.y) * (pt.y - ptj.y));//с5
+				row.put(index_9+2, (pt.x - ptj.x) * (pt.x - ptj.x));//СЃ3
+				row.put(index_9+3, (pt.x - ptj.x) * (pt.y - ptj.y));//СЃ4
+				row.put(index_9+4, (pt.y - ptj.y) * (pt.y - ptj.y));//СЃ5
 			}
 			
 
@@ -2824,10 +2824,10 @@ void AddRowsToEquation(int order,
 }
 
 void AddRowsToEquation2(int order,
-						vector<sparse_row> & M,	// формируемая матрица
+						vector<sparse_row> & M,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols,
-					  vector<double> & B,			// формируемый вектор правых частей
-					  vector<double> & z,			// отметки высот
+					  vector<double> & B,			// С„РѕСЂРјРёСЂСѓРµРјС‹Р№ РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
 					  EdgeEx * ex,
 					  vector<Point> &base_points)
 {
@@ -2878,7 +2878,7 @@ void AddRowsToEquation2(int order,
 		double x_len = x_dest - x_org;
 		double y_len = y_dest - y_org;
 
-		// базовые точки для обоих полигонов
+		// Р±Р°Р·РѕРІС‹Рµ С‚РѕС‡РєРё РґР»СЏ РѕР±РѕРёС… РїРѕР»РёРіРѕРЅРѕРІ
 		Point pt1j = base_points[index1];
 		Point pt2j = base_points[index2];
 
@@ -2913,7 +2913,7 @@ void AddRowsToEquation2(int order,
 		bool add_first_der_x = true;
 		bool add_first_der_y = true;
 
-		//наклон ребра
+		//РЅР°РєР»РѕРЅ СЂРµР±СЂР°
 #if 1
 		double fabs_slope = fabs(ex->slope());
 
@@ -2943,20 +2943,20 @@ void AddRowsToEquation2(int order,
 					// zj + c1*x_org_xj+c2*y_org_yj+c4*x_org_xj*y_org_yj+c3*x_org_xj^2+c5*y_org_yj^2
 					row.clear();	
 					// zj + c1*x_org_xj + c2*y_org_yj + c4*x_org_xj*y_org_yj + c3*x_org_xj^2
-					row.put(index1_9+0, x_org_x1j);//с1
-					row.put(index1_9+1, y_org_y1j);//с2
+					row.put(index1_9+0, x_org_x1j);//СЃ1
+					row.put(index1_9+1, y_org_y1j);//СЃ2
 
-					row.put(index1_9+2, (x_org_x1j) * (x_org_x1j));//с3
-					row.put(index1_9+3, (x_org_x1j) * (y_org_y1j));//с4
-					row.put(index1_9+4, (y_org_y1j) * (y_org_y1j));//с5
+					row.put(index1_9+2, (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.put(index1_9+3, (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.put(index1_9+4, (y_org_y1j) * (y_org_y1j));//СЃ5
 					
 
-					row.put(index2_9+0, - (x_org_x2j));//с1
-					row.put(index2_9+1, - (y_org_y2j));//с2
+					row.put(index2_9+0, - (x_org_x2j));//СЃ1
+					row.put(index2_9+1, - (y_org_y2j));//СЃ2
 
-					row.put(index2_9+2, - (x_org_x2j) * (x_org_x2j));//с3
-					row.put(index2_9+3, - (x_org_x2j) * (y_org_y2j));//с4
-					row.put(index2_9+4, - (y_org_y2j) * (y_org_y2j));//с5
+					row.put(index2_9+2, - (x_org_x2j) * (x_org_x2j));//СЃ3
+					row.put(index2_9+3, - (x_org_x2j) * (y_org_y2j));//СЃ4
+					row.put(index2_9+4, - (y_org_y2j) * (y_org_y2j));//СЃ5
 					
 
 					M.push_back(row);	B.push_back(z[ind2] - z[ind1]);
@@ -2971,20 +2971,20 @@ void AddRowsToEquation2(int order,
 					//)*t
 					// (c1*x_len+2*c3*x_org_xj*x_len+c2*y_len+c4*x_org_xj*y_len+c4*x_len*y_org_yj)*t+
 
-					row.put(index1_9+0, x_len);//с1
-					row.put(index1_9+1, y_len);//с2
+					row.put(index1_9+0, x_len);//СЃ1
+					row.put(index1_9+1, y_len);//СЃ2
 
-					row.put(index1_9+2, 2.0 * x_org_x1j * x_len);//с3
-					row.put(index1_9+3, x_len * y_org_y1j + x_org_x1j * y_len);//с4
-					row.put(index1_9+4, 2.0 * y_org_y1j * y_len);//с5
+					row.put(index1_9+2, 2.0 * x_org_x1j * x_len);//СЃ3
+					row.put(index1_9+3, x_len * y_org_y1j + x_org_x1j * y_len);//СЃ4
+					row.put(index1_9+4, 2.0 * y_org_y1j * y_len);//СЃ5
 					
 
-					row.put(index2_9+0, - x_len);//с1
-					row.put(index2_9+1, - y_len);//с2
+					row.put(index2_9+0, - x_len);//СЃ1
+					row.put(index2_9+1, - y_len);//СЃ2
 
-					row.put(index2_9+2, - 2.0 * x_org_x2j * x_len);//с3
-					row.put(index2_9+3, - (x_len * y_org_y2j + x_org_x2j * y_len));//с4
-					row.put(index2_9+4, - 2.0 * y_org_y2j * y_len);//с5
+					row.put(index2_9+2, - 2.0 * x_org_x2j * x_len);//СЃ3
+					row.put(index2_9+3, - (x_len * y_org_y2j + x_org_x2j * y_len));//СЃ4
+					row.put(index2_9+4, - 2.0 * y_org_y2j * y_len);//СЃ5
 
 
 
@@ -3003,20 +3003,20 @@ void AddRowsToEquation2(int order,
 					//3*c9*y_org_yj*y_len^2+
 					//)*t^2+
 
-					row.put(index1_9+2, x_len * x_len);//с3
-					row.put(index1_9+3, x_len * y_len);//с4
-					row.put(index1_9+4, y_len * y_len);//с5
+					row.put(index1_9+2, x_len * x_len);//СЃ3
+					row.put(index1_9+3, x_len * y_len);//СЃ4
+					row.put(index1_9+4, y_len * y_len);//СЃ5
 
-					row.put(index2_9+2, - x_len * x_len);//с3
-					row.put(index2_9+3, - x_len * y_len);//с4
-					row.put(index2_9+4, - y_len * y_len);//с5
+					row.put(index2_9+2, - x_len * x_len);//СЃ3
+					row.put(index2_9+3, - x_len * y_len);//СЃ4
+					row.put(index2_9+4, - y_len * y_len);//СЃ5
 					
 					M.push_back(row);	B.push_back(0.0);
 				}
 				break;
 			case 3:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// f(t) := 
@@ -3040,29 +3040,29 @@ void AddRowsToEquation2(int order,
 
 					row.clear();	
 					//zj + c1*x_org_xj + c2*y_org_yj + c3*x_org_xj^2 + c5*y_org_yj^2 + c6*x_org_xj^3 + c7*x_org_xj^2*y_org_yj + c8*x_org_xj*y_org_yj^2 + c4*x_org_xj*y_org_yj + c9*y_org_yj^3
-					row.put(index1_9+0, x_org_x1j);//с1
-					row.put(index1_9+1, y_org_y1j);//с2
+					row.put(index1_9+0, x_org_x1j);//СЃ1
+					row.put(index1_9+1, y_org_y1j);//СЃ2
 
-					row.put(index1_9+2, (x_org_x1j) * (x_org_x1j));//с3
-					row.put(index1_9+3, (x_org_x1j) * (y_org_y1j));//с4
-					row.put(index1_9+4, (y_org_y1j) * (y_org_y1j));//с5
+					row.put(index1_9+2, (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.put(index1_9+3, (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.put(index1_9+4, (y_org_y1j) * (y_org_y1j));//СЃ5
 					
-					row.put(index1_9+5, (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//с6
-					row.put(index1_9+6, (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//с7
-					row.put(index1_9+7, (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//с8
-					row.put(index1_9+8, (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с9
+					row.put(index1_9+5, (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//СЃ6
+					row.put(index1_9+6, (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//СЃ7
+					row.put(index1_9+7, (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//СЃ8
+					row.put(index1_9+8, (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ9
 
-					row.put(index2_9+0, - (x_org_x2j));//с1
-					row.put(index2_9+1, - (y_org_y2j));//с2
+					row.put(index2_9+0, - (x_org_x2j));//СЃ1
+					row.put(index2_9+1, - (y_org_y2j));//СЃ2
 
-					row.put(index2_9+2, - (x_org_x2j) * (x_org_x2j));//с3
-					row.put(index2_9+3, - (x_org_x2j) * (y_org_y2j));//с4
-					row.put(index2_9+4, - (y_org_y2j) * (y_org_y2j));//с5
+					row.put(index2_9+2, - (x_org_x2j) * (x_org_x2j));//СЃ3
+					row.put(index2_9+3, - (x_org_x2j) * (y_org_y2j));//СЃ4
+					row.put(index2_9+4, - (y_org_y2j) * (y_org_y2j));//СЃ5
 					
-					row.put(index2_9+5, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//с6
-					row.put(index2_9+6, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//с7
-					row.put(index2_9+7, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//с8
-					row.put(index2_9+8, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//с9
+					row.put(index2_9+5, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//СЃ6
+					row.put(index2_9+6, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//СЃ7
+					row.put(index2_9+7, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//СЃ8
+					row.put(index2_9+8, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//СЃ9
 
 					M.push_back(row);	B.push_back(z[ind2] - z[ind1]);
 					
@@ -3082,29 +3082,29 @@ void AddRowsToEquation2(int order,
 					//3*c9*y_org_yj^2*y_len+
 					//)*t
 
-					row.put(index1_9+0, x_len);//с1
-					row.put(index1_9+1, y_len);//с2
+					row.put(index1_9+0, x_len);//СЃ1
+					row.put(index1_9+1, y_len);//СЃ2
 
-					row.put(index1_9+2, 2.0 * x_org_x1j * x_len);//с3
-					row.put(index1_9+3, x_len * y_org_y1j + x_org_x1j * y_len);//с4
-					row.put(index1_9+4, 2.0 * y_org_y1j * y_len);//с5
+					row.put(index1_9+2, 2.0 * x_org_x1j * x_len);//СЃ3
+					row.put(index1_9+3, x_len * y_org_y1j + x_org_x1j * y_len);//СЃ4
+					row.put(index1_9+4, 2.0 * y_org_y1j * y_len);//СЃ5
 					
-					row.put(index1_9+5, 3.0 * x_org_x1j * x_org_x1j * x_len);//с6
-					row.put(index1_9+6, x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j);//с7
-					row.put(index1_9+7, x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j);//с8
-					row.put(index1_9+8, 3.0 * y_org_y1j * y_org_y1j * y_len);//с9
+					row.put(index1_9+5, 3.0 * x_org_x1j * x_org_x1j * x_len);//СЃ6
+					row.put(index1_9+6, x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j);//СЃ7
+					row.put(index1_9+7, x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j);//СЃ8
+					row.put(index1_9+8, 3.0 * y_org_y1j * y_org_y1j * y_len);//СЃ9
 
-					row.put(index2_9+0, - x_len);//с1
-					row.put(index2_9+1, - y_len);//с2
+					row.put(index2_9+0, - x_len);//СЃ1
+					row.put(index2_9+1, - y_len);//СЃ2
 
-					row.put(index2_9+2, - 2.0 * x_org_x2j * x_len);//с3
-					row.put(index2_9+3, - (x_len * y_org_y2j + x_org_x2j * y_len));//с4
-					row.put(index2_9+4, - 2.0 * y_org_y2j * y_len);//с5
+					row.put(index2_9+2, - 2.0 * x_org_x2j * x_len);//СЃ3
+					row.put(index2_9+3, - (x_len * y_org_y2j + x_org_x2j * y_len));//СЃ4
+					row.put(index2_9+4, - 2.0 * y_org_y2j * y_len);//СЃ5
 
-					row.put(index2_9+5, - (3.0 * x_org_x2j * x_org_x2j * x_len));//с6
-					row.put(index2_9+6, - (x_org_x2j * x_org_x2j * y_len + 2.0 * x_org_x2j * x_len * y_org_y2j));//с7
-					row.put(index2_9+7, - (x_len * y_org_y2j * y_org_y2j + 2.0 * x_org_x2j * y_len * y_org_y2j));//с8
-					row.put(index2_9+8, - (3.0 * y_org_y2j * y_org_y2j * y_len));//с9
+					row.put(index2_9+5, - (3.0 * x_org_x2j * x_org_x2j * x_len));//СЃ6
+					row.put(index2_9+6, - (x_org_x2j * x_org_x2j * y_len + 2.0 * x_org_x2j * x_len * y_org_y2j));//СЃ7
+					row.put(index2_9+7, - (x_len * y_org_y2j * y_org_y2j + 2.0 * x_org_x2j * y_len * y_org_y2j));//СЃ8
+					row.put(index2_9+8, - (3.0 * y_org_y2j * y_org_y2j * y_len));//СЃ9
 
 
 					M.push_back(row);	B.push_back(0.0);
@@ -3122,39 +3122,39 @@ void AddRowsToEquation2(int order,
 					//3*c9*y_org_yj*y_len^2+
 					//)*t^2+
 
-					row.put(index1_9+2, x_len * x_len);//с3
-					row.put(index1_9+3, x_len * y_len);//с4
-					row.put(index1_9+4, y_len * y_len);//с5
+					row.put(index1_9+2, x_len * x_len);//СЃ3
+					row.put(index1_9+3, x_len * y_len);//СЃ4
+					row.put(index1_9+4, y_len * y_len);//СЃ5
 					
-					row.put(index1_9+5, 3.0 * x_org_x1j * x_len * x_len);//с6
-					row.put(index1_9+6, x_len * x_len * y_org_y1j + 2.0 * x_org_x1j * x_len * y_len);//с7
-					row.put(index1_9+7, x_org_x1j * y_len * y_len + 2.0 * y_org_y1j * x_len * y_len);//с8
-					row.put(index1_9+8, 3.0 * y_org_y1j * y_len * y_len);//с9
+					row.put(index1_9+5, 3.0 * x_org_x1j * x_len * x_len);//СЃ6
+					row.put(index1_9+6, x_len * x_len * y_org_y1j + 2.0 * x_org_x1j * x_len * y_len);//СЃ7
+					row.put(index1_9+7, x_org_x1j * y_len * y_len + 2.0 * y_org_y1j * x_len * y_len);//СЃ8
+					row.put(index1_9+8, 3.0 * y_org_y1j * y_len * y_len);//СЃ9
 
 
-					row.put(index2_9+2, - x_len * x_len);//с3
-					row.put(index2_9+3, - x_len * y_len);//с4
-					row.put(index2_9+4, - y_len * y_len);//с5
+					row.put(index2_9+2, - x_len * x_len);//СЃ3
+					row.put(index2_9+3, - x_len * y_len);//СЃ4
+					row.put(index2_9+4, - y_len * y_len);//СЃ5
 					
-					row.put(index2_9+5, - (3.0 * x_org_x2j * x_len * x_len));//с6
-					row.put(index2_9+6, - (x_len * x_len * y_org_y2j + 2.0 * x_org_x2j * x_len * y_len));//с7
-					row.put(index2_9+7, - (x_org_x2j * y_len * y_len + 2.0 * y_org_y2j * x_len * y_len));//с8
-					row.put(index2_9+8, - (3.0 * y_org_y2j * y_len * y_len));//с9
+					row.put(index2_9+5, - (3.0 * x_org_x2j * x_len * x_len));//СЃ6
+					row.put(index2_9+6, - (x_len * x_len * y_org_y2j + 2.0 * x_org_x2j * x_len * y_len));//СЃ7
+					row.put(index2_9+7, - (x_org_x2j * y_len * y_len + 2.0 * y_org_y2j * x_len * y_len));//СЃ8
+					row.put(index2_9+8, - (3.0 * y_org_y2j * y_len * y_len));//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 
 
 					row.clear();	
 					//(c8*x_len*y_len^2 + c6*x_len^3 + c7*x_len^2*y_len + c9*y_len^3)*t^3+
-					row.put(index1_9+5, x_len * x_len * x_len);//с6
-					row.put(index1_9+6, x_len * x_len * y_len);//с7
-					row.put(index1_9+7, x_len * y_len * y_len);//с8
-					row.put(index1_9+8, y_len * y_len * y_len);//с9
+					row.put(index1_9+5, x_len * x_len * x_len);//СЃ6
+					row.put(index1_9+6, x_len * x_len * y_len);//СЃ7
+					row.put(index1_9+7, x_len * y_len * y_len);//СЃ8
+					row.put(index1_9+8, y_len * y_len * y_len);//СЃ9
 
-					row.put(index2_9+5, - x_len * x_len * x_len);//с6
-					row.put(index2_9+6, - x_len * x_len * y_len);//с7
-					row.put(index2_9+7, - x_len * y_len * y_len);//с8
-					row.put(index2_9+8, - y_len * y_len * y_len);//с9
+					row.put(index2_9+5, - x_len * x_len * x_len);//СЃ6
+					row.put(index2_9+6, - x_len * x_len * y_len);//СЃ7
+					row.put(index2_9+7, - x_len * y_len * y_len);//СЃ8
+					row.put(index2_9+8, - y_len * y_len * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -3172,7 +3172,7 @@ void AddRowsToEquation2(int order,
 			case 2:
 				{
 					// the first derivative
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_x(t) := 
@@ -3190,16 +3190,16 @@ void AddRowsToEquation2(int order,
 
 					row.clear();	
 					//c1 + 2*c3*x_org_xj + c4*y_org_yj + 2*c7*x_org_xj*y_org_yj + 3*c6*x_org_xj^2 + c8*y_org_yj^2
-					row.put(index1_9+0, 1.0);//с1
+					row.put(index1_9+0, 1.0);//СЃ1
 
-					row.put(index1_9+2, 2.0 * x_org_x1j);//с3
-					row.put(index1_9+3,       y_org_y1j);//с4
+					row.put(index1_9+2, 2.0 * x_org_x1j);//СЃ3
+					row.put(index1_9+3,       y_org_y1j);//СЃ4
 					
 
-					row.put(index2_9+0, - 1.0);//с1
+					row.put(index2_9+0, - 1.0);//СЃ1
 
-					row.put(index2_9+2, - 2.0 * x_org_x2j);//с3
-					row.put(index2_9+3, -       y_org_y2j);//с4
+					row.put(index2_9+2, - 2.0 * x_org_x2j);//СЃ3
+					row.put(index2_9+3, -       y_org_y2j);//СЃ4
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -3214,12 +3214,12 @@ void AddRowsToEquation2(int order,
 					//2*c8*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_9+2, 2.0 * x_len);//с3
-					row.put(index1_9+3,       y_len);//с4
+					row.put(index1_9+2, 2.0 * x_len);//СЃ3
+					row.put(index1_9+3,       y_len);//СЃ4
 					
 
-					row.put(index2_9+2, - 2.0 * x_len);//с3
-					row.put(index2_9+3, -       y_len);//с4
+					row.put(index2_9+2, - 2.0 * x_len);//СЃ3
+					row.put(index2_9+3, -       y_len);//СЃ4
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -3228,7 +3228,7 @@ void AddRowsToEquation2(int order,
 			case 3:
 				{
 					// the first derivative
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_x(t) := 
@@ -3246,23 +3246,23 @@ void AddRowsToEquation2(int order,
 
 					row.clear();	
 					//c1 + 2*c3*x_org_xj + c4*y_org_yj + 2*c7*x_org_xj*y_org_yj + 3*c6*x_org_xj^2 + c8*y_org_yj^2
-					row.put(index1_9+0, 1.0);//с1
+					row.put(index1_9+0, 1.0);//СЃ1
 
-					row.put(index1_9+2, 2.0 * x_org_x1j);//с3
-					row.put(index1_9+3,       y_org_y1j);//с4
+					row.put(index1_9+2, 2.0 * x_org_x1j);//СЃ3
+					row.put(index1_9+3,       y_org_y1j);//СЃ4
 					
-					row.put(index1_9+5, 3.0 * x_org_x1j * x_org_x1j);//с6
-					row.put(index1_9+6, 2.0 * x_org_x1j * y_org_y1j);//с7
-					row.put(index1_9+7,       y_org_y1j * y_org_y1j);//с8
+					row.put(index1_9+5, 3.0 * x_org_x1j * x_org_x1j);//СЃ6
+					row.put(index1_9+6, 2.0 * x_org_x1j * y_org_y1j);//СЃ7
+					row.put(index1_9+7,       y_org_y1j * y_org_y1j);//СЃ8
 
-					row.put(index2_9+0, - 1.0);//с1
+					row.put(index2_9+0, - 1.0);//СЃ1
 
-					row.put(index2_9+2, - 2.0 * x_org_x2j);//с3
-					row.put(index2_9+3, -       y_org_y2j);//с4
+					row.put(index2_9+2, - 2.0 * x_org_x2j);//СЃ3
+					row.put(index2_9+3, -       y_org_y2j);//СЃ4
 					
-					row.put(index2_9+5, - 3.0 * x_org_x2j * x_org_x2j);//с6
-					row.put(index2_9+6, - 2.0 * x_org_x2j * y_org_y2j);//с7
-					row.put(index2_9+7, -       y_org_y2j * y_org_y2j);//с8
+					row.put(index2_9+5, - 3.0 * x_org_x2j * x_org_x2j);//СЃ6
+					row.put(index2_9+6, - 2.0 * x_org_x2j * y_org_y2j);//СЃ7
+					row.put(index2_9+7, -       y_org_y2j * y_org_y2j);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -3276,19 +3276,19 @@ void AddRowsToEquation2(int order,
 					//2*c8*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_9+2, 2.0 * x_len);//с3
-					row.put(index1_9+3,       y_len);//с4
+					row.put(index1_9+2, 2.0 * x_len);//СЃ3
+					row.put(index1_9+3,       y_len);//СЃ4
 					
-					row.put(index1_9+5, 6.0 * x_org_x1j * x_len);//с6
-					row.put(index1_9+6, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//с7
-					row.put(index1_9+7, 2.0 * y_org_y1j * y_len);//с8
+					row.put(index1_9+5, 6.0 * x_org_x1j * x_len);//СЃ6
+					row.put(index1_9+6, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//СЃ7
+					row.put(index1_9+7, 2.0 * y_org_y1j * y_len);//СЃ8
 
-					row.put(index2_9+2, - 2.0 * x_len);//с3
-					row.put(index2_9+3, -       y_len);//с4
+					row.put(index2_9+2, - 2.0 * x_len);//СЃ3
+					row.put(index2_9+3, -       y_len);//СЃ4
 					
-					row.put(index2_9+5, - 6.0 * x_org_x2j * x_len);//с6
-					row.put(index2_9+6, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len));//с7
-					row.put(index2_9+7, - 2.0 * y_org_y2j * y_len);//с8
+					row.put(index2_9+5, - 6.0 * x_org_x2j * x_len);//СЃ6
+					row.put(index2_9+6, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len));//СЃ7
+					row.put(index2_9+7, - 2.0 * y_org_y2j * y_len);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -3296,13 +3296,13 @@ void AddRowsToEquation2(int order,
 					row.clear();	
 					//(3*c6*x_len^2 + 2*c7*x_len*y_len + c8*y_len^2)*t^2+
 
-					row.put(index1_9+5, 3.0 * x_len * x_len);//с6
-					row.put(index1_9+6, 2.0 * x_len * y_len);//с7
-					row.put(index1_9+7,       y_len * y_len);//с8
+					row.put(index1_9+5, 3.0 * x_len * x_len);//СЃ6
+					row.put(index1_9+6, 2.0 * x_len * y_len);//СЃ7
+					row.put(index1_9+7,       y_len * y_len);//СЃ8
 
-					row.put(index2_9+5, - 3.0 * x_len * x_len);//с6
-					row.put(index2_9+6, - 2.0 * x_len * y_len);//с7
-					row.put(index2_9+7, -       y_len * y_len);//с8
+					row.put(index2_9+5, - 3.0 * x_len * x_len);//СЃ6
+					row.put(index2_9+6, - 2.0 * x_len * y_len);//СЃ7
+					row.put(index2_9+7, -       y_len * y_len);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -3317,7 +3317,7 @@ void AddRowsToEquation2(int order,
 			case 2:
 				{
 					row._order = 1;
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -3338,16 +3338,16 @@ void AddRowsToEquation2(int order,
 					row.clear();	
 					//c2 + c4*x_org_xj + 2*c5*y_org_yj + 2*c8*x_org_xj*y_org_yj + c7*x_org_xj^2 + 3*c9*y_org_yj^2
 
-					row.put(index1_9+1, 1.0);//с2
+					row.put(index1_9+1, 1.0);//СЃ2
 
-					row.put(index1_9+3,       x_org_x1j);//с4
-					row.put(index1_9+4, 2.0 * y_org_y1j);//с5
+					row.put(index1_9+3,       x_org_x1j);//СЃ4
+					row.put(index1_9+4, 2.0 * y_org_y1j);//СЃ5
 					
 
-					row.put(index2_9+1, - 1.0);//с2
+					row.put(index2_9+1, - 1.0);//СЃ2
 
-					row.put(index2_9+3, -       x_org_x2j);//с4
-					row.put(index2_9+4, - 2.0 * y_org_y2j);//с5
+					row.put(index2_9+3, -       x_org_x2j);//СЃ4
+					row.put(index2_9+4, - 2.0 * y_org_y2j);//СЃ5
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -3362,12 +3362,12 @@ void AddRowsToEquation2(int order,
 					//6*c9*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_9+3,       x_len);//с4
-					row.put(index1_9+4, 2.0 * y_len);//с5
+					row.put(index1_9+3,       x_len);//СЃ4
+					row.put(index1_9+4, 2.0 * y_len);//СЃ5
 					
 
-					row.put(index2_9+3, -       x_len);//с4
-					row.put(index2_9+4, - 2.0 * y_len);//с5
+					row.put(index2_9+3, -       x_len);//СЃ4
+					row.put(index2_9+4, - 2.0 * y_len);//СЃ5
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -3376,7 +3376,7 @@ void AddRowsToEquation2(int order,
 			case 3:
 				{
 					row._order = 1;
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -3397,23 +3397,23 @@ void AddRowsToEquation2(int order,
 					row.clear();	
 					//c2 + c4*x_org_xj + 2*c5*y_org_yj + 2*c8*x_org_xj*y_org_yj + c7*x_org_xj^2 + 3*c9*y_org_yj^2
 
-					row.put(index1_9+1, 1.0);//с2
+					row.put(index1_9+1, 1.0);//СЃ2
 
-					row.put(index1_9+3,       x_org_x1j);//с4
-					row.put(index1_9+4, 2.0 * y_org_y1j);//с5
+					row.put(index1_9+3,       x_org_x1j);//СЃ4
+					row.put(index1_9+4, 2.0 * y_org_y1j);//СЃ5
 					
-					row.put(index1_9+6,       x_org_x1j * x_org_x1j);//с7
-					row.put(index1_9+7, 2.0 * x_org_x1j * y_org_y1j);//с8
-					row.put(index1_9+8, 3.0 * y_org_y1j * y_org_y1j);//с9
+					row.put(index1_9+6,       x_org_x1j * x_org_x1j);//СЃ7
+					row.put(index1_9+7, 2.0 * x_org_x1j * y_org_y1j);//СЃ8
+					row.put(index1_9+8, 3.0 * y_org_y1j * y_org_y1j);//СЃ9
 
-					row.put(index2_9+1, - 1.0);//с2
+					row.put(index2_9+1, - 1.0);//СЃ2
 
-					row.put(index2_9+3, -       x_org_x2j);//с4
-					row.put(index2_9+4, - 2.0 * y_org_y2j);//с5
+					row.put(index2_9+3, -       x_org_x2j);//СЃ4
+					row.put(index2_9+4, - 2.0 * y_org_y2j);//СЃ5
 					
-					row.put(index2_9+6, -       x_org_x2j * x_org_x2j);//с7
-					row.put(index2_9+7, - 2.0 * x_org_x2j * y_org_y2j);//с8
-					row.put(index2_9+8, - 3.0 * y_org_y2j * y_org_y2j);//с9
+					row.put(index2_9+6, -       x_org_x2j * x_org_x2j);//СЃ7
+					row.put(index2_9+7, - 2.0 * x_org_x2j * y_org_y2j);//СЃ8
+					row.put(index2_9+8, - 3.0 * y_org_y2j * y_org_y2j);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -3427,32 +3427,32 @@ void AddRowsToEquation2(int order,
 					//6*c9*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_9+3,       x_len);//с4
-					row.put(index1_9+4, 2.0 * y_len);//с5
+					row.put(index1_9+3,       x_len);//СЃ4
+					row.put(index1_9+4, 2.0 * y_len);//СЃ5
 					
-					row.put(index1_9+6, 2.0 * x_org_x1j * x_len);//с7
-					row.put(index1_9+7, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//с8
-					row.put(index1_9+8, 6.0 * y_org_y1j * y_len);//с9
+					row.put(index1_9+6, 2.0 * x_org_x1j * x_len);//СЃ7
+					row.put(index1_9+7, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//СЃ8
+					row.put(index1_9+8, 6.0 * y_org_y1j * y_len);//СЃ9
 
-					row.put(index2_9+3, -       x_len);//с4
-					row.put(index2_9+4, - 2.0 * y_len);//с5
+					row.put(index2_9+3, -       x_len);//СЃ4
+					row.put(index2_9+4, - 2.0 * y_len);//СЃ5
 					
-					row.put(index2_9+6, - 2.0 * x_org_x2j * x_len);//с7
-					row.put(index2_9+7, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len) );//с8
-					row.put(index2_9+8, - 3.0 * y_org_y2j * y_len);//с9
+					row.put(index2_9+6, - 2.0 * x_org_x2j * x_len);//СЃ7
+					row.put(index2_9+7, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len) );//СЃ8
+					row.put(index2_9+8, - 3.0 * y_org_y2j * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 
 					row.clear();	
 					//(c7*x_len^2 + 2*c8*x_len*y_len + 3*c9*y_len^2)*t^2+
 
-					row.put(index1_9+6,       x_len * x_len);//с7
-					row.put(index1_9+7, 2.0 * x_len * y_len);//с8
-					row.put(index1_9+8, 3.0 * y_len * y_len);//с9
+					row.put(index1_9+6,       x_len * x_len);//СЃ7
+					row.put(index1_9+7, 2.0 * x_len * y_len);//СЃ8
+					row.put(index1_9+8, 3.0 * y_len * y_len);//СЃ9
 
-					row.put(index2_9+6, - 2.0 * x_len * x_len);//с7
-					row.put(index2_9+7, - 2.0 * x_len * y_len);//с8
-					row.put(index2_9+8, - 3.0 * y_len * y_len);//с9
+					row.put(index2_9+6, - 2.0 * x_len * x_len);//СЃ7
+					row.put(index2_9+7, - 2.0 * x_len * y_len);//СЃ8
+					row.put(index2_9+8, - 3.0 * y_len * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -3468,7 +3468,7 @@ void AddRowsToEquation2(int order,
 			{
 			case 2:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -3484,15 +3484,15 @@ void AddRowsToEquation2(int order,
 
 					row.clear();	
 					//2*c3 + 6*c6*x_org_xj + 2*c7*y_org_yj
-					row.put(index1_9+2, 2.0);//с3				
+					row.put(index1_9+2, 2.0);//СЃ3				
 
-					row.put(index2_9+2, - 2.0);//с3				
+					row.put(index2_9+2, - 2.0);//СЃ3				
 
 					M.push_back(row);	B.push_back(0.0);
 					
 
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_yy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -3507,16 +3507,16 @@ void AddRowsToEquation2(int order,
 
 					row.clear();	
 					//2*c5 + 2*c8*x_org_xj + 6*c9*y_org_yj
-					row.put(index1_9+4, + 2.0);//с5				
+					row.put(index1_9+4, + 2.0);//СЃ5				
 
-					row.put(index2_9+4, - 2.0);//с5				
+					row.put(index2_9+4, - 2.0);//СЃ5				
 
 					M.push_back(row);	B.push_back(0.0);
 					
 
 					
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_xy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -3531,9 +3531,9 @@ void AddRowsToEquation2(int order,
 
 					row.clear();
 					//c4 + 2*c7*x_org_xj + 2*c8*y_org_yj
-					row.put(index1_9+3, + 1.0);//с4				
+					row.put(index1_9+3, + 1.0);//СЃ4				
 
-					row.put(index2_9+3, - 1.0);//с4				
+					row.put(index2_9+3, - 1.0);//СЃ4				
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -3541,7 +3541,7 @@ void AddRowsToEquation2(int order,
 				break;
 			case 3:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -3557,27 +3557,27 @@ void AddRowsToEquation2(int order,
 
 					row.clear();	
 					//2*c3 + 6*c6*x_org_xj + 2*c7*y_org_yj
-					row.put(index1_9+2, 2.0);//с3				
-					row.put(index1_9+5, 6.0 * x_org_x1j);//с6
-					row.put(index1_9+6, 2.0 * y_org_y1j);//с7
+					row.put(index1_9+2, 2.0);//СЃ3				
+					row.put(index1_9+5, 6.0 * x_org_x1j);//СЃ6
+					row.put(index1_9+6, 2.0 * y_org_y1j);//СЃ7
 
-					row.put(index2_9+2, - 2.0);//с3				
-					row.put(index2_9+5, - 6.0 * x_org_x2j);//с6
-					row.put(index2_9+6, - 2.0 * y_org_y2j);//с7
+					row.put(index2_9+2, - 2.0);//СЃ3				
+					row.put(index2_9+5, - 6.0 * x_org_x2j);//СЃ6
+					row.put(index2_9+6, - 2.0 * y_org_y2j);//СЃ7
 
 					M.push_back(row);	B.push_back(0.0);
 					
 					row.clear();	
 					//(6*c6*x_len + 2*c7*y_len)*t+
-					row.put(index1_9+5, 6.0 * x_len);//с6
-					row.put(index1_9+6, 2.0 * y_len);//с7
+					row.put(index1_9+5, 6.0 * x_len);//СЃ6
+					row.put(index1_9+6, 2.0 * y_len);//СЃ7
 
-					row.put(index2_9+5, - 6.0 * x_len);//с6
-					row.put(index2_9+6, - 2.0 * y_len);//с7
+					row.put(index2_9+5, - 6.0 * x_len);//СЃ6
+					row.put(index2_9+6, - 2.0 * y_len);//СЃ7
 
 					M.push_back(row);	B.push_back(0.0);
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_yy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -3592,28 +3592,28 @@ void AddRowsToEquation2(int order,
 
 					row.clear();	
 					//2*c5 + 2*c8*x_org_xj + 6*c9*y_org_yj
-					row.put(index1_9+4, + 2.0);//с5				
-					row.put(index1_9+7, + 2.0 * x_org_x1j);//с8
-					row.put(index1_9+8, + 6.0 * y_org_y1j);//с9
+					row.put(index1_9+4, + 2.0);//СЃ5				
+					row.put(index1_9+7, + 2.0 * x_org_x1j);//СЃ8
+					row.put(index1_9+8, + 6.0 * y_org_y1j);//СЃ9
 
-					row.put(index2_9+4, - 2.0);//с5				
-					row.put(index2_9+7, - 2.0 * x_org_x2j);//с8
-					row.put(index2_9+8, - 6.0 * y_org_y2j);//с9
+					row.put(index2_9+4, - 2.0);//СЃ5				
+					row.put(index2_9+7, - 2.0 * x_org_x2j);//СЃ8
+					row.put(index2_9+8, - 6.0 * y_org_y2j);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 					
 					row.clear();	
 					// (2*c8*x_len + 6*c9*y_len)*t+
-					row.put(index1_9+7, + 2.0 * x_len);//с8
-					row.put(index1_9+8, + 6.0 * y_len);//с9
+					row.put(index1_9+7, + 2.0 * x_len);//СЃ8
+					row.put(index1_9+8, + 6.0 * y_len);//СЃ9
 
-					row.put(index2_9+7, - 2.0 * x_len);//с8
-					row.put(index2_9+8, - 6.0 * y_len);//с9
+					row.put(index2_9+7, - 2.0 * x_len);//СЃ8
+					row.put(index2_9+8, - 6.0 * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 					
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_xy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -3628,23 +3628,23 @@ void AddRowsToEquation2(int order,
 
 					row.clear();
 					//c4 + 2*c7*x_org_xj + 2*c8*y_org_yj
-					row.put(index1_9+3, + 1.0);//с4				
-					row.put(index1_9+6, + 2.0 * x_org_x1j);//с7
-					row.put(index1_9+7, + 2.0 * y_org_y1j);//с8
+					row.put(index1_9+3, + 1.0);//СЃ4				
+					row.put(index1_9+6, + 2.0 * x_org_x1j);//СЃ7
+					row.put(index1_9+7, + 2.0 * y_org_y1j);//СЃ8
 
-					row.put(index2_9+3, - 1.0);//с4				
-					row.put(index2_9+6, - 2.0 * x_org_x2j);//с7
-					row.put(index2_9+7, - 2.0 * y_org_y2j);//с8
+					row.put(index2_9+3, - 1.0);//СЃ4				
+					row.put(index2_9+6, - 2.0 * x_org_x2j);//СЃ7
+					row.put(index2_9+7, - 2.0 * y_org_y2j);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 
 					row.clear();
 					//(2*c7*x_len + 2*c8*y_len)*t+
-					row.put(index1_9+6, + 2.0 * x_len);//с7
-					row.put(index1_9+7, + 2.0 * y_len);//с8
+					row.put(index1_9+6, + 2.0 * x_len);//СЃ7
+					row.put(index1_9+7, + 2.0 * y_len);//СЃ8
 
-					row.put(index2_9+6, - 2.0 * x_len);//с7
-					row.put(index2_9+7, - 2.0 * y_len);//с8
+					row.put(index2_9+6, - 2.0 * x_len);//СЃ7
+					row.put(index2_9+7, - 2.0 * y_len);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -3662,18 +3662,18 @@ void AddRowsToEquation2(int order,
 void AddRowsToEquation_(int N_trias, int order_t, int order_c, 
 						size_t nk_t, size_t nk_c,						
 						//double _weight,
-					   vector<sparse_row> & M,	// формируемая матрица
+					   vector<sparse_row> & M,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols, 
-					  vector<double> & B,			// формируемый вектор правых частей
-					  vector<double> & z,			// отметки высот
+					  vector<double> & B,			// С„РѕСЂРјРёСЂСѓРµРјС‹Р№ РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
 					  PolygonEx * p,
 					  vector<geometry2D::Point> &base_points
 					  )
 {
-	geometry2D::Point ptj;		// базовая точка
-	geometry2D::Point pt;		// дополнительная точка, 
-					  // которая должна удовлетворять 
-					  // уравнению кубической интерполяции
+	geometry2D::Point ptj;		// Р±Р°Р·РѕРІР°СЏ С‚РѕС‡РєР°
+	geometry2D::Point pt;		// РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ С‚РѕС‡РєР°, 
+					  // РєРѕС‚РѕСЂР°СЏ РґРѕР»Р¶РЅР° СѓРґРѕРІР»РµС‚РІРѕСЂСЏС‚СЊ 
+					  // СѓСЂР°РІРЅРµРЅРёСЋ РєСѓР±РёС‡РµСЃРєРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 	size_t index = p->index;
 	ptj = base_points[index];
 	size_t index_10 = (int)index < N_trias ? index*nk_t : N_trias*nk_t + (index-N_trias)*nk_c;
@@ -3702,7 +3702,7 @@ void AddRowsToEquation_(int N_trias, int order_t, int order_c,
 			double dx = pt.x - ptj.x;
 			double dy = pt.y - ptj.y;
 
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			
 			sparse_row row; 
 			row.clear();
@@ -3710,24 +3710,24 @@ void AddRowsToEquation_(int N_trias, int order_t, int order_c,
 			switch(order)
 			{
 			case 4:
-				row.put(index_10+10, dx * dx * dx * dx);//с6
-				row.put(index_10+11, dx * dx * dx * dy);//с7
-				row.put(index_10+12, dx * dx * dy * dy);//с8
-				row.put(index_10+13, dx * dy * dy * dy);//с8
-				row.put(index_10+14, dy * dy * dy * dy);//с9
+				row.put(index_10+10, dx * dx * dx * dx);//СЃ6
+				row.put(index_10+11, dx * dx * dx * dy);//СЃ7
+				row.put(index_10+12, dx * dx * dy * dy);//СЃ8
+				row.put(index_10+13, dx * dy * dy * dy);//СЃ8
+				row.put(index_10+14, dy * dy * dy * dy);//СЃ9
 			case 3:
-				row.put(index_10+6, dx * dx * dx);//с6
-				row.put(index_10+7, dx * dx * dy);//с7
-				row.put(index_10+8, dx * dy * dy);//с8
-				row.put(index_10+9, dy * dy * dy);//с9
+				row.put(index_10+6, dx * dx * dx);//СЃ6
+				row.put(index_10+7, dx * dx * dy);//СЃ7
+				row.put(index_10+8, dx * dy * dy);//СЃ8
+				row.put(index_10+9, dy * dy * dy);//СЃ9
 			case 2:
-				row.put(index_10+3, dx * dx);//с3
-				row.put(index_10+4, dx * dy);//с4
-				row.put(index_10+5, dy * dy);//с5
+				row.put(index_10+3, dx * dx);//СЃ3
+				row.put(index_10+4, dx * dy);//СЃ4
+				row.put(index_10+5, dy * dy);//СЃ5
 			case 1:
-				row.put(index_10+0, 1.0);//с0
-				row.put(index_10+1, dx);//с1
-				row.put(index_10+2, dy);//с2
+				row.put(index_10+0, 1.0);//СЃ0
+				row.put(index_10+1, dx);//СЃ1
+				row.put(index_10+2, dy);//СЃ2
 			}
 			
 #if SPARSE_ROW_EX
@@ -3742,10 +3742,10 @@ void AddRowsToEquation_(int N_trias, int order_t, int order_c,
 }
 
 void AddRowsToEquation2__(int order,
-						vector<sparse_row> & M,	// формируемая матрица
+						vector<sparse_row> & M,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols,
-					  vector<double> & B,			// формируемый вектор правых частей
-					  vector<double> & z,			// отметки высот
+					  vector<double> & B,			// С„РѕСЂРјРёСЂСѓРµРјС‹Р№ РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
 					  EdgeEx * ex,
 					  vector<geometry2D::Point> &base_points)
 {
@@ -3799,7 +3799,7 @@ void AddRowsToEquation2__(int order,
 		double x_len = x_dest - x_org;
 		double y_len = y_dest - y_org;
 
-		// базовые точки для обоих полигонов
+		// Р±Р°Р·РѕРІС‹Рµ С‚РѕС‡РєРё РґР»СЏ РѕР±РѕРёС… РїРѕР»РёРіРѕРЅРѕРІ
 		geometry2D::Point pt1j = base_points[index1];
 		geometry2D::Point pt2j = base_points[index2];
 
@@ -3817,7 +3817,7 @@ void AddRowsToEquation2__(int order,
 		bool add_first_der_x = true;
 		bool add_first_der_y = true;
 
-		//наклон ребра
+		//РЅР°РєР»РѕРЅ СЂРµР±СЂР°
 
 		double fabs_slope = fabs(ex->slope());
 
@@ -3846,22 +3846,22 @@ void AddRowsToEquation2__(int order,
 					// zj + c1*x_org_xj+c2*y_org_yj+c4*x_org_xj*y_org_yj+c3*x_org_xj^2+c5*y_org_yj^2
 					row.clear();	
 					// zj + c1*x_org_xj + c2*y_org_yj + c4*x_org_xj*y_org_yj + c3*x_org_xj^2
-					row.put(index1_10+0, 1.0);//с0
-					row.put(index1_10+1, x_org_x1j);//с1
-					row.put(index1_10+2, y_org_y1j);//с2
+					row.put(index1_10+0, 1.0);//СЃ0
+					row.put(index1_10+1, x_org_x1j);//СЃ1
+					row.put(index1_10+2, y_org_y1j);//СЃ2
 
-					row.put(index1_10+3, (x_org_x1j) * (x_org_x1j));//с3
-					row.put(index1_10+4, (x_org_x1j) * (y_org_y1j));//с4
-					row.put(index1_10+5, (y_org_y1j) * (y_org_y1j));//с5
+					row.put(index1_10+3, (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.put(index1_10+4, (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.put(index1_10+5, (y_org_y1j) * (y_org_y1j));//СЃ5
 					
 
-					row.put(index2_10+0, - 1.0);//с0
-					row.put(index2_10+1, - (x_org_x2j));//с1
-					row.put(index2_10+2, - (y_org_y2j));//с2
+					row.put(index2_10+0, - 1.0);//СЃ0
+					row.put(index2_10+1, - (x_org_x2j));//СЃ1
+					row.put(index2_10+2, - (y_org_y2j));//СЃ2
 
-					row.put(index2_10+3, - (x_org_x2j) * (x_org_x2j));//с3
-					row.put(index2_10+4, - (x_org_x2j) * (y_org_y2j));//с4
-					row.put(index2_10+5, - (y_org_y2j) * (y_org_y2j));//с5
+					row.put(index2_10+3, - (x_org_x2j) * (x_org_x2j));//СЃ3
+					row.put(index2_10+4, - (x_org_x2j) * (y_org_y2j));//СЃ4
+					row.put(index2_10+5, - (y_org_y2j) * (y_org_y2j));//СЃ5
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -3876,20 +3876,20 @@ void AddRowsToEquation2__(int order,
 					//)*t
 					// (c1*x_len+2*c3*x_org_xj*x_len+c2*y_len+c4*x_org_xj*y_len+c4*x_len*y_org_yj)*t+
 
-					row.put(index1_10+1, x_len);//с1
-					row.put(index1_10+2, y_len);//с2
+					row.put(index1_10+1, x_len);//СЃ1
+					row.put(index1_10+2, y_len);//СЃ2
 
-					row.put(index1_10+3, 2.0 * x_org_x1j * x_len);//с3
-					row.put(index1_10+4, x_len * y_org_y1j + x_org_x1j * y_len);//с4
-					row.put(index1_10+5, 2.0 * y_org_y1j * y_len);//с5
+					row.put(index1_10+3, 2.0 * x_org_x1j * x_len);//СЃ3
+					row.put(index1_10+4, x_len * y_org_y1j + x_org_x1j * y_len);//СЃ4
+					row.put(index1_10+5, 2.0 * y_org_y1j * y_len);//СЃ5
 					
 
-					row.put(index2_10+1, - x_len);//с1
-					row.put(index2_10+2, - y_len);//с2
+					row.put(index2_10+1, - x_len);//СЃ1
+					row.put(index2_10+2, - y_len);//СЃ2
 
-					row.put(index2_10+3, - 2.0 * x_org_x2j * x_len);//с3
-					row.put(index2_10+4, - (x_len * y_org_y2j + x_org_x2j * y_len));//с4
-					row.put(index2_10+5, - 2.0 * y_org_y2j * y_len);//с5
+					row.put(index2_10+3, - 2.0 * x_org_x2j * x_len);//СЃ3
+					row.put(index2_10+4, - (x_len * y_org_y2j + x_org_x2j * y_len));//СЃ4
+					row.put(index2_10+5, - 2.0 * y_org_y2j * y_len);//СЃ5
 
 
 
@@ -3907,20 +3907,20 @@ void AddRowsToEquation2__(int order,
 					//3*c9*y_org_yj*y_len^2+
 					//)*t^2+
 
-					row.put(index1_10+3, x_len * x_len);//с3
-					row.put(index1_10+4, x_len * y_len);//с4
-					row.put(index1_10+5, y_len * y_len);//с5
+					row.put(index1_10+3, x_len * x_len);//СЃ3
+					row.put(index1_10+4, x_len * y_len);//СЃ4
+					row.put(index1_10+5, y_len * y_len);//СЃ5
 
-					row.put(index2_10+3, - x_len * x_len);//с3
-					row.put(index2_10+4, - x_len * y_len);//с4
-					row.put(index2_10+5, - y_len * y_len);//с5
+					row.put(index2_10+3, - x_len * x_len);//СЃ3
+					row.put(index2_10+4, - x_len * y_len);//СЃ4
+					row.put(index2_10+5, - y_len * y_len);//СЃ5
 					
 					M.push_back(row);	B.push_back(0.0);
 				}
 				break;
 			case 3:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// f(t) := 
@@ -3944,31 +3944,31 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();	
 					//zj + c1*x_org_xj + c2*y_org_yj + c3*x_org_xj^2 + c5*y_org_yj^2 + c6*x_org_xj^3 + c7*x_org_xj^2*y_org_yj + c8*x_org_xj*y_org_yj^2 + c4*x_org_xj*y_org_yj + c9*y_org_yj^3
-					row.put(index1_10+0, 1.0);//с0
-					row.put(index1_10+1, x_org_x1j);//с1
-					row.put(index1_10+2, y_org_y1j);//с2
+					row.put(index1_10+0, 1.0);//СЃ0
+					row.put(index1_10+1, x_org_x1j);//СЃ1
+					row.put(index1_10+2, y_org_y1j);//СЃ2
 
-					row.put(index1_10+3, (x_org_x1j) * (x_org_x1j));//с3
-					row.put(index1_10+4, (x_org_x1j) * (y_org_y1j));//с4
-					row.put(index1_10+5, (y_org_y1j) * (y_org_y1j));//с5
+					row.put(index1_10+3, (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.put(index1_10+4, (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.put(index1_10+5, (y_org_y1j) * (y_org_y1j));//СЃ5
 					
-					row.put(index1_10+6, (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//с6
-					row.put(index1_10+7, (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//с7
-					row.put(index1_10+8, (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//с8
-					row.put(index1_10+9, (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с9
+					row.put(index1_10+6, (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//СЃ6
+					row.put(index1_10+7, (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//СЃ7
+					row.put(index1_10+8, (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//СЃ8
+					row.put(index1_10+9, (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ9
 
-					row.put(index2_10+0, - 1.0);//с0
-					row.put(index2_10+1, - (x_org_x2j));//с1
-					row.put(index2_10+2, - (y_org_y2j));//с2
+					row.put(index2_10+0, - 1.0);//СЃ0
+					row.put(index2_10+1, - (x_org_x2j));//СЃ1
+					row.put(index2_10+2, - (y_org_y2j));//СЃ2
 
-					row.put(index2_10+3, - (x_org_x2j) * (x_org_x2j));//с3
-					row.put(index2_10+4, - (x_org_x2j) * (y_org_y2j));//с4
-					row.put(index2_10+5, - (y_org_y2j) * (y_org_y2j));//с5
+					row.put(index2_10+3, - (x_org_x2j) * (x_org_x2j));//СЃ3
+					row.put(index2_10+4, - (x_org_x2j) * (y_org_y2j));//СЃ4
+					row.put(index2_10+5, - (y_org_y2j) * (y_org_y2j));//СЃ5
 					
-					row.put(index2_10+6, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//с6
-					row.put(index2_10+7, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//с7
-					row.put(index2_10+8, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//с8
-					row.put(index2_10+9, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//с9
+					row.put(index2_10+6, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//СЃ6
+					row.put(index2_10+7, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//СЃ7
+					row.put(index2_10+8, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//СЃ8
+					row.put(index2_10+9, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 					
@@ -3988,29 +3988,29 @@ void AddRowsToEquation2__(int order,
 					//3*c9*y_org_yj^2*y_len+
 					//)*t
 
-					row.put(index1_10+1, x_len);//с1
-					row.put(index1_10+2, y_len);//с2
+					row.put(index1_10+1, x_len);//СЃ1
+					row.put(index1_10+2, y_len);//СЃ2
 
-					row.put(index1_10+3, 2.0 * x_org_x1j * x_len);//с3
-					row.put(index1_10+4, x_len * y_org_y1j + x_org_x1j * y_len);//с4
-					row.put(index1_10+5, 2.0 * y_org_y1j * y_len);//с5
+					row.put(index1_10+3, 2.0 * x_org_x1j * x_len);//СЃ3
+					row.put(index1_10+4, x_len * y_org_y1j + x_org_x1j * y_len);//СЃ4
+					row.put(index1_10+5, 2.0 * y_org_y1j * y_len);//СЃ5
 					
-					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j * x_len);//с6
-					row.put(index1_10+7, x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j);//с7
-					row.put(index1_10+8, x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j);//с8
-					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j * y_len);//с9
+					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j * x_len);//СЃ6
+					row.put(index1_10+7, x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j);//СЃ7
+					row.put(index1_10+8, x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j);//СЃ8
+					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j * y_len);//СЃ9
 
-					row.put(index2_10+1, - x_len);//с1
-					row.put(index2_10+2, - y_len);//с2
+					row.put(index2_10+1, - x_len);//СЃ1
+					row.put(index2_10+2, - y_len);//СЃ2
 
-					row.put(index2_10+3, - 2.0 * x_org_x2j * x_len);//с3
-					row.put(index2_10+4, - (x_len * y_org_y2j + x_org_x2j * y_len));//с4
-					row.put(index2_10+5, - 2.0 * y_org_y2j * y_len);//с5
+					row.put(index2_10+3, - 2.0 * x_org_x2j * x_len);//СЃ3
+					row.put(index2_10+4, - (x_len * y_org_y2j + x_org_x2j * y_len));//СЃ4
+					row.put(index2_10+5, - 2.0 * y_org_y2j * y_len);//СЃ5
 
-					row.put(index2_10+6, - (3.0 * x_org_x2j * x_org_x2j * x_len));//с6
-					row.put(index2_10+7, - (x_org_x2j * x_org_x2j * y_len + 2.0 * x_org_x2j * x_len * y_org_y2j));//с7
-					row.put(index2_10+8, - (x_len * y_org_y2j * y_org_y2j + 2.0 * x_org_x2j * y_len * y_org_y2j));//с8
-					row.put(index2_10+9, - (3.0 * y_org_y2j * y_org_y2j * y_len));//с9
+					row.put(index2_10+6, - (3.0 * x_org_x2j * x_org_x2j * x_len));//СЃ6
+					row.put(index2_10+7, - (x_org_x2j * x_org_x2j * y_len + 2.0 * x_org_x2j * x_len * y_org_y2j));//СЃ7
+					row.put(index2_10+8, - (x_len * y_org_y2j * y_org_y2j + 2.0 * x_org_x2j * y_len * y_org_y2j));//СЃ8
+					row.put(index2_10+9, - (3.0 * y_org_y2j * y_org_y2j * y_len));//СЃ9
 
 
 					M.push_back(row);	B.push_back(0.0);
@@ -4028,45 +4028,45 @@ void AddRowsToEquation2__(int order,
 					//3*c9*y_org_yj*y_len^2+
 					//)*t^2+
 
-					row.put(index1_10+3, x_len * x_len);//с3
-					row.put(index1_10+4, x_len * y_len);//с4
-					row.put(index1_10+5, y_len * y_len);//с5
+					row.put(index1_10+3, x_len * x_len);//СЃ3
+					row.put(index1_10+4, x_len * y_len);//СЃ4
+					row.put(index1_10+5, y_len * y_len);//СЃ5
 					
-					row.put(index1_10+6, 3.0 * x_org_x1j * x_len * x_len);//с6
-					row.put(index1_10+7, x_len * x_len * y_org_y1j + 2.0 * x_org_x1j * x_len * y_len);//с7
-					row.put(index1_10+8, x_org_x1j * y_len * y_len + 2.0 * y_org_y1j * x_len * y_len);//с8
-					row.put(index1_10+9, 3.0 * y_org_y1j * y_len * y_len);//с9
+					row.put(index1_10+6, 3.0 * x_org_x1j * x_len * x_len);//СЃ6
+					row.put(index1_10+7, x_len * x_len * y_org_y1j + 2.0 * x_org_x1j * x_len * y_len);//СЃ7
+					row.put(index1_10+8, x_org_x1j * y_len * y_len + 2.0 * y_org_y1j * x_len * y_len);//СЃ8
+					row.put(index1_10+9, 3.0 * y_org_y1j * y_len * y_len);//СЃ9
 
 
-					row.put(index2_10+3, - x_len * x_len);//с3
-					row.put(index2_10+4, - x_len * y_len);//с4
-					row.put(index2_10+5, - y_len * y_len);//с5
+					row.put(index2_10+3, - x_len * x_len);//СЃ3
+					row.put(index2_10+4, - x_len * y_len);//СЃ4
+					row.put(index2_10+5, - y_len * y_len);//СЃ5
 					
-					row.put(index2_10+6, - (3.0 * x_org_x2j * x_len * x_len));//с6
-					row.put(index2_10+7, - (x_len * x_len * y_org_y2j + 2.0 * x_org_x2j * x_len * y_len));//с7
-					row.put(index2_10+8, - (x_org_x2j * y_len * y_len + 2.0 * y_org_y2j * x_len * y_len));//с8
-					row.put(index2_10+9, - (3.0 * y_org_y2j * y_len * y_len));//с9
+					row.put(index2_10+6, - (3.0 * x_org_x2j * x_len * x_len));//СЃ6
+					row.put(index2_10+7, - (x_len * x_len * y_org_y2j + 2.0 * x_org_x2j * x_len * y_len));//СЃ7
+					row.put(index2_10+8, - (x_org_x2j * y_len * y_len + 2.0 * y_org_y2j * x_len * y_len));//СЃ8
+					row.put(index2_10+9, - (3.0 * y_org_y2j * y_len * y_len));//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 
 					row.clear();	
 					//(c8*x_len*y_len^2 + c6*x_len^3 + c7*x_len^2*y_len + c9*y_len^3)*t^3+
-					row.put(index1_10+6, x_len * x_len * x_len);//с6
-					row.put(index1_10+7, x_len * x_len * y_len);//с7
-					row.put(index1_10+8, x_len * y_len * y_len);//с8
-					row.put(index1_10+9, y_len * y_len * y_len);//с9
+					row.put(index1_10+6, x_len * x_len * x_len);//СЃ6
+					row.put(index1_10+7, x_len * x_len * y_len);//СЃ7
+					row.put(index1_10+8, x_len * y_len * y_len);//СЃ8
+					row.put(index1_10+9, y_len * y_len * y_len);//СЃ9
 
-					row.put(index2_10+6, - x_len * x_len * x_len);//с6
-					row.put(index2_10+7, - x_len * x_len * y_len);//с7
-					row.put(index2_10+8, - x_len * y_len * y_len);//с8
-					row.put(index2_10+9, - y_len * y_len * y_len);//с9
+					row.put(index2_10+6, - x_len * x_len * x_len);//СЃ6
+					row.put(index2_10+7, - x_len * x_len * y_len);//СЃ7
+					row.put(index2_10+8, - x_len * y_len * y_len);//СЃ8
+					row.put(index2_10+9, - y_len * y_len * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 				}
 				break;
 			case 4:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// f(t) := 
@@ -4119,43 +4119,43 @@ void AddRowsToEquation2__(int order,
 					// c13*x_org_xj*y_org_yj^3+
 					// c14*y_org_yj^4+
 
-					row.put(index1_10+0, 1.0);//с0
-					row.put(index1_10+1, x_org_x1j);//с1
-					row.put(index1_10+2, y_org_y1j);//с2
+					row.put(index1_10+0, 1.0);//СЃ0
+					row.put(index1_10+1, x_org_x1j);//СЃ1
+					row.put(index1_10+2, y_org_y1j);//СЃ2
 
-					row.put(index1_10+3, (x_org_x1j) * (x_org_x1j));//с3
-					row.put(index1_10+4, (x_org_x1j) * (y_org_y1j));//с4
-					row.put(index1_10+5, (y_org_y1j) * (y_org_y1j));//с5
+					row.put(index1_10+3, (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.put(index1_10+4, (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.put(index1_10+5, (y_org_y1j) * (y_org_y1j));//СЃ5
 					
-					row.put(index1_10+6, (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//с6
-					row.put(index1_10+7, (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//с7
-					row.put(index1_10+8, (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//с8
-					row.put(index1_10+9, (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с9
+					row.put(index1_10+6, (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//СЃ6
+					row.put(index1_10+7, (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//СЃ7
+					row.put(index1_10+8, (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//СЃ8
+					row.put(index1_10+9, (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ9
 
-					row.put(index1_10+10, (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//с10
-					row.put(index1_10+11, (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//с11
-					row.put(index1_10+12, (x_org_x1j) * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//с12
-					row.put(index1_10+13, (x_org_x1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с13
-					row.put(index1_10+14, (y_org_y1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с14
+					row.put(index1_10+10, (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//СЃ10
+					row.put(index1_10+11, (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//СЃ11
+					row.put(index1_10+12, (x_org_x1j) * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//СЃ12
+					row.put(index1_10+13, (x_org_x1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ13
+					row.put(index1_10+14, (y_org_y1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ14
 
-					row.put(index2_10+0, - 1.0);//с0
-					row.put(index2_10+1, - (x_org_x2j));//с1
-					row.put(index2_10+2, - (y_org_y2j));//с2
+					row.put(index2_10+0, - 1.0);//СЃ0
+					row.put(index2_10+1, - (x_org_x2j));//СЃ1
+					row.put(index2_10+2, - (y_org_y2j));//СЃ2
 
-					row.put(index2_10+3, - (x_org_x2j) * (x_org_x2j));//с3
-					row.put(index2_10+4, - (x_org_x2j) * (y_org_y2j));//с4
-					row.put(index2_10+5, - (y_org_y2j) * (y_org_y2j));//с5
+					row.put(index2_10+3, - (x_org_x2j) * (x_org_x2j));//СЃ3
+					row.put(index2_10+4, - (x_org_x2j) * (y_org_y2j));//СЃ4
+					row.put(index2_10+5, - (y_org_y2j) * (y_org_y2j));//СЃ5
 					
-					row.put(index2_10+6, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//с6
-					row.put(index2_10+7, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//с7
-					row.put(index2_10+8, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//с8
-					row.put(index2_10+9, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//с9
+					row.put(index2_10+6, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//СЃ6
+					row.put(index2_10+7, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//СЃ7
+					row.put(index2_10+8, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//СЃ8
+					row.put(index2_10+9, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//СЃ9
 
-					row.put(index2_10+10, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//с10
-					row.put(index2_10+11, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//с11
-					row.put(index2_10+12, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//с12
-					row.put(index2_10+13, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//с13
-					row.put(index2_10+14, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//с14
+					row.put(index2_10+10, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j) * (x_org_x2j));//СЃ10
+					row.put(index2_10+11, - (x_org_x2j) * (x_org_x2j) * (x_org_x2j) * (y_org_y2j));//СЃ11
+					row.put(index2_10+12, - (x_org_x2j) * (x_org_x2j) * (y_org_y2j) * (y_org_y2j));//СЃ12
+					row.put(index2_10+13, - (x_org_x2j) * (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//СЃ13
+					row.put(index2_10+14, - (y_org_y2j) * (y_org_y2j) * (y_org_y2j) * (y_org_y2j));//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 					
@@ -4203,57 +4203,57 @@ void AddRowsToEquation2__(int order,
 					// )*t+
 
 
-					row.put(index1_10+1, x_len);//с1
-					row.put(index1_10+2, y_len);//с2
+					row.put(index1_10+1, x_len);//СЃ1
+					row.put(index1_10+2, y_len);//СЃ2
 
-					row.put(index1_10+3, 2.0 * x_org_x1j * x_len);//с3
-					row.put(index1_10+4, x_len * y_org_y1j + x_org_x1j * y_len);//с4
-					row.put(index1_10+5, 2.0 * y_org_y1j * y_len);//с5
+					row.put(index1_10+3, 2.0 * x_org_x1j * x_len);//СЃ3
+					row.put(index1_10+4, x_len * y_org_y1j + x_org_x1j * y_len);//СЃ4
+					row.put(index1_10+5, 2.0 * y_org_y1j * y_len);//СЃ5
 					
-					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j * x_len);//с6
-					row.put(index1_10+7, x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j);//с7
-					row.put(index1_10+8, x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j);//с8
-					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j * y_len);//с9
+					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j * x_len);//СЃ6
+					row.put(index1_10+7, x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j);//СЃ7
+					row.put(index1_10+8, x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j);//СЃ8
+					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j * y_len);//СЃ9
 
 					row.put(index1_10+10, 
-						4.0 * x_org_x1j * x_org_x1j * x_org_x1j * x_len);//с10
+						4.0 * x_org_x1j * x_org_x1j * x_org_x1j * x_len);//СЃ10
 					row.put(index1_10+11, 
 						x_org_x1j * x_org_x1j * x_org_x1j * y_len + 
-						3.0 * x_org_x1j * x_org_x1j * x_len * y_org_y1j);//с11
+						3.0 * x_org_x1j * x_org_x1j * x_len * y_org_y1j);//СЃ11
 					row.put(index1_10+12, 
 						2.0 * x_org_x1j*x_len*y_org_y1j*y_org_y1j + 
-						2.0 * x_org_x1j*x_org_x1j*y_org_y1j*y_len);//с12
+						2.0 * x_org_x1j*x_org_x1j*y_org_y1j*y_len);//СЃ12
 					row.put(index1_10+13, 
 						x_len * y_org_y1j * y_org_y1j * y_org_y1j + 
-						3.0 * x_org_x1j * y_len * y_org_y1j * y_org_y1j);//с13
+						3.0 * x_org_x1j * y_len * y_org_y1j * y_org_y1j);//СЃ13
 					row.put(index1_10+14, 
-						4.0 * y_org_y1j * y_org_y1j * y_org_y1j * y_len);//с14
+						4.0 * y_org_y1j * y_org_y1j * y_org_y1j * y_len);//СЃ14
 
-					row.put(index2_10+1, - x_len);//с1
-					row.put(index2_10+2, - y_len);//с2
+					row.put(index2_10+1, - x_len);//СЃ1
+					row.put(index2_10+2, - y_len);//СЃ2
 
-					row.put(index2_10+3, - 2.0 * x_org_x2j * x_len);//с3
-					row.put(index2_10+4, - (x_len * y_org_y2j + x_org_x2j * y_len));//с4
-					row.put(index2_10+5, - 2.0 * y_org_y2j * y_len);//с5
+					row.put(index2_10+3, - 2.0 * x_org_x2j * x_len);//СЃ3
+					row.put(index2_10+4, - (x_len * y_org_y2j + x_org_x2j * y_len));//СЃ4
+					row.put(index2_10+5, - 2.0 * y_org_y2j * y_len);//СЃ5
 
-					row.put(index2_10+6, - (3.0 * x_org_x2j * x_org_x2j * x_len));//с6
-					row.put(index2_10+7, - (x_org_x2j * x_org_x2j * y_len + 2.0 * x_org_x2j * x_len * y_org_y2j));//с7
-					row.put(index2_10+8, - (x_len * y_org_y2j * y_org_y2j + 2.0 * x_org_x2j * y_len * y_org_y2j));//с8
-					row.put(index2_10+9, - (3.0 * y_org_y2j * y_org_y2j * y_len));//с9
+					row.put(index2_10+6, - (3.0 * x_org_x2j * x_org_x2j * x_len));//СЃ6
+					row.put(index2_10+7, - (x_org_x2j * x_org_x2j * y_len + 2.0 * x_org_x2j * x_len * y_org_y2j));//СЃ7
+					row.put(index2_10+8, - (x_len * y_org_y2j * y_org_y2j + 2.0 * x_org_x2j * y_len * y_org_y2j));//СЃ8
+					row.put(index2_10+9, - (3.0 * y_org_y2j * y_org_y2j * y_len));//СЃ9
 					
 					row.put(index2_10+10, 
-						-4.0 * x_org_x2j * x_org_x2j * x_org_x2j * x_len);//с10
+						-4.0 * x_org_x2j * x_org_x2j * x_org_x2j * x_len);//СЃ10
 					row.put(index2_10+11, 
 						-x_org_x2j * x_org_x2j * x_org_x2j * y_len - 
-						3.0 * x_org_x2j * x_org_x2j * x_len * y_org_y2j);//с11
+						3.0 * x_org_x2j * x_org_x2j * x_len * y_org_y2j);//СЃ11
 					row.put(index2_10+12, 
 						-2.0 * x_org_x2j*x_len*y_org_y2j*y_org_y2j - 
-						2.0 * x_org_x2j*x_org_x2j*y_org_y2j*y_len);//с12
+						2.0 * x_org_x2j*x_org_x2j*y_org_y2j*y_len);//СЃ12
 					row.put(index2_10+13, 
 						-x_len * y_org_y2j * y_org_y2j * y_org_y2j - 
-						3.0 * x_org_x2j * y_len * y_org_y2j * y_org_y2j);//с13
+						3.0 * x_org_x2j * y_len * y_org_y2j * y_org_y2j);//СЃ13
 					row.put(index2_10+14, 
-						-4.0 * y_org_y2j * y_org_y2j * y_org_y2j * y_len);//с14
+						-4.0 * y_org_y2j * y_org_y2j * y_org_y2j * y_len);//СЃ14
 
 
 
@@ -4294,59 +4294,59 @@ void AddRowsToEquation2__(int order,
 					// 3*c13*x_len*y_org_yj^2*y_len+
 					// 6*c14*y_org_yj^2*y_len^2
 					// )*t^2+
-					row.put(index1_10+3, x_len * x_len);//с3
-					row.put(index1_10+4, x_len * y_len);//с4
-					row.put(index1_10+5, y_len * y_len);//с5
+					row.put(index1_10+3, x_len * x_len);//СЃ3
+					row.put(index1_10+4, x_len * y_len);//СЃ4
+					row.put(index1_10+5, y_len * y_len);//СЃ5
 					
-					row.put(index1_10+6, 3.0 * x_org_x1j * x_len * x_len);//с6
+					row.put(index1_10+6, 3.0 * x_org_x1j * x_len * x_len);//СЃ6
 					row.put(index1_10+7, 
 						x_len * x_len * y_org_y1j 
-						+ 2.0 * x_org_x1j * x_len * y_len);//с7
+						+ 2.0 * x_org_x1j * x_len * y_len);//СЃ7
 					row.put(index1_10+8, 
 						x_org_x1j * y_len * y_len + 
-						2.0 * y_org_y1j * x_len * y_len);//с8
-					row.put(index1_10+9, 3.0 * y_org_y1j * y_len * y_len);//с9
+						2.0 * y_org_y1j * x_len * y_len);//СЃ8
+					row.put(index1_10+9, 3.0 * y_org_y1j * y_len * y_len);//СЃ9
 
 					row.put(index1_10+10, 
-						6.0 * x_org_x1j * x_org_x1j * x_len * x_len);//с10
+						6.0 * x_org_x1j * x_org_x1j * x_len * x_len);//СЃ10
 					row.put(index1_10+11, 
 						3.0 * x_len * y_len * x_org_x1j * x_org_x1j 
-						+ 3.0 * x_org_x1j * x_len * x_len * y_org_y1j);//с11
+						+ 3.0 * x_org_x1j * x_len * x_len * y_org_y1j);//СЃ11
 					row.put(index1_10+12, 
 						x_org_x1j * x_org_x1j * y_len * y_len + 
 						y_org_y1j * y_org_y1j * x_len * x_len + 
-						4.0 * x_org_x1j * y_org_y1j * x_len * y_len);//с12
+						4.0 * x_org_x1j * y_org_y1j * x_len * y_len);//СЃ12
 					row.put(index1_10+13, 
 						3.0 * x_org_x1j * y_org_y1j * y_len * y_len + 
-						3.0 * y_org_y1j * y_org_y1j * x_len * y_len);//с13
+						3.0 * y_org_y1j * y_org_y1j * x_len * y_len);//СЃ13
 					row.put(index1_10+14, 
-						6.0 * y_org_y1j * y_org_y1j * y_len * y_len);//с14
+						6.0 * y_org_y1j * y_org_y1j * y_len * y_len);//СЃ14
 
 
-					row.put(index2_10+3, - x_len * x_len);//с3
-					row.put(index2_10+4, - x_len * y_len);//с4
-					row.put(index2_10+5, - y_len * y_len);//с5
+					row.put(index2_10+3, - x_len * x_len);//СЃ3
+					row.put(index2_10+4, - x_len * y_len);//СЃ4
+					row.put(index2_10+5, - y_len * y_len);//СЃ5
 					
-					row.put(index2_10+6, - (3.0 * x_org_x2j * x_len * x_len));//с6
-					row.put(index2_10+7, - (x_len * x_len * y_org_y2j + 2.0 * x_org_x2j * x_len * y_len));//с7
-					row.put(index2_10+8, - (x_org_x2j * y_len * y_len + 2.0 * y_org_y2j * x_len * y_len));//с8
-					row.put(index2_10+9, - (3.0 * y_org_y2j * y_len * y_len));//с9
+					row.put(index2_10+6, - (3.0 * x_org_x2j * x_len * x_len));//СЃ6
+					row.put(index2_10+7, - (x_len * x_len * y_org_y2j + 2.0 * x_org_x2j * x_len * y_len));//СЃ7
+					row.put(index2_10+8, - (x_org_x2j * y_len * y_len + 2.0 * y_org_y2j * x_len * y_len));//СЃ8
+					row.put(index2_10+9, - (3.0 * y_org_y2j * y_len * y_len));//СЃ9
 
 
 					row.put(index2_10+10, 
-						- 6.0 * x_org_x2j * x_org_x2j * x_len * x_len);//с10
+						- 6.0 * x_org_x2j * x_org_x2j * x_len * x_len);//СЃ10
 					row.put(index2_10+11, 
 						- 3.0 * x_len * y_len * x_org_x2j * x_org_x2j 
-						- 3.0 * x_org_x2j * x_len * x_len * y_org_y2j);//с11
+						- 3.0 * x_org_x2j * x_len * x_len * y_org_y2j);//СЃ11
 					row.put(index2_10+12, 
 						- x_org_x2j * x_org_x2j * y_len * y_len 
 						- y_org_y2j * y_org_y2j * x_len * x_len 
-						- 4.0 * x_org_x2j * y_org_y2j * x_len * y_len);//с12
+						- 4.0 * x_org_x2j * y_org_y2j * x_len * y_len);//СЃ12
 					row.put(index2_10+13, 
 						- 3.0 * x_org_x2j * y_org_y2j * y_len * y_len
-						- 3.0 * y_org_y2j * y_org_y2j * x_len * y_len);//с13
+						- 3.0 * y_org_y2j * y_org_y2j * x_len * y_len);//СЃ13
 					row.put(index2_10+14, 
-						- 6.0 * y_org_y2j * y_org_y2j * y_len * y_len);//с14
+						- 6.0 * y_org_y2j * y_org_y2j * y_len * y_len);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -4369,43 +4369,43 @@ void AddRowsToEquation2__(int order,
 					// 3*c13*x_len*y_org_yj*y_len^2+
 					// 4*c14*y_org_yj*y_len^3+
 					// )*t^3+
-					row.put(index1_10+6, x_len * x_len * x_len);//с6
-					row.put(index1_10+7, x_len * x_len * y_len);//с7
-					row.put(index1_10+8, x_len * y_len * y_len);//с8
-					row.put(index1_10+9, y_len * y_len * y_len);//с9
+					row.put(index1_10+6, x_len * x_len * x_len);//СЃ6
+					row.put(index1_10+7, x_len * x_len * y_len);//СЃ7
+					row.put(index1_10+8, x_len * y_len * y_len);//СЃ8
+					row.put(index1_10+9, y_len * y_len * y_len);//СЃ9
 
 					row.put(index1_10+10, 
-						+ 4.0 * x_org_x1j * x_len * x_len * x_len);//с10
+						+ 4.0 * x_org_x1j * x_len * x_len * x_len);//СЃ10
 					row.put(index1_10+11, 
 						+ x_len * x_len * x_len * y_org_y1j 
-						+ 3.0 * x_org_x1j * x_len * x_len * y_len);//с11
+						+ 3.0 * x_org_x1j * x_len * x_len * y_len);//СЃ11
 					row.put(index1_10+12, 
 						+ 2.0 * x_org_x1j * x_len * y_len * y_len 
-						+ 2.0 * x_len * x_len  * y_org_y1j * y_len);//с12
+						+ 2.0 * x_len * x_len  * y_org_y1j * y_len);//СЃ12
 					row.put(index1_10+13, 
 						+ x_org_x1j * y_len * y_len * y_len 
-						+ 3.0 * x_len * y_org_y1j * y_len * y_len);//с13
+						+ 3.0 * x_len * y_org_y1j * y_len * y_len);//СЃ13
 					row.put(index1_10+14, 
-						+ 4.0 * y_org_y1j * y_len * y_len * y_len);//с14
+						+ 4.0 * y_org_y1j * y_len * y_len * y_len);//СЃ14
 
-					row.put(index2_10+6, - x_len * x_len * x_len);//с6
-					row.put(index2_10+7, - x_len * x_len * y_len);//с7
-					row.put(index2_10+8, - x_len * y_len * y_len);//с8
-					row.put(index2_10+9, - y_len * y_len * y_len);//с9
+					row.put(index2_10+6, - x_len * x_len * x_len);//СЃ6
+					row.put(index2_10+7, - x_len * x_len * y_len);//СЃ7
+					row.put(index2_10+8, - x_len * y_len * y_len);//СЃ8
+					row.put(index2_10+9, - y_len * y_len * y_len);//СЃ9
 
 					row.put(index2_10+10, 
-						- 4.0 * x_org_x2j * x_len * x_len * x_len);//с10
+						- 4.0 * x_org_x2j * x_len * x_len * x_len);//СЃ10
 					row.put(index2_10+11, 
 						- x_len * x_len * x_len * y_org_y2j 
-						- 3.0 * x_org_x2j * x_len * x_len * y_len);//с11
+						- 3.0 * x_org_x2j * x_len * x_len * y_len);//СЃ11
 					row.put(index2_10+12, 
 						- 2.0 * x_org_x2j * x_len * y_len * y_len 
-						- 2.0 * x_len * x_len  * y_org_y2j * y_len);//с12
+						- 2.0 * x_len * x_len  * y_org_y2j * y_len);//СЃ12
 					row.put(index2_10+13, 
 						- x_org_x2j * y_len * y_len * y_len
-						- 3.0 * x_len * y_org_y2j * y_len * y_len);//с13
+						- 3.0 * x_len * y_org_y2j * y_len * y_len);//СЃ13
 					row.put(index2_10+14, 
-						- 4.0 * y_org_y2j * y_len * y_len * y_len);//с14
+						- 4.0 * y_org_y2j * y_len * y_len * y_len);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -4419,26 +4419,26 @@ void AddRowsToEquation2__(int order,
 					// )*t^4+
 
 					row.put(index1_10+10, 
-						+ x_len * x_len * x_len * x_len);//с10
+						+ x_len * x_len * x_len * x_len);//СЃ10
 					row.put(index1_10+11, 
-						+ x_len * x_len * x_len * y_len);//с11
+						+ x_len * x_len * x_len * y_len);//СЃ11
 					row.put(index1_10+12, 
-						+ x_len * x_len * y_len * y_len);//с12
+						+ x_len * x_len * y_len * y_len);//СЃ12
 					row.put(index1_10+13, 
-						+ x_len * y_len * y_len * y_len);//с13
+						+ x_len * y_len * y_len * y_len);//СЃ13
 					row.put(index1_10+14, 
-						+ y_len * y_len * y_len * y_len);//с14
+						+ y_len * y_len * y_len * y_len);//СЃ14
 
 					row.put(index2_10+10, 
-						- x_len * x_len * x_len * x_len);//с10
+						- x_len * x_len * x_len * x_len);//СЃ10
 					row.put(index2_10+11, 
-						- x_len * x_len * x_len * y_len);//с11
+						- x_len * x_len * x_len * y_len);//СЃ11
 					row.put(index2_10+12, 
-						- x_len * x_len * y_len * y_len);//с12
+						- x_len * x_len * y_len * y_len);//СЃ12
 					row.put(index2_10+13, 
-						- x_len * y_len * y_len * y_len);//с13
+						- x_len * y_len * y_len * y_len);//СЃ13
 					row.put(index2_10+14, 
-						- y_len * y_len * y_len * y_len);//с14
+						- y_len * y_len * y_len * y_len);//СЃ14
 
 					
 					M.push_back(row);	B.push_back(0.0);
@@ -4458,7 +4458,7 @@ void AddRowsToEquation2__(int order,
 			case 2:
 				{
 					// the first derivative
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_x(t) := 
@@ -4476,16 +4476,16 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();	
 					//c1 + 2*c3*x_org_xj + c4*y_org_yj + 2*c7*x_org_xj*y_org_yj + 3*c6*x_org_xj^2 + c8*y_org_yj^2
-					row.put(index1_10+1, 1.0);//с1
+					row.put(index1_10+1, 1.0);//СЃ1
 
-					row.put(index1_10+3, 2.0 * x_org_x1j);//с3
-					row.put(index1_10+4,       y_org_y1j);//с4
+					row.put(index1_10+3, 2.0 * x_org_x1j);//СЃ3
+					row.put(index1_10+4,       y_org_y1j);//СЃ4
 					
 
-					row.put(index2_10+1, - 1.0);//с1
+					row.put(index2_10+1, - 1.0);//СЃ1
 
-					row.put(index2_10+3, - 2.0 * x_org_x2j);//с3
-					row.put(index2_10+4, -       y_org_y2j);//с4
+					row.put(index2_10+3, - 2.0 * x_org_x2j);//СЃ3
+					row.put(index2_10+4, -       y_org_y2j);//СЃ4
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -4500,12 +4500,12 @@ void AddRowsToEquation2__(int order,
 					//2*c8*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_10+3, 2.0 * x_len);//с3
-					row.put(index1_10+4,       y_len);//с4
+					row.put(index1_10+3, 2.0 * x_len);//СЃ3
+					row.put(index1_10+4,       y_len);//СЃ4
 					
 
-					row.put(index2_10+3, - 2.0 * x_len);//с3
-					row.put(index2_10+4, -       y_len);//с4
+					row.put(index2_10+3, - 2.0 * x_len);//СЃ3
+					row.put(index2_10+4, -       y_len);//СЃ4
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -4515,7 +4515,7 @@ void AddRowsToEquation2__(int order,
 			case 3:
 				{
 					// the first derivative
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_x(t) := 
@@ -4533,23 +4533,23 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();	
 					//c1 + 2*c3*x_org_xj + c4*y_org_yj + 2*c7*x_org_xj*y_org_yj + 3*c6*x_org_xj^2 + c8*y_org_yj^2
-					row.put(index1_10+1, 1.0);//с1
+					row.put(index1_10+1, 1.0);//СЃ1
 
-					row.put(index1_10+3, 2.0 * x_org_x1j);//с3
-					row.put(index1_10+4,       y_org_y1j);//с4
+					row.put(index1_10+3, 2.0 * x_org_x1j);//СЃ3
+					row.put(index1_10+4,       y_org_y1j);//СЃ4
 					
-					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j);//с6
-					row.put(index1_10+7, 2.0 * x_org_x1j * y_org_y1j);//с7
-					row.put(index1_10+8,       y_org_y1j * y_org_y1j);//с8
+					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j);//СЃ6
+					row.put(index1_10+7, 2.0 * x_org_x1j * y_org_y1j);//СЃ7
+					row.put(index1_10+8,       y_org_y1j * y_org_y1j);//СЃ8
 
-					row.put(index2_10+1, - 1.0);//с1
+					row.put(index2_10+1, - 1.0);//СЃ1
 
-					row.put(index2_10+3, - 2.0 * x_org_x2j);//с3
-					row.put(index2_10+4, -       y_org_y2j);//с4
+					row.put(index2_10+3, - 2.0 * x_org_x2j);//СЃ3
+					row.put(index2_10+4, -       y_org_y2j);//СЃ4
 					
-					row.put(index2_10+6, - 3.0 * x_org_x2j * x_org_x2j);//с6
-					row.put(index2_10+7, - 2.0 * x_org_x2j * y_org_y2j);//с7
-					row.put(index2_10+8, -       y_org_y2j * y_org_y2j);//с8
+					row.put(index2_10+6, - 3.0 * x_org_x2j * x_org_x2j);//СЃ6
+					row.put(index2_10+7, - 2.0 * x_org_x2j * y_org_y2j);//СЃ7
+					row.put(index2_10+8, -       y_org_y2j * y_org_y2j);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -4564,32 +4564,32 @@ void AddRowsToEquation2__(int order,
 					//2*c8*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_10+3, 2.0 * x_len);//с3
-					row.put(index1_10+4,       y_len);//с4
+					row.put(index1_10+3, 2.0 * x_len);//СЃ3
+					row.put(index1_10+4,       y_len);//СЃ4
 					
-					row.put(index1_10+6, 6.0 * x_org_x1j * x_len);//с6
-					row.put(index1_10+7, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//с7
-					row.put(index1_10+8, 2.0 * y_org_y1j * y_len);//с8
+					row.put(index1_10+6, 6.0 * x_org_x1j * x_len);//СЃ6
+					row.put(index1_10+7, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//СЃ7
+					row.put(index1_10+8, 2.0 * y_org_y1j * y_len);//СЃ8
 
-					row.put(index2_10+3, - 2.0 * x_len);//с3
-					row.put(index2_10+4, -       y_len);//с4
+					row.put(index2_10+3, - 2.0 * x_len);//СЃ3
+					row.put(index2_10+4, -       y_len);//СЃ4
 					
-					row.put(index2_10+6, - 6.0 * x_org_x2j * x_len);//с6
-					row.put(index2_10+7, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len));//с7
-					row.put(index2_10+8, - 2.0 * y_org_y2j * y_len);//с8
+					row.put(index2_10+6, - 6.0 * x_org_x2j * x_len);//СЃ6
+					row.put(index2_10+7, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len));//СЃ7
+					row.put(index2_10+8, - 2.0 * y_org_y2j * y_len);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 
 					row.clear();	
 					//(3*c6*x_len^2 + 2*c7*x_len*y_len + c8*y_len^2)*t^2+
 
-					row.put(index1_10+6, 3.0 * x_len * x_len);//с6
-					row.put(index1_10+7, 2.0 * x_len * y_len);//с7
-					row.put(index1_10+8,       y_len * y_len);//с8
+					row.put(index1_10+6, 3.0 * x_len * x_len);//СЃ6
+					row.put(index1_10+7, 2.0 * x_len * y_len);//СЃ7
+					row.put(index1_10+8,       y_len * y_len);//СЃ8
 
-					row.put(index2_10+6, - 3.0 * x_len * x_len);//с6
-					row.put(index2_10+7, - 2.0 * x_len * y_len);//с7
-					row.put(index2_10+8, -       y_len * y_len);//с8
+					row.put(index2_10+6, - 3.0 * x_len * x_len);//СЃ6
+					row.put(index2_10+7, - 2.0 * x_len * y_len);//СЃ7
+					row.put(index2_10+8, -       y_len * y_len);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -4597,7 +4597,7 @@ void AddRowsToEquation2__(int order,
 			case 4:
 				{
 					// the first derivative
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_x(t) := 
@@ -4632,33 +4632,33 @@ void AddRowsToEquation2__(int order,
 					// 3*c11*x_org_xj^2*y_org_yj+
 					// 2*c12*x_org_xj*y_org_yj^2+
 					// c13*y_org_yj^3
-					row.put(index1_10+1, 1.0);//с1
+					row.put(index1_10+1, 1.0);//СЃ1
 
-					row.put(index1_10+3, 2.0 * x_org_x1j);//с3
-					row.put(index1_10+4,       y_org_y1j);//с4
+					row.put(index1_10+3, 2.0 * x_org_x1j);//СЃ3
+					row.put(index1_10+4,       y_org_y1j);//СЃ4
 					
-					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j);//с6
-					row.put(index1_10+7, 2.0 * x_org_x1j * y_org_y1j);//с7
-					row.put(index1_10+8,       y_org_y1j * y_org_y1j);//с8
+					row.put(index1_10+6, 3.0 * x_org_x1j * x_org_x1j);//СЃ6
+					row.put(index1_10+7, 2.0 * x_org_x1j * y_org_y1j);//СЃ7
+					row.put(index1_10+8,       y_org_y1j * y_org_y1j);//СЃ8
 
-					row.put(index1_10+10, 4.0 * x_org_x1j * x_org_x1j * x_org_x1j);//с10
-					row.put(index1_10+11, 3.0 * x_org_x1j * x_org_x1j * y_org_y1j);//с11
-					row.put(index1_10+12, 2.0 * x_org_x1j * y_org_y1j * y_org_y1j);//с12
-					row.put(index1_10+13,       y_org_y1j * y_org_y1j * y_org_y1j);//с13
+					row.put(index1_10+10, 4.0 * x_org_x1j * x_org_x1j * x_org_x1j);//СЃ10
+					row.put(index1_10+11, 3.0 * x_org_x1j * x_org_x1j * y_org_y1j);//СЃ11
+					row.put(index1_10+12, 2.0 * x_org_x1j * y_org_y1j * y_org_y1j);//СЃ12
+					row.put(index1_10+13,       y_org_y1j * y_org_y1j * y_org_y1j);//СЃ13
 
-					row.put(index2_10+1, - 1.0);//с1
+					row.put(index2_10+1, - 1.0);//СЃ1
 
-					row.put(index2_10+3, - 2.0 * x_org_x2j);//с3
-					row.put(index2_10+4, -       y_org_y2j);//с4
+					row.put(index2_10+3, - 2.0 * x_org_x2j);//СЃ3
+					row.put(index2_10+4, -       y_org_y2j);//СЃ4
 					
-					row.put(index2_10+6, - 3.0 * x_org_x2j * x_org_x2j);//с6
-					row.put(index2_10+7, - 2.0 * x_org_x2j * y_org_y2j);//с7
-					row.put(index2_10+8, -       y_org_y2j * y_org_y2j);//с8
+					row.put(index2_10+6, - 3.0 * x_org_x2j * x_org_x2j);//СЃ6
+					row.put(index2_10+7, - 2.0 * x_org_x2j * y_org_y2j);//СЃ7
+					row.put(index2_10+8, -       y_org_y2j * y_org_y2j);//СЃ8
 
-					row.put(index2_10+10, - 4.0 * x_org_x2j * x_org_x2j * x_org_x2j);//с10
-					row.put(index2_10+11, - 3.0 * x_org_x2j * x_org_x2j * y_org_y2j);//с11
-					row.put(index2_10+12, - 2.0 * x_org_x2j * y_org_y2j * y_org_y2j);//с12
-					row.put(index2_10+13, -       y_org_y2j * y_org_y2j * y_org_y2j);//с13
+					row.put(index2_10+10, - 4.0 * x_org_x2j * x_org_x2j * x_org_x2j);//СЃ10
+					row.put(index2_10+11, - 3.0 * x_org_x2j * x_org_x2j * y_org_y2j);//СЃ11
+					row.put(index2_10+12, - 2.0 * x_org_x2j * y_org_y2j * y_org_y2j);//СЃ12
+					row.put(index2_10+13, -       y_org_y2j * y_org_y2j * y_org_y2j);//СЃ13
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -4689,37 +4689,37 @@ void AddRowsToEquation2__(int order,
 					// 3*c13*y_org_yj^2*y_len+
 					// )*t+
 
-					row.put(index1_10+3, 2.0 * x_len);//с3
-					row.put(index1_10+4,       y_len);//с4
+					row.put(index1_10+3, 2.0 * x_len);//СЃ3
+					row.put(index1_10+4,       y_len);//СЃ4
 					
-					row.put(index1_10+6, 6.0 * x_org_x1j * x_len);//с6
-					row.put(index1_10+7, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//с7
-					row.put(index1_10+8, 2.0 * y_org_y1j * y_len);//с8
+					row.put(index1_10+6, 6.0 * x_org_x1j * x_len);//СЃ6
+					row.put(index1_10+7, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//СЃ7
+					row.put(index1_10+8, 2.0 * y_org_y1j * y_len);//СЃ8
 
-					row.put(index1_10+10, 12.0 * x_org_x1j * x_org_x1j * x_len);//с10
+					row.put(index1_10+10, 12.0 * x_org_x1j * x_org_x1j * x_len);//СЃ10
 					row.put(index1_10+11, 
 						+ 6.0 * x_org_x1j * x_len * y_org_y1j 
-						+ 3.0 * x_org_x1j * x_org_x1j * y_len);//с11
+						+ 3.0 * x_org_x1j * x_org_x1j * y_len);//СЃ11
 					row.put(index1_10+12, 
 						+ 4.0 * x_org_x1j * y_org_y1j * y_len 
-						+ 2.0 * x_len * y_org_y1j * y_org_y1j);//с12
-					row.put(index1_10+13, 3.0 * y_org_y1j * y_org_y1j * y_len);//с13
+						+ 2.0 * x_len * y_org_y1j * y_org_y1j);//СЃ12
+					row.put(index1_10+13, 3.0 * y_org_y1j * y_org_y1j * y_len);//СЃ13
 
-					row.put(index2_10+3, - 2.0 * x_len);//с3
-					row.put(index2_10+4, -       y_len);//с4
+					row.put(index2_10+3, - 2.0 * x_len);//СЃ3
+					row.put(index2_10+4, -       y_len);//СЃ4
 					
-					row.put(index2_10+6, - 6.0 * x_org_x2j * x_len);//с6
-					row.put(index2_10+7, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len));//с7
-					row.put(index2_10+8, - 2.0 * y_org_y2j * y_len);//с8
+					row.put(index2_10+6, - 6.0 * x_org_x2j * x_len);//СЃ6
+					row.put(index2_10+7, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len));//СЃ7
+					row.put(index2_10+8, - 2.0 * y_org_y2j * y_len);//СЃ8
 
-					row.put(index2_10+10, - 12.0 * x_org_x2j * x_org_x2j * x_len);//с10
+					row.put(index2_10+10, - 12.0 * x_org_x2j * x_org_x2j * x_len);//СЃ10
 					row.put(index2_10+11, 
 						- 6.0 * x_org_x2j * x_len * y_org_y2j 
-						- 3.0 * x_org_x2j * x_org_x2j * y_len);//с11
+						- 3.0 * x_org_x2j * x_org_x2j * y_len);//СЃ11
 					row.put(index2_10+12, 
 						- 4.0 * x_org_x2j * y_org_y2j * y_len 
-						- 2.0 * x_len * y_org_y2j * y_org_y2j);//с12
-					row.put(index2_10+13, - 3.0 * y_org_y2j * y_org_y2j * y_len);//с13
+						- 2.0 * x_len * y_org_y2j * y_org_y2j);//СЃ12
+					row.put(index2_10+13, - 3.0 * y_org_y2j * y_org_y2j * y_len);//СЃ13
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -4740,31 +4740,31 @@ void AddRowsToEquation2__(int order,
 					// 3*c13*y_org_yj*y_len^2+
 					// )*t^2+
 
-					row.put(index1_10+6, 3.0 * x_len * x_len);//с6
-					row.put(index1_10+7, 2.0 * x_len * y_len);//с7
-					row.put(index1_10+8,       y_len * y_len);//с8
+					row.put(index1_10+6, 3.0 * x_len * x_len);//СЃ6
+					row.put(index1_10+7, 2.0 * x_len * y_len);//СЃ7
+					row.put(index1_10+8,       y_len * y_len);//СЃ8
 
-					row.put(index1_10+10, 12.0 * x_org_x1j * x_len * x_len);//с10
+					row.put(index1_10+10, 12.0 * x_org_x1j * x_len * x_len);//СЃ10
 					row.put(index1_10+11, 
 						+ 6.0 * x_org_x1j * x_len * y_len 
-						+ 3.0 * x_len * x_len * y_org_y1j);//с11
+						+ 3.0 * x_len * x_len * y_org_y1j);//СЃ11
 					row.put(index1_10+12, 
 						+ 4.0 * x_len * y_org_y1j * y_len 
-						+ 2.0 * x_org_x1j * y_len * y_len);//с12
-					row.put(index1_10+13, 3.0 * y_org_y1j * y_len * y_len);//с13
+						+ 2.0 * x_org_x1j * y_len * y_len);//СЃ12
+					row.put(index1_10+13, 3.0 * y_org_y1j * y_len * y_len);//СЃ13
 
-					row.put(index2_10+6, - 3.0 * x_len * x_len);//с6
-					row.put(index2_10+7, - 2.0 * x_len * y_len);//с7
-					row.put(index2_10+8, -       y_len * y_len);//с8
+					row.put(index2_10+6, - 3.0 * x_len * x_len);//СЃ6
+					row.put(index2_10+7, - 2.0 * x_len * y_len);//СЃ7
+					row.put(index2_10+8, -       y_len * y_len);//СЃ8
 
-					row.put(index2_10+10, - 12.0 * x_org_x2j * x_len * x_len);//с10
+					row.put(index2_10+10, - 12.0 * x_org_x2j * x_len * x_len);//СЃ10
 					row.put(index2_10+11, 
 						- 6.0 * x_org_x2j * x_len * y_len 
-						- 3.0 * x_len * x_len * y_org_y2j);//с11
+						- 3.0 * x_len * x_len * y_org_y2j);//СЃ11
 					row.put(index2_10+12, 
 						- 4.0 * x_len * y_org_y2j * y_len 
-						- 2.0 * x_org_x2j * y_len * y_len);//с12
-					row.put(index2_10+13, - 3.0 * y_org_y2j * y_len * y_len);//с13
+						- 2.0 * x_org_x2j * y_len * y_len);//СЃ12
+					row.put(index2_10+13, - 3.0 * y_org_y2j * y_len * y_len);//СЃ13
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -4776,15 +4776,15 @@ void AddRowsToEquation2__(int order,
 					// c13*y_len^3+
 					// )*t^3+
 
-					row.put(index1_10+10, + 4.0 * x_len * x_len * x_len);//с10
-					row.put(index1_10+11, + 3.0 * x_len * x_len * y_len);//с11
-					row.put(index1_10+12, + 2.0 * x_len * y_len * y_len);//с12
-					row.put(index1_10+13, +       y_len * y_len * y_len);//с13
+					row.put(index1_10+10, + 4.0 * x_len * x_len * x_len);//СЃ10
+					row.put(index1_10+11, + 3.0 * x_len * x_len * y_len);//СЃ11
+					row.put(index1_10+12, + 2.0 * x_len * y_len * y_len);//СЃ12
+					row.put(index1_10+13, +       y_len * y_len * y_len);//СЃ13
 
-					row.put(index2_10+10, - 4.0 * x_len * x_len * x_len);//с10
-					row.put(index2_10+11, - 3.0 * x_len * x_len * y_len);//с11
-					row.put(index2_10+12, - 2.0 * x_len * y_len * y_len);//с12
-					row.put(index2_10+13, -       y_len * y_len * y_len);//с13
+					row.put(index2_10+10, - 4.0 * x_len * x_len * x_len);//СЃ10
+					row.put(index2_10+11, - 3.0 * x_len * x_len * y_len);//СЃ11
+					row.put(index2_10+12, - 2.0 * x_len * y_len * y_len);//СЃ12
+					row.put(index2_10+13, -       y_len * y_len * y_len);//СЃ13
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -4801,7 +4801,7 @@ void AddRowsToEquation2__(int order,
 #if SPARSE_ROW_EX
 					row._order = 1;
 #endif
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -4822,16 +4822,16 @@ void AddRowsToEquation2__(int order,
 					row.clear();	
 					//c2 + c4*x_org_xj + 2*c5*y_org_yj + 2*c8*x_org_xj*y_org_yj + c7*x_org_xj^2 + 3*c9*y_org_yj^2
 
-					row.put(index1_10+2, 1.0);//с2
+					row.put(index1_10+2, 1.0);//СЃ2
 
-					row.put(index1_10+4,       x_org_x1j);//с4
-					row.put(index1_10+5, 2.0 * y_org_y1j);//с5
+					row.put(index1_10+4,       x_org_x1j);//СЃ4
+					row.put(index1_10+5, 2.0 * y_org_y1j);//СЃ5
 					
 
-					row.put(index2_10+2, - 1.0);//с2
+					row.put(index2_10+2, - 1.0);//СЃ2
 
-					row.put(index2_10+4, -       x_org_x2j);//с4
-					row.put(index2_10+5, - 2.0 * y_org_y2j);//с5
+					row.put(index2_10+4, -       x_org_x2j);//СЃ4
+					row.put(index2_10+5, - 2.0 * y_org_y2j);//СЃ5
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -4846,12 +4846,12 @@ void AddRowsToEquation2__(int order,
 					//6*c9*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_10+4,       x_len);//с4
-					row.put(index1_10+5, 2.0 * y_len);//с5
+					row.put(index1_10+4,       x_len);//СЃ4
+					row.put(index1_10+5, 2.0 * y_len);//СЃ5
 					
 
-					row.put(index2_10+4, -       x_len);//с4
-					row.put(index2_10+5, - 2.0 * y_len);//с5
+					row.put(index2_10+4, -       x_len);//СЃ4
+					row.put(index2_10+5, - 2.0 * y_len);//СЃ5
 					
 
 					M.push_back(row);	B.push_back(0.0);
@@ -4862,7 +4862,7 @@ void AddRowsToEquation2__(int order,
 #if SPARSE_ROW_EX
 					row._order = 1;
 #endif
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -4883,23 +4883,23 @@ void AddRowsToEquation2__(int order,
 					row.clear();	
 					//c2 + c4*x_org_xj + 2*c5*y_org_yj + 2*c8*x_org_xj*y_org_yj + c7*x_org_xj^2 + 3*c9*y_org_yj^2
 
-					row.put(index1_10+2, 1.0);//с2
+					row.put(index1_10+2, 1.0);//СЃ2
 
-					row.put(index1_10+4,       x_org_x1j);//с4
-					row.put(index1_10+5, 2.0 * y_org_y1j);//с5
+					row.put(index1_10+4,       x_org_x1j);//СЃ4
+					row.put(index1_10+5, 2.0 * y_org_y1j);//СЃ5
 					
-					row.put(index1_10+7,       x_org_x1j * x_org_x1j);//с7
-					row.put(index1_10+8, 2.0 * x_org_x1j * y_org_y1j);//с8
-					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j);//с9
+					row.put(index1_10+7,       x_org_x1j * x_org_x1j);//СЃ7
+					row.put(index1_10+8, 2.0 * x_org_x1j * y_org_y1j);//СЃ8
+					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j);//СЃ9
 
-					row.put(index2_10+2, - 1.0);//с2
+					row.put(index2_10+2, - 1.0);//СЃ2
 
-					row.put(index2_10+4, -       x_org_x2j);//с4
-					row.put(index2_10+5, - 2.0 * y_org_y2j);//с5
+					row.put(index2_10+4, -       x_org_x2j);//СЃ4
+					row.put(index2_10+5, - 2.0 * y_org_y2j);//СЃ5
 					
-					row.put(index2_10+7, -       x_org_x2j * x_org_x2j);//с7
-					row.put(index2_10+8, - 2.0 * x_org_x2j * y_org_y2j);//с8
-					row.put(index2_10+9, - 3.0 * y_org_y2j * y_org_y2j);//с9
+					row.put(index2_10+7, -       x_org_x2j * x_org_x2j);//СЃ7
+					row.put(index2_10+8, - 2.0 * x_org_x2j * y_org_y2j);//СЃ8
+					row.put(index2_10+9, - 3.0 * y_org_y2j * y_org_y2j);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -4913,32 +4913,32 @@ void AddRowsToEquation2__(int order,
 					//6*c9*y_org_yj*y_len
 					//)*t+
 
-					row.put(index1_10+4,       x_len);//с4
-					row.put(index1_10+5, 2.0 * y_len);//с5
+					row.put(index1_10+4,       x_len);//СЃ4
+					row.put(index1_10+5, 2.0 * y_len);//СЃ5
 					
-					row.put(index1_10+7, 2.0 * x_org_x1j * x_len);//с7
-					row.put(index1_10+8, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//с8
-					row.put(index1_10+9, 6.0 * y_org_y1j * y_len);//с9
+					row.put(index1_10+7, 2.0 * x_org_x1j * x_len);//СЃ7
+					row.put(index1_10+8, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//СЃ8
+					row.put(index1_10+9, 6.0 * y_org_y1j * y_len);//СЃ9
 
-					row.put(index2_10+4, -       x_len);//с4
-					row.put(index2_10+5, - 2.0 * y_len);//с5
+					row.put(index2_10+4, -       x_len);//СЃ4
+					row.put(index2_10+5, - 2.0 * y_len);//СЃ5
 					
-					row.put(index2_10+7, - 2.0 * x_org_x2j * x_len);//с7
-					row.put(index2_10+8, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len) );//с8
-					row.put(index2_10+9, - 3.0 * y_org_y2j * y_len);//с9
+					row.put(index2_10+7, - 2.0 * x_org_x2j * x_len);//СЃ7
+					row.put(index2_10+8, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len) );//СЃ8
+					row.put(index2_10+9, - 3.0 * y_org_y2j * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 
 					row.clear();	
 					//(c7*x_len^2 + 2*c8*x_len*y_len + 3*c9*y_len^2)*t^2+
 
-					row.put(index1_10+7,       x_len * x_len);//с7
-					row.put(index1_10+8, 2.0 * x_len * y_len);//с8
-					row.put(index1_10+9, 3.0 * y_len * y_len);//с9
+					row.put(index1_10+7,       x_len * x_len);//СЃ7
+					row.put(index1_10+8, 2.0 * x_len * y_len);//СЃ8
+					row.put(index1_10+9, 3.0 * y_len * y_len);//СЃ9
 
-					row.put(index2_10+7, - 2.0 * x_len * x_len);//с7
-					row.put(index2_10+8, - 2.0 * x_len * y_len);//с8
-					row.put(index2_10+9, - 3.0 * y_len * y_len);//с9
+					row.put(index2_10+7, - 2.0 * x_len * x_len);//СЃ7
+					row.put(index2_10+8, - 2.0 * x_len * y_len);//СЃ8
+					row.put(index2_10+9, - 3.0 * y_len * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -4948,7 +4948,7 @@ void AddRowsToEquation2__(int order,
 #if SPARSE_ROW_EX
 					row._order = 1;
 #endif
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -4988,33 +4988,33 @@ void AddRowsToEquation2__(int order,
 					// 3*c13*x_org_xj*y_org_yj^2
 					// 4*c14*y_org_yj^3+
 
-					row.put(index1_10+2, 1.0);//с2
+					row.put(index1_10+2, 1.0);//СЃ2
 
-					row.put(index1_10+4,       x_org_x1j);//с4
-					row.put(index1_10+5, 2.0 * y_org_y1j);//с5
+					row.put(index1_10+4,       x_org_x1j);//СЃ4
+					row.put(index1_10+5, 2.0 * y_org_y1j);//СЃ5
 					
-					row.put(index1_10+7,       x_org_x1j * x_org_x1j);//с7
-					row.put(index1_10+8, 2.0 * x_org_x1j * y_org_y1j);//с8
-					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j);//с9
+					row.put(index1_10+7,       x_org_x1j * x_org_x1j);//СЃ7
+					row.put(index1_10+8, 2.0 * x_org_x1j * y_org_y1j);//СЃ8
+					row.put(index1_10+9, 3.0 * y_org_y1j * y_org_y1j);//СЃ9
 
-					row.put(index1_10+11,       x_org_x1j * x_org_x1j * x_org_x1j);//с11
-					row.put(index1_10+12, 2.0 * x_org_x1j * x_org_x1j * y_org_y1j);//с12
-					row.put(index1_10+13, 3.0 * x_org_x1j * y_org_y1j * y_org_y1j);//с13
-					row.put(index1_10+14, 4.0 * y_org_y1j * y_org_y1j * y_org_y1j);//с14
+					row.put(index1_10+11,       x_org_x1j * x_org_x1j * x_org_x1j);//СЃ11
+					row.put(index1_10+12, 2.0 * x_org_x1j * x_org_x1j * y_org_y1j);//СЃ12
+					row.put(index1_10+13, 3.0 * x_org_x1j * y_org_y1j * y_org_y1j);//СЃ13
+					row.put(index1_10+14, 4.0 * y_org_y1j * y_org_y1j * y_org_y1j);//СЃ14
 
-					row.put(index2_10+2, - 1.0);//с2
+					row.put(index2_10+2, - 1.0);//СЃ2
 
-					row.put(index2_10+4, -       x_org_x2j);//с4
-					row.put(index2_10+5, - 2.0 * y_org_y2j);//с5
+					row.put(index2_10+4, -       x_org_x2j);//СЃ4
+					row.put(index2_10+5, - 2.0 * y_org_y2j);//СЃ5
 					
-					row.put(index2_10+7, -       x_org_x2j * x_org_x2j);//с7
-					row.put(index2_10+8, - 2.0 * x_org_x2j * y_org_y2j);//с8
-					row.put(index2_10+9, - 3.0 * y_org_y2j * y_org_y2j);//с9
+					row.put(index2_10+7, -       x_org_x2j * x_org_x2j);//СЃ7
+					row.put(index2_10+8, - 2.0 * x_org_x2j * y_org_y2j);//СЃ8
+					row.put(index2_10+9, - 3.0 * y_org_y2j * y_org_y2j);//СЃ9
 
-					row.put(index2_10+11, -       x_org_x2j * x_org_x2j * x_org_x2j);//с11
-					row.put(index2_10+12, - 2.0 * x_org_x2j * x_org_x2j * y_org_y2j);//с12
-					row.put(index2_10+13, - 3.0 * x_org_x2j * y_org_y2j * y_org_y2j);//с13
-					row.put(index2_10+14, - 4.0 * y_org_y2j * y_org_y2j * y_org_y2j);//с14
+					row.put(index2_10+11, -       x_org_x2j * x_org_x2j * x_org_x2j);//СЃ11
+					row.put(index2_10+12, - 2.0 * x_org_x2j * x_org_x2j * y_org_y2j);//СЃ12
+					row.put(index2_10+13, - 3.0 * x_org_x2j * y_org_y2j * y_org_y2j);//СЃ13
+					row.put(index2_10+14, - 4.0 * y_org_y2j * y_org_y2j * y_org_y2j);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -5045,45 +5045,45 @@ void AddRowsToEquation2__(int order,
 					// 12*c14*y_org_yj^2*y_len+
 					// )*t+
 					
-					row.put(index1_10+4,       x_len);//с4
-					row.put(index1_10+5, 2.0 * y_len);//с5
+					row.put(index1_10+4,       x_len);//СЃ4
+					row.put(index1_10+5, 2.0 * y_len);//СЃ5
 					
-					row.put(index1_10+7, 2.0 * x_org_x1j * x_len);//с7
-					row.put(index1_10+8, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//с8
-					row.put(index1_10+9, 6.0 * y_org_y1j * y_len);//с9
+					row.put(index1_10+7, 2.0 * x_org_x1j * x_len);//СЃ7
+					row.put(index1_10+8, 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//СЃ8
+					row.put(index1_10+9, 6.0 * y_org_y1j * y_len);//СЃ9
 
 					row.put(index1_10+11, 
-						+ 3.0 * x_org_x1j * x_org_x1j * x_len);//с11
+						+ 3.0 * x_org_x1j * x_org_x1j * x_len);//СЃ11
 					row.put(index1_10+12, 
 						+ 2.0 * x_org_x1j * x_org_x1j * y_len
 						+ 4.0 * x_org_x1j * x_len * y_org_y1j
-						);//с12
+						);//СЃ12
 					row.put(index1_10+13, 
 						+ 3.0 * x_len * y_org_y1j * y_org_y1j
 						+ 6.0 * x_org_x1j * y_org_y1j * y_len
-						);//с13
+						);//СЃ13
 					row.put(index1_10+14, 
-						+ 12.0 * y_org_y1j * y_org_y1j * y_len);//с14
+						+ 12.0 * y_org_y1j * y_org_y1j * y_len);//СЃ14
 
-					row.put(index2_10+4, -       x_len);//с4
-					row.put(index2_10+5, - 2.0 * y_len);//с5
+					row.put(index2_10+4, -       x_len);//СЃ4
+					row.put(index2_10+5, - 2.0 * y_len);//СЃ5
 					
-					row.put(index2_10+7, - 2.0 * x_org_x2j * x_len);//с7
-					row.put(index2_10+8, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len) );//с8
-					row.put(index2_10+9, - 3.0 * y_org_y2j * y_len);//с9
+					row.put(index2_10+7, - 2.0 * x_org_x2j * x_len);//СЃ7
+					row.put(index2_10+8, - 2.0 * (x_org_x2j * y_len + y_org_y2j * x_len) );//СЃ8
+					row.put(index2_10+9, - 3.0 * y_org_y2j * y_len);//СЃ9
 
 					row.put(index2_10+11, 
-						- 3.0 * x_org_x2j * x_org_x2j * x_len);//с11
+						- 3.0 * x_org_x2j * x_org_x2j * x_len);//СЃ11
 					row.put(index2_10+12, 
 						- 2.0 * x_org_x2j * x_org_x2j * y_len
 						- 4.0 * x_org_x2j * x_len * y_org_y2j
-						);//с12
+						);//СЃ12
 					row.put(index2_10+13, 
 						- 3.0 * x_len * y_org_y2j * y_org_y2j
 						- 6.0 * x_org_x2j * y_org_y2j * y_len
-						);//с13
+						);//СЃ13
 					row.put(index2_10+14, 
-						- 12.0 * y_org_y2j * y_org_y2j * y_len);//с14
+						- 12.0 * y_org_y2j * y_org_y2j * y_len);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -5103,39 +5103,39 @@ void AddRowsToEquation2__(int order,
 					// 12*c14*y_org_yj*y_len^2+
 					// )*t^2+
 
-					row.put(index1_10+7,       x_len * x_len);//с7
-					row.put(index1_10+8, 2.0 * x_len * y_len);//с8
-					row.put(index1_10+9, 3.0 * y_len * y_len);//с9
+					row.put(index1_10+7,       x_len * x_len);//СЃ7
+					row.put(index1_10+8, 2.0 * x_len * y_len);//СЃ8
+					row.put(index1_10+9, 3.0 * y_len * y_len);//СЃ9
 
 					row.put(index1_10+11, 
-						+ 3.0 * x_org_x1j * x_len * x_len);//с11
+						+ 3.0 * x_org_x1j * x_len * x_len);//СЃ11
 					row.put(index1_10+12, 
 						+ 2.0 * x_len * x_len * y_org_y1j
 						+ 4.0 * x_org_x1j * x_len * y_len
-						);//с12
+						);//СЃ12
 					row.put(index1_10+13, 
 						+ 3.0 * x_org_x1j * y_len * y_len
 						+ 6.0 * x_len * y_org_y1j * y_len
-						);//с13
+						);//СЃ13
 					row.put(index1_10+14, 
-						+ 12.0 * y_org_y1j * y_len * y_len);//с14
+						+ 12.0 * y_org_y1j * y_len * y_len);//СЃ14
 
-					row.put(index2_10+7, - 2.0 * x_len * x_len);//с7
-					row.put(index2_10+8, - 2.0 * x_len * y_len);//с8
-					row.put(index2_10+9, - 3.0 * y_len * y_len);//с9
+					row.put(index2_10+7, - 2.0 * x_len * x_len);//СЃ7
+					row.put(index2_10+8, - 2.0 * x_len * y_len);//СЃ8
+					row.put(index2_10+9, - 3.0 * y_len * y_len);//СЃ9
 
 					row.put(index2_10+11, 
-						- 3.0 * x_org_x2j * x_len * x_len);//с11
+						- 3.0 * x_org_x2j * x_len * x_len);//СЃ11
 					row.put(index2_10+12, 
 						- 2.0 * x_len * x_len * y_org_y2j
 						- 4.0 * x_org_x2j * x_len * y_len
-						);//с12
+						);//СЃ12
 					row.put(index2_10+13, 
 						- 3.0 * x_org_x2j * y_len * y_len
 						- 6.0 * x_len * y_org_y2j * y_len
-						);//с13
+						);//СЃ13
 					row.put(index2_10+14, 
-						- 12.0 * y_org_y2j * y_len * y_len);//с14
+						- 12.0 * y_org_y2j * y_len * y_len);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -5148,22 +5148,22 @@ void AddRowsToEquation2__(int order,
 					// )*t^3+
 
 					row.put(index1_10+11, 
-						+ x_len * x_len * x_len);//с11
+						+ x_len * x_len * x_len);//СЃ11
 					row.put(index1_10+12, 
-						+ 2.0 * x_len * x_len * y_len);//с12
+						+ 2.0 * x_len * x_len * y_len);//СЃ12
 					row.put(index1_10+13, 
-						+ 3.0 * x_len * y_len * y_len);//с13
+						+ 3.0 * x_len * y_len * y_len);//СЃ13
 					row.put(index1_10+14, 
-						+ 4.0 * y_len * y_len * y_len);//с14
+						+ 4.0 * y_len * y_len * y_len);//СЃ14
 
 					row.put(index2_10+11, 
-						- x_len * x_len * x_len);//с11
+						- x_len * x_len * x_len);//СЃ11
 					row.put(index2_10+12, 
-						- 2.0 * x_len * x_len * y_len);//с12
+						- 2.0 * x_len * x_len * y_len);//СЃ12
 					row.put(index2_10+13, 
-						- 3.0 * x_len * y_len * y_len);//с13
+						- 3.0 * x_len * y_len * y_len);//СЃ13
 					row.put(index2_10+14, 
-						- 4.0 * y_len * y_len * y_len);//с14
+						- 4.0 * y_len * y_len * y_len);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -5181,7 +5181,7 @@ void AddRowsToEquation2__(int order,
 			{
 			case 2:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -5197,15 +5197,15 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();	
 					//2*c3 + 6*c6*x_org_xj + 2*c7*y_org_yj
-					row.put(index1_10+3, 2.0);//с3				
+					row.put(index1_10+3, 2.0);//СЃ3				
 
-					row.put(index2_10+3, - 2.0);//с3				
+					row.put(index2_10+3, - 2.0);//СЃ3				
 
 					M.push_back(row);	B.push_back(0.0);
 					
 
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_yy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -5220,16 +5220,16 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();	
 					//2*c5 + 2*c8*x_org_xj + 6*c9*y_org_yj
-					row.put(index1_10+5, + 2.0);//с5				
+					row.put(index1_10+5, + 2.0);//СЃ5				
 
-					row.put(index2_10+5, - 2.0);//с5				
+					row.put(index2_10+5, - 2.0);//СЃ5				
 
 					M.push_back(row);	B.push_back(0.0);
 					
 
 					
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_xy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -5244,9 +5244,9 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();
 					//c4 + 2*c7*x_org_xj + 2*c8*y_org_yj
-					row.put(index1_10+4, + 1.0);//с4				
+					row.put(index1_10+4, + 1.0);//СЃ4				
 
-					row.put(index2_10+4, - 1.0);//с4				
+					row.put(index2_10+4, - 1.0);//СЃ4				
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -5254,7 +5254,7 @@ void AddRowsToEquation2__(int order,
 				break;
 			case 3:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -5270,27 +5270,27 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();	
 					//2*c3 + 6*c6*x_org_xj + 2*c7*y_org_yj
-					row.put(index1_10+3, 2.0);//с3				
-					row.put(index1_10+6, 6.0 * x_org_x1j);//с6
-					row.put(index1_10+7, 2.0 * y_org_y1j);//с7
+					row.put(index1_10+3, 2.0);//СЃ3				
+					row.put(index1_10+6, 6.0 * x_org_x1j);//СЃ6
+					row.put(index1_10+7, 2.0 * y_org_y1j);//СЃ7
 
-					row.put(index2_10+3, - 2.0);//с3				
-					row.put(index2_10+6, - 6.0 * x_org_x2j);//с6
-					row.put(index2_10+7, - 2.0 * y_org_y2j);//с7
+					row.put(index2_10+3, - 2.0);//СЃ3				
+					row.put(index2_10+6, - 6.0 * x_org_x2j);//СЃ6
+					row.put(index2_10+7, - 2.0 * y_org_y2j);//СЃ7
 
 					M.push_back(row);	B.push_back(0.0);
 					
 					row.clear();	
 					//(6*c6*x_len + 2*c7*y_len)*t+
-					row.put(index1_10+6, 6.0 * x_len);//с6
-					row.put(index1_10+7, 2.0 * y_len);//с7
+					row.put(index1_10+6, 6.0 * x_len);//СЃ6
+					row.put(index1_10+7, 2.0 * y_len);//СЃ7
 
-					row.put(index2_10+6, - 6.0 * x_len);//с6
-					row.put(index2_10+7, - 2.0 * y_len);//с7
+					row.put(index2_10+6, - 6.0 * x_len);//СЃ6
+					row.put(index2_10+7, - 2.0 * y_len);//СЃ7
 
 					M.push_back(row);	B.push_back(0.0);
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_yy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -5305,28 +5305,28 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();	
 					//2*c5 + 2*c8*x_org_xj + 6*c9*y_org_yj
-					row.put(index1_10+5, + 2.0);//с5				
-					row.put(index1_10+8, + 2.0 * x_org_x1j);//с8
-					row.put(index1_10+9, + 6.0 * y_org_y1j);//с9
+					row.put(index1_10+5, + 2.0);//СЃ5				
+					row.put(index1_10+8, + 2.0 * x_org_x1j);//СЃ8
+					row.put(index1_10+9, + 6.0 * y_org_y1j);//СЃ9
 
-					row.put(index2_10+5, - 2.0);//с5				
-					row.put(index2_10+8, - 2.0 * x_org_x2j);//с8
-					row.put(index2_10+9, - 6.0 * y_org_y2j);//с9
+					row.put(index2_10+5, - 2.0);//СЃ5				
+					row.put(index2_10+8, - 2.0 * x_org_x2j);//СЃ8
+					row.put(index2_10+9, - 6.0 * y_org_y2j);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 					
 					row.clear();	
 					// (2*c8*x_len + 6*c9*y_len)*t+
-					row.put(index1_10+8, + 2.0 * x_len);//с8
-					row.put(index1_10+9, + 6.0 * y_len);//с9
+					row.put(index1_10+8, + 2.0 * x_len);//СЃ8
+					row.put(index1_10+9, + 6.0 * y_len);//СЃ9
 
-					row.put(index2_10+8, - 2.0 * x_len);//с8
-					row.put(index2_10+9, - 6.0 * y_len);//с9
+					row.put(index2_10+8, - 2.0 * x_len);//СЃ8
+					row.put(index2_10+9, - 6.0 * y_len);//СЃ9
 
 					M.push_back(row);	B.push_back(0.0);
 					
 					
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_xy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -5341,30 +5341,30 @@ void AddRowsToEquation2__(int order,
 
 					row.clear();
 					//c4 + 2*c7*x_org_xj + 2*c8*y_org_yj
-					row.put(index1_10+4, + 1.0);//с4				
-					row.put(index1_10+7, + 2.0 * x_org_x1j);//с7
-					row.put(index1_10+8, + 2.0 * y_org_y1j);//с8
+					row.put(index1_10+4, + 1.0);//СЃ4				
+					row.put(index1_10+7, + 2.0 * x_org_x1j);//СЃ7
+					row.put(index1_10+8, + 2.0 * y_org_y1j);//СЃ8
 
-					row.put(index2_10+4, - 1.0);//с4				
-					row.put(index2_10+7, - 2.0 * x_org_x2j);//с7
-					row.put(index2_10+8, - 2.0 * y_org_y2j);//с8
+					row.put(index2_10+4, - 1.0);//СЃ4				
+					row.put(index2_10+7, - 2.0 * x_org_x2j);//СЃ7
+					row.put(index2_10+8, - 2.0 * y_org_y2j);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 
 					row.clear();
 					//(2*c7*x_len + 2*c8*y_len)*t+
-					row.put(index1_10+7, + 2.0 * x_len);//с7
-					row.put(index1_10+8, + 2.0 * y_len);//с8
+					row.put(index1_10+7, + 2.0 * x_len);//СЃ7
+					row.put(index1_10+8, + 2.0 * y_len);//СЃ8
 
-					row.put(index2_10+7, - 2.0 * x_len);//с7
-					row.put(index2_10+8, - 2.0 * y_len);//с8
+					row.put(index2_10+7, - 2.0 * x_len);//СЃ7
+					row.put(index2_10+8, - 2.0 * y_len);//СЃ8
 
 					M.push_back(row);	B.push_back(0.0);
 				}
 				break;
 			case 4:
 				{
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 
@@ -5392,21 +5392,21 @@ void AddRowsToEquation2__(int order,
 					// 12*c10*x_org_xj^2+
 					// 6*c11*x_org_xj*y_org_yj+
 					// 2*c12*y_org_yj^2
-					row.put(index1_10+3, 2.0);//с3				
-					row.put(index1_10+6, 6.0 * x_org_x1j);//с6
-					row.put(index1_10+7, 2.0 * y_org_y1j);//с7
+					row.put(index1_10+3, 2.0);//СЃ3				
+					row.put(index1_10+6, 6.0 * x_org_x1j);//СЃ6
+					row.put(index1_10+7, 2.0 * y_org_y1j);//СЃ7
 
-					row.put(index1_10+10, 12.0 * x_org_x1j * x_org_x1j);//с10
-					row.put(index1_10+11, 6.0 * x_org_x1j * y_org_y1j);//с11
-					row.put(index1_10+12, 2.0 * y_org_y1j * y_org_y1j);//с12
+					row.put(index1_10+10, 12.0 * x_org_x1j * x_org_x1j);//СЃ10
+					row.put(index1_10+11, 6.0 * x_org_x1j * y_org_y1j);//СЃ11
+					row.put(index1_10+12, 2.0 * y_org_y1j * y_org_y1j);//СЃ12
 
-					row.put(index2_10+3, - 2.0);//с3				
-					row.put(index2_10+6, - 6.0 * x_org_x2j);//с6
-					row.put(index2_10+7, - 2.0 * y_org_y2j);//с7
+					row.put(index2_10+3, - 2.0);//СЃ3				
+					row.put(index2_10+6, - 6.0 * x_org_x2j);//СЃ6
+					row.put(index2_10+7, - 2.0 * y_org_y2j);//СЃ7
 
-					row.put(index2_10+10, - 12.0 * x_org_x2j * x_org_x2j);//с10
-					row.put(index2_10+11, - 6.0 * x_org_x2j * y_org_y2j);//с11
-					row.put(index2_10+12, - 2.0 * y_org_y2j * y_org_y2j);//с12
+					row.put(index2_10+10, - 12.0 * x_org_x2j * x_org_x2j);//СЃ10
+					row.put(index2_10+11, - 6.0 * x_org_x2j * y_org_y2j);//СЃ11
+					row.put(index2_10+12, - 2.0 * y_org_y2j * y_org_y2j);//СЃ12
 
 					M.push_back(row);	B.push_back(0.0);
 					
@@ -5422,29 +5422,29 @@ void AddRowsToEquation2__(int order,
 					// 6*c11*x_len*y_org_yj+
 					// 4*c12*y_org_yj*y_len
 					// )*t+
-					row.put(index1_10+6, 6.0 * x_len);//с6
-					row.put(index1_10+7, 2.0 * y_len);//с7
+					row.put(index1_10+6, 6.0 * x_len);//СЃ6
+					row.put(index1_10+7, 2.0 * y_len);//СЃ7
 
 					row.put(index1_10+10, 
-						+ 24.0 * x_org_x1j * x_len);//с10
+						+ 24.0 * x_org_x1j * x_len);//СЃ10
 					row.put(index1_10+11, 
 						+ 6.0 * x_org_x1j * y_len
 						+ 6.0 * x_len * y_org_y1j
-						);//с11
+						);//СЃ11
 					row.put(index1_10+12, 
-						+ 4.0 * y_org_y1j * y_len);//с12
+						+ 4.0 * y_org_y1j * y_len);//СЃ12
 
-					row.put(index2_10+6, - 6.0 * x_len);//с6
-					row.put(index2_10+7, - 2.0 * y_len);//с7
+					row.put(index2_10+6, - 6.0 * x_len);//СЃ6
+					row.put(index2_10+7, - 2.0 * y_len);//СЃ7
 
 					row.put(index2_10+10, 
-						- 24.0 * x_org_x2j * x_len);//с10
+						- 24.0 * x_org_x2j * x_len);//СЃ10
 					row.put(index2_10+11, 
 						- 6.0 * x_org_x2j * y_len
 						- 6.0 * x_len * y_org_y2j
-						);//с11
+						);//СЃ11
 					row.put(index2_10+12, 
-						- 4.0 * y_org_y2j * y_len);//с12
+						- 4.0 * y_org_y2j * y_len);//СЃ12
 
 					M.push_back(row);	B.push_back(0.0);
 					
@@ -5457,22 +5457,22 @@ void AddRowsToEquation2__(int order,
 					// )*t^2+
 
 					row.put(index1_10+10, 
-						+ 12.0 * x_len * x_len);//с10
+						+ 12.0 * x_len * x_len);//СЃ10
 					row.put(index1_10+11, 
-						+ 6.0 * x_len * y_len);//с11
+						+ 6.0 * x_len * y_len);//СЃ11
 					row.put(index1_10+12, 
-						+ 2.0 * y_len * y_len);//с12
+						+ 2.0 * y_len * y_len);//СЃ12
 
 					row.put(index2_10+10, 
-						- 12.0 * x_len * x_len);//с10
+						- 12.0 * x_len * x_len);//СЃ10
 					row.put(index2_10+11, 
-						- 6.0 * x_len * y_len);//с11
+						- 6.0 * x_len * y_len);//СЃ11
 					row.put(index2_10+12, 
-						- 2.0 * y_len * y_len);//с12
+						- 2.0 * y_len * y_len);//СЃ12
 
 					M.push_back(row);	B.push_back(0.0);
 
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_yy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -5499,21 +5499,21 @@ void AddRowsToEquation2__(int order,
 					// 2*c12*x_org_xj^2+
 					// 6*c13*x_org_xj*y_org_yj+
 					// 12*c14*y_org_yj^2
-					row.put(index1_10+5, + 2.0);//с5				
-					row.put(index1_10+8, + 2.0 * x_org_x1j);//с8
-					row.put(index1_10+9, + 6.0 * y_org_y1j);//с9
+					row.put(index1_10+5, + 2.0);//СЃ5				
+					row.put(index1_10+8, + 2.0 * x_org_x1j);//СЃ8
+					row.put(index1_10+9, + 6.0 * y_org_y1j);//СЃ9
 
-					row.put(index1_10+12, 2.0 * x_org_x1j * x_org_x1j);//с12
-					row.put(index1_10+13, 6.0 * x_org_x1j * y_org_y1j);//с13
-					row.put(index1_10+14, 12.0 * y_org_y1j * y_org_y1j);//с14
+					row.put(index1_10+12, 2.0 * x_org_x1j * x_org_x1j);//СЃ12
+					row.put(index1_10+13, 6.0 * x_org_x1j * y_org_y1j);//СЃ13
+					row.put(index1_10+14, 12.0 * y_org_y1j * y_org_y1j);//СЃ14
 
-					row.put(index2_10+5, - 2.0);//с5				
-					row.put(index2_10+8, - 2.0 * x_org_x2j);//с8
-					row.put(index2_10+9, - 6.0 * y_org_y2j);//с9
+					row.put(index2_10+5, - 2.0);//СЃ5				
+					row.put(index2_10+8, - 2.0 * x_org_x2j);//СЃ8
+					row.put(index2_10+9, - 6.0 * y_org_y2j);//СЃ9
 
-					row.put(index2_10+12, - 2.0 * x_org_x2j * x_org_x2j);//с12
-					row.put(index2_10+13, - 6.0 * x_org_x2j * y_org_y2j);//с13
-					row.put(index2_10+14, - 12.0 * y_org_y2j * y_org_y2j);//с14
+					row.put(index2_10+12, - 2.0 * x_org_x2j * x_org_x2j);//СЃ12
+					row.put(index2_10+13, - 6.0 * x_org_x2j * y_org_y2j);//СЃ13
+					row.put(index2_10+14, - 12.0 * y_org_y2j * y_org_y2j);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 					
@@ -5529,29 +5529,29 @@ void AddRowsToEquation2__(int order,
 					// 6*c13*x_len*y_org_yj+
 					// 24*c14*y_org_yj*y_len
 					// )*t+
-					row.put(index1_10+8, + 2.0 * x_len);//с8
-					row.put(index1_10+9, + 6.0 * y_len);//с9
+					row.put(index1_10+8, + 2.0 * x_len);//СЃ8
+					row.put(index1_10+9, + 6.0 * y_len);//СЃ9
 
 					row.put(index1_10+12, 
-						+ 4.0 * x_org_x1j * x_len);//с12
+						+ 4.0 * x_org_x1j * x_len);//СЃ12
 					row.put(index1_10+13, 
 						+ 6.0 * x_org_x1j * y_len
 						+ 6.0 * x_len * y_org_y1j
-						);//с13
+						);//СЃ13
 					row.put(index1_10+14, 
-						+ 24.0 * y_org_y1j * y_len);//с14
+						+ 24.0 * y_org_y1j * y_len);//СЃ14
 
-					row.put(index2_10+8, - 2.0 * x_len);//с8
-					row.put(index2_10+9, - 6.0 * y_len);//с9
+					row.put(index2_10+8, - 2.0 * x_len);//СЃ8
+					row.put(index2_10+9, - 6.0 * y_len);//СЃ9
 
 					row.put(index2_10+12, 
-						- 4.0 * x_org_x2j * x_len);//с12
+						- 4.0 * x_org_x2j * x_len);//СЃ12
 					row.put(index2_10+13, 
 						- 6.0 * x_org_x2j * y_len
 						- 6.0 * x_len * y_org_y2j
-						);//с13
+						);//СЃ13
 					row.put(index2_10+14, 
-						- 24.0 * y_org_y2j * y_len);//с14
+						- 24.0 * y_org_y2j * y_len);//СЃ14
 
 					M.push_back(row);	B.push_back(0.0);
 					
@@ -5563,22 +5563,22 @@ void AddRowsToEquation2__(int order,
 					// )*t^2+
 					
 					row.put(index1_10+10, 
-						+ 2.0 * x_len * x_len);//с10
+						+ 2.0 * x_len * x_len);//СЃ10
 					row.put(index1_10+11, 
-						+ 6.0 * x_len * y_len);//с11
+						+ 6.0 * x_len * y_len);//СЃ11
 					row.put(index1_10+12, 
-						+ 12.0 * y_len * y_len);//с12
+						+ 12.0 * y_len * y_len);//СЃ12
 
 					row.put(index2_10+10, 
-						- 2.0 * x_len * x_len);//с10
+						- 2.0 * x_len * x_len);//СЃ10
 					row.put(index2_10+11, 
-						- 6.0 * x_len * y_len);//с11
+						- 6.0 * x_len * y_len);//СЃ11
 					row.put(index2_10+12, 
-						- 12.0 * y_len * y_len);//с12
+						- 12.0 * y_len * y_len);//СЃ12
 
 					M.push_back(row);	B.push_back(0.0);
 
-					// добавляем строку в уравнение
+					// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 					//*****************************************************************************************
 					//*****************************************************************************************
 					// diff_xy(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -5605,21 +5605,21 @@ void AddRowsToEquation2__(int order,
 					// 3*c11*x_org_xj^2+
 					// 4*c12*x_org_xj*y_org_yj+
 					// 3*c13*y_org_yj^2
-					row.put(index1_10+4, + 1.0);//с4				
-					row.put(index1_10+7, + 2.0 * x_org_x1j);//с7
-					row.put(index1_10+8, + 2.0 * y_org_y1j);//с8
+					row.put(index1_10+4, + 1.0);//СЃ4				
+					row.put(index1_10+7, + 2.0 * x_org_x1j);//СЃ7
+					row.put(index1_10+8, + 2.0 * y_org_y1j);//СЃ8
 
-					row.put(index1_10+11, 3.0 * x_org_x1j * x_org_x1j);//с11
-					row.put(index1_10+12, 4.0 * x_org_x1j * y_org_y1j);//с12
-					row.put(index1_10+13, 3.0 * y_org_y1j * y_org_y1j);//с13
+					row.put(index1_10+11, 3.0 * x_org_x1j * x_org_x1j);//СЃ11
+					row.put(index1_10+12, 4.0 * x_org_x1j * y_org_y1j);//СЃ12
+					row.put(index1_10+13, 3.0 * y_org_y1j * y_org_y1j);//СЃ13
 
-					row.put(index2_10+4, - 1.0);//с4				
-					row.put(index2_10+7, - 2.0 * x_org_x2j);//с7
-					row.put(index2_10+8, - 2.0 * y_org_y2j);//с8
+					row.put(index2_10+4, - 1.0);//СЃ4				
+					row.put(index2_10+7, - 2.0 * x_org_x2j);//СЃ7
+					row.put(index2_10+8, - 2.0 * y_org_y2j);//СЃ8
 
-					row.put(index2_10+11, - 3.0 * x_org_x2j * x_org_x2j);//с11
-					row.put(index2_10+12, - 4.0 * x_org_x2j * y_org_y2j);//с12
-					row.put(index2_10+13, - 3.0 * y_org_y2j * y_org_y2j);//с13
+					row.put(index2_10+11, - 3.0 * x_org_x2j * x_org_x2j);//СЃ11
+					row.put(index2_10+12, - 4.0 * x_org_x2j * y_org_y2j);//СЃ12
+					row.put(index2_10+13, - 3.0 * y_org_y2j * y_org_y2j);//СЃ13
 
 					M.push_back(row);	B.push_back(0.0);
 
@@ -5635,29 +5635,29 @@ void AddRowsToEquation2__(int order,
 					// 4*c12*x_len*y_org_yj+
 					// 6*c13*y_org_yj*y_len
 					// )*t+
-					row.put(index1_10+7, + 2.0 * x_len);//с7
-					row.put(index1_10+8, + 2.0 * y_len);//с8
+					row.put(index1_10+7, + 2.0 * x_len);//СЃ7
+					row.put(index1_10+8, + 2.0 * y_len);//СЃ8
 
 					row.put(index1_10+11, 
-						+ 6.0 * x_org_x1j * x_len);//с11
+						+ 6.0 * x_org_x1j * x_len);//СЃ11
 					row.put(index1_10+12, 
 						+ 4.0 * x_org_x1j * y_len
 						+ 4.0 * x_len * y_org_y1j
-						);//с12
+						);//СЃ12
 					row.put(index1_10+13, 
-						+ 6.0 * y_org_y1j * y_len);//с13
+						+ 6.0 * y_org_y1j * y_len);//СЃ13
 
-					row.put(index2_10+7, - 2.0 * x_len);//с7
-					row.put(index2_10+8, - 2.0 * y_len);//с8
+					row.put(index2_10+7, - 2.0 * x_len);//СЃ7
+					row.put(index2_10+8, - 2.0 * y_len);//СЃ8
 
 					row.put(index2_10+11, 
-						+ 6.0 * x_org_x2j * x_len);//с11
+						+ 6.0 * x_org_x2j * x_len);//СЃ11
 					row.put(index2_10+12, 
 						+ 4.0 * x_org_x2j * y_len
 						+ 4.0 * x_len * y_org_y2j
-						);//с12
+						);//СЃ12
 					row.put(index2_10+13, 
-						+ 6.0 * y_org_y2j * y_len);//с13
+						+ 6.0 * y_org_y2j * y_len);//СЃ13
 
 					M.push_back(row);	B.push_back(0.0);
 					
@@ -5665,18 +5665,18 @@ void AddRowsToEquation2__(int order,
 					// (3*c11*x_len^2 + 4*c12*x_len*y_len + 3*c13*y_len^2)*t^2+
 					
 					row.put(index1_10+11, 
-						+ 3.0 * x_len * x_len);//с11
+						+ 3.0 * x_len * x_len);//СЃ11
 					row.put(index1_10+12, 
-						+ 4.0 * x_len * y_len);//с12
+						+ 4.0 * x_len * y_len);//СЃ12
 					row.put(index1_10+13, 
-						+ 3.0 * y_len * y_len);//с13
+						+ 3.0 * y_len * y_len);//СЃ13
 
 					row.put(index2_10+11, 
-						- 3.0 * x_len * x_len);//с11
+						- 3.0 * x_len * x_len);//СЃ11
 					row.put(index2_10+12, 
-						- 4.0 * x_len * y_len);//с12
+						- 4.0 * x_len * y_len);//СЃ12
 					row.put(index2_10+13, 
-						- 3.0 * y_len * y_len);//с13
+						- 3.0 * y_len * y_len);//СЃ13
 
 					M.push_back(row);	B.push_back(0.0);
 				}
@@ -5690,16 +5690,16 @@ void AddRowsToEquation2__(int order,
 }
 
 
-// заполняем строку 
-void FillRow_NonFault(sparse_row & row, // заполняемая строка
-					  int order, // порялок полигона
-					  int pw_t, // степень при t
-					  size_t index1_10, // начальный индекс
+// Р·Р°РїРѕР»РЅСЏРµРј СЃС‚СЂРѕРєСѓ 
+void FillRow_NonFault(sparse_row & row, // Р·Р°РїРѕР»РЅСЏРµРјР°СЏ СЃС‚СЂРѕРєР°
+					  int order, // РїРѕСЂСЏР»РѕРє РїРѕР»РёРіРѕРЅР°
+					  int pw_t, // СЃС‚РµРїРµРЅСЊ РїСЂРё t
+					  size_t index1_10, // РЅР°С‡Р°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ
 					  double x_org_x1j,
 					  double y_org_y1j,
 					  double x_len,
 					  double y_len,
-					  double m) // множитель знака и наклона
+					  double m) // РјРЅРѕР¶РёС‚РµР»СЊ Р·РЅР°РєР° Рё РЅР°РєР»РѕРЅР°
 {
 	switch (order)
 	{
@@ -5714,9 +5714,9 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 			case 0:
 				{
 					// zj + c1*x_org_xj + c2*y_org_yj + c4*x_org_xj*y_org_yj + c3*x_org_xj^2
-					row.plus(index1_10+0, m * 1.0);//с0
-					row.plus(index1_10+1, m * x_org_x1j);//с1
-					row.plus(index1_10+2, m * y_org_y1j);//с2
+					row.plus(index1_10+0, m * 1.0);//СЃ0
+					row.plus(index1_10+1, m * x_org_x1j);//СЃ1
+					row.plus(index1_10+2, m * y_org_y1j);//СЃ2
 				}
 				break;
 			case 1:
@@ -5730,8 +5730,8 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					//)*t
 					// (c1*x_len+2*c3*x_org_xj*x_len+c2*y_len+c4*x_org_xj*y_len+c4*x_len*y_org_yj)*t+
 
-					row.plus(index1_10+1,  m * x_len);//с1
-					row.plus(index1_10+2,  m * y_len);//с2
+					row.plus(index1_10+1,  m * x_len);//СЃ1
+					row.plus(index1_10+2,  m * y_len);//СЃ2
 				}
 				break;
 			}
@@ -5748,13 +5748,13 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 			case 0:
 				{
 					// zj + c1*x_org_xj + c2*y_org_yj + c4*x_org_xj*y_org_yj + c3*x_org_xj^2
-					row.plus(index1_10+0, m * 1.0);//с0
-					row.plus(index1_10+1, m * x_org_x1j);//с1
-					row.plus(index1_10+2, m * y_org_y1j);//с2
+					row.plus(index1_10+0, m * 1.0);//СЃ0
+					row.plus(index1_10+1, m * x_org_x1j);//СЃ1
+					row.plus(index1_10+2, m * y_org_y1j);//СЃ2
 
-					row.plus(index1_10+3, m * (x_org_x1j) * (x_org_x1j));//с3
-					row.plus(index1_10+4, m * (x_org_x1j) * (y_org_y1j));//с4
-					row.plus(index1_10+5, m * (y_org_y1j) * (y_org_y1j));//с5
+					row.plus(index1_10+3, m * (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.plus(index1_10+4, m * (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.plus(index1_10+5, m * (y_org_y1j) * (y_org_y1j));//СЃ5
 				}
 				break;
 			case 1:
@@ -5768,12 +5768,12 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					//)*t
 					// (c1*x_len+2*c3*x_org_xj*x_len+c2*y_len+c4*x_org_xj*y_len+c4*x_len*y_org_yj)*t+
 
-					row.plus(index1_10+1,  m * x_len);//с1
-					row.plus(index1_10+2,  m * y_len);//с2
+					row.plus(index1_10+1,  m * x_len);//СЃ1
+					row.plus(index1_10+2,  m * y_len);//СЃ2
 
-					row.plus(index1_10+3,  m * 2.0 * x_org_x1j * x_len);//с3
-					row.plus(index1_10+4,  m * (x_len * y_org_y1j + x_org_x1j * y_len));//с4
-					row.plus(index1_10+5,  m * 2.0 * y_org_y1j * y_len);//с5
+					row.plus(index1_10+3,  m * 2.0 * x_org_x1j * x_len);//СЃ3
+					row.plus(index1_10+4,  m * (x_len * y_org_y1j + x_org_x1j * y_len));//СЃ4
+					row.plus(index1_10+5,  m * 2.0 * y_org_y1j * y_len);//СЃ5
 				}
 				break;
 			case 2:
@@ -5790,9 +5790,9 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					//3*c9*y_org_yj*y_len^2+
 					//)*t^2+
 
-					row.plus(index1_10+3, m * x_len * x_len);//с3
-					row.plus(index1_10+4, m * x_len * y_len);//с4
-					row.plus(index1_10+5, m * y_len * y_len);//с5
+					row.plus(index1_10+3, m * x_len * x_len);//СЃ3
+					row.plus(index1_10+4, m * x_len * y_len);//СЃ4
+					row.plus(index1_10+5, m * y_len * y_len);//СЃ5
 				}
 				break;
 			}
@@ -5800,7 +5800,7 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 		break;
 	case 3:
 		{
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 			// f(t) := 
@@ -5827,18 +5827,18 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 			case 0:
 				{
 					//zj + c1*x_org_xj + c2*y_org_yj + c3*x_org_xj^2 + c5*y_org_yj^2 + c6*x_org_xj^3 + c7*x_org_xj^2*y_org_yj + c8*x_org_xj*y_org_yj^2 + c4*x_org_xj*y_org_yj + c9*y_org_yj^3
-					row.plus(index1_10+0, m * 1.0);//с0
-					row.plus(index1_10+1, m * x_org_x1j);//с1
-					row.plus(index1_10+2, m * y_org_y1j);//с2
+					row.plus(index1_10+0, m * 1.0);//СЃ0
+					row.plus(index1_10+1, m * x_org_x1j);//СЃ1
+					row.plus(index1_10+2, m * y_org_y1j);//СЃ2
 
-					row.plus(index1_10+3, m * (x_org_x1j) * (x_org_x1j));//с3
-					row.plus(index1_10+4, m * (x_org_x1j) * (y_org_y1j));//с4
-					row.plus(index1_10+5, m * (y_org_y1j) * (y_org_y1j));//с5
+					row.plus(index1_10+3, m * (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.plus(index1_10+4, m * (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.plus(index1_10+5, m * (y_org_y1j) * (y_org_y1j));//СЃ5
 					
-					row.plus(index1_10+6, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//с6
-					row.plus(index1_10+7, m * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//с7
-					row.plus(index1_10+8, m * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//с8
-					row.plus(index1_10+9, m * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с9
+					row.plus(index1_10+6, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//СЃ6
+					row.plus(index1_10+7, m * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//СЃ7
+					row.plus(index1_10+8, m * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//СЃ8
+					row.plus(index1_10+9, m * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ9
 				}
 				break;
 			case 1:
@@ -5858,17 +5858,17 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					//3*c9*y_org_yj^2*y_len+
 					//)*t
 
-					row.plus(index1_10+1, m * x_len);//с1
-					row.plus(index1_10+2, m * y_len);//с2
+					row.plus(index1_10+1, m * x_len);//СЃ1
+					row.plus(index1_10+2, m * y_len);//СЃ2
 
-					row.plus(index1_10+3, m * 2.0 * x_org_x1j * x_len);//с3
-					row.plus(index1_10+4, m * (x_len * y_org_y1j + x_org_x1j * y_len));//с4
-					row.plus(index1_10+5, m * 2.0 * y_org_y1j * y_len);//с5
+					row.plus(index1_10+3, m * 2.0 * x_org_x1j * x_len);//СЃ3
+					row.plus(index1_10+4, m * (x_len * y_org_y1j + x_org_x1j * y_len));//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_org_y1j * y_len);//СЃ5
 					
-					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j * x_len);//с6
-					row.plus(index1_10+7, m * (x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j));//с7
-					row.plus(index1_10+8, m * (x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j));//с8
-					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j * y_len);//с9
+					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j * x_len);//СЃ6
+					row.plus(index1_10+7, m * (x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j));//СЃ7
+					row.plus(index1_10+8, m * (x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j));//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j * y_len);//СЃ9
 				}
 				break;
 			case 2:
@@ -5885,23 +5885,23 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					//3*c9*y_org_yj*y_len^2+
 					//)*t^2+
 
-					row.plus(index1_10+3, m * x_len * x_len);//с3
-					row.plus(index1_10+4, m * x_len * y_len);//с4
-					row.plus(index1_10+5, m * y_len * y_len);//с5
+					row.plus(index1_10+3, m * x_len * x_len);//СЃ3
+					row.plus(index1_10+4, m * x_len * y_len);//СЃ4
+					row.plus(index1_10+5, m * y_len * y_len);//СЃ5
 					
-					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_len * x_len);//с6
-					row.plus(index1_10+7, m * (x_len * x_len * y_org_y1j + 2.0 * x_org_x1j * x_len * y_len));//с7
-					row.plus(index1_10+8, m * (x_org_x1j * y_len * y_len + 2.0 * y_org_y1j * x_len * y_len));//с8
-					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_len * y_len);//с9
+					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_len * x_len);//СЃ6
+					row.plus(index1_10+7, m * (x_len * x_len * y_org_y1j + 2.0 * x_org_x1j * x_len * y_len));//СЃ7
+					row.plus(index1_10+8, m * (x_org_x1j * y_len * y_len + 2.0 * y_org_y1j * x_len * y_len));//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_len * y_len);//СЃ9
 				}
 				break;
 			case 3:
 				{
 					//(c8*x_len*y_len^2 + c6*x_len^3 + c7*x_len^2*y_len + c9*y_len^3)*t^3+
-					row.plus(index1_10+6, m * x_len * x_len * x_len);//с6
-					row.plus(index1_10+7, m * x_len * x_len * y_len);//с7
-					row.plus(index1_10+8, m * x_len * y_len * y_len);//с8
-					row.plus(index1_10+9, m * y_len * y_len * y_len);//с9
+					row.plus(index1_10+6, m * x_len * x_len * x_len);//СЃ6
+					row.plus(index1_10+7, m * x_len * x_len * y_len);//СЃ7
+					row.plus(index1_10+8, m * x_len * y_len * y_len);//СЃ8
+					row.plus(index1_10+9, m * y_len * y_len * y_len);//СЃ9
 				}
 				break;
 			}
@@ -5909,7 +5909,7 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 		break;
 	case 4:
 		{
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 			// f(t) := 
@@ -5965,24 +5965,24 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					// c13*x_org_xj*y_org_yj^3+
 					// c14*y_org_yj^4+
 
-					row.plus(index1_10+0, m * 1.0);//с0
-					row.plus(index1_10+1, m * x_org_x1j);//с1
-					row.plus(index1_10+2, m * y_org_y1j);//с2
+					row.plus(index1_10+0, m * 1.0);//СЃ0
+					row.plus(index1_10+1, m * x_org_x1j);//СЃ1
+					row.plus(index1_10+2, m * y_org_y1j);//СЃ2
 
-					row.plus(index1_10+3, m * (x_org_x1j) * (x_org_x1j));//с3
-					row.plus(index1_10+4, m * (x_org_x1j) * (y_org_y1j));//с4
-					row.plus(index1_10+5, m * (y_org_y1j) * (y_org_y1j));//с5
+					row.plus(index1_10+3, m * (x_org_x1j) * (x_org_x1j));//СЃ3
+					row.plus(index1_10+4, m * (x_org_x1j) * (y_org_y1j));//СЃ4
+					row.plus(index1_10+5, m * (y_org_y1j) * (y_org_y1j));//СЃ5
 					
-					row.plus(index1_10+6, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//с6
-					row.plus(index1_10+7, m * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//с7
-					row.plus(index1_10+8, m * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//с8
-					row.plus(index1_10+9, m * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с9
+					row.plus(index1_10+6, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//СЃ6
+					row.plus(index1_10+7, m * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//СЃ7
+					row.plus(index1_10+8, m * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//СЃ8
+					row.plus(index1_10+9, m * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ9
 
-					row.plus(index1_10+10, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//с10
-					row.plus(index1_10+11, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//с11
-					row.plus(index1_10+12, m * (x_org_x1j) * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//с12
-					row.plus(index1_10+13, m * (x_org_x1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с13
-					row.plus(index1_10+14, m * (y_org_y1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//с14
+					row.plus(index1_10+10, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (x_org_x1j));//СЃ10
+					row.plus(index1_10+11, m * (x_org_x1j) * (x_org_x1j) * (x_org_x1j) * (y_org_y1j));//СЃ11
+					row.plus(index1_10+12, m * (x_org_x1j) * (x_org_x1j) * (y_org_y1j) * (y_org_y1j));//СЃ12
+					row.plus(index1_10+13, m * (x_org_x1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ13
+					row.plus(index1_10+14, m * (y_org_y1j) * (y_org_y1j) * (y_org_y1j) * (y_org_y1j));//СЃ14
 				}
 				break;
 			case 1:
@@ -6030,31 +6030,31 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					// )*t+
 
 
-					row.plus(index1_10+1, m * x_len);//с1
-					row.plus(index1_10+2, m * y_len);//с2
+					row.plus(index1_10+1, m * x_len);//СЃ1
+					row.plus(index1_10+2, m * y_len);//СЃ2
 
-					row.plus(index1_10+3, m * 2.0 * x_org_x1j * x_len);//с3
-					row.plus(index1_10+4, m * (x_len * y_org_y1j + x_org_x1j * y_len));//с4
-					row.plus(index1_10+5, m * 2.0 * y_org_y1j * y_len);//с5
+					row.plus(index1_10+3, m * 2.0 * x_org_x1j * x_len);//СЃ3
+					row.plus(index1_10+4, m * (x_len * y_org_y1j + x_org_x1j * y_len));//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_org_y1j * y_len);//СЃ5
 					
-					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j * x_len);//с6
-					row.plus(index1_10+7, m * (x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j));//с7
-					row.plus(index1_10+8, m * (x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j));//с8
-					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j * y_len);//с9
+					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j * x_len);//СЃ6
+					row.plus(index1_10+7, m * (x_org_x1j * x_org_x1j * y_len + 2.0 * x_org_x1j * x_len * y_org_y1j));//СЃ7
+					row.plus(index1_10+8, m * (x_len * y_org_y1j * y_org_y1j + 2.0 * x_org_x1j * y_len * y_org_y1j));//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j * y_len);//СЃ9
 
 					row.plus(index1_10+10, m * 
-						4.0 * x_org_x1j * x_org_x1j * x_org_x1j * x_len);//с10
+						4.0 * x_org_x1j * x_org_x1j * x_org_x1j * x_len);//СЃ10
 					row.plus(index1_10+11, m * 
 						(x_org_x1j * x_org_x1j * x_org_x1j * y_len + 
-						3.0 * x_org_x1j * x_org_x1j * x_len * y_org_y1j));//с11
+						3.0 * x_org_x1j * x_org_x1j * x_len * y_org_y1j));//СЃ11
 					row.plus(index1_10+12, m * 
 						(2.0 * x_org_x1j*x_len*y_org_y1j*y_org_y1j + 
-						2.0 * x_org_x1j*x_org_x1j*y_org_y1j*y_len));//с12
+						2.0 * x_org_x1j*x_org_x1j*y_org_y1j*y_len));//СЃ12
 					row.plus(index1_10+13, m * 
 						(x_len * y_org_y1j * y_org_y1j * y_org_y1j + 
-						3.0 * x_org_x1j * y_len * y_org_y1j * y_org_y1j));//с13
+						3.0 * x_org_x1j * y_len * y_org_y1j * y_org_y1j));//СЃ13
 					row.plus(index1_10+14, m * 
-						4.0 * y_org_y1j * y_org_y1j * y_org_y1j * y_len);//с14
+						4.0 * y_org_y1j * y_org_y1j * y_org_y1j * y_len);//СЃ14
 				}
 				break;
 			case 2:
@@ -6093,33 +6093,33 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					// 3*c13*x_len*y_org_yj^2*y_len+
 					// 6*c14*y_org_yj^2*y_len^2
 					// )*t^2+
-					row.plus(index1_10+3, m * x_len * x_len);//с3
-					row.plus(index1_10+4, m * x_len * y_len);//с4
-					row.plus(index1_10+5, m * y_len * y_len);//с5
+					row.plus(index1_10+3, m * x_len * x_len);//СЃ3
+					row.plus(index1_10+4, m * x_len * y_len);//СЃ4
+					row.plus(index1_10+5, m * y_len * y_len);//СЃ5
 					
-					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_len * x_len);//с6
+					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_len * x_len);//СЃ6
 					row.plus(index1_10+7, m * 
 						(x_len * x_len * y_org_y1j 
-						+ 2.0 * x_org_x1j * x_len * y_len));//с7
+						+ 2.0 * x_org_x1j * x_len * y_len));//СЃ7
 					row.plus(index1_10+8, m * 
 						(x_org_x1j * y_len * y_len + 
-						2.0 * y_org_y1j * x_len * y_len));//с8
-					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_len * y_len);//с9
+						2.0 * y_org_y1j * x_len * y_len));//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_len * y_len);//СЃ9
 
 					row.plus(index1_10+10, m * 
-						6.0 * x_org_x1j * x_org_x1j * x_len * x_len);//с10
+						6.0 * x_org_x1j * x_org_x1j * x_len * x_len);//СЃ10
 					row.plus(index1_10+11, m * 
 						(3.0 * x_len * y_len * x_org_x1j * x_org_x1j 
-						+ 3.0 * x_org_x1j * x_len * x_len * y_org_y1j));//с11
+						+ 3.0 * x_org_x1j * x_len * x_len * y_org_y1j));//СЃ11
 					row.plus(index1_10+12, m * 
 						(x_org_x1j * x_org_x1j * y_len * y_len + 
 						y_org_y1j * y_org_y1j * x_len * x_len + 
-						4.0 * x_org_x1j * y_org_y1j * x_len * y_len));//с12
+						4.0 * x_org_x1j * y_org_y1j * x_len * y_len));//СЃ12
 					row.plus(index1_10+13, m * 
 						(3.0 * x_org_x1j * y_org_y1j * y_len * y_len + 
-						3.0 * y_org_y1j * y_org_y1j * x_len * y_len));//с13
+						3.0 * y_org_y1j * y_org_y1j * x_len * y_len));//СЃ13
 					row.plus(index1_10+14, m * 
-						6.0 * y_org_y1j * y_org_y1j * y_len * y_len);//с14
+						6.0 * y_org_y1j * y_org_y1j * y_len * y_len);//СЃ14
 				}
 				break;
 			case 3:	
@@ -6141,24 +6141,24 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					// 3*c13*x_len*y_org_yj*y_len^2+
 					// 4*c14*y_org_yj*y_len^3+
 					// )*t^3+
-					row.plus(index1_10+6, m * x_len * x_len * x_len);//с6
-					row.plus(index1_10+7, m * x_len * x_len * y_len);//с7
-					row.plus(index1_10+8, m * x_len * y_len * y_len);//с8
-					row.plus(index1_10+9, m * y_len * y_len * y_len);//с9
+					row.plus(index1_10+6, m * x_len * x_len * x_len);//СЃ6
+					row.plus(index1_10+7, m * x_len * x_len * y_len);//СЃ7
+					row.plus(index1_10+8, m * x_len * y_len * y_len);//СЃ8
+					row.plus(index1_10+9, m * y_len * y_len * y_len);//СЃ9
 
 					row.plus(index1_10+10, m * 
-						4.0 * x_org_x1j * x_len * x_len * x_len);//с10
+						4.0 * x_org_x1j * x_len * x_len * x_len);//СЃ10
 					row.plus(index1_10+11, m * 
 						(x_len * x_len * x_len * y_org_y1j 
-						+ 3.0 * x_org_x1j * x_len * x_len * y_len));//с11
+						+ 3.0 * x_org_x1j * x_len * x_len * y_len));//СЃ11
 					row.plus(index1_10+12, m * 
 						(2.0 * x_org_x1j * x_len * y_len * y_len 
-						+ 2.0 * x_len * x_len  * y_org_y1j * y_len));//с12
+						+ 2.0 * x_len * x_len  * y_org_y1j * y_len));//СЃ12
 					row.plus(index1_10+13, m * 
 						(x_org_x1j * y_len * y_len * y_len 
-						+ 3.0 * x_len * y_org_y1j * y_len * y_len));//с13
+						+ 3.0 * x_len * y_org_y1j * y_len * y_len));//СЃ13
 					row.plus(index1_10+14, m * 
-						4.0 * y_org_y1j * y_len * y_len * y_len);//с14
+						4.0 * y_org_y1j * y_len * y_len * y_len);//СЃ14
 				}
 				break;
 			case 4:
@@ -6172,15 +6172,15 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 					// )*t^4+
 
 					row.plus(index1_10+10, m * 
-						x_len * x_len * x_len * x_len);//с10
+						x_len * x_len * x_len * x_len);//СЃ10
 					row.plus(index1_10+11, m * 
-						x_len * x_len * x_len * y_len);//с11
+						x_len * x_len * x_len * y_len);//СЃ11
 					row.plus(index1_10+12, m * 
-						x_len * x_len * y_len * y_len);//с12
+						x_len * x_len * y_len * y_len);//СЃ12
 					row.plus(index1_10+13, m * 
-						x_len * y_len * y_len * y_len);//с13
+						x_len * y_len * y_len * y_len);//СЃ13
 					row.plus(index1_10+14, m * 
-						y_len * y_len * y_len * y_len);//с14
+						y_len * y_len * y_len * y_len);//СЃ14
 				}
 				break;
 			}
@@ -6188,22 +6188,22 @@ void FillRow_NonFault(sparse_row & row, // заполняемая строка
 		break;
 	}
 }
-void FillRow_diff_x(sparse_row & row, // заполняемая строка
-					  int order, // порялок полигона
-					  int pw_t, // степень при t
-					  size_t index1_10, // начальный индекс
+void FillRow_diff_x(sparse_row & row, // Р·Р°РїРѕР»РЅСЏРµРјР°СЏ СЃС‚СЂРѕРєР°
+					  int order, // РїРѕСЂСЏР»РѕРє РїРѕР»РёРіРѕРЅР°
+					  int pw_t, // СЃС‚РµРїРµРЅСЊ РїСЂРё t
+					  size_t index1_10, // РЅР°С‡Р°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ
 					  double x_org_x1j,
 					  double y_org_y1j,
 					  double x_len,
 					  double y_len,
-					  double m) // множитель знака и наклона
+					  double m) // РјРЅРѕР¶РёС‚РµР»СЊ Р·РЅР°РєР° Рё РЅР°РєР»РѕРЅР°
 {
 	switch (order)
 	{
 	case 1:
 		{
 			// the first derivative
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 			// diff_x(t) := 
@@ -6224,7 +6224,7 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 			case 0:
 				{
 					//c1 + 2*c3*x_org_xj + c4*y_org_yj + 2*c7*x_org_xj*y_org_yj + 3*c6*x_org_xj^2 + c8*y_org_yj^2
-					row.plus(index1_10+1, m * 1.0);//с1
+					row.plus(index1_10+1, m * 1.0);//СЃ1
 				}
 				break;
 			}
@@ -6233,7 +6233,7 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 	case 2:
 		{
 			// the first derivative
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 			// diff_x(t) := 
@@ -6254,10 +6254,10 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 			case 0:
 				{
 					//c1 + 2*c3*x_org_xj + c4*y_org_yj + 2*c7*x_org_xj*y_org_yj + 3*c6*x_org_xj^2 + c8*y_org_yj^2
-					row.plus(index1_10+1, m * 1.0);//с1
+					row.plus(index1_10+1, m * 1.0);//СЃ1
 
-					row.plus(index1_10+3, m * 2.0 * x_org_x1j);//с3
-					row.plus(index1_10+4, m *       y_org_y1j);//с4
+					row.plus(index1_10+3, m * 2.0 * x_org_x1j);//СЃ3
+					row.plus(index1_10+4, m *       y_org_y1j);//СЃ4
 				}
 				break;
 			case 1:
@@ -6271,8 +6271,8 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 					//2*c8*y_org_yj*y_len
 					//)*t+
 
-					row.plus(index1_10+3, m * 2.0 * x_len);//с3
-					row.plus(index1_10+4, m *       y_len);//с4
+					row.plus(index1_10+3, m * 2.0 * x_len);//СЃ3
+					row.plus(index1_10+4, m *       y_len);//СЃ4
 				}
 				break;
 			}
@@ -6281,7 +6281,7 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 	case 3:
 		{
 			// the first derivative
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 			// diff_x(t) := 
@@ -6302,14 +6302,14 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 			case 0:
 				{
 					//c1 + 2*c3*x_org_xj + c4*y_org_yj + 2*c7*x_org_xj*y_org_yj + 3*c6*x_org_xj^2 + c8*y_org_yj^2
-					row.plus(index1_10+1, m * 1.0);//с1
+					row.plus(index1_10+1, m * 1.0);//СЃ1
 
-					row.plus(index1_10+3, m * 2.0 * x_org_x1j);//с3
-					row.plus(index1_10+4, m *       y_org_y1j);//с4
+					row.plus(index1_10+3, m * 2.0 * x_org_x1j);//СЃ3
+					row.plus(index1_10+4, m *       y_org_y1j);//СЃ4
 					
-					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j);//с6
-					row.plus(index1_10+7, m * 2.0 * x_org_x1j * y_org_y1j);//с7
-					row.plus(index1_10+8, m *       y_org_y1j * y_org_y1j);//с8
+					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j);//СЃ6
+					row.plus(index1_10+7, m * 2.0 * x_org_x1j * y_org_y1j);//СЃ7
+					row.plus(index1_10+8, m *       y_org_y1j * y_org_y1j);//СЃ8
 				}
 				break;
 			case 1:
@@ -6324,21 +6324,21 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 					//2*c8*y_org_yj*y_len
 					//)*t+
 
-					row.plus(index1_10+3, m * 2.0 * x_len);//с3
-					row.plus(index1_10+4, m *       y_len);//с4
+					row.plus(index1_10+3, m * 2.0 * x_len);//СЃ3
+					row.plus(index1_10+4, m *       y_len);//СЃ4
 					
-					row.plus(index1_10+6, m * 6.0 * x_org_x1j * x_len);//с6
-					row.plus(index1_10+7, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//с7
-					row.plus(index1_10+8, m * 2.0 * y_org_y1j * y_len);//с8
+					row.plus(index1_10+6, m * 6.0 * x_org_x1j * x_len);//СЃ6
+					row.plus(index1_10+7, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//СЃ7
+					row.plus(index1_10+8, m * 2.0 * y_org_y1j * y_len);//СЃ8
 				}
 				break;
 			case 2:
 				{
 					//(3*c6*x_len^2 + 2*c7*x_len*y_len + c8*y_len^2)*t^2+
 
-					row.plus(index1_10+6, m * 3.0 * x_len * x_len);//с6
-					row.plus(index1_10+7, m * 2.0 * x_len * y_len);//с7
-					row.plus(index1_10+8, m *       y_len * y_len);//с8
+					row.plus(index1_10+6, m * 3.0 * x_len * x_len);//СЃ6
+					row.plus(index1_10+7, m * 2.0 * x_len * y_len);//СЃ7
+					row.plus(index1_10+8, m *       y_len * y_len);//СЃ8
 				}
 				break;
 			}
@@ -6347,7 +6347,7 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 	case 4:
 		{
 			// the first derivative
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 			// diff_x(t) := 
@@ -6385,19 +6385,19 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 					// 3*c11*x_org_xj^2*y_org_yj+
 					// 2*c12*x_org_xj*y_org_yj^2+
 					// c13*y_org_yj^3
-					row.plus(index1_10+1, m * 1.0);//с1
+					row.plus(index1_10+1, m * 1.0);//СЃ1
 
-					row.plus(index1_10+3, m * 2.0 * x_org_x1j);//с3
-					row.plus(index1_10+4, m *       y_org_y1j);//с4
+					row.plus(index1_10+3, m * 2.0 * x_org_x1j);//СЃ3
+					row.plus(index1_10+4, m *       y_org_y1j);//СЃ4
 					
-					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j);//с6
-					row.plus(index1_10+7, m * 2.0 * x_org_x1j * y_org_y1j);//с7
-					row.plus(index1_10+8, m *       y_org_y1j * y_org_y1j);//с8
+					row.plus(index1_10+6, m * 3.0 * x_org_x1j * x_org_x1j);//СЃ6
+					row.plus(index1_10+7, m * 2.0 * x_org_x1j * y_org_y1j);//СЃ7
+					row.plus(index1_10+8, m *       y_org_y1j * y_org_y1j);//СЃ8
 
-					row.plus(index1_10+10, m * 4.0 * x_org_x1j * x_org_x1j * x_org_x1j);//с10
-					row.plus(index1_10+11, m * 3.0 * x_org_x1j * x_org_x1j * y_org_y1j);//с11
-					row.plus(index1_10+12, m * 2.0 * x_org_x1j * y_org_y1j * y_org_y1j);//с12
-					row.plus(index1_10+13, m *       y_org_y1j * y_org_y1j * y_org_y1j);//с13
+					row.plus(index1_10+10, m * 4.0 * x_org_x1j * x_org_x1j * x_org_x1j);//СЃ10
+					row.plus(index1_10+11, m * 3.0 * x_org_x1j * x_org_x1j * y_org_y1j);//СЃ11
+					row.plus(index1_10+12, m * 2.0 * x_org_x1j * y_org_y1j * y_org_y1j);//СЃ12
+					row.plus(index1_10+13, m *       y_org_y1j * y_org_y1j * y_org_y1j);//СЃ13
 				}
 				break;
 			case 1:
@@ -6428,21 +6428,21 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 					// 3*c13*y_org_yj^2*y_len+
 					// )*t+
 
-					row.plus(index1_10+3, m * 2.0 * x_len);//с3
-					row.plus(index1_10+4, m *       y_len);//с4
+					row.plus(index1_10+3, m * 2.0 * x_len);//СЃ3
+					row.plus(index1_10+4, m *       y_len);//СЃ4
 					
-					row.plus(index1_10+6, m * 6.0 * x_org_x1j * x_len);//с6
-					row.plus(index1_10+7, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//с7
-					row.plus(index1_10+8, m * 2.0 * y_org_y1j * y_len);//с8
+					row.plus(index1_10+6, m * 6.0 * x_org_x1j * x_len);//СЃ6
+					row.plus(index1_10+7, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len));//СЃ7
+					row.plus(index1_10+8, m * 2.0 * y_org_y1j * y_len);//СЃ8
 
-					row.plus(index1_10+10, m * 12.0 * x_org_x1j * x_org_x1j * x_len);//с10
+					row.plus(index1_10+10, m * 12.0 * x_org_x1j * x_org_x1j * x_len);//СЃ10
 					row.plus(index1_10+11, m * 
 						( 6.0 * x_org_x1j * x_len * y_org_y1j 
-						+ 3.0 * x_org_x1j * x_org_x1j * y_len));//с11
+						+ 3.0 * x_org_x1j * x_org_x1j * y_len));//СЃ11
 					row.plus(index1_10+12, m * 
 						( 4.0 * x_org_x1j * y_org_y1j * y_len 
-						+ 2.0 * x_len * y_org_y1j * y_org_y1j));//с12
-					row.plus(index1_10+13, m * 3.0 * y_org_y1j * y_org_y1j * y_len);//с13
+						+ 2.0 * x_len * y_org_y1j * y_org_y1j));//СЃ12
+					row.plus(index1_10+13, m * 3.0 * y_org_y1j * y_org_y1j * y_len);//СЃ13
 				}
 				break;
 			case 2:
@@ -6462,18 +6462,18 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 					// 3*c13*y_org_yj*y_len^2+
 					// )*t^2+
 
-					row.plus(index1_10+6, m * 3.0 * x_len * x_len);//с6
-					row.plus(index1_10+7, m * 2.0 * x_len * y_len);//с7
-					row.plus(index1_10+8, m *       y_len * y_len);//с8
+					row.plus(index1_10+6, m * 3.0 * x_len * x_len);//СЃ6
+					row.plus(index1_10+7, m * 2.0 * x_len * y_len);//СЃ7
+					row.plus(index1_10+8, m *       y_len * y_len);//СЃ8
 
-					row.plus(index1_10+10, m * 12.0 * x_org_x1j * x_len * x_len);//с10
+					row.plus(index1_10+10, m * 12.0 * x_org_x1j * x_len * x_len);//СЃ10
 					row.plus(index1_10+11, m * 
 						( 6.0 * x_org_x1j * x_len * y_len 
-						+ 3.0 * x_len * x_len * y_org_y1j));//с11
+						+ 3.0 * x_len * x_len * y_org_y1j));//СЃ11
 					row.plus(index1_10+12, m * 
 						( 4.0 * x_len * y_org_y1j * y_len 
-						+ 2.0 * x_org_x1j * y_len * y_len));//с12
-					row.plus(index1_10+13, m * 3.0 * y_org_y1j * y_len * y_len);//с13
+						+ 2.0 * x_org_x1j * y_len * y_len));//СЃ12
+					row.plus(index1_10+13, m * 3.0 * y_org_y1j * y_len * y_len);//СЃ13
 				}
 				break;
 			case 3:
@@ -6485,10 +6485,10 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 					// c13*y_len^3+
 					// )*t^3+
 
-					row.plus(index1_10+10, m * 4.0 * x_len * x_len * x_len);//с10
-					row.plus(index1_10+11, m * 3.0 * x_len * x_len * y_len);//с11
-					row.plus(index1_10+12, m * 2.0 * x_len * y_len * y_len);//с12
-					row.plus(index1_10+13, m *       y_len * y_len * y_len);//с13
+					row.plus(index1_10+10, m * 4.0 * x_len * x_len * x_len);//СЃ10
+					row.plus(index1_10+11, m * 3.0 * x_len * x_len * y_len);//СЃ11
+					row.plus(index1_10+12, m * 2.0 * x_len * y_len * y_len);//СЃ12
+					row.plus(index1_10+13, m *       y_len * y_len * y_len);//СЃ13
 				}
 				break;
 			}
@@ -6496,15 +6496,15 @@ void FillRow_diff_x(sparse_row & row, // заполняемая строка
 		break;
 	}
 }
-void FillRow_diff_y(sparse_row & row, // заполняемая строка
-					  int order, // порялок полигона
-					  int pw_t, // степень при t
-					  size_t index1_10, // начальный индекс
+void FillRow_diff_y(sparse_row & row, // Р·Р°РїРѕР»РЅСЏРµРјР°СЏ СЃС‚СЂРѕРєР°
+					  int order, // РїРѕСЂСЏР»РѕРє РїРѕР»РёРіРѕРЅР°
+					  int pw_t, // СЃС‚РµРїРµРЅСЊ РїСЂРё t
+					  size_t index1_10, // РЅР°С‡Р°Р»СЊРЅС‹Р№ РёРЅРґРµРєСЃ
 					  double x_org_x1j,
 					  double y_org_y1j,
 					  double x_len,
 					  double y_len,
-					  double m) // множитель знака и наклона
+					  double m) // РјРЅРѕР¶РёС‚РµР»СЊ Р·РЅР°РєР° Рё РЅР°РєР»РѕРЅР°
 {
 	switch (order)
 	{
@@ -6513,7 +6513,7 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 #if SPARSE_ROW_EX
 			row._order = 1;
 #endif
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 
@@ -6536,7 +6536,7 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 			case 0:
 				{
 					//c2 + c4*x_org_xj + 2*c5*y_org_yj + 2*c8*x_org_xj*y_org_yj + c7*x_org_xj^2 + 3*c9*y_org_yj^2
-					row.plus(index1_10+2, m * 1.0);//с2
+					row.plus(index1_10+2, m * 1.0);//СЃ2
 				}
 				break;
 			}
@@ -6547,7 +6547,7 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 #if SPARSE_ROW_EX
 			row._order = 1;
 #endif
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 
@@ -6571,10 +6571,10 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 				{
 					//c2 + c4*x_org_xj + 2*c5*y_org_yj + 2*c8*x_org_xj*y_org_yj + c7*x_org_xj^2 + 3*c9*y_org_yj^2
 
-					row.plus(index1_10+2, m * 1.0);//с2
+					row.plus(index1_10+2, m * 1.0);//СЃ2
 
-					row.plus(index1_10+4, m *       x_org_x1j);//с4
-					row.plus(index1_10+5, m * 2.0 * y_org_y1j);//с5
+					row.plus(index1_10+4, m *       x_org_x1j);//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_org_y1j);//СЃ5
 				}
 				break;
 			case 1:
@@ -6588,8 +6588,8 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 					//6*c9*y_org_yj*y_len
 					//)*t+
 
-					row.plus(index1_10+4, m *       x_len);//с4
-					row.plus(index1_10+5, m * 2.0 * y_len);//с5
+					row.plus(index1_10+4, m *       x_len);//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_len);//СЃ5
 				}
 				break;
 			}
@@ -6600,7 +6600,7 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 #if SPARSE_ROW_EX
 			row._order = 1;
 #endif
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 
@@ -6624,14 +6624,14 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 				{
 					//c2 + c4*x_org_xj + 2*c5*y_org_yj + 2*c8*x_org_xj*y_org_yj + c7*x_org_xj^2 + 3*c9*y_org_yj^2
 
-					row.plus(index1_10+2, m * 1.0);//с2
+					row.plus(index1_10+2, m * 1.0);//СЃ2
 
-					row.plus(index1_10+4, m *       x_org_x1j);//с4
-					row.plus(index1_10+5, m * 2.0 * y_org_y1j);//с5
+					row.plus(index1_10+4, m *       x_org_x1j);//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_org_y1j);//СЃ5
 					
-					row.plus(index1_10+7, m *       x_org_x1j * x_org_x1j);//с7
-					row.plus(index1_10+8, m * 2.0 * x_org_x1j * y_org_y1j);//с8
-					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j);//с9
+					row.plus(index1_10+7, m *       x_org_x1j * x_org_x1j);//СЃ7
+					row.plus(index1_10+8, m * 2.0 * x_org_x1j * y_org_y1j);//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j);//СЃ9
 				}
 				break;
 			case 1:
@@ -6645,12 +6645,12 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 					//6*c9*y_org_yj*y_len
 					//)*t+
 
-					row.plus(index1_10+4, m *       x_len);//с4
-					row.plus(index1_10+5, m * 2.0 * y_len);//с5
+					row.plus(index1_10+4, m *       x_len);//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_len);//СЃ5
 					
-					row.plus(index1_10+7, m * 2.0 * x_org_x1j * x_len);//с7
-					row.plus(index1_10+8, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//с8
-					row.plus(index1_10+9, m * 6.0 * y_org_y1j * y_len);//с9
+					row.plus(index1_10+7, m * 2.0 * x_org_x1j * x_len);//СЃ7
+					row.plus(index1_10+8, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//СЃ8
+					row.plus(index1_10+9, m * 6.0 * y_org_y1j * y_len);//СЃ9
 				}
 				break;
 
@@ -6658,9 +6658,9 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 				{
 					//(c7*x_len^2 + 2*c8*x_len*y_len + 3*c9*y_len^2)*t^2+
 
-					row.plus(index1_10+7, m *       x_len * x_len);//с7
-					row.plus(index1_10+8, m * 2.0 * x_len * y_len);//с8
-					row.plus(index1_10+9, m * 3.0 * y_len * y_len);//с9
+					row.plus(index1_10+7, m *       x_len * x_len);//СЃ7
+					row.plus(index1_10+8, m * 2.0 * x_len * y_len);//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_len * y_len);//СЃ9
 				}
 				break;
 			}
@@ -6671,7 +6671,7 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 #if SPARSE_ROW_EX
 			row._order = 1;
 #endif
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			//*****************************************************************************************
 			//*****************************************************************************************
 
@@ -6714,19 +6714,19 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 					// 3*c13*x_org_xj*y_org_yj^2
 					// 4*c14*y_org_yj^3+
 
-					row.plus(index1_10+2, m * 1.0);//с2
+					row.plus(index1_10+2, m * 1.0);//СЃ2
 
-					row.plus(index1_10+4, m *       x_org_x1j);//с4
-					row.plus(index1_10+5, m * 2.0 * y_org_y1j);//с5
+					row.plus(index1_10+4, m *       x_org_x1j);//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_org_y1j);//СЃ5
 					
-					row.plus(index1_10+7, m *       x_org_x1j * x_org_x1j);//с7
-					row.plus(index1_10+8, m * 2.0 * x_org_x1j * y_org_y1j);//с8
-					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j);//с9
+					row.plus(index1_10+7, m *       x_org_x1j * x_org_x1j);//СЃ7
+					row.plus(index1_10+8, m * 2.0 * x_org_x1j * y_org_y1j);//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_org_y1j * y_org_y1j);//СЃ9
 
-					row.plus(index1_10+11, m *       x_org_x1j * x_org_x1j * x_org_x1j);//с11
-					row.plus(index1_10+12, m * 2.0 * x_org_x1j * x_org_x1j * y_org_y1j);//с12
-					row.plus(index1_10+13, m * 3.0 * x_org_x1j * y_org_y1j * y_org_y1j);//с13
-					row.plus(index1_10+14, m * 4.0 * y_org_y1j * y_org_y1j * y_org_y1j);//с14
+					row.plus(index1_10+11, m *       x_org_x1j * x_org_x1j * x_org_x1j);//СЃ11
+					row.plus(index1_10+12, m * 2.0 * x_org_x1j * x_org_x1j * y_org_y1j);//СЃ12
+					row.plus(index1_10+13, m * 3.0 * x_org_x1j * y_org_y1j * y_org_y1j);//СЃ13
+					row.plus(index1_10+14, m * 4.0 * y_org_y1j * y_org_y1j * y_org_y1j);//СЃ14
 				}
 				break;
 			case 1:
@@ -6757,25 +6757,25 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 					// 12*c14*y_org_yj^2*y_len+
 					// )*t+
 					
-					row.plus(index1_10+4, m *       x_len);//с4
-					row.plus(index1_10+5, m * 2.0 * y_len);//с5
+					row.plus(index1_10+4, m *       x_len);//СЃ4
+					row.plus(index1_10+5, m * 2.0 * y_len);//СЃ5
 					
-					row.plus(index1_10+7, m * 2.0 * x_org_x1j * x_len);//с7
-					row.plus(index1_10+8, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//с8
-					row.plus(index1_10+9, m * 6.0 * y_org_y1j * y_len);//с9
+					row.plus(index1_10+7, m * 2.0 * x_org_x1j * x_len);//СЃ7
+					row.plus(index1_10+8, m * 2.0 * (x_org_x1j * y_len + y_org_y1j * x_len) );//СЃ8
+					row.plus(index1_10+9, m * 6.0 * y_org_y1j * y_len);//СЃ9
 
 					row.plus(index1_10+11, m * 
-						3.0 * x_org_x1j * x_org_x1j * x_len);//с11
+						3.0 * x_org_x1j * x_org_x1j * x_len);//СЃ11
 					row.plus(index1_10+12, m * 
 						( 2.0 * x_org_x1j * x_org_x1j * y_len
 						+ 4.0 * x_org_x1j * x_len * y_org_y1j)
-						);//с12
+						);//СЃ12
 					row.plus(index1_10+13, m * 
 						( 3.0 * x_len * y_org_y1j * y_org_y1j
 						+ 6.0 * x_org_x1j * y_org_y1j * y_len)
-						);//с13
+						);//СЃ13
 					row.plus(index1_10+14, m * 
-						12.0 * y_org_y1j * y_org_y1j * y_len);//с14
+						12.0 * y_org_y1j * y_org_y1j * y_len);//СЃ14
 				}
 				break;
 			case 2:
@@ -6795,22 +6795,22 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 					// 12*c14*y_org_yj*y_len^2+
 					// )*t^2+
 
-					row.plus(index1_10+7, m *       x_len * x_len);//с7
-					row.plus(index1_10+8, m * 2.0 * x_len * y_len);//с8
-					row.plus(index1_10+9, m * 3.0 * y_len * y_len);//с9
+					row.plus(index1_10+7, m *       x_len * x_len);//СЃ7
+					row.plus(index1_10+8, m * 2.0 * x_len * y_len);//СЃ8
+					row.plus(index1_10+9, m * 3.0 * y_len * y_len);//СЃ9
 
 					row.plus(index1_10+11, m * 
-						 3.0 * x_org_x1j * x_len * x_len);//с11
+						 3.0 * x_org_x1j * x_len * x_len);//СЃ11
 					row.plus(index1_10+12, m * 
 						( 2.0 * x_len * x_len * y_org_y1j
 						+ 4.0 * x_org_x1j * x_len * y_len)
-						);//с12
+						);//СЃ12
 					row.plus(index1_10+13, m * 
 						( 3.0 * x_org_x1j * y_len * y_len
 						+ 6.0 * x_len * y_org_y1j * y_len)
-						);//с13
+						);//СЃ13
 					row.plus(index1_10+14, m * 
-						12.0 * y_org_y1j * y_len * y_len);//с14
+						12.0 * y_org_y1j * y_len * y_len);//СЃ14
 				}
 				break;
 			case 3:
@@ -6823,13 +6823,13 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 					// )*t^3+
 
 					row.plus(index1_10+11, m * 
-						x_len * x_len * x_len);//с11
+						x_len * x_len * x_len);//СЃ11
 					row.plus(index1_10+12, m * 
-						2.0 * x_len * x_len * y_len);//с12
+						2.0 * x_len * x_len * y_len);//СЃ12
 					row.plus(index1_10+13, m * 
-						3.0 * x_len * y_len * y_len);//с13
+						3.0 * x_len * y_len * y_len);//СЃ13
 					row.plus(index1_10+14, m * 
-						4.0 * y_len * y_len * y_len);//с14
+						4.0 * y_len * y_len * y_len);//СЃ14
 				}
 				break;
 			}
@@ -6842,10 +6842,10 @@ void FillRow_diff_y(sparse_row & row, // заполняемая строка
 
 bool AddRowsToEquation2_(int N_trias, int order_t, int order_c, 
 						 size_t nk_t, size_t nk_c,
-						vector<sparse_row> & M,	// формируемая матрица
+						vector<sparse_row> & M,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols,
-					  vector<double> & B,			// формируемый вектор правых частей
-					  vector<double> & z,			// отметки высот
+					  vector<double> & B,			// С„РѕСЂРјРёСЂСѓРµРјС‹Р№ РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
 					  EdgeEx * ex,
 					  vector<geometry2D::Point> &base_points,
 					  finite_element_par & fep)
@@ -6895,7 +6895,7 @@ bool AddRowsToEquation2_(int N_trias, int order_t, int order_c,
 		double x_len = x_dest - x_org;
 		double y_len = y_dest - y_org;
 
-		// базовые точки для обоих полигонов
+		// Р±Р°Р·РѕРІС‹Рµ С‚РѕС‡РєРё РґР»СЏ РѕР±РѕРёС… РїРѕР»РёРіРѕРЅРѕРІ
 		geometry2D::Point pt1j = base_points[index1];
 		geometry2D::Point pt2j = base_points[index2];
 
@@ -6910,13 +6910,13 @@ bool AddRowsToEquation2_(int N_trias, int order_t, int order_c,
 		bool add_non_fault = fep.add_non_fault;
 		bool add_first_der_n = fep.add_first_der_n;
 
-		//наклон ребра
+		//РЅР°РєР»РѕРЅ СЂРµР±СЂР°
 		bool add_first_der_x = true;
 		bool add_first_der_y = true;
 
 		if (fep.add_first_der_x_or_y)
 		{
-			//наклон ребра
+			//РЅР°РєР»РѕРЅ СЂРµР±СЂР°
 
 			double fabs_slope = fabs(ex->slope());
 
@@ -7032,11 +7032,11 @@ bool AddRowsToEquation2_(int N_trias, int order_t, int order_c,
 
 bool AddBoundaryConditionRowsToEquation2_(int N_trias, int order_t, int order_c, 
 						 size_t nk_t, size_t nk_c,
-						vector<sparse_row> & M,	// формируемая матрица
+						vector<sparse_row> & M,	// С„РѕСЂРјРёСЂСѓРµРјР°СЏ РјР°С‚СЂРёС†Р°
 					   size_t cols,
-					  vector<double> & B,			// формируемый вектор правых частей
-					  vector<double> & z,			// отметки высот
-					  vector<double> & sol,			// решение содержащее коэффициенты линейной интерполяции
+					  vector<double> & B,			// С„РѕСЂРјРёСЂСѓРµРјС‹Р№ РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№
+					  vector<double> & z,			// РѕС‚РјРµС‚РєРё РІС‹СЃРѕС‚
+					  vector<double> & sol,			// СЂРµС€РµРЅРёРµ СЃРѕРґРµСЂР¶Р°С‰РµРµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ Р»РёРЅРµР№РЅРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 					  EdgeEx * ex,
 					  vector<geometry2D::Point> &base_points,
 					  finite_element_par & fep)
@@ -7076,7 +7076,7 @@ bool AddBoundaryConditionRowsToEquation2_(int N_trias, int order_t, int order_c,
 		double x_len = x_dest - x_org;
 		double y_len = y_dest - y_org;
 
-		// базовые точки для обоих полигонов
+		// Р±Р°Р·РѕРІС‹Рµ С‚РѕС‡РєРё РґР»СЏ РѕР±РѕРёС… РїРѕР»РёРіРѕРЅРѕРІ
 		geometry2D::Point ptj = base_points[index];
 
 		double x_org_xj = x_org - ptj.x;
@@ -7087,13 +7087,13 @@ bool AddBoundaryConditionRowsToEquation2_(int N_trias, int order_t, int order_c,
 		bool add_non_fault = fep.add_non_fault;
 		bool add_first_der_n = fep.add_first_der_n;
 
-		//наклон ребра
+		//РЅР°РєР»РѕРЅ СЂРµР±СЂР°
 		bool add_first_der_x = true;
 		bool add_first_der_y = true;
 
 		if (fep.add_first_der_x_or_y)
 		{
-			//наклон ребра
+			//РЅР°РєР»РѕРЅ СЂРµР±СЂР°
 
 			double fabs_slope = fabs(ex->slope());
 
@@ -7124,7 +7124,7 @@ bool AddBoundaryConditionRowsToEquation2_(int N_trias, int order_t, int order_c,
 		// n.y = dy/dn
 
 		// df/dn = (df/dx)*(dx/dn) + (df/dy)*(dy/dn)
-		// Коэффициенты при t для линейного решения
+		// РљРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїСЂРё t РґР»СЏ Р»РёРЅРµР№РЅРѕРіРѕ СЂРµС€РµРЅРёСЏ
 		double c0 = sol[index_10 + 0];
 		double c1 = sol[index_10 + 1];
 		double c2 = sol[index_10 + 2];
@@ -7152,7 +7152,7 @@ bool AddBoundaryConditionRowsToEquation2_(int N_trias, int order_t, int order_c,
 					index_10, x_org_xj, y_org_yj, x_len, y_len, fep.alpha_non_fault);
 			M.push_back(row);	B.push_back(b*fep.alpha_non_fault);
 
-			// приравниваем нулю коэффициенты при высших степенях t : t^2, t^3,..
+			// РїСЂРёСЂР°РІРЅРёРІР°РµРј РЅСѓР»СЋ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РїСЂРё РІС‹СЃС€РёС… СЃС‚РµРїРµРЅСЏС… t : t^2, t^3,..
 			for (pw_t = 2; pw_t <= order; pw_t++)
 			{
 				row.clear();
@@ -7256,7 +7256,7 @@ struct min_col_range
 #if FILL_GRID_TEST
 	bool test = true;
 #endif
-	// вычисляем триангуляцию Делоне
+	// РІС‹С‡РёСЃР»СЏРµРј С‚СЂРёР°РЅРіСѓР»СЏС†РёСЋ Р”РµР»РѕРЅРµ
 	Dictionary<EdgeEx*> * out_edges = new Dictionary<EdgeEx*>(edgeCmpEx);
 	List<PolygonEx*> * trias = delaunayTriangulateEx(vs, out_edges);
 
@@ -7288,7 +7288,7 @@ struct min_col_range
 	}
 #endif
 
-    // Фильтруем полигоны от "плохих" краевых треугольников		
+    // Р¤РёР»СЊС‚СЂСѓРµРј РїРѕР»РёРіРѕРЅС‹ РѕС‚ "РїР»РѕС…РёС…" РєСЂР°РµРІС‹С… С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ		
 	if (false)
 		FilteringPolygonesEx1(trias, out_edges);
 	else
@@ -7316,10 +7316,10 @@ struct min_col_range
 	}
 #endif
 
-    // Получаем замкнутый контур внешней границы
+    // РџРѕР»СѓС‡Р°РµРј Р·Р°РјРєРЅСѓС‚С‹Р№ РєРѕРЅС‚СѓСЂ РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹
 	List<EdgeEx*> * contour = GetContourOfPolygonesEx2(trias);
 
-	// Из каждой вершины внешней границы проводим вовне биссектрисы
+	// РР· РєР°Р¶РґРѕР№ РІРµСЂС€РёРЅС‹ РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹ РїСЂРѕРІРѕРґРёРј РІРѕРІРЅРµ Р±РёСЃСЃРµРєС‚СЂРёСЃС‹
 	List<EdgeEx*> * biss = MakeBissectrissToContour(contour, GetMaxLenOfEdges(contour));
 #if FILL_GRID_TEST
 	if (test)
@@ -7341,21 +7341,21 @@ struct min_col_range
 
 	biss = CorrectBissectriss3(biss);
 
-	// Вокруг контура внешней границы, базируясь на внешних биссектриссах формируем массив экстраполяционных полигонов
-	vector<Point> * poly_contour_base_points = new vector<Point>; // список базовых точек для экстраполяционных полигонов
+	// Р’РѕРєСЂСѓРі РєРѕРЅС‚СѓСЂР° РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹, Р±Р°Р·РёСЂСѓСЏСЃСЊ РЅР° РІРЅРµС€РЅРёС… Р±РёСЃСЃРµРєС‚СЂРёСЃСЃР°С… С„РѕСЂРјРёСЂСѓРµРј РјР°СЃСЃРёРІ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅС‹С… РїРѕР»РёРіРѕРЅРѕРІ
+	vector<Point> * poly_contour_base_points = new vector<Point>; // СЃРїРёСЃРѕРє Р±Р°Р·РѕРІС‹С… С‚РѕС‡РµРє РґР»СЏ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅС‹С… РїРѕР»РёРіРѕРЅРѕРІ
 	List<PolygonEx*> * poly_contour = GetContourOfExtraPolygones(contour, biss, poly_contour_base_points, 0);
 
 
-	// Итак, мы имеем N треугольников экстраполяции
+	// РС‚Р°Рє, РјС‹ РёРјРµРµРј N С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРё
 	int N = trias->length();
 printf("N = trias->length() %d\n", N );
-	// построенных на n точках
+	// РїРѕСЃС‚СЂРѕРµРЅРЅС‹С… РЅР° n С‚РѕС‡РєР°С…
 	// int n = x.size();
-	// А также L полигонов экстраполяционных
+	// Рђ С‚Р°РєР¶Рµ L РїРѕР»РёРіРѕРЅРѕРІ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅС‹С…
 	int L = poly_contour->length();
 printf("L = poly_contour->length() %d\n", L );
 
-	// каждый треугольник мы будем аппроксимировать уравнением (1):
+	// РєР°Р¶РґС‹Р№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє РјС‹ Р±СѓРґРµРј Р°РїРїСЂРѕРєСЃРёРјРёСЂРѕРІР°С‚СЊ СѓСЂР°РІРЅРµРЅРёРµРј (1):
 	// f(x,y):= zj + c1*(x-xj)   + c2*(y-yj)          + 
 	//				 c3*(x-xj)^2 + c4*(x-xj)*(y-yj)   + c5*(y-yj)^2        + 
 	//				 c6*(x-xj)^3 + c7*(x-xj)^2*(y-yj) + c8*(x-xj)*(y-yj)^2 + c9*(y-yj)^3;
@@ -7366,7 +7366,7 @@ printf("L = poly_contour->length() %d\n", L );
 	// diff(f(x,y),y,y) = 2*c5+2*c8*(x-xj)+6*c9*(y-yj)
 	// diff(f(x,y),x,y) = c4+2*c7*(x-xj)+2*c8*(y-yj)
 
-	// Итак у нас 9 * N + 9 * L неизвестных коэффициентов
+	// РС‚Р°Рє Сѓ РЅР°СЃ 9 * N + 9 * L РЅРµРёР·РІРµСЃС‚РЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	int cols;
 	int order = 2;
 	switch(order)
@@ -7378,10 +7378,10 @@ printf("L = poly_contour->length() %d\n", L );
             cols = 9 * N + 9 * L;
 			break;
 	}
-	vector<double> sol(cols, 0.0); // вектор решения
+	vector<double> sol(cols, 0.0); // РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
 
 	List<PolygonEx*> poly;
-	// список базовых точек для триангуляционных треугольников
+	// СЃРїРёСЃРѕРє Р±Р°Р·РѕРІС‹С… С‚РѕС‡РµРє РґР»СЏ С‚СЂРёР°РЅРіСѓР»СЏС†РёРѕРЅРЅС‹С… С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ
 	vector<Point> base_points;
 	size_t index = 0;
 	for (trias->first(); !trias->isHead(); trias->next(),index++)
@@ -7390,8 +7390,8 @@ printf("L = poly_contour->length() %d\n", L );
 		base_points.push_back(trias->val()->point());
 		poly.append(trias->val());
 #if 0
-		// инициализируем линейные коэффициенты
-		// линейная интерполяция - первое приближение
+		// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Р»РёРЅРµР№РЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
+		// Р»РёРЅРµР№РЅР°СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёСЏ - РїРµСЂРІРѕРµ РїСЂРёР±Р»РёР¶РµРЅРёРµ
 		//sol[index*9+0];//c1
 		//sol[index*9+1];//c2
 
@@ -7403,7 +7403,7 @@ printf("L = poly_contour->length() %d\n", L );
 
 			
 		vector<sparse_row> m; 
-		// и вектор правых частей 
+		// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 		vector<double> b;
 
 
@@ -7414,13 +7414,13 @@ printf("L = poly_contour->length() %d\n", L );
 
 			if (pt != ptj && pt.index > -1 && pt.index < z.size())
 			{			
-				// добавляем строку в уравнение
+				// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 				
 				sparse_row row; 
 				row.clear();
 
-				row.put(0, pt.x - ptj.x);//с1
-				row.put(1, pt.y - ptj.y);//с2
+				row.put(0, pt.x - ptj.x);//СЃ1
+				row.put(1, pt.y - ptj.y);//СЃ2
 
 				m.push_back(row);
 				b.push_back(z[pt.index] - z[ptj.index]);
@@ -7453,11 +7453,11 @@ printf("L = poly_contour->length() %d\n", L );
 		size_t index_9 = index*9;
 
 		EdgeEx * ex = contour->val();
-		// указатель на полигон контурный
+		// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРѕР»РёРіРѕРЅ РєРѕРЅС‚СѓСЂРЅС‹Р№
 		// PolygonEx * pc = ex->LeftPolygon();
-		// указазатель на соответствующий внутренний треугольник
+		// СѓРєР°Р·Р°Р·Р°С‚РµР»СЊ РЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РІРЅСѓС‚СЂРµРЅРЅРёР№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє
 		PolygonEx * tr = ex->RightPolygon();
-		// ищем в треугольнике противоположную точку
+		// РёС‰РµРј РІ С‚СЂРµСѓРіРѕР»СЊРЅРёРєРµ РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅСѓСЋ С‚РѕС‡РєСѓ
 		Point tr_pt;
 		for (int i = 0; i < tr->size(); i++)
 		{
@@ -7474,23 +7474,23 @@ printf("L = poly_contour->length() %d\n", L );
 			ex->dest.index > -1 && ex->dest.index < z.size())
 		{						
 			vector<sparse_row> m; 
-			// и вектор правых частей 
+			// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 			vector<double> b;
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			sparse_row row; 
 
-			// базовая точка == ex->org
+			// Р±Р°Р·РѕРІР°СЏ С‚РѕС‡РєР° == ex->org
 
 			row.clear();        
-			row.put(0, tr_pt.x - (*itp).x);//с1
-			row.put(1, tr_pt.y - (*itp).y);//с2		
+			row.put(0, tr_pt.x - (*itp).x);//СЃ1
+			row.put(1, tr_pt.y - (*itp).y);//СЃ2		
 			m.push_back(row);b.push_back(z[tr_pt.index] - z[(*itp).index]);
 
 			// ex->dest
 
 			row.clear();        
-			row.put(0, ex->dest.x - (*itp).x);//с1
-			row.put(1, ex->dest.y - (*itp).y);//с2		
+			row.put(0, ex->dest.x - (*itp).x);//СЃ1
+			row.put(1, ex->dest.y - (*itp).y);//СЃ2		
 			m.push_back(row);b.push_back(z[ex->dest.index] - z[(*itp).index]);
 			
 			vector<double> x;
@@ -7549,11 +7549,11 @@ printf("L = poly_contour->length() %d\n", L );
 		}
 	}
 #endif
-	// Наша цель составить матрицу с числом строк S
+	// РќР°С€Р° С†РµР»СЊ СЃРѕСЃС‚Р°РІРёС‚СЊ РјР°С‚СЂРёС†Сѓ СЃ С‡РёСЃР»РѕРј СЃС‚СЂРѕРє S
 	vector<sparse_row> M; 
-	// и вектор правых частей 
+	// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 	vector<double> B;
-	// Для каждого треугольника будем подставлять координаты двух дополнительных точек
+	// Р”Р»СЏ РєР°Р¶РґРѕРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° Р±СѓРґРµРј РїРѕРґСЃС‚Р°РІР»СЏС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РґРІСѓС… РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… С‚РѕС‡РµРє
 	//
 	for (trias->first(); 
 		!trias->isHead(); 
@@ -7565,7 +7565,7 @@ printf("L = poly_contour->length() %d\n", L );
 
 	printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 
-	// Для каждого экстраполяционного треугольника подставим координаты одной дополнительной точки
+	// Р”Р»СЏ РєР°Р¶РґРѕРіРѕ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РїРѕРґСЃС‚Р°РІРёРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РѕРґРЅРѕР№ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ С‚РѕС‡РєРё
 	for (poly_contour->first(); 
 		!poly_contour->isHead(); 
 		poly_contour->next())
@@ -7577,23 +7577,23 @@ printf("L = poly_contour->length() %d\n", L );
 	printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 
 
-	// каждое ребро треугольника и экстраполяционного 
-	// полигона позволяет ввести параметрическую систему 
-	// координат. Каждое ребро начинается в начальной точке 
+	// РєР°Р¶РґРѕРµ СЂРµР±СЂРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° Рё СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ 
+	// РїРѕР»РёРіРѕРЅР° РїРѕР·РІРѕР»СЏРµС‚ РІРІРµСЃС‚Рё РїР°СЂР°РјРµС‚СЂРёС‡РµСЃРєСѓСЋ СЃРёСЃС‚РµРјСѓ 
+	// РєРѕРѕСЂРґРёРЅР°С‚. РљР°Р¶РґРѕРµ СЂРµР±СЂРѕ РЅР°С‡РёРЅР°РµС‚СЃСЏ РІ РЅР°С‡Р°Р»СЊРЅРѕР№ С‚РѕС‡РєРµ 
 	// (x_org, y_org)
-	// и заканчивается в конечной точке
+	// Рё Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РІ РєРѕРЅРµС‡РЅРѕР№ С‚РѕС‡РєРµ
 	// (x_dest, y_dest). 
-	// Параметрическая переменная t изменяется 
-	// при движении по прямой вдоль ребра т.о., 
-	// что t=0.0 в точке начала ребра и t = 1.0 
-	// в точке конца ребра
+	// РџР°СЂР°РјРµС‚СЂРёС‡РµСЃРєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ t РёР·РјРµРЅСЏРµС‚СЃСЏ 
+	// РїСЂРё РґРІРёР¶РµРЅРёРё РїРѕ РїСЂСЏРјРѕР№ РІРґРѕР»СЊ СЂРµР±СЂР° С‚.Рѕ., 
+	// С‡С‚Рѕ t=0.0 РІ С‚РѕС‡РєРµ РЅР°С‡Р°Р»Р° СЂРµР±СЂР° Рё t = 1.0 
+	// РІ С‚РѕС‡РєРµ РєРѕРЅС†Р° СЂРµР±СЂР°
 	// x(t) = x_org + (x_dest - x_org)*t
 	// y(t) = y_org + (y_dest - y_org)*t
 
-	// теперь наша задача записать такие дополнительные уравнения, 
-	// которые означают непрерывность ф-ции вдоль каждого ребра 
-	// и вдоль каждого экстраполяционного луча
-	// А также непрерывность её первой и второй производной
+	// С‚РµРїРµСЂСЊ РЅР°С€Р° Р·Р°РґР°С‡Р° Р·Р°РїРёСЃР°С‚СЊ С‚Р°РєРёРµ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СѓСЂР°РІРЅРµРЅРёСЏ, 
+	// РєРѕС‚РѕСЂС‹Рµ РѕР·РЅР°С‡Р°СЋС‚ РЅРµРїСЂРµСЂС‹РІРЅРѕСЃС‚СЊ С„-С†РёРё РІРґРѕР»СЊ РєР°Р¶РґРѕРіРѕ СЂРµР±СЂР° 
+	// Рё РІРґРѕР»СЊ РєР°Р¶РґРѕРіРѕ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ Р»СѓС‡Р°
+	// Рђ С‚Р°РєР¶Рµ РЅРµРїСЂРµСЂС‹РІРЅРѕСЃС‚СЊ РµС‘ РїРµСЂРІРѕР№ Рё РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 
 	// f(t) := 
 	// f(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -7640,7 +7640,7 @@ printf("L = poly_contour->length() %d\n", L );
 	// 2*c7*(x_org-xj+(x_dest-x_org)*t)+
 	// 2*c8*(y_org-yj+(y_dest-y_org)*t)
 
-	// перебираем все внутренние рёбра
+	// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ РІРЅСѓС‚СЂРµРЅРЅРёРµ СЂС‘Р±СЂР°
 	EdgeEx * ex_;
 	List<EdgeEx *> *out_edges_ = new List<EdgeEx *>;
 
@@ -7672,7 +7672,7 @@ printf("L = poly_contour->length() %d\n", L );
 
 	printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 
-	// перебираем все рёбра контура
+	// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЂС‘Р±СЂР° РєРѕРЅС‚СѓСЂР°
 	for( contour->first(); !contour->isHead(); contour->next())
 	{
 		EdgeEx* ex = contour->val();
@@ -7680,7 +7680,7 @@ printf("L = poly_contour->length() %d\n", L );
 	}
 	printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 
-	// перебираем все биссектриссы
+	// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ Р±РёСЃСЃРµРєС‚СЂРёСЃСЃС‹
 	for( biss->first(); !biss->isHead(); biss->next())
 	{
 		EdgeEx* ex = biss->val();
@@ -7706,9 +7706,9 @@ MessageBox(0,"","",0);
 
 	if (false)
 	{	
-		// Наша цель составить матрицу с числом строк S
+		// РќР°С€Р° С†РµР»СЊ СЃРѕСЃС‚Р°РІРёС‚СЊ РјР°С‚СЂРёС†Сѓ СЃ С‡РёСЃР»РѕРј СЃС‚СЂРѕРє S
 		vector<sparse_row> M2; 
-		// и вектор правых частей 
+		// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 		vector<double> B2;
 		for (size_t r = 0; r < M.size(); r++)
 		{
@@ -7884,7 +7884,7 @@ return;
 				else
 					z_value = BLANK_VALUE;
 
-				// полученное значение z_value записываем в грид
+				// РїРѕР»СѓС‡РµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ z_value Р·Р°РїРёСЃС‹РІР°РµРј РІ РіСЂРёРґ
 				grid->gridSection.z[jj][ii] = z_value;
 			}
 		}
@@ -7929,7 +7929,7 @@ int getTriangulationContour(vector<double>& x, vector<double>& y,
 		vs[i].index = (int)i;
 	}
 
-	// вычисляем триангуляцию Делоне
+	// РІС‹С‡РёСЃР»СЏРµРј С‚СЂРёР°РЅРіСѓР»СЏС†РёСЋ Р”РµР»РѕРЅРµ
 	Dictionary<EdgeEx*> * out_edges = new Dictionary<EdgeEx*>(edgeCmpEx);
 	List<PolygonEx*> * trias = delaunayTriangulateEx(vs, out_edges);
 
@@ -7946,7 +7946,7 @@ int getTriangulationContour(vector<double>& x, vector<double>& y,
 		cin >> ftf;
 	}
 #endif
-    // Фильтруем полигоны от "плохих" краевых треугольников		
+    // Р¤РёР»СЊС‚СЂСѓРµРј РїРѕР»РёРіРѕРЅС‹ РѕС‚ "РїР»РѕС…РёС…" РєСЂР°РµРІС‹С… С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ		
 	switch (ftf)
 	{
 	case 1:
@@ -7959,7 +7959,7 @@ int getTriangulationContour(vector<double>& x, vector<double>& y,
 
 
 
-    // Получаем замкнутый контур внешней границы
+    // РџРѕР»СѓС‡Р°РµРј Р·Р°РјРєРЅСѓС‚С‹Р№ РєРѕРЅС‚СѓСЂ РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹
 	List<EdgeEx*> * contour = GetContourOfPolygonesEx2(trias);
 
 	if (!use_biss)
@@ -7978,11 +7978,11 @@ int getTriangulationContour(vector<double>& x, vector<double>& y,
 	}
 	else
 	{
-		// Из каждой вершины внешней границы проводим вовне биссектрисы		
+		// РР· РєР°Р¶РґРѕР№ РІРµСЂС€РёРЅС‹ РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹ РїСЂРѕРІРѕРґРёРј РІРѕРІРЅРµ Р±РёСЃСЃРµРєС‚СЂРёСЃС‹		
 		List<EdgeEx*> * biss = MakeBissectrissToContour(contour, len_biss);
 
-		// Вокруг контура внешней границы, базируясь на внешних биссектриссах формируем 
-		// новый контур внешней границы
+		// Р’РѕРєСЂСѓРі РєРѕРЅС‚СѓСЂР° РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹, Р±Р°Р·РёСЂСѓСЏСЃСЊ РЅР° РІРЅРµС€РЅРёС… Р±РёСЃСЃРµРєС‚СЂРёСЃСЃР°С… С„РѕСЂРјРёСЂСѓРµРј 
+		// РЅРѕРІС‹Р№ РєРѕРЅС‚СѓСЂ РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹
 		for ( biss->first(); 
 			!biss->isHead(); 
 			biss->next() )
@@ -8040,42 +8040,42 @@ void FillDefaultParam(griddata_3_param &param)
 {
 
 		param.use_contour = true;
-	// флаг отфильтровывания периферийных "плохих" треугольников в триангуляции Делоне
-	// 0 - отфильтровывания не происходит
-	// 1 - отфильтровывание по "щадящему" алгоритму
-	// 2 - отфильтровывание по более жёсткому алгоритму
-	// м.б. 3 - отфильтровывание по "разъедающему" алгоритму
+	// С„Р»Р°Рі РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РЅРёСЏ РїРµСЂРёС„РµСЂРёР№РЅС‹С… "РїР»РѕС…РёС…" С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ РІ С‚СЂРёР°РЅРіСѓР»СЏС†РёРё Р”РµР»РѕРЅРµ
+	// 0 - РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РЅРёСЏ РЅРµ РїСЂРѕРёСЃС…РѕРґРёС‚
+	// 1 - РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РЅРёРµ РїРѕ "С‰Р°РґСЏС‰РµРјСѓ" Р°Р»РіРѕСЂРёС‚РјСѓ
+	// 2 - РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РЅРёРµ РїРѕ Р±РѕР»РµРµ Р¶С‘СЃС‚РєРѕРјСѓ Р°Р»РіРѕСЂРёС‚РјСѓ
+	// Рј.Р±. 3 - РѕС‚С„РёР»СЊС‚СЂРѕРІС‹РІР°РЅРёРµ РїРѕ "СЂР°Р·СЉРµРґР°СЋС‰РµРјСѓ" Р°Р»РіРѕСЂРёС‚РјСѓ
 	param.ftf = 0; // filtering of triangulation flag
 
-	// порядок интерполяции:
-	// внутренних треугольников
+	// РїРѕСЂСЏРґРѕРє РёРЅС‚РµСЂРїРѕР»СЏС†РёРё:
+	// РІРЅСѓС‚СЂРµРЅРЅРёС… С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ
 	param.order_t = 2;// ;
-	// и контурных полигонов
+	// Рё РєРѕРЅС‚СѓСЂРЅС‹С… РїРѕР»РёРіРѕРЅРѕРІ
 	param.order_c = 2;// ;
 
-	// регуляризационные коэффициенты alpha, с помощью которых 
-	// мы будем стараться приближаться к линейной интерполяции
+	// СЂРµРіСѓР»СЏСЂРёР·Р°С†РёРѕРЅРЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ alpha, СЃ РїРѕРјРѕС‰СЊСЋ РєРѕС‚РѕСЂС‹С… 
+	// РјС‹ Р±СѓРґРµРј СЃС‚Р°СЂР°С‚СЊСЃСЏ РїСЂРёР±Р»РёР¶Р°С‚СЊСЃСЏ Рє Р»РёРЅРµР№РЅРѕР№ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
 
-	// alpha с нулём воздействуют на коэффициенты интерполяции с нулевой степенью 
-	//		(Этот коэффициент будет "придавливать" центральную точку полигона)
-	// alpha с единицей воздействуют на коэффициенты интерполяции с первой степенью 
-	//		(этот коэффициент будет "придавливать" периферию полигона)
+	// alpha СЃ РЅСѓР»С‘Рј РІРѕР·РґРµР№СЃС‚РІСѓСЋС‚ РЅР° РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё СЃ РЅСѓР»РµРІРѕР№ СЃС‚РµРїРµРЅСЊСЋ 
+	//		(Р­С‚РѕС‚ РєРѕСЌС„С„РёС†РёРµРЅС‚ Р±СѓРґРµС‚ "РїСЂРёРґР°РІР»РёРІР°С‚СЊ" С†РµРЅС‚СЂР°Р»СЊРЅСѓСЋ С‚РѕС‡РєСѓ РїРѕР»РёРіРѕРЅР°)
+	// alpha СЃ РµРґРёРЅРёС†РµР№ РІРѕР·РґРµР№СЃС‚РІСѓСЋС‚ РЅР° РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё СЃ РїРµСЂРІРѕР№ СЃС‚РµРїРµРЅСЊСЋ 
+	//		(СЌС‚РѕС‚ РєРѕСЌС„С„РёС†РёРµРЅС‚ Р±СѓРґРµС‚ "РїСЂРёРґР°РІР»РёРІР°С‚СЊ" РїРµСЂРёС„РµСЂРёСЋ РїРѕР»РёРіРѕРЅР°)
 
-	// эти коэффициенты относятся к внутренним треугольникам
+	// СЌС‚Рё РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РѕС‚РЅРѕСЃСЏС‚СЃСЏ Рє РІРЅСѓС‚СЂРµРЅРЅРёРј С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°Рј
 	param.alpha_t0 = 0.1;// ;
 	param.alpha_t1 = 1.0;//;	
 	param.alpha_tn = 1.0;//;	
 
 
-	// эти коэффициенты относятся к контурным полигонам
+	// СЌС‚Рё РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ РѕС‚РЅРѕСЃСЏС‚СЃСЏ Рє РєРѕРЅС‚СѓСЂРЅС‹Рј РїРѕР»РёРіРѕРЅР°Рј
 	param.alpha_c0 = 0.1;//;
 	param.alpha_c1 = 1.0;//;
 	param.alpha_cn = 1.0;//;
 
-	// коэффициент задающий сглажтвание
-	// если ноль, сглаживания не происходит
-	// если положительный, происходит сглаживание по методу "скользящего среднего", тогда dij определяет размер окна
-	// если отрицательный, тогда на стыках полигонов происходит усреднение интерполяционных значений для разных полигонов по отношению к текущей точке
+	// РєРѕСЌС„С„РёС†РёРµРЅС‚ Р·Р°РґР°СЋС‰РёР№ СЃРіР»Р°Р¶С‚РІР°РЅРёРµ
+	// РµСЃР»Рё РЅРѕР»СЊ, СЃРіР»Р°Р¶РёРІР°РЅРёСЏ РЅРµ РїСЂРѕРёСЃС…РѕРґРёС‚
+	// РµСЃР»Рё РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Р№, РїСЂРѕРёСЃС…РѕРґРёС‚ СЃРіР»Р°Р¶РёРІР°РЅРёРµ РїРѕ РјРµС‚РѕРґСѓ "СЃРєРѕР»СЊР·СЏС‰РµРіРѕ СЃСЂРµРґРЅРµРіРѕ", С‚РѕРіРґР° dij РѕРїСЂРµРґРµР»СЏРµС‚ СЂР°Р·РјРµСЂ РѕРєРЅР°
+	// РµСЃР»Рё РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Р№, С‚РѕРіРґР° РЅР° СЃС‚С‹РєР°С… РїРѕР»РёРіРѕРЅРѕРІ РїСЂРѕРёСЃС…РѕРґРёС‚ СѓСЃСЂРµРґРЅРµРЅРёРµ РёРЅС‚РµСЂРїРѕР»СЏС†РёРѕРЅРЅС‹С… Р·РЅР°С‡РµРЅРёР№ РґР»СЏ СЂР°Р·РЅС‹С… РїРѕР»РёРіРѕРЅРѕРІ РїРѕ РѕС‚РЅРѕС€РµРЅРёСЋ Рє С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРµ
 	param.dij = 1;//1;
 	//double row_weight;// = 1.0;
 	
@@ -8102,7 +8102,7 @@ void FillDefaultParam(griddata_3_param &param)
 	//param.slau_method = 1;//SLAU_excl
 	param.slau_method = 2;//Tihonov
 
-	param.m_len_biss_type = griddata_3_param::len_biss_type::user_defined;
+    param.m_len_biss_type = griddata_3_param_len_biss_type_user_defined;
 	param.len_biss = 1.0;
 
 }
@@ -8219,7 +8219,7 @@ int griddata_3(HWND hwndParent, vector<double>& x, vector<double>& y, vector<dou
 
 {					
 	griddata_3_param * param = reinterpret_cast<griddata_3_param *>(_param);
-	// тут осуществляем триангуляционный алгоритм
+	// С‚СѓС‚ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµРј С‚СЂРёР°РЅРіСѓР»СЏС†РёРѕРЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј
 
 	size_t len = x.size();
 	
@@ -8266,7 +8266,7 @@ int griddata_3(HWND hwndParent, vector<double>& x, vector<double>& y, vector<dou
 		double min_z = DBL_MAX;
 		double max_z = -DBL_MAX;
 
-		//координаты чётырёх углов площадки
+		//РєРѕРѕСЂРґРёРЅР°С‚С‹ С‡С‘С‚С‹СЂС‘С… СѓРіР»РѕРІ РїР»РѕС‰Р°РґРєРё
 		double x0 = grid->gridSection.xLL;
 		double y0 = grid->gridSection.yLL;
 		double xm = grid->gridSection.xLL + (grid->gridSection.nCol-1)*grid->gridSection.xSize;
@@ -8307,19 +8307,19 @@ int griddata_3(HWND hwndParent, vector<double>& x, vector<double>& y, vector<dou
 			}
 		}
 		/*
-		//Площадь плошадки
+		//РџР»РѕС‰Р°РґСЊ РїР»РѕС€Р°РґРєРё
 		double S = fabs((xm-x0)*(yn-y0));
 
-		//средняя плотность точек
+		//СЃСЂРµРґРЅСЏСЏ РїР»РѕС‚РЅРѕСЃС‚СЊ С‚РѕС‡РµРє
 		double plotnost_t = double(len) / S;
 
-		//матожидание расстояния между каждой точкой и ближайшей к ней соседней
+		//РјР°С‚РѕР¶РёРґР°РЅРёРµ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РјРµР¶РґСѓ РєР°Р¶РґРѕР№ С‚РѕС‡РєРѕР№ Рё Р±Р»РёР¶Р°Р№С€РµР№ Рє РЅРµР№ СЃРѕСЃРµРґРЅРµР№
 		double delta_ma = 0.5 / sqrt(plotnost_t);
 
-		// радиус внутри которого ищем ближайшие точки
+		// СЂР°РґРёСѓСЃ РІРЅСѓС‚СЂРё РєРѕС‚РѕСЂРѕРіРѕ РёС‰РµРј Р±Р»РёР¶Р°Р№С€РёРµ С‚РѕС‡РєРё
 		double R = delta_ma*5.0;
 
-		//пространственная индексация - делим площадку на клетки и в каждую клетку складываем координаты попадающих в неё точек
+		//РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅР°СЏ РёРЅРґРµРєСЃР°С†РёСЏ - РґРµР»РёРј РїР»РѕС‰Р°РґРєСѓ РЅР° РєР»РµС‚РєРё Рё РІ РєР°Р¶РґСѓСЋ РєР»РµС‚РєСѓ СЃРєР»Р°РґС‹РІР°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕРїР°РґР°СЋС‰РёС… РІ РЅРµС‘ С‚РѕС‡РµРє
 		vector<vector<vector<COORDINATES> > > W;
 		size_t start_size = do_quads_indexation(len, x, y, z, grid, W, m_1, n_1);
 
@@ -8329,7 +8329,7 @@ int griddata_3(HWND hwndParent, vector<double>& x, vector<double>& y, vector<dou
 		//myeps *= 0.005;
 		printf("myeps = %f\n", myeps);
 
-		// убираем повторяющиеся точки
+		// СѓР±РёСЂР°РµРј РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ С‚РѕС‡РєРё
 		size_t end_size = remove_repeate_points(myeps, W, m_1, n_1);
 
 		printf("start_size = %u end_size =%u\n", start_size, end_size);
@@ -8355,7 +8355,7 @@ int partial_gridding(HWND hwndParent, vector<double>& x, vector<double>& y, vect
 			 Grid * grid, int max_len, int (* griddata_fun)(HWND , vector<double>& , vector<double>& , vector<double>& , Grid * ), bool to_allocate)
 {
 					
-	// ищем max_len ближайших точек
+	// РёС‰РµРј max_len Р±Р»РёР¶Р°Р№С€РёС… С‚РѕС‡РµРє
 
 	static size_t partial_grid_calling = 0;
 	partial_grid_calling++;
@@ -8422,7 +8422,7 @@ printf("partial_gridding len = %d partial_grid_calling = %u\n", len, partial_gri
 				double x_i = grid->gridSection.xLL + ii*grid->gridSection.xSize;
 				double y_j = grid->gridSection.yLL + jj*grid->gridSection.ySize;
 
-				// ищем max_len ближайших точек
+				// РёС‰РµРј max_len Р±Р»РёР¶Р°Р№С€РёС… С‚РѕС‡РµРє
 				/*for (int k = 0; k < len; k++)
 				{
 					id[k].i = k;
@@ -8554,7 +8554,7 @@ int partial_gridding2(HWND hwndParent, vector<double>& x, vector<double>& y, vec
 			 Grid * grid, int max_len, int (* griddata_fun)(HWND , vector<double>& , vector<double>& , vector<double>& , Grid * , void * , bool), bool to_allocate)
 {
 					
-	// ищем max_len ближайших точек
+	// РёС‰РµРј max_len Р±Р»РёР¶Р°Р№С€РёС… С‚РѕС‡РµРє
 
 	static size_t partial_grid_calling = 0;
 	partial_grid_calling++;
@@ -8595,22 +8595,22 @@ printf("partial_gridding len = %d partial_grid_calling = %u\n", len, partial_gri
 		xy = xy.';
 		*/
 
-		//координаты чётырёх углов площадки
+		//РєРѕРѕСЂРґРёРЅР°С‚С‹ С‡С‘С‚С‹СЂС‘С… СѓРіР»РѕРІ РїР»РѕС‰Р°РґРєРё
 		double x0 = grid->gridSection.xLL;
 		double y0 = grid->gridSection.yLL;
 		double xm = grid->gridSection.xLL + (grid->gridSection.nCol-1)*grid->gridSection.xSize;
 		double yn = grid->gridSection.yLL + (grid->gridSection.nRow-1)*grid->gridSection.ySize;
 		
-		//Площадь плошадки
+		//РџР»РѕС‰Р°РґСЊ РїР»РѕС€Р°РґРєРё
 		double S = fabs((xm-x0)*(yn-y0));
 
-		//средняя плотность точек
+		//СЃСЂРµРґРЅСЏСЏ РїР»РѕС‚РЅРѕСЃС‚СЊ С‚РѕС‡РµРє
 		double plotnost_t = double(len) / S;
 
-		//матожидание расстояния между каждой точкой и ближайшей к ней соседней
+		//РјР°С‚РѕР¶РёРґР°РЅРёРµ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РјРµР¶РґСѓ РєР°Р¶РґРѕР№ С‚РѕС‡РєРѕР№ Рё Р±Р»РёР¶Р°Р№С€РµР№ Рє РЅРµР№ СЃРѕСЃРµРґРЅРµР№
 		double delta_ma = 0.5 / sqrt(plotnost_t);
 
-		// радиус внутри которого ищем ближайшие точки
+		// СЂР°РґРёСѓСЃ РІРЅСѓС‚СЂРё РєРѕС‚РѕСЂРѕРіРѕ РёС‰РµРј Р±Р»РёР¶Р°Р№С€РёРµ С‚РѕС‡РєРё
 		double R = delta_ma*5.0;
 
 		double z_value;
@@ -8641,7 +8641,7 @@ printf("partial_gridding len = %d partial_grid_calling = %u\n", len, partial_gri
 				double x_i = grid->gridSection.xLL + ii*grid->gridSection.xSize;
 				double y_j = grid->gridSection.yLL + jj*grid->gridSection.ySize;
 
-				// ищем max_len ближайших точек
+				// РёС‰РµРј max_len Р±Р»РёР¶Р°Р№С€РёС… С‚РѕС‡РµРє
 				/*for (int k = 0; k < len; k++)
 				{
 					id[k].i = k;
@@ -9007,7 +9007,7 @@ printf("griddata (non.Size() > 0 )\n");
 		end
 		*/
 
-		//сортировка по с
+		//СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СЃ
 		COORDINATES * prcv = new COORDINATES[r.Length()];
 		for (i = 0; i < r.Length(); i++)
 		{
@@ -9027,9 +9027,9 @@ printf("griddata (non.Size() > 0 )\n");
 
 		vdouble c_diff_vect = c.DiffVector();
 		Vector<bool> zero_c_diff_vect = c_diff_vect == 0.0;
-		Vector<int> rep = Find(zero_c_diff_vect); //ищем повторяющиеся точки
+		Vector<int> rep = Find(zero_c_diff_vect); //РёС‰РµРј РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ С‚РѕС‡РєРё
 
-		if (rep.Size() > 0)// более двух точек должны быть усреднены
+		if (rep.Size() > 0)// Р±РѕР»РµРµ РґРІСѓС… С‚РѕС‡РµРє РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓСЃСЂРµРґРЅРµРЅС‹
 		{
 			vdouble vzero_c_diff_vect(zero_c_diff_vect.Size());
 			for (i = 0; i < zero_c_diff_vect.Size(); i++)
@@ -9041,7 +9041,7 @@ printf("griddata (non.Size() > 0 )\n");
 			for (i = 0; i < runs.Size(); i++)
 			{
 				runs[i] += 1;
-				Vector<int> k = Find(c == c[runs[i]]);//индексы всех повторяющихся точек
+				Vector<int> k = Find(c == c[runs[i]]);//РёРЅРґРµРєСЃС‹ РІСЃРµС… РїРѕРІС‚РѕСЂСЏСЋС‰РёС…СЃСЏ С‚РѕС‡РµРє
 				double mean_z = z[(size_t)c[runs[i]]];
 				for(j = 0; j < k.Size(); j++)
 				{
@@ -9076,7 +9076,7 @@ printf("griddata (non.Size() > 0 )\n");
 			z.DeleteElement(int(c[i]));
 		}*/
 
-		//Удаление лишних элементов
+		//РЈРґР°Р»РµРЅРёРµ Р»РёС€РЅРёС… СЌР»РµРјРµРЅС‚РѕРІ
 		vector<double>::iterator it_x, it_y, it_z;
 
 		it_x = x.begin();
@@ -9093,7 +9093,7 @@ printf("griddata (non.Size() > 0 )\n");
 			}
 			if( i > 0 && c[i] == c_pre)
 			{
-				// повторяющийся индекс - не производим удаления
+				// РїРѕРІС‚РѕСЂСЏСЋС‰РёР№СЃСЏ РёРЅРґРµРєСЃ - РЅРµ РїСЂРѕРёР·РІРѕРґРёРј СѓРґР°Р»РµРЅРёСЏ
 			}
 			else
 			{
@@ -9594,7 +9594,7 @@ printf("griddata (non.Size() > 0 )\n");
 		end
 		*/
 
-		//сортировка по с
+		//СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СЃ
 		COORDINATES * prcv = new COORDINATES[r.Length()];
 		for (i = 0; i < r.Length(); i++)
 		{
@@ -9614,9 +9614,9 @@ printf("griddata (non.Size() > 0 )\n");
 
 		vdouble c_diff_vect = c.DiffVector();
 		Vector<bool> zero_c_diff_vect = c_diff_vect == 0.0;
-		Vector<int> rep = Find(zero_c_diff_vect); //ищем повторяющиеся точки
+		Vector<int> rep = Find(zero_c_diff_vect); //РёС‰РµРј РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ С‚РѕС‡РєРё
 
-		if (rep.Size() > 0)// более двух точек должны быть усреднены
+		if (rep.Size() > 0)// Р±РѕР»РµРµ РґРІСѓС… С‚РѕС‡РµРє РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓСЃСЂРµРґРЅРµРЅС‹
 		{
 			vdouble vzero_c_diff_vect(zero_c_diff_vect.Size());
 			for (i = 0; i < zero_c_diff_vect.Size(); i++)
@@ -9628,7 +9628,7 @@ printf("griddata (non.Size() > 0 )\n");
 			for (i = 0; i < runs.Size(); i++)
 			{
 				runs[i] += 1;
-				Vector<int> k = Find(c == c[runs[i]]);//индексы всех повторяющихся точек
+				Vector<int> k = Find(c == c[runs[i]]);//РёРЅРґРµРєСЃС‹ РІСЃРµС… РїРѕРІС‚РѕСЂСЏСЋС‰РёС…СЃСЏ С‚РѕС‡РµРє
 				double mean_z = z[(size_t)c[runs[i]]];
 				for(j = 0; j < k.Size(); j++)
 				{
@@ -9663,7 +9663,7 @@ printf("griddata (non.Size() > 0 )\n");
 			z.DeleteElement(int(c[i]));
 		}*/
 
-		//Удаление лишних элементов
+		//РЈРґР°Р»РµРЅРёРµ Р»РёС€РЅРёС… СЌР»РµРјРµРЅС‚РѕРІ
 		vector<double>::iterator it_x, it_y, it_z;
 
 		it_x = x.begin();
@@ -9680,7 +9680,7 @@ printf("griddata (non.Size() > 0 )\n");
 			}
 			if( i > 0 && c[i] == c_pre)
 			{
-				// повторяющийся индекс - не производим удаления
+				// РїРѕРІС‚РѕСЂСЏСЋС‰РёР№СЃСЏ РёРЅРґРµРєСЃ - РЅРµ РїСЂРѕРёР·РІРѕРґРёРј СѓРґР°Р»РµРЅРёСЏ
 			}
 			else
 			{
@@ -10137,7 +10137,7 @@ printf("griddata (non.Size() > 0 )\n");
 		end
 		*/
 
-		//сортировка по с
+		//СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СЃ
 		COORDINATES * prcv = new COORDINATES[r.Length()];
 		for (i = 0; i < r.Length(); i++)
 		{
@@ -10157,9 +10157,9 @@ printf("griddata (non.Size() > 0 )\n");
 
 		vdouble c_diff_vect = c.DiffVector();
 		Vector<bool> zero_c_diff_vect = c_diff_vect == 0.0;
-		Vector<int> rep = Find(zero_c_diff_vect); //ищем повторяющиеся точки
+		Vector<int> rep = Find(zero_c_diff_vect); //РёС‰РµРј РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ С‚РѕС‡РєРё
 
-		if (rep.Size() > 0)// более двух точек должны быть усреднены
+		if (rep.Size() > 0)// Р±РѕР»РµРµ РґРІСѓС… С‚РѕС‡РµРє РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓСЃСЂРµРґРЅРµРЅС‹
 		{
 			vdouble vzero_c_diff_vect(zero_c_diff_vect.Size());
 			for (i = 0; i < zero_c_diff_vect.Size(); i++)
@@ -10171,7 +10171,7 @@ printf("griddata (non.Size() > 0 )\n");
 			for (i = 0; i < runs.Size(); i++)
 			{
 				runs[i] += 1;
-				Vector<int> k = Find(c == c[runs[i]]);//индексы всех повторяющихся точек
+				Vector<int> k = Find(c == c[runs[i]]);//РёРЅРґРµРєСЃС‹ РІСЃРµС… РїРѕРІС‚РѕСЂСЏСЋС‰РёС…СЃСЏ С‚РѕС‡РµРє
 				double mean_z = z[(size_t)c[runs[i]]];
 				for(j = 0; j < k.Size(); j++)
 				{
@@ -10206,7 +10206,7 @@ printf("griddata (non.Size() > 0 )\n");
 			z.DeleteElement(int(c[i]));
 		}*/
 
-		//Удаление лишних элементов
+		//РЈРґР°Р»РµРЅРёРµ Р»РёС€РЅРёС… СЌР»РµРјРµРЅС‚РѕРІ
 		vector<double>::iterator it_x, it_y, it_z;
 
 		it_x = x.begin();
@@ -10223,7 +10223,7 @@ printf("griddata (non.Size() > 0 )\n");
 			}
 			if( i > 0 && c[i] == c_pre)
 			{
-				// повторяющийся индекс - не производим удаления
+				// РїРѕРІС‚РѕСЂСЏСЋС‰РёР№СЃСЏ РёРЅРґРµРєСЃ - РЅРµ РїСЂРѕРёР·РІРѕРґРёРј СѓРґР°Р»РµРЅРёСЏ
 			}
 			else
 			{
@@ -10666,7 +10666,7 @@ printf("griddata (non.Size() > 0 )\n");
 		end
 		*/
 
-		//сортировка по с
+		//СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СЃ
 		COORDINATES * prcv = new COORDINATES[r.Length()];
 		for (i = 0; i < r.Length(); i++)
 		{
@@ -10686,9 +10686,9 @@ printf("griddata (non.Size() > 0 )\n");
 
 		vdouble c_diff_vect = c.DiffVector();
 		Vector<bool> zero_c_diff_vect = c_diff_vect == 0.0;
-		Vector<int> rep = Find(zero_c_diff_vect); //ищем повторяющиеся точки
+		Vector<int> rep = Find(zero_c_diff_vect); //РёС‰РµРј РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ С‚РѕС‡РєРё
 
-		if (rep.Size() > 0)// более двух точек должны быть усреднены
+		if (rep.Size() > 0)// Р±РѕР»РµРµ РґРІСѓС… С‚РѕС‡РµРє РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓСЃСЂРµРґРЅРµРЅС‹
 		{
 			vdouble vzero_c_diff_vect(zero_c_diff_vect.Size());
 			for (i = 0; i < zero_c_diff_vect.Size(); i++)
@@ -10700,7 +10700,7 @@ printf("griddata (non.Size() > 0 )\n");
 			for (i = 0; i < runs.Size(); i++)
 			{
 				runs[i] += 1;
-				Vector<int> k = Find(c == c[runs[i]]);//индексы всех повторяющихся точек
+				Vector<int> k = Find(c == c[runs[i]]);//РёРЅРґРµРєСЃС‹ РІСЃРµС… РїРѕРІС‚РѕСЂСЏСЋС‰РёС…СЃСЏ С‚РѕС‡РµРє
 				double mean_z = z[(size_t)c[runs[i]]];
 				for(j = 0; j < k.Size(); j++)
 				{
@@ -10735,7 +10735,7 @@ printf("griddata (non.Size() > 0 )\n");
 			z.DeleteElement(int(c[i]));
 		}*/
 
-		//Удаление лишних элементов
+		//РЈРґР°Р»РµРЅРёРµ Р»РёС€РЅРёС… СЌР»РµРјРµРЅС‚РѕРІ
 		vector<double>::iterator it_x, it_y, it_z, it_v;
 
 		it_x = x.begin();
@@ -10753,7 +10753,7 @@ printf("griddata (non.Size() > 0 )\n");
 			}
 			if( i > 0 && c[i] == c_pre)
 			{
-				// повторяющийся индекс - не производим удаления
+				// РїРѕРІС‚РѕСЂСЏСЋС‰РёР№СЃСЏ РёРЅРґРµРєСЃ - РЅРµ РїСЂРѕРёР·РІРѕРґРёРј СѓРґР°Р»РµРЅРёСЏ
 			}
 			else
 			{

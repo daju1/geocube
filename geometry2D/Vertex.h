@@ -1,22 +1,22 @@
 #pragma once
-#include "./node.h"
-#include "./point.h"
+#include "./Node.h"
+#include "./Point.h"
 
 namespace geometry2D
 {
 	class Polygon;
 	enum { CLOCKWISE,  COUNTER_CLOCKWISE};
-	//(CLOCKWISE или COUNTER_CLOCKWISE — по часовой стрелке или против):
+	//(CLOCKWISE РёР»Рё COUNTER_CLOCKWISE вЂ” РїРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ РёР»Рё РїСЂРѕС‚РёРІ):
 
 class Vertex: public Node, public  Point  {
  public:
-	//Polygon * _neighbor_poly; // полигон, который по часовой стрелке слева
+	//Polygon * _neighbor_poly; // РїРѕР»РёРіРѕРЅ, РєРѕС‚РѕСЂС‹Р№ РїРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ СЃР»РµРІР°
   Vertex (double x, double y);
-  Vertex (Point&);
+  Vertex (const Point&);
   Vertex *cw(void);
   Vertex *ccw(void);
   Vertex *neighbor (int rotation);
-  Point point (void);
+  const Point & point (void) const;
   Vertex *insert (Vertex* );
   Vertex *remove (void);
   void splice (Vertex*);

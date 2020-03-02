@@ -7,6 +7,11 @@
 #include "sequence.h"
 #include "wav.h"
 
+#ifdef _MSC_VER
+#else
+#include "mywindows.h"
+#endif
+
 int vdouble::m_nMaxDims = VDOUBLE_MAX_DIMS;
 unsigned int vdouble::m_nConstructions = 0;
 unsigned int vdouble::m_nDestructions = 0;
@@ -270,7 +275,7 @@ vdouble::vdouble(Vector<int>& vsize) // Конструктор многомер�
 
 }
 void
-vdouble::resize(int _length)
+vdouble::resize(const int _length)
 {
 //WriteRaporto("vdouble::resize 1_\n");
 	if (m_length != _length)
@@ -322,7 +327,7 @@ vdouble::resize(int _length)
 #endif
 }
 void
-vdouble::resize(int _length, const double& ra)
+vdouble::resize(const int _length, const double& ra)
 {
 //printf("vdouble::resize(int %d, double %f) 1\n",  _length, ra);
 	if (m_length != _length)
@@ -365,7 +370,7 @@ vdouble::resize(int _length, const double& ra)
 }
 
 void
-vdouble::resize(int rows, int cols) // двумерной матрицы
+vdouble::resize(const int rows, const int cols) // двумерной матрицы
 {
 	if (m_length != rows * cols)
 	{
@@ -404,7 +409,7 @@ vdouble::resize(int rows, int cols) // двумерной матрицы
 }
 
 void
-vdouble::resize(int rows, int cols, const double& ra) // двумерной матрицы
+vdouble::resize(const int rows, const int cols, const double& ra) // двумерной матрицы
 {
 	if (m_length != rows * cols)
 	{
@@ -444,7 +449,7 @@ vdouble::resize(int rows, int cols, const double& ra) // двумерной ма
 }
 
 void
-vdouble::resize(int rows, int cols, int tabs) // Конструктор трёхмерной матрицы
+vdouble::resize(const int rows, const int cols, const int tabs) // Конструктор трёхмерной матрицы
 {
 	if (m_length != rows * cols * tabs)
 	{
@@ -479,7 +484,7 @@ vdouble::resize(int rows, int cols, int tabs) // Конструктор трёх
 #endif
 }
 void
-vdouble::resize(Vector<int>& vsize) // Конструктор многомерной матрицы
+vdouble::resize(const Vector<int>& vsize) // Конструктор многомерной матрицы
 {
 	if (m_length > 0)
 		if (pD)

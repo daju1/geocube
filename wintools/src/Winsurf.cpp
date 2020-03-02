@@ -78,7 +78,7 @@ char * SelectNameFromPath(const char * path, char * name, size_t len);
 
 
 
-extern HINSTANCE hInst;   // текущий экземпляр
+extern HINSTANCE hInst;   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //extern LPCTSTR lpszAppName;
 LPCTSTR lpszSurfTitle   = "Geo Cube 01";
 LPCTSTR lpszWinSurfParent   = "WINSURF Cube 01";
@@ -133,7 +133,7 @@ typedef struct
 
 int BeginWinSurf(WNDCLASSEX &wc)
 {
-	// Регистрация класса главного окна приложения.
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	//............................................
 	wc.style         = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc   = (WNDPROC)WinSurfParentProc;
@@ -157,14 +157,14 @@ int BeginWinSurf(WNDCLASSEX &wc)
 
 	if ( !RegisterClassEx( &wc ) )
 	{
-		if(1410 != GetLastError())// класс уже существует
+		if(1410 != GetLastError())// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			MessageBox(0,"!RegisterClassEx","WinSurf",0);
 			return( FALSE );
 		}
 		else
 		{
-//			MessageBox(0,"класс уже существует","WinSurf",0);
+//			MessageBox(0,"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ","WinSurf",0);
 		}
 	}
 	return (TRUE);
@@ -308,7 +308,7 @@ WPARAM WinSurf()
 	app->GetWinProject()->SetApp(app);
 	
 //	app->work(argc, argv);	
-	// просим коммандную строку у системы
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	CommandLineParser parser;
 	parser.DoParsing();
 	if (strlen(parser.open_file) > 0)
@@ -536,7 +536,7 @@ int blockNum;
 
 /*inline double Rand(double x)
 {
-	//====== Случайное число в диапазоне (-x, x)
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (-x, x)
 	return x - (x + x) * rand() / RAND_MAX;
 }*/
 			
@@ -549,11 +549,11 @@ typedef struct
 
 int GetSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ hwnd пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	case IDC_XPOS:
 		nID = IDC_XPOS_TEXT;
 		return 0;
@@ -593,246 +593,6 @@ int GetSliderNum(HWND hwnd, UINT& nID)
 
 
 
-int ReadContourBlnFile(vdouble& x, vdouble& y)
-{
-	char *p, ext[255];
-	FILE *stream;
-	const unsigned int n = 1023;
-	char szBuff[n];
-
-	p = strrchr(szPath,'.');
-	if (p)
-		strcpy(ext, p+1);
-
-	if (p && strcmp(ext, "bln") == 0)
-	{
-		//MessageBox(0, ext, "bln",0);
-		// open the file
-		if ((stream = fopen(szPath,"rt")) == NULL)
-		{
-			MessageBox(0, "Cannot open input file.\n", "Import", 
-				MB_OK | MB_ICONINFORMATION);
-			return -1;
-		}
-		int len;
-		if (!feof(stream))
-		{
-			char * ch;
-			ch = fgets(szBuff,n,stream);
-			if( ch != NULL && strlen(szBuff) > 1)
-			{
-				len = atoi(szBuff);
-			}
-		}
-		double X,Y;
-		int i = 0;
-		x.resize(len);
-		y.resize(len);
-		while (!feof(stream) && i < len)
-		{
-			char * ch;
-			ch = fgets(szBuff,n,stream);
-			if( ch != NULL && strlen(szBuff) > 1)
-			{
-				int rez = sscanf(szBuff,"%lf,%lf",
-								&X, &Y);
-				if (rez == 2 && rez != EOF)
-				{
-					x[i] = X;
-					y[i] = Y;
-					i++;
-				}
-
-			}
-		}
-		fclose(stream);
-		if (i == len && i > 2)
-			return 0;
-		if (!(x[0] == x.End() && y[0] == y.End()))
-		{
-			MessageBox(0, "The contour is not closed!", "Warning", 0);
-			return 1;
-		}										
-	}
-	return -1;
-}
-int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible)
-{
-	if ( xc.Length() != yc.Length() )
-	{
-		char errstr[1024];
-		sprintf(errstr, 
-			"lengthes of vectors xc(%d), yc(%d) must be equial",
-			xc.Length(), yc.Length());
-		MessageBox(0, errstr,"Error using SetVisiblePointsInContour",0);
-		return -1;
-	}
-	int i,j,q, ind,
-		m = xi.Length(), 
-		n = yi.Length(), 
-		lenc = xc.Length();
-
-
-	RECT rcClient;  // Client area of parent window 
-	int cyVScroll;  // Height of scroll bar arrow 
-	HWND hwndPB;    // Handle of progress bar 
-	DWORD cb,		// Size of file and count of
-	  cb_read = 0,  // bytes read 
-	  cb_disp = 0;  // bytes displayed
-
-
-
-	// Ensure that the common control DLL is loaded
-	// and create a progress bar along the bottom of
-	// the client area of the parent window. 
-	// Base the height of the progress bar on the
-	// height of a scroll bar arrow. 
-	InitCommonControls(); 
-	GetClientRect(hwndParent, &rcClient); 
-	GetWindowRect(hwndParent, &rcClient); 
-	cyVScroll = GetSystemMetrics(SM_CYVSCROLL); 
-	hwndPB = CreateWindowEx(WS_EX_TOPMOST, PROGRESS_CLASS,
-			 (LPSTR) NULL, 
-			 //WS_CHILD | WS_VISIBLE,
-			 WS_POPUPWINDOW,
-			 //0, 0,
-			 rcClient.left, rcClient.bottom-cyVScroll,
-			 rcClient.right, cyVScroll, 
-			 //hwndParent, 
-			 NULL,
-			 
-			 (HMENU) 0, hInst, NULL); 
-
-	ShowWindow(hwndPB,1);
-
-	// Gets the file descriptor associated with a stream.
-	//int fd = _fileno(stream);
-	// Get the length of a file in bytes
-	cb = lenc;
-
-
-
-	// Set the range and increment of the progress
-	// bar. 
-
-	SendMessage(hwndPB, PBM_SETRANGE, 0,
-				MAKELPARAM(0, cb)); 
-	SendMessage(hwndPB, PBM_SETSTEP, (WPARAM) 1, 0); 
-
-
-
-
-
-	vdouble angle,angle1,angle2, dangle, sum_dangle;
-
-	visible.resize(n, m, 0.0);
-	angle.resize(n, m);
-	angle1.resize(n, m);
-	angle2.resize(n, m);
-	dangle.resize(n, m, 0.0);
-	sum_dangle.resize(n, m, 0.0);
-	for (q = 0; q < lenc; q++)
-	{
-		if(q > 0)
-		{
-			angle1 = angle;
-		}
-		for ( i = 0; i < m; i++)
-		{
-			for (j = 0; j < n; j++)
-			{												
-				angle(j,i) = atan2(
-					yc[q] - yi[j], 
-					xc[q] - xi[i]);			
-			}
-		}
-		if(q > 0)
-		{
-			angle2 = angle;
-			dangle = angle2 - angle1;
-			Vector <int> indexes = Find(dangle > 1.9*PI);
-			for (ind = 0; ind < indexes.Size(); ind++)
-			{
-				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
-					dangle[indexes[ind]] -= 2*PI;
-			}
-			indexes = Find(dangle < -1.9*PI);
-			for (ind = 0; ind < indexes.Size(); ind++)
-			{
-				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
-					dangle[indexes[ind]] += 2*PI;
-			}
-			sum_dangle += dangle;
-		}
-		SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
-
-	}
-/*	q = 0; 
-	{
-			angle1 = angle;
-		for ( i = 0; i < m; i++)
-		{
-			for (j = 0; j < n; j++)
-			{												
-				angle(i,j) = atan2(
-					yc[q] - yi[j], 
-					xc[q] - xi[i]);
-			}
-		}
-			angle2 = angle;
-			dangle = angle2 - angle1;
-			Vector <int> indexes = Find(dangle > 4.*PI/3.);
-			for (int ind = 0; ind < indexes.Size(); ind++)
-			{
-				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
-					dangle[indexes[ind]] -= 2*PI;
-			}
-			indexes = Find(dangle < -4.*PI/3.);
-			for (ind = 0; ind < indexes.Size(); ind++)
-			{
-				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
-					dangle[indexes[ind]] += 2*PI;
-			}
-			sum_dangle += dangle;
-		SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
-//				RECT rect;
-//				GetClientRect(hwndParent,&rect);
-//				InvalidateRect(hwndParent,&rect, true);
-//MessageBox(0,"","",0);
-
-	}*/
-	// 
-	Vector <int> indexes = Find(sum_dangle > 1.9*PI || sum_dangle < -1.9*PI);
-	for (int ind = 0; ind < indexes.Size(); ind++)
-	{
-		visible[indexes[ind]] = 1.0;
-	}
-
-		
-	DestroyWindow(hwndPB);
-	return 0;
-}
-#if !FAST_GRID_LOADING
-DWORD WINAPI SetVisiblePointsInContour(void * p)
-{
-	CGrid* pThis;
-	MessageBox(0,"SetVisiblePointsInContour(void * p)","",0);
-	if (p)
-		pThis = reinterpret_cast<CGrid*>(p);
-	else
-	{
-		pThis = NULL;
-		return 1;
-	}
-
-	if (pThis->SetVisiblePointsInContour() == 0)
-	{
-		SendMessage(pThis->hwndParent, WM_COMMAND, ID_WINSURF_DRAW, 0);
-		SendMessage(pThis->hwndParent, WM_COMMAND, ID_WINSURF_FILE_SAVEAS_SURFER7_GRID,0);
-	}
-	return 0;
-}
-#endif
 
 int ChooseSurfColor(HWND hwndOwner, COLORREF& color)
 {
@@ -865,9 +625,9 @@ int ChooseSurfColor(HWND hwndOwner, COLORREF& color)
 typedef struct
 {
 //	double zoomCoefZ_XY;
-//	bool		m_bEqialZoom;		// Режим заполнения полигонов
-//	bool		m_bQuad;			// Флаг использования GL_QUAD
-//	GLenum		m_FillMode;		// Режим заполнения полигонов
+//	bool		m_bEqialZoom;		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+//	bool		m_bQuad;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ GL_QUAD
+//	GLenum		m_FillMode;		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	HWND		hWnd;
 	SurfDoc*	pSurfDoc;
 
@@ -875,11 +635,11 @@ typedef struct
 SURFCUTSPLANEDLGDATA, *LPSURFCUTSPLANEDLGDATA;
 int GetCutsPlaneSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ hwnd пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	case IDC_SLIDER_CUT_PLANE:
 		nID = IDC_EDIT_SURF_CUTS_PLANE_D;
 		return 0;
@@ -890,7 +650,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFCUTSPLANEDLGDATA lpSurfCutsPlaneDlgMem;
-	static double m_Pos[11]; 			// Массив позиций ползунков
+	static double m_Pos[11]; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static unsigned int lastCommand;
 	static double min_Dd, max_Dd;
 	static double min_Dv, max_Dv;
@@ -922,45 +682,45 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetCutsPlaneSliderNum(hwnd, nID);
 				double delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -100;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +100;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = newPos<0 ? 0 : newPos>20000.0 ? 20000.0 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -983,17 +743,17 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 				lpSurfCutsPlaneDlgMem->pSurfDoc->GetMinMaxDPlaneCoef(true, min_Dv, max_Dv);
 				lpSurfCutsPlaneDlgMem->pSurfDoc->GetMinMaxDPlaneCoef(false, min_Dd, max_Dd);
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 				double mu = m_Pos[num]/20000.0;
 				lpSurfCutsPlaneDlgMem->pSurfDoc->m_cut_plane_v[3] = m_Pos[num]*(max_Dv - min_Dv)/20000.0 + min_Dv;
 				lpSurfCutsPlaneDlgMem->pSurfDoc->m_cut_plane_d[3] = m_Pos[num]*(max_Dd - min_Dd)/20000.0 + min_Dd;
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				char s[1024];
 				sprintf (s,"%lf",cut_plane[3]);
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 #if 0
 				SendMessage(hDlg,WM_COMMAND,IDC_BUTTON_DRAW_SURF_CUTS_PLANE,1);
 				SendMessage(hDlg,WM_COMMAND,lastCommand,0);
@@ -1125,7 +885,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 					cut_plane = lpSurfCutsPlaneDlgMem->pSurfDoc->m_cut_plane_d;
 				}
 				//*****************************************************
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_CUT_PLANE);
 
 				SendMessage(    // returns LRESULT in lResult
@@ -1134,12 +894,12 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 				(WPARAM) true,          // = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 20000)              // = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				if (lpSurfCutsPlaneDlgMem->pSurfDoc->m_bFastCutting)
 				{
 					for (int i=0; i<1; i++)
 					{
-						//====== Заполняем транспортный массив pPos
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 						m_Pos[i] = 20000.0*(cut_plane[3] - min_Dv) / (max_Dv - min_Dv);
 					}
 				}
@@ -1147,36 +907,36 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 				{
 					for (int i=0; i<1; i++)
 					{
-						//====== Заполняем транспортный массив pPos
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 						m_Pos[i] = 20000.0*(cut_plane[3] - min_Dd) / (max_Dd - min_Dd);
 					}
 				}
 
-				//====== Массив идентификаторов ползунков
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_CUT_PLANE
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (int i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
-					//=== Добываем Windows-описатель окна ползунка
+					//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					int num = GetCutsPlaneSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					if ( i == 0)
 					{
 						char s[1024];
-						//====== Готовим текстовый аналог текущей позиции
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						sprintf (s, "%8.3f", cut_plane[3]);
-						//====== Помещаем текст в окно справа от ползунка
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 					}
 				}
@@ -1302,7 +1062,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 				if (lParam == 0)
 				{
 					SendMessage(hDlg,WM_COMMAND,IDC_INIT_SURF_CUTS_SLIDER,0);
-					//====== Перерисовываем Вид с учетом изменений
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					RECT rect;
 					GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 					InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1314,7 +1074,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 				glDeleteLists(FIRST_HARD_LIST+2,1);
 				lpSurfCutsPlaneDlgMem->pSurfDoc->m_bDrawCutPlane = false;
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1329,7 +1089,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 					lpSurfCutsPlaneDlgMem->pSurfDoc->Cut(false,true);
 					lpSurfCutsPlaneDlgMem->pSurfDoc->ZoomViewCutlinesPolygones();
 					lpSurfCutsPlaneDlgMem->pSurfDoc->DrawCutPlaneLines();
-					//====== Перерисовываем Вид с учетом изменений
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					RECT rect;
 					GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 					InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1342,7 +1102,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 //				GLdouble * cut_plane ;
 				/*if (lpSurfCutsPlaneDlgMem->pSurfDoc->m_bFastCutting)
 				{
-					//====== Перерисовываем Вид с учетом изменений
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					RECT rect;
 					GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 					InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1353,7 +1113,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 					lpSurfCutsPlaneDlgMem->pSurfDoc->Cut(false,true);
 					lpSurfCutsPlaneDlgMem->pSurfDoc->ZoomViewCutlinesPolygones();
 					lpSurfCutsPlaneDlgMem->pSurfDoc->DrawCutPlaneLines();
-					//====== Перерисовываем Вид с учетом изменений
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					RECT rect;
 					GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 					InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1375,7 +1135,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 				
 				lpSurfCutsPlaneDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1394,7 +1154,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 
 				lastCommand = IDC_BUTTON_SURF_CUTS_PLANE_UNVISIBLE2;
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1419,7 +1179,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 
 				//DrawScene(lpSurfCutsPlaneDlgMem->pSurfDoc, lpSurfCutsPlaneDlgMem->m_bQuad, lpSurfCutsPlaneDlgMem->m_FillMode);
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1452,7 +1212,7 @@ LRESULT CALLBACK DlgProcSurfCutsPlane( HWND hDlg, UINT uMsg,
 					lpSurfCutsPlaneDlgMem->pSurfDoc->CutXYZandDisvisible(q);					
 					lpSurfCutsPlaneDlgMem->pSurfDoc->Draw();
 
-					//====== Перерисовываем Вид с учетом изменений
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					RECT rect;
 					GetClientRect(lpSurfCutsPlaneDlgMem->hWnd,&rect);
 					InvalidateRect(lpSurfCutsPlaneDlgMem->hWnd,&rect, true);
@@ -1753,7 +1513,7 @@ LRESULT CALLBACK DlgProcSurfPalette( HWND hDlg, UINT uMsg,
 				
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -1780,11 +1540,11 @@ typedef struct
 {
 //	double zoomCoef_XY;
 //	double zoomCoefZ_XY;
-//	bool		m_bQuad;			// Флаг использования GL_QUAD
+//	bool		m_bQuad;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ GL_QUAD
 //	bool		m_bEqialZoomXYZ;		
 //	bool		m_bEqialZoomXY;		
 //	bool		m_bEqialZoom;		
-//	GLenum		m_FillMode;		// Режим заполнения полигонов
+//	GLenum		m_FillMode;		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	HWND		hWnd;
 	SurfDoc*	pSurfDoc;
 
@@ -1922,7 +1682,7 @@ LRESULT CALLBACK DlgProcSurfZoom( HWND hDlg, UINT uMsg,
 
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -2328,7 +2088,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -2369,7 +2129,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 
 								lpSurfDlgMem->pSurfDoc->Draw();
 
-								//====== Перерисовываем Вид с учетом изменений
+								//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								RECT rect;
 								GetClientRect(lpSurfDlgMem->hWnd,&rect);
 								InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -2388,7 +2148,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 
 								lpSurfDlgMem->pSurfDoc->Draw();
 
-								//====== Перерисовываем Вид с учетом изменений
+								//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								RECT rect;
 								GetClientRect(lpSurfDlgMem->hWnd,&rect);
 								InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -2409,7 +2169,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 
 							lpSurfDlgMem->pSurfDoc->Draw();
 
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(lpSurfDlgMem->hWnd,&rect);
 							InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -2425,7 +2185,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 							lpSurfDlgMem->pSurfDoc->ZoomView();
 							lpSurfDlgMem->pSurfDoc->Draw();
 
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(lpSurfDlgMem->hWnd,&rect);
 							InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);							
@@ -2443,7 +2203,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 							lpSurfDlgMem->pSurfDoc->ZoomView();
 							lpSurfDlgMem->pSurfDoc->Draw();
 
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(lpSurfDlgMem->hWnd,&rect);
 							InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);							
@@ -2457,7 +2217,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 							lpSurfDlgMem->pSurfDoc->ZoomView();
 							lpSurfDlgMem->pSurfDoc->Draw();
 
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(lpSurfDlgMem->hWnd,&rect);
 							InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);							
@@ -2663,7 +2423,7 @@ LRESULT CALLBACK DlgProcSurfImportProfile( HWND hDlg, UINT uMsg,
 
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -2735,10 +2495,10 @@ LRESULT CALLBACK DlgProcCreateProfileOnWells( HWND hDlg, UINT uMsg,
 				enter_id_insteed_of_wells_names = IsDlgButtonChecked( hDlg, IDC_CHECK_PROFILE_CREATE_ENTER_WELLS_ID) == BST_CHECKED;
 				if (enter_id_insteed_of_wells_names)
 					SetDlgItemText(hDlg, IDC_STATIC_HOW_WELLS_ENTER, 
-					"Введите список ID_KT скважин, разделитель - запятая");
+					"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ID_KT пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				else
 					SetDlgItemText(hDlg, IDC_STATIC_HOW_WELLS_ENTER, 
-					"Введите список скважин, разделитель - запятая");
+					"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
 			}
 			break;
@@ -2845,7 +2605,7 @@ LRESULT CALLBACK DlgProcCreateProfileOnWells( HWND hDlg, UINT uMsg,
 					lpSurfDlgMem->pSurfDoc->ZoomView();
 					lpSurfDlgMem->pSurfDoc->Draw();
 
-					//====== Перерисовываем Вид с учетом изменений
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					RECT rect;
 					GetClientRect(lpSurfDlgMem->hWnd,&rect);
 					InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -2878,13 +2638,13 @@ LRESULT CALLBACK DlgProcCreateProfileOnWells( HWND hDlg, UINT uMsg,
 typedef struct
 {
 	HWND hWnd;
-	GLfloat	m_AngleView;		// Угол перспективы
-	GLfloat	m_xTrans;			// Cмещение вдоль X
-	GLfloat	m_yTrans;			// Cмещение вдоль Y
-	GLfloat	m_zTrans;			// Cмещение вдоль Z
-	GLfloat	m_AngleX;			// Угол поворота вокруг оси X
-	GLfloat	m_AngleY;			// Угол поворота вокруг оси Y
-	GLfloat	m_AngleZ;			// Угол поворота вокруг оси Z
+	GLfloat	m_AngleView;		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	GLfloat	m_xTrans;			// CпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ X
+	GLfloat	m_yTrans;			// CпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Y
+	GLfloat	m_zTrans;			// CпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Z
+	GLfloat	m_AngleX;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ X
+	GLfloat	m_AngleY;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Y
+	GLfloat	m_AngleZ;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Z
 }	
 SURFVIEWDLGDATA, *LPSURFVIEWDLGDATA;
 
@@ -2965,11 +2725,11 @@ LRESULT CALLBACK DlgProcSurfViewAnglesTranses( HWND hDlg, UINT uMsg,
 
 int GetAlphaSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ hwnd пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	case IDC_SLIDER_SURF_ALPHA:
 		nID = IDC_EDIT_SURF_ALPHA;
 		return 0;
@@ -2987,7 +2747,7 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFDLGDATA lpSurfDlgMem;
-	static int m_Pos[11]; 			// Массив позиций ползунков
+	static int m_Pos[11]; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch( uMsg )
 	{
     case WM_INITDIALOG :
@@ -3018,45 +2778,45 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetAlphaSliderNum(hwnd, nID);
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -255;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +255;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = newPos<0 ? 0 : newPos>255 ? 255 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -3064,8 +2824,8 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 					return (TRUE);
 				}
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 				switch (num)
 				{
 				case 0:
@@ -3080,7 +2840,7 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 				}
 
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				char s[1024];
 				sprintf (s,"%d",lpSurfDlgMem->pSurfDoc->m_alpha);
 				sprintf (s,"%d",m_Pos[num]);
@@ -3089,7 +2849,7 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				//lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3102,7 +2862,7 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 		{
 		case IDC_INIT_SURF_ALPHA_SLIDER :
 			{
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_SURF_ALPHA);
 
 				SendMessage(    // returns LRESULT in lResult
@@ -3127,14 +2887,14 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 				(WPARAM) true,          // = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 255)              // = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				//for (int i=0; i<2; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 					m_Pos[0] = lpSurfDlgMem->pSurfDoc->m_alpha;
 					m_Pos[1] = lpSurfDlgMem->pSurfDoc->m_alpha_plane;
 					m_Pos[2] = lpSurfDlgMem->pSurfDoc->m_alpha_gdiplus_profiles;
 
-				//====== Массив идентификаторов ползунков
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_SURF_ALPHA,
@@ -3142,23 +2902,23 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 					IDC_SLIDER_SURF_ALPHA_GDIPLUS_PROFILES
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (int i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
-					//=== Добываем Windows-описатель окна ползунка
+					//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					int num = GetAlphaSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					char s[1024];
-					//====== Готовим текстовый аналог текущей позиции
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					sprintf (s,"%d",m_Pos[i]);
-					//====== Помещаем текст в окно справа от ползунка
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 				}
 			}
@@ -3189,7 +2949,7 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3214,11 +2974,11 @@ LRESULT CALLBACK DlgProcSurfAlpha( HWND hDlg, UINT uMsg,
 
 int GetSphereRadiusSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ hwnd пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	case IDC_SLIDER_SURF_SPHERE_RADIUS:
 		nID = IDC_STATIC_SURF_SPHERE_RADIUS_VALUE;
 		return 0;
@@ -3230,7 +2990,7 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFDLGDATA lpSurfDlgMem;
-	static int m_Pos[11]; 			// Массив позиций ползунков
+	static int m_Pos[11]; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static double max_sphere_radius;
 	switch( uMsg )
 	{
@@ -3263,45 +3023,45 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetSphereRadiusSliderNum(hwnd, nID);
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -255;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +255;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = newPos<0 ? 0 : newPos>255 ? 255 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -3313,12 +3073,12 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
 				GetDlgItemText(hDlg, IDC_EDIT_SURF_SPHERE_RADIUS_MAX,str,1022);
 				max_sphere_radius = atof (str);
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 				lpSurfDlgMem->pSurfDoc->m_sphere_radius = 
 					max_sphere_radius * double(m_Pos[num]) / 100.;
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				char s[1024];
 				sprintf (s,"%lf",lpSurfDlgMem->pSurfDoc->m_sphere_radius);
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
@@ -3326,7 +3086,7 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				//lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3340,7 +3100,7 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
 		case IDC_INIT_SURF_ALPHA_SLIDER :
 			{
 				int i;
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_SURF_SPHERE_RADIUS);
 
 				SendMessage(				// returns LRESULT in lResult
@@ -3349,35 +3109,35 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
 				(WPARAM) true,				// = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 100)	// = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (i=0; i<1; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 					m_Pos[i] = int(100. *  lpSurfDlgMem->pSurfDoc->m_sphere_radius / max_sphere_radius);
 
-				//====== Массив идентификаторов ползунков
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_SURF_SPHERE_RADIUS
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
 					
-					//=== Добываем Windows-описатель окна ползунка
+					//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					int num = GetSphereRadiusSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					/*char s[1024];
-					//====== Готовим текстовый аналог текущей позиции
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					sprintf (s,"%d",m_Pos[i]);
-					//====== Помещаем текст в окно справа от ползунка
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 
 					MessageBox(hDlg, s,"",0);*/
@@ -3406,7 +3166,7 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
 
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3429,11 +3189,11 @@ LRESULT CALLBACK DlgProcSurfSphereRadius( HWND hDlg, UINT uMsg,
 
 int GetKarotazhScaleSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ hwnd пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	case IDC_SLIDER_SURF_SPHERE_RADIUS:
 		nID = IDC_STATIC_SURF_SPHERE_RADIUS_VALUE;
 		return 0;
@@ -3451,7 +3211,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFDLGDATA lpSurfDlgMem;
-	static int m_Pos[11]; 			// Массив позиций ползунков
+	static int m_Pos[11]; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static double max_karotazh_scale;
 	static double max_karotazh_scale_2d;
 	static int index;
@@ -3494,45 +3254,45 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetKarotazhScaleSliderNum(hwnd, nID);
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -255;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +255;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = newPos<0 ? 0 : newPos>255 ? 255 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -3547,8 +3307,8 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				GetDlgItemText(hDlg, IDC_EDIT_SURF_SPHERE_RADIUS_MAX2,str,1022);
 				max_karotazh_scale_2d = atof (str);
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 				switch (num)
 				{
 				case 0:
@@ -3568,7 +3328,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 						{
 							if (index < Well_3D::karotazh_list.size()) Well_3D::karotazh_list[index].scale = Karotazh::s_scale;
 						}
-						//====== Синхронизируем текстовый аналог позиции
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						char s[1024];
 						sprintf (s,"%lf",Karotazh::s_scale);
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
@@ -3591,7 +3351,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 						{
 							if (index < Well_3D::karotazh_list.size()) Well_3D::karotazh_list[index].scale_2d = Karotazh::s_scale_2d;
 						}
-						//====== Синхронизируем текстовый аналог позиции
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						char s[1024];
 						sprintf (s,"%lf",Karotazh::s_scale_2d);
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
@@ -3612,7 +3372,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 						{
 							if (index < Well_3D::karotazh_list.size()) Well_3D::karotazh_list[index].alpha = Karotazh::s_alpha;
 						}					
-						//====== Синхронизируем текстовый аналог позиции
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						char s[1024];
 						sprintf (s,"%d",Karotazh::s_alpha);
 						SetDlgItemText(hDlg, nID, (LPCTSTR)s);
@@ -3626,7 +3386,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->Zoom(lpSurfDlgMem->pSurfDoc->m_drills);
 				//lpSurfDlgMem->pSurfDoc->Draw();
 				ReDrawDrills(lpSurfDlgMem->pSurfDoc);
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3692,7 +3452,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 			break;
 		case IDC_INIT_SURF_ALPHA_SLIDER :
 			{
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_SURF_SPHERE_RADIUS);
 
 				SendMessage(				// returns LRESULT in lResult
@@ -3702,7 +3462,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				(LPARAM) MAKELONG (0, 100)	// = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
 
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				hwnd = GetDlgItem(hDlg, IDC_SLIDER_SURF_SPHERE_RADIUS2);
 
 				SendMessage(				// returns LRESULT in lResult
@@ -3712,7 +3472,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				(LPARAM) MAKELONG (0, 100)	// = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
 
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				hwnd = GetDlgItem(hDlg, IDC_SLIDER_KAROTAZH_ALPHA);
 
 				SendMessage(				// returns LRESULT in lResult
@@ -3721,14 +3481,14 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				(WPARAM) true,				// = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 255)	// = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				//for (int i=0; i<1; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 					m_Pos[0] = int(100. *  Karotazh::s_scale / max_karotazh_scale);
 					m_Pos[1] = int(100. *  Karotazh::s_scale_2d / max_karotazh_scale_2d);
 					m_Pos[2] = int(Karotazh::s_alpha);
 
-				//====== Массив идентификаторов ползунков
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_SURF_SPHERE_RADIUS,
@@ -3736,24 +3496,24 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 					IDC_SLIDER_KAROTAZH_ALPHA
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (int i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
 					
-					//=== Добываем Windows-описатель окна ползунка
+					//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					int num = GetKarotazhScaleSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					/*char s[1024];
-					//====== Готовим текстовый аналог текущей позиции
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					sprintf (s,"%d",m_Pos[i]);
-					//====== Помещаем текст в окно справа от ползунка
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 
 					MessageBox(hDlg, s,"",0);*/
@@ -3784,7 +3544,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				//lpSurfDlgMem->pSurfDoc->Draw();
 				ReDrawDrills(lpSurfDlgMem->pSurfDoc);
 				*/
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3816,7 +3576,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				//lpSurfDlgMem->pSurfDoc->Draw();
 				ReDrawDrills(lpSurfDlgMem->pSurfDoc);
 				
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3866,7 +3626,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->Zoom(lpSurfDlgMem->pSurfDoc->m_drills);
 				//lpSurfDlgMem->pSurfDoc->Draw();
 				ReDrawDrills(lpSurfDlgMem->pSurfDoc);
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -3898,7 +3658,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->Zoom(lpSurfDlgMem->pSurfDoc->m_drills);
 				//lpSurfDlgMem->pSurfDoc->Draw();
 				ReDrawDrills(lpSurfDlgMem->pSurfDoc);
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -4028,7 +3788,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@		
 				ReDrawDrills(lpSurfDlgMem->pSurfDoc);
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -4092,7 +3852,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhScale( HWND hDlg, UINT uMsg,
 				//lpSurfDlgMem->pSurfDoc->Draw();
 				ReDrawDrills(lpSurfDlgMem->pSurfDoc);
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -4315,7 +4075,7 @@ LRESULT CALLBACK DlgProcKarotazhList(HWND hwnd, UINT message, WPARAM wParam, LPA
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 100; 				
 
 				return TRUE; 
@@ -4556,7 +4316,7 @@ LRESULT CALLBACK DlgProcWellsDrawList(HWND hwnd, UINT message, WPARAM wParam, LP
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -4706,7 +4466,7 @@ LRESULT CALLBACK DlgProcSurfacesOrderList(HWND hwnd, UINT message, WPARAM wParam
 				}
 				// #############################################################
 				// #############################################################
-				lpSurfDlgMem->pSurfDoc->m_SurfacesOrderListViewTab.SetHeaderString(0, "Имя поверхности");
+				lpSurfDlgMem->pSurfDoc->m_SurfacesOrderListViewTab.SetHeaderString(0, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				lpSurfDlgMem->pSurfDoc->m_SurfacesOrderListViewTab.SetHeaderString(1, "");
 				lpSurfDlgMem->pSurfDoc->m_SurfacesOrderListViewTab.SetHeaderString(2, "");
 				lpSurfDlgMem->pSurfDoc->m_SurfacesOrderListViewTab.SetHeaderString(3, "");
@@ -4845,7 +4605,7 @@ LRESULT CALLBACK DlgProcSurfacesOrderList(HWND hwnd, UINT message, WPARAM wParam
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -4956,7 +4716,7 @@ LRESULT CALLBACK DlgProcSurfacesBlankOrderList(HWND hwnd, UINT message, WPARAM w
 				}
 				// #############################################################
 				// #############################################################
-				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankOrderListViewTab.SetHeaderString(0, "Имя поверхности");
+				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankOrderListViewTab.SetHeaderString(0, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankOrderListViewTab.SetHeaderString(1, "blank_me_up");
 				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankOrderListViewTab.SetHeaderString(2, "blank_me_up_above");
 				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankOrderListViewTab.SetHeaderString(3, "blank_me_down");
@@ -5099,7 +4859,7 @@ LRESULT CALLBACK DlgProcSurfacesBlankOrderList(HWND hwnd, UINT message, WPARAM w
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -5190,9 +4950,9 @@ LRESULT CALLBACK DlgProcSurfacesBlankFunctionsList(HWND hwnd, UINT message, WPAR
 				}
 				// #############################################################
 				// #############################################################
-				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankFunctionsListViewTab.SetHeaderString(0, "Бланковать");
-				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankFunctionsListViewTab.SetHeaderString(1, "С помощью");
-				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankFunctionsListViewTab.SetHeaderString(2, "Методом");
+				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankFunctionsListViewTab.SetHeaderString(0, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankFunctionsListViewTab.SetHeaderString(1, "пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_SurfacesBlankFunctionsListViewTab.SetHeaderString(2, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 			}
 		}
 		break;
@@ -5296,7 +5056,7 @@ LRESULT CALLBACK DlgProcSurfacesBlankFunctionsList(HWND hwnd, UINT message, WPAR
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -5463,14 +5223,14 @@ LRESULT CALLBACK DlgProcSurfacesOrderLists(HWND hDlg, UINT message, WPARAM wPara
 				case IDC_BUTTON_GENERATE_BLANK_FUN:
 					{
 						if (IDYES == MessageBox(hDlg, 
-							"Вы действительно хотите сгенерировать\n"
-							"набор функций бланкования по умолчанию\n"
-							"в зависимости от таблица очерёдности наслоения?\n\n"
-							" Будьте осторожны, - если у Вас уже есть\n"
-							"сформированный Вами список функций бланкования,\n"
-							"повторная генерация может засорить\n"
-							"Ваш список ненужными функциями", 
-							"Генерация набора функций бланкования", MB_YESNO))
+							"пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n"
+							"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n"
+							"пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ?\n\n"
+							" пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, - пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ\n"
+							"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,\n"
+							"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n"
+							"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", 
+							"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", MB_YESNO))
 						{							
 							if (lpSurfDlgMem && lpSurfDlgMem->pSurfDoc)
 							{
@@ -5535,7 +5295,7 @@ LRESULT CALLBACK DlgProcSurfacesOrderLists(HWND hDlg, UINT message, WPARAM wPara
 							lpSurfDlgMem->pSurfDoc->SurfacesAutoBlank();
 							lpSurfDlgMem->pSurfDoc->ZoomView();
 							lpSurfDlgMem->pSurfDoc->Draw();
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(lpSurfDlgMem->hWnd,&rect);
 							InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -5552,7 +5312,7 @@ LRESULT CALLBACK DlgProcSurfacesOrderLists(HWND hDlg, UINT message, WPARAM wPara
 							lpSurfDlgMem->pSurfDoc->NoBlank(false);
 							lpSurfDlgMem->pSurfDoc->ZoomView();
 							lpSurfDlgMem->pSurfDoc->Draw();
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(lpSurfDlgMem->hWnd,&rect);
 							InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -5567,7 +5327,7 @@ LRESULT CALLBACK DlgProcSurfacesOrderLists(HWND hDlg, UINT message, WPARAM wPara
 						lpSurfDlgMem->pSurfDoc->Cutting();
 						//lpSurfDlgMem->pSurfDoc->ZoomView();
 						//lpSurfDlgMem->pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						//RECT rect;
 						//GetClientRect(lpSurfDlgMem->hWnd,&rect);
 						//InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -5636,12 +5396,12 @@ LRESULT CALLBACK DlgProcLabExcludedList(HWND hwnd, UINT message, WPARAM wParam, 
 						{
 						case LabNumber::mine_working_type::hole:
 							{
-								pSurfDoc->m_LabExcludedListViewTab.SetItemString(r,4,"шурф");
+								pSurfDoc->m_LabExcludedListViewTab.SetItemString(r,4,"пїЅпїЅпїЅпїЅ");
 							}
 							break;
 						case LabNumber::mine_working_type::well:
 							{
-								pSurfDoc->m_LabExcludedListViewTab.SetItemString(r,4,"скв");
+								pSurfDoc->m_LabExcludedListViewTab.SetItemString(r,4,"пїЅпїЅпїЅ");
 							}
 							break;
 						}
@@ -5655,13 +5415,13 @@ LRESULT CALLBACK DlgProcLabExcludedList(HWND hwnd, UINT message, WPARAM wParam, 
 				}
 				// #############################################################
 				// #############################################################
-				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(0, "тип значения");
-				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(1, "значение");
-				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(2, "номер лаб.слоя");
-				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(3, "лаб.номер");
-				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(4, "тип выработки");
-				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(5, "номер выработки");
-				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(6, "глубина пробы");
+				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(0, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(1, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(2, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ");
+				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(3, "пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅпїЅ");
+				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(4, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(5, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				pSurfDoc->m_LabExcludedListViewTab.SetHeaderString(6, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 			}
 		}
 		break;
@@ -5753,7 +5513,7 @@ LRESULT CALLBACK DlgProcLabExcludedList(HWND hwnd, UINT message, WPARAM wParam, 
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -5868,10 +5628,10 @@ LRESULT CALLBACK DlgProcLabLayersList(HWND hwnd, UINT message, WPARAM wParam, LP
 				}
 				// #############################################################
 				// #############################################################
-				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(0, "номер лаб.слоя");
-				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(1, "ID лаб.слоя");
-				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(2, "имя файла");
-				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(3, "к-во лаб.номеров");
+				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(0, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(1, "ID пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(2, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_LabLayersListViewTab.SetHeaderString(3, "пїЅ-пїЅпїЅ пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 			}
 		}
 		break;
@@ -5962,7 +5722,7 @@ LRESULT CALLBACK DlgProcLabLayersList(HWND hwnd, UINT message, WPARAM wParam, LP
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -6056,12 +5816,12 @@ LRESULT CALLBACK DlgProcLabErrorsList(HWND hwnd, UINT message, WPARAM wParam, LP
 						{
 						case LabNumber::mine_working_type::hole:
 							{
-								lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetItemString(r,2,"шурф");
+								lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetItemString(r,2,"пїЅпїЅпїЅпїЅ");
 							}
 							break;
 						case LabNumber::mine_working_type::well:
 							{
-								lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetItemString(r,2,"скв");
+								lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetItemString(r,2,"пїЅпїЅпїЅ");
 							}
 							break;
 						}
@@ -6075,11 +5835,11 @@ LRESULT CALLBACK DlgProcLabErrorsList(HWND hwnd, UINT message, WPARAM wParam, LP
 				}
 				// #############################################################
 				// #############################################################
-				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(0, "номер лаб.слоя");
-				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(1, "лаб.номер");
-				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(2, "тип выработки");
-				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(3, "номер выработки");
-				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(4, "глубина пробы");
+				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(0, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(1, "пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(2, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(3, "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_LabErrorsListViewTab.SetHeaderString(4, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 			}
 		}
 		break;
@@ -6171,7 +5931,7 @@ LRESULT CALLBACK DlgProcLabErrorsList(HWND hwnd, UINT message, WPARAM wParam, LP
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -6640,7 +6400,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhInterpolation( HWND hDlg, UINT uMsg,
 					if (!lpSurfDlgMem->pSurfDoc->m_cube_size.Defined())
 					{
 						//lpSurfDlgMem->pSurfDoc->m_cube_size.Define(minx, miny, minz, maxx, maxy, maxz);
-						AfxMessageBox("Определите сначала размерность куба");
+						AfxMessageBox("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 						return 0;
 					}
 					else
@@ -6689,7 +6449,7 @@ LRESULT CALLBACK DlgProcSurfKarotazhInterpolation( HWND hDlg, UINT uMsg,
 						lpSurfDlgMem->pSurfDoc->Draw();
 						//ReDrawDrills(lpSurfDlgMem->pSurfDoc);
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(lpSurfDlgMem->hWnd,&rect);
 						InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -6855,7 +6615,7 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 							GetDlgItemText(hDlg,IDC_EDIT_BITMAP_HEIGHT, str, 127);
 							height = atoi(str);
 
-								//задаём размер рисунка
+								//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT paper;
 							paper.left		= 0;
 							paper.top		= 0;
@@ -6867,22 +6627,22 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 							print.toDisableOpenGL	= true;
 							  
 							  
-							//CGLPrintMan print;//объект - печатник
-							// здесь создаём:
-							// 1) битмап уазанного размера для рисования
-							// 2) контекст устройства памяти, совместимый с окном
-							//	связываем контекст устройства памяти, с битмап изображением
-							// 3) контест реализации OpenGL, который может писать в битмап
+							//CGLPrintMan print;//пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+							// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ:
+							// 1) пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+							// 2) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+							//	пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+							// 3) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenGL, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 							print.EnableOpenGL(paper, hWnd, &print.m_hDC, &print.m_hRC);
-							// сохраняем теущие как старые контексты окна и реализации OpenGL
-							// выбираем контест реализации OpenGL (3) в качестве текущего для 
-							// контекст устройства памяти (2), 
-							// который в свою очередь уже связан с битмап (1)
+							// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenGL
+							// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenGL (3) пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 
+							// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (2), 
+							// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (1)
 							print.StartUpdate();
 							UseGLFont( print.m_hDC,  &lf_Label);
 
-							// теперь мы подготовили такой контекст реализации OpenGL 
-							// который будет рисовать в битмап объекта print
+							// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenGL 
+							// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ print
 							  
 							SendMessage(hWnd, WM_COMMAND, ID_FILE_INITOG2, 0);
 							glDrawBuffer(GL_FRONT);
@@ -6893,7 +6653,7 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 								project * prj = woglv->GetProject();
 								SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 								//pSurfDoc->ZoomView();
-								//====== Формирование списка рисующих команд
+								//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 								pSurfDoc->Draw();
 							}
 
@@ -6909,7 +6669,7 @@ LRESULT CALLBACK DlgProcSaveBitmap( HWND hDlg, UINT uMsg,
 						// save
 						print.SaveBitmap2(fn);
 						print.DisableOpenGL(hWnd, print.m_hDC, print.m_hRC);
-						// возобновляем старые установки OpenGL
+						// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenGL
 						print.EndUpdate();
 
 					}
@@ -8287,9 +8047,9 @@ LRESULT CALLBACK DlgProcSurfLithoMappingList(HWND hwnd, UINT message, WPARAM wPa
 				}
 				// #############################################################
 				// #############################################################
-				lpSurfDlgMem->pSurfDoc->m_SurfLithoMappingListViewTab.SetHeaderString(0, "Имя поверхности");
-				lpSurfDlgMem->pSurfDoc->m_SurfLithoMappingListViewTab.SetHeaderString(1, "ИГЭ");
-				lpSurfDlgMem->pSurfDoc->m_SurfLithoMappingListViewTab.SetHeaderString(2, "Подошва?");
+				lpSurfDlgMem->pSurfDoc->m_SurfLithoMappingListViewTab.SetHeaderString(0, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_SurfLithoMappingListViewTab.SetHeaderString(1, "пїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_SurfLithoMappingListViewTab.SetHeaderString(2, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ?");
 				lpSurfDlgMem->pSurfDoc->m_SurfLithoMappingListViewTab.SetHeaderString(2, "id_surf");
 			}
 
@@ -8466,7 +8226,7 @@ LRESULT CALLBACK DlgProcSurfLithoMappingList(HWND hwnd, UINT message, WPARAM wPa
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -8549,9 +8309,9 @@ LRESULT CALLBACK DlgProcSurfEnGeoMappingList(HWND hwnd, UINT message, WPARAM wPa
 				}
 				// #############################################################
 				// #############################################################
-				lpSurfDlgMem->pSurfDoc->m_SurfEnGeoMappingListViewTab.SetHeaderString(0, "Имя поверхности");
-				lpSurfDlgMem->pSurfDoc->m_SurfEnGeoMappingListViewTab.SetHeaderString(1, "ИГЭ");
-				lpSurfDlgMem->pSurfDoc->m_SurfEnGeoMappingListViewTab.SetHeaderString(2, "Подошва?");
+				lpSurfDlgMem->pSurfDoc->m_SurfEnGeoMappingListViewTab.SetHeaderString(0, "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_SurfEnGeoMappingListViewTab.SetHeaderString(1, "пїЅпїЅпїЅ");
+				lpSurfDlgMem->pSurfDoc->m_SurfEnGeoMappingListViewTab.SetHeaderString(2, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ?");
 				lpSurfDlgMem->pSurfDoc->m_SurfEnGeoMappingListViewTab.SetHeaderString(3, "id_surf");
 			}
 
@@ -8729,7 +8489,7 @@ LRESULT CALLBACK DlgProcSurfEnGeoMappingList(HWND hwnd, UINT message, WPARAM wPa
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 25; 				
 
 				return TRUE; 
@@ -9041,7 +8801,7 @@ BOOL CALLBACK DlgProcSuspendedInWaterSpecificGravity( HWND hDlg, UINT uMsg,
 {
 	static LPSURFDLGDATA lpSurfDlgMem;
 	static int index_cub_specific_gravity_of_ground_particles;
-	// коэффициент пористости природного слож.доли ед.             .75
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ пїЅпїЅ.             .75
 	static int index_cub_porosity_factor;
 	static int type_of_calculation;
 
@@ -9236,8 +8996,8 @@ LRESULT APIENTRY WaterSaturationTabWndSubclassProc(
 						 lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.SetCols(3);
 #endif
 						 						
-						lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.SetHeaderString(0, "степень влажности");
-						lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.SetHeaderString(1, "ИГЭ");
+						lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.SetHeaderString(0, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+						lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.SetHeaderString(1, "пїЅпїЅпїЅ");
 						GeoColomn * colomn = lpSurfDlgMem->pSurfDoc->FindGeoColomn(GeoElement::type::engineer_geological);
 						if (colomn) 
 						{
@@ -9265,7 +9025,7 @@ LRESULT APIENTRY WaterSaturationTabWndSubclassProc(
 										lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.AddRow(LPARAM(0), &eng->WaterSaturation_Checked);
 										size_t r = lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.Rows()-1;
 										
-										sprintf(str, "ИГЭ-%s\0", eng->GetKey().c_str());
+										sprintf(str, "пїЅпїЅпїЅ-%s\0", eng->GetKey().c_str());
 										lpSurfDlgMem->pSurfDoc->m_WaterSaturationListViewTab.SetItemString(r, 1, str);
 
 										double v;
@@ -9306,7 +9066,7 @@ LRESULT APIENTRY WaterSaturationTabWndSubclassProc(
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 100; 				
 
 				return TRUE; 
@@ -9856,11 +9616,11 @@ extern void AddCheckedItem(HWND hwndList, LPSTR lpstr, LPARAM check);
 
 int GetToPaintSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ hwnd пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	case IDC_SLIDER_SURF_TOPAINT:
 		nID = IDC_EDIT_SURF_TOPAINT;
 		return 0;
@@ -9872,7 +9632,7 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFDLGDATA lpSurfDlgMem;
-	static UINT m_Pos[11]; 			// Массив позиций ползунков
+	static UINT m_Pos[11]; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static UINT nObjects;
 	static int direction;
 
@@ -9905,7 +9665,7 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 			SetDlgItemText(hDlg, IDC_EDIT_SURF_TOPAINT_TIMER_MILLISECONDS, str);
 
 			SendMessage(hDlg,WM_COMMAND,IDC_INIT_SURF_ALPHA_SLIDER,0);			
-			//====== Перерисовываем Вид с учетом изменений
+			//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			RECT rect;
 			GetClientRect(lpSurfDlgMem->hWnd,&rect);
 			InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -10068,45 +9828,45 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetToPaintSliderNum(hwnd, nID);
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -255;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +255;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = newPos<0 ? 0 : newPos>(nObjects-1) ? (nObjects-1) : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -10114,17 +9874,17 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 					return (TRUE);
 				}
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 				//lpSurfDlgMem->pSurfDoc->m_DrawListArray.SetObjectToPaint(m_Pos[num]);
 				SendMessage(hDlg, WM_COMMAND, IDOK, m_Pos[num]);
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				char s[1024];
 				sprintf (s,"%u", m_Pos[num]);
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -10155,7 +9915,7 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 		case IDC_INIT_SURF_ALPHA_SLIDER :
 			{
 				int i;
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_SURF_TOPAINT);
 
 				SendMessage(				// returns LRESULT in lResult
@@ -10164,36 +9924,36 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 				(WPARAM) true,				// = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, WORD(nObjects-1))	// = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (i=0; i<1; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 					m_Pos[i] = DrawListArray::GetObjectToPaint();
 
-				//====== Массив идентификаторов ползунков
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_SURF_TOPAINT
 				};
 				
 				char s[1024];
-				//====== Цикл прохода по всем регуляторам
+				//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
 					
-					//=== Добываем Windows-описатель окна ползунка
+					//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					int num = GetToPaintSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					
-					//====== Готовим текстовый аналог текущей позиции
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					sprintf (s,"%u",m_Pos[i]);
-					//====== Помещаем текст в окно справа от ползунка
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					SetDlgItemText(hDlg, nID, (LPCTSTR)s);					
 				}
 				sprintf(s,"%u",nObjects);
@@ -10323,7 +10083,7 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 
 				SendMessage(hDlg,WM_COMMAND,IDC_INIT_SURF_ALPHA_SLIDER,0);
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -10357,7 +10117,7 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 				}
 
 													
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -10408,11 +10168,11 @@ LRESULT CALLBACK DlgProcSurfToPaint( HWND hDlg, UINT uMsg,
 
 int GetFiltersSliderNum(HWND hwnd, UINT& nID)
 {
-	//====== GetDlgCtrlID по известному hwnd определяет
-	//====== и возвращает идентификатор элемента управления
+	//====== GetDlgCtrlID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ hwnd пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch (GetDlgCtrlID(hwnd))
 	{
-	//====== Выясняем идентификатор окна справа
+	//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	case IDC_SLIDER_SURF_FILTER:
 		nID = IDC_EDIT_SURF_FILTER_LEVEL;
 		return 0;
@@ -10423,7 +10183,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFDLGDATA lpSurfDlgMem;
-	static double m_Pos[11]; 			// Массив позиций ползунков
+	static double m_Pos[11]; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static double ** original = NULL;
 	static double ** m_X = NULL;
 	static double ** m_Y = NULL;
@@ -10499,45 +10259,45 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetFiltersSliderNum(hwnd, nID);
 				double delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -100;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +100;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = newPos<0 ? 0 : newPos>100 ? 100 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -10545,12 +10305,12 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 					return (TRUE);
 				}
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 				filter_level = 
 					min_of_original + m_Pos[num] * (max_of_original - min_of_original) / 100.  ;
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				char s[1024];
 				sprintf (s,"%lf", filter_level);
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
@@ -10562,7 +10322,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -10615,7 +10375,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 		case IDC_INIT_SURF_FILTER_SLIDER :
 			{
 				int i;
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_SURF_FILTER);
 
 				SendMessage(    // returns LRESULT in lResult
@@ -10624,35 +10384,35 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				(WPARAM) true,          // = (WPARAM) (BOOL) fRedraw
 				(LPARAM) MAKELONG (0, 100)              // = (LPARAM) MAKELONG (lMinimum, lMaximum)
 				);
-				//====== Проход по всем регулировкам
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (i=0; i<1; i++)
-					//====== Заполняем транспортный массив pPos
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 					m_Pos[i] = (filter_level - min_of_original) / (max_of_original - min_of_original) * 100.;
 
-				//====== Массив идентификаторов ползунков
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				UINT IDs[] = 
 				{
 					IDC_SLIDER_SURF_FILTER
 				};
 
-				//====== Цикл прохода по всем регуляторам
+				//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				for (i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 				{
-					//=== Добываем Windows-описатель окна ползунка
+					//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 					UINT nID;
 
-					//====== Определяем его идентификатор
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					int num = GetFiltersSliderNum(hwnd, nID);
 
-					// Требуем установить ползунок в положение m_Pos[i]
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 					::SendMessage(hwnd, TBM_SETPOS, TRUE,
 									(LPARAM)m_Pos[i]);
 					char s[1024];
-					//====== Готовим текстовый аналог текущей позиции
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					//sprintf (s,"%lf",min_of_original + m_Pos[i] * (max_of_original - min_of_original) / 100. );
 					sprintf (s,"%lf",filter_level);
-					//====== Помещаем текст в окно справа от ползунка
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 				}
 			}
@@ -10666,7 +10426,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 					int s = 0;
 					do
 					{
-						//====== Размеры изображаемого объекта
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						UINT	nx = pSurfDoc->m_surfaces.GetCurrentMsg().m_surface.m_lenx,
 								ny = pSurfDoc->m_surfaces.GetCurrentMsg().m_surface.m_leny;
 						//CPoint3 *ptd;
@@ -10691,13 +10451,13 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 							ySize = 0.; // spacing between adjacent nodes in the Y direction (between rows)
 						}
 
-						//====== Цикл прохода по слоям изображения (ось Z)
+						//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ Z)
 						for (UINT y=0, i=0;  y<ny;  y++/*, i++*/)
 						{
-							//====== Цикл прохода вдоль оси X
+							//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ X
 							for (UINT x=0;  x<nx;  x++, i++)
 							{
-								//=== Выбор координат вершин из контейнера
+								//=== пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								double
 									xi = ptd[i].x,
 									yi = ptd[i].y,
@@ -10780,7 +10540,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 					int s = 0;
 					do
 					{
-						//====== Размеры изображаемого объекта
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						//COLORREF surfColor = pSurfDoc->m_surfaces.GetCurrentMsg();
 						UINT	nx = pSurfDoc->m_surfaces.GetCurrentMsg().m_surface.m_lenx,
 								ny = pSurfDoc->m_surfaces.GetCurrentMsg().m_surface.m_leny;
@@ -10792,12 +10552,12 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 						ptmax = pSurfDoc->m_surfaces.GetCurrentMsg().GetMax();
 						ptmin = pSurfDoc->m_surfaces.GetCurrentMsg().GetMin();
 
-						//====== Цикл прохода по слоям изображения (ось Z)
+						//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ Z)
 						bool start = true;
 						double maxz, minz;
 						for (UINT y=0, i=0;  y<ny;  y++/*, i++*/)
 						{
-							//====== Цикл прохода вдоль оси X
+							//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ X
 							for (UINT x=0;  x<nx;  x++, i++)
 							{
 								if ( s == 0)
@@ -10843,7 +10603,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -10857,7 +10617,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -10874,7 +10634,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 					int s = 0;
 					do
 					{
-						//====== Размеры изображаемого объекта
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						//COLORREF surfColor = pSurfDoc->m_vSurfColor.GetCurrentMsg();
 						UINT	nx = pSurfDoc->m_surfaces.GetCurrentMsg().m_surface.m_lenx,
 								ny = pSurfDoc->m_surfaces.GetCurrentMsg().m_surface.m_leny;
@@ -10886,12 +10646,12 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 						ptmax = pSurfDoc->m_surfaces.GetCurrentMsg().GetMax();
 						ptmin = pSurfDoc->m_surfaces.GetCurrentMsg().GetMin();
 
-						//====== Цикл прохода по слоям изображения (ось Z)
+						//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ Z)
 						bool start = true;
 						double maxz, minz;
 						for (UINT y=0, i=0;  y<ny;  y++/*, i++*/)
 						{
-							//====== Цикл прохода вдоль оси X
+							//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ X
 							for (UINT x=0;  x<nx;  x++, i++)
 							{
 								if ( s == 0)
@@ -11006,7 +10766,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11078,7 +10838,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11191,7 +10951,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11202,7 +10962,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				int r,c;
 				for ( r = 0; r < rows-1; r++){
 					for ( c = 0; c < cols-1; c++){
-						//Алгоритм двумерной интерполяции
+						//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						vdouble M,Z;
 						M.resize(4,4);
 						Z.resize(4);
@@ -11255,7 +11015,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11278,7 +11038,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11376,7 +11136,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11448,7 +11208,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				// init of zoomCoefZ_XY
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				lpSurfDlgMem->pSurfDoc->Draw();
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11466,7 +11226,7 @@ LRESULT CALLBACK DlgProcSurfFilters( HWND hDlg, UINT uMsg,
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 				DrawScene(lpSurfDlgMem->pSurfDoc, lpSurfDlgMem->m_bQuad, lpSurfDlgMem->m_FillMode);
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);*/
@@ -11563,7 +11323,7 @@ LRESULT CALLBACK DlgProcSurfIzolines( HWND hDlg, UINT uMsg,
 
 				lpSurfDlgMem->pSurfDoc->Draw();
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -11591,7 +11351,7 @@ LRESULT CALLBACK DlgProcSurfIzolines( HWND hDlg, UINT uMsg,
 
 				if (Translated)
 					lpSurfDlgMem->pSurfDoc->AngleLocalMin(n, cos_boder);
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				lpSurfDlgMem->pSurfDoc->ZoomView();
 
 
@@ -11619,19 +11379,19 @@ LRESULT CALLBACK DlgProcSurfProp( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFPROPDLGDATA lpSurfPropDlgMem;
-	static int m_Pos[11]; 			// Массив позиций ползунков
+	static int m_Pos[11]; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	switch( uMsg )
 	{
     case WM_INITDIALOG :
 		{
 			int i;
 			lpSurfPropDlgMem = (LPSURFPROPDLGDATA)lParam;
-			//====== Проход по всем регулировкам
+			//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			for (i=0; i<11; i++)
-				//====== Заполняем транспортный массив pPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ pPos
 				m_Pos[i] = lpSurfPropDlgMem->pSurfDoc->m_LightParam[i];
 
-			//====== Массив идентификаторов ползунков
+			//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			UINT IDs[] = 
 			{
 				IDC_XPOS,		IDC_YPOS,		IDC_ZPOS,
@@ -11645,23 +11405,23 @@ LRESULT CALLBACK DlgProcSurfProp( HWND hDlg, UINT uMsg,
 				IDC_EMISSION
 			};
 
-			//====== Цикл прохода по всем регуляторам
+			//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			for (i=0; i<sizeof(IDs)/sizeof(IDs[0]); i++)
 			{
-				//=== Добываем Windows-описатель окна ползунка
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = GetDlgItem(hDlg, IDs[i]);
 				UINT nID;
 
-				//====== Определяем его идентификатор
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetSliderNum(hwnd, nID);
 
-				// Требуем установить ползунок в положение m_Pos[i]
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 				::SendMessage(hwnd, TBM_SETPOS, TRUE,
 								(LPARAM)m_Pos[i]);
 				char s[1024];
-				//====== Готовим текстовый аналог текущей позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				sprintf (s,"%d",m_Pos[i]);
-				//====== Помещаем текст в окно справа от ползунка
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 			}
 		}
@@ -11671,45 +11431,45 @@ LRESULT CALLBACK DlgProcSurfProp( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int num = GetSliderNum(hwnd, nID);
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -100;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +100;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos[num] + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos[num] = newPos<0 ? 0 : newPos>100 ? 100 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -11717,21 +11477,21 @@ LRESULT CALLBACK DlgProcSurfProp( HWND hDlg, UINT uMsg,
 					return (TRUE);
 				}
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				char s[1024];
 				sprintf (s,"%d",m_Pos[num]);
 				SetDlgItemText(hDlg, nID, (LPCTSTR)s);
 
-				//====== Передаем изменение в класс Вида
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				//m_pView->SetLightParam (num, m_Pos[num]);
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 				lpSurfPropDlgMem->pSurfDoc->m_LightParam[num] = m_Pos[num];
 /*
-// управление этими источниками света
-// вращающимися вместе со сценой
-// перенести в другой диалог
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				project * prj;
 				prj = dynamic_cast<project *>(lpSurfPropDlgMem->pSurfDoc);
 				if (num >= 0 && num < 3)
@@ -11746,7 +11506,7 @@ LRESULT CALLBACK DlgProcSurfProp( HWND hDlg, UINT uMsg,
 					}
 				}
 */
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfPropDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfPropDlgMem->hWnd,&rect, true);
@@ -11778,7 +11538,7 @@ LRESULT CALLBACK DlgProcPlayMols( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam )
 {
 	static LPSURFPROPDLGDATA lpSurfPropDlgMem;
-	static int m_Pos; 			// Массив позиций ползунков
+	static int m_Pos; 			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static int m_nblocks;
 	switch( uMsg )
 	{
@@ -11787,7 +11547,7 @@ LRESULT CALLBACK DlgProcPlayMols( HWND hDlg, UINT uMsg,
 			lpSurfPropDlgMem = (LPSURFPROPDLGDATA)lParam;
 			m_Pos = 0;
 
-			//=== Добываем Windows-описатель окна ползунка
+			//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			HWND hwnd = GetDlgItem(hDlg, IDC_SLIDER_PLAY_MOLS);
 			//UINT nID;
 			
@@ -11801,13 +11561,13 @@ LRESULT CALLBACK DlgProcPlayMols( HWND hDlg, UINT uMsg,
 			(LPARAM) MAKELONG (0, 20000)              // = (LPARAM) MAKELONG (lMinimum, lMaximum)
 			);
 
-			// Требуем установить ползунок в положение m_Pos[i]
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_Pos[i]
 			::SendMessage(hwnd, TBM_SETPOS, TRUE,
 							(LPARAM)m_Pos);
 			char s[1024];
-			//====== Готовим текстовый аналог текущей позиции
+			//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			sprintf (s,"%d",blockNum);
-			//====== Помещаем текст в окно справа от ползунка
+			//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			SetDlgItemText(hDlg, IDC_STATIC_PLAY_MOLS_SLIDER, (LPCTSTR)s);
 		}
 		break;
@@ -11816,44 +11576,44 @@ LRESULT CALLBACK DlgProcPlayMols( HWND hDlg, UINT uMsg,
 			if (lParam)
 			{
 				int nPos = HIWORD (wParam);
-				//====== Windows-описатель окна активного ползунка
+				//====== Windows-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				HWND hwnd = reinterpret_cast<HWND> (lParam);
 
 				//UINT nID;
 
-				//=== Определяем индекс в массиве позиций ползунков
+				//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				int delta, newPos;
 
-				//====== Анализируем код события
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				switch ( LOWORD( wParam ) )
 				{
 				case SB_THUMBTRACK:
-				case SB_THUMBPOSITION:		// Управление мышью
+				case SB_THUMBPOSITION:		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					m_Pos = nPos;
 					break;
-				case SB_LEFT:					// Клавиша Home
+				case SB_LEFT:					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Home
 					delta = -100;
 					goto New_Pos;
-				case SB_RIGHT:				// Клавиша End
+				case SB_RIGHT:				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ End
 					delta = +100;
 					goto New_Pos;
-				case SB_LINELEFT:			// Клавиша <-
+				case SB_LINELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ <-
 					delta = -1;
 					goto New_Pos;
-				case SB_LINERIGHT:			// Клавиша ->
+				case SB_LINERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ->
 					delta = +1;
 					goto New_Pos;
-				case SB_PAGELEFT:			// Клавиша PgUp
+				case SB_PAGELEFT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgUp
 					delta = -20;
 					goto New_Pos;
-				case SB_PAGERIGHT:			// Клавиша PgDn
+				case SB_PAGERIGHT:			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ PgDn
 					delta = +20;
 					goto New_Pos;
 
-				New_Pos:						// Общая ветвь
-					//====== Устанавливаем новое значение регулятора
+				New_Pos:						// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					newPos = m_Pos + delta;
-					//====== Ограничения
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_Pos = newPos<0 ? 0 : newPos>100 ? 100 : newPos;
 					break;
 				case SB_ENDSCROLL:
@@ -11866,7 +11626,7 @@ LRESULT CALLBACK DlgProcPlayMols( HWND hDlg, UINT uMsg,
 
 
 
-				//====== Синхронизируем текстовый аналог позиции
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				char s[1024];
 				sprintf (s,"%d",blockNum);
 				SetDlgItemText(hDlg, IDC_STATIC_PLAY_MOLS_SLIDER, (LPCTSTR)s);
@@ -11877,18 +11637,18 @@ LRESULT CALLBACK DlgProcPlayMols( HWND hDlg, UINT uMsg,
 									
 				SendMessage(lpSurfPropDlgMem->hWnd,WM_COMMAND,ID_WINSURF_DRAW_MOLS,0);					
 
-				//====== Передаем изменение в класс Вида
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				//m_pView->SetLightParam (num, m_Pos[num]);
 
-				//====== Синхронизируем параметр lp и
-				//====== устанавливаем его в положение nPos
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ lp пїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ nPos
 #if 0
 				lpSurfPropDlgMem->pSurfDoc->m_LightParam[num] = m_Pos;
 				glDeleteLists(FIRST_HARD_LIST+1,N_HARD_LISTS +(GLsizei) lpSurfPropDlgMem->pSurfDoc->m_nglLists);
 				lpSurfPropDlgMem->pSurfDoc->m_nglLists = 0;
 				DrawScene(lpSurfPropDlgMem->pSurfDoc, true, 1);
 
-				//====== Перерисовываем Вид с учетом изменений
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(lpSurfPropDlgMem->hWnd,&rect);
 				InvalidateRect(lpSurfPropDlgMem->hWnd,&rect, true);
@@ -12000,10 +11760,10 @@ static HTREEITEM hCurrentTreeItem;
 				m_bCaptured1 = false;
 				m_bCaptured2 = false;
 				//**************************************
-				// Создать статический элемент управления и элемент
-				// управления редактированием, размеры которых будут
-				// установлены в соответствии с размерами клиентской
-				// области родительского окна.
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 				//.............................................................
 				CREATESTRUCT *pcs = (CREATESTRUCT *)lParam;
 
@@ -12052,7 +11812,7 @@ static HTREEITEM hCurrentTreeItem;
 				GetClientRect(hWnd, &clParentRect);
 
 				WNDCLASSEX wc;
-				// Регистрация класса главного окна приложения.
+				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 				//............................................
 				wc.style         = CS_HREDRAW | CS_VREDRAW;
 				//wc.lpfnWndProc   = (WNDPROC)WinSurfProc;
@@ -12078,7 +11838,7 @@ static HTREEITEM hCurrentTreeItem;
 
 				if ( !RegisterClassEx( &wc ) )
 				{
-					if(1410 != GetLastError())// класс уже существует
+					if(1410 != GetLastError())// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					{
 						MessageBox(0,"!RegisterClassEx","WinSurf",0);
 						//return( FALSE );
@@ -12088,18 +11848,18 @@ static HTREEITEM hCurrentTreeItem;
 							"Here is the Edit Control\n\n!RegisterClassEx",
 							WS_CHILD | WS_BORDER | WS_VISIBLE |
 							ES_LEFT | ES_MULTILINE,
-							treeRect.right, 0,   	 // Установить левый верхний 	
-							// угол таким образом,
-							clParentRect.right - treeRect.right, // чтобы он находился
-							clParentRect.bottom, // под статическим окном.
+							treeRect.right, 0,   	 // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 	
+							// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+							clParentRect.right - treeRect.right, // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+							clParentRect.bottom, // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 							hWnd,
-							(HMENU) 102, 	 // Идентификатор элемента 	
-							// управления.
+							(HMENU) 102, 	 // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 	
+							// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 							hInst, NULL );
 					}
 					else
 					{
-			//			MessageBox(0,"класс уже существует","WinSurf",0);
+			//			MessageBox(0,"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ","WinSurf",0);
 					}
 				}
 			}
@@ -12425,7 +12185,7 @@ static HTREEITEM hCurrentTreeItem;
 
 							}
 
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(hSurfWnd,&rect);
 							InvalidateRect(hSurfWnd,&rect, true);
@@ -13064,13 +12824,13 @@ static HTREEITEM hCurrentTreeItem;
 							if (!pwin_project->m_cube_size.Defined())
 							{
 								//SendMessage(hWnd, ID_GEO_CUBESIZE, 0, 0);
-								AfxMessageBox("Определите сначала размерность куба");
+								AfxMessageBox("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 								return 0;
 							}
 
 							char str[1048];
-							sprintf(str, "Геоколонку %s в гриддату:\n"
-								"подошву YES или кровлю NO\n",
+							sprintf(str, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ YES пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ NO\n",
 								GeoElement::GeoElementTypeToString(pGeoColomn->m_type) );
 							
 							int ans = MessageBox(0,str, "", MB_YESNOCANCEL);
@@ -13093,7 +12853,7 @@ static HTREEITEM hCurrentTreeItem;
 
 
 
-							//bool useSurfer = IDYES == MessageBox(0, "Хотите ли вы использовать стандартные алгоритмы Surfer?", "GeoSurface::RebuildByGridData()", MB_YESNO);
+							//bool useSurfer = IDYES == MessageBox(0, "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Surfer?", "GeoSurface::RebuildByGridData()", MB_YESNO);
 							bool to_allocate = true;
 							griddata_dialog(to_allocate, pwin_project, NULL, hWnd, griddata_dialog::griddata_application::unknown, NULL, true, false);
 
@@ -13116,8 +12876,8 @@ static HTREEITEM hCurrentTreeItem;
 						if(pGeoColomn)
 						{
 							char str[1048];
-							sprintf(str, "Геоколонку %s в гриддату:\n"
-								"подошву YES или кровлю NO\n",
+							sprintf(str, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ YES пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ NO\n",
 								GeoElement::GeoElementTypeToString(pGeoColomn->m_type));
 							int ans = MessageBox(0,str, "", MB_YESNOCANCEL);
 							switch (ans)
@@ -13179,8 +12939,8 @@ static HTREEITEM hCurrentTreeItem;
 						if(pGeoElement)
 						{
 							char str[1048];
-							sprintf(str, "Геоэлемент %s в гриддату:\n"
-								"подошву YES или кровлю NO\n",
+							sprintf(str, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ YES пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ NO\n",
 								pGeoElement->GetKey().c_str());
 							int ans = MessageBox(0,str, "", MB_YESNOCANCEL);
 							switch (ans)
@@ -13211,8 +12971,8 @@ static HTREEITEM hCurrentTreeItem;
 						if(pGeoElement)
 						{
 							char str[1048];
-							sprintf(str, "Геоэлемент %s в гриддату:\n"
-								"подошву YES или кровлю NO\n",
+							sprintf(str, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ YES пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ NO\n",
 								pGeoElement->GetKey().c_str());
 							int ans = MessageBox(0,str, "", MB_YESNOCANCEL);
 							switch (ans)
@@ -13460,21 +13220,21 @@ static HTREEITEM hCurrentTreeItem;
 				{
 					hCurs2 = LoadCursor(NULL, IDC_SIZEWE);
 					if (hCurs2) SetCursor(hCurs2); 
-					//====== Захватываем сообщения мыши,
-					//====== направляя их в свое окно
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ,
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					SetCapture(hWnd);
-					//====== Запоминаем факт захвата
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //					m_bSplit = true;
 
 				}
 				break;*/
 			case ID_WINSURF_VIEW_TREE_WIDGTH:
 				{
-					// Изменились размеры родительского окна. Изменить
-					// размеры статического элемента управления и элемента
-					// управления редактированием, чтобы они соответствовали
-					// размерам клиентской области, но не перемещать эти
-					// элементы управления.
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 					//.........................................................
 					long treeWidgth = lParam;
 
@@ -13507,11 +13267,11 @@ static HTREEITEM hCurrentTreeItem;
 				break;
 			case ID_WINSURF_VIEW_TREE_HEIGTH:
 				{
-					// Изменились размеры родительского окна. Изменить
-					// размеры статического элемента управления и элемента
-					// управления редактированием, чтобы они соответствовали
-					// размерам клиентской области, но не перемещать эти
-					// элементы управления.
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+					// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 					//.........................................................
 					//long treeWidgth = lParam;
 
@@ -13556,11 +13316,11 @@ static HTREEITEM hCurrentTreeItem;
 		case WM_SIZE :
 			  {
 //MessageBox(0, "WM_SIZE 0", "Parent", 0);
-				  // Изменились размеры родительского окна. Изменить
-				  // размеры статического элемента управления и элемента
-				  // управления редактированием, чтобы они соответствовали
-				  // размерам клиентской области, но не перемещать эти
-				  // элементы управления.
+				  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+				  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 				  //.........................................................
 				  GetWindowRect(hwndTV, &treeRect);
 				  long treeWidgth = (treeRect.right - treeRect.left);
@@ -13603,9 +13363,9 @@ static HTREEITEM hCurrentTreeItem;
 				if (yPos > 32768) yPos -= 65536;
 				/*if (m_bSplit)
 				{
-					//====== Снимаем флаг захвата мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					m_bSplit = false;
-					//====== Отпускаем сообщения мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					ReleaseCapture();
 
 				}
@@ -13620,10 +13380,10 @@ static HTREEITEM hCurrentTreeItem;
 
 					if (fabs((double)(xPos - treeWidgth - sSplit/2)) < sSplit)
 					{
-						//====== Захватываем сообщения мыши,
-						//====== направляя их в свое окно
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ,
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 						SetCapture(hWnd);
-						//====== Запоминаем факт захвата
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						m_bCaptured1 = true;
 						//hCurs2 = LoadCursor(NULL, IDC_SIZEWE);
 						//if (hCurs2) SetCursor(hCurs2); 
@@ -13633,10 +13393,10 @@ static HTREEITEM hCurrentTreeItem;
 					if (xPos > 0 && xPos < treeWidgth + sSplit && 
 						fabs((double)(yPos - treeHeigth - sSplit/2)) < sSplit)
 					{
-						//====== Захватываем сообщения мыши,
-						//====== направляя их в свое окно
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ,
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 						SetCapture(hWnd);
-						//====== Запоминаем факт захвата
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						m_bCaptured2 = true;
 
 
@@ -13655,18 +13415,18 @@ static HTREEITEM hCurrentTreeItem;
 				if (yPos > 32768) yPos -= 65536;
 				if (m_bCaptured1)
 				{
-					//====== Снимаем флаг захвата мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					m_bCaptured1 = false;
-					//====== Отпускаем сообщения мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					ReleaseCapture();
 
 					SendMessage(hWnd,  WM_COMMAND, ID_WINSURF_VIEW_TREE_WIDGTH, (LPARAM)xPos);
 				}
 				if (m_bCaptured2)
 				{
-					//====== Снимаем флаг захвата мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					m_bCaptured2 = false;
-					//====== Отпускаем сообщения мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					ReleaseCapture();
 
 					SendMessage(hWnd,  WM_COMMAND, ID_WINSURF_VIEW_TREE_HEIGTH, (LPARAM)yPos);
@@ -13724,7 +13484,7 @@ static HTREEITEM hCurrentTreeItem;
 			{
 				LPMEASUREITEMSTRUCT lpmis = (LPMEASUREITEMSTRUCT) lParam; 
 				// Set the height of the list box items. 
-				lpmis->itemHeight = YBITMAP3; 	/// А здесь сработало!!!!!!!!!			
+				lpmis->itemHeight = YBITMAP3; 	/// пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!!!!!!!			
 				lpmis->itemWidth = 100; 				
 
 				return TRUE; 
@@ -13764,7 +13524,7 @@ static HTREEITEM hCurrentTreeItem;
 						{	
 							if (to_update_check)
 							{
-								//вызываем перечисление только с целью проверить состояние m_bCheck для всех объектов
+								//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_bCheck пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								TreeView_EnumCheckedItems(hwndTV, TVI_ROOT, 0, &Checking);
 
 								LONG_PTR userdata = GetWindowLongPtr(hWnd,GWLP_USERDATA);
@@ -13939,35 +13699,35 @@ static HTREEITEM hCurrentTreeItem;
 }
 LRESULT CALLBACK WinSurfProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
-	static	HGLRC		m_hRC;				// Контекст OpenGL
-	static	HDC			m_hdc; 			// Контекст Windows
+	static	HGLRC		m_hRC;				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ OpenGL
+	static	HDC			m_hdc; 			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows
 	static char * pBitmap;
 	static HPALETTE hPalette;
 	static int      nColorData;
 
-	static GLfloat	m_dx;				// Квант смещения вдоль X
-	static GLfloat	m_dy;				// Квант смещения вдоль Y
-	static GLfloat	m_dz;				// Квант смещения вдоль Z
+	static GLfloat	m_dx;				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ X
+	static GLfloat	m_dy;				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Y
+	static GLfloat	m_dz;				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Z
 	
-	static bool		m_bShiftPressed;	// Признак нажатия Shift
-	static bool		m_bCtrlPressed;		// Признак нажатия Ctrl
-	static bool		m_bCaptured;		// Признак захвата мыши
-	static bool		m_bRightButton;		// Флаг правой кнопки мыши
+	static bool		m_bShiftPressed;	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Shift
+	static bool		m_bCtrlPressed;		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Ctrl
+	static bool		m_bCaptured;		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	static bool		m_bRightButton;		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
-//	static bool		m_bQuad;			// Флаг использования GL_QUAD
-//	static bool		m_bEqialZoom;		// Режим заполнения полигонов
-//	static GLenum		m_FillMode;		// Режим заполнения полигонов
-	static tagPOINT		m_pt;				// Текущая позиция мыши
+//	static bool		m_bQuad;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ GL_QUAD
+//	static bool		m_bEqialZoom;		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+//	static GLenum		m_FillMode;		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	static tagPOINT		m_pt;				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	
-	static GLfloat	m_AngleView;		// Угол перспективы
-	static GLfloat	m_xTrans;			// Cмещение вдоль X
-	static GLfloat	m_yTrans;			// Cмещение вдоль Y
-	static GLfloat	m_zTrans;			// Cмещение вдоль Z
-	static GLfloat	m_AngleX;			// Угол поворота вокруг оси X
-	static GLfloat	m_AngleY;			// Угол поворота вокруг оси Y
-	static GLfloat	m_AngleZ;			// Угол поворота вокруг оси Z
+	static GLfloat	m_AngleView;		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	static GLfloat	m_xTrans;			// CпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ X
+	static GLfloat	m_yTrans;			// CпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Y
+	static GLfloat	m_zTrans;			// CпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Z
+	static GLfloat	m_AngleX;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ X
+	static GLfloat	m_AngleY;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Y
+	static GLfloat	m_AngleZ;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Z
 
-	static bool		m_bPerspective;		// Флаг использования Перспективной проекции
+	static bool		m_bPerspective;		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 	static GLuint m_listsNumber;
@@ -13996,7 +13756,7 @@ LRESULT CALLBACK WinSurfProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	static int i_eq;
 
 		
-	static bool		m_bTree;			// Флаг использования Tree
+	static bool		m_bTree;			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Tree
 		
 	static HWND hwndTV;    // handle to tree-view control 
 	static GLYPHMETRICSFLOAT m_agmf[256];
@@ -14384,11 +14144,11 @@ LRESULT CALLBACK WinSurfProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 			switch(wParam)
 			{
 			case IDT_TIMER_SURF:
-			//====== Если это был наш таймер
-				//====== Увеличиваем углы поворота
+			//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_AngleX += m_dy;
 				m_AngleY += m_dx;
-				//====== Ограничители роста углов
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 				if (m_AngleX > 360)
 					m_AngleX -= 360;
 				if (m_AngleX <-360)
@@ -14399,7 +14159,7 @@ LRESULT CALLBACK WinSurfProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 				if (m_AngleY <-360)
 					m_AngleY += 360;
 
-				//====== Просим перерисовать окно
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				RECT rect;
 				GetClientRect(hWnd,&rect);
 				InvalidateRect(hWnd,&rect, true);
@@ -14507,7 +14267,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
  				// Set up transformation to draw the string 
 				glTranslatef(-4.0f, -2.0f, -1.0f) ;
-				//====== растяжение сжатие
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				//glScalef(2.0f, 2.0f, 2.0f); 
 				glScalef(0.5f, 0.5f, 0.5f); 
 				// set up for a string-drawing display List call 
@@ -14545,28 +14305,28 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					RECT rect;
 					GetClientRect(hWnd,&rect);
 
-						//======= Создаем шрифт для оцифровки осей
+						//======= пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					hFont = CreateFont(12,0,0,0,100,0,0,0,DEFAULT_CHARSET,
 								OUT_RASTER_PRECIS,CLIP_DEFAULT_PRECIS,
 								DEFAULT_QUALITY,FF_DONTCARE,"Arial");
-					//======= Создаем шрифт для оцифровки осей
+					//======= пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					hPrintFont = CreateFont(72,0,0,0,100,0,0,0,DEFAULT_CHARSET,
 								OUT_RASTER_PRECIS,CLIP_DEFAULT_PRECIS,
 								DEFAULT_QUALITY,FF_DONTCARE,"Arial");
 
 
-					//====== Создаем черное перо для изображения рамки
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					rectPen = CreatePen(PS_SOLID, 0, RGB(255,255,255));
 					boxPen = CreatePen(PS_SOLID, 0, RGB(0,0,0));
 
-					//====== С помощью контекста устройства
-					//====== узнаем адрес окна, его использующего
+					//====== пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					
 					bool isPrint = GetDeviceCaps(m_hdc, TECHNOLOGY) == DT_RASPRINTER;
 					bool isMeta = GetDeviceCaps(m_hdc, TECHNOLOGY) == DT_METAFILE;
 					bool isWnd = GetDeviceCaps(m_hdc, TECHNOLOGY) == DT_RASDISPLAY;	
 					
-					//====== Готовимся изображать координатную сетку
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					SelectObject(m_hdc, rectPen);
 
 					int border = 20;
@@ -14587,11 +14347,11 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					LineTo(m_hdc, border, border);
 					*/
 
-					//====== Задаем цвет и выравнивание текста
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 					SetTextColor(m_hdc, 0);
 					SetTextAlign(m_hdc, TA_LEFT | TA_BASELINE);
 
-					//====== Выбираем шрифт
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 					if(!isPrint)
 						SelectObject (m_hdc, hFont);
 					else
@@ -14608,7 +14368,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					char str_trans[255];
 					sprintf(str_trans, "%4.2f:%4.2f:%4.2f",m_xTrans, m_yTrans,m_zTrans);
 
-					//====== Выводим экстремумы функции	
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ	
 					//char str[32];
 					//wsprintf(str,"Min = " );
 
@@ -14637,8 +14397,8 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 				SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 
-				//====== Начальное смещение относительно центра сцены
-				//====== Сдвиг назад на полуторный размер объекта
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_zTrans = -1.5f*(float)pSurfDoc->m_fRangeX;
 				m_xTrans = 0.f;
 				m_yTrans = 0.f;
@@ -14650,23 +14410,23 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				int yPos = HIWORD(lParam); // vertical position of pointer 		}
 				if (xPos > 32768) xPos -= 65536;
 				if (yPos > 32768) yPos -= 65536;
-				//====== Запоминаем факт нажатия правой кнопки
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				m_bRightButton = true;
 
-				//====== Воспроизводим реакцию на левую кнопку
-				//====== Останавливаем таймер
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				KillTimer(hWnd,IDT_TIMER_SURF);
 
-				//====== Обнуляем кванты перемещения
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_dx = 0.f;
 				m_dy = 0.f;
 
-				//====== Захватываем сообщения мыши,
-				//====== направляя их в свое окно
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ,
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				SetCapture(hWnd);
-				//====== Запоминаем факт захвата
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_bCaptured = true;
-				//====== Запоминаем координаты курсора
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_pt.x = xPos;
 				m_pt.y = yPos;
 			}
@@ -14678,19 +14438,19 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				int yPos = HIWORD(lParam); // vertical position of pointer 		}
 				if (xPos > 32768) xPos -= 65536;
 				if (yPos > 32768) yPos -= 65536;
-				//====== Останавливаем таймер
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				KillTimer(hWnd,IDT_TIMER_SURF);
 
-				//====== Обнуляем кванты перемещения
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_dx = 0.f;
 				m_dy = 0.f;
 
-				//====== Захватываем сообщения мыши,
-				//====== направляя их в свое окно
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ,
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				SetCapture(hWnd);
-				//====== Запоминаем факт захвата
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_bCaptured = true;
-				//====== Запоминаем координаты курсора
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_pt.x = xPos;
 				m_pt.y = yPos;
 
@@ -14706,22 +14466,22 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				//Main_OnLButtonUp();
 				if (m_bCaptured)
 				{
-					//=== то анализируем желаемый квант перемещения
-					//=== на превышение порога чувствительности
+					//=== пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					//=== пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					if (fabs(m_dx) > 0.5f || fabs(m_dy) > 0.5f)
-						//=== Включаем режим постоянного вращения
+						//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						SetTimer(hWnd,
 						/*m_nView * 2 + 1*/IDT_TIMER_SURF,
 						33,	                // 10-second interval 
 					(TIMERPROC) NULL);     // no timer callback 
 
 					else
-						//=== Выключаем режим постоянного вращения
+						//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						KillTimer(hWnd, /*m_nView * 2 +1*/IDT_TIMER_SURF);
 
-					//====== Снимаем флаг захвата мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					m_bCaptured = false;
-					//====== Отпускаем сообщения мыши
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					ReleaseCapture();
 				}
 			}
@@ -14732,11 +14492,11 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				int yPos = HIWORD(lParam); // vertical position of pointer 		}
 				if (xPos > 32768) xPos -= 65536;
 				if (yPos > 32768) yPos -= 65536;
-				//====== Правая кнопка отпущена
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				m_bRightButton = false;
-				//====== Снимаем флаг захвата мыши
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				m_bCaptured = false;
-				//====== Отпускаем сообщения мыши
+				//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				ReleaseCapture();
 			}
 			break;
@@ -14750,16 +14510,16 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				if( wParam &  MK_LBUTTON)
 				{
 					//Main_OnMouseMove(hWnd, hwndTV, xPos, yPos);
-					if (m_bCaptured)		// Если был захват,
+					if (m_bCaptured)		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ,
 					{
-						// Вычисляем компоненты желаемой скорости вращения
+						// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						m_dy = float(yPos - m_pt.y)/40.f;
 						m_dx = float(xPos - m_pt.x)/40.f;
 
-						//====== Если одновременно была нажата Ctrl,
+						//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Ctrl,
 						if (wParam & MK_CONTROL)
 						{
-							//=== Изменяем коэффициенты сдвига изображения
+							//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							m_xTrans += m_dx;
 							m_yTrans -= m_dy;
 						}
@@ -14772,12 +14532,12 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							}
 							else
 							{
-								//====== Иначе, изменяем углы поворота
+								//====== пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								m_AngleX += m_dy;
 								m_AngleY += m_dx;
 							}
 						}
-						//=== В любом случае запоминаем новое положение мыши
+						//=== пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 						m_pt.x = xPos;
 						m_pt.y = yPos;
 						RECT rect;
@@ -14789,16 +14549,16 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				{
 					if	(wParam &  MK_RBUTTON )
 					{
-						if (m_bCaptured)		// Если был захват,
+						if (m_bCaptured)		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ,
 						{
-							// Вычисляем компоненты желаемой скорости вращения
+							// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							m_dy = float(yPos - m_pt.y)/40.f;
 							m_dx = float(xPos - m_pt.x)/40.f;
 
-							//====== Если одновременно была нажата Ctrl,
+							//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Ctrl,
 							if (wParam & MK_CONTROL)
 							{
-								//=== Изменяем коэффициенты сдвига изображения
+								//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								m_xTrans += m_dx;
 								m_yTrans -= m_dy;
 							}
@@ -14811,11 +14571,11 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 								}
 								else
 								{
-									//====== Усредняем величину сдвига
+									//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 									m_zTrans += (m_dx + m_dy)/2.f;
 								}
 							}
-							//=== В любом случае запоминаем новое положение мыши
+							//=== пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 							m_pt.x = xPos;
 							m_pt.y = yPos;
 							RECT rect;
@@ -14833,10 +14593,10 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				//unsigned short xPos = LOWORD(lParam); // horizontal position of pointer 
 				//unsigned short yPos = HIWORD(lParam); // vertical position of pointer 		}
 				m_dz = float(zDelta) / 3000000.f;
-				//====== Если одновременно была нажата Ctrl,
+				//====== пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Ctrl,
 				if (wParam & MK_CONTROL)
 				{
-					//=== Изменяем коэффициенты сдвига изображения
+					//=== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					m_AngleX += m_dz;
 				}
 				else
@@ -14889,7 +14649,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							m_xTrans += 0.02f;
 						else
 						{
-							if (m_bCtrlPressed)//поворот влево
+							if (m_bCtrlPressed)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 								m_AngleZ -= 0.5f;
 							else
 							{
@@ -14909,7 +14669,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							m_xTrans -= 0.02f;
 						else
 						{
-							if (m_bCtrlPressed)// поворот вправо
+							if (m_bCtrlPressed)// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 								m_AngleZ += 0.5f;
 							else
 							{
@@ -14929,7 +14689,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							m_AngleX += 0.5f;
 						else
 						{
-							if (m_bCtrlPressed)// поворот вправо
+							if (m_bCtrlPressed)// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 								m_AngleY += 0.5f;
 							else
 								m_yTrans -= 0.02f;
@@ -14942,7 +14702,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							m_AngleX -= 0.5f;
 						else
 						{
-							if (m_bCtrlPressed)// поворот вправо
+							if (m_bCtrlPressed)// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 								m_AngleY -= 0.5f;
 							else
 								m_yTrans += 0.02f;
@@ -15296,7 +15056,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  }
 										
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15313,7 +15073,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ZoomView();
 					  //pSurfDoc->Draw();
 					  DrawGeoCatches(pSurfDoc);
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15330,7 +15090,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  //pSurfDoc->ZoomView();
 					  //pSurfDoc->Draw();
 					  //DrawGeoCatches(pSurfDoc);
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15354,7 +15114,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->InitGeoCatch_GorizontPlane();	
 					  pSurfDoc->ZoomView();
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15370,7 +15130,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->SurfacesFaultsCutlines();	
 					  pSurfDoc->ZoomView();
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15384,7 +15144,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  
 					  pSurfDoc->BlnProfilesIntersectionsBuild();	
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15400,7 +15160,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->SurfacesBlank();	
 					  pSurfDoc->ZoomView();
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15415,7 +15175,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->FaultsBlank();	
 					  pSurfDoc->ZoomView();
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15430,7 +15190,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->BrokenPlanesBlank();	
 					  pSurfDoc->ZoomView();
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15445,7 +15205,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->NoBlank(true);	
 					  pSurfDoc->ZoomView();
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15484,7 +15244,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  }
 										
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15518,7 +15278,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  }
 										
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15540,7 +15300,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->ZoomView();
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15561,7 +15321,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ZoomView();
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15637,7 +15397,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15714,7 +15474,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15745,7 +15505,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15776,7 +15536,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15806,7 +15566,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15837,7 +15597,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
 					  
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15868,7 +15628,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15882,7 +15642,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -15908,7 +15668,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15934,7 +15694,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15960,7 +15720,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -15998,7 +15758,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);*/
@@ -16033,7 +15793,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16162,7 +15922,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearSurf();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16177,7 +15937,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearGeoColomns();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16193,7 +15953,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearCubes();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16208,7 +15968,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearFaults();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16222,7 +15982,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  SurfDoc* pSurfDoc = dynamic_cast<SurfDoc*>(prj); // from win_graphics_view::GetProject()
 					  pSurfDoc->ClearIzolines();
 					  //pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16236,7 +15996,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearCutLines();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16252,7 +16012,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->SetLineForDraw(NULL);
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16266,7 +16026,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearSpheres();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16280,14 +16040,14 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					   CommandLineParser parser;
 					   parser.DoParsing();
 
-					   // Создать интерфейс командного процессора "Geo Surf Cube Document".
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "Geo Surf Cube Document".
 					   //................................
 					   lResult = RegCreateKeyEx( HKEY_CLASSES_ROOT,
                        					"Geo Surf Cube Document\\shell\\Open\\command", 0, "",
 										REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS,
 								NULL, &hKeyResult, &dwDisposition );
 
-					   // Использовать NotePad для открытия документа.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ NotePad пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 					   //..................................
 					   if ( lResult == ERROR_SUCCESS )
 					   {
@@ -16301,8 +16061,8 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						 RegCloseKey( hKeyResult );
 					   }
 
-					   // Создать используемую по умолчанию пиктограмму 
-					   // DefaultIcon для документа Geo Surf Cube Document
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+					   // DefaultIcon пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Geo Surf Cube Document
 					   //.................................
 					   lResult = RegCreateKeyEx( HKEY_CLASSES_ROOT,
 								 "Geo Surf Cube Document\\DefaultIcon", 0, 
@@ -16310,7 +16070,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 								 NULL, &hKeyResult, &dwDisposition );
 
 
-					   // Установить используемую по умолчанию пиктограмму.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 					   //......................
 					   if ( lResult == ERROR_SUCCESS )
 					   {
@@ -16328,14 +16088,14 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						 RegCloseKey( hKeyResult );
 					   }
 
-					   // Создать связь с расширением файла .gsf.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ .gsf.
 					   //.......................................
 					   lResult = RegCreateKeyEx( HKEY_CLASSES_ROOT, ".gsf",
                        						 0, "", REG_OPTION_NON_VOLATILE,
 											 KEY_ALL_ACCESS, NULL, 
 									 &hKeyResult, &dwDisposition );
 
-					   // Связать расширение файла .gsf с типом документа Geo Surf Cube Document.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ .gsf пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Geo Surf Cube Document.
 					   //..............................
 					   if ( lResult == ERROR_SUCCESS )
 					   {
@@ -16345,14 +16105,14 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						 RegCloseKey( hKeyResult );
 					   }
 
-					   // Создать связь с расширением файла .cub.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ .cub.
 					   //.......................................
 					   lResult = RegCreateKeyEx( HKEY_CLASSES_ROOT, ".cub",
                        						 0, "", REG_OPTION_NON_VOLATILE,
 											 KEY_ALL_ACCESS, NULL, 
 									 &hKeyResult, &dwDisposition );
 
-					   // Связать расширение файла .gsf с типом документа Geo Surf Cube Document.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ .gsf пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Geo Surf Cube Document.
 					   //..............................
 					   if ( lResult == ERROR_SUCCESS )
 					   {
@@ -16373,7 +16133,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					   LONG  lResult = RegOpenKeyEx( HKEY_CLASSES_ROOT,
                             					 "Geo Surf Cube Document\\shell\\Open\\command", 
 									 0, KEY_ALL_ACCESS, &hKeyResult );
-					   // Удалить стандартное значение.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 					   //......................
 					   if ( lResult == ERROR_SUCCESS )
 					   {
@@ -16384,7 +16144,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					   lResult = RegOpenKeyEx( HKEY_CLASSES_ROOT,
                        					   "Geo Surf Cube Document\\DefaultIcon", 
 								   0, KEY_ALL_ACCESS, &hKeyResult );
-					   // Удалить стандартное значение.
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 					   //......................
 					   if ( lResult == ERROR_SUCCESS )
 					   {
@@ -16392,9 +16152,9 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						 RegCloseKey( hKeyResult );
 					   }
 
-					   // Удалить ключи. Все подключи должны быть удалены перед 
-					   // удалением родительских ключей. Это ограничение, 
-					   // накладываемое функцией RegDeleteKey().
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, 
+					   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ RegDeleteKey().
 					   //.....................................................
 					   RegDeleteKey( HKEY_CLASSES_ROOT,
 									 "Geo Surf Cube Document\\shell\\Open\\command" );
@@ -16459,7 +16219,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 								  p2 =  strchr(p1,' ');
 								  if (p2==NULL)
 								  {
-									  MessageBox(0, "Неверный формат файла\n", "", 
+									  MessageBox(0, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ\n", "", 
 										  MB_OK | MB_ICONINFORMATION);
 									  fclose(stream);
 									  return 0;
@@ -16471,7 +16231,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						  }
 						  CloseHandle(hFile);
 						  fclose(stream);
-						  sprintf(szBuff, "Сформирован бинарный файл палитры для ресурсов в проекте С++:\n%s",
+						  sprintf(szBuff, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ++:\n%s",
 							  filename);
 						  MessageBox(0, szBuff, "", MB_OK | MB_ICONINFORMATION);
 
@@ -16487,7 +16247,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16495,14 +16255,14 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 				  break;
 			  case ID_SURFTEST_FONT2:
 				  {
-					//======= Создаем шрифт для оцифровки осей
+					//======= пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					HFONT m_font = CreateFont(8,0,0,0,100,0,0,0,DEFAULT_CHARSET,
 								OUT_RASTER_PRECIS,CLIP_DEFAULT_PRECIS,
 								DEFAULT_QUALITY,FF_DONTCARE,"Arial");
 					SelectObject (m_hdc, m_font);
 
 
-					//====== Пытаемся выбрать его в качестве текущего
+					//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					if ( !wglMakeCurrent (m_hdc, m_hRC))
 					{
 						MessageBox(hWnd,"wglMakeCurrent::Error","On Create",0);
@@ -16530,7 +16290,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearPoligones();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16545,7 +16305,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearKarotazhList();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16559,7 +16319,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearKarotazhy();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16573,7 +16333,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						pSurfDoc->ClearDrills();
 
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16588,7 +16348,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearStrings();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16606,7 +16366,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->SetLineForDraw(NULL);
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16622,7 +16382,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearBitmaps();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16637,7 +16397,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearBmpProfiles();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16653,7 +16413,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearObjects();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16668,7 +16428,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearCollections();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16685,7 +16445,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearGridData();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16701,7 +16461,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearGeoCatches();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16715,7 +16475,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearAutoBuildProfiles();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16730,7 +16490,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearBlankLines();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16746,7 +16506,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearCutlinesPolygones();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16762,7 +16522,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 					  pSurfDoc->ClearPoints();
 					  
 					  pSurfDoc->Draw();
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -16790,15 +16550,15 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 								"If y->z (zflag == 2) press NO\n"
 								"If z->z (zflag == 3) press CANCEL\n"
 								"\n"
-								"Загрузка разлома\n"
-								"Выберите тип замены координат\n"
-								"Если Z меняется на X (zflag == 1) нажмите YES\n"
-								"Если Z меняется на Y (zflag == 2) нажмите NO\n"
-								"Если Z меняется на Z (zflag == 3) нажмите CANCEL\n"
-								"Первые два типа выбирают для субвертикальных разломов\n"
-								"Третий тип - для субгоризонтальных\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n"
+								"пїЅпїЅпїЅпїЅ Z пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ X (zflag == 1) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ YES\n"
+								"пїЅпїЅпїЅпїЅ Z пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Y (zflag == 2) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ NO\n"
+								"пїЅпїЅпїЅпїЅ Z пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Z (zflag == 3) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ CANCEL\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n"
+								"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n"
 								, 								
-								"Загрузка разлома", 
+								"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", 
 								MB_YESNOCANCEL | MB_ICONQUESTION);
 							if ( answer == IDYES)
 							{
@@ -16859,7 +16619,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 								DrawFaults(pSurfDoc);
 							}
 						}
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -16937,7 +16697,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 							rgbCurrent = cc.rgbResult; 
 						}
 						glClearColor (float(GetRValue(rgbCurrent))/255.f, float(GetGValue(rgbCurrent))/255.f,float(GetBValue(rgbCurrent))/255.f, 1.f); 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -17011,7 +16771,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES\n");
 						  {
 							  printf("ID_WINSURF_FILE_IMPORT_GRID 4\n");
 #if !FAST_GRID_LOADING
-							  //пытаемся обойтись без использования класса CGrid
+							  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ CGrid
 							  pCGrid->Init(pGrid);
 #endif
 							  SendMessage(hWnd, WM_COMMAND, ID_WINSURF_DRAW, 0);
@@ -17066,7 +16826,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 								GLUquadricObj* pSphere = gluNewQuadric();
 								gluQuadricDrawStyle(pSphere, GLU_FILL);
 
-								glPushMatrix();//перейдём к новым координатам, сохранив старые
+								glPushMatrix();//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 								glTranslated(
 										x, 
 										y, 
@@ -17075,8 +16835,8 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 								//COLORREF sphereColor = pSurfDoc->m_vSphereColor.GetCurrentMsg();
 								glColor3ub (255,0,0); 
 
-								gluSphere(pSphere, 0.02, 20, 20) ;//рисуем сферу 
-								glPopMatrix(); //возвращаемся к старым координатам 
+								gluSphere(pSphere, 0.02, 20, 20) ;//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 
+								glPopMatrix(); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 								gluDeleteQuadric(pSphere);
 							
 							glEndList();
@@ -17202,7 +16962,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  
 					  pSurfDoc->Draw();
 					  
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(lpSurfDlgMem->hWnd,&rect);
 					  InvalidateRect(lpSurfDlgMem->hWnd,&rect, true);
@@ -17289,7 +17049,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						pSurfDoc->ZoomView();
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -17324,7 +17084,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						pSurfDoc->ZoomView();
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -17341,7 +17101,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						pSurfDoc->ZoomView();
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -17999,9 +17759,9 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						if (pSurfDoc) pSurfDoc->DetermineUdelnoeSceplenie();
 
-						pSurfDoc->ZoomView();// ускорить !!! перерисовка только каротажей или скважин
+						pSurfDoc->ZoomView();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						prj->UpdateAllViews();
 				  }
 				  break;
@@ -18013,9 +17773,9 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						if (pSurfDoc) pSurfDoc->TestPesokOrGlina();	
 
-						pSurfDoc->ZoomView();// ускорить !!! перерисовка только каротажей или скважин
+						pSurfDoc->ZoomView();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						prj->UpdateAllViews();
 				  }
 				  break;
@@ -18028,9 +17788,9 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						if (pSurfDoc) pSurfDoc->DetermineUdolVnutrennegoTrenia();	
 
-						pSurfDoc->ZoomView();// ускорить !!! перерисовка только каротажей или скважин
+						pSurfDoc->ZoomView();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						prj->UpdateAllViews();
 				  }
 				  break;
@@ -18042,9 +17802,9 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						if (pSurfDoc) pSurfDoc->DetermineDeformationModul();	
 
-						pSurfDoc->ZoomView();// ускорить !!! перерисовка только каротажей или скважин
+						pSurfDoc->ZoomView();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						prj->UpdateAllViews();
 				  }
 				  break;
@@ -18056,9 +17816,9 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 						if (pSurfDoc) pSurfDoc->DeterminePesokGlinaFromPCK();
 
-						pSurfDoc->ZoomView();// ускорить !!! перерисовка только каротажей или скважин
+						pSurfDoc->ZoomView();// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						pSurfDoc->Draw();
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						prj->UpdateAllViews();
 
 				  }
@@ -18411,7 +18171,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							{
 								pSurfDoc->ZoomView();
 								pSurfDoc->Draw();
-								//====== Перерисовываем Вид с учетом изменений
+								//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								RECT rect;
 								GetClientRect(hWnd,&rect);
 								InvalidateRect(hWnd,&rect, true);
@@ -18478,7 +18238,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 								pSurfDoc->ZoomView();
 								pSurfDoc->Draw();
-								//====== Перерисовываем Вид с учетом изменений
+								//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								RECT rect;
 								GetClientRect(hWnd,&rect);
 								InvalidateRect(hWnd,&rect, true);
@@ -18513,7 +18273,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 							pSurfDoc->ZoomView();
 							pSurfDoc->Draw();
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(hWnd,&rect);
 							InvalidateRect(hWnd,&rect, true);
@@ -18554,7 +18314,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 						{
 							pSurfDoc->ZoomView();
 							pSurfDoc->Draw();
-							//====== Перерисовываем Вид с учетом изменений
+							//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							RECT rect;
 							GetClientRect(hWnd,&rect);
 							InvalidateRect(hWnd,&rect, true);
@@ -18612,7 +18372,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 								  }
 								  pSurfDoc->ZoomView();                                  
 								  pSurfDoc->Draw();
-								  //====== Перерисовываем Вид с учетом изменений
+								  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								  RECT rect;
 								  GetClientRect(hWnd,&rect);
 								  InvalidateRect(hWnd,&rect, true);
@@ -18634,7 +18394,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  {
 						  pSurfDoc->ZoomView();
 						  pSurfDoc->Draw();
-						  //====== Перерисовываем Вид с учетом изменений
+						  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						  RECT rect;
 						  GetClientRect(hWnd,&rect);
 						  InvalidateRect(hWnd,&rect, true);
@@ -18652,7 +18412,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  {
 						  pSurfDoc->ZoomView();
 						  pSurfDoc->Draw();
-						  //====== Перерисовываем Вид с учетом изменений
+						  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						  RECT rect;
 						  GetClientRect(hWnd,&rect);
 						  InvalidateRect(hWnd,&rect, true);
@@ -18679,7 +18439,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 						  bool AsImport = false;
 						  if(pSurfDoc->OpenFile(fileNameBuf, 4096, NULL, AsImport))
 						  {
-							  //====== Перерисовываем Вид с учетом изменений
+							  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							  RECT rect;
 							  GetClientRect(hWnd,&rect);
 							  InvalidateRect(hWnd,&rect, true);
@@ -18707,7 +18467,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 						  bool AsImport = true;
 						  if(pSurfDoc->OpenFile(fileNameBuf, 4096, NULL, AsImport))
 						  {
-							  //====== Перерисовываем Вид с учетом изменений
+							  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 							  RECT rect;
 							  GetClientRect(hWnd,&rect);
 							  InvalidateRect(hWnd,&rect, true);
@@ -18759,7 +18519,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  char grd_file[2048];
 					  if (OpenFileDlg(hWnd, "Cube 3D grid(*.cub)\0*.cub\0All files \0*.*\0", grd_file) == S_OK)
 					  {
-						  //здесь load грид
+						  //пїЅпїЅпїЅпїЅпїЅ load пїЅпїЅпїЅпїЅ
 						  Grid4 * grid = new Grid4;
 
 						  if (0 == ImportSurfer7Grid4(grd_file, grid))
@@ -18781,7 +18541,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 									pSurfDoc->ZoomView();
 									DrawCubes(pSurfDoc);
 								}
-								//====== Перерисовываем Вид с учетом изменений
+								//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								RECT rect;
 								GetClientRect(hWnd,&rect);
 								InvalidateRect(hWnd,&rect, true);
@@ -18797,7 +18557,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 					  char grd_file[2048];
 					  if (OpenFileDlg(hWnd, "Cube 3D grid(*.cub)\0*.cub\0All files \0*.*\0", grd_file) == S_OK)
 					  {
-						  //здесь load грид
+						  //пїЅпїЅпїЅпїЅпїЅ load пїЅпїЅпїЅпїЅ
 						  Grid4 * grid = new Grid4;
 
 						  if (0 == ImportSurfer7Grid4(grd_file, grid))
@@ -18819,7 +18579,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 									pSurfDoc->ZoomView();
 									DrawCubes(pSurfDoc);
 								}
-								//====== Перерисовываем Вид с учетом изменений
+								//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 								RECT rect;
 								GetClientRect(hWnd,&rect);
 								InvalidateRect(hWnd,&rect, true);
@@ -18837,7 +18597,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 cout << "Enter N" << endl;
 cin >> N;
 
-					  //здесь вычисляем грид
+					  //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					  Grid4 * grid = new Grid4;
 					  grid->grid4Section.xLL = 0;
 					  grid->grid4Section.yLL = 0;
@@ -18979,7 +18739,7 @@ pSurfDoc->AddCube(grid, color);
 						  pSurfDoc->ZoomView();
 						  DrawCubes(pSurfDoc);
 					  }
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -18995,7 +18755,7 @@ pSurfDoc->AddCube(grid, color);
 cout << "Enter N" << endl;
 cin >> N;
 
-					  //здесь вычисляем грид
+					  //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					  Grid * grid = new Grid;
 					  grid->gridSection.xLL = 0;
 					  grid->gridSection.yLL = 0;
@@ -19110,7 +18870,7 @@ cin >> F2;
 						  pSurfDoc->ZoomView();
 						  DrawSurfs(pSurfDoc);
 					  }
-					  //====== Перерисовываем Вид с учетом изменений
+					  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					  RECT rect;
 					  GetClientRect(hWnd,&rect);
 					  InvalidateRect(hWnd,&rect, true);
@@ -19159,7 +18919,7 @@ cin >> F2;
 							  DWORD nFilterIndex = 0;
 							  if (SaveFileDlg(0, grd_file, filter, nFilterIndex) == S_OK)
 							  {
-								  vector<double> VX, VY, VZ;// векторы для построения гридов
+								  vector<double> VX, VY, VZ;// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 								  double min_x = DBL_MAX, min_y = DBL_MAX;
 								  double max_x = -DBL_MAX, max_y = -DBL_MAX;
 								  for (size_t i = 0; i < vectors->size(); i++)
@@ -19195,7 +18955,7 @@ min_y -= y_Size/10;
 max_y += y_Size/10;
 #endif
 
-								  //здесь вычисляем грид
+								  //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 								  Grid * grid = new Grid;
 								  grid->gridSection.xLL = min_x;
 								  grid->gridSection.yLL = min_y;
@@ -19290,7 +19050,7 @@ max_y += y_Size/10;
 										  pSurfDoc->ZoomView();
 										  DrawSurfs(pSurfDoc);
 									  }
-									  //====== Перерисовываем Вид с учетом изменений
+									  //====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 									  RECT rect;
 									  GetClientRect(hWnd,&rect);
 									  InvalidateRect(hWnd,&rect, true);
@@ -19309,7 +19069,7 @@ max_y += y_Size/10;
 				  {
 					  vdouble xi,yi,zi;
 					  vdouble x,y,z;
-					  vdouble xc,yc;//контур
+					  vdouble xc,yc;//пїЅпїЅпїЅпїЅпїЅпїЅ
 					  vdouble visible;
 
 					  int zflag = 0;
@@ -19415,7 +19175,7 @@ max_y += y_Size/10;
 
 						pSurfDoc->Draw();
 
-						//====== Перерисовываем Вид с учетом изменений
+						//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 						RECT rect;
 						GetClientRect(hWnd,&rect);
 						InvalidateRect(hWnd,&rect, true);
@@ -19424,8 +19184,8 @@ max_y += y_Size/10;
 				  break;
 			  case ID_FILE_IMPORT_DIGITAL_MODEL:
 				  {
-					  long nCol = 1201;// из файла *.hdr
-					  long nRow = 1681;// из файла *.hdr
+					  long nCol = 1201;// пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ *.hdr
+					  long nRow = 1681;// пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ *.hdr
 					  
 					  double xLeft = 46.0; double xRight = 56.0;
 					  double yLow  = 35.0; double yHigh  = 49.0;
@@ -19487,7 +19247,7 @@ max_y += y_Size/10;
 
 										pSurfDoc->ZoomView();
 										pSurfDoc->Draw();
-										//====== Перерисовываем Вид с учетом изменений
+										//====== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 										RECT rect;
 										GetClientRect(hWnd,&rect);
 										InvalidateRect(hWnd,&rect, true);	
@@ -19665,7 +19425,7 @@ LRESULT CALLBACK DlgProcPrintSurfParam( HWND hDlg, UINT uMsg,
 				&cReturned))				// number of printers enumerated
 			{
 				DWORD lastError = GetLastError();
-				if( lastError == lastError) // сетевой запрос не поддерживается
+				if( lastError == lastError) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				{
 					pPrinterEnum = (unsigned char *)HeapReAlloc( GetProcessHeap(),
 						HEAP_ZERO_MEMORY,
@@ -19682,7 +19442,7 @@ LRESULT CALLBACK DlgProcPrintSurfParam( HWND hDlg, UINT uMsg,
 							&cReturned))				// number of printers enumerated
 					{
 						lastError = GetLastError();
-						if (lastError == 122)// область данных, перданных для сетевого запроса слишком мала
+						if (lastError == 122)// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 						{
 							pPrinterEnum2 = (unsigned char *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
 								cbNeeded );
@@ -19743,9 +19503,9 @@ LRESULT CALLBACK DlgProcPrintSurfParam( HWND hDlg, UINT uMsg,
 						}
 					}
 				}
-				else// сетевой запрос поддерживается
+				else// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				{
-					if (lastError == 122)// область данных, перданных для сетевого запроса слишком мала
+					if (lastError == 122)// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 					{
 
 						pPrinterEnum2 = (unsigned char *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -19831,14 +19591,14 @@ LRESULT CALLBACK DlgProcPrintSurfParam( HWND hDlg, UINT uMsg,
 			break;
 		case IDPRINT_SETUP :
 			{
-				// имя принтера
+				// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				GetDlgItemText(hDlg,
 					IDC_COMBO_PRINTER_NAME,
 					lpPrintDlgMem->szPrinterName, 31);
 				if (strlen(lpPrintDlgMem->szPrinterName) > 0)
 					lpPrintDlgMem->bPrinterNameFound  = true;
 
-				// число копий
+				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 				BOOL bTranslated;
 				lpPrintDlgMem->dmCopies = 
 					(short)GetDlgItemInt(hDlg, IDC_EDIT_COPIES, &bTranslated, false);
@@ -19851,14 +19611,14 @@ LRESULT CALLBACK DlgProcPrintSurfParam( HWND hDlg, UINT uMsg,
 			break;
 		case IDPRINT :
 			{
-				// имя принтера
+				// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				GetDlgItemText(hDlg,
 					IDC_COMBO_PRINTER_NAME,
 					lpPrintDlgMem->szPrinterName, 31);
 				if (strlen(lpPrintDlgMem->szPrinterName) > 0)
 					lpPrintDlgMem->bPrinterNameFound  = true;
 
-				// число копий
+				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 				BOOL bTranslated;
 				lpPrintDlgMem->dmCopies = 
 					(short)GetDlgItemInt(hDlg, IDC_EDIT_COPIES, &bTranslated, false);
@@ -19871,14 +19631,14 @@ LRESULT CALLBACK DlgProcPrintSurfParam( HWND hDlg, UINT uMsg,
 			break;		
 		case IDOK :
 			{
-				// имя принтера
+				// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				GetDlgItemText(hDlg,
 					IDC_COMBO_PRINTER_NAME,
 					lpPrintDlgMem->szPrinterName, 31);
 				if (strlen(lpPrintDlgMem->szPrinterName) > 0)
 					lpPrintDlgMem->bPrinterNameFound  = true;
 
-				// число копий
+				// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 				BOOL bTranslated;
 				lpPrintDlgMem->dmCopies = 
 					(short)GetDlgItemInt(hDlg, IDC_EDIT_COPIES, &bTranslated, false);

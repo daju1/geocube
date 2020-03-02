@@ -193,10 +193,10 @@ public:
 
 	void resize(int _length);// 
 	void resize(int _length, const double& ra);// 
-	void resize(int rows, int cols); // 
-	void resize(int rows, int cols, const double& ra); // двумерной матрицы
-	void resize(int rows, int cols, int tabs); // 
-	void resize(Vector<int>& vsize); // 
+    void resize(const int rows, const int cols); //
+    void resize(const int rows, const int cols, const double& ra); // двумерной матрицы
+    void resize(const int rows, const int cols, const int tabs); //
+    void resize(const Vector<int>& vsize); //
 
 	virtual ~vdouble(); // Деструктор выполняет освобождение памяти
 	void OnDestroy(); // Деструктор выполняет освобождение памяти

@@ -1,15 +1,15 @@
 
-#include ".\Point.h"
-#include ".\PolygonEx.h"
+#include "./Point.h"
+#include "./PolygonEx.h"
 
 
 namespace geometry2D
 {
 
-enum { INSIDE, OUTSIDE, BOUNDARY };         // положение точки
-//     ¬Ќ”“–», ¬Ќ≈,     Ќј √–јЌ»÷≈
-enum { TOUCHING, CROSSING, INESSENTIAL };   // положение ребра
-//      ј—ј“≈ЋbЌќ≈, ѕ≈–≈—≈ јёў≈≈, Ќ≈—”ў≈—“¬≈ЌЌќ≈
+enum { INSIDE, OUTSIDE, BOUNDARY };         // √ѓ√Ѓ√Ђ√Ѓ√¶√•√≠√®√• √≤√Ѓ√Ј√™√®
+//     √В√Н√У√Т√Р√И, √В√Н√Е,     √Н√А √Г√Р√А√Н√И√Ц√Е
+enum { TOUCHING, CROSSING, INESSENTIAL };   // √ѓ√Ѓ√Ђ√Ѓ√¶√•√≠√®√• √∞√•√°√∞√†
+//     √К√А√С√А√Т√Е√Лb√Н√О√Е, √П√Е√Р√Е√С√Е√К√А√Ю√Щ√Е√Е, √Н√Е√С√У√Щ√Е√С√Т√В√Е√Н√Н√О√Е
 
 bool pointInTriangle (Point p, Point a, Point b, Point c);
 int pointInPolygon(Point &a, Polygon &p);

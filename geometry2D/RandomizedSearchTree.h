@@ -5,16 +5,21 @@ namespace geometry2D
 {
 
 /*
-Деревья случайного поиска представляются в виде объектов класса RandomizedSearchTree. Во многих отношениях шаблон класса напоминает класс BraidedSearchTree: элемент данных root указывает на головной узел, win представляет окно, а элемент cmp указывает на функцию сравнения деревьев.
+Р”РµСЂРµРІСЊСЏ СЃР»СѓС‡Р°Р№РЅРѕРіРѕ РїРѕРёСЃРєР° РїСЂРµРґСЃС‚Р°РІР»СЏСЋС‚СЃСЏ РІ РІРёРґРµ РѕР±СЉРµРєС‚РѕРІ РєР»Р°СЃСЃР° RandomizedSearchTree. Р’Рѕ РјРЅРѕРіРёС… РѕС‚РЅРѕС€РµРЅРёСЏС… С€Р°Р±Р»РѕРЅ РєР»Р°СЃСЃР° РЅР°РїРѕРјРёРЅР°РµС‚ РєР»Р°СЃСЃ BraidedSearchTree: СЌР»РµРјРµРЅС‚ РґР°РЅРЅС‹С… root СѓРєР°Р·С‹РІР°РµС‚ РЅР° РіРѕР»РѕРІРЅРѕР№ СѓР·РµР», win РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ РѕРєРЅРѕ, Р° СЌР»РµРјРµРЅС‚ cmp СѓРєР°Р·С‹РІР°РµС‚ РЅР° С„СѓРЅРєС†РёСЋ СЃСЂР°РІРЅРµРЅРёСЏ РґРµСЂРµРІСЊРµРІ.
 */
 template<class T> class RandomizedSearchTree {
  private :
-  RandomizedNode<T> *root;       // головной узел 
-  RandomizedNode<T> *win;        // окно 
-  int (*cmp) (T,T);	             // функция сравнения
+  RandomizedNode<T> *root;       // РіРѕР»РѕРІРЅРѕР№ СѓР·РµР» 
+  RandomizedNode<T> *win;        // РѕРєРЅРѕ 
+  int (*cmp) (T,T);	             // С„СѓРЅРєС†РёСЏ СЃСЂР°РІРЅРµРЅРёСЏ
   void _remove(RandomizedNode<T>*);
  public :
-  RandomizedSearchTree (int (*) (T,T) , int = -1);
+  //RandomizedSearchTree (int (*) (T,T) , int = -1);
+  RandomizedSearchTree<T>(int (*c) (T, T), int seed = -1):cmp(c)
+  {
+    win = root = new RandomizedNode<T> (NULL, seed);
+    root->_priority = -1.0;
+  }
   ~RandomizedSearchTree (void);
   T next (void);
   T prev(void);

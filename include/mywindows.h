@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 // https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/efda8314-6e41-4837-8299-38ba0ee04b92
 // https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types
@@ -191,6 +192,7 @@ typedef struct tagRECT {
 #define MB_RETRYCANCEL      0x00000005L
 
 #define MB_ICONEXCLAMATION  0x00000030L
+#define MB_ICONINFORMATION  0x00000040L
 
 #define S_OK        ((HRESULT)0L)
 #define S_FALSE     ((HRESULT)1L)
@@ -242,10 +244,18 @@ BOOL DeleteFileA(
 
 #define _LDBL_RADIX 2
 
-inline int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...);
-
+int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...);
+#if 0
 template<size_t sizeOfBuffer>
-inline int sprintf_s(char (&buffer)[sizeOfBuffer], const char* format, ...);
+inline int sprintf_s(char (&buffer)[sizeOfBuffer], const char* format, ...)
+{
+    va_list ap;
+    va_start(ap, format);
+    int result = vsnprintf(buffer, sizeOfBuffer, format, ap);
+    va_end(ap);
+    return result;
+}
+#endif
 
 #include <qmessagebox.h>
 int MessageBox(void* /*hwnd*/, const char * title, const char * msg, int /*flags*/);

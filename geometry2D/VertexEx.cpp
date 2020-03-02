@@ -1,10 +1,10 @@
 #include "StdAfx.h"
-#include ".\vertexEx.h"
+#include "./VertexEx.h"
 
 namespace geometry2D
 {
 	/*
-Îáúåêò êëàññà Vertex ìîæåò áûòü ñôîðìèðîâàí íà îñíîâå òî÷êè èëè ïî åå êîîðäèíàòàì õ è ó.
+ÑœÐ±ÑŠÐµÐºÑ‚ ÐºÐ»Ð°ÑÑÐ° Vertex Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ ÑÑ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½ Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ðµ Ñ‚Ð¾Ñ‡ÐºÐ¸ Ð¸Ð»Ð¸ Ð¿Ð¾ ÐµÐµ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð°Ð¼ Ñ… Ð¸ Ñƒ.
 */
 
 VertexEx::VertexEx(double x, double y) : Vertex (x,y)
@@ -12,7 +12,7 @@ VertexEx::VertexEx(double x, double y) : Vertex (x,y)
 	this->_neighbor_polygon = NULL;
 }
 
-VertexEx::VertexEx (Point &p) :
+VertexEx::VertexEx (const Point &p) :
   Vertex (p)
 {
 	this->_neighbor_polygon = NULL;

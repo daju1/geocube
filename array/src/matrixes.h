@@ -1,5 +1,10 @@
 // matrixes.h
 
+#ifdef _MSC_VER
+#else
+#include "mywindows.h"
+#endif
+
 void ZeroDoubleMat(double **v, int nrows, int cols);
 template <class T> T **Alloc2DMat (size_t size1, size_t size2);
 template <class T> T **Alloc2DMat (size_t size1, size_t size2, T val);
@@ -47,9 +52,9 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 
 	if (v == NULL)
 	{
-		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * sizeof( T *** ) = %d bytes", ncubes, ncubes * sizeof( T *** ) );
-		MessageBox(0,errstr,"Alloc4DMat",0);
+                TCHAR errstr[255];
+                sprintf_s(errstr, 255, _T("Not enough memory for %d * sizeof( T *** ) = %d bytes"), ncubes, ncubes * sizeof( T *** ) );
+                MessageBox(0,errstr, _T("Alloc4DMat"),0);
 	}	
 	// выделяем память под указатели на страницы
 	v[0] = (T ***)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -57,7 +62,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 	if (v[0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * %d * sizeof( T ** ) = %d bytes", ncubes, npages, ncubes * npages * sizeof( T ** ) );
+                sprintf_s(errstr, 255, "Not enough memory for %d * %d * sizeof( T ** ) = %d bytes", ncubes, npages, ncubes * npages * sizeof( T ** ) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
 	// выделяем память под указатели на строки
@@ -66,7 +71,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
  	if (v[0][0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * %d * %d * sizeof( T* ) = %d bytes", ncubes, npages, nrows, ncubes * npages * nrows * sizeof (T*) );
+                sprintf_s(errstr, 255, "Not enough memory for %d * %d * %d * sizeof( T* ) = %d bytes", ncubes, npages, nrows, ncubes * npages * nrows * sizeof (T*) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
 	// выделяем память под указатели на элементы строк
@@ -75,7 +80,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
  	if (v[0][0][0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * %d * %d  * %d * sizeof( T ) = %d bytes", ncubes, npages, nrows, ncols, ncubes * npages * nrows * ncols * sizeof (T) );
+                sprintf_s(errstr, 255, "Not enough memory for %d * %d * %d  * %d * sizeof( T ) = %d bytes", ncubes, npages, nrows, ncols, ncubes * npages * nrows * ncols * sizeof (T) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
 	for (cube = 0; cube < ncubes; cube ++)
@@ -118,7 +123,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 	if (v == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * sizeof( T *** ) = %d bytes", ncubes, ncubes * sizeof( T *** ) );
+                sprintf_s(errstr, 255, "Not enough memory for %d * sizeof( T *** ) = %d bytes", ncubes, ncubes * sizeof( T *** ) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}	
 	// выделяем память под указатели на страницы
@@ -127,7 +132,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
 	if (v[0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * %d * sizeof( T ** ) = %d bytes", ncubes, npages, ncubes * npages * sizeof( T ** ) );
+                sprintf_s(errstr, 255, "Not enough memory for %d * %d * sizeof( T ** ) = %d bytes", ncubes, npages, ncubes * npages * sizeof( T ** ) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
 	// выделяем память под указатели на строки
@@ -136,7 +141,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
  	if (v[0][0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * %d * %d * sizeof( T* ) = %d bytes", ncubes, npages, nrows, ncubes * npages * nrows * sizeof (T*) );
+                sprintf_s(errstr, 255, "Not enough memory for %d * %d * %d * sizeof( T* ) = %d bytes", ncubes, npages, nrows, ncubes * npages * nrows * sizeof (T*) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
 	// выделяем память под указатели на элементы строк
@@ -145,7 +150,7 @@ template <class T> T ****Alloc4DMat (size_t ncubes, size_t npages, size_t nrows,
  	if (v[0][0][0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %d * %d * %d  * %d * sizeof( T ) = %d bytes", ncubes, npages, nrows, ncols, ncubes * npages * nrows * ncols * sizeof (T) );
+                sprintf_s(errstr, 255, "Not enough memory for %d * %d * %d  * %d * sizeof( T ) = %d bytes", ncubes, npages, nrows, ncols, ncubes * npages * nrows * ncols * sizeof (T) );
 		MessageBox(0,errstr,"Alloc4DMat",0);
 	}
 	for (cube = 0; cube < ncubes; cube ++)
@@ -188,7 +193,7 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 	if (v == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %u * sizeof( T ** ) = %d bytes", npages, npages * sizeof( T ** ) );
+                sprintf_s(errstr, 255, "Not enough memory for %u * sizeof( T ** ) = %d bytes", npages, npages * sizeof( T ** ) );
 		MessageBox(0,errstr,"AllocTMat",0);
 	}
 	// выделяем память под указатели на строки
@@ -198,7 +203,7 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
  	if (v[0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %u * %u * sizeof( T* ) = %u bytes", npages, nrows, npages * nrows * sizeof (T*) );
+                sprintf_s(errstr, 255, "Not enough memory for %u * %u * sizeof( T* ) = %u bytes", npages, nrows, npages * nrows * sizeof (T*) );
 		MessageBox(0,errstr,"AllocTMat",0);
 	}
 	// выделяем память под указатели на элементы строк
@@ -208,7 +213,7 @@ template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
  	if (v[0][0] == NULL)
 	{
 		char errstr[255];
-		sprintf(errstr, "Not enough memory for %u * %u * %u * sizeof( T ) = %u bytes", npages, nrows, ncols, npages * nrows * ncols * sizeof (T) );
+                sprintf_s(errstr, 255, "Not enough memory for %u * %u * %u * sizeof( T ) = %u bytes", npages, nrows, ncols, npages * nrows * ncols * sizeof (T) );
 		MessageBox(0,errstr,"AllocTMat",0);
 	}
 

@@ -1,17 +1,17 @@
 #pragma once
-#include "./vertex.h"
+#include "./Vertex.h"
 
 namespace geometry2D
 {
 	class PolygonEx;
 //	enum { CLOCKWISE,  COUNTER_CLOCKWISE};
-	//(CLOCKWISE или COUNTER_CLOCKWISE — по часовой стрелке или против):
+	//(CLOCKWISE РёР»Рё COUNTER_CLOCKWISE вЂ” РїРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ РёР»Рё РїСЂРѕС‚РёРІ):
 
 class VertexEx: public Vertex  {
 public:
-	PolygonEx * _neighbor_polygon; // полигон, который по часовой стрелке слева
+	PolygonEx * _neighbor_polygon; // РїРѕР»РёРіРѕРЅ, РєРѕС‚РѕСЂС‹Р№ РїРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ СЃР»РµРІР°
 	VertexEx (double x, double y);
-	VertexEx (Point&);
+    VertexEx (const Point&);
 	friend class Polygon;
 };
 

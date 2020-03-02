@@ -1,14 +1,17 @@
 //delaunay.h
 
-#include ".\SearchTree.h"
-#include ".\BraidedSearchTree.h"
-#include ".\RandomizedSearchTree.h"
-#include ".\Point.h"
+#include "./SearchTree.h"
+#include "./BraidedSearchTree.h"
+#include "./RandomizedSearchTree.h"
+#include "./Point.h"
 
 #include <vector>
 #include <algorithm>
 #include <iostream>
 using namespace std;
+
+#include <cfloat>
+#include <limits>
 
 namespace geometry2D
 {
@@ -244,7 +247,7 @@ template<class T> bool test_orientation(T sa, bool cw)
 template<class T> void AppendBissectriss(List<T*> * edges_biss, T* e_1, T* e_2, double len_b)
 {
 	bool cw = true;
-	//построение внешней биссекрисы
+	//РїРѕСЃС‚СЂРѕРµРЅРёРµ РІРЅРµС€РЅРµР№ Р±РёСЃСЃРµРєСЂРёСЃС‹
 	if (e_1->dest != e_2->org)
 	{
 		char err[2048];
@@ -261,26 +264,26 @@ template<class T> void AppendBissectriss(List<T*> * edges_biss, T* e_1, T* e_2, 
 		return;
 	}
 
-	//перводим ребра в вектора
+	//РїРµСЂРІРѕРґРёРј СЂРµР±СЂР° РІ РІРµРєС‚РѕСЂР°
 	Point v1 = e_1->org - e_1->dest;
 	Point v2 = e_2->dest - e_2->org;
 
-	//ищем длину векторов-ребер
+	//РёС‰РµРј РґР»РёРЅСѓ РІРµРєС‚РѕСЂРѕРІ-СЂРµР±РµСЂ
 
 	double len1 = v1.length();
 	double len2 = v2.length();
 
-	//скалярное произведение векторов-рёбер
+	//СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ-СЂС‘Р±РµСЂ
 
 	double dp = dotProduct(v1, v2);
 
-	//угол между рёбрами
+	//СѓРіРѕР» РјРµР¶РґСѓ СЂС‘Р±СЂР°РјРё
 
 	double cosine = dp / (len1*len2);
 	double alpha = acos(cosine);
 
-	// косинус угла между каждым из ребром и внешней биссектисой
-	// знак минус характеризует факт того, что биссектрисса внешняя
+	// РєРѕСЃРёРЅСѓСЃ СѓРіР»Р° РјРµР¶РґСѓ РєР°Р¶РґС‹Рј РёР· СЂРµР±СЂРѕРј Рё РІРЅРµС€РЅРµР№ Р±РёСЃСЃРµРєС‚РёСЃРѕР№
+	// Р·РЅР°Рє РјРёРЅСѓСЃ С…Р°СЂР°РєС‚РµСЂРёР·СѓРµС‚ С„Р°РєС‚ С‚РѕРіРѕ, С‡С‚Рѕ Р±РёСЃСЃРµРєС‚СЂРёСЃСЃР° РІРЅРµС€РЅСЏСЏ
 	double cosine_2;
 	double sa = v2.x*v1.y - v1.x*v2.y;
 
@@ -293,23 +296,23 @@ template<class T> void AppendBissectriss(List<T*> * edges_biss, T* e_1, T* e_2, 
 		cosine_2 = - cos(alpha/2.0);
 	}
 
-	//скалярное произведение второго ребра и внешней биссектриссы
+	//СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РІС‚РѕСЂРѕРіРѕ СЂРµР±СЂР° Рё РІРЅРµС€РЅРµР№ Р±РёСЃСЃРµРєС‚СЂРёСЃСЃС‹
 
 	double dp2 = len2*len_b*cosine_2;
 
-	// начальная точка внешней биссектриссы
+	// РЅР°С‡Р°Р»СЊРЅР°СЏ С‚РѕС‡РєР° РІРЅРµС€РЅРµР№ Р±РёСЃСЃРµРєС‚СЂРёСЃСЃС‹
 
 	Point b1 = e_1->dest;// == e_2->org
 
-	// теперь, зная значение скалярного произведения 
-	// и начальной точки запишем систему двух уравнений
-	// с целью отыскания конечной точки внешней биссектриссы
+	// С‚РµРїРµСЂСЊ, Р·РЅР°СЏ Р·РЅР°С‡РµРЅРёРµ СЃРєР°Р»СЏСЂРЅРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ 
+	// Рё РЅР°С‡Р°Р»СЊРЅРѕР№ С‚РѕС‡РєРё Р·Р°РїРёС€РµРј СЃРёСЃС‚РµРјСѓ РґРІСѓС… СѓСЂР°РІРЅРµРЅРёР№
+	// СЃ С†РµР»СЊСЋ РѕС‚С‹СЃРєР°РЅРёСЏ РєРѕРЅРµС‡РЅРѕР№ С‚РѕС‡РєРё РІРЅРµС€РЅРµР№ Р±РёСЃСЃРµРєС‚СЂРёСЃСЃС‹
 	Point b2;
 	// (b2.x - b1.x) * v2.x + (b2.y - b1.y) * v2.y = dp2
 	// (b2.x - b1.x) = vb.x
 	// (b2.y - b1.y) = vb.y
 
-	// Вектор биссектриссы
+	// Р’РµРєС‚РѕСЂ Р±РёСЃСЃРµРєС‚СЂРёСЃСЃС‹
 	Point vb;
 	// vb.x * v2.x + vb.y * v2.y = dp2
 	// vb.x * vb.x + vb.y * vb.y = len_b*len_b
@@ -362,7 +365,7 @@ template<class T> void AppendBissectriss(List<T*> * edges_biss, T* e_1, T* e_2, 
 			{
 				vb.y = ( 2.0*v2.y*dp2 + sqrt(D) ) / ( 2.0 * (v2.y*v2.y + v2.x*v2.x) );
                 vb.x = (dp2 - vb.y * v2.y) / v2.x;
-				// Пара векторов (v2,vb) должна быть -тельно ориентированной
+				// РџР°СЂР° РІРµРєС‚РѕСЂРѕРІ (v2,vb) РґРѕР»Р¶РЅР° Р±С‹С‚СЊ -С‚РµР»СЊРЅРѕ РѕСЂРёРµРЅС‚РёСЂРѕРІР°РЅРЅРѕР№
 				double sa = v2.x*vb.y - vb.x*v2.y;
 				if (test_orientation<double>(sa,cw))
 				{
@@ -372,7 +375,7 @@ template<class T> void AppendBissectriss(List<T*> * edges_biss, T* e_1, T* e_2, 
 				{
 					vb.y = ( 2.0*v2.y*dp2 - sqrt(D) ) / ( 2.0 * (v2.y*v2.y + v2.x*v2.x) );
 					vb.x = (dp2 - vb.y * v2.y) / v2.x;
-					// Пара векторов (v2,vb) должна быть -тельно ориентированной
+					// РџР°СЂР° РІРµРєС‚РѕСЂРѕРІ (v2,vb) РґРѕР»Р¶РЅР° Р±С‹С‚СЊ -С‚РµР»СЊРЅРѕ РѕСЂРёРµРЅС‚РёСЂРѕРІР°РЅРЅРѕР№
 					sa = v2.x*vb.y - vb.x*v2.y;
 					if (test_orientation<double>(sa,cw))
 					{
@@ -394,7 +397,7 @@ template<class T> void AppendBissectriss(List<T*> * edges_biss, T* e_1, T* e_2, 
 			{
 				vb.x = ( 2.0*v2.x*dp2 + sqrt(D) ) / ( 2.0 * (v2.y*v2.y + v2.x*v2.x) );
 				vb.y = (dp2 - vb.x * v2.x) / v2.y;
-				// Пара векторов (v2,vb) должна быть -тельно ориентированной
+				// РџР°СЂР° РІРµРєС‚РѕСЂРѕРІ (v2,vb) РґРѕР»Р¶РЅР° Р±С‹С‚СЊ -С‚РµР»СЊРЅРѕ РѕСЂРёРµРЅС‚РёСЂРѕРІР°РЅРЅРѕР№
 				double sa = v2.x*vb.y - vb.x*v2.y;
 				if (test_orientation<double>(sa,cw))
 				{
@@ -404,7 +407,7 @@ template<class T> void AppendBissectriss(List<T*> * edges_biss, T* e_1, T* e_2, 
 				{
 					vb.x = ( 2.0*v2.x*dp2 - sqrt(D) ) / ( 2.0 * (v2.y*v2.y + v2.x*v2.x) );
 					vb.y = (dp2 - vb.x * v2.x) / v2.y;
-					// Пара векторов (v2,vb) должна быть -тельно ориентированной
+					// РџР°СЂР° РІРµРєС‚РѕСЂРѕРІ (v2,vb) РґРѕР»Р¶РЅР° Р±С‹С‚СЊ -С‚РµР»СЊРЅРѕ РѕСЂРёРµРЅС‚РёСЂРѕРІР°РЅРЅРѕР№
 					sa = v2.x*vb.y - vb.x*v2.y;
 					if (test_orientation<double>(sa,cw))
 					{

@@ -13,7 +13,7 @@ fill_grid_without_contour
 #if FILL_GRID_TEST
 	bool test = true;
 #endif
-	// вычисляем триангуляцию Делоне
+	// РІС‹С‡РёСЃР»СЏРµРј С‚СЂРёР°РЅРіСѓР»СЏС†РёСЋ Р”РµР»РѕРЅРµ
 	Dictionary<EdgeEx*> * out_edges = new Dictionary<EdgeEx*>(edgeCmpEx);
 	List<PolygonEx*> * trias = delaunayTriangulateEx(vs, out_edges);
 
@@ -56,7 +56,7 @@ fill_grid_without_contour
 		cin >> ftf;
 	}
 
-    // Фильтруем полигоны от "плохих" краевых треугольников		
+    // Р¤РёР»СЊС‚СЂСѓРµРј РїРѕР»РёРіРѕРЅС‹ РѕС‚ "РїР»РѕС…РёС…" РєСЂР°РµРІС‹С… С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ		
 	switch (ftf)
 	{
 	case 1:
@@ -90,7 +90,7 @@ fill_grid_without_contour
 #endif
 
 #if USE_CONTOUR
-    // Получаем замкнутый контур внешней границы
+    // РџРѕР»СѓС‡Р°РµРј Р·Р°РјРєРЅСѓС‚С‹Р№ РєРѕРЅС‚СѓСЂ РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹
 	List<EdgeEx*> * contour = GetContourOfPolygonesEx2(trias);
 
 	if (!contour)
@@ -99,25 +99,25 @@ fill_grid_without_contour
 		return false;
 	}
 
-	// Из каждой вершины внешней границы проводим вовне биссектрисы
+	// РР· РєР°Р¶РґРѕР№ РІРµСЂС€РёРЅС‹ РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹ РїСЂРѕРІРѕРґРёРј РІРѕРІРЅРµ Р±РёСЃСЃРµРєС‚СЂРёСЃС‹
 	double len_biss;
 	if (param)
 	{
 		switch(param->m_len_biss_type)
 		{
-		case griddata_3_param::len_biss_type::user_defined:
+                case griddata_3_param_len_biss_type_user_defined:
 			len_biss = param->len_biss;
 			break;
-		case griddata_3_param::len_biss_type::min_edges_len:
+                case griddata_3_param_len_biss_type_min_edges_len:
 			len_biss = GetMinLenOfEdges(contour);
 			break;
-		case griddata_3_param::len_biss_type::mean_edges_len:
+                case griddata_3_param_len_biss_type_mean_edges_len:
 			len_biss = GetMeanLenOfEdges(contour);
 			break;
-		case griddata_3_param::len_biss_type::median_edges_len:
+                case griddata_3_param_len_biss_type_median_edges_len:
 			len_biss = GetMedianLenOfEdges(contour);
 			break;
-		case griddata_3_param::len_biss_type::max_edges_len:
+                case griddata_3_param_len_biss_type_max_edges_len:
 			len_biss = GetMaxLenOfEdges(contour);
 			break;
 		}
@@ -134,22 +134,22 @@ fill_grid_without_contour
 		cin >> _len_bis_type;
 		switch(_len_bis_type)
 		{
-		case griddata_3_param::len_biss_type::user_defined:
+                case griddata_3_param_len_biss_type_user_defined:
 			{
 				cout << "enter bissectriss length" << endl;
 				cin >> len_biss;
 			}
 			break;
-		case griddata_3_param::len_biss_type::min_edges_len:
+                case griddata_3_param_len_biss_type_min_edges_len:
 			len_biss = GetMinLenOfEdges(contour);
 			break;
-		case griddata_3_param::len_biss_type::mean_edges_len:
+                case griddata_3_param_len_biss_type_mean_edges_len:
 			len_biss = GetMeanLenOfEdges(contour);
 			break;
-		case griddata_3_param::len_biss_type::median_edges_len:
+                case griddata_3_param_len_biss_type_median_edges_len:
 			len_biss = GetMedianLenOfEdges(contour);
 			break;
-		case griddata_3_param::len_biss_type::max_edges_len:
+                case griddata_3_param_len_biss_type_max_edges_len:
 			len_biss = GetMaxLenOfEdges(contour);
 			break;
 		}
@@ -176,22 +176,22 @@ fill_grid_without_contour
 
 	//biss = CorrectBissectriss2(biss);
 
-	// Вокруг контура внешней границы, базируясь на внешних биссектриссах формируем массив экстраполяционных полигонов
-	vector<geometry2D::Point> * poly_contour_base_points = new vector<geometry2D::Point>; // список базовых точек для экстраполяционных полигонов
+	// Р’РѕРєСЂСѓРі РєРѕРЅС‚СѓСЂР° РІРЅРµС€РЅРµР№ РіСЂР°РЅРёС†С‹, Р±Р°Р·РёСЂСѓСЏСЃСЊ РЅР° РІРЅРµС€РЅРёС… Р±РёСЃСЃРµРєС‚СЂРёСЃСЃР°С… С„РѕСЂРјРёСЂСѓРµРј РјР°СЃСЃРёРІ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅС‹С… РїРѕР»РёРіРѕРЅРѕРІ
+	vector<geometry2D::Point> * poly_contour_base_points = new vector<geometry2D::Point>; // СЃРїРёСЃРѕРє Р±Р°Р·РѕРІС‹С… С‚РѕС‡РµРє РґР»СЏ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅС‹С… РїРѕР»РёРіРѕРЅРѕРІ
 	List<PolygonEx*> * poly_contour = GetContourOfExtraPolygones(contour, biss, poly_contour_base_points, 1);
 
 #endif /*USE_CONTOUR*/
-	// Итак, мы имеем N треугольников экстраполяции
+	// РС‚Р°Рє, РјС‹ РёРјРµРµРј N С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРё
 	int N_trias = trias->length();
 printf("N_trias = trias->length() %d\n", N_trias );
-	// построенных на n точках
+	// РїРѕСЃС‚СЂРѕРµРЅРЅС‹С… РЅР° n С‚РѕС‡РєР°С…
 	// int n = x.size();
-	// А также L полигонов экстраполяционных
+	// Рђ С‚Р°РєР¶Рµ L РїРѕР»РёРіРѕРЅРѕРІ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅС‹С…
 #if USE_CONTOUR
 	int N_contour = poly_contour->length();
 printf("N_contour = poly_contour->length() %d\n", N_contour );
 #endif
-	// каждый треугольник мы будем аппроксимировать уравнением (1):
+	// РєР°Р¶РґС‹Р№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє РјС‹ Р±СѓРґРµРј Р°РїРїСЂРѕРєСЃРёРјРёСЂРѕРІР°С‚СЊ СѓСЂР°РІРЅРµРЅРёРµРј (1):
 	// f(x,y):= c0 + c1*(x-xj)   + c2*(y-yj)          + 
 	//				 c3*(x-xj)^2 + c4*(x-xj)*(y-yj)   + c5*(y-yj)^2        + 
 	//				 c6*(x-xj)^3 + c7*(x-xj)^2*(y-yj) + c8*(x-xj)*(y-yj)^2 + c9*(y-yj)^3;
@@ -202,7 +202,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 	// diff(f(x,y),y,y) = 2*c5+2*c8*(x-xj)+6*c9*(y-yj)
 	// diff(f(x,y),x,y) = c4+2*c7*(x-xj)+2*c8*(y-yj)
 
-	// Итак у нас 10 * N + 10 * L неизвестных коэффициентов
+	// РС‚Р°Рє Сѓ РЅР°СЃ 10 * N + 10 * L РЅРµРёР·РІРµСЃС‚РЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 	int cols;
 	//int order = 3;
 	int order_t = 3;
@@ -384,11 +384,11 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 		+ (int)nk_c * N_contour
 #endif
 		;
-	vector<double> sol(cols, 0.0); // вектор решения
-	vector<double> valpha(cols, 0.0); // вектор регуряризационных коэффициентов
+	vector<double> sol(cols, 0.0); // РІРµРєС‚РѕСЂ СЂРµС€РµРЅРёСЏ
+	vector<double> valpha(cols, 0.0); // РІРµРєС‚РѕСЂ СЂРµРіСѓСЂСЏСЂРёР·Р°С†РёРѕРЅРЅС‹С… РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ
 
 	List<PolygonEx*> poly;
-	// список базовых точек для триангуляционных треугольников
+	// СЃРїРёСЃРѕРє Р±Р°Р·РѕРІС‹С… С‚РѕС‡РµРє РґР»СЏ С‚СЂРёР°РЅРіСѓР»СЏС†РёРѕРЅРЅС‹С… С‚СЂРµСѓРіРѕР»СЊРЅРёРєРѕРІ
 	vector<geometry2D::Point> base_points;
 	vector<double> base_points_z;
 	size_t index = 0;
@@ -397,7 +397,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 		trias->val()->index = index;
 		poly.append(trias->val());
 
-		PolygonEx * p = trias->val();
+                PolygonEx * p = trias->val();
 
 		geometry2D::Point pt_intersect; bool pt_intersect_calculed = false;
 
@@ -406,15 +406,15 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 		int i = 0;
 		if (i < p->size())
 		{		
-			Edge* e_1 = &p->edge();	p->advance(CLOCKWISE); i++;
+                        Edge e_1 = p->edge(); p->advance(CLOCKWISE); i++;
 			if (i < p->size())
 			{
-				Edge* e_2 = &p->edge();	p->advance(CLOCKWISE); i++;
-				AppendBissectriss(edges_biss, e_1, e_2, 1.0);
+                                Edge e_2 = p->edge();	p->advance(CLOCKWISE); i++;
+                                AppendBissectriss(edges_biss, &e_1, &e_2, 1.0);
 				if (i < p->size())
 				{
-					Edge* e_3 = &p->edge();	p->advance(CLOCKWISE); i++;
-					AppendBissectriss(edges_biss, e_2, e_3, 1.0);
+                                        Edge e_3 = p->edge();	p->advance(CLOCKWISE); i++;
+                                        AppendBissectriss(edges_biss, &e_2, &e_3, 1.0);
 				}
 			}
 		}
@@ -446,8 +446,8 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 			printf("fill_grid\t!pt_intersect_calculed\n");
 		}
 
-		// инициализируем линейные коэффициенты
-		// линейная интерполяция - первое приближение
+		// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Р»РёРЅРµР№РЅС‹Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹
+		// Р»РёРЅРµР№РЅР°СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёСЏ - РїРµСЂРІРѕРµ РїСЂРёР±Р»РёР¶РµРЅРёРµ
 		//sol[index*10+0];//c0
 		//sol[index*10+1];//c1
 		//sol[index*10+2];//c2
@@ -457,7 +457,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 
 			
 		vector<sparse_row> m; 
-		// и вектор правых частей 
+		// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 		vector<double> b;
 
 
@@ -468,14 +468,14 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 
 			if (pt != ptj && pt.index > -1 && pt.index < (int)z.size())
 			{			
-				// добавляем строку в уравнение
+				// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 				
 				sparse_row row; 
 				row.clear();
 
-				row.put(0, 1.0);//с0
-				row.put(1, pt.x - ptj.x);//с1
-				row.put(2, pt.y - ptj.y);//с2
+				row.put(0, 1.0);//СЃ0
+				row.put(1, pt.x - ptj.x);//СЃ1
+				row.put(2, pt.y - ptj.y);//СЃ2
 
 				m.push_back(row);
 				b.push_back(z[pt.index]);
@@ -532,7 +532,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 		size_t index_10 = N_trias*nk_t + (index-N_trias)*nk_c;
 
 		EdgeEx * ex = contour->val();
-		// указатель на полигон контурный
+		// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРѕР»РёРіРѕРЅ РєРѕРЅС‚СѓСЂРЅС‹Р№
 		PolygonEx * pc = ex->LeftPolygon();
 		for (int i = 0; i < pc->size(); i++)
 		{
@@ -549,9 +549,9 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 			}
 
 		}
-		// указазатель на соответствующий внутренний треугольник
+		// СѓРєР°Р·Р°Р·Р°С‚РµР»СЊ РЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РІРЅСѓС‚СЂРµРЅРЅРёР№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє
 		PolygonEx * tr = ex->RightPolygon();
-		// ищем в треугольнике противоположную точку
+		// РёС‰РµРј РІ С‚СЂРµСѓРіРѕР»СЊРЅРёРєРµ РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅСѓСЋ С‚РѕС‡РєСѓ
 		geometry2D::Point tr_pt;
 		for (int i = 0; i < tr->size(); i++)
 		{
@@ -568,35 +568,35 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 			ex->dest.index > -1 && ex->dest.index < (int)z.size())
 		{						
 			vector<sparse_row> m; 
-			// и вектор правых частей 
+			// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 			vector<double> b;
-			// добавляем строку в уравнение
+			// РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СѓСЂР°РІРЅРµРЅРёРµ
 			sparse_row row; 
 
-			// базовая точка != ex->org
+			// Р±Р°Р·РѕРІР°СЏ С‚РѕС‡РєР° != ex->org
 
 			// tr_pt.x
 
 			row.clear();        
-			row.put(0, 1.0);//с0
-			row.put(1, tr_pt.x - (*itp).x);//с1
-			row.put(2, tr_pt.y - (*itp).y);//с2		
+			row.put(0, 1.0);//СЃ0
+			row.put(1, tr_pt.x - (*itp).x);//СЃ1
+			row.put(2, tr_pt.y - (*itp).y);//СЃ2		
 			m.push_back(row);b.push_back(z[tr_pt.index]);
 
 			// ex->dest
 
 			row.clear();        
-			row.put(0, 1.0);//с0
-			row.put(1, ex->dest.x - (*itp).x);//с1
-			row.put(2, ex->dest.y - (*itp).y);//с2		
+			row.put(0, 1.0);//СЃ0
+			row.put(1, ex->dest.x - (*itp).x);//СЃ1
+			row.put(2, ex->dest.y - (*itp).y);//СЃ2		
 			m.push_back(row);b.push_back(z[ex->dest.index]);
 
 			// ex->org
 			
 			row.clear();        
-			row.put(0, 1.0);//с0
-			row.put(1, ex->org.x - (*itp).x);//с1
-			row.put(2, ex->org.y - (*itp).y);//с2		
+			row.put(0, 1.0);//СЃ0
+			row.put(1, ex->org.x - (*itp).x);//СЃ1
+			row.put(2, ex->org.y - (*itp).y);//СЃ2		
 			m.push_back(row);b.push_back(z[ex->org.index]);
 			
 			vector<double> xx;
@@ -681,11 +681,11 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 
 	if (order_t > 1)
 	{
-		// Наша цель составить матрицу с числом строк S
+		// РќР°С€Р° С†РµР»СЊ СЃРѕСЃС‚Р°РІРёС‚СЊ РјР°С‚СЂРёС†Сѓ СЃ С‡РёСЃР»РѕРј СЃС‚СЂРѕРє S
 		vector<sparse_row> M; 
-		// и вектор правых частей 
+		// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 		vector<double> B;
-		// Для каждого треугольника будем подставлять координаты двух дополнительных точек
+		// Р”Р»СЏ РєР°Р¶РґРѕРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° Р±СѓРґРµРј РїРѕРґСЃС‚Р°РІР»СЏС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РґРІСѓС… РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… С‚РѕС‡РµРє
 		//
 		for (trias->first(); 
 			!trias->isHead(); 
@@ -697,7 +697,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 
 		printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 	#if USE_CONTOUR
-		// Для каждого экстраполяционного треугольника подставим координаты одной дополнительной точки
+		// Р”Р»СЏ РєР°Р¶РґРѕРіРѕ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РїРѕРґСЃС‚Р°РІРёРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РѕРґРЅРѕР№ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ С‚РѕС‡РєРё
 		for (poly_contour->first(); 
 			!poly_contour->isHead(); 
 			poly_contour->next())
@@ -708,30 +708,30 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 
 	#endif
 		
-		// число точных уравнений
+		// С‡РёСЃР»Рѕ С‚РѕС‡РЅС‹С… СѓСЂР°РІРЅРµРЅРёР№
 		size_t prec_eqns = M.size();
 		
 
 		printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 
 
-		// каждое ребро треугольника и экстраполяционного 
-		// полигона позволяет ввести параметрическую систему 
-		// координат. Каждое ребро начинается в начальной точке 
+		// РєР°Р¶РґРѕРµ СЂРµР±СЂРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° Рё СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ 
+		// РїРѕР»РёРіРѕРЅР° РїРѕР·РІРѕР»СЏРµС‚ РІРІРµСЃС‚Рё РїР°СЂР°РјРµС‚СЂРёС‡РµСЃРєСѓСЋ СЃРёСЃС‚РµРјСѓ 
+		// РєРѕРѕСЂРґРёРЅР°С‚. РљР°Р¶РґРѕРµ СЂРµР±СЂРѕ РЅР°С‡РёРЅР°РµС‚СЃСЏ РІ РЅР°С‡Р°Р»СЊРЅРѕР№ С‚РѕС‡РєРµ 
 		// (x_org, y_org)
-		// и заканчивается в конечной точке
+		// Рё Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РІ РєРѕРЅРµС‡РЅРѕР№ С‚РѕС‡РєРµ
 		// (x_dest, y_dest). 
-		// Параметрическая переменная t изменяется 
-		// при движении по прямой вдоль ребра т.о., 
-		// что t=0.0 в точке начала ребра и t = 1.0 
-		// в точке конца ребра
+		// РџР°СЂР°РјРµС‚СЂРёС‡РµСЃРєР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ t РёР·РјРµРЅСЏРµС‚СЃСЏ 
+		// РїСЂРё РґРІРёР¶РµРЅРёРё РїРѕ РїСЂСЏРјРѕР№ РІРґРѕР»СЊ СЂРµР±СЂР° С‚.Рѕ., 
+		// С‡С‚Рѕ t=0.0 РІ С‚РѕС‡РєРµ РЅР°С‡Р°Р»Р° СЂРµР±СЂР° Рё t = 1.0 
+		// РІ С‚РѕС‡РєРµ РєРѕРЅС†Р° СЂРµР±СЂР°
 		// x(t) = x_org + (x_dest - x_org)*t
 		// y(t) = y_org + (y_dest - y_org)*t
 
-		// теперь наша задача записать такие дополнительные уравнения, 
-		// которые означают непрерывность ф-ции вдоль каждого ребра 
-		// и вдоль каждого экстраполяционного луча
-		// А также непрерывность её первой и второй производной
+		// С‚РµРїРµСЂСЊ РЅР°С€Р° Р·Р°РґР°С‡Р° Р·Р°РїРёСЃР°С‚СЊ С‚Р°РєРёРµ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СѓСЂР°РІРЅРµРЅРёСЏ, 
+		// РєРѕС‚РѕСЂС‹Рµ РѕР·РЅР°С‡Р°СЋС‚ РЅРµРїСЂРµСЂС‹РІРЅРѕСЃС‚СЊ С„-С†РёРё РІРґРѕР»СЊ РєР°Р¶РґРѕРіРѕ СЂРµР±СЂР° 
+		// Рё РІРґРѕР»СЊ РєР°Р¶РґРѕРіРѕ СЌРєСЃС‚СЂР°РїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ Р»СѓС‡Р°
+		// Рђ С‚Р°РєР¶Рµ РЅРµРїСЂРµСЂС‹РІРЅРѕСЃС‚СЊ РµС‘ РїРµСЂРІРѕР№ Рё РІС‚РѕСЂРѕР№ РїСЂРѕРёР·РІРѕРґРЅРѕР№
 
 		// f(t) := 
 		// f(x_org+(x_dest-x_org)*t,y_org+(y_dest-y_org)*t) := 
@@ -778,7 +778,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 		// 2*c7*(x_org-xj+(x_dest-x_org)*t)+
 		// 2*c8*(y_org-yj+(y_dest-y_org)*t)
 
-		// перебираем все внутренние рёбра
+		// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ РІРЅСѓС‚СЂРµРЅРЅРёРµ СЂС‘Р±СЂР°
 //		EdgeEx * ex_;
 		List<EdgeEx *> *out_edges_ = new List<EdgeEx *>;
 
@@ -854,7 +854,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 
 		printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 	#if USE_CONTOUR
-		// перебираем все рёбра контура
+		// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЂС‘Р±СЂР° РєРѕРЅС‚СѓСЂР°
 		for( contour->first(); !contour->isHead(); contour->next())
 		{
 			EdgeEx* ex = contour->val();
@@ -878,7 +878,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 		}
 		printf("cols = %d, rows = %u, real_cols_number = %u\n", cols, M.size(), GetRealColsNumber(M,cols));
 
-		// перебираем все биссектриссы
+		// РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ Р±РёСЃСЃРµРєС‚СЂРёСЃСЃС‹
 		for( biss->first(); !biss->isHead(); biss->next())
 		{
 			EdgeEx* ex = biss->val();
@@ -1006,9 +1006,9 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 #if SPARSE_ROW_EX
 		if (false)
 		{	
-			// Наша цель составить матрицу с числом строк S
+			// РќР°С€Р° С†РµР»СЊ СЃРѕСЃС‚Р°РІРёС‚СЊ РјР°С‚СЂРёС†Сѓ СЃ С‡РёСЃР»РѕРј СЃС‚СЂРѕРє S
 			vector<sparse_row> M2; 
-			// и вектор правых частей 
+			// Рё РІРµРєС‚РѕСЂ РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ 
 			vector<double> B2;
 			for (size_t r = 0; r < M.size(); r++)
 			{
@@ -1081,7 +1081,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 					else
 						z_value = BLANK_VALUE;
 
-					// полученное значение z_value записываем в грид
+					// РїРѕР»СѓС‡РµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ z_value Р·Р°РїРёСЃС‹РІР°РµРј РІ РіСЂРёРґ
 					grid->gridSection.z[jj][ii] = z_value;
 				}
 			}
@@ -1173,7 +1173,7 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 					else
 						z_value = BLANK_VALUE;
 
-					// полученное значение z_value записываем в грид
+					// РїРѕР»СѓС‡РµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ z_value Р·Р°РїРёСЃС‹РІР°РµРј РІ РіСЂРёРґ
 					grid->gridSection.z[jj][ii] = z_value;
 				}
 			}

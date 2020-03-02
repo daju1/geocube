@@ -376,7 +376,7 @@ struct Grid4
 Archive& operator <<(Archive& ar, Grid4& ob);
 Archive& operator >>(Archive& ar, Grid4& ob);
 
-int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, 
+int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile,
 					  long nRow, 
 					  long nCol, 
 					  double xLL, // X coordinate of the lower left corner of the grid

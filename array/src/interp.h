@@ -4,6 +4,10 @@
 #include <vector>
 using namespace std;
 
+#if !defined (_MSC_VER)
+#include "mywindows.h"
+#endif
+
 class vdouble;
 struct Grid;
 struct Grid4;
@@ -24,6 +28,11 @@ struct prostranstven_index
 	double y;
 	double z;
 };
+enum points_sort_mode
+{
+    point_with_distance_points_sort_mode_by_dist,
+    point_with_distance_points_sort_mode_by_angle
+};
 struct point_with_distance
 {	
 	double x;
@@ -33,16 +42,16 @@ struct point_with_distance
 	double angle;
 
 
-	enum points_sort_mode {by_dist, by_angle};
+
 	static points_sort_mode s_points_sort_mode;
 #if 1
 	bool operator<(const point_with_distance& rhs)
 	{
 		switch(point_with_distance::s_points_sort_mode)
 		{
-                case by_dist:
+                case point_with_distance_points_sort_mode_by_dist:
 			return dist < rhs.dist;
-                case by_angle:
+                case point_with_distance_points_sort_mode_by_angle:
 			return angle < rhs.angle;
 		}
 	}
@@ -50,9 +59,9 @@ struct point_with_distance
 	{
 		switch(point_with_distance::s_points_sort_mode)
 		{
-                case by_dist:
+                case point_with_distance_points_sort_mode_by_dist:
 			return dist > rhs.dist;
-                case by_angle:
+                case point_with_distance_points_sort_mode_by_angle:
 			return angle > rhs.angle;
 		}
 	}
@@ -91,6 +100,14 @@ struct finite_element_par
 
 };
 
+enum len_biss_type
+{
+    griddata_3_param_len_biss_type_user_defined = 0,
+    griddata_3_param_len_biss_type_min_edges_len,
+    griddata_3_param_len_biss_type_mean_edges_len,
+    griddata_3_param_len_biss_type_median_edges_len,
+    griddata_3_param_len_biss_type_max_edges_len
+};
 struct griddata_3_param
 {
 	bool use_contour;
@@ -138,7 +155,7 @@ struct griddata_3_param
 
 	int slau_method; // = 1; SLAU9(0), SLAU_excl(1)
 
-	enum len_biss_type {user_defined = 0, min_edges_len, mean_edges_len, median_edges_len, max_edges_len};
+
 	len_biss_type m_len_biss_type;
 	double len_biss;
 

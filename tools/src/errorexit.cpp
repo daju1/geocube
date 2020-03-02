@@ -80,4 +80,16 @@ void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess)
 		ExitProcess(dwLastError); 
 }
 #else
+void ErrorExit(LPTSTR lpszFunction, bool toExitProcess)
+{
+}
+
+
+void ErrorPrint(LPTSTR lpszFunction)
+{
+}
+
+void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess)
+{
+}
 #endif

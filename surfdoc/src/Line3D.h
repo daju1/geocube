@@ -25,9 +25,9 @@ protected:
 public:
 	long id_ige;
 	long id_umpoz;
-	long id_surf;//идентификатор для зранения поверхности в базе
-	// поскольку поверхность в базе может храниться толко в виде гриддаты
-	// поэтому только гриддата может назначить id_surf отличный от -1
+	long id_surf;//РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РґР»СЏ Р·СЂР°РЅРµРЅРёСЏ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё РІ Р±Р°Р·Рµ
+	// РїРѕСЃРєРѕР»СЊРєСѓ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ РІ Р±Р°Р·Рµ РјРѕР¶РµС‚ С…СЂР°РЅРёС‚СЊСЃСЏ С‚РѕР»РєРѕ РІ РІРёРґРµ РіСЂРёРґРґР°С‚С‹
+	// РїРѕСЌС‚РѕРјСѓ С‚РѕР»СЊРєРѕ РіСЂРёРґРґР°С‚Р° РјРѕР¶РµС‚ РЅР°Р·РЅР°С‡РёС‚СЊ id_surf РѕС‚Р»РёС‡РЅС‹Р№ РѕС‚ -1
 	BYTE podoshva;
 
 	GLfloat m_LineWidth;
@@ -44,8 +44,10 @@ public:
 	void Init(const Line3D& ob);
 	Line3D(const Line3D& ob);
 	Line3D& operator=(const Line3D& ob);
+#ifdef _MSC_VER
 	void Drawing(void);
 	void DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view * v , Profile3D * on, int alpha);
+#endif
 	void SavingAsRazrez(FILE *fd, 
 		SSaveProfData &sprData,
 		double a, double b, double c, double d,
@@ -66,7 +68,7 @@ public:
 	friend Archive& operator <<(Archive& ar, Line3D& ob);
 	friend Archive& operator >>(Archive& ar, Line3D& ob);
 	bool GetLineLength(double& ans);
-
+#ifdef _MSC_VER
 	virtual bool IsSelected(CPoint3 selected_view_pt, 
 		double search_radius,
 		WhatSelected& ws);
@@ -80,15 +82,16 @@ public:
 	bool FindIntersection(Profile3D * on, CPoint3 pt1, CPoint3 pt2, CPoint3 & pt3, int & i1, int & i2, int & unvisibles, int & dst_to_vis);
 
 	virtual HTREEITEM AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s = "");
-
+#endif
 	enum line3d_draw_mode {as_thing_lines = 10, as_lines_with_spheres = 20};
 	static line3d_draw_mode s_line3d_draw_mode;
-
+#ifdef _MSC_VER
 	//void FreeMiddlePoints();
 	void FillContextMenu(HMENU& hMenu);
 
 	virtual void PrintfProperties(vector<fmtstr> & text);
 	virtual void PrintfProperties(vector<LabData> & labdata);
+#endif
 
 };
 

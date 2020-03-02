@@ -6,7 +6,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef _MSC_VER
 //#include <windows.h>
+#else
+#include "mywindows.h"
+#endif
 #include <assert.h>
 #ifdef _MSC_VER
 class Archive;

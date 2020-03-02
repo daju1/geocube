@@ -18,29 +18,28 @@
 #include "Grid.h"
 #include "Primitive3D.h"
 
-
-class SurfDoc;
 #if defined (_MSC_VER)
-#define CUBE4D_AS_PRIMITIVE 0
-#else
-#define CUBE4D_AS_PRIMITIVE 1
+class SurfDoc;
 #endif
-
+#define CUBE4D_AS_PRIMITIVE 0
 #define Cube4D_npages 5
 
 class Cube4D
 #if CUBE4D_AS_PRIMITIVE
 	: public Primitive3D <CPoint4>
 #else
+#if defined (_MSC_VER)
         : public Object
 #endif
+#endif
 {
+#if defined (_MSC_VER)
 	APalette m_palette;
 	UINT m_nColormap;
 
 	bool m_bUseColormap;
 	bool m_bInverseColormap;
-
+#endif
 #if CUBE4D_AS_PRIMITIVE
 	double  m_vMax, m_vMin;
 #endif
@@ -57,8 +56,10 @@ class Cube4D
 
 public:
 	//void DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view * v, Profile3D * on);
+#if defined (_MSC_VER)
 	void ScaleIsolevels();
 	void UpdateIsolevels(bool);
+#endif
 #if CUBE4D_AS_PRIMITIVE
 	unsigned int m_leny; //grid4Section->nRow
 	unsigned int m_lenx; //grid4Section->nCol
@@ -89,6 +90,10 @@ public:
 	bool draw_as_image;
 	bool draw_as_contours;
 	bool draw_as_vol_render;
+
+#if !defined (_MSC_VER)
+        std::string name;
+#endif
 
 protected:
 #if defined (_MSC_VER)
@@ -127,6 +132,7 @@ public:
 #if CUBE4D_AS_PRIMITIVE
 	bool MakeGridSection(LPSURFER7GRID4SECTION grid4Section);
 #else
+#if defined (_MSC_VER)
 	void SetLayer(const Layer* layer)
 	{
 		this->SetLayer_NonVirtual(layer);
@@ -159,6 +165,7 @@ public:
 		glEndList();
 	}
 	virtual void ReDraw(void);
+#endif
 	bool SaveAs();
 	bool SaveAsBln(FILE * stream)
 	{		
@@ -177,7 +184,9 @@ public:
 #endif
 	bool SaveAs3DGrid(const char * file);
 	bool SaveAsVTK(const char * file);
+#if defined (_MSC_VER)
 	bool SaveAsDxf_OfOneIsoSurface(const char * outfile);
+#endif
 	bool SaveAsGrid_OfOneIsoSurface(const char * outfile);
 
 	bool SaveAsSurferClices(int nProjection);
@@ -199,7 +208,9 @@ public:
 	COLORREF GetColor(double z);
 	void DrawQuadsNumbers();
         Cube4D();
+#if defined (_MSC_VER)
 	Cube4D(SurfDoc * pSurfDoc);
+#endif
 	BOOL GetPoint(int iz, int iy, int ix, CPoint4 *pt);
 	virtual ~Cube4D();
 #if CUBE4D_AS_PRIMITIVE

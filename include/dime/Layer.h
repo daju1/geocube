@@ -30,7 +30,10 @@
 #ifndef DIME_LAYER_H
 #define DIME_LAYER_H
 
+#if defined (_MSC_VER)
 #include <windows.h> // for COLORREF
+#endif
+
 #include <dime/Basic.h>
 
 class DIME_DLL_API dimeLayer

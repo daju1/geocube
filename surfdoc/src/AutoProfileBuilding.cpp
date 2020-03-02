@@ -1002,8 +1002,9 @@ void DoMyMethod(vector<double> & X,
 	}
 	do
 	{
+#if defined (_MSC_VER)
 		if (!CheckMyLicense()) break;
-
+#endif
 		double old_add_F = add_F;
 		vector<double> old_sol = sol;
 		// тут мы получили функционал дополнительного отношения предпочтения
@@ -7945,9 +7946,9 @@ void DoMyMethod2(FILE * description,
 		
 	printf("The matrix is filled!!!\n");
 
-    
+#if defined (_MSC_VER)
 	if (!CheckMyLicense()) return;
-
+#endif
         
 	// здесь вычисляем грид
 	// Грид по размеру геологической структуры
@@ -8338,9 +8339,9 @@ void DoMyMethod3(int type, // тип прямой задачи
 
 		
 	printf("The matrix is filled!!!\n");
-
+#if defined (_MSC_VER)
 	if (!CheckMyLicense()) return;
-
+#endif
 
         
 	//здесь вычисляем грид
@@ -8725,9 +8726,9 @@ void DoMyMethod2W(FILE * description,
 	}
 		
 	printf("The matrix is filled!!!\n");
-
+#if defined (_MSC_VER)
 	if (!CheckMyLicense()) return;
-
+#endif
 	bool to_fill_matrix_2 = to_fill_matrix;
 
 	if (to_fill_matrix_2)
@@ -9416,9 +9417,9 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 		
 	printf("The matrix is filled!!!\n");
-
+#if defined (_MSC_VER)
 	if (!CheckMyLicense()) return;        
-
+#endif
 	// Грид по размеру геологической структуры
 	Grid4 * grid = CreateProfileGrid3D(mmd);
 
@@ -12191,7 +12192,9 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		fclose(stream);
 	}
 	//**********************************************
+#if defined (_MSC_VER)
 	if (!CheckMyLicense()) return false;
+#endif
 	//##############################################################
 	//это блок построения корреляционной матрицы
 	bool vertical_korr_on_base_wnd = true;
@@ -14973,7 +14976,9 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		fclose(stream);
 	}
 	//**********************************************
+#if defined (_MSC_VER)
 	if (!CheckMyLicense()) return false;
+#endif
 	//##############################################################
 	//это блок построения корреляционной матрицы
 	bool vertical_korr_on_base_wnd = true;

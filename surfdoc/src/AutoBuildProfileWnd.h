@@ -7,6 +7,12 @@
 // MapWnd.h : header file
 //
 
+#if defined (_MSC_VER)
+#include <windows.h>
+#else
+#include "mywindows.h"
+#endif
+
 /////////////////////////////////////////////////////////////////////////////
 // CMapWnd window
 
@@ -51,7 +57,9 @@ public:
 
 // Implementation
 public:
+#if defined (_MSC_VER)
 	void Invalidate();
+#endif
 	virtual ~AutoBuildProfileWnd();
 
 	void CreateNewMap(int points);
@@ -74,7 +82,9 @@ private:
 	// Generated message map functions
 protected:
 //	//{{AFX_MSG(CMapWnd)
+#if defined (_MSC_VER)
 	void OnPaint(HWND hwnd);
+#endif
 //	//}}AFX_MSG
 //	DECLARE_MESSAGE_MAP()
 };

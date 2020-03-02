@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "sorting.h"
 #include <math.h>
-int __cdecl compare_index_for_sort_decrease( const void *arg1, const void *arg2 )
+int compare_index_for_sort_decrease( const void *arg1, const void *arg2 )
 {
    /* Compare Y: */
    double 
@@ -14,7 +14,7 @@ int __cdecl compare_index_for_sort_decrease( const void *arg1, const void *arg2 
    return 0;
 }
 
-int __cdecl compare_index_for_sort( const void *arg1, const void *arg2 )
+int compare_index_for_sort( const void *arg1, const void *arg2 )
 {
    /* Compare Y: */
    double 
@@ -26,7 +26,7 @@ int __cdecl compare_index_for_sort( const void *arg1, const void *arg2 )
 	   return +1;
    return 0;
 }
-int __cdecl compare_X( const void *arg1, const void *arg2 )
+int compare_X( const void *arg1, const void *arg2 )
 {
    /* Compare X: */
    double 
@@ -40,7 +40,7 @@ int __cdecl compare_X( const void *arg1, const void *arg2 )
 	   return 1;
    return 0;
 }
-int __cdecl compare_Y( const void *arg1, const void *arg2 )
+int compare_Y( const void *arg1, const void *arg2 )
 {
    /* Compare Y: */
    double 
@@ -59,7 +59,7 @@ int __cdecl compare_Y( const void *arg1, const void *arg2 )
 
 
 
-int __cdecl compare4_X( const void *arg1, const void *arg2 )
+int compare4_X( const void *arg1, const void *arg2 )
 {
    /* Compare X: */
    double 
@@ -73,7 +73,7 @@ int __cdecl compare4_X( const void *arg1, const void *arg2 )
 	   return 1;
    return 0;
 }
-int __cdecl compare4_Y( const void *arg1, const void *arg2 )
+int compare4_Y( const void *arg1, const void *arg2 )
 {
    /* Compare Y: */
    double 
@@ -91,7 +91,7 @@ int __cdecl compare4_Y( const void *arg1, const void *arg2 )
 
 
 
-int __cdecl compare4_Z( const void *arg1, const void *arg2 )
+int compare4_Z( const void *arg1, const void *arg2 )
 {
    /* Compare Z: */
    double 
@@ -109,7 +109,7 @@ int __cdecl compare4_Z( const void *arg1, const void *arg2 )
 
 
 
-int __cdecl compare_int( const void *arg1, const void *arg2 )
+int compare_int( const void *arg1, const void *arg2 )
 {
    /* Compare Y: */
    int 
@@ -235,7 +235,7 @@ double Rand(double minBorder, double maxBorder)
 }
 double Rand(double x)
 {
-	//====== Случайное число в диапазоне (-x, x)
+	//====== РЎР»СѓС‡Р°Р№РЅРѕРµ С‡РёСЃР»Рѕ РІ РґРёР°РїР°Р·РѕРЅРµ (-x, x)
 	return x - (x + x) * rand() / RAND_MAX;
 }
 void randpermute(int n, vector<int>& result)

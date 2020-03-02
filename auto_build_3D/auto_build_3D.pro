@@ -23,7 +23,43 @@ SOURCES += main.cpp\
     ../tools/src/filedlg_qt.cpp \
     ../tools/src/errorexit.cpp \
     ../array/src/matrixes.cpp \
-    ../src/mywindows.cpp
+    ../src/mywindows.cpp \
+    ../surfdoc/src/Grid.cpp \
+    ../surfdoc/src/cube.cpp \
+    ../array/src/fft.cpp \
+    ../array/src/sorting.cpp \
+    ../tools/src/readfile.cpp \
+    ../array/src/korrelation.cpp \
+    ../geometry2D/Node.cpp \
+    ../array/src/wav.cpp \
+    ../array/src/interp.cpp \
+    ../geometry2D/VertexEx.cpp \
+    ../geometry2D/Vertex.cpp \
+    ../geometry2D/RandomizedSearchTree.cpp \
+    ../geometry2D/RandomizedNode.cpp \
+    ../geometry2D/PolygonEx.cpp \
+    ../geometry2D/Polygon.cpp \
+    ../geometry2D/Point.cpp \
+    ../geometry2D/ListNode.cpp \
+    ../geometry2D/List.cpp \
+    ../geometry2D/Edge.cpp \
+    ../geometry2D/delaunay.cpp \
+    ../geometry2D/belong.cpp \
+    ../array/src/Vector.cpp \
+    ../surfdoc/src/AutoBuildProfileWnd.cpp \
+    ../alglib-3.1.0/cpp/src/specialfunctions.cpp \
+    ../alglib-3.1.0/cpp/src/alglibinternal.cpp \
+    ../alglib-3.1.0/cpp/src/alglibmisc.cpp \
+    ../alglib-3.1.0/cpp/src/ap.cpp \
+    ../alglib-3.1.0/cpp/src/dataanalysis.cpp \
+    ../alglib-3.1.0/cpp/src/diffequations.cpp \
+    ../alglib-3.1.0/cpp/src/fasttransforms.cpp \
+    ../alglib-3.1.0/cpp/src/integration.cpp \
+    ../alglib-3.1.0/cpp/src/interpolation.cpp \
+    ../alglib-3.1.0/cpp/src/linalg.cpp \
+    ../alglib-3.1.0/cpp/src/optimization.cpp \
+    ../alglib-3.1.0/cpp/src/solvers.cpp \
+    ../alglib-3.1.0/cpp/src/statistics.cpp
 
 HEADERS  += auto_build_3d.h \
     ./../surfdoc/src/AutoProfileBuilding.h \
@@ -46,7 +82,22 @@ HEADERS  += auto_build_3d.h \
     ../array/src/sparse_row_map.h \
     ../array/src/interp.h \
     ../array/src/ap.h \
-    ../array/src/stdafx.h
+    ../array/src/stdafx.h \
+    ../surfdoc/src/AFile.h \
+    ../geometry2D/Node.h \
+    ../geometry2D/belong.h \
+    ../geometry2D/delaunay.h \
+    ../geometry2D/Edge.h \
+    ../geometry2D/List.h \
+    ../geometry2D/ListNode.h \
+    ../geometry2D/Point.h \
+    ../geometry2D/Polygon.h \
+    ../geometry2D/PolygonEx.h \
+    ../geometry2D/RandomizedNode.h \
+    ../geometry2D/RandomizedSearchTree.h \
+    ../geometry2D/SearchTree.h \
+    ../geometry2D/Vertex.h \
+    ../geometry2D/VertexEx.h
 
 FORMS    += auto_build_3d.ui
 

@@ -709,18 +709,19 @@ bool CorrelationCoefficient(vector<double> & v1, vector<double> & v2, double & k
 
 bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & signal, vector<double> & v_korr, vector<double> & v_cov);
 
-#ifdef _MSC_VER
+
 AutoBuildProfileDlg::AutoBuildProfileDlg(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab) : m_ab(ab)
 {
 	p_auto_build_profile = auto_build_profile;
 	consol = _consol;
-
+#ifdef _MSC_VER
 	DialogBoxParam( 
 	   hInst, 
 	   MAKEINTRESOURCE(IDD_DIALOG_AUTO_BUILD_PROFILE), 
 	   NULL,
 	   (DLGPROC)DlgProcAutoBuildProfile,
 	   (LPARAM)this);
+#endif
 
 }
 
@@ -728,7 +729,7 @@ AutoBuildProfileDlg::~AutoBuildProfileDlg()
 {
 
 }
-
+#ifdef _MSC_VER
 void AutoBuildProfileDlg::OnInitDialog()
 {
 	TCHAR str[1024];
@@ -1137,20 +1138,21 @@ void AutoBuildProfileDlg::OnDestroy()
 {
 
 }
-
+#endif
 
 
 AutoBuildProfileDlg1::AutoBuildProfileDlg1(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab) : m_ab(ab)
 {
 	p_auto_build_profile = auto_build_profile;
 	consol = _consol;
-
+#ifdef _MSC_VER
 	DialogBoxParam( 
 	   hInst, 
 	   MAKEINTRESOURCE(IDD_DIALOG_AUTO_BUILD_PROFILE1), 
 	   NULL,
 	   (DLGPROC)DlgProcAutoBuildProfile1,
 	   (LPARAM)this);
+#endif
 
 }
 
@@ -1158,7 +1160,7 @@ AutoBuildProfileDlg1::~AutoBuildProfileDlg1()
 {
 
 }
-
+#ifdef _MSC_VER
 void AutoBuildProfileDlg1::OnInitDialog()
 {
 	CheckRadioButton( hDlg, 
@@ -1874,7 +1876,7 @@ void SaveCubesAndSlices(const char * common_directory,
 
 
 	// 	======================================================
-	Cube4D a_cube(NULL);
+    Cube4D a_cube;
 	a_cube.Init(&cubes[cc][i_alpha]->grid4Section, (COLORREF)0);
 
 	char slice_dir[4098];
@@ -5345,8 +5347,9 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 										dir_out);
 									SaveAsSurfer7Grid4(fn, cube);*/
 								}
+#if defined (_MSC_VER)
 								if (!CheckMyLicense()) continue;        
-
+#endif
 								{
 									vector<sparse_row_map> m;
 									long _cols;
@@ -5964,9 +5967,9 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 									}
 
 									//printf("The matrix is filled!!!\n");
-
+#if defined (_MSC_VER)
 									if (!CheckMyLicense()) continue;        
-
+#endif
 									char fn_mrec_min_sq[4098];
 									if (/*to_calculi_min_sq_mat*/true)
 									{
@@ -11510,11 +11513,10 @@ bool Lamp(int use_newton,
 	delete cubes;
 #endif
 }
-#if defined (_MSC_VER)
+
 bool AutoBuildProfileDlg0::OpenFileDialog(void)
 {
     HRESULT hr = S_OK;
-	OPENFILENAME ofn;       // common dialog box structure
 	
  			
 	TCHAR filter[] =
@@ -11522,8 +11524,12 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 		TEXT("Data files (*.dat*)\0*.dat\0")
 		TEXT("Text files (*.txt)\0*.txt\0")
 		;
+    ::OpenFileDlg(NULL, filter, this->filename);
 
-	// Initialize OPENFILENAME
+
+#if defined (_MSC_VER)
+    OPENFILENAME ofn;       // common dialog box structure
+    // Initialize OPENFILENAME
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.lpstrFile = szFile;
@@ -11569,7 +11575,7 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 				strcpy(this->m_files_in_dir.szFileFilter, "*.txt");
 				break;
 			}
-			strcpy(filename, ofn.lpstrFile + ofn.nFileOffset);
+            strcpy(file, ofn.lpstrFile + ofn.nFileOffset);
 			strcpy(this->directory, ofn.lpstrFile);
 			if (ofn.nFileOffset > 1) this->directory[ofn.nFileOffset-1] = '\0';
 
@@ -11661,8 +11667,9 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 	}
 	// Display the Open dialog box. 
 	return false;
-}
 #endif
+}
+
 
 
 

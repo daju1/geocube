@@ -1,7 +1,7 @@
 #include "../StdAfx.h"
 #include "readfile.h"
 //#include "../datenum.h"
-extern HINSTANCE hInst;   // текущий экземпляр
+extern HINSTANCE hInst;   // С‚РµРєСѓС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
 extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
 
 int ReadInputFile(char * fname, vdouble& x, vdouble& y)
@@ -163,12 +163,12 @@ int ReadInputFile(char * fname, Vector<vdouble>& vv, int delim)
 			MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
-
+#if defined (_MSC_VER)
 	// Gets the file descriptor associated with a stream.
 	int fd = _fileno(stream);
 	// Get the length of a file in bytes
 	cb = _filelength(fd);
-
+#endif
 		char title[512];
 		int nParams = 0;
 		size_t bytes_line;
@@ -253,7 +253,7 @@ printf("len = %d nParams = %d\n", len, nParams);fflush(stdout);
 */
 		if( len == 0)
 		{
-			MessageBox(0,"Файл не содержит информации надлежащего формата", "Import",0);
+			MessageBox(0,"Р¤Р°Р№Р» РЅРµ СЃРѕРґРµСЂР¶РёС‚ РёРЅС„РѕСЂРјР°С†РёРё РЅР°РґР»РµР¶Р°С‰РµРіРѕ С„РѕСЂРјР°С‚Р°", "Import",0);
 			return 0;
 		}
 
@@ -444,7 +444,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 		  cb_read = 0,  // bytes read 
 		  cb_disp = 0;  // bytes displayed
 
-
+#if defined (_MSC_VER)
 		if (hWnd != NULL)
 		{
 
@@ -477,7 +477,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 						MAKELPARAM(0, cb / 2048)); 
 			SendMessage(hwndPB, PBM_SETSTEP, (WPARAM) 1, 0); 
 		}
-
+#endif
 		bool have_header = false;
 		bool have_tsyfra = false;
 
@@ -500,6 +500,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 				bytes_line = strlen(ch);
 				//MessageBox(0, szBuff, "", 0);
 				// calculate progress
+#if defined (_MSC_VER)
 				if(hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -513,9 +514,10 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 							SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
 					}
 				}
+#endif
 				p1 = szBuff;
 
-				// подбор разделителя
+				// РїРѕРґР±РѕСЂ СЂР°Р·РґРµР»РёС‚РµР»СЏ
 				if (strchr(p1,',') != NULL)
 				{
 					delim = ',';
@@ -542,7 +544,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 				for (size_t j = 0; j < first_line_len; j++)
 				{
 					int cur_char = szBuff[j];
-					// принадлежит ли данный знак цифровому интервалу?
+					// РїСЂРёРЅР°РґР»РµР¶РёС‚ Р»Рё РґР°РЅРЅС‹Р№ Р·РЅР°Рє С†РёС„СЂРѕРІРѕРјСѓ РёРЅС‚РµСЂРІР°Р»Сѓ?
 					if (isnot_comment_char)
 					{
 						if (cur_char == '"')
@@ -633,6 +635,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 
 				bytes_line = strlen(ch);
 				// calculate progress
+#if defined (_MSC_VER)
 				if (hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -646,6 +649,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 							SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
 					}
 				}
+#endif
 				p1 = szBuff;
 
 				vector<double> temp_row;
@@ -686,11 +690,13 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 			}
 		}
 		fclose(stream);
+#if defined (_MSC_VER)
 		if (hWnd && hwndPB)
 			DestroyWindow(hwndPB);
+#endif
 	}
 	else
-		MessageBox(0, ext, "Расширение файла не подходит", 
+		MessageBox(0, ext, "Р Р°СЃС€РёСЂРµРЅРёРµ С„Р°Р№Р»Р° РЅРµ РїРѕРґС…РѕРґРёС‚", 
 			MB_OK | MB_ICONINFORMATION);
 	if(szBuff)
 		HeapFree(GetProcessHeap(), 0,szBuff);
@@ -761,7 +767,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 		  cb_read = 0,  // bytes read 
 		  cb_disp = 0;  // bytes displayed
 
-
+#if defined (_MSC_VER)
 		if (hWnd != NULL)
 		{
 
@@ -794,7 +800,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 						MAKELPARAM(0, cb / 2048)); 
 			SendMessage(hwndPB, PBM_SETSTEP, (WPARAM) 1, 0); 
 		}
-
+#endif
 
 
 		// read and ignore first nLinesToIgnore lines
@@ -815,6 +821,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 				bytes_line = strlen(ch);
 				//MessageBox(0, szBuff, "", 0);
 				// calculate progress
+#if defined (_MSC_VER)
 				if(hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -828,6 +835,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 							SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
 					}
 				}
+#endif
 				p1 = szBuff;
 
 				ncol = 0;
@@ -874,6 +882,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 
 				bytes_line = strlen(ch);
 				// calculate progress
+#if defined (_MSC_VER)
 				if (hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -887,6 +896,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 							SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
 					}
 				}
+#endif
 				p1 = szBuff;
 				
 				cell			temp_cell;
@@ -943,11 +953,13 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			}
 		}
 		fclose(stream);
+#if defined (_MSC_VER)
 		if (hWnd && hwndPB)
 			DestroyWindow(hwndPB);
+#endif
 	}
 	else
-		MessageBox(0, ext, "Расширение файла не подходит", 
+		MessageBox(0, ext, "Р Р°СЃС€РёСЂРµРЅРёРµ С„Р°Р№Р»Р° РЅРµ РїРѕРґС…РѕРґРёС‚", 
 			MB_OK | MB_ICONINFORMATION);
 	if(szBuff)
 		HeapFree(GetProcessHeap(), 0,szBuff);
@@ -1120,7 +1132,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 		  cb_read = 0,  // bytes read 
 		  cb_disp = 0;  // bytes displayed
 
-
+#if defined (_MSC_VER)
 		if (hWnd != NULL)
 		{
 
@@ -1153,7 +1165,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 						MAKELPARAM(0, cb / 2048)); 
 			SendMessage(hwndPB, PBM_SETSTEP, (WPARAM) 1, 0); 
 		}
-
+#endif
 
 
 		// read and ignore first nLinesToIgnore lines
@@ -1172,6 +1184,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 				bytes_line = strlen(ch);
 				//MessageBox(0, szBuff, "", 0);
 				// calculate progress
+#if defined (_MSC_VER)
 				if(hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -1185,6 +1198,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 							SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
 					}
 				}
+#endif
 #if 1
 				ParseLine(0, szBuff, title, bytes_line, dd,  NULL, pnames, NULL, NULL);
 #else
@@ -1254,6 +1268,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			{
 				bytes_line = strlen(ch);
 				// calculate progress
+#if defined (_MSC_VER)
 				if (hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -1267,6 +1282,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 							SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
 					}
 				}
+#endif
 				vector<cell>	temp_row;
 #if 1
 				ParseLine(i, szBuff, title, bytes_line, dd, &temp_row, NULL, NULL, NULL);
@@ -1353,11 +1369,13 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			}
 		}
 		fclose(stream);
+#if defined (_MSC_VER)
 		if (hWnd && hwndPB)
 			DestroyWindow(hwndPB);
+#endif
 	}
 	else
-		MessageBox(0, ext, "Расширение файла не подходит", 
+		MessageBox(0, ext, "Р Р°СЃС€РёСЂРµРЅРёРµ С„Р°Р№Р»Р° РЅРµ РїРѕРґС…РѕРґРёС‚", 
 			MB_OK | MB_ICONINFORMATION);
 	if(szBuff)
 		HeapFree(GetProcessHeap(), 0,szBuff);

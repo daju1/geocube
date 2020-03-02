@@ -4,7 +4,17 @@
 #include "../stdafx.h"
 #include "stdafx.h"
 #include "AutoBuildProfileWnd.h"
+#include <stdio.h>
 
+#if !defined (_MSC_VER)
+#ifdef _UNICODE
+#else
+#define _ftprintf fprintf
+#define _tfopen fopen
+#define _fgetts fgets
+#define _stscanf sscanf
+#endif
+#endif
 
 /////////////////////////////////////////////////////////////////////////////
 // CMapWnd
@@ -16,13 +26,17 @@ m_points(0), m_wayPoints(0),
 m_xWay(NULL), m_yWay(NULL), 
 m_vxWay(NULL), m_vyWay(NULL)
 {
+#if defined (_MSC_VER)
 	InitializeCriticalSection(&CriticalSection);
+#endif
 }
 
 AutoBuildProfileWnd::~AutoBuildProfileWnd()
 {
 	Free();
+#if defined (_MSC_VER)
 	DeleteCriticalSection(&CriticalSection);
+#endif
 }
 
 /*
@@ -39,6 +53,7 @@ END_MESSAGE_MAP()
 // ------------------------------------------------------------
 // WM_PAINT - paint the window
 //
+#if defined (_MSC_VER)
 void AutoBuildProfileWnd::OnPaint(HWND hwnd) 
 {
 	PAINTSTRUCT ps;
@@ -133,7 +148,7 @@ void AutoBuildProfileWnd::OnPaint(HWND hwnd)
 	EndPaint(hwnd, &ps); 
 }
 
-
+#endif
 
 // ------------------------------------------------------------
 // create new map
@@ -145,16 +160,17 @@ void AutoBuildProfileWnd::CreateNewMap(int points)
 
 	// free old map
 	Free();
-
+#if defined (_MSC_VER)
 	srand(GetTickCount());
 	GetClientRect(hwnd, &rc);
+#endif
 	rc.right	-= 6;
 	rc.bottom	-= 6;
 
 	m_points = points;
 
 char str[255];
-sprintf(str, "m_points = %d points=%d", m_points, points);
+sprintf_s(str, 255, "m_points = %d points=%d", m_points, points);
 MessageBox(0, str, "CreateMap", 0);
 
 	m_xPoints	= new double[points];
@@ -168,8 +184,9 @@ MessageBox(0, str, "CreateMap", 0);
 //		m_xPoints[i] = (rand() % rc.right) + 3;
 //		m_yPoints[i] = (rand() % rc.bottom) + 3;
 	}
-
+#if defined (_MSC_VER)
 	Invalidate();
+#endif
 }
 
 
@@ -261,12 +278,18 @@ void AutoBuildProfileWnd::ReallocWay(short count)
 //
 void AutoBuildProfileWnd::SetPoints(double* xPoints, double* yPoints)
 {
-	LeaveCriticalSection(&CriticalSection);
+#if defined (_MSC_VER)
+    EnterCriticalSection(&CriticalSection);
+#endif
 	memcpy(m_xPoints, xPoints, m_points * sizeof(double));
 	memcpy(m_yPoints, yPoints, m_points * sizeof(double));
+#if defined (_MSC_VER)
 	LeaveCriticalSection(&CriticalSection);
+#endif
 	ExtremePoints();
+#if defined (_MSC_VER)
 	Invalidate();
+#endif
 }
 
 void AutoBuildProfileWnd::ExtremePoints()
@@ -326,8 +349,9 @@ void AutoBuildProfileWnd::SetWay(double* xPoints, double* yPoints, short count)
 		m_xWay[i] = xPoints[i];
 		m_yWay[i] = yPoints[i];
 	}
-
+#if defined (_MSC_VER)
 	Invalidate();
+#endif
 }
 
 
@@ -416,13 +440,13 @@ int AutoBuildProfileWnd::Load(LPCTSTR szFile)
 	// free file and mem
 	fclose(fp);
 	delete [] sz;
-
+#if defined (_MSC_VER)
 	// redraw map
 	Invalidate();
-
+#endif
 	return r;
 }
-
+#if defined (_MSC_VER)
 void AutoBuildProfileWnd::Invalidate()
 {
 	RECT rect;
@@ -435,3 +459,4 @@ void AutoBuildProfileWnd::Invalidate()
 
 	InvalidateRect(hwnd,&rect, true);
 }
+#endif

@@ -1337,6 +1337,7 @@ public:
 	}
 };
 
+#if defined (_MSC_VER)
 template <class T> Archive& operator <<(Archive& ar, vect<T, vectItem<T> >& v)
 {
 //printf("Archive& operator <<(Archive& ar, vect<T, vectItem<T> >& v)\n");
@@ -1436,7 +1437,7 @@ template <class T> Archive& operator >>(Archive& ar, vect<T, vectItem<T> >& v)
 	return ar;
 
 }
-#if defined (_MSC_VER)
+
 template <class T> Archive& operator <<(Archive& ar, vect<T, ObjectItem<T> >& v)
 {
 //printf("Archive& operator <<(Archive& ar, vect<T, ObjectItem<T> >& v)\n");

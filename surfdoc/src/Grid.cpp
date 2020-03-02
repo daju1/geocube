@@ -3,12 +3,13 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
+#if defined (_MSC_VER)
 #include <cderr.h>
-
-#include "..\..\array\src\vdouble.h"
-#include "..\..\array\src\matrixes.h"
-#include "archive.h"
-
+#endif
+#include "../../array/src/Vdouble.h"
+#include "../../array/src/matrixes.h"
+#include "Archive.h"
+#include "filedlg.h"
 
 #include <fstream>
 #include <iostream>
@@ -19,7 +20,7 @@ using namespace std;
 extern int ReadContourBlnFile(vdouble& x, vdouble& y);
 extern int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible);
 extern int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
-extern HINSTANCE hInst;   // текущий экземпляр
+extern HINSTANCE hInst;   // С‚РµРєСѓС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
 extern char szPath[];
 
 //////////////////////////////////////////////////////////////////////
@@ -46,7 +47,7 @@ void CGrid::Init(Grid* pGrid)
 printf ("CGrid::Init(Grid* pGrid)\n");
 	xi = dsequence(pGrid->gridSection.xLL, pGrid->gridSection.xSize, pGrid->gridSection.nCol);
 	yi = dsequence(pGrid->gridSection.yLL, pGrid->gridSection.ySize, pGrid->gridSection.nRow);
-	zi.resize(pGrid->gridSection.nRow, pGrid->gridSection.nCol);
+    zi.resize((const int)pGrid->gridSection.nRow, (const int)pGrid->gridSection.nCol);
 	visible.resize(pGrid->gridSection.nRow, pGrid->gridSection.nCol, 1.0);
 	
 	//MessageBox(0,"1","",0);
@@ -121,7 +122,7 @@ double CGrid::GetYMax()
 
 
 
-int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, 
+int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile,
 					  long nRow, 
 					  long nCol, 
 					  double xLL, // X coordinate of the lower left corner of the grid
@@ -134,9 +135,6 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile,
 {
     HRESULT hr = S_OK;
 
-//    SSavePlotData spdData;
-    OPENFILENAME ofn;
-
     static TCHAR file[256];
     static TCHAR szFilepath[256];
     static TCHAR fileTitle[256];
@@ -146,6 +144,14 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile,
     strcpy( file, lpstrFile);
     strcpy( fileTitle, TEXT(""));
     //strcpy( fileTitle, lpstrFile);
+
+    DWORD nFilterIndex;
+    if (SaveFileDlg(hWnd, lpstrFile, filter, nFilterIndex) != S_OK)
+        return -1;
+#if 0 //defined (_MSC_VER)
+//    SSavePlotData spdData;
+    OPENFILENAME ofn;
+
 
     memset( &ofn, 0, sizeof(ofn) );
     ofn.lStructSize       = sizeof(OPENFILENAME);
@@ -280,8 +286,10 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile,
 			return -1;
         }
     }
-	if (ofn.nFilterIndex == 1)
+#endif
+    if (nFilterIndex == 1)
 		strcat(file, ".grd");
+
 
 	char *p, ext[255];
 	FILE *stream;
@@ -313,7 +321,7 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile,
 
 	size_t wrote;
 
-	// Записываем
+	// Р—Р°РїРёСЃС‹РІР°РµРј
 	long headerID = 0x42525344;
 	wrote = fwrite(&headerID, sizeof(long), 1, stream);
 
@@ -418,12 +426,9 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile,
 
 
 
-int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible)
+int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible)
 {
     HRESULT hr = S_OK;
-
-//    SSavePlotData spdData;
-    OPENFILENAME ofn;
 
     static TCHAR file[256];
     static TCHAR szFilepath[256];
@@ -434,6 +439,16 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vd
     strcpy( file, lpstrFile);
     strcpy( fileTitle, TEXT(""));
     //strcpy( fileTitle, lpstrFile);
+
+    DWORD nFilterIndex;
+    if (SaveFileDlg(hWnd, lpstrFile, filter, nFilterIndex) != S_OK)
+        return -1;
+
+#if 0 //defined (_MSC_VER)
+//    SSavePlotData spdData;
+    OPENFILENAME ofn;
+
+
 
     memset( &ofn, 0, sizeof(ofn) );
     ofn.lStructSize       = sizeof(OPENFILENAME);
@@ -568,7 +583,8 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vd
 			return -1;
         }
     }
-	if (ofn.nFilterIndex == 1)
+#endif
+    if (nFilterIndex == 1)
 		strcat(file, ".grd");
 
 	char *p, ext[255];
@@ -593,14 +609,14 @@ int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vd
 	if ((stream = fopen(file,"wb")) == NULL)
 	{
 		char errstr[1024];
-		sprintf(errstr, "Cannot open output file.\n%s", szPath);
+        sprintf(errstr, "Cannot open output file.\n%s", file);
 		MessageBox(0, errstr, "SaveAsSurferGrid7", 
 			MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
 	size_t wrote;
 
-	// Записываем
+	// Р—Р°РїРёСЃС‹РІР°РµРј
 	long headerID = 0x42525344;
 	wrote = fwrite(&headerID, sizeof(long), 1, stream);
 
@@ -844,7 +860,7 @@ printf("ImportSurfer7Grid\n");
 				MB_OK | MB_ICONINFORMATION);
 			return -1;
 		}
-		// считываем 
+		// СЃС‡РёС‚С‹РІР°РµРј 
 		size_t read;
 		long headerID;
 		read = fread(&headerID, sizeof(long), 1, stream);
@@ -1137,7 +1153,7 @@ int SaveAsSurfer7Grid(const char *file, Grid* pgrid)
 
 	size_t wrote;
 
-	// Записываем
+	// Р—Р°РїРёСЃС‹РІР°РµРј
 	long headerID = 0x42525344;
 	wrote = fwrite(&headerID, sizeof(long), 1, stream);
 
@@ -1230,7 +1246,7 @@ printf("ImportSurfer7Grid4 %s\n", file);
 				MB_OK | MB_ICONINFORMATION);
 			return -1;
 		}
-		// считываем 
+		// СЃС‡РёС‚С‹РІР°РµРј 
 		size_t read;
 		long headerID;
 		read = fread(&headerID, sizeof(long), 1, stream);
@@ -1540,7 +1556,7 @@ int SaveAsVTK(const char *file, Grid4* pgrid, bool view)
 	if ((stream = fopen(file,"wb")) == NULL)
 	{
 		char errstr[1024];
-		sprintf(errstr, "Cannot open output file.\n%s", szPath);
+        sprintf(errstr, "Cannot open output file.\n%s", file);
 		MessageBox(0, errstr, "SaveAsVTK", 
 			MB_OK | MB_ICONINFORMATION);
 		return -1;
@@ -1647,15 +1663,15 @@ int SaveAsSurfer7Grid4(const char *file, Grid4* pgrid)
 	if ((stream = fopen(file,"wb")) == NULL)
 	{
 		char errstr[1024];
-		sprintf(errstr, "Cannot open output file.\n%s", szPath);
-		//MessageBox(0, errstr, "SaveAsSurferGrid7", 
-		//	MB_OK | MB_ICONINFORMATION);
+        sprintf(errstr, "Cannot open output file.\n%s", file);
+        MessageBox(0, errstr, "SaveAsSurferGrid7",
+            MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
 
 	size_t wrote;
 
-	// Записываем
+	// Р—Р°РїРёСЃС‹РІР°РµРј
 	long headerID = 0x42525377;
 	wrote = fwrite(&headerID, sizeof(long), 1, stream);
 
@@ -1929,7 +1945,7 @@ Archive& operator <<(Archive& ar, Grid4& ob)
 
 //	size_t wrote;
 
-	// Записываем
+	// Р—Р°РїРёСЃС‹РІР°РµРј
 	long headerID = 0x42525377;
 	//wrote = fwrite(&headerID, sizeof(long), 1, stream);
 	ar << headerID;
@@ -2028,7 +2044,7 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 //				MB_OK | MB_ICONINFORMATION);
 //			return -1;
 //		}
-		// считываем 
+		// СЃС‡РёС‚С‹РІР°РµРј 
 //		size_t read;
 		long headerID;
 		//read = fread(&headerID, sizeof(long), 1, stream);
@@ -2233,3 +2249,248 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 
 	return ar;
 }
+
+
+
+int ReadContourBlnFile(vdouble& x, vdouble& y)
+{
+	char *p, ext[255];
+	FILE *stream;
+	const unsigned int n = 1023;
+	char szBuff[n];
+
+	p = strrchr(szPath,'.');
+	if (p)
+		strcpy(ext, p+1);
+
+	if (p && strcmp(ext, "bln") == 0)
+	{
+		//MessageBox(0, ext, "bln",0);
+		// open the file
+		if ((stream = fopen(szPath,"rt")) == NULL)
+		{
+			MessageBox(0, "Cannot open input file.\n", "Import", 
+				MB_OK | MB_ICONINFORMATION);
+			return -1;
+		}
+		int len;
+		if (!feof(stream))
+		{
+			char * ch;
+			ch = fgets(szBuff,n,stream);
+			if( ch != NULL && strlen(szBuff) > 1)
+			{
+				len = atoi(szBuff);
+			}
+		}
+		double X,Y;
+		int i = 0;
+		x.resize(len);
+		y.resize(len);
+		while (!feof(stream) && i < len)
+		{
+			char * ch;
+			ch = fgets(szBuff,n,stream);
+			if( ch != NULL && strlen(szBuff) > 1)
+			{
+				int rez = sscanf(szBuff,"%lf,%lf",
+								&X, &Y);
+				if (rez == 2 && rez != EOF)
+				{
+					x[i] = X;
+					y[i] = Y;
+					i++;
+				}
+
+			}
+		}
+		fclose(stream);
+		if (i == len && i > 2)
+			return 0;
+		if (!(x[0] == x.End() && y[0] == y.End()))
+		{
+			MessageBox(0, "The contour is not closed!", "Warning", 0);
+			return 1;
+		}										
+	}
+	return -1;
+}
+int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible)
+{
+	if ( xc.Length() != yc.Length() )
+	{
+		char errstr[1024];
+		sprintf(errstr, 
+			"lengthes of vectors xc(%d), yc(%d) must be equial",
+			xc.Length(), yc.Length());
+		MessageBox(0, errstr,"Error using SetVisiblePointsInContour",0);
+		return -1;
+	}
+	int i,j,q, ind,
+		m = xi.Length(), 
+		n = yi.Length(), 
+		lenc = xc.Length();
+
+
+	RECT rcClient;  // Client area of parent window 
+	int cyVScroll;  // Height of scroll bar arrow 
+	HWND hwndPB;    // Handle of progress bar 
+	DWORD cb,		// Size of file and count of
+	  cb_read = 0,  // bytes read 
+	  cb_disp = 0;  // bytes displayed
+
+
+#if defined (_MSC_VER)
+	// Ensure that the common control DLL is loaded
+	// and create a progress bar along the bottom of
+	// the client area of the parent window. 
+	// Base the height of the progress bar on the
+	// height of a scroll bar arrow. 
+	InitCommonControls(); 
+	GetClientRect(hwndParent, &rcClient); 
+	GetWindowRect(hwndParent, &rcClient); 
+	cyVScroll = GetSystemMetrics(SM_CYVSCROLL); 
+	hwndPB = CreateWindowEx(WS_EX_TOPMOST, PROGRESS_CLASS,
+			 (LPSTR) NULL, 
+			 //WS_CHILD | WS_VISIBLE,
+			 WS_POPUPWINDOW,
+			 //0, 0,
+			 rcClient.left, rcClient.bottom-cyVScroll,
+			 rcClient.right, cyVScroll, 
+			 //hwndParent, 
+			 NULL,
+			 
+			 (HMENU) 0, hInst, NULL); 
+
+	ShowWindow(hwndPB,1);
+#endif
+	// Gets the file descriptor associated with a stream.
+	//int fd = _fileno(stream);
+	// Get the length of a file in bytes
+	cb = lenc;
+
+
+
+	// Set the range and increment of the progress
+	// bar. 
+#if defined (_MSC_VER)
+	SendMessage(hwndPB, PBM_SETRANGE, 0,
+				MAKELPARAM(0, cb)); 
+	SendMessage(hwndPB, PBM_SETSTEP, (WPARAM) 1, 0); 
+#endif
+
+
+
+
+	vdouble angle,angle1,angle2, dangle, sum_dangle;
+
+	visible.resize(n, m, 0.0);
+	angle.resize(n, m);
+	angle1.resize(n, m);
+	angle2.resize(n, m);
+	dangle.resize(n, m, 0.0);
+	sum_dangle.resize(n, m, 0.0);
+	for (q = 0; q < lenc; q++)
+	{
+		if(q > 0)
+		{
+			angle1 = angle;
+		}
+		for ( i = 0; i < m; i++)
+		{
+			for (j = 0; j < n; j++)
+			{												
+				angle(j,i) = atan2(
+					yc[q] - yi[j], 
+					xc[q] - xi[i]);			
+			}
+		}
+		if(q > 0)
+		{
+			angle2 = angle;
+			dangle = angle2 - angle1;
+			Vector <int> indexes = Find(dangle > 1.9*PI);
+			for (ind = 0; ind < indexes.Size(); ind++)
+			{
+				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
+					dangle[indexes[ind]] -= 2*PI;
+			}
+			indexes = Find(dangle < -1.9*PI);
+			for (ind = 0; ind < indexes.Size(); ind++)
+			{
+				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
+					dangle[indexes[ind]] += 2*PI;
+			}
+			sum_dangle += dangle;
+		}
+#if defined (_MSC_VER)
+		SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
+#endif
+	}
+/*	q = 0; 
+	{
+			angle1 = angle;
+		for ( i = 0; i < m; i++)
+		{
+			for (j = 0; j < n; j++)
+			{												
+				angle(i,j) = atan2(
+					yc[q] - yi[j], 
+					xc[q] - xi[i]);
+			}
+		}
+			angle2 = angle;
+			dangle = angle2 - angle1;
+			Vector <int> indexes = Find(dangle > 4.*PI/3.);
+			for (int ind = 0; ind < indexes.Size(); ind++)
+			{
+				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
+					dangle[indexes[ind]] -= 2*PI;
+			}
+			indexes = Find(dangle < -4.*PI/3.);
+			for (ind = 0; ind < indexes.Size(); ind++)
+			{
+				if (angle1[indexes[ind]] * angle2[indexes[ind]] < 0.0)
+					dangle[indexes[ind]] += 2*PI;
+			}
+			sum_dangle += dangle;
+		SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
+//				RECT rect;
+//				GetClientRect(hwndParent,&rect);
+//				InvalidateRect(hwndParent,&rect, true);
+//MessageBox(0,"","",0);
+
+	}*/
+	// 
+	Vector <int> indexes = Find(sum_dangle > 1.9*PI || sum_dangle < -1.9*PI);
+	for (int ind = 0; ind < indexes.Size(); ind++)
+	{
+		visible[indexes[ind]] = 1.0;
+	}
+
+#if defined (_MSC_VER)
+	DestroyWindow(hwndPB);
+#endif
+	return 0;
+}
+#if !FAST_GRID_LOADING
+DWORD WINAPI SetVisiblePointsInContour(void * p)
+{
+	CGrid* pThis;
+	MessageBox(0,"SetVisiblePointsInContour(void * p)","",0);
+	if (p)
+		pThis = reinterpret_cast<CGrid*>(p);
+	else
+	{
+		pThis = NULL;
+		return 1;
+	}
+
+	if (pThis->SetVisiblePointsInContour() == 0)
+	{
+		SendMessage(pThis->hwndParent, WM_COMMAND, ID_WINSURF_DRAW, 0);
+		SendMessage(pThis->hwndParent, WM_COMMAND, ID_WINSURF_FILE_SAVEAS_SURFER7_GRID,0);
+	}
+	return 0;
+}
+#endif
