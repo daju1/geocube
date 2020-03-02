@@ -10,11 +10,17 @@ auto_build_3D::auto_build_3D(QWidget *parent) :
     ui->setupUi(this);
 
     AutoBuildProfile::auto_build_parametrs_Init1();
-    abpd = new AutoBuildProfileDlg(true, NULL, AutoBuildProfile::ab);		// ...right after the dialog is closed?
+    abpd1 = new AutoBuildProfileDlg1(true, NULL, AutoBuildProfile::ab);		// ...right after the dialog is closed?
 }
 
 auto_build_3D::~auto_build_3D()
 {
     delete ui;
-    delete abpd;
+    delete abpd1;
+}
+
+void auto_build_3D::on_pushButton_clicked()
+{
+    abpd1->HandlingOfInputFiles();
+
 }

@@ -16,7 +16,10 @@ public:
     explicit auto_build_3D(QWidget *parent = 0);
     ~auto_build_3D();
 
-    AutoBuildProfileDlg * abpd;
+    AutoBuildProfileDlg1 * abpd1;
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::auto_build_3D *ui;
