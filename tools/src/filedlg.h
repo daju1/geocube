@@ -30,7 +30,7 @@ public:
 };
 HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData);
 
-HRESULT OpenFileDlg(HWND hWnd, LPCTSTR lpstrFilter, LPTSTR lpstrFile = NULL);
+HRESULT OpenFileDlg(HWND hWnd, TCHAR filter[], LPTSTR lpstrFile = NULL);
 HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
 #if defined (_MSC_VER)
 HRESULT SavePlot(HWND hWnd, HENHMETAFILE hMetaFile, LPCTSTR lpstrFile);

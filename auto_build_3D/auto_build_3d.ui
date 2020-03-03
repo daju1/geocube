@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
+    <width>952</width>
     <height>527</height>
    </rect>
   </property>
@@ -14,11 +14,11 @@
    <string>auto_build_3D</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pushButton_handle_input_files">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>420</y>
+      <x>840</x>
+      <y>440</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -27,13 +27,26 @@
      <string>PushButton</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_BrowseNumColomn">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>440</y>
+      <width>151</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>BrowseNumColomn</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>601</width>
+     <width>952</width>
      <height>25</height>
     </rect>
    </property>

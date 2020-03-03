@@ -39,9 +39,13 @@ protected:
 		UINT uMsg, 
 		WPARAM wParam, 
 		LPARAM lParam) ;
-
-	HWND					hDlg;
+    HWND					hDlg;
+#else
+public:
+    QWidget*				hDlg;
+protected:
 #endif
+
 	FilesInDirectory		m_files_in_dir;
 	char szFile		[4098];			// buffer for file name
 	char directory	[2048];			// for dir name
@@ -63,8 +67,14 @@ public:
 	virtual bool HandlingOfInputFiles() = 0;
 
 
-	AutoBuildProfileDlg0(){};
-	virtual ~AutoBuildProfileDlg0(){};
+    AutoBuildProfileDlg0()
+    {
+        hDlg = NULL;
+    }
+    virtual ~AutoBuildProfileDlg0()
+    {
+
+    }
 };
 
 
@@ -83,7 +93,7 @@ public:
 	void OnDestroy();
 	void OnButtonOK();
 	void OnInitDialog();
-	void OnButtonBroseNumColomn();
+    void OnButtonBrowseNumColomn();
 	void ShowWindows_RelatedWith_CheckUseLocals();
 	void ShowWindows_RelatedWith_Windows_Cycles();
 	void ShowWindows_RelatedWith_Windows_Cycles2();
@@ -114,7 +124,7 @@ public:
 	void OnDestroy();
 	void OnButtonOK();
 	void OnInitDialog();
-	void OnButtonBroseNumColomn();
+    void OnButtonBrowseNumColomn();
 	void ShowWindows_RelatedWith_CheckUseLocals();
 	void ShowWindows_RelatedWith_Windows_Cycles();
 	void ShowWindows_RelatedWith_Windows_Cycles2();

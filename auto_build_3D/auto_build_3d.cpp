@@ -11,6 +11,7 @@ auto_build_3D::auto_build_3D(QWidget *parent) :
 
     AutoBuildProfile::auto_build_parametrs_Init1();
     abpd1 = new AutoBuildProfileDlg1(true, NULL, AutoBuildProfile::ab);		// ...right after the dialog is closed?
+    abpd1->hDlg = this;
 }
 
 auto_build_3D::~auto_build_3D()
@@ -19,8 +20,12 @@ auto_build_3D::~auto_build_3D()
     delete abpd1;
 }
 
-void auto_build_3D::on_pushButton_clicked()
+void auto_build_3D::on_pushButton_handle_input_files_clicked()
 {
-    abpd1->HandlingOfInputFiles();
+    abpd1->OnButtonOK();
+}
 
+void auto_build_3D::on_pushButton_BrowseNumColomn_clicked()
+{
+    abpd1->OnButtonBrowseNumColomn();
 }

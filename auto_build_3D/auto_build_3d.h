@@ -19,7 +19,9 @@ public:
     AutoBuildProfileDlg1 * abpd1;
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButton_handle_input_files_clicked();
+
+    void on_pushButton_BrowseNumColomn_clicked();
 
 private:
     Ui::auto_build_3D *ui;

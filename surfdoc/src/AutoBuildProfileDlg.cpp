@@ -28,6 +28,8 @@ using namespace std;
 #include "SurfDoc.h"
 #else
 #include <QDateTime>
+#include <QFileDialog>
+#include <QDebug>
 #endif
 #include "../mylicense.h"
 #include "../../auto_build_3D/picks_search.h"
@@ -435,7 +437,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->OnButtonBroseNumColomn();
+                    auto_build_dlg->OnButtonBrowseNumColomn();
 				}
 			}
 			break;
@@ -637,7 +639,7 @@ LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 			{
 				if(auto_build_dlg) 
 				{
-					auto_build_dlg->OnButtonBroseNumColomn();
+                    auto_build_dlg->OnButtonBrowseNumColomn();
 				}
 			}
 			break;
@@ -1120,7 +1122,8 @@ void AutoBuildProfileDlg::ShowWindows_RelatedWith_CheckUseLocals()
 		this->m_ab.allow_sd_limit_quantil && this->m_ab.use_locals);
 
 }
-void AutoBuildProfileDlg::OnButtonBroseNumColomn()
+#endif
+void AutoBuildProfileDlg::OnButtonBrowseNumColomn()
 {
 	if (::OpenFileDlg(hDlg, 
 		"Data (*.dat)\0*.dat\0"
@@ -1129,7 +1132,9 @@ void AutoBuildProfileDlg::OnButtonBroseNumColomn()
 
 	{
 		strcpy(this->m_ab.num_col_filename,::szPath);
+#ifdef _MSC_VER
 		SetDlgItemText(this->hDlg, IDC_EDIT_NUM_COLOMNS, this->m_ab.num_col_filename);
+#endif
 		num_col_file_selected = true;
 	}
 }
@@ -1138,8 +1143,6 @@ void AutoBuildProfileDlg::OnDestroy()
 {
 
 }
-#endif
-
 
 AutoBuildProfileDlg1::AutoBuildProfileDlg1(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab) : m_ab(ab)
 {
@@ -1378,10 +1381,10 @@ void AutoBuildProfileDlg1::OnInitDialog()
 
 
 }
-
+#endif
 void AutoBuildProfileDlg1::OnButtonOK()
 {
-	char str[125];
+    //char str[125];
 	///////////////////////////////////////////////
 /*	GetDlgItemText(this->hDlg,IDC_EDIT_GLUBINA_K, str, 124);
 	this->m_ab.k = atof(str);
@@ -1491,7 +1494,7 @@ printf("this->m_ab.start_j2 = %d\n", this->m_ab.start_j2);
 		//AutoBuildProfile_main(consol, p_auto_build_profile, this->m_ab);
 	}
 }
-
+#ifdef _MSC_VER
 void AutoBuildProfileDlg1::ShowWindows_RelatedWith_Windows_Cycles2()
 {
 	///////////////////////////////////////////////
@@ -1622,8 +1625,10 @@ void AutoBuildProfileDlg1::ShowWindows_RelatedWith_CheckUseLocals()
 		this->m_ab.allow_sd_limit_quantil && this->m_ab.use_locals);
 
 }
-void AutoBuildProfileDlg1::OnButtonBroseNumColomn()
+#endif
+void AutoBuildProfileDlg1::OnButtonBrowseNumColomn()
 {
+
 	if (::OpenFileDlg(hDlg, 
 		_T("Data (*.dat)\0*.dat\0")
 		_T("CSV (*.csv)\0*.csv\0")
@@ -1631,16 +1636,38 @@ void AutoBuildProfileDlg1::OnButtonBroseNumColomn()
 
 	{
 		strcpy(this->m_ab.num_col_filename,::szPath);
+#ifdef _MSC_VER
 		SetDlgItemText(this->hDlg, IDC_EDIT_NUM_COLOMNS, this->m_ab.num_col_filename);
+#endif
 		num_col_file_selected = true;
 	}
+#if 0
+    QStringList filters;
+    filters << "Data (*.dat)"
+            << "CSV (*.csv)"
+            << "Any files (*)";
+    QFileDialog dialog ((QWidget *)this->hDlg);
+    dialog.setNameFilters(filters);
+    if(dialog.exec())
+    {
+        QDir dir = dialog.directory();
+        qDebug() << dir;
+        strcpy(directory, dir.absolutePath().toStdString().c_str());
+
+        QStringList files = dialog.selectedFiles();
+        qDebug() << files;
+        if (files.size() > 0)
+        {
+            strcpy(this->m_ab.num_col_filename, files[0].toStdString().c_str());
+        }
+    }
+#endif
 }
 
 void AutoBuildProfileDlg1::OnDestroy()
 {
 
 }
-#endif
 
 void GetMinMaxXYOfData(
 				   vector<double> & X,
@@ -3657,16 +3684,18 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 	{
 #if defined (_MSC_VER)
 		SetDlgItemText(hDlg,IDC_DIRECTORY2, this->directory);
-
+#endif
 		strcpy(this->szPath,this->directory);
 		strcat(this->szPath, "\\" );
 		strcat(this->szPath, this->m_files_in_dir.szFileFilter);
+#if defined (_MSC_VER)
 		DlgDirList( hDlg, this->szPath, IDC_LIST2, IDC_DIRECTORY2,
 						DDL_READWRITE );
-		if (IDOK == MessageBox( hDlg, this->szPath, "Directory Selected",
+
+        if (IDOK == MessageBox( hDlg, this->szPath, "Directory Selected",
 					MB_OKCANCEL | MB_ICONINFORMATION ))
-#else
 #endif
+
 		{
 			HandlingOfInputFiles();
 		}
@@ -11524,7 +11553,10 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 		TEXT("Data files (*.dat*)\0*.dat\0")
 		TEXT("Text files (*.txt)\0*.txt\0")
 		;
-    ::OpenFileDlg(NULL, filter, this->filename);
+    if (S_OK != ::OpenFileDlg(NULL, filter, this->filename))
+    {
+        return false;
+    }
 
 
 #if defined (_MSC_VER)
