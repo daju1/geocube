@@ -112,4 +112,6 @@ INCLUDEPATH += "./../laboratory/src/"
 INCLUDEPATH += "./../array/src/"
 INCLUDEPATH += "./../tools/src/"
 
+QMAKE_CXXFLAGS += -DQT_PROJECT
+
 
