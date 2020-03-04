@@ -163,7 +163,7 @@ int ReadInputFile(char * fname, Vector<vdouble>& vv, int delim)
 			MB_OK | MB_ICONINFORMATION);
 		return -1;
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	// Gets the file descriptor associated with a stream.
 	int fd = _fileno(stream);
 	// Get the length of a file in bytes
@@ -444,7 +444,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 		  cb_read = 0,  // bytes read 
 		  cb_disp = 0;  // bytes displayed
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		if (hWnd != NULL)
 		{
 
@@ -500,7 +500,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 				bytes_line = strlen(ch);
 				//MessageBox(0, szBuff, "", 0);
 				// calculate progress
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 				if(hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -635,7 +635,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 
 				bytes_line = strlen(ch);
 				// calculate progress
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 				if (hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -690,7 +690,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 			}
 		}
 		fclose(stream);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		if (hWnd && hwndPB)
 			DestroyWindow(hwndPB);
 #endif
@@ -767,7 +767,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 		  cb_read = 0,  // bytes read 
 		  cb_disp = 0;  // bytes displayed
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		if (hWnd != NULL)
 		{
 
@@ -821,7 +821,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 				bytes_line = strlen(ch);
 				//MessageBox(0, szBuff, "", 0);
 				// calculate progress
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 				if(hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -882,7 +882,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 
 				bytes_line = strlen(ch);
 				// calculate progress
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 				if (hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -953,7 +953,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			}
 		}
 		fclose(stream);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		if (hWnd && hwndPB)
 			DestroyWindow(hwndPB);
 #endif
@@ -1132,7 +1132,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 		  cb_read = 0,  // bytes read 
 		  cb_disp = 0;  // bytes displayed
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		if (hWnd != NULL)
 		{
 
@@ -1184,7 +1184,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 				bytes_line = strlen(ch);
 				//MessageBox(0, szBuff, "", 0);
 				// calculate progress
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 				if(hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -1268,7 +1268,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			{
 				bytes_line = strlen(ch);
 				// calculate progress
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 				if (hWnd != NULL)
 				{
 					cb_read += bytes_line;
@@ -1369,7 +1369,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			}
 		}
 		fclose(stream);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		if (hWnd && hwndPB)
 			DestroyWindow(hwndPB);
 #endif

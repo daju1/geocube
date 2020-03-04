@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <cderr.h>
 #endif
 #include "../../array/src/Vdouble.h"
@@ -2340,7 +2340,7 @@ int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdoubl
 	  cb_disp = 0;  // bytes displayed
 
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	// Ensure that the common control DLL is loaded
 	// and create a progress bar along the bottom of
 	// the client area of the parent window. 
@@ -2373,7 +2373,7 @@ int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdoubl
 
 	// Set the range and increment of the progress
 	// bar. 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	SendMessage(hwndPB, PBM_SETRANGE, 0,
 				MAKELPARAM(0, cb)); 
 	SendMessage(hwndPB, PBM_SETSTEP, (WPARAM) 1, 0); 
@@ -2423,7 +2423,7 @@ int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdoubl
 			}
 			sum_dangle += dangle;
 		}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		SendMessage(hwndPB, PBM_STEPIT, 0, 0); 
 #endif
 	}
@@ -2468,7 +2468,7 @@ int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdoubl
 		visible[indexes[ind]] = 1.0;
 	}
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	DestroyWindow(hwndPB);
 #endif
 	return 0;

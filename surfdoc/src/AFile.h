@@ -1,5 +1,5 @@
 #pragma once
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <windows.h>
 #else
 #include "mywindows.h"
@@ -9,7 +9,7 @@
 class AFile
 {
 public:
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	HANDLE m_hFile;
 #else
        QFile m_file;

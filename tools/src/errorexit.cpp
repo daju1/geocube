@@ -1,6 +1,6 @@
 #include "../StdAfx.h"
 #include "errorexit.h"
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 void ErrorExit(LPTSTR lpszFunction, bool toExitProcess) 
 {
 #define BUF_LEN 200

@@ -1,6 +1,6 @@
 
 
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <windows.h>
 #include <gdiplus.h>
 using namespace Gdiplus;

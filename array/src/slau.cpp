@@ -1,6 +1,6 @@
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <afx.h>
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
@@ -13,7 +13,7 @@
 
 #define TRACE              printf
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <windows.h>
 #include <gdiplus.h>
 using namespace Gdiplus;
@@ -4624,7 +4624,7 @@ bool tria_solve_of_down_and_up(const char * fn_L, const char * fn_U, vector<doub
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -4749,7 +4749,7 @@ bool tria_solve_of_down_and_up(const char * fn_L, const char * fn_U, vector<doub
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -4950,7 +4950,7 @@ bool tria_solve_of_down_and_up(const char * fn_Lt, vector<double> b, vector<doub
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -5182,7 +5182,7 @@ void SaveSparseMatrixAsGrid(vector<sparse_row > & m, size_t cols, const char *na
 bool solve_using_Holesski_tria_matrixes(vector<sparse_row > Lt, vector<double> & B, vector<double> & x)
 {
 	vector<double> y;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	DWORD 
 		time_eplased,
 		time_start = GetCurrentTime(),
@@ -5194,7 +5194,7 @@ bool solve_using_Holesski_tria_matrixes(vector<sparse_row > Lt, vector<double> &
 	if (Holesski(Lt))
 	//if (Holesski3(Lt))
 	{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		time_current = GetCurrentTime();
 		time_eplased = time_current - time_pre_current;
 		time_pre_current = time_current;
@@ -5222,7 +5222,7 @@ bool solve_using_Holesski_tria_matrixes_(vector<sparse_row > Lt, vector<double> 
 
 
     StoreMatrix("At.smf", Lt, Lt.size());
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	SparseStructureToMetafile("At.smf", "At.emf");
 #endif
 	vector<sparse_row> G;
@@ -5261,7 +5261,7 @@ bool solve_using_Holesski_tria_matrixes_(vector<sparse_row > Lt, vector<double> 
 	}
 		
 	StoreMatrix("At2.smf", Lt2, Lt2.size());
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	SparseStructureToMetafile("At2.smf", "At2.emf");
 #endif
 	vector<double> y;
@@ -5269,7 +5269,7 @@ bool solve_using_Holesski_tria_matrixes_(vector<sparse_row > Lt, vector<double> 
 	if (Holesski(Lt2))
 	{
 		StoreMatrix("Lt2.smf", Lt2, Lt2.size());
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		SparseStructureToMetafile("Lt2.smf", "Lt2.emf");
 #endif
 		if (tria_solve_of_down(Lt2, Bp, y))

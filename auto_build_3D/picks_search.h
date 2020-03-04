@@ -65,7 +65,7 @@ public:
 class profile_interval
 {
 public:
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Layer * layer;
 #endif
 	int iFile;
@@ -496,7 +496,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 							   int reverse1, int reverse2,
 							   int delim);
 void DoVerticalCorrelation(int wlen,// = 100;//длина окна корреляции
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
                            Collection * pcollection,
 #else
                            void * pcollection,
@@ -591,7 +591,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 			   short value_type,// 1 - korr_k;  // коэффициент горизонтальной корреляции
 								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
 								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			   Collection * pcollection,
 #else
                void * pcollection,
@@ -610,7 +610,7 @@ void BuildGrid(char * file_grd,
 			   vector<double> &vZ,			
 			   vector<double> &vK,			
 			   double xSize, double ySize, double max_glubina, 
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
                Collection * pcollection
 #else
                void * pcollection

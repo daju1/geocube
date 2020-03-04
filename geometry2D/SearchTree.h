@@ -1,5 +1,5 @@
 #pragma once
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <windows.h>
 #else
 #include "mywindows.h"

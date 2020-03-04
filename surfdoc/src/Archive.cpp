@@ -4,10 +4,8 @@
 #include "Layer.h"
 #include "Grid.h"
 #include "ProfileAttachPoint.h"
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "BrokenPlane3D.h"
-#endif
-#ifdef _MSC_VER
 #else
 #include "mywindows.h"
 #endif
@@ -356,7 +354,7 @@ Archive& Archive::operator <<(bool b)
 	Write((unsigned char *)&b, sizeof(bool));
 	return *this;
 }
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 Archive& Archive::operator <<(ULONGLONG dwdw)
 {
 	Write((unsigned char *)&dwdw, sizeof(ULONGLONG));
@@ -456,7 +454,7 @@ Archive& Archive::operator >>(bool& b)
 	//printf("Archive& Archive::operator >>(const bool& b = %d)\n", b);
 	return *this;
 }
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 Archive& Archive::operator >>(ULONGLONG& dwdw)
 {
 	Read((unsigned char *)&dwdw, sizeof(ULONGLONG));
@@ -509,7 +507,7 @@ Archive& operator <<(Archive& ar, ProfileAttachPoint& pa)
 	ar << pa.yMap;
 	return ar;
 }
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 Archive& operator <<(Archive& ar, SurfLineIntersectPoint& p)
 {
 	ar << p.i_surf1;
@@ -585,7 +583,7 @@ Archive& operator >>(Archive& ar, ProfileAttachPoint& pa)
 	ar >> pa.yMap;
 	return ar;
 }
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 Archive& operator >>(Archive& ar, SurfLineIntersectPoint& p)
 {
 	ar >> p.i_surf1;

@@ -22,7 +22,7 @@ struct FilesInDirectory
 
 	char szFileFilter[16];
 	short nFileFilterID;
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	DWORD nFilterIndex;
 #endif
 };
@@ -33,7 +33,7 @@ struct FilesInDirectory
 class AutoBuildProfileDlg0  
 {
 protected:
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
 		HWND hwnd, 
 		UINT uMsg, 
@@ -80,7 +80,7 @@ public:
 
 class AutoBuildProfileDlg  : public AutoBuildProfileDlg0
 {
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
 		HWND hwnd, 
 		UINT uMsg, 
@@ -102,7 +102,7 @@ public:
 
 	AutoBuildProfileDlg(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab);
 	virtual ~AutoBuildProfileDlg();
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	friend LRESULT CALLBACK DlgProcAutoBuildProfile( HWND hDlg, UINT uMsg,
 								  WPARAM wParam, LPARAM lParam );
 #endif
@@ -110,7 +110,7 @@ public:
 
 class AutoBuildProfileDlg1 : public AutoBuildProfileDlg0
 {
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
 		HWND hwnd, 
 		UINT uMsg, 
@@ -133,7 +133,7 @@ public:
 
 	AutoBuildProfileDlg1(bool _consol, AutoBuildProfile * auto_build_profile, auto_build_parametrs& ab);
 	virtual ~AutoBuildProfileDlg1();
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	friend LRESULT CALLBACK DlgProcAutoBuildProfile1( HWND hDlg, UINT uMsg,
 								  WPARAM wParam, LPARAM lParam );
 #endif

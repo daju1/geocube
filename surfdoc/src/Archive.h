@@ -122,7 +122,7 @@ public:
 	Archive& operator <<(unsigned u);
 #endif
 	Archive& operator <<(bool b);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Archive& operator <<(ULONGLONG dwdw);
 	Archive& operator <<(LONGLONG dwdw);
 #endif
@@ -154,7 +154,7 @@ public:
 	Archive& operator >>(unsigned& u);
 #endif
 	Archive& operator >>(bool& b);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Archive& operator >>(ULONGLONG& dwdw);
 	Archive& operator >>(LONGLONG& dwdw);
 #endif
@@ -265,7 +265,7 @@ template <class T> Archive& operator >>(Archive& ar, std::vector<T>& v)
 template <class K, class T> Archive& operator <<(Archive& ar, std::map<K,T>& m)
 {
 	ar << m.size();
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	map <K, T>::iterator m1_Iter;
 #else
 	typename std::map <K, T>::const_iterator m1_Iter;
@@ -323,7 +323,7 @@ template <class K, class T> void Archive::ReadStdMapAsImport(std::map<K,T>& m)
 		m.insert( pair <K, T>( key, val ) );
 	}
 }
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "Object.h"
 
 class VersionException

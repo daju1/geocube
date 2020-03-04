@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <cderr.h>
 #endif
 #include <vector>
@@ -19,12 +19,12 @@ using namespace std;
 #include "../../array/src/Vdouble.h"
 #include "../../array/src/interp.h"
 #include "../../array/src/matrixes.h"
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "../../winplot/src/winplot.h"
 #include "../../wintools/src/winsurf.h"
 #endif
 #include "../../resource.h"
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "SurfDoc.h"
 #else
 #include <QDateTime>
@@ -239,7 +239,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 
 Grid4 * CreateProfileGrid3D( MyMethodsData3 & mmd );
 
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 WNDPROC wpOrigAutoBuildProfileWndProc; 
 
 LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
@@ -716,7 +716,7 @@ AutoBuildProfileDlg::AutoBuildProfileDlg(bool _consol, AutoBuildProfile * auto_b
 {
 	p_auto_build_profile = auto_build_profile;
 	consol = _consol;
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	DialogBoxParam( 
 	   hInst, 
 	   MAKEINTRESOURCE(IDD_DIALOG_AUTO_BUILD_PROFILE), 
@@ -731,7 +731,7 @@ AutoBuildProfileDlg::~AutoBuildProfileDlg()
 {
 
 }
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 void AutoBuildProfileDlg::OnInitDialog()
 {
 	TCHAR str[1024];
@@ -1132,7 +1132,7 @@ void AutoBuildProfileDlg::OnButtonBrowseNumColomn()
 
 	{
 		strcpy(this->m_ab.num_col_filename,::szPath);
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		SetDlgItemText(this->hDlg, IDC_EDIT_NUM_COLOMNS, this->m_ab.num_col_filename);
 #endif
 		num_col_file_selected = true;
@@ -1148,7 +1148,7 @@ AutoBuildProfileDlg1::AutoBuildProfileDlg1(bool _consol, AutoBuildProfile * auto
 {
 	p_auto_build_profile = auto_build_profile;
 	consol = _consol;
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	DialogBoxParam( 
 	   hInst, 
 	   MAKEINTRESOURCE(IDD_DIALOG_AUTO_BUILD_PROFILE1), 
@@ -1163,7 +1163,7 @@ AutoBuildProfileDlg1::~AutoBuildProfileDlg1()
 {
 
 }
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 void AutoBuildProfileDlg1::OnInitDialog()
 {
 	CheckRadioButton( hDlg, 
@@ -1494,7 +1494,7 @@ printf("this->m_ab.start_j2 = %d\n", this->m_ab.start_j2);
 		//AutoBuildProfile_main(consol, p_auto_build_profile, this->m_ab);
 	}
 }
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 void AutoBuildProfileDlg1::ShowWindows_RelatedWith_Windows_Cycles2()
 {
 	///////////////////////////////////////////////
@@ -1636,7 +1636,7 @@ void AutoBuildProfileDlg1::OnButtonBrowseNumColomn()
 
 	{
 		strcpy(this->m_ab.num_col_filename,::szPath);
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		SetDlgItemText(this->hDlg, IDC_EDIT_NUM_COLOMNS, this->m_ab.num_col_filename);
 #endif
 		num_col_file_selected = true;
@@ -3682,13 +3682,13 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 {
 	if(this->OpenFileDialog())
 	{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_PROJECT)
 		SetDlgItemText(hDlg,IDC_DIRECTORY2, this->directory);
 #endif
 		strcpy(this->szPath,this->directory);
 		strcat(this->szPath, "\\" );
 		strcat(this->szPath, this->m_files_in_dir.szFileFilter);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_PROJECT)
 		DlgDirList( hDlg, this->szPath, IDC_LIST2, IDC_DIRECTORY2,
 						DDL_READWRITE );
 
@@ -3834,7 +3834,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	}
 
     char common_directory[4096];
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     SYSTEMTIME time;
     GetLocalTime(&time);
     sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
@@ -3866,7 +3866,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	}
 	//**********************************************
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	this->m_files_in_dir.nFilesInDirectory = SendDlgItemMessage( hDlg, IDC_LIST2, LB_GETCOUNT, 0, 0);
 	//память не освобождена!!!!
 	this->m_files_in_dir.vFileNameLengthes = (int *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -3947,7 +3947,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 	for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
 	{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		this->m_files_in_dir.vFileNameLengthes[iFile] = SendDlgItemMessage( hDlg, 
 			IDC_LIST2, LB_GETTEXTLEN, (WPARAM) iFile, 0)+1;
 		this->m_files_in_dir.vFileNames[iFile] = (char *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -5376,7 +5376,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 										dir_out);
 									SaveAsSurfer7Grid4(fn, cube);*/
 								}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 								if (!CheckMyLicense()) continue;        
 #endif
 								{
@@ -5996,7 +5996,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 									}
 
 									//printf("The matrix is filled!!!\n");
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 									if (!CheckMyLicense()) continue;        
 #endif
 									char fn_mrec_min_sq[4098];
@@ -6675,7 +6675,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			}
 			break;
 #endif
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		case 8:
 			{
 #ifdef _DEBUG
@@ -7086,7 +7086,7 @@ function write_eas(filename,data,header,line1);
 	}
 #endif
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Beep(200, 1000);
 #endif
     MessageBox(NULL, "OK!!!", "AutoBuildProfileDlg::HandlingOfInputFiles",0);
@@ -7112,7 +7112,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 
     char common_directory[4096];
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     SYSTEMTIME time;
 	GetLocalTime(&time);
     sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
@@ -7144,7 +7144,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 	//**********************************************
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	this->m_files_in_dir.nFilesInDirectory = SendDlgItemMessage( hDlg, IDC_LIST2, LB_GETCOUNT, 0, 0);
 	//память не освобождена!!!!
 	this->m_files_in_dir.vFileNameLengthes = (int *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -7198,7 +7198,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	///////////////////////////////////
 	//cout << "Enter normal of which antenn X or Y is parallel to profile (or to fly of airplane)" << endl;
 	//cin >> parallel_to_profile_antenn_normal;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	if (BST_CHECKED == IsDlgButtonChecked(hDlg, IDC_RADIO_parallel_to_profile_antenn_normal_X))
 	{
 		when_to_swap = 0;
@@ -7219,7 +7219,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 	for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
 	{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		this->m_files_in_dir.vFileNameLengthes[iFile] = SendDlgItemMessage( hDlg, 
 			IDC_LIST2, LB_GETTEXTLEN, (WPARAM) iFile, 0)+1;
 		this->m_files_in_dir.vFileNames[iFile] = (char *)HeapAlloc( GetProcessHeap(), HEAP_ZERO_MEMORY,
@@ -7733,7 +7733,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
     bool to_set_mean_of_profiles_to_zero = false;
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     to_set_mean_of_profiles_to_zero = IsDlgButtonChecked( hDlg, IDC_CHECK_to_set_mean_of_profiles_to_zero) == BST_CHECKED;
 	//cout << "Enter to_set_mean_of_profiles_to_zero 0 1 ?" << endl;
 	//cin >> to_set_mean_of_profiles_to_zero;
@@ -7748,7 +7748,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	if (to_set_mean_of_profiles_to_zero)
 	{
         bool to_set_mean_value_to_profile = false;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
         to_set_mean_value_to_profile =
 			IsDlgButtonChecked( hDlg, IDC_CHECK_to_set_mean_value_to_profile) == BST_CHECKED;
 		//cout << "Enter to_set_mean_value_to_profile 0 1 ?" << endl;
@@ -7802,7 +7802,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
     bool to_recenter_profiles = false;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     to_recenter_profiles =
 		IsDlgButtonChecked( hDlg, IDC_CHECK_to_recenter_profiles) == BST_CHECKED;
 	//cout << "Enter to_recenter_profiles 0 1 ?" << endl;
@@ -7905,7 +7905,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		//cout << "Enter Do you need coordinate preobrazovanie" << endl;
 		//cin >> mmd3.to_povorot;
         mmd3.to_povorot = true;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
         mmd3.to_povorot =
 			IsDlgButtonChecked( hDlg, IDC_CHECK_to_povorot) == BST_CHECKED;
 #else
@@ -7919,7 +7919,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			//	"(1 - yes, 0 - output will be in profile length)" << endl;
 			//cin >> mmd3.need_crd_projection;
             mmd3.need_crd_projection = true;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
             mmd3.need_crd_projection =
 				IsDlgButtonChecked( hDlg, IDC_CHECK_need_crd_projection) == BST_CHECKED;
 #else
@@ -8079,7 +8079,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	//cout << "1 - with diagramm of 3 antenns and nonpolarized sources" << endl;
 	//cout << "2 - --//-- and with assumption that tg delta much more than one" << endl;
 	//cin >> type;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_TYPE_1) == BST_CHECKED)
 		type = 1;
 	else 
@@ -8090,7 +8090,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 #endif
 
 	double z0 = 0.0, z_min = 0.0, DZ = 0.0;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	char str[128];
 	GetDlgItemText(this->hDlg, IDC_EDIT_Altitude_z0, str, 127);
 	z0 = atof(str);
@@ -8174,7 +8174,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		//cout << "Enter min_value (small positive, for example from 1e-16 to 0.03)" << endl;
 		//cin >> mmd3.min_value;
 		mmd3.min_value = 0.0;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		//cout << "Enter dx/DZ=dy/DZ (for example 2)" << endl;
 		//cin >> mmd3.dx_and_dy_per_DZ;
 		GetDlgItemText(this->hDlg, IDC_EDIT_dx_and_dy_per_DZ, str, 127);
@@ -8184,7 +8184,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
         mmd3.dx_and_dy_per_DZ = 2.0;
 #endif
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		//cout << "Enter granicy_kak_glubina?  0 - no 1 - yes" << endl;
 		mmd3.granicy_kak_glubina = IsDlgButtonChecked(hDlg, IDC_CHECK_granicy_kak_glubina) == BST_CHECKED;
 #else
@@ -8193,7 +8193,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 // here calculi operator  by mean[c]
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		//cout << "Enter rows" << endl;
 		//cin >> mmd3.rows;
 		GetDlgItemText(this->hDlg, IDC_EDIT_ROWS, str, 127);
@@ -8247,7 +8247,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			mmd3.k_oslablenie = 0.0;
 			//cout << "Enter k_oslablenie (po naprjazhonnosti polja, for example 0.00023025 -> 1.999 dB/km by power), (m^-1)" << endl;
 			//cin >> mmd3.k_oslablenie;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			GetDlgItemText(this->hDlg, IDC_EDIT_k_oslablenie, str, 127);
 			mmd3.k_oslablenie = atof(str);
 #else
@@ -8374,7 +8374,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 //}
 
 	bool lamp = true;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_LAMP) == BST_CHECKED)
 		lamp = true;
 	else 
@@ -8390,7 +8390,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	vector<vector<double> > pW;
 
     bool to_frec = false;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     to_frec = IsDlgButtonChecked(hDlg, IDC_CHECK_FREC) == BST_CHECKED;
 #else
     // TODO
@@ -8398,7 +8398,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 #endif
 
     int use_newton = 0;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_SPUSK) == BST_CHECKED) 
 	{
 		use_newton = 0;
@@ -8416,7 +8416,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
     use_newton = 1;
 #endif
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	bool apply_dgdni = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdni) == BST_CHECKED;	   
 	bool apply_dgdKTi = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdKTi) == BST_CHECKED;
 	bool apply_dgdep = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdep) == BST_CHECKED;
@@ -8441,7 +8441,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 			//cout << "To get each frec? [1 2 .. 10 ... ]" << endl;
 			//cin >> frec;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			GetDlgItemText(this->hDlg, IDC_EDIT_frec, str, 127);
 			frec = atoi(str);
 #else
@@ -8511,7 +8511,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		if (to_frec)
 		{
 			int frec = 1;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			//cout << "To get each frec? [1 2 .. 10 ... ]" << endl;
 			//cin >> frec;
 			GetDlgItemText(this->hDlg, IDC_EDIT_frec, str, 127);
@@ -8526,7 +8526,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 			// массив коэффициентов симметризации
 			vector<vector<double> > S(3);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			bool init_by_lamp = IsDlgButtonChecked(hDlg, IDC_CHECK_TO_INIT_BY_LAMP) == BST_CHECKED;
 			//cout << "Enter init_by_lamp" << endl;
 			//cin >> init_by_lamp;
@@ -8593,7 +8593,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 			// массив коэффициентов симметризации
 			vector<vector<double> > S(3);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			bool init_by_lamp = IsDlgButtonChecked(hDlg, IDC_CHECK_TO_INIT_BY_LAMP) == BST_CHECKED;
 #else
             // TODO
@@ -8652,7 +8652,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Beep(200, 1000);
 #endif
     MessageBox(NULL, "OK!!!", "AutoBuildProfileDlg::HandlingOfInputFiles",0);
@@ -11559,7 +11559,7 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
     }
 
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     OPENFILENAME ofn;       // common dialog box structure
     // Initialize OPENFILENAME
 	ZeroMemory(&ofn, sizeof(ofn));
