@@ -91,7 +91,11 @@ DWORD Archive::ReWriteToFile(unsigned char * from, DWORD to_BytesFromBegin, DWOR
 	DWORD rez = 0;
 	if (this && this->m_pFile && from)
 	{
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		this->m_pFile->Seek((long)to_BytesFromBegin, FILE_BEGIN);
+#else
+		this->m_pFile->seek((long)to_BytesFromBegin, FILE_BEGIN);
+#endif
 		rez = this->m_pFile->Write(from, count);
 		this->m_pFile->SeekToEnd();
 	}

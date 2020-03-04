@@ -1,7 +1,7 @@
 #pragma once
 
 #include <float.h>
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <commctrl.h>
 #endif
 #include "BaseLab.h"

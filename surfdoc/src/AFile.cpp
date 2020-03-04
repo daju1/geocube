@@ -198,27 +198,25 @@ void AFile::SeekToEnd(void)
     m_file.atEnd();
 }
 
-LONG AFile::Seek(long lOff, DWORD dwMoveMethod)
+bool AFile::Seek(long lOff, DWORD dwMoveMethod)
 {
     switch (dwMoveMethod)
     {
     case FILE_BEGIN:
     {
-        m_file.seek(lOff);
-        break;
+        return m_file.seek(lOff);
     }
     case FILE_CURRENT:
     {
         qint64 pos = m_file.pos();
-        m_file.seek(pos + lOff);
-        break;
+        return m_file.seek(pos + lOff);
     }
     case FILE_END:
     {
         qint64 sz = m_file.size();
-        m_file.seek(sz - lOff);
-        break;
+        return m_file.seek(sz - lOff);
     }
     }
+    return false;
 }
 #endif

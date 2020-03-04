@@ -352,7 +352,6 @@ public:
 				vector<double> & signal,
 				string name);
 
-//#ifdef _MSC_VER
 	// получить граф в виде полной структуры смежности 
 	// или нижней структуры смежности 
 	// ( в зависимости от значения переменной  bool to_form_full_structure ) 
@@ -422,7 +421,7 @@ public:
 			  vector<double> & b,
 			  vector<double> & x,
 			  vector<double> & valpha);
-//#endif
+
 	void plus_equal (double mult, BraidedSearchTree <T> /*sparse_row*/ & r)
 	{
 		BraidedNode<T> *n = this->root->next();

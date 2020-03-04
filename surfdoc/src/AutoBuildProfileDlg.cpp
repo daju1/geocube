@@ -22,16 +22,15 @@ using namespace std;
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "../../winplot/src/winplot.h"
 #include "../../wintools/src/winsurf.h"
-#endif
 #include "../../resource.h"
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "SurfDoc.h"
+#include "../mylicense.h"
 #else
 #include <QDateTime>
 #include <QFileDialog>
 #include <QDebug>
 #endif
-#include "../mylicense.h"
+
 #include "../../auto_build_3D/picks_search.h"
 #include "./../array/src/slau.h"
 #include "cube.h"

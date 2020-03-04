@@ -72,10 +72,11 @@ typedef const char* LPCSTR;
 typedef const wchar_t* LPCWSTR;
 typedef char* PSTR, *LPSTR;
 typedef wchar_t* LPWSTR, *PWSTR;
-
+#if !defined (_MSC_VER)
 typedef HANDLE HWND;
 typedef HANDLE HDC;
 typedef HANDLE HINSTANCE;
+#endif
 
 #define FAR
 
@@ -128,7 +129,7 @@ typedef struct tagLOGFONTW {
   WCHAR lfFaceName[LF_FACESIZE];
 } LOGFONTW, *PLOGFONTW, *NPLOGFONTW, *LPLOGFONTW;
 
-#ifdef _UNICODE
+/*#ifdef _UNICODE
         #define _T(x)      L ## x
         #define LPTSTR LPWSTR
         #define LPCTSTR LPCWSTR
@@ -143,7 +144,14 @@ typedef struct tagLOGFONTW {
         #define LOGFONT LOGFONTA
         #define TCHAR CHAR
 #define __TEXT(q) q
-#endif /* _UNICODE */
+//#endif /* _UNICODE */
+
+
+/*#if defined( _UNICODE) || defined (UNICODE)
+#define stprintf_s _snwprintf
+#else*/
+#define stprintf_s sprintf_s
+//#endif
 
 typedef TCHAR *PTCHAR;
 #define TEXT(q) __TEXT(q)
@@ -242,7 +250,9 @@ BOOL DeleteFileA(
 #define DeleteFile DeleteFileA
 #endif
 
+#ifndef _LDBL_RADIX
 #define _LDBL_RADIX 2
+#endif
 
 int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...);
 #if 0
@@ -262,6 +272,23 @@ int MessageBox(void* /*hwnd*/, const char * title, const char * msg, int /*flags
 
 int AfxMessageBox(const char * msg );
 
+
+// From gl.h
+typedef unsigned int GLenum;
+typedef unsigned char GLboolean;
+typedef unsigned int GLbitfield;
+typedef signed char GLbyte;
+typedef short GLshort;
+typedef int GLint;
+typedef int GLsizei;
+typedef unsigned char GLubyte;
+typedef unsigned short GLushort;
+typedef unsigned int GLuint;
+typedef float GLfloat;
+typedef float GLclampf;
+typedef double GLdouble;
+typedef double GLclampd;
+typedef void GLvoid;
 
 #endif //_MY_WINDOWS_H_
 

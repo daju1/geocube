@@ -24,5 +24,9 @@ public:
 	DWORD Write(LPCVOID  lpBuff, DWORD dwNumberOfBytesToWrite);
 	void SeekToBegin(void);
 	void SeekToEnd(void);
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	LONG Seek(long lOff, DWORD dwMoveMethod);
+#else
+	bool Seek(long lOff, DWORD dwMoveMethod);
+#endif
 };

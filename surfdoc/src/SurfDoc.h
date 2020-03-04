@@ -7,7 +7,7 @@
 #include "../../commonOG.h"
 #include "palette.h"
 #include "../../array/src/sorting.h"
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "../../wintools/src/listfun.h"
 #endif
 #include "../../array/src/vect.h"

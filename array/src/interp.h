@@ -4,7 +4,8 @@
 #include <vector>
 using namespace std;
 
-#if !defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#else
 #include "mywindows.h"
 #endif
 

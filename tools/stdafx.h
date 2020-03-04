@@ -9,7 +9,7 @@
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 // TODO: reference additional headers your program requires here
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <windows.h>
 #include <tchar.h>
 #include <io.h>

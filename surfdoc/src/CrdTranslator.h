@@ -1,4 +1,5 @@
 #pragma once
+#include "../../tools/src/filedlg.h"
 enum crd_translation_mode
 {
         crd_translation_mode_xyz = 0,
@@ -143,7 +144,7 @@ private:
 		}
 	}
 };
-#include "../../tools/src/filedlg.h"
+
 bool InitTranslator(CrdTranslator& translator, SSaveProfData &sprData);
 bool InitTranslator(CrdTranslator& translator, SSaveProfData &sprData,
 							double a, double b, double c, double d,

@@ -1,6 +1,6 @@
 #ifndef FILE_DLG_INCLUDED
 #define FILE_DLG_INCLUDED
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include <windows.h>
 #else
 #include <mywindows.h>
@@ -32,7 +32,7 @@ HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterI
 
 HRESULT OpenFileDlg(HWND hWnd, TCHAR filter[], LPTSTR lpstrFile = NULL);
 HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 HRESULT SavePlot(HWND hWnd, HENHMETAFILE hMetaFile, LPCTSTR lpstrFile);
 #endif
 bool BroseDirDlg(HWND hWnd, char * dir);

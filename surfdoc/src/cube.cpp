@@ -1102,7 +1102,7 @@ bool Cube4D::SaveAsSurferClices(int nProjection)
 
 	static Grid grid;// грид для построения и сохранения разреза куба
 
-	TCHAR lpstrFile[4098];	
+	char lpstrFile[4098];	
     char my_name[1024];
     sprintf(my_name,
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
@@ -1179,11 +1179,11 @@ bool Cube4D::SaveAsSurferClices(int nProjection)
 
 bool Cube4D::SaveAsSurferClicesXY(const char * outfile, Grid & grid)
 {
-	TCHAR lpstrFile[4098];
+	char lpstrFile[4098];
 	for (long pp = 0; pp < lattice.grid4Section.nPag; pp++)
 	{
 		double z = this->lattice.grid4Section.zLL + pp * this->lattice.grid4Section.zSize; 
-		sprintf(lpstrFile, "%s_z=%f_%02d.grd", outfile, z, pp);
+		sprintf_s(lpstrFile, 4098, "%s_z=%f_%02d.grd", outfile, z, pp);
 		this->Produce3DSurferGrid7_XY(pp, grid.gridSection);
 		SaveAsSurfer7Grid(lpstrFile, &grid);
 	}
@@ -1191,11 +1191,11 @@ bool Cube4D::SaveAsSurferClicesXY(const char * outfile, Grid & grid)
 }
 bool Cube4D::SaveAsSurferClicesXZ(const char * outfile, Grid & grid)
 {
-	TCHAR lpstrFile[4098];
+	char lpstrFile[4098];
 	for (long rr = 0; rr < lattice.grid4Section.nRow; rr++)
 	{
 		double y = lattice.grid4Section.yLL + rr * lattice.grid4Section.ySize;
-		sprintf(lpstrFile, "%s_y=%f_%02d.grd", outfile, y, rr);
+		sprintf_s(lpstrFile, 4098, "%s_y=%f_%02d.grd", outfile, y, rr);
 		this->Produce3DSurferGrid7_XZ(rr, grid.gridSection);
 		SaveAsSurfer7Grid(lpstrFile, &grid);
 	}
@@ -1203,11 +1203,11 @@ bool Cube4D::SaveAsSurferClicesXZ(const char * outfile, Grid & grid)
 }
 bool Cube4D::SaveAsSurferClicesYZ(const char * outfile, Grid & grid)
 {
-	TCHAR lpstrFile[4098];
+	char lpstrFile[4098];
 	for (long cc = 0; cc < lattice.grid4Section.nCol; cc++)
 	{
 		double x = lattice.grid4Section.xLL + cc * lattice.grid4Section.xSize;
-		sprintf(lpstrFile, "%s_x=%f_%02d.grd", outfile, x, cc);
+		sprintf_s(lpstrFile, 4098, "%s_x=%f_%02d.grd", outfile, x, cc);
 		this->Produce3DSurferGrid7_YZ(cc, grid.gridSection);
 		SaveAsSurfer7Grid(lpstrFile, &grid);
 	}
@@ -1216,11 +1216,11 @@ bool Cube4D::SaveAsSurferClicesYZ(const char * outfile, Grid & grid)
 
 bool Cube4D::SaveAsSurferClicesXZ(const char * outfile, Grid & grid, double x_t_povorot, double cos_ugol)
 {
-	TCHAR lpstrFile[4098];
+	char lpstrFile[4098];
 	for (long rr = 0; rr < lattice.grid4Section.nRow; rr++)
 	{
 		double y = lattice.grid4Section.yLL + rr * lattice.grid4Section.ySize;
-		sprintf(lpstrFile, "%s_y=%f_%02d_prj.grd", outfile, y, rr);
+		sprintf_s(lpstrFile, 4098, "%s_y=%f_%02d_prj.grd", outfile, y, rr);
 		this->Produce3DSurferGrid7_XZ(rr, grid.gridSection);
 
 		grid.gridSection.xLL += x_t_povorot;
@@ -1232,11 +1232,11 @@ bool Cube4D::SaveAsSurferClicesXZ(const char * outfile, Grid & grid, double x_t_
 }
 bool Cube4D::SaveAsSurferClicesYZ(const char * outfile, Grid & grid, double y_t_povorot, double cos_ugol)
 {
-	TCHAR lpstrFile[4098];
+	char lpstrFile[4098];
 	for (long cc = 0; cc < lattice.grid4Section.nCol; cc++)
 	{
 		double x = lattice.grid4Section.xLL + cc * lattice.grid4Section.xSize;
-		sprintf(lpstrFile, "%s_x=%f_%02d_prj.grd", outfile, x, cc);
+		sprintf_s(lpstrFile, 4098, "%s_x=%f_%02d_prj.grd", outfile, x, cc);
 		this->Produce3DSurferGrid7_YZ(cc, grid.gridSection);
 
 		grid.gridSection.xLL += y_t_povorot;

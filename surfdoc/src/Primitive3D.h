@@ -11,21 +11,24 @@
 
 #include "../../surfdefs.h"
 #include "stdafx.h"
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "Object.h"
+#include <GL/gl.h>
+#else
+#include "mywindows.h"
 #endif
 #include "points.h"
 #include "../../tools/src/filedlg.h"
 #include "Archive.h"
 #include "./CrdTranslator.h"
-#include <GL/gl.h>
+
 
 extern int ChooseSurfColor(HWND hwndOwner, COLORREF& color);
 
 extern char directory[];
 class Profile3D;
 template <class T> class Primitive3D
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
         : public Object
 #endif
 {
@@ -45,7 +48,7 @@ public:
 	PRIMITIVE_POINTS_TYPE(T) m_vdPoints;
 	PRIMITIVE_POINTS_TYPE(T) m_vvPoints;
 	COLORREF m_color;
-#if !defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
         CPoint3 m_ptMax;
         CPoint3 m_ptMin;
 #endif
@@ -86,7 +89,7 @@ public:
 public:
 	Primitive3D(const Primitive3D& ob)
 	{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		dynamic_cast<Object*>(this)->Init(ob);
 #else
             this->m_ptMax = ob.m_ptMax;
@@ -99,7 +102,7 @@ public:
 	{
 		if (this == &ob)
 			return *this;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		dynamic_cast<Object*>(this)->Init(ob);
 #else
             this->m_ptMax = ob.m_ptMax;
@@ -121,7 +124,7 @@ public:
 		m_alpha = 255;
 		m_FillMode = GL_FILL;
 		m_nPoints	= 0;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		this->m_object_type = Object::object_type::primitive3d;
 #endif
 		this->m_primitive_version = 1;
@@ -150,7 +153,7 @@ public:
 	{
 		m_alpha = alpha;
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	virtual void Draw();/*
 	{
 		if (m_pSurfDoc)
@@ -200,7 +203,7 @@ public:
 				break;
 			default:
 				{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 					throw VersionException(version, VersionException::cannot_store, this->m_object_type);
 #endif
 				}
@@ -229,7 +232,7 @@ public:
 			default:
 				{
 					printf("Primitive_Serialize(Archive& ar) throw!!!\n");
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 					throw VersionException(this->m_primitive_version, VersionException::cannot_load, this->m_object_type);
 #endif
 				}
@@ -411,7 +414,7 @@ public:
 			return status;
 		if (nFilterIndex == 1)
 		{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			status = this->Object::SaveAsDxf(lpstrFile,NULL);
 #endif
 		}

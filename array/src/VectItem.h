@@ -10,7 +10,7 @@
 #endif // _MSC_VER > 1000
 //#include "raporto.h"
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "../../surfdoc/src/Object.h"
 #endif
 
@@ -80,7 +80,7 @@ public:
 	}
 };
 
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #if 1
 template <class T> class ObjectItem
 {

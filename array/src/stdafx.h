@@ -19,11 +19,6 @@
 #include "mywindows.h"
 #endif
 
-#if defined( _UNICODE) || defined (UNICODE)
-#define stprintf_s _snwprintf
-#else
-#define stprintf_s sprintf_s
-#endif
 
 #include <stdio.h>
 #include <math.h>

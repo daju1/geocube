@@ -2498,7 +2498,7 @@ bool inline hist2(const vdouble& v1, const vdouble& v2,int n1, int n2, vdouble& 
 
 	if (v1.m_length != v2.m_length)
 	{
-		MessageBox(0, _T("length(v1)~=length(v2)"),_T("hist2"),0);
+		MessageBox(0, "length(v1)~=length(v2)", "hist2",0);
 		return false;
 	}
 

@@ -5,16 +5,17 @@
 #include "stdafx.h"
 #include "AutoBuildProfileWnd.h"
 #include <stdio.h>
-
-#if !defined (_MSC_VER) && !defined (QT_PROJECT)
-#ifdef _UNICODE
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #else
+//#ifdef _UNICODE
+//#else
 #define _ftprintf fprintf
 #define _tfopen fopen
 #define _fgetts fgets
 #define _stscanf sscanf
+//#endif
 #endif
-#endif
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CMapWnd
@@ -156,17 +157,18 @@ void AutoBuildProfileWnd::OnPaint(HWND hwnd)
 void AutoBuildProfileWnd::CreateNewMap(int points)
 {
 	int		i;
-	RECT	rc;
+
 
 	// free old map
 	Free();
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
+	RECT	rc;
 	srand(GetTickCount());
 	GetClientRect(hwnd, &rc);
-#endif
+
 	rc.right	-= 6;
 	rc.bottom	-= 6;
-
+#endif
 	m_points = points;
 
 char str[255];
@@ -374,7 +376,7 @@ int AutoBuildProfileWnd::Save(LPCTSTR szFile)
 	// save all point
 	for (i = 0; i < m_points; i++)
 	{
-		_ftprintf(fp, _T("%d %d\n"), m_xPoints[i], m_yPoints[i]);
+		_ftprintf(fp, _T("%f %f\n"), m_xPoints[i], m_yPoints[i]);
 	}
 
 	fclose(fp);

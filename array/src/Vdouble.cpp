@@ -2798,7 +2798,7 @@ vdouble vdouble::CumSum() // Возврашает вектор кумуляти�
 {
 	int len = m_length;
 	vdouble cms = vdouble(len);
-	double *pv, *pr, sum = 0.0, num = 0.0;
+	double *pv, *pr, sum = 0.0;
 	pr = cms.pD;
 	pv = pD;
 	for (int i = 0; i < len; i++)
@@ -3883,8 +3883,7 @@ vdouble vdouble::TransponedMatrixProduct(vdouble& x)
 vdouble vdouble::VectorsToMatrixProduct(vdouble& gor)
 {
 	int rows = m_length, 
-		cols = gor.m_length, 
-		Len = rows * cols;
+		cols = gor.m_length;
 	vdouble m = vdouble(rows,cols);
 	double *pm, *pvert, *pgor;
 	pm = m.pD;
@@ -3922,8 +3921,7 @@ vdouble vdouble::TichonovOld(vdouble& b)
 	int 
 		i, r, c,
 		rows = m_size[0],
-		cols = m_size[1],
-		MaxNotTurned = 10;// число итераций на которые действует отмена настройки
+		cols = m_size[1];// число итераций на которые действует отмена настройки
 	vdouble x, E = vdouble(rows), d2Fdx2 = vdouble(cols);
 	double delta, 
 		alpha, 
@@ -4073,9 +4071,9 @@ vdouble vdouble::Tichonov(vdouble& b, bool AlphaNonZero)
 		alpha_old, // 
 		xS, //
 		part = 0.01, // доля от нормы вектора невязки, какую должен составлять регуляризационный коэффициент
-		part_down = 0.1, //
+		//part_down = 0.1, //
 		mindFdx = 1.0e-12, // минимальное значение изменения функционала - ниже которого отменяется настройка для элемента решения на заданное число итераций
-		mindFdx_down = 0.1, //
+		//mindFdx_down = 0.1, //
 		inertio = 0.4, // инерционный коэффициент
 		minetha = 0.4, // минимальное значение коэффициента скорости обучения
 		maxetha = 1.3, // максимальное значение коэффициента скорости обучения
@@ -5725,10 +5723,10 @@ int vdouble::PolynomDivideIntoThree_member(double& b, double c)// Произво
 
 int vdouble::PolynomRootsSimple(vdouble& prs, vdouble& D)// Вычленяет кратные корни, получая полином с простыми корнями и соответствующий множитель
 {
-	int result, q = 0;
+	int result;
 	double epsilon = 0.1,
 		control_epsilon = 1e-6;
-	bool go = true, stop = false, Success;
+	bool stop = false, Success;
 
 	vdouble deriv, rem1, rem2, rem3, quot;
 	deriv = PolynomDerivative();
@@ -7158,7 +7156,7 @@ int vdouble::Bernulli_roots(vdouble& dr, Vector<complex>& cr, vdouble& unsolved,
 int vdouble::BernulliMinRealRoot(vdouble& dr, const double& depsilon)
 {
 	//Вычисляет минимальный по модулю действительный корень действительного полинома методом Бернулли (для полиномов с вычленёнными кратными корнями)
-	int result, i, len, len1, len0, k, k1, k2, k3, maxLoops = 100000, mink = 4, j, j2, inv = 0;
+	int result, i, len, len1, len0, k, k1, k2, k3, maxLoops = 100000, mink = 4, j, j2;
 	double mjuk, tk, Sk, Sk_1, x, y, xx, e, mf, mdf, c,
 		epsilon_control = 1.0e-3,
 		epsilon2_control = epsilon_control * epsilon_control,
@@ -8240,7 +8238,7 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 		return 0;
 	}
 	int len_h = dh.m_length,
-		len_s_right = 1,
+		//len_s_right = 1,
 		// длина разложения определяется 
 		// сколько раз фильтр может полностью 
 		// уложиться на сигнале со сдвигом 2 
@@ -8273,10 +8271,11 @@ int vdouble::dwt(Vector<int>& t, Vector<int>& tsd,
 	ptsd = tsd.data + len_s - 1;
 	ps = s.pD + len_s - 1;
 
-	int ind, i, j/*, k */,
+	int ind, i, j/*, k ,*/
 		// если при укладке фильтра на сигнале 
 		// остаётся один элемент, то мы это должны учесть.
-		ind0 = (m_length - len_h)%2;
+		//ind0 = (m_length - len_h)%2
+		;
 	// центральные коэффициенты
 	for (i = m_length - 1; i >= len_h-1; i -= 2)// движемся по сигналу с конца на начало с шагом 2
 	{

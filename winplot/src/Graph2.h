@@ -8,7 +8,7 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "StdAfx.h"
 #endif
 #include "../../tezey/src/Graph.h"

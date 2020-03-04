@@ -17715,7 +17715,7 @@ void BuildGrid(char * file_grd,
 			   vector<double> &vZ,
 			   vector<double> &vK,
 			   double xSize, double ySize, double max_glubina,
-#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
                Collection * pcollection
 #else
                void * pcollection
