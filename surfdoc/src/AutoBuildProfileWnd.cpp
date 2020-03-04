@@ -26,7 +26,7 @@ m_points(0), m_wayPoints(0),
 m_xWay(NULL), m_yWay(NULL), 
 m_vxWay(NULL), m_vyWay(NULL)
 {
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	InitializeCriticalSection(&CriticalSection);
 #endif
 }
@@ -34,7 +34,7 @@ m_vxWay(NULL), m_vyWay(NULL)
 AutoBuildProfileWnd::~AutoBuildProfileWnd()
 {
 	Free();
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	DeleteCriticalSection(&CriticalSection);
 #endif
 }
@@ -53,7 +53,7 @@ END_MESSAGE_MAP()
 // ------------------------------------------------------------
 // WM_PAINT - paint the window
 //
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 void AutoBuildProfileWnd::OnPaint(HWND hwnd) 
 {
 	PAINTSTRUCT ps;
@@ -160,7 +160,7 @@ void AutoBuildProfileWnd::CreateNewMap(int points)
 
 	// free old map
 	Free();
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	srand(GetTickCount());
 	GetClientRect(hwnd, &rc);
 #endif
@@ -184,7 +184,7 @@ MessageBox(0, str, "CreateMap", 0);
 //		m_xPoints[i] = (rand() % rc.right) + 3;
 //		m_yPoints[i] = (rand() % rc.bottom) + 3;
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Invalidate();
 #endif
 }
@@ -278,16 +278,16 @@ void AutoBuildProfileWnd::ReallocWay(short count)
 //
 void AutoBuildProfileWnd::SetPoints(double* xPoints, double* yPoints)
 {
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     EnterCriticalSection(&CriticalSection);
 #endif
 	memcpy(m_xPoints, xPoints, m_points * sizeof(double));
 	memcpy(m_yPoints, yPoints, m_points * sizeof(double));
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	LeaveCriticalSection(&CriticalSection);
 #endif
 	ExtremePoints();
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Invalidate();
 #endif
 }
@@ -349,7 +349,7 @@ void AutoBuildProfileWnd::SetWay(double* xPoints, double* yPoints, short count)
 		m_xWay[i] = xPoints[i];
 		m_yWay[i] = yPoints[i];
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Invalidate();
 #endif
 }
@@ -440,13 +440,13 @@ int AutoBuildProfileWnd::Load(LPCTSTR szFile)
 	// free file and mem
 	fclose(fp);
 	delete [] sz;
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	// redraw map
 	Invalidate();
 #endif
 	return r;
 }
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 void AutoBuildProfileWnd::Invalidate()
 {
 	RECT rect;

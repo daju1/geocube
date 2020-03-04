@@ -161,7 +161,7 @@ template<class T> class TreeNode {
 
   friend class SearchTree<T>;        // возможные пополнения
   friend class BraidedSearchTree<T>; // структуры
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
   friend class sparse_row; // структуры
 #endif
 	friend void ::DoMyMethod(vector<double> & X,

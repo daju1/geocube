@@ -3682,13 +3682,13 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 {
 	if(this->OpenFileDialog())
 	{
-#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		SetDlgItemText(hDlg,IDC_DIRECTORY2, this->directory);
 #endif
 		strcpy(this->szPath,this->directory);
 		strcat(this->szPath, "\\" );
 		strcat(this->szPath, this->m_files_in_dir.szFileFilter);
-#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		DlgDirList( hDlg, this->szPath, IDC_LIST2, IDC_DIRECTORY2,
 						DDL_READWRITE );
 

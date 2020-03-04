@@ -1,5 +1,5 @@
 #pragma once
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 #include "Object.h"
 #include "Collection.h"
 #include "FastCollection.h"
@@ -9,7 +9,7 @@
 #include "../../surfdoc/src/Archive.h"
 
 class AutoBuildProfile
-#ifdef _MSC_VER
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
     : public Object
 #endif
 {
@@ -17,13 +17,13 @@ public:
 	static struct auto_build_parametrs	ab;
 	static void auto_build_parametrs_Init();
 	static void auto_build_parametrs_Init1();
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	vect<Collection>					m_collections;
 	ObjectList							m_collections_ObjectList;
 #endif
 	void CutAndDisvisible(bool positive, double a, double b, double c, double d);
 	void CutXYZandDisvisible(int subcube_number, double X, double Y, double Z);
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	virtual void Draw();
 	virtual void ReDraw();
 	virtual void EnumObjects(WPARAM wParam, LPARAM lParam, void * p,
@@ -35,7 +35,7 @@ public:
 #endif
 	void Init(const AutoBuildProfile& bp)
 	{
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		// Objects' vectors
 		this->m_collections				= bp.m_collections;
 		this->m_collections_ObjectList.Init(this->m_collections, this);
@@ -54,7 +54,7 @@ public:
 	{
 		return false;
 	}
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	virtual bool IsSelected(CPoint3 selected_view_pt,
 			double search_radius,
 			WhatSelected& ws);
@@ -87,7 +87,7 @@ public:
 	bool init();
 	bool init1();
 #endif /*!VIEW_ONLY_VERSION*/
-#if defined (_MSC_VER)
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	Collection* CreateNewCollection(void);
 #endif
 
