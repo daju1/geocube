@@ -43,7 +43,7 @@ typedef void VOID, *PVOID, *LPVOID;
 typedef const void* LPCVOID;
 
 
-typedef wchar_t UNICODE;
+//typedef wchar_t UNICODE;
 
 typedef unsigned int ULONG32;
 

@@ -7,7 +7,7 @@
 
 
 #include <iostream>
-#ifdef _MSC_VER
+#ifdef _MSC_VER  && !defined (QT_PROJECT)
 #include <tchar.h>
 #endif
 

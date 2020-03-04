@@ -8,7 +8,7 @@
 #define COMMON_INCLUDED_
 
 //#define _WIN32_WINNT 0x0501
-#ifdef _MSC_VER
+#ifdef _MSC_VER && !defined (QT_PROJECT)
 #include <windows.h>
 #endif
 //#define USE_PICK_FILTER

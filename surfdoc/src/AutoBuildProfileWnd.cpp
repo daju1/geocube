@@ -6,7 +6,7 @@
 #include "AutoBuildProfileWnd.h"
 #include <stdio.h>
 
-#if !defined (_MSC_VER)
+#if !defined (_MSC_VER) && !defined (QT_PROJECT)
 #ifdef _UNICODE
 #else
 #define _ftprintf fprintf
