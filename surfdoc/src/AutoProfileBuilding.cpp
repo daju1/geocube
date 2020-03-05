@@ -5722,8 +5722,8 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 		// из прямоугольной разреженной матрицы
 		// формируем квадратную систему уравнений
 
-		size_t cols = _rows;
-		size_t rows = _cols;
+		/*size_t*/ unsigned long cols = _rows;
+		/*size_t*/ unsigned long rows = _cols;
 
 		printf("FormMinSquareMatrix rows = %u cols = %u\n",  rows, cols);
 
@@ -5833,7 +5833,7 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
     //vector<sparse_row_simple> at; представление матрицы в транспонированном виде
 
 	char buff[BUFF_SIZE];
-	long _cols, _rows;
+	unsigned long _cols, _rows;
 	bool res = false;
 
 	AFile f;
@@ -15071,7 +15071,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		profile_intervals.push_back(prof_interval);
 		prof_interval.i1 = prof_interval.i2+1;
 	}
-
+	return true;
 }
 
 bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,

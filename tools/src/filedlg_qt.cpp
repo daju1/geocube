@@ -9,7 +9,7 @@ char directory[255];
 
 HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData)
 {
-
+	return S_FALSE;
 }
 
 QStringList parse_filter(TCHAR filter[])
@@ -27,10 +27,10 @@ QStringList parse_filter(TCHAR filter[])
 }
 
 
-HRESULT OpenFileDlg(HWND hWnd, TCHAR filter[], LPTSTR lpstrFile )
+HRESULT OpenFileDlg(QWidget* hWnd, TCHAR filter[], LPTSTR lpstrFile)
 {
 #if 0
-    QString fileName = QFileDialog::getOpenFileName((QWidget *)hWnd, "Open File",
+    QString fileName = QFileDialog::getOpenFileName(hWnd, "Open File",
                                                     QDir("../../").absolutePath(),
                                                     filter);
     qDebug() << fileName;
@@ -42,7 +42,7 @@ HRESULT OpenFileDlg(HWND hWnd, TCHAR filter[], LPTSTR lpstrFile )
 
     QStringList filters = parse_filter(filter);
 
-    QFileDialog dialog ((QWidget *)hWnd);
+    QFileDialog dialog (hWnd);
     dialog.setNameFilters(filters);
     dialog.setDirectory(QDir("../../").absolutePath());
     if(dialog.exec())
@@ -64,7 +64,7 @@ HRESULT OpenFileDlg(HWND hWnd, TCHAR filter[], LPTSTR lpstrFile )
 #endif
     return S_FALSE;
 }
-HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex)
+HRESULT SaveFileDlg(QWidget* hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex)
 {
     QStringList filters;
     //filters << "Image files (*.png *.xpm *.jpg)"
@@ -73,11 +73,11 @@ HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterI
 
     filters << filter;
 
-    QString fileName = QFileDialog::getSaveFileName((QWidget *)hWnd, "Save File",
+    QString fileName = QFileDialog::getSaveFileName(hWnd, "Save File",
                                lpstrFile,
                                filter);
     strcpy(lpstrFile, fileName.toStdString().c_str());
-
+	return S_FALSE;
 }
 
 bool BroseDirDlg(HWND hWnd, char * dir)
@@ -89,4 +89,5 @@ bool BroseDirDlg(HWND hWnd, char * dir)
                             "/home",
                             "Images (*.png *.xpm *.jpg)");
 #endif
+	return S_FALSE;
 }

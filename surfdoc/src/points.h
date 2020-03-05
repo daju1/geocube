@@ -87,7 +87,7 @@ class CPoint3
 public:
 	double x, y, z;	// Координаты точки
 	bool bVisible;
-	LPARAM flag;
+	unsigned long flag;
 	//====== Конструктор по умолчанию
 	CPoint3 () { x = y = z = 0; bVisible = true; flag = 0;}
 	//====== Конструктор с параметрами
@@ -107,7 +107,7 @@ public:
 		bVisible = bvisible;
 		flag = 0;
 	}
-	CPoint3 (double c1, double c2, double c3, bool bvisible, LPARAM f)
+	CPoint3 (double c1, double c2, double c3, bool bvisible, unsigned long f)
 	{
 		x = double(c1);
 		y = double(c2);
@@ -497,7 +497,7 @@ struct VERT
 {
 	CPoint3 v;	// Координаты вершины
 	CPoint3 n;	// Координаты нормали
-	DWORD c;		// Цвет вершины
+	unsigned long c;		// Цвет вершины
 };
 
 //====== Данные о вершине геометрического примитива
@@ -505,7 +505,7 @@ struct VERT_TEX
 {
 	CPoint3 v;	// Координаты вершины
 	CPoint3 n;	// Координаты нормали
-	DWORD c;		// Цвет вершины
+	unsigned long c;		// Цвет вершины
 	CPoint2 t;	// Координаты текстуры
 };
 

@@ -227,7 +227,7 @@ LPVOID HeapAlloc(HANDLE, DWORD /*dwFlags*/, size_t dwBytes);
 BOOL HeapFree(HANDLE, DWORD /*dwFlags*/, LPVOID lpMem);
 ;
 
-#ifdef _UNICODE
+/*#ifdef _UNICODE
 BOOL CreateDirectoryW(
   LPCWSTR                lpPathName,
   void *  //LPSECURITY_ATTRIBUTES lpSecurityAttributes
@@ -237,7 +237,7 @@ BOOL DeleteFileW(
 );
 #define CreateDirectory CreateDirectoryW
 #define DeleteFile DeleteFileW
-#else
+#else*/
 BOOL CreateDirectoryA(
   LPCSTR                lpPathName,
   void *   //LPSECURITY_ATTRIBUTES lpSecurityAttributes
@@ -248,12 +248,12 @@ BOOL DeleteFileA(
 );
 #define CreateDirectory CreateDirectoryA
 #define DeleteFile DeleteFileA
-#endif
+//#endif
 
 #ifndef _LDBL_RADIX
 #define _LDBL_RADIX 2
 #endif
-
+#if !defined (_MSC_VER)
 int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...);
 #if 0
 template<size_t sizeOfBuffer>
@@ -265,6 +265,7 @@ inline int sprintf_s(char (&buffer)[sizeOfBuffer], const char* format, ...)
     va_end(ap);
     return result;
 }
+#endif
 #endif
 
 #include <qmessagebox.h>

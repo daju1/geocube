@@ -1999,16 +1999,16 @@ vdouble inline linterp(const vdouble& x, const vdouble& y, vdouble& xx)
 	yy.resize(nxx);
 	if (xx[0] < x[0])
 	{
-		TCHAR errstr[255];
-		stprintf_s(errstr, 255, _T("You must have min(x = %f) <= min(xx = %f).."), x[0], xx[0]);
-		MessageBox(0,errstr,_T("linterp"),0);
+		char errstr[255];
+		sprintf_s(errstr, 255, "You must have min(x = %f) <= min(xx = %f)..", x[0], xx[0]);
+		MessageBox(0,errstr, "linterp", 0);
 		return vdouble();
 	}	
 	if (xx[nxx-1] > x[nx-1])
 	{
-		TCHAR errstr[255];
-		stprintf_s(errstr, 255, _T("You must have max(xx = %f) <= max(x = %f).."), xx[nxx-1], x[nx-1]);
-		MessageBox(0,errstr,_T("linterp"),0);
+		char errstr[255];
+		sprintf_s(errstr, 255, "You must have max(xx = %f) <= max(x = %f)..", xx[nxx-1], x[nx-1]);
+		MessageBox(0,errstr, "linterp", 0);
 		return vdouble();
 	}
 	//
@@ -2476,9 +2476,9 @@ bool inline hist(const vdouble& v, int N, vdouble&  n, vdouble& x)
 	x = dsequence(-epsilon+mi + .5*dx, dx, ma + epsilon - .5*dx);
 	if (x.m_length != N)
 	{
-		TCHAR str[250];
-		stprintf_s( str, 250, _T("x1.m_length%d ~= N%d"),x.m_length, N);
-		MessageBox(0, str,_T("hist2"),0);
+		char str[250];
+		sprintf_s( str, 250, "x1.m_length%d ~= N%d",x.m_length, N);
+		MessageBox(0, str, "hist2", 0);
 		return false;
 	}
 
@@ -2516,16 +2516,16 @@ bool inline hist2(const vdouble& v1, const vdouble& v2,int n1, int n2, vdouble& 
 	x2 = dsequence(-epsilon+mi2 + .5*dx2, dx2, ma2 + epsilon - .5*dx2);
 	if (x1.m_length != n1)
 	{
-		TCHAR str[250];
-		stprintf_s( str, 250, _T("x1.m_length%d ~= n1%d"),x1.m_length, n1);
-		MessageBox(0, str,_T("hist2"),0);
+		char str[250];
+		sprintf_s( str, 250, "x1.m_length%d ~= n1%d", x1.m_length, n1);
+		MessageBox(0, str, "hist2", 0);
 		return false;
 	}
 	if (x2.m_length != n2)
 	{
-		TCHAR str[250];
-		stprintf_s( str, 250, _T("x2.m_length%d ~= n2%d"),x2.m_length, n2);
-		MessageBox(0, str,_T("hist2"),0);
+		char str[250];
+		sprintf_s( str, 250, "x2.m_length%d ~= n2%d", x2.m_length, n2);
+		MessageBox(0, str, "hist2", 0);
 		return false;
 	}
 

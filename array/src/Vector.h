@@ -62,9 +62,9 @@ public:
 		if ((data = new T [size]) == NULL && size != 0)
 		{
 			size = 0;
-			TCHAR str[200];
-			stprintf_s(str, 200, _T("Vector<T>::Alloc(%d) - Not enough memory"), size);
-			MessageBox(0, str, _T("Vector"), 0);
+			char str[200];
+			sprintf_s(str, 200, "Vector<T>::Alloc(%d) - Not enough memory", size);
+			MessageBox(0, str, "Vector", 0);
 			return;
 		}
 	}
@@ -123,10 +123,10 @@ public:
 	{ 
 		if (i < 0 || i >= size_t(size))
 		{
-			TCHAR strerr[1024];;
-			stprintf_s(strerr, 1024, _T("Index = %i Error using Vector<size = %i>::Operator[]"), i, size);
+			char strerr[1024];;
+			sprintf_s(strerr, 1024, "Index = %i Error using Vector<size = %i>::Operator[]", i, size);
 			printf("%s\n", strerr);
-			MessageBox(0, strerr, _T(""), 0);
+			MessageBox(0, strerr, "", 0);
 			assert(false);
 		}
 		return data[i]; 
@@ -197,10 +197,10 @@ public:
 		if ((data2 = new T [size]) == NULL && size != 0)
 		{
 			size--;
-			TCHAR s[200];
-			stprintf_s(s, 200, _T("Vector <T>::push_back(const T &a) - Not enough memory\nsize = %d, sizeof(T) = %d"),
+			char s[200];
+			sprintf_s(s, 200, "Vector <T>::push_back(const T &a) - Not enough memory\nsize = %d, sizeof(T) = %d",
 				size, sizeof(T));
-			MessageBox(0,s,_T("Vector"),0);
+			MessageBox(0,s,"Vector",0);
 			return;
 		}
 		for(int i=0; i<size_1; i++)

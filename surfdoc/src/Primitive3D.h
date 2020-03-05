@@ -49,8 +49,9 @@ public:
 	PRIMITIVE_POINTS_TYPE(T) m_vvPoints;
 	COLORREF m_color;
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
-        CPoint3 m_ptMax;
-        CPoint3 m_ptMin;
+#else
+	CPoint3 m_ptMax;
+	CPoint3 m_ptMin;
 #endif
 	void Init(const Primitive3D& ob)
 	{

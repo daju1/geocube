@@ -91,11 +91,7 @@ DWORD Archive::ReWriteToFile(unsigned char * from, DWORD to_BytesFromBegin, DWOR
 	DWORD rez = 0;
 	if (this && this->m_pFile && from)
 	{
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		this->m_pFile->Seek((long)to_BytesFromBegin, FILE_BEGIN);
-#else
-		this->m_pFile->seek((long)to_BytesFromBegin, FILE_BEGIN);
-#endif
 		rez = this->m_pFile->Write(from, count);
 		this->m_pFile->SeekToEnd();
 	}
@@ -767,7 +763,7 @@ void FileBlockInfo::InitFileBlockHeader(long& type, long& version, DWORD size)
 }
 Archive& operator <<(Archive& ar, const std::string& s)
 {
-	ar << s.size();
+	ar << (unsigned long)s.size();
 	for (size_t i = 0; i < s.size(); i++)
 		ar << s[i];
 	//ar << ob.sID.size();
@@ -776,7 +772,7 @@ Archive& operator <<(Archive& ar, const std::string& s)
 }
 Archive& operator <<(Archive& ar, std::string& s)
 {
-	ar << s.size();
+	ar << (unsigned long)s.size();
 	for (size_t i = 0; i < s.size(); i++)
 		ar << s[i];
 	//ar << ob.sID.size();
@@ -785,7 +781,7 @@ Archive& operator <<(Archive& ar, std::string& s)
 }
 Archive& operator >>(Archive& ar, std::string& s)
 {
-	size_t len;
+	unsigned long len; //size_t
 	ar >> len;
 	s.resize(len);
 	for (size_t i = 0; i < len; i++)

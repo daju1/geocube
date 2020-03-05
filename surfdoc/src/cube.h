@@ -92,6 +92,7 @@ public:
 	bool draw_as_vol_render;
 
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
+#else
         std::string name;
 #endif
 

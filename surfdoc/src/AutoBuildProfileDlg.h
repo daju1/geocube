@@ -14,6 +14,8 @@
 //#include "./generic.h"
 
 #include "../../auto_build_3D/picks_search.h"
+#include "AutoBuildProfileWnd.h"
+
 struct FilesInDirectory
 {
 	int nFilesInDirectory;
@@ -27,8 +29,6 @@ struct FilesInDirectory
 #endif
 };
 
-
-#include "AutoBuildProfileWnd.h"
 
 class AutoBuildProfileDlg0  
 {

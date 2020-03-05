@@ -11,7 +11,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include <GL/gl.h>
+
 class WhatSelected;
 //#include ".\whatselected.h"
 #include "points.h"
@@ -24,6 +24,7 @@ class Layer;
 
 //#define UNICODE
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
+#include <GL/gl.h>
 #include <windows.h>
 #include <gdiplus.h>
 using namespace Gdiplus;

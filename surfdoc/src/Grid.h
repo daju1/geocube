@@ -376,7 +376,14 @@ struct Grid4
 Archive& operator <<(Archive& ar, Grid4& ob);
 Archive& operator >>(Archive& ar, Grid4& ob);
 
-int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile,
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
+typedef HWND Widget;
+#else
+typedef QWidget* Widget;
+#endif
+
+
+int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
 					  long nRow, 
 					  long nCol, 
 					  double xLL, // X coordinate of the lower left corner of the grid
@@ -386,7 +393,7 @@ int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile,
 					  double zMin, // minimum Z value within the grid
 					  double zMax, // maximum Z value within the grid
 					  double ** z, int ** visible);
-int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
+int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
 int ImportSurfer7Grid(char *file, Grid* pgrid, bool to_allocate = true);
 int ImportSurfer7Grid4(char *file, Grid4* pgrid);
 int ImportDigitalModel(Grid* pgrid,
@@ -400,7 +407,7 @@ int ImportDigitalModel(Grid* pgrid,
 	double zMax);
 
 int ImportDigitalModelHeader(long& nRow, long& nCol, double& xLeft, double& xRight, double& yLow, double& yHigh, double& zMin, double& zMax);
-
+int SetVisiblePointsInContour(Widget hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible);
 int SaveAsSurfer7Grid(const char *file, Grid* pgrid);
 int SaveAsSurfer7Grid4(const char *file, Grid4* pgrid);
 int SaveAsVTK(const char *file, Grid4* pgrid, bool view);
@@ -420,13 +427,13 @@ public:
 	double GetYMin();
 	double GetXMax();
 	double GetXMin();
-	HWND hwndParent;
+	Widget hwndParent;
     int SaveAsSurferGrid7( LPTSTR lpstrFile);
 	int SetVisiblePointsInContour();
 	int ReadContourBlnFile();
 	void Init(Grid* pGrid);
 	CGrid();
-	CGrid(HWND hwnd);
+	CGrid(Widget hwnd);
 	virtual ~CGrid();
 
 };

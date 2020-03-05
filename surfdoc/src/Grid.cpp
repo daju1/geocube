@@ -18,8 +18,8 @@ using namespace std;
 
 #include "Grid.h"
 extern int ReadContourBlnFile(vdouble& x, vdouble& y);
-extern int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible);
-extern int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
+
+
 extern HINSTANCE hInst;   // текущий экземпляр
 extern char szPath[];
 
@@ -27,7 +27,7 @@ extern char szPath[];
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 //#if !FAST_GRID_LOADING
-CGrid::CGrid(HWND hwnd)
+CGrid::CGrid(Widget hwnd)
 {
 	hwndParent = hwnd;
 }
@@ -122,7 +122,7 @@ double CGrid::GetYMax()
 
 
 
-int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile,
+int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
 					  long nRow, 
 					  long nCol, 
 					  double xLL, // X coordinate of the lower left corner of the grid
@@ -426,7 +426,7 @@ int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile,
 
 
 
-int SaveAsSurferGrid7(HWND hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible)
+int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible)
 {
     HRESULT hr = S_OK;
 
@@ -2315,7 +2315,7 @@ int ReadContourBlnFile(vdouble& x, vdouble& y)
 	}
 	return -1;
 }
-int SetVisiblePointsInContour(HWND hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible)
+int SetVisiblePointsInContour(Widget hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible)
 {
 	if ( xc.Length() != yc.Length() )
 	{
