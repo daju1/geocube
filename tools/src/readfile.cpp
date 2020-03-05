@@ -2,7 +2,7 @@
 #include "readfile.h"
 //#include "../datenum.h"
 extern HINSTANCE hInst;   // текущий экземпляр
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
+extern void ErrorExit(LPCTSTR lpszFunction, bool toExitProcess = false) ;
 
 int ReadInputFile(char * fname, vdouble& x, vdouble& y)
 {
