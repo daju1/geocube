@@ -275,21 +275,29 @@ int AfxMessageBox(const char * msg );
 
 
 // From gl.h
-typedef unsigned int GLenum;
-typedef unsigned char GLboolean;
-typedef unsigned int GLbitfield;
-typedef signed char GLbyte;
-typedef short GLshort;
-typedef int GLint;
-typedef int GLsizei;
-typedef unsigned char GLubyte;
-typedef unsigned short GLushort;
-typedef unsigned int GLuint;
-typedef float GLfloat;
-typedef float GLclampf;
-typedef double GLdouble;
-typedef double GLclampd;
-typedef void GLvoid;
+/*
+ * Datatypes
+ */
+typedef unsigned int	GLenum;
+typedef unsigned char	GLboolean;
+typedef unsigned int	GLbitfield;
+typedef void		GLvoid;
+typedef signed char	GLbyte;		/* 1-byte signed */
+typedef short		GLshort;	/* 2-byte signed */
+typedef int		GLint;		/* 4-byte signed */
+typedef unsigned char	GLubyte;	/* 1-byte unsigned */
+typedef unsigned short	GLushort;	/* 2-byte unsigned */
+typedef unsigned int	GLuint;		/* 4-byte unsigned */
+typedef int		GLsizei;	/* 4-byte signed */
+typedef float		GLfloat;	/* single precision float */
+typedef float		GLclampf;	/* single precision float in [0,1] */
+typedef double		GLdouble;	/* double precision float */
+typedef double		GLclampd;	/* double precision float in [0,1] */
+
+/* Polygons */
+#define GL_POINT				0x1B00
+#define GL_LINE					0x1B01
+#define GL_FILL					0x1B02
 
 #endif //_MY_WINDOWS_H_
 

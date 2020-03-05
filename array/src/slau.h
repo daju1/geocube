@@ -103,11 +103,12 @@ T ScalarProduct(vector<T>& v1, vector<T>& v2)// Возврашает скаля�
 	}
 	return _ScalarProduct;
 }
-
+#ifdef PRINT_SLAU
 void print_slau(vector<vector<double> >& a,
      vector<double>& b, const char *);
 void print_slau(vector<sparse_row>& a,
      vector<double>& b, const char * s);
+#endif
 bool lesgausssolve(vector<vector<double> > a,
      int n,
      vector<double> b,

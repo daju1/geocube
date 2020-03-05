@@ -482,9 +482,9 @@ printf("N_contour = poly_contour->length() %d\n", N_contour );
 				
 			}
 		}
-
+#ifdef PRINT_SLAU
 		print_slau(m,b,"slau");
-
+#endif
 
 		vector<double> xx;
 		if (lesgausssolve_find_max(m, (int)m.size(), 3, b, xx, 0.0))
