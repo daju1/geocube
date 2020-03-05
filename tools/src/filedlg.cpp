@@ -174,7 +174,7 @@ UINT_PTR CALLBACK DlgProcSaveProf(HWND hDlg, UINT message, WPARAM wParam, LPARAM
     }
     return TRUE;
 }
-HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData)
+HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData)
 {
     HRESULT hr = S_OK;
 	int iext;
@@ -391,7 +391,7 @@ e_Exit:
 }
 
 
-HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex)
+HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex)
 {
 /*  Example:
  *			TCHAR filter[] =

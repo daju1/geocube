@@ -3,6 +3,6 @@
 #else
 #include <mywindows.h>
 #endif
-void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
-void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess = false);
-void ErrorPrint(LPTSTR lpszFunction);
+void ErrorExit(LPCTSTR lpszFunction, bool toExitProcess = false) ;
+void ErrorExit(DWORD dwLastError, LPCTSTR lpszFunction, bool toExitProcess = false);
+void ErrorPrint(LPCTSTR lpszFunction);

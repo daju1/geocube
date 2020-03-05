@@ -420,7 +420,7 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 		 int delim,
 
 		 size_t level_of_signal, 
-		 char * name_suffics,
+		 const char * name_suffics,
 
 #if _USE_WINSURF_
 		 SurfDoc * doc, 

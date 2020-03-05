@@ -3805,7 +3805,7 @@ void LoadingTheMatrix(vector<SparseRow>& m, long & cols)
 
 	}
 }
-bool StoreMatrixHeader(char * filename, long rows, long cols, bool ByColomns)
+bool StoreMatrixHeader(const char * filename, long rows, long cols, bool ByColomns)
 {
 	if (rows <= 0)
 	{
@@ -3836,7 +3836,7 @@ bool StoreMatrixHeader(char * filename, long rows, long cols, bool ByColomns)
 	f.Close();
 	return true;
 }
-bool StoreMatrixHeader(char * filename, long rows, long cols)
+bool StoreMatrixHeader(const char * filename, long rows, long cols)
 {
 	if (rows <= 0)
 	{
@@ -3866,7 +3866,7 @@ bool StoreMatrixHeader(char * filename, long rows, long cols)
 	f.Close();
 	return true;
 }
-bool StoreMatrix(char * filename, vector<vector<double> > & m, bool ByColomns)
+bool StoreMatrix(const char * filename, vector<vector<double> > & m, bool ByColomns)
 {
 	long rows = m.size();
 	if (rows <= 0)
@@ -3920,7 +3920,7 @@ bool StoreMatrix(char * filename, vector<vector<double> > & m, bool ByColomns)
 	f.Close();
 	return true;
 }
-bool LoadMatrix(char * filename, vector<vector<double> > & m)
+bool LoadMatrix(const char * filename, vector<vector<double> > & m)
 {
 	bool result = false;
 	AFile f;
@@ -16021,7 +16021,7 @@ void Window_Cycle_Of_Signal_which_Done_By_Indexes(
 		 int delim,
 
 		 size_t level_of_signal, 
-		 char * name_suffics,
+		 const char * name_suffics,
 
 #if _USE_WINSURF_
 		 SurfDoc * doc, 

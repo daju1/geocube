@@ -12,11 +12,11 @@ HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterI
 	return S_FALSE;
 }
 
-QStringList parse_filter(TCHAR filter[])
+QStringList parse_filter(const TCHAR filter[])
 {
     QStringList filters;
     int i = 0;
-    for (LPTSTR pszz = filter; *pszz; pszz += strlen(pszz) + 1, ++i) {
+    for (LPCTSTR pszz = filter; *pszz; pszz += strlen(pszz) + 1, ++i) {
       //From our start to the cursor is our word.
       std::string s = std::string(pszz);
       if (0 == i%2)
@@ -27,7 +27,7 @@ QStringList parse_filter(TCHAR filter[])
 }
 
 
-HRESULT OpenFileDlg(QWidget* hWnd, TCHAR filter[], LPTSTR lpstrFile)
+HRESULT OpenFileDlg(QWidget* hWnd, const TCHAR filter[], LPTSTR lpstrFile)
 {
 #if 0
     QString fileName = QFileDialog::getOpenFileName(hWnd, "Open File",
@@ -64,7 +64,7 @@ HRESULT OpenFileDlg(QWidget* hWnd, TCHAR filter[], LPTSTR lpstrFile)
 #endif
     return S_FALSE;
 }
-HRESULT SaveFileDlg(QWidget* hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex)
+HRESULT SaveFileDlg(QWidget* hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex)
 {
     QStringList filters;
     //filters << "Image files (*.png *.xpm *.jpg)"

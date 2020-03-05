@@ -189,9 +189,9 @@ bool Lamp(int use_newton, int type, // тип прямой задачи
 		   double DZ,
 		   char * common_directory);
 
-template <class T> bool StoreMatrix(char * filename, vector<T>& m, long cols);
-template <class T> void LoadMatrix(char * filename, vector<T>& m, long & cols);
-void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd);
+template <class T> bool StoreMatrix(const char * filename, vector<T>& m, long cols);
+template <class T> void LoadMatrix(const char * filename, vector<T>& m, long & cols);
+void SparseStructureToSurferGrid(const char * fn_spm, char * fn_grd);
 
 bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed, 
 							 const char * fn_min_sq_mat,

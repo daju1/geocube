@@ -1,7 +1,7 @@
 #include "../StdAfx.h"
 #include "errorexit.h"
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
-void ErrorExit(LPTSTR lpszFunction, bool toExitProcess) 
+void ErrorExit(LPCTSTR lpszFunction, bool toExitProcess) 
 {
 #define BUF_LEN 200
     TCHAR szBuf[BUF_LEN]; 
@@ -29,7 +29,7 @@ void ErrorExit(LPTSTR lpszFunction, bool toExitProcess)
 }
 
 
-void ErrorPrint(LPTSTR lpszFunction) 
+void ErrorPrint(LPCTSTR lpszFunction) 
 { 
     TCHAR szBuf[BUF_LEN]; 
     LPVOID lpMsgBuf;
@@ -54,7 +54,7 @@ void ErrorPrint(LPTSTR lpszFunction)
 
 }
 
-void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess) 
+void ErrorExit(DWORD dwLastError, LPCTSTR lpszFunction, bool toExitProcess) 
 { 
     TCHAR szBuf[BUF_LEN]; 
     LPVOID lpMsgBuf;
@@ -80,16 +80,16 @@ void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess)
 		ExitProcess(dwLastError); 
 }
 #else
-void ErrorExit(LPTSTR lpszFunction, bool toExitProcess)
+void ErrorExit(LPCTSTR lpszFunction, bool toExitProcess)
 {
 }
 
 
-void ErrorPrint(LPTSTR lpszFunction)
+void ErrorPrint(LPCTSTR lpszFunction)
 {
 }
 
-void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess)
+void ErrorExit(DWORD dwLastError, LPCTSTR lpszFunction, bool toExitProcess)
 {
 }
 #endif

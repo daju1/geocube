@@ -17,7 +17,8 @@ BOOL HeapFree(HANDLE, DWORD /*dwFlags*/, LPVOID lpMem)
 }
 #include <QDir>
 
-#ifdef _UNICODE
+#if 0
+//#ifdef _UNICODE
 BOOL CreateDirectoryW(
   LPCWSTR                lpPathName,
   void *  //LPSECURITY_ATTRIBUTES lpSecurityAttributes
@@ -36,7 +37,8 @@ BOOL DeleteFileW(
 }
 #define CreateDirectory CreateDirectoryW
 #define DeleteFile DeleteFileW
-#else
+//#else
+#endif
 BOOL CreateDirectoryA(
   LPCSTR                lpPathName,
   void *   //LPSECURITY_ATTRIBUTES lpSecurityAttributes
@@ -56,8 +58,8 @@ BOOL DeleteFileA(
 }
 #define CreateDirectory CreateDirectoryA
 #define DeleteFile DeleteFileA
-#endif
-
+//#endif
+#if !defined (_MSC_VER)
 #define _LDBL_RADIX 2
 
 int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...)
@@ -68,6 +70,7 @@ int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...)
     va_end(ap);
     return result;
 }
+#endif
 
 
 

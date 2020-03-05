@@ -30,13 +30,13 @@ public:
 };
 HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData);
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
-HRESULT OpenFileDlg(HWND hWnd, TCHAR filter[], LPTSTR lpstrFile = NULL);
-HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
+HRESULT OpenFileDlg(HWND hWnd, const TCHAR filter[], LPTSTR lpstrFile = NULL);
+HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex);
 
 HRESULT SavePlot(HWND hWnd, HENHMETAFILE hMetaFile, LPCTSTR lpstrFile);
 #else
-HRESULT OpenFileDlg(QWidget* hWnd, TCHAR filter[], LPTSTR lpstrFile = NULL);
-HRESULT SaveFileDlg(QWidget* hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
+HRESULT OpenFileDlg(QWidget* hWnd, const TCHAR filter[], LPTSTR lpstrFile = NULL);
+HRESULT SaveFileDlg(QWidget* hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex);
 #endif
 bool BroseDirDlg(HWND hWnd, char * dir);
 
