@@ -10089,7 +10089,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 		DeleteEnhMetaFile(hMetaFile);
 }
 #endif
-void SparseStructureToSurferGrid(char * fn_spm, char * fn_grd)
+void SparseStructureToSurferGrid(const char * fn_spm, char * fn_grd)
 {
 	char buff[BUFF_SIZE];
 	long cols, rows;
@@ -14208,13 +14208,14 @@ printf("r = %u rows = %d\n", r, rows);
 		//size_t end_window_len		= 200;
 		//size_t step_vindow_len	= 100;
 #endif
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		if (!CheckMyLicense())
 		{
 			start_window_len = rows+rand();
 			//printf("start_window_len = %u\n", start_window_len);
 			//return;
 		}
-
+#endif
 		if (rows <= max(start_window_len, end_window_len))
 		{
 			char str[1024];
