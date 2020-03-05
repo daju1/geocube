@@ -3,8 +3,8 @@
 #include "StdAfx.h"
 #include "Vdouble.h"
 #include "factorial.h"
-#include "lagerfun.h"
-#include "sequence.h"
+#include "LAGERFUN.H"
+#include "SEQUENCE.H"
 #include "wav.h"
 
 #if defined (_MSC_VER) && !defined (QT_PROJECT)

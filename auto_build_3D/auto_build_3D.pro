@@ -100,7 +100,10 @@ HEADERS  += auto_build_3d.h \
     ../geometry2D/Vertex.h \
     ../geometry2D/VertexEx.h \
     ../surfdoc/src/Grid.h \
-    ../surfdoc/src/Primitive3D.h
+    ../surfdoc/src/Primitive3D.h \
+    ../array/src/COMPLEX.H \
+    ../array/src/LAGERFUN.H \
+    ../array/src/SEQUENCE.H
 
 FORMS    += auto_build_3d.ui
 

@@ -10,7 +10,7 @@
 
 #define  DEBUGGING false
 #include <cfloat>
-#include "complex.h"
+#include "COMPLEX.H"
 #include <math.h>
 #include "Vector.h"
 
