@@ -160,7 +160,7 @@ struct auto_build_parametrs
 	bool use_min_max_sticks;
 
 
-	int delim;
+	char delim;
 };
 //void auto_build_parametrs_Init();
 

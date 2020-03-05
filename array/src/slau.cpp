@@ -339,9 +339,9 @@ bool lesgausssolve_find_max_norm(vector<vector<double> > a,
     int j;
     int i;
     double t;
-
+#ifdef PRINT_SLAU
 	print_slau(a, b, "start");
-
+#endif
     x.resize(cols);
     u = 0; // номер текущей колонки
     result = true;
@@ -402,9 +402,9 @@ bool lesgausssolve_find_max_norm(vector<vector<double> > a,
 				b[u] = b[k];
 				b[k] = t;
             }
-				
+#ifdef PRINT_SLAU
 			print_slau(a, b , "after perestanovka strok");
-			
+#endif
 #if 0
 			i = u;
 			double a_u_u = a[u][u];
@@ -434,9 +434,9 @@ bool lesgausssolve_find_max_norm(vector<vector<double> > a,
             }
             while(j>=u);
 #endif
-				
+#ifdef PRINT_SLAU
 			print_slau(a, b, "after delenie");
-
+#endif
 
             if( u+1<rows )// если найдённая строка с ненулевым элементом в текущей колонке не самая нижняя
             {
@@ -459,8 +459,9 @@ bool lesgausssolve_find_max_norm(vector<vector<double> > a,
                 while(i<rows);
             }
 
-
+#ifdef PRINT_SLAU
 			print_slau(a, b, "after otnjatie");
+#endif
         }
         else
         {
@@ -835,9 +836,9 @@ bool lesgausssolve(vector<vector<double> > a,
     int j;
     int i;
     double t;
-
+#ifdef PRINT_SLAU
 	print_slau(a, b, "start");
-
+#endif
     x.resize(cols);
     u = 0; // номер текущей колонки
     result = true;
@@ -871,9 +872,9 @@ bool lesgausssolve(vector<vector<double> > a,
 				b[u] = b[k];
 				b[k] = t;
             }
-				
+#ifdef PRINT_SLAU
 			print_slau(a, b , "after perestanovka strok");
-
+#endif
 			// делим всю строку на текущий диагональный элемент
 			j = cols-1; // иначе надо и элемент вектора правых частей разделить на текущий диагональный элемент
 			b[u] = b[u] / a[u][u];
@@ -884,9 +885,9 @@ bool lesgausssolve(vector<vector<double> > a,
             }
             while(j>=u);
 
-				
+#ifdef PRINT_SLAU
 			print_slau(a, b, "after delenie");
-
+#endif
 
             if( k+1<rows )// если найдённая строка с ненулевым элементом в текущей колонке не самая нижняя
             {
@@ -909,8 +910,9 @@ bool lesgausssolve(vector<vector<double> > a,
                 while(i<rows);
             }
 
-
+#ifdef PRINT_SLAU
 			print_slau(a, b, "after otnjatie");
+#endif
         }
         else
         {

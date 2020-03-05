@@ -140,7 +140,7 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 	ab.use_min_max_sticks = true;
 	ab.use_min_max_sticks = true;
 
-	ab.delim = ',';
+	ab.delim = ';';
 }
 
 void AutoBuildProfile::auto_build_parametrs_Init1()
@@ -227,7 +227,7 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 	ab.use_min_max_sticks = true;
 	ab.use_min_max_sticks = true;
 
-	ab.delim = ',';
+	ab.delim = ';';
 }
 
 AutoBuildProfile::AutoBuildProfile()

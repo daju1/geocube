@@ -703,7 +703,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 	return 0;
 }
 
-int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, int delim )
+int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, char delim )
 {
 	bool bUse_Header = true;
 	double value;

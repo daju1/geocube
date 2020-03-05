@@ -49,7 +49,9 @@ HRESULT OpenFileDlg(QWidget* hWnd, const TCHAR filter[], LPTSTR lpstrFile)
     {
         QDir dir = dialog.directory();
         qDebug() << dir;
-        strcpy(directory, dir.absolutePath().toStdString().c_str());
+        QString dirAbsPath = dir.absolutePath();
+        std::string dir_abs_path = dirAbsPath.toStdString();
+        strcpy(directory, dir_abs_path.c_str());
 
         QStringList files = dialog.selectedFiles();
         qDebug() << files;

@@ -1627,40 +1627,18 @@ void AutoBuildProfileDlg1::ShowWindows_RelatedWith_CheckUseLocals()
 #endif
 void AutoBuildProfileDlg1::OnButtonBrowseNumColomn()
 {
-
 	if (::OpenFileDlg(hDlg, 
 		_T("Data (*.dat)\0*.dat\0")
 		_T("CSV (*.csv)\0*.csv\0")
-		_T("All files \0*.*\0")) == S_OK)
+		_T("All files \0*.*\0"), this->m_ab.num_col_filename) == S_OK)
 
 	{
-		strcpy(this->m_ab.num_col_filename,::szPath);
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
+		strcpy(this->m_ab.num_col_filename,::szPath);
 		SetDlgItemText(this->hDlg, IDC_EDIT_NUM_COLOMNS, this->m_ab.num_col_filename);
 #endif
 		num_col_file_selected = true;
 	}
-#if 0
-    QStringList filters;
-    filters << "Data (*.dat)"
-            << "CSV (*.csv)"
-            << "Any files (*)";
-    QFileDialog dialog ((QWidget *)this->hDlg);
-    dialog.setNameFilters(filters);
-    if(dialog.exec())
-    {
-        QDir dir = dialog.directory();
-        qDebug() << dir;
-        strcpy(directory, dir.absolutePath().toStdString().c_str());
-
-        QStringList files = dialog.selectedFiles();
-        qDebug() << files;
-        if (files.size() > 0)
-        {
-            strcpy(this->m_ab.num_col_filename, files[0].toStdString().c_str());
-        }
-    }
-#endif
 }
 
 void AutoBuildProfileDlg1::OnDestroy()
@@ -3683,11 +3661,9 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 	{
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
 		SetDlgItemText(hDlg,IDC_DIRECTORY2, this->directory);
-#endif
 		strcpy(this->szPath,this->directory);
 		strcat(this->szPath, "\\" );
 		strcat(this->szPath, this->m_files_in_dir.szFileFilter);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
 		DlgDirList( hDlg, this->szPath, IDC_LIST2, IDC_DIRECTORY2,
 						DDL_READWRITE );
 
@@ -11552,12 +11528,6 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 		TEXT("Data files (*.dat*)\0*.dat\0")
 		TEXT("Text files (*.txt)\0*.txt\0")
 		;
-    if (S_OK != ::OpenFileDlg(NULL, filter, this->filename))
-    {
-        return false;
-    }
-
-
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
     OPENFILENAME ofn;       // common dialog box structure
     // Initialize OPENFILENAME
@@ -11698,6 +11668,41 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 	}
 	// Display the Open dialog box. 
 	return false;
+#else
+
+	QStringList filters;
+	filters << "Comma separated files (*.csv)"
+			<< "Data files (*.dat)"
+			<< "Text files (*.txt)"
+			<< "Any files (*)";
+
+	QFileDialog dialog(hDlg);
+	dialog.setNameFilters(filters);
+	dialog.setDirectory(QDir("../../").absolutePath());
+	if (dialog.exec())
+	{
+		QDir dir = dialog.directory();
+		QString dirAbsPath = dir.absolutePath();
+		std::string dir_abs_path = dirAbsPath.toStdString();
+		strcpy(directory, dir_abs_path.c_str());
+
+		QStringList files = dialog.selectedFiles();
+		if (files.size() > 0)
+		{
+			strcpy(this->filename, files[0].toStdString().c_str());
+		}
+
+		this->m_files_in_dir.nFilesInDirectory = files.size();
+		//память не освобождена!!!!
+		this->m_files_in_dir.vFileNameLengthes = (int*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+			sizeof(int) * this->m_files_in_dir.nFilesInDirectory);
+		this->m_files_in_dir.vFileNames = (char**)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+			sizeof(char*) * this->m_files_in_dir.nFilesInDirectory);
+		//strcpy(this->directory, ::directory);
+		return S_OK;
+	}
+
+	return true;
 #endif
 }
 
