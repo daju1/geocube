@@ -59,7 +59,8 @@ SOURCES += main.cpp\
     ../alglib-3.1.0/cpp/src/linalg.cpp \
     ../alglib-3.1.0/cpp/src/optimization.cpp \
     ../alglib-3.1.0/cpp/src/solvers.cpp \
-    ../alglib-3.1.0/cpp/src/statistics.cpp
+    ../alglib-3.1.0/cpp/src/statistics.cpp \
+    ../array/src/LocalExtremumsFiltering.cpp
 
 HEADERS  += auto_build_3d.h \
     ./../surfdoc/src/AutoProfileBuilding.h \
@@ -98,7 +99,8 @@ HEADERS  += auto_build_3d.h \
     ../geometry2D/SearchTree.h \
     ../geometry2D/Vertex.h \
     ../geometry2D/VertexEx.h \
-    ../surfdoc/src/Grid.h
+    ../surfdoc/src/Grid.h \
+    ../surfdoc/src/Primitive3D.h
 
 FORMS    += auto_build_3d.ui
 
