@@ -1644,6 +1644,7 @@ void AutoBuildProfileDlg1::OnButtonBrowseNumColomn()
 	QString dir = QDir("../data/rovno/rovno_u001/").absolutePath();
 	QString file = "Colomn_list_vertical.dat";
 	sprintf(this->m_ab.num_col_filename, "%s/%s", dir.toStdString().c_str(), file.toStdString().c_str());
+    num_col_file_selected = true;
 #endif
 }
 
@@ -11718,7 +11719,7 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 
 	QStringList filters = QDir::nameFiltersFromString("*.csv");
 
-	QStringList files = qdir.entryList(filters, QDir::Filter::Files, QDir::SortFlag::Name);
+    QStringList files = qdir.entryList(filters, QDir::Files, QDir::Name);
 #endif
 #endif
 	if (files.size() > 0)
