@@ -1942,7 +1942,7 @@ void SaveCubesAndSlices(const char * common_directory,
 
 		if (!(to_reduce_x || to_reduce_y))
 		{
-			sprintf(slice_dir, "%s\\slices_%s_of_%s", common_directory, 
+            sprintf(slice_dir, "%s/slices_%s_of_%s", common_directory,
 				projection, name);
 			char * p;
 			while (p=strchr (slice_dir,'\"'))
@@ -1953,7 +1953,7 @@ void SaveCubesAndSlices(const char * common_directory,
 			int n = 0;
 			while (!CreateDirectory(slice_dir,NULL))
 			{
-				sprintf(slice_dir, "%s\\slices_%s_of_%s(%d)", common_directory, 
+                sprintf(slice_dir, "%s/slices_%s_of_%s(%d)", common_directory,
 					projection, name, n++);
 				char * p;
 				while (p=strchr (slice_dir,'\"'))
@@ -1963,7 +1963,7 @@ void SaveCubesAndSlices(const char * common_directory,
 			}
 		}
 
-		sprintf(lpstrFile, "%s\\slice_%s_of_%s", slice_dir, 
+        sprintf(lpstrFile, "%s/slice_%s_of_%s", slice_dir,
 			projection, name);
 
 		switch(nProjection)
@@ -2000,7 +2000,7 @@ void SaveCubesAndSlices(const char * common_directory,
 						bool to_reduce_x, bool to_reduce_y)
 {
 	char file[2048];
-	sprintf(file, "%s\\%s_of_%s_alpha=%01e.cub", 
+    sprintf(file, "%s/%s_of_%s_alpha=%01e.cub",
 		common_directory, method_name,
 		new_names_of_colomns[cc].c_str(),
 		mmd3.v_alpha[i_alpha]);
@@ -2030,7 +2030,7 @@ void SaveCubesAndSlices(const char * common_directory,
 						bool to_reduce_x, bool to_reduce_y)
 {
 	char file[2048];
-	sprintf(file, "%s\\%s_%s.cub", 
+    sprintf(file, "%s/%s_%s.cub",
 		common_directory, method_name, cube_name);
 	char * p;
 	while (p=strchr (file,'\"'))
@@ -2114,7 +2114,7 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 		
 			sprintf(name, "%s_%c", method_name, 'x'+ a);
 
-			sprintf(bln_name, "%s\\origin_%s.bln", DirName, name);
+            sprintf(bln_name, "%s/origin_%s.bln", DirName, name);
 			char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 			FILE * bln = fopen (bln_name, "wt");
 			if(bln)
@@ -2127,7 +2127,7 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 				fclose(bln);
 			}
 			
-			sprintf(bln_name, "%s\\reconstr_%s.bln", DirName, name);
+            sprintf(bln_name, "%s/reconstr_%s.bln", DirName, name);
 			while (p=strchr (bln_name,'\"')){*p = '_';}
 			bln = fopen (bln_name, "wt");
 			if(bln)
@@ -3662,7 +3662,7 @@ void AutoBuildProfileDlg0::UseWholeDirectory()
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
 		SetDlgItemText(hDlg,IDC_DIRECTORY2, this->directory);
 		strcpy(this->szPath,this->directory);
-		strcat(this->szPath, "\\" );
+        strcat(this->szPath, "/" );
 		strcat(this->szPath, this->m_files_in_dir.szFileFilter);
 		DlgDirList( hDlg, this->szPath, IDC_LIST2, IDC_DIRECTORY2,
 						DDL_READWRITE );
@@ -3697,11 +3697,11 @@ UsingOneOfMyMethods3W(int type, // тип прямой задачи
 					   char * common_directory_iX_iY,					   
 					   int nFilesInDirectory)
 {
-	sprintf(dir_out, "%s\\common_raz_of_%d_files", common_directory_iX_iY, nFilesInDirectory);
+    sprintf(dir_out, "%s/common_raz_of_%d_files", common_directory_iX_iY, nFilesInDirectory);
 	int n = 0;
 	while (!CreateDirectory(dir_out,NULL))
 	{
-		sprintf(dir_out, "%s\\common_raz_of_%d_files(%d)", common_directory_iX_iY, nFilesInDirectory, n++);
+        sprintf(dir_out, "%s/common_raz_of_%d_files(%d)", common_directory_iX_iY, nFilesInDirectory, n++);
 	}
 
 		vector<vector <double> > rec_signals;
@@ -3716,11 +3716,11 @@ UsingOneOfMyMethods3W(int type, // тип прямой задачи
 		if (to_test_algorithm_by_reconstructed_signal)
 		{
 			// а теперь подаём на вход реконструированный сигнал
-			sprintf(dir_out, "%s\\common_rec_of_%d_files", common_directory_iX_iY, nFilesInDirectory);
+            sprintf(dir_out, "%s/common_rec_of_%d_files", common_directory_iX_iY, nFilesInDirectory);
 			int n = 0;
 			while (!CreateDirectory(dir_out,NULL))
 			{
-				sprintf(dir_out, "%s\\common_rec_of_%d_files(%d)", common_directory_iX_iY, nFilesInDirectory, n++);
+                sprintf(dir_out, "%s/common_rec_of_%d_files(%d)", common_directory_iX_iY, nFilesInDirectory, n++);
 			}
 
 			vector<vector <double> > rec_signals2;
@@ -3736,11 +3736,11 @@ UsingOneOfMyMethods3W(int type, // тип прямой задачи
 				rec_signals2, rec_modul2);
 
 			// а теперь подаём на вход реконструированный сигнал
-			/*sprintf(dir_out, "%s\\common_rec2_of_%d_files", common_directory, this->m_files_in_dir.nFilesInDirectory);
+            /*sprintf(dir_out, "%s/common_rec2_of_%d_files", common_directory, this->m_files_in_dir.nFilesInDirectory);
 			n = 0;
 			while (!CreateDirectory(dir_out,NULL))
 			{
-				sprintf(dir_out, "%s\\common_rec2_of_%d_files(%d)", common_directory, this->m_files_in_dir.nFilesInDirectory, n++);
+                sprintf(dir_out, "%s/common_rec2_of_%d_files(%d)", common_directory, this->m_files_in_dir.nFilesInDirectory, n++);
 			}
 
 			vector<vector <double> > rec_signals3;
@@ -3812,10 +3812,10 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
     SYSTEMTIME time;
     GetLocalTime(&time);
-    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
+    sprintf(common_directory, "%s/%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
 #else
     QDateTime time = QDateTime::currentDateTime();
-    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.date().year(), time.date().month(), time.date().day(), time.time().hour(), time.time().minute(),time.time().second());
+    sprintf(common_directory, "%s/%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.date().year(), time.date().month(), time.date().day(), time.time().hour(), time.time().minute(),time.time().second());
 #endif
     printf("common_directory = %s\n\n",common_directory);
 
@@ -3831,7 +3831,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	//**********************************************
 	//формируем файл описания режима работы
 	char filename_description[4096];
-	sprintf(filename_description, "%s\\description1.txt", common_directory);
+    sprintf(filename_description, "%s/description1.txt", common_directory);
 	FILE *stream;
 	stream = fopen(filename_description,"wt");
 	if (stream)
@@ -3935,7 +3935,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 		{
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
 			char sz_path_of_file[4096];			
-			sprintf(sz_path_of_file, "%s\\%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
+            sprintf(sz_path_of_file, "%s/%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
 #else
 			const char* sz_path_of_file = this->m_files_in_dir.vFileNames[iFile];
 #endif
@@ -4280,7 +4280,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 	}
 
 	char means_name[1024];
-	sprintf(means_name, "%s\\means.txt", common_directory);
+    sprintf(means_name, "%s/means.txt", common_directory);
 	//char * p; while (p=strchr (means_name,'\"')){*p = '_';}
 	FILE * means = fopen (means_name, "wt");
 	if(means)
@@ -4359,7 +4359,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 
 	char disps_name[1024];
-	sprintf(disps_name, "%s\\disps.txt", common_directory);
+    sprintf(disps_name, "%s/disps.txt", common_directory);
 	//char * p; while (p=strchr (disps_name,'\"')){*p = '_';}
 	FILE * disps = fopen (disps_name, "wt");
 	if(disps)
@@ -4697,7 +4697,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 			char bln_name[1024];
 
-			sprintf(bln_name, "%s\\new_XY.bln", common_directory);
+            sprintf(bln_name, "%s/new_XY.bln", common_directory);
 			//char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 			FILE * bln = fopen (bln_name, "wt");
 			if(bln)
@@ -4806,7 +4806,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				cout << "Enter p_max? [0.55]" << endl;
 				cin >> p_max;
 
-				sprintf(common_directory_iX_iY, "%s\\part_of_object_%f_%f", common_directory, p_min, p_max);
+                sprintf(common_directory_iX_iY, "%s/part_of_object_%f_%f", common_directory, p_min, p_max);
 				if (!CreateDirectory(common_directory_iX_iY, NULL))
 				{
 				}
@@ -4838,7 +4838,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				cin >> frec;
 
 
-				sprintf(common_directory_iX_iY, "%s\\whole_object_with_frec=%d", common_directory, frec);
+                sprintf(common_directory_iX_iY, "%s/whole_object_with_frec=%d", common_directory, frec);
 				if (!CreateDirectory(common_directory_iX_iY, NULL))
 				{
 				}
@@ -4903,7 +4903,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 	
 						char common_directory_iX_iY[4096];			
-						sprintf(common_directory_iX_iY, "%s\\iX=%03d_iY=%03d", 
+                        sprintf(common_directory_iX_iY, "%s/iX=%03d_iY=%03d",
 							common_directory, iX, iY);			
 						printf("common_directory_iX_iY = %s\n\n",common_directory_iX_iY);
 						printf("len_pX = %d\n\n",len_pX);
@@ -4945,7 +4945,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 			break;
 		case 4:
 			{				   
-				//sprintf(common_directory_iX_iY, "%s\\whole_object_by_colomns", common_directory);
+                //sprintf(common_directory_iX_iY, "%s/whole_object_by_colomns", common_directory);
 				//if (!CreateDirectory(common_directory_iX_iY, NULL))
 				//{
 				//}
@@ -5017,7 +5017,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							if (max_len_pX < len_pX) max_len_pX = len_pX;
 		
 							//char common_directory_iX_iY[4096];			
-							//sprintf(dir_out, "%s\\c=%03d_r=%03d", common_directory, c, r);			
+                            //sprintf(dir_out, "%s/c=%03d_r=%03d", common_directory, c, r);
 							//printf("common_directory_iX_iY = %s\n\n",common_directory_iX_iY);
 							printf("len_pX = %d mmd3.pages = %d\n\n",len_pX, mmd3.pages);
 						}
@@ -5227,7 +5227,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 						size_t len_pX = pX.size();
 	
 						//char common_directory_iX_iY[4096];			
-						//sprintf(dir_out, "%s\\c=%03d_r=%03d", common_directory, c, r);			
+                        //sprintf(dir_out, "%s/c=%03d_r=%03d", common_directory, c, r);
 						//printf("common_directory_iX_iY = %s\n\n",common_directory_iX_iY);
 						printf("len_pX = %d mmd3.pages = %d\n", len_pX, mmd3.pages);
 
@@ -5266,12 +5266,12 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								//	common_directory_iX_iY,					   
 								//	this->m_files_in_dir.nFilesInDirectory);
 
-								//sprintf(dir_out, "%s\\common_raz_of_%d_files", common_directory_iX_iY, this->m_files_in_dir.nFilesInDirectory);
+                                //sprintf(dir_out, "%s/common_raz_of_%d_files", common_directory_iX_iY, this->m_files_in_dir.nFilesInDirectory);
 								//int n = 0;
-								sprintf(dir_out, "%s\\c=%03d_r=%03d", common_directory, c, r);			
+                                sprintf(dir_out, "%s/c=%03d_r=%03d", common_directory, c, r);
 								while (!CreateDirectory(dir_out,NULL))
 								{
-								//	sprintf(dir_out, "%s\\common_raz_of_%d_files(%d)", common_directory_iX_iY, this->m_files_in_dir.nFilesInDirectory, n++);
+                                //	sprintf(dir_out, "%s/common_raz_of_%d_files(%d)", common_directory_iX_iY, this->m_files_in_dir.nFilesInDirectory, n++);
 								}
 
 
@@ -5281,8 +5281,8 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								//DoMyMethod3W(type, granicy_kak_glubina, description, mmd3, w3, ab,X,Y,Z, to_fill_matrix);
 								if (/*to_fill_matrix*/true)
 								{
-									sprintf(mmd3.fn_operator_spm, "%s\\operator.spm", dir_out);
-									sprintf(mmd3.fn_operator_transponed, "%s\\operator_transponed.spm", dir_out);
+                                    sprintf(mmd3.fn_operator_spm, "%s/operator.spm", dir_out);
+                                    sprintf(mmd3.fn_operator_transponed, "%s/operator_transponed.spm", dir_out);
 
 									//int smoof_power = 1024;
 									//int smoof_power = 4096;
@@ -5351,7 +5351,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 									/*Grid4 * cube = ShowCube(mmd);
 									char fn[1024]; 
-									sprintf(fn, "%s\\cube.cub", 
+                                    sprintf(fn, "%s/cube.cub",
 										dir_out);
 									SaveAsSurfer7Grid4(fn, cube);*/
 								}
@@ -5481,15 +5481,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 									if (mmd3.save_operator_grid)
 									{
-										sprintf(fn_grd, "%s\\operator.grd", dir_out);
+                                        sprintf(fn_grd, "%s/operator.grd", dir_out);
 										SparseStructureToSurferGrid(mmd3.fn_operator_spm, fn_grd);
 									}
-									//sprintf(fn_grd, "%s\\operator.emf", dir_out);
+                                    //sprintf(fn_grd, "%s/operator.emf", dir_out);
 									//SparseStructureToMetafile(mmd3.fn_operator_spm, fn_grd);
 
 									if (mmd3.save_operator_grid)
 									{
-										sprintf(fn_grd, "%s\\operator_transponed.grd", dir_out);
+                                        sprintf(fn_grd, "%s/operator_transponed.grd", dir_out);
 										SparseStructureToSurferGrid(mmd3.fn_operator_transponed, fn_grd);
 									}
 								}
@@ -5499,8 +5499,8 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 
 								if (true)
 								{
-									//sprintf(mmd3.fn_min_sq_mat, "%s\\op_wav_min_sq_%f.spm", dir_out, mmd3.alpha_min_sq);					
-									sprintf(mmd3.fn_min_sq_mat, "%s\\op_min_sq.spm", dir_out);					
+                                    //sprintf(mmd3.fn_min_sq_mat, "%s/op_wav_min_sq_%f.spm", dir_out, mmd3.alpha_min_sq);
+                                    sprintf(mmd3.fn_min_sq_mat, "%s/op_min_sq.spm", dir_out);
 									//if (!FormMinSquareMatrix(mmd3.fn_operator_wav, mmd3.fn_min_sq_mat, mmd3.alpha_min_sq))
 									if (!FormMinSquareMatrix(mmd3.fn_operator_transponed, mmd3.fn_min_sq_mat, 0.0))
 									{
@@ -5511,7 +5511,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 																		
 									if (mmd3.save_min_sq_grid)
 									{
-										sprintf(fn_grd, "%s\\op_min_sq.grd", dir_out);
+                                        sprintf(fn_grd, "%s/op_min_sq.grd", dir_out);
 										SparseStructureToSurferGrid(mmd3.fn_min_sq_mat, fn_grd);
 									}
 
@@ -5530,7 +5530,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 										SparseStructureToMetafile(mmd3.fn_min_sq_mat, "min_sq_mat_struct.emf");
 								#endif
 										char fn_Lt[4098];
-										sprintf(fn_Lt, "%s\\Lt_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
+                                        sprintf(fn_Lt, "%s/Lt_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
 										mmd3.fnames_Lt[i_alpha] = fn_Lt;
 								#if 1
 										if (!Holesski3(mmd3.fn_min_sq_mat, mmd3.fnames_Lt[i_alpha].c_str(), dir_out, mmd3.j_start, mmd3.v_alpha[i_alpha]))
@@ -5553,11 +5553,11 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 									{
 										char fn[4098];
 
-										sprintf(fn, "%s\\L_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
+                                        sprintf(fn, "%s/L_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
 										mmd3.fnames_L[i_alpha] = fn;										
-										sprintf(fn, "%s\\U_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
+                                        sprintf(fn, "%s/U_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
 										mmd3.fnames_U[i_alpha] = fn;										
-										sprintf(fn, "%s\\P_alpha=%01e.ind", dir_out, mmd3.v_alpha[i_alpha]);
+                                        sprintf(fn, "%s/P_alpha=%01e.ind", dir_out, mmd3.v_alpha[i_alpha]);
 										mmd3.fnames_P[i_alpha] = fn;
 										
 										if (!LUP_in_operative_memory(mmd3.fn_min_sq_mat, 
@@ -5783,7 +5783,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				}
 
 				char DirName[4098];
-				sprintf(DirName, "%s\\korr", common_directory);	
+                sprintf(DirName, "%s/korr", common_directory);
 				if (!CreateDirectory(DirName,NULL))
 				{
 				}
@@ -5802,7 +5802,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 					//
 					printf("Save the razrez matrix\n");
 
-					sprintf(DirName, "%s\\LC1", common_directory);	
+                    sprintf(DirName, "%s/LC1", common_directory);
 					if (!CreateDirectory(DirName,NULL))
 					{
 					}
@@ -5868,7 +5868,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							sprintf(method_name, "LC2");
 							sprintf(name, "norm_k_%s", 	method_name);
 
-							sprintf(file_name, "%s\\%s.txt", DirName, name);
+                            sprintf(file_name, "%s/%s.txt", DirName, name);
 							//char * p; while (p=strchr (file_name,'\"')){*p = '_';}
 							FILE * file = fopen (file_name, "wt");
 							for (int cc = 0; cc < cols_3; cc++)
@@ -5917,7 +5917,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												new_names_of_colomns[cc].c_str(), 
 												mmd3.v_alpha[i_alpha]);
 
-											sprintf(bln_name, "%s\\origin_%s.bln", DirName, 
+                                            sprintf(bln_name, "%s/origin_%s.bln", DirName,
 												name);
 											char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 											FILE * bln = fopen (bln_name, "wt");
@@ -5931,7 +5931,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												fclose(bln);
 											}
 											
-											sprintf(bln_name, "%s\\reconstr_%s.bln", DirName, name);
+                                            sprintf(bln_name, "%s/reconstr_%s.bln", DirName, name);
 											while (p=strchr (bln_name,'\"')){*p = '_';}
 											bln = fopen (bln_name, "wt");
 											if(bln)
@@ -5951,12 +5951,12 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 									//vector<sparse_row_map> m;
 									char fn_transponed_mrec[4098];
 									sprintf(fn_transponed_mrec, 
-										"%s\\mrec_transponed_cc=%d_i_alpha=%d.spm", 
+                                        "%s/mrec_transponed_cc=%d_i_alpha=%d.spm",
 										dir_out, cc, i_alpha);
 
 									char fn_mrec[4098];
 									sprintf(fn_mrec, 
-										"%s\\mrec_cc=%d_i_alpha=%d.spm", 
+                                        "%s/mrec_cc=%d_i_alpha=%d.spm",
 										dir_out, cc, i_alpha);
 									{
 										long __cols = light_colomn_number;
@@ -5984,16 +5984,16 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 										char fn_grd[4098];
 
 										sprintf(fn_grd, 
-											"%s\\mrec_transponed_cc=%d_i_alpha=%d.grd", 
+                                            "%s/mrec_transponed_cc=%d_i_alpha=%d.grd",
 											dir_out, cc, i_alpha);
 										SparseStructureToSurferGrid(fn_transponed_mrec, fn_grd);
-										//sprintf(fn_grd, "%s\\operator.emf", dir_out);
+                                        //sprintf(fn_grd, "%s/operator.emf", dir_out);
 										//SparseStructureToMetafile(mmd3.fn_operator_spm, fn_grd);
 
 										if (!mmd3.use_norm_k)
 										{
 											sprintf(fn_mrec_min_sq, 
-												"%s\\mrec_min_sq_cc=%d_i_alpha=%d.spm", 
+                                                "%s/mrec_min_sq_cc=%d_i_alpha=%d.spm",
 												dir_out, cc, i_alpha);
 											if (!FormMinSquareMatrix(fn_transponed_mrec, 
 												fn_mrec_min_sq, 0.0))
@@ -6003,7 +6003,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												//return false;
 											}
 											sprintf(fn_grd, 
-												"%s\\mrec_min_sq_cc=%d_i_alpha=%d.grd", 
+                                                "%s/mrec_min_sq_cc=%d_i_alpha=%d.grd",
 												dir_out, cc, i_alpha);
 											SparseStructureToSurferGrid(fn_mrec_min_sq, fn_grd);
 										}
@@ -6012,7 +6012,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 										if (/*to_calculi_holesski*/!mmd3.use_norm_k)
 										{
 
-											sprintf(fn_mrec_Lt, "%s\\mrec_Lt_cc=%d_i_alpha=%d.spm", 
+                                            sprintf(fn_mrec_Lt, "%s/mrec_Lt_cc=%d_i_alpha=%d.spm",
 												dir_out, cc, i_alpha);
 											//mmd3.fnames_Lt[i_alpha] = fn_Lt;
 
@@ -6105,7 +6105,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							{
 								fclose(file);
 							}						
-							sprintf(DirName, "%s\\LC2", common_directory);	
+                            sprintf(DirName, "%s/LC2", common_directory);
 							if (!CreateDirectory(DirName,NULL))
 							{
 							}
@@ -6156,7 +6156,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												new_names_of_colomns[cc].c_str(), 
 												mmd3.v_alpha[i_alpha]);
 
-											sprintf(bln_name, "%s\\origin_%s.bln", DirName, 
+                                            sprintf(bln_name, "%s/origin_%s.bln", DirName,
 												name);
 											char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 											FILE * bln = fopen (bln_name, "wt");
@@ -6170,7 +6170,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 												fclose(bln);
 											}
 											
-											sprintf(bln_name, "%s\\reconstr_%s.bln", DirName, name);
+                                            sprintf(bln_name, "%s/reconstr_%s.bln", DirName, name);
 											while (p=strchr (bln_name,'\"')){*p = '_';}
 											bln = fopen (bln_name, "wt");
 											if(bln)
@@ -6189,7 +6189,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 								}
 							}
 							char iter_file[4098];
-							sprintf(iter_file, "%s\\iterations.txt", common_directory);
+                            sprintf(iter_file, "%s/iterations.txt", common_directory);
 							FILE * iter_txt = fopen (iter_file, "wt");
 							if (iter_txt)
 							{
@@ -6243,7 +6243,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 							{
 								char method_name[512];
 								sprintf(method_name, "LC_iter=%03d",iteration);
-								sprintf(DirName, "%s\\%s", common_directory, method_name);	
+                                sprintf(DirName, "%s/%s", common_directory, method_name);
 								if (iteration%mmd3.iter_save == 0)
 								{
 									if (!CreateDirectory(DirName,NULL))
@@ -6305,15 +6305,15 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 														// находим решение обратной задачи
 														vector<double> sol(/*Ns*/mmd3.pages);
 														//#if SPARSE_OUT_W
-														sprintf(dir_out, "%s\\c=%03d_r=%03d", common_directory, c, r);												
-														sprintf(mmd3.fn_operator_spm, "%s\\operator.spm", dir_out);
-														sprintf(mmd3.fn_operator_transponed, "%s\\operator_transponed.spm", dir_out);
-														sprintf(mmd3.fn_min_sq_mat, "%s\\op_min_sq.spm", dir_out);
+                                                        sprintf(dir_out, "%s/c=%03d_r=%03d", common_directory, c, r);
+                                                        sprintf(mmd3.fn_operator_spm, "%s/operator.spm", dir_out);
+                                                        sprintf(mmd3.fn_operator_transponed, "%s/operator_transponed.spm", dir_out);
+                                                        sprintf(mmd3.fn_min_sq_mat, "%s/op_min_sq.spm", dir_out);
 														if (mmd3.to_calculi_holesski)
 														{
 																				
 															char fn_Lt[4098];
-															sprintf(fn_Lt, "%s\\Lt_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
+                                                            sprintf(fn_Lt, "%s/Lt_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
 															mmd3.fnames_Lt[i_alpha] = fn_Lt;
 
 															if (!InverseProblem_Solving(false, mmd3.fn_operator_transponed, 
@@ -6327,11 +6327,11 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 														{
 															char fn[4098];
 
-															sprintf(fn, "%s\\L_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
+                                                            sprintf(fn, "%s/L_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
 															mmd3.fnames_L[i_alpha] = fn;										
-															sprintf(fn, "%s\\U_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
+                                                            sprintf(fn, "%s/U_alpha=%01e.spm", dir_out, mmd3.v_alpha[i_alpha]);
 															mmd3.fnames_U[i_alpha] = fn;										
-															sprintf(fn, "%s\\P_alpha=%01e.ind", dir_out, mmd3.v_alpha[i_alpha]);
+                                                            sprintf(fn, "%s/P_alpha=%01e.ind", dir_out, mmd3.v_alpha[i_alpha]);
 															mmd3.fnames_P[i_alpha] = fn;
 
 															if (!InverseProblem_Solving(false, mmd3.fn_operator_transponed, 
@@ -6368,7 +6368,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 																new_names_of_colomns[cc].c_str(), 
 																i_alpha);
 
-															sprintf(bln_name, "%s\\sol_%s.bln", DirName, 
+                                                            sprintf(bln_name, "%s/sol_%s.bln", DirName,
 																name);
 															char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 															FILE * bln = fopen (bln_name, "wt");
@@ -6382,7 +6382,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 																fclose(bln);
 															}
 															
-															sprintf(bln_name, "%s\\sol_mean_%s.bln", DirName, name);
+                                                            sprintf(bln_name, "%s/sol_mean_%s.bln", DirName, name);
 															while (p=strchr (bln_name,'\"')){*p = '_';}
 															bln = fopen (bln_name, "wt");
 															if(bln)
@@ -6395,7 +6395,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 																fclose(bln);
 															}
 													
-															sprintf(bln_name, "%s\\origin_pXYZ_%s.bln", DirName, 
+                                                            sprintf(bln_name, "%s/origin_pXYZ_%s.bln", DirName,
 																name);
 															while (p=strchr (bln_name,'\"')){*p = '_';}
 															bln = fopen (bln_name, "wt");
@@ -6409,7 +6409,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 																fclose(bln);
 															}
 															
-															sprintf(bln_name, "%s\\reconstr_%s.bln", DirName, name);
+                                                            sprintf(bln_name, "%s/reconstr_%s.bln", DirName, name);
 															while (p=strchr (bln_name,'\"')){*p = '_';}
 															bln = fopen (bln_name, "wt");
 															if(bln)
@@ -6511,7 +6511,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 														new_names_of_colomns[cc].c_str(), 
 														mmd3.v_alpha[i_alpha]);
 
-													sprintf(bln_name, "%s\\origin_%s.bln", DirName, 
+                                                    sprintf(bln_name, "%s/origin_%s.bln", DirName,
 														name);
 													char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 													FILE * bln = fopen (bln_name, "wt");
@@ -6525,7 +6525,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 														fclose(bln);
 													}
 													
-													sprintf(bln_name, "%s\\reconstr_%s.bln", DirName, name);
+                                                    sprintf(bln_name, "%s/reconstr_%s.bln", DirName, name);
 													while (p=strchr (bln_name,'\"')){*p = '_';}
 													bln = fopen (bln_name, "wt");
 													if(bln)
@@ -7032,7 +7032,7 @@ function write_eas(filename,data,header,line1);
 	}
 	else
 	{
-		sprintf(common_directory_iX_iY, "%s\\whole_object", common_directory, this->m_files_in_dir.nFilesInDirectory);
+        sprintf(common_directory_iX_iY, "%s/whole_object", common_directory, this->m_files_in_dir.nFilesInDirectory);
 		if (!CreateDirectory(common_directory_iX_iY, NULL))
 		{
 		}
@@ -7094,10 +7094,10 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
     SYSTEMTIME time;
 	GetLocalTime(&time);
-    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
+    sprintf(common_directory, "%s/%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.wYear, time.wMonth, time.wDay, time.wHour, time.wMinute,time.wSecond);
 #else
     QDateTime time = QDateTime::currentDateTime();
-    sprintf(common_directory, "%s\\%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.date().year(), time.date().month(), time.date().day(), time.time().hour(), time.time().minute(),time.time().second());
+    sprintf(common_directory, "%s/%d-%02d-%02d_%02d_%02d_%02d", this->directory, time.date().year(), time.date().month(), time.date().day(), time.time().hour(), time.time().minute(),time.time().second());
 #endif
 	printf("common_directory = %s\n\n",common_directory);
 
@@ -7113,7 +7113,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	//**********************************************
 	//формируем файл описания режима работы
 	char filename_description[4096];
-	sprintf(filename_description, "%s\\description1.txt", common_directory);
+    sprintf(filename_description, "%s/description1.txt", common_directory);
 	FILE *stream;
 	stream = fopen(filename_description,"wt");
 	if (stream)
@@ -7212,7 +7212,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		{
 #if defined (_MSC_VER) && !defined (QT_PROJECT)
 			char sz_path_of_file[4096];
-			sprintf(sz_path_of_file, "%s\\%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
+            sprintf(sz_path_of_file, "%s/%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
 #else
 			const char* sz_path_of_file = this->m_files_in_dir.vFileNames[iFile];
 #endif
@@ -7557,7 +7557,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	}
 
 	char means_name[1024];
-	sprintf(means_name, "%s\\means.txt", common_directory);
+    sprintf(means_name, "%s/means.txt", common_directory);
 	//char * p; while (p=strchr (means_name,'\"')){*p = '_';}
 	FILE * means = fopen (means_name, "wt");
 	if(means)
@@ -7636,7 +7636,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 	char disps_name[1024];
-	sprintf(disps_name, "%s\\disps.txt", common_directory);
+    sprintf(disps_name, "%s/disps.txt", common_directory);
 	//char * p; while (p=strchr (disps_name,'\"')){*p = '_';}
 	FILE * disps = fopen (disps_name, "wt");
 	if(disps)
@@ -8014,7 +8014,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 			char bln_name[1024];
 
-			sprintf(bln_name, "%s\\new_XY.bln", common_directory);
+            sprintf(bln_name, "%s/new_XY.bln", common_directory);
 			//char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 			FILE * bln = fopen (bln_name, "wt");
 			if(bln)
@@ -8263,14 +8263,14 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 		// save parameters
 //		char filename_parameters[4096];
-//		sprintf(filename_parameters, "%s\\parameters.par3", dir_out);
+//		sprintf(filename_parameters, "%s/parameters.par3", dir_out);
 //		SaveParameters (filename_parameters, mmd3);
 
 
 	//**********************************************
 	//формируем файл описания режима работы
 //	char filename_description[4096];
-	sprintf(filename_description, "%s\\description.txt", dir_out);		
+    sprintf(filename_description, "%s/description.txt", dir_out);
 	FILE * description = fopen(filename_description,"wt");
 
 	//**********************************************
@@ -8668,7 +8668,7 @@ bool Dipol(int use_newton,
 		   char * common_directory)
 {		
 #if 1
-	//sprintf(common_directory_iX_iY, "%s\\whole_object_by_colomns", common_directory);
+    //sprintf(common_directory_iX_iY, "%s/whole_object_by_colomns", common_directory);
 	//if (!CreateDirectory(common_directory_iX_iY, NULL))
 	//{
 	//}
@@ -8800,7 +8800,7 @@ bool Dipol(int use_newton,
 
 	/*Grid4 * cube = ShowCube(mmd);
 	char fn[1024]; 
-	sprintf(fn, "%s\\cube.cub", 
+    sprintf(fn, "%s/cube.cub",
 		dir_out);
 	SaveAsSurfer7Grid4(fn, cube);*/
 
@@ -9325,7 +9325,7 @@ bool Dipol(int use_newton,
 	}
 
 	char DirName[4098];
-	sprintf(DirName, "%s\\init", common_directory);	
+    sprintf(DirName, "%s/init", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
@@ -9471,17 +9471,17 @@ bool Dipol(int use_newton,
 
 
 	
-	/*sprintf(DirName, "%s\\maxwell_iters", common_directory);	
+    /*sprintf(DirName, "%s/maxwell_iters", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
-	sprintf(DirName, "%s\\MX", common_directory);	
+    sprintf(DirName, "%s/MX", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}*/
 
 	char iter_file[4098];
-	sprintf(iter_file, "%s\\iterations.txt", common_directory);
+    sprintf(iter_file, "%s/iterations.txt", common_directory);
 	FILE * iter_txt = fopen (iter_file, "wt");
 	if (iter_txt)
 	{
@@ -9587,7 +9587,7 @@ bool Dipol(int use_newton,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
 
-	sprintf(DirName, "%s\\korr", common_directory);	
+    sprintf(DirName, "%s/korr", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
@@ -9733,7 +9733,7 @@ bool Dipol(int use_newton,
 
 		char method_name[512];
 		sprintf(method_name, "MX_iter=%05d", iteration);
-		sprintf(DirName, "%s\\%s", common_directory, method_name);	
+        sprintf(DirName, "%s/%s", common_directory, method_name);
 		if (iteration%mmd3.iter_save == 0)
 		{
 			if (!CreateDirectory(DirName,NULL))
@@ -10051,7 +10051,7 @@ bool Dipol(int use_newton,
 					if (n_bad_iterations == 0)
 					{
 						sprintf(method_name, "MX_iter=%05d",iteration);
-						sprintf(DirName, "%s\\%s", common_directory, method_name);	
+                        sprintf(DirName, "%s/%s", common_directory, method_name);
 		
 						if (!CreateDirectory(DirName,NULL))
 						{
@@ -10337,7 +10337,7 @@ bool Lamp(int use_newton,
 		   char * common_directory)
 {		
 #if 1
-	//sprintf(common_directory_iX_iY, "%s\\whole_object_by_colomns", common_directory);
+    //sprintf(common_directory_iX_iY, "%s/whole_object_by_colomns", common_directory);
 	//if (!CreateDirectory(common_directory_iX_iY, NULL))
 	//{
 	//}
@@ -10463,7 +10463,7 @@ bool Lamp(int use_newton,
 
 	/*Grid4 * cube = ShowCube(mmd);
 	char fn[1024]; 
-	sprintf(fn, "%s\\cube.cub", 
+    sprintf(fn, "%s/cube.cub",
 		dir_out);
 	SaveAsSurfer7Grid4(fn, cube);*/
 
@@ -10840,17 +10840,17 @@ bool Lamp(int use_newton,
 
 	
 	char DirName[4098];
-	/*sprintf(DirName, "%s\\maxwell_iters", common_directory);	
+    /*sprintf(DirName, "%s/maxwell_iters", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
-	sprintf(DirName, "%s\\MX", common_directory);	
+    sprintf(DirName, "%s/MX", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}*/
 
 	char iter_file[4098];
-	sprintf(iter_file, "%s\\iterations.txt", common_directory);
+    sprintf(iter_file, "%s/iterations.txt", common_directory);
 	FILE * iter_txt = fopen (iter_file, "wt");
 	if (iter_txt)
 	{
@@ -10912,7 +10912,7 @@ bool Lamp(int use_newton,
 	double sqrt_MA = sqrt(2.0 * MA / operator_rows);
 	double sqrt_MB = sqrt(2.0 * MB / operator_rows);
 
-	sprintf(DirName, "%s\\init", common_directory);	
+    sprintf(DirName, "%s/init", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
@@ -10939,7 +10939,7 @@ bool Lamp(int use_newton,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
 
-	sprintf(DirName, "%s\\korr", common_directory);	
+    sprintf(DirName, "%s/korr", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
@@ -11047,7 +11047,7 @@ bool Lamp(int use_newton,
 
 		char method_name[512];
 		sprintf(method_name, "MX_iter=%05d",iteration);
-		sprintf(DirName, "%s\\%s", common_directory, method_name);	
+        sprintf(DirName, "%s/%s", common_directory, method_name);
 		if (iteration%mmd3.iter_save == 0)
 		{
 			if (!CreateDirectory(DirName,NULL))
@@ -11328,7 +11328,7 @@ bool Lamp(int use_newton,
 					if (n_bad_iterations == 0)
 					{
 						sprintf(method_name, "MX_iter=%05d",iteration);
-						sprintf(DirName, "%s\\%s", common_directory, method_name);	
+                        sprintf(DirName, "%s/%s", common_directory, method_name);
 		
 						if (!CreateDirectory(DirName,NULL))
 						{

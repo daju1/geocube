@@ -992,7 +992,7 @@ void DoMyMethod(vector<double> & X,
 	int q = 0;
 	{
 		char file[2048];
-		sprintf(file, "%s\\MyMethod_of_%s_%03d.grd", directory,name.c_str(),++q);
+        sprintf(file, "%s/MyMethod_of_%s_%03d.grd", directory,name.c_str(),++q);
 		char * p;
 		while (p=strchr (file,'\"'))
 		{
@@ -1032,7 +1032,7 @@ void DoMyMethod(vector<double> & X,
 		// частично подстраиваемся: подстраиваем только те элементы вектора решения,
 		// которые имеют максимальный модулб первой производной дополнительного функционала и
 		// количество которых равно число неизвестных минус число уравнений
-		//char test[2048];sprintf(test, "%s\\test%03d_%s.dat", directory, q, name.c_str());
+        //char test[2048];sprintf(test, "%s/test%03d_%s.dat", directory, q, name.c_str());
 		//FILE * stream = fopen(test, "wt");
 		for (i = Cols-j; i < rows_cols-j; i++)
 		{
@@ -1160,7 +1160,7 @@ void DoMyMethod(vector<double> & X,
 		else
 		{
 			char file[2048];
-			sprintf(file, "%s\\MyMethod_of_%s_%03d.grd", directory,name.c_str(),q);
+            sprintf(file, "%s/MyMethod_of_%s_%03d.grd", directory,name.c_str(),q);
 			char * p;
 			while (p=strchr (file,'\"'))
 			{
@@ -1224,7 +1224,7 @@ void DoMyMethod(vector<double> & X,
 
 	//
 	char file[2048];
-	sprintf(file, "%s\\MyMethod_of_%s.grd", directory,name.c_str());
+    sprintf(file, "%s/MyMethod_of_%s.grd", directory,name.c_str());
 	char * p;
 	while (p=strchr (file,'\"'))
 	{
@@ -5086,7 +5086,7 @@ void ErrorOfInverseProblemSolving(vector<vector<double> > & m, size_t rows, size
 	printf("e = %f\n", SquareSum(e));
 
 	char bln_name[1024];
-	sprintf(bln_name, "%s\\%s.bln", dir_out, name.c_str());
+    sprintf(bln_name, "%s/%s.bln", dir_out, name.c_str());
 	FILE * bln = fopen (bln_name, "wt");
 	if(bln)
 	{
@@ -5256,7 +5256,7 @@ void ErrorOfInverseProblemSolving(vector<SparseRow> & a, size_t rows, vector<dou
 	printf("e = %f\n", SquareSum(e));
 
 	char bln_name[1024];
-	sprintf(bln_name, "%s\\%s.bln", dir_out, name.c_str());
+    sprintf(bln_name, "%s/%s.bln", dir_out, name.c_str());
 	FILE * bln = fopen (bln_name, "wt");
 	if(bln)
 	{
@@ -5348,7 +5348,7 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 
 	char bln_name[1024];
 
-	sprintf(bln_name, "%s\\%s_origin.bln", dir_out, name.c_str());
+    sprintf(bln_name, "%s/%s_origin.bln", dir_out, name.c_str());
 	char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 	FILE * bln = fopen (bln_name, "wt");
 	if(bln)
@@ -5363,7 +5363,7 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 	else
 		ErrorPrint("fopen");
 
-	sprintf(bln_name, "%s\\%s_reconstr.bln", dir_out, name.c_str());
+    sprintf(bln_name, "%s/%s_reconstr.bln", dir_out, name.c_str());
 	while (p=strchr (bln_name,'\"')){*p = '_';}
 	bln = fopen (bln_name, "wt");
 	if(bln)
@@ -5536,7 +5536,7 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 
 		char bln_name[1024];
 
-		sprintf(bln_name, "%s\\origin_%s.bln", dir_out, name.c_str());
+        sprintf(bln_name, "%s/origin_%s.bln", dir_out, name.c_str());
 		char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 		FILE * bln = fopen (bln_name, "wt");
 		if(bln)
@@ -5551,7 +5551,7 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 		else
 			ErrorPrint("fopen");
 
-		sprintf(bln_name, "%s\\reconstr_%s.bln", dir_out, name.c_str());
+        sprintf(bln_name, "%s/reconstr_%s.bln", dir_out, name.c_str());
 		while (p=strchr (bln_name,'\"')){*p = '_';}
 		bln = fopen (bln_name, "wt");
 		if(bln)
@@ -5979,7 +5979,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 	bool res = false;
 
 	char TempDirName[4098];
-	sprintf(TempDirName, "%s\\Temp", dir);
+    sprintf(TempDirName, "%s/Temp", dir);
 	if (!CreateDirectory(TempDirName,NULL))
 	{
 		char err_str[4096];
@@ -5989,7 +5989,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 	}
 
 	char TempFileName[4098];
-	sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, 0);
+    sprintf(TempFileName, "%s/%06d.tmp", TempDirName, 0);
 
 	char buff[BUFF_SIZE];
 	long cols, rows;
@@ -6093,7 +6093,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 			printf("Holesski %ld %ld, time_eplased = %0.3f %d sec\n", i,rows, double(time_eplased)/1000.0, (time_current - time_start)/1000);
 #endif
-			sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, i);
+            sprintf(TempFileName, "%s/%06d.tmp", TempDirName, i);
 
 			AFile fi;
 			if( !fi.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
@@ -6162,7 +6162,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 				//////////////////////////////////////////////////////
 
 
-				sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, i+1);
+                sprintf(TempFileName, "%s/%06d.tmp", TempDirName, i+1);
 
 				AFile fi1;
 				if( !fi1.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) )
@@ -6239,11 +6239,11 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 			ari.Close();
 			fi.Close();
 			// удаляем i-тый tmp файл
-			sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, i);
+            sprintf(TempFileName, "%s/%06d.tmp", TempDirName, i);
 			DeleteFile(TempFileName);
 		}
 		// удаляем rows-тый tmp файл
-		sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, rows);
+        sprintf(TempFileName, "%s/%06d.tmp", TempDirName, rows);
 		DeleteFile(TempFileName);
 	}
 	catch(char * str)
@@ -6277,7 +6277,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 	bool res = false;
 
 	char TempDirName[4098];
-	sprintf(TempDirName, "%s\\Temp", dir);
+    sprintf(TempDirName, "%s/Temp", dir);
 	if (!CreateDirectory(TempDirName,NULL) && j_start == 0 )
 	{
 		//char err_str[4096];
@@ -6287,7 +6287,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 	}
 
 	char TempFileName[4098];
-	//sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, 0);
+    //sprintf(TempFileName, "%s/%06d.tmp", TempDirName, 0);
 
 	char buff[BUFF_SIZE];
 	long cols, rows;
@@ -6418,7 +6418,7 @@ e_start_row_j:
 			{
 
 
-				sprintf(TempFileName, "%s\\%06d.isr", TempDirName, k);
+                sprintf(TempFileName, "%s/%06d.isr", TempDirName, k);
 
 				AFile fk;
 				if( !fk.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
@@ -6497,7 +6497,7 @@ e_start_row_j:
 			}
 
 			// create j-тый tmp файл
-			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
+            sprintf(TempFileName, "%s/%06d.isr", TempDirName, j);
 
 			AFile fj;
 			if( !fj.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) )
@@ -6556,7 +6556,7 @@ e_start_row_j:
 		for(long j = 0; j < rows; j++)
 		{
 			// open j-тый tmp файл
-			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
+            sprintf(TempFileName, "%s/%06d.isr", TempDirName, j);
 
 			AFile fjs;
 			if( ! fjs.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
@@ -6609,7 +6609,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 	bool res = false;
 
 	//char TempDirName[4098];
-	//sprintf(TempDirName, "%s\\Temp", dir);
+    //sprintf(TempDirName, "%s/Temp", dir);
 	//if (!CreateDirectory(TempDirName,NULL) && j_start == 0 )
 	//{
 	//	char err_str[4096];
@@ -6619,7 +6619,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 	//}
 
 	//char TempFileName[4098];
-	//sprintf(TempFileName, "%s\\%06d.tmp", TempDirName, 0);
+    //sprintf(TempFileName, "%s/%06d.tmp", TempDirName, 0);
 
 	char buff[BUFF_SIZE];
 	long cols, rows;
@@ -6776,7 +6776,7 @@ e_start__row_j:
 			{
 
 
-				//sprintf(TempFileName, "%s\\%06d.isr", TempDirName, k);
+                //sprintf(TempFileName, "%s/%06d.isr", TempDirName, k);
 
 				//AFile fk;
 				//if( !fk.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
@@ -6856,7 +6856,7 @@ e_start__row_j:
 			}
 
 			// create j-тый tmp файл
-			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
+            sprintf(TempFileName, "%s/%06d.isr", TempDirName, j);
 			
 			AFile fj;
 			if( !fj.Open( TempFileName, GENERIC_WRITE, CREATE_NEW) ) 
@@ -6924,7 +6924,7 @@ e_start__row_j:
 		for(long j = 0; j < rows; j++)
 		{
 			// open j-тый tmp файл
-//			sprintf(TempFileName, "%s\\%06d.isr", TempDirName, j);
+//			sprintf(TempFileName, "%s/%06d.isr", TempDirName, j);
 
 			//AFile fjs;
 			//if( ! fjs.Open( TempFileName, GENERIC_READ, OPEN_EXISTING) )
@@ -7914,7 +7914,7 @@ void DoMyMethod2(FILE * description,
 	bool the_martix_on_memory = false;
 
 	char spm_filename[4096];
-	sprintf(spm_filename, "%s\\operator.spm", dir_out);
+    sprintf(spm_filename, "%s/operator.spm", dir_out);
 
 	//vector<SparseRow> * m = the_martix_on_memory ? new vector<SparseRow> : NULL;
 
@@ -7970,7 +7970,7 @@ void DoMyMethod2(FILE * description,
 
 	printf("Start of filling the matrix in Frequency region %ld %ld\n", 2*mmd.Nr, 2*mmd.Nc);
 	//char vvd_filename[4096];
-	sprintf(mmd.fn_operator_wav, "%s\\operator_freq.vvd", dir_out);
+    sprintf(mmd.fn_operator_wav, "%s/operator_freq.vvd", dir_out);
 
 #if ON_THE_FLY_STORING
 	StoreMatrixHeader(mmd.fn_operator_wav, signal_len, Nq, true);
@@ -8124,7 +8124,7 @@ void DoMyMethod2D_part2()
 	//-----------------------------------
 
 	char file[2048];
-	sprintf(file, "%s\\MyMethod2_of_%s.grd", dir_out, name.c_str());
+    sprintf(file, "%s/MyMethod2_of_%s.grd", dir_out, name.c_str());
 	char * p;
 	while (p=strchr (file,'\"'))
 	{
@@ -8279,7 +8279,7 @@ void DoMyMethod3(int type, // тип прямой задачи
 	// Простейшая формулировка прямой задачи
 
 	char spm_filename[4096];
-	sprintf(spm_filename, "%s\\operator.spm", dir_out);
+    sprintf(spm_filename, "%s/operator.spm", dir_out);
 
 	vector<double> sol(rows_cols_pages, 0.0);
 
@@ -8382,7 +8382,7 @@ void DoMyMethod3(int type, // тип прямой задачи
 		
 	printf("Start of filling the matrix in Frequency region %ld %ld\n", 2*Nr, 2*Nc);
 	char vvd_filename[4096];
-	sprintf(vvd_filename, "%s\\operator3_freq.vvd", dir_out);
+    sprintf(vvd_filename, "%s/operator3_freq.vvd", dir_out);
 
 #if ON_THE_FLY_STORING
 	StoreMatrixHeader(vvd_filename, signal_len, Nq, true);
@@ -8529,7 +8529,7 @@ void DoMyMethod2D_part2()
 	//-----------------------------------
 
 	char file[2048];
-	sprintf(file, "%s\\MyMethod3_of_%s.cub", dir_out, name.c_str());
+    sprintf(file, "%s/MyMethod3_of_%s.cub", dir_out, name.c_str());
 	char * p;
 	while (p=strchr (file,'\"'))
 	{
@@ -8702,7 +8702,7 @@ void DoMyMethod2W(FILE * description,
 
 	if (to_fill_matrix)
 	{
-		sprintf(mmd.fn_operator_spm, "%s\\operator.spm", dir_out);
+        sprintf(mmd.fn_operator_spm, "%s/operator.spm", dir_out);
 		
 		int smoof_power = 1024;
 
@@ -8749,9 +8749,9 @@ void DoMyMethod2W(FILE * description,
 		printf("Start of filling the matrix in S-Coefficient region %ld %ld\n", mmd.Nr, mmd.Nc);
 		
 #if SPARSE_OUT_W
-		sprintf(mmd.fn_operator_wav, "%s\\operator_wav.spm", dir_out);
+        sprintf(mmd.fn_operator_wav, "%s/operator_wav.spm", dir_out);
 #else
-		sprintf(mmd.vvd_filename, "%s\\operator_wav.vvd", dir_out);
+        sprintf(mmd.vvd_filename, "%s/operator_wav.vvd", dir_out);
 #endif
 	#if ON_THE_FLY_STORING
 #if SPARSE_OUT_W
@@ -8765,7 +8765,7 @@ void DoMyMethod2W(FILE * description,
 		Grid * wavSimage = InverseWaveletImage2D(w2, mmd.increaser_pw, mmd);
 
 		char fn[1024]; 
-		sprintf(fn, "%s\\iwsi.grd", 
+        sprintf(fn, "%s/iwsi.grd",
 			dir_out);
 		
 		// Ниже оно будет обращено
@@ -8846,7 +8846,7 @@ void DoMyMethod2W(FILE * description,
 				grid->gridSection.zMin = min_w;
 
 				char fn[1024]; 
-				sprintf(fn, "%s\\iwsi %02ld %02ld r_begin = %ld r_end = %ld c_begin = %ld c_end = %ld.grd", 
+                sprintf(fn, "%s/iwsi %02ld %02ld r_begin = %ld r_end = %ld c_begin = %ld c_end = %ld.grd",
 					dir_out,
 					rs,cs,
 					r_begin, r_end, c_begin, c_end);
@@ -8944,7 +8944,7 @@ void DoMyMethod2W(FILE * description,
 				grid->gridSection.zMin = min_w;
 
 				//char fn[1024]; 
-				sprintf(fn, "%s\\iwsi %02ld %02ld r_begin = %ld r_end = %ld c_begin = %ld c_end = %ld .grd", 
+                sprintf(fn, "%s/iwsi %02ld %02ld r_begin = %ld r_end = %ld c_begin = %ld c_end = %ld .grd",
 					dir_out,
 					rs,cs,
 					r_begin, r_end, c_begin, c_end);
@@ -9125,7 +9125,7 @@ void DoInverseAndFillGrid2W(MyMethodsData& mmd,
 	//-----------------------------------
 
 	char file[2048];
-	sprintf(file, "%s\\MyMethod2_of_%s.grd", dir_out, name.c_str());
+    sprintf(file, "%s/MyMethod2_of_%s.grd", dir_out, name.c_str());
 	char * p; while (p=strchr (file,'\"')){*p = '_';}
 	SaveAsSurfer7Grid(file, grid);
 
@@ -9350,7 +9350,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 	// Простейшая формулировка прямой задачи
 #if 0
 	char spm_filename[4096];
-	sprintf(spm_filename, "%s\\operator.spm", dir_out);
+    sprintf(spm_filename, "%s/operator.spm", dir_out);
 
 	vector<double> sol(rows_cols_pages, 0.0);
 #endif
@@ -9358,7 +9358,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 	if (to_fill_matrix)
 	{
-		sprintf(mmd.fn_operator_spm, "%s\\operator.spm", dir_out);
+        sprintf(mmd.fn_operator_spm, "%s/operator.spm", dir_out);
 
 		//int smoof_power = 1024;
 		//int smoof_power = 4096;
@@ -9409,7 +9409,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 		/*Grid4 * cube = ShowCube(mmd);
 		char fn[1024]; 
-		sprintf(fn, "%s\\cube.cub", 
+        sprintf(fn, "%s/cube.cub",
 			dir_out);
 		SaveAsSurfer7Grid4(fn, cube);*/
 
@@ -9440,12 +9440,12 @@ void DoMyMethod3W(int type, // тип прямой задачи
 	printf("Start of filling the matrix in S-Coefficient region %ld %ld %ld\n", mmd.Nr, mmd.Nc, mmd.Np);
 	//printf("Start of filling the matrix in Frequency region %ld %ld\n", 2*Nr, 2*Nc);
 	//char vvd_filename[4096];
-	//sprintf(vvd_filename, "%s\\operator3_freq.vvd", dir_out);
+    //sprintf(vvd_filename, "%s/operator3_freq.vvd", dir_out);
 
 #if SPARSE_OUT_W
-	sprintf(mmd.fn_operator_wav, "%s\\operator3_wav.spm", dir_out);
+    sprintf(mmd.fn_operator_wav, "%s/operator3_wav.spm", dir_out);
 #else
-	sprintf(mmd.vvd_filename, "%s\\operator3_wav.vvd", dir_out);
+    sprintf(mmd.vvd_filename, "%s/operator3_wav.vvd", dir_out);
 #endif
 
 #if ON_THE_FLY_STORING
@@ -9461,7 +9461,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 		Grid4 * wavSimage = InverseWaveletImage3D(w3, mmd.increaser_pw, mmd);
 
 		char fn[1024]; 
-		sprintf(fn, "%s\\iwsi.cub", 
+        sprintf(fn, "%s/iwsi.cub",
 			dir_out);
 		
 		// Ниже оно будет обращено
@@ -9687,7 +9687,7 @@ void DoInverseAndFillGrid3W(MyMethodsData3& mmd,
 	//-----------------------------------
 
 	char file[2048];
-	sprintf(file, "%s\\MyMethod3_of_%s.cub", dir_out, name.c_str());
+    sprintf(file, "%s/MyMethod3_of_%s.cub", dir_out, name.c_str());
 	char * p;
 	while (p=strchr (file,'\"'))
 	{
@@ -10293,7 +10293,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 
 				// save parameters
 				char filename_parameters[4096];
-				sprintf(filename_parameters, "%s\\parameters.par", dir_out);
+                sprintf(filename_parameters, "%s/parameters.par", dir_out);
 				SaveParameters (filename_parameters, mmd);
 			}
 			else
@@ -10365,7 +10365,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 
 				// save parameters
 				char filename_parameters[4096];
-				sprintf(filename_parameters, "%s\\parameters.par3", dir_out);
+                sprintf(filename_parameters, "%s/parameters.par3", dir_out);
 				SaveParameters (filename_parameters, mmd3);
 			}
 			else
@@ -10382,7 +10382,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 	//**********************************************
 	//формируем файл описания режима работы
 	char filename_description[4096];
-	sprintf(filename_description, "%s\\description2.txt", dir_out);		
+    sprintf(filename_description, "%s/description2.txt", dir_out);
 	FILE * description = fopen(filename_description,"wt");
 
 	//**********************************************
@@ -10509,7 +10509,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 						fprintf(description, "alpha on calculi_min_sq_mat = %f\n", alpha);
 						fclose(description);
 
-						sprintf(mmd.fn_min_sq_mat, "%s\\op_wav_min_sq_%f.spm", dir_out, alpha);					
+                        sprintf(mmd.fn_min_sq_mat, "%s/op_wav_min_sq_%f.spm", dir_out, alpha);
 						if (!FormMinSquareMatrix(mmd.fn_operator_wav, mmd.fn_min_sq_mat, alpha))
 						{
 						}
@@ -10547,7 +10547,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 						fprintf(description, "alpha on calculi_holesski = %f\n", alpha);
 						fclose(description);
 
-						sprintf(mmd.fn_Lt, "%s\\Lt_%f.spm", dir_out, alpha);
+                        sprintf(mmd.fn_Lt, "%s/Lt_%f.spm", dir_out, alpha);
 						//if (!Holesski(mmd.fn_min_sq_mat, mmd.fn_Lt, dir_out))
 
 						long j_start = 0;
@@ -10569,7 +10569,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 							{
 								strcpy(dir_out, fn);
 								char *p1, *p2;
-								p1 = strrchr(dir_out,'\\');
+                                p1 = strrchr(dir_out,'\\');
 								p2 = strrchr(dir_out,'/');
 								if(p1)
 									*p1 = '\0';
@@ -10788,7 +10788,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 							{
 								strcpy(dir_out, fn);
 								char *p1, *p2;
-								p1 = strrchr(dir_out,'\\');
+                                p1 = strrchr(dir_out,'\\');
 								p2 = strrchr(dir_out,'/');
 								if(p1)
 									*p1 = '\0';
@@ -10834,7 +10834,7 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 
 					if (to_calculi_min_sq_mat)
 					{
-						sprintf(mmd3.fn_min_sq_mat, "%s\\op_wav_min_sq_%f.spm", dir_out, alpha_min_sq);					
+                        sprintf(mmd3.fn_min_sq_mat, "%s/op_wav_min_sq_%f.spm", dir_out, alpha_min_sq);
 						if (!FormMinSquareMatrix(mmd3.fn_operator_wav, mmd3.fn_min_sq_mat, alpha_min_sq))
 						{
 							printf("Error while FormMinSquareMatrix()\n");
@@ -10850,14 +10850,14 @@ double inv_k_oslablenie;	MyMethodsData3 mmd3;
 #endif
 
 #if 0
-						sprintf(mmd3.fn_Lt, "%s\\Lt.spm", dir_out);
+                        sprintf(mmd3.fn_Lt, "%s/Lt.spm", dir_out);
 						if (!Holesski(mmd3.fn_min_sq_mat, mmd3.fn_Lt, dir_out))
 						{
 							printf("Error while Holesski()\n");
 							return;
 						}
 #else
-						sprintf(mmd3.fn_Lt, "%s\\Lt_%f.spm", dir_out, alpha_holesski);
+                        sprintf(mmd3.fn_Lt, "%s/Lt_%f.spm", dir_out, alpha_holesski);
 						if (!Holesski3(mmd3.fn_min_sq_mat, mmd3.fn_Lt, dir_out, j_start, 0.0))
 						{
 							printf("Error while Holesski3()\n");
@@ -11192,7 +11192,7 @@ void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
 
 		// save parameters
 		char filename_parameters[4096];
-		sprintf(filename_parameters, "%s\\parameters.par3", dir_out);
+        sprintf(filename_parameters, "%s/parameters.par3", dir_out);
 		SaveParameters (filename_parameters, mmd3);
 	}
 	else
@@ -11205,7 +11205,7 @@ void UseOneOfMyMethods3W_preparing(int type, // тип прямой задачи
 	//**********************************************
 	//формируем файл описания режима работы
 	char filename_description[4096];
-	sprintf(filename_description, "%s\\description.txt", dir_out);		
+    sprintf(filename_description, "%s/description.txt", dir_out);
 	FILE * description = fopen(filename_description,"wt");
 
 	//**********************************************
@@ -11366,7 +11366,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 	//**********************************************
 	//формируем файл описания режима работы
 	char filename_description[4096];
-	sprintf(filename_description, "%s\\description3W.txt", dir_out);		
+    sprintf(filename_description, "%s/description3W.txt", dir_out);
 	FILE * description = fopen(filename_description,"wt");
 
 	/*DoMyMethod3W(description,k_oslablenie, ab,vX,vY,vZ,z0,vModul,"modul");
@@ -11461,7 +11461,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 			{
 				strcpy(dir_out, fn);
 				char *p1, *p2;
-				p1 = strrchr(dir_out,'\\');
+                p1 = strrchr(dir_out,'\\');
 				p2 = strrchr(dir_out,'/');
 				if(p1)
 					*p1 = '\0';
@@ -11507,7 +11507,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 
 	if (to_calculi_min_sq_mat)
 	{
-		sprintf(mmd3.fn_min_sq_mat, "%s\\op_wav_min_sq_%f.spm", dir_out, mmd3.alpha_min_sq);					
+        sprintf(mmd3.fn_min_sq_mat, "%s/op_wav_min_sq_%f.spm", dir_out, mmd3.alpha_min_sq);
 		if (!FormMinSquareMatrix(mmd3.fn_operator_wav, mmd3.fn_min_sq_mat, mmd3.alpha_min_sq))
 		{
 			printf("Error while FormMinSquareMatrix()\n");
@@ -11523,7 +11523,7 @@ void UseOneOfMyMethods3W(int type, // тип прямой задачи
 #endif
 
 
-		sprintf(mmd3.fn_Lt, "%s\\Lt.spm", dir_out);
+        sprintf(mmd3.fn_Lt, "%s/Lt.spm", dir_out);
 		if (!Holesski3(mmd3.fn_min_sq_mat, mmd3.fn_Lt, dir_out, mmd3.j_start, 0.0))
 		{
 			printf("Error while Holesski3()\n");
@@ -11789,11 +11789,11 @@ bool AutoBuildProfile_main(
 #if 1
 		if (1)
 		{		
-			sprintf(dir_out, "%s\\raz_of_%s", directory, filename);
+            sprintf(dir_out, "%s/raz_of_%s", directory, filename);
 			int n = 0;
 			while (!CreateDirectory(dir_out,NULL))
 			{
-				sprintf(dir_out, "%s\\raz_of_%s(%d)", directory, filename, n++);
+                sprintf(dir_out, "%s/raz_of_%s(%d)", directory, filename, n++);
 			}
 		}
 
@@ -12180,17 +12180,17 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 {
 	double k = ab.k;
 
-	sprintf(dir_out, "%s\\raz_of_%s", current_directory, filename);
+    sprintf(dir_out, "%s/raz_of_%s", current_directory, filename);
 	int n = 0;
 	while (!CreateDirectory(dir_out,NULL))
 	{
-		sprintf(dir_out, "%s\\raz_of_%s(%d)", current_directory, filename, n++);
+        sprintf(dir_out, "%s/raz_of_%s(%d)", current_directory, filename, n++);
 	}
 
 	//**********************************************
 	//формируем файл описания режима работы
 	char filename_description[4096];
-	sprintf(filename_description, "%s\\description_old.txt", dir_out);
+    sprintf(filename_description, "%s/description_old.txt", dir_out);
 	FILE *stream;
 	stream = fopen(filename_description,"wt");
 	if (stream)
@@ -12307,7 +12307,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				{
 					TCHAR lpstrFile[1024];
 					FILE * stream_corr_ivan = NULL;
-					sprintf(lpstrFile, "%s\\corr_ivan_%s_%s_sym_%d.dat", dir_out,
+                    sprintf(lpstrFile, "%s/corr_ivan_%s_%s_sym_%d.dat", dir_out,
 						(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
@@ -12324,7 +12324,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 					TCHAR blnFile[1024];
 					FILE * bln = NULL;
-					sprintf(blnFile, "%s\\corr_ivan_%s_%s_sym_%d.bln", dir_out,
+                    sprintf(blnFile, "%s/corr_ivan_%s_%s_sym_%d.bln", dir_out,
 						(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
@@ -12481,7 +12481,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 						TCHAR lpstrFile[1024];
 						FILE * corr_v3 = NULL;
-						sprintf(lpstrFile, "%s\\corr_v3_%s_%s_sym_%d.dat", dir_out,
+                        sprintf(lpstrFile, "%s/corr_v3_%s_%s_sym_%d.dat", dir_out,
 							(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 							(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 							reverse1 * reverse2
@@ -12499,7 +12499,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 						//TCHAR lpstrFile[1024];
 						FILE * corr_v_3 = NULL;
-						sprintf(lpstrFile, "%s\\corr_v_3_%s_%s_sym_%d.dat", dir_out,
+                        sprintf(lpstrFile, "%s/corr_v_3_%s_%s_sym_%d.dat", dir_out,
 							(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 							(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 							reverse1 * reverse2
@@ -12793,7 +12793,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								//
 								char file[2048];
-								sprintf(file, "%s\\corr_ivan_%s_%s_sym_%d R = %04d.grd", dir_out,
+                                sprintf(file, "%s/corr_ivan_%s_%s_sym_%d R = %04d.grd", dir_out,
 									(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 									(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 									reverse1 * reverse2,
@@ -12825,7 +12825,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								//
 								char file2[2048];
-								sprintf(file2, "%s\\corr_ivan_%s_%s_sym_%d R = %04d 2.grd", dir_out,
+                                sprintf(file2, "%s/corr_ivan_%s_%s_sym_%d R = %04d 2.grd", dir_out,
 									(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 									(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 									reverse1 * reverse2,
@@ -12857,7 +12857,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								//
 								char file3[2048];
-								sprintf(file3, "%s\\corr_ivan_%s_%s_sym_%d R = %04d 3.grd", dir_out,
+                                sprintf(file3, "%s/corr_ivan_%s_%s_sym_%d R = %04d 3.grd", dir_out,
 									(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 									(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 									reverse1 * reverse2,
@@ -12889,7 +12889,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								//
 								char file4[2048];
-								sprintf(file4, "%s\\corr_ivan_%s_%s_sym_%d R = %04d 4.grd", dir_out,
+                                sprintf(file4, "%s/corr_ivan_%s_%s_sym_%d R = %04d 4.grd", dir_out,
 									(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 									(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 									reverse1 * reverse2,
@@ -12968,7 +12968,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				{	
 					TCHAR lpstrFile[1024];
 					FILE * stream_corr_ivan = NULL;
-					sprintf(lpstrFile, "%s\\corr_ivan_%s_%s_sym_%d.dat", dir_out,
+                    sprintf(lpstrFile, "%s/corr_ivan_%s_%s_sym_%d.dat", dir_out,
 						(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
@@ -13167,7 +13167,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 							//int i_1 = len_1/2;
 							{										
 								char file_dat[2048];
-								sprintf(file_dat, "%s\\corr_ivan_%s_%s sym %d i_1 = %04d.dat", dir_out,
+                                sprintf(file_dat, "%s/corr_ivan_%s_%s sym %d i_1 = %04d.dat", dir_out,
 									(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 									(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 									reverse1 * reverse2,
@@ -13297,7 +13297,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 								//
 								char file[2048];
-								sprintf(file, "%s\\corr_ivan_%s_%s_sym_%d i_1 = %04d.grd", dir_out,
+                                sprintf(file, "%s/corr_ivan_%s_%s_sym_%d i_1 = %04d.grd", dir_out,
 									(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 									(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 									reverse1 * reverse2,
@@ -13374,7 +13374,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 
 					TCHAR lpstrFile[1024];
 					FILE * stream_corr_ivan = NULL;
-					sprintf(lpstrFile, "%s\\corr_ivan_%s_%s_sym_%d.dat", dir_out,
+                    sprintf(lpstrFile, "%s/corr_ivan_%s_%s_sym_%d.dat", dir_out,
 						(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
@@ -13551,7 +13551,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				{
 					TCHAR lpstrFile[1024];
 					FILE * stream_corr_ivan = NULL;
-					sprintf(lpstrFile, "%s\\corr_ivan_%s_%s_sym_%d.dat", dir_out,
+                    sprintf(lpstrFile, "%s/corr_ivan_%s_%s_sym_%d.dat", dir_out,
 						(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 						reverse1 * reverse2
@@ -13678,7 +13678,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		// а непосредственно к сигналу или к дисперсиям
 		TCHAR lpstrFile[1024];
 		FILE * stream_corr_c = NULL;
-		sprintf(lpstrFile, "%s\\corr_c.dat", dir_out);
+        sprintf(lpstrFile, "%s/corr_c.dat", dir_out);
 		stream_corr_c = fopen(lpstrFile, "wt");
 
 		double max_z = 10000.0;
@@ -13786,27 +13786,27 @@ printf("r = %u rows = %d\n", r, rows);
 		TCHAR lpstrFile[1024];	
 
 		FILE * stream_correlation = NULL;
-		sprintf(lpstrFile, "%s\\correlation.dat", dir_out);
+        sprintf(lpstrFile, "%s/correlation.dat", dir_out);
 //			if (ab.use_correlation_algorithm) 
 			stream_correlation = fopen(lpstrFile, "wt");
 
 		FILE * corr_loc_max = NULL;
-		sprintf(lpstrFile, "%s\\corr_loc_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/corr_loc_max.dat", dir_out);
 //			if (ab.use_correlation_algorithm) 
 			corr_loc_max = fopen(lpstrFile, "wt");
 
 		FILE * corr_loc_min = NULL;
-		sprintf(lpstrFile, "%s\\corr_loc_min.dat", dir_out);
+        sprintf(lpstrFile, "%s/corr_loc_min.dat", dir_out);
 //			if (ab.use_correlation_algorithm) 
 			corr_loc_min = fopen(lpstrFile, "wt");
 
 		FILE * sum_corr_loc_max = NULL;
-		sprintf(lpstrFile, "%s\\sum_corr_loc_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/sum_corr_loc_max.dat", dir_out);
 //			if (ab.use_correlation_algorithm) 
 			sum_corr_loc_max = fopen(lpstrFile, "wt");
 
 		FILE * sum_corr_loc_min = NULL;
-		sprintf(lpstrFile, "%s\\sum_corr_loc_min.dat", dir_out);
+        sprintf(lpstrFile, "%s/sum_corr_loc_min.dat", dir_out);
 //			if (ab.use_correlation_algorithm) 
 			sum_corr_loc_min = fopen(lpstrFile, "wt");
 
@@ -13817,7 +13817,7 @@ printf("r = %u rows = %d\n", r, rows);
 
 		for (size_t f = 0; f < files; f++)
 		{
-			sprintf(lpstrFile, "%s\\correlation_%.02f-%.02f.dat", dir_out, 1.0-k_step*(f+1), 1.0-k_step*f);
+            sprintf(lpstrFile, "%s/correlation_%.02f-%.02f.dat", dir_out, 1.0-k_step*(f+1), 1.0-k_step*f);
 			corrs[f] = fopen(lpstrFile,"wt");
 		}
 
@@ -14235,45 +14235,45 @@ printf("r = %u rows = %d\n", r, rows);
 		TCHAR lpstrFile[1024];		
 		//##############################################################
 		//FILE * stream_common_razez = NULL;
-		//sprintf(lpstrFile, "%s\\raz_com_%d_%d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
+        //sprintf(lpstrFile, "%s/raz_com_%d_%d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
 		//stream_common_razez = fopen(lpstrFile, "wt");
 
 		//============================================================================
 		//============================================================================
 		//FILE * stream_common_negative_dima = NULL;
-		//sprintf(lpstrFile, "%s\\negative_dima_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
+        //sprintf(lpstrFile, "%s/negative_dima_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
 		//stream_common_negative_dima = fopen(lpstrFile, "wt");
 
 		//FILE * stream_common_positive_dima = NULL;
-		//sprintf(lpstrFile, "%s\\positive_dima_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
+        //sprintf(lpstrFile, "%s/positive_dima_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
 		//stream_common_positive_dima = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_positive_dima = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_dima_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
+        sprintf(lpstrFile, "%s/razez_positive_dima_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
 		if (ab.use_window_cycles_algorithm_dima) stream_common_razez_positive_dima = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_negative_dima = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_dima_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
+        sprintf(lpstrFile, "%s/razez_negative_dima_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
 		if (ab.use_window_cycles_algorithm_dima) stream_common_razez_negative_dima = fopen(lpstrFile, "wt");
 
 		//============================================================================
 		//============================================================================
 
 		//FILE * stream_common_negative = NULL;
-		//sprintf(lpstrFile, "%s\\negative_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
+        //sprintf(lpstrFile, "%s/negative_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
 		//stream_common_negative = fopen(lpstrFile, "wt");
 
 		//FILE * stream_common_positive = NULL;
-		//sprintf(lpstrFile, "%s\\positive_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
+        //sprintf(lpstrFile, "%s/positive_%d_%d_%d %d.dat", dir_out, start_window_len, step_vindow_len, end_window_len, use_repeat_points);
 		//stream_common_positive = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_positive = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
+        sprintf(lpstrFile, "%s/razez_positive_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
 		if (ab.use_window_cycles_algorithm_1) 
 			stream_common_razez_positive = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_negative = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
+        sprintf(lpstrFile, "%s/razez_negative_%d_%d %d.dat", dir_out, start_window_len, end_window_len, ab.use_repeat_points);
 		if (ab.use_window_cycles_algorithm_1) 
 			stream_common_razez_negative = fopen(lpstrFile, "wt");
 		//============================================================================
@@ -14281,33 +14281,33 @@ printf("r = %u rows = %d\n", r, rows);
 		//##############################################################
 		//============================================================================
 		FILE * stream_common_razez_local_max_less = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_local_max_less_%0.1f.dat", dir_out, ab.quantil_naklony);
+        sprintf(lpstrFile, "%s/razez_positive_local_max_less_%0.1f.dat", dir_out, ab.quantil_naklony);
 		if (ab.use_locals && ab.use_max) 
 			stream_common_razez_local_max_less = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_local_min_less = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_local_min_less_%0.1f.dat", dir_out, ab.quantil_naklony);
+        sprintf(lpstrFile, "%s/razez_negative_local_min_less_%0.1f.dat", dir_out, ab.quantil_naklony);
 		if (ab.use_locals && ab.use_min) 
 			stream_common_razez_local_min_less = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_local_min_max_less = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_local_min_max_less_%0.1f.dat", dir_out, ab.quantil_naklony);
+        sprintf(lpstrFile, "%s/razez_positive_local_min_max_less_%0.1f.dat", dir_out, ab.quantil_naklony);
 		if (ab.use_locals && ab.use_min_max) 
 			stream_common_razez_local_min_max_less = fopen(lpstrFile, "wt");
 		//============================================================================
 		//============================================================================
 		FILE * stream_common_razez_local_max_more = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_local_max_more_%0.1f.dat", dir_out, ab.quantil_naklony);
+        sprintf(lpstrFile, "%s/razez_positive_local_max_more_%0.1f.dat", dir_out, ab.quantil_naklony);
 		if (ab.use_locals && ab.use_max) 
 			stream_common_razez_local_max_more = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_local_min_more = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_local_min_more_%0.1f.dat", dir_out, ab.quantil_naklony);
+        sprintf(lpstrFile, "%s/razez_negative_local_min_more_%0.1f.dat", dir_out, ab.quantil_naklony);
 		if (ab.use_locals && ab.use_min) 
 			stream_common_razez_local_min_more = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_local_min_max_more = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_local_min_max_more_%0.1f.dat", dir_out, ab.quantil_naklony);
+        sprintf(lpstrFile, "%s/razez_positive_local_min_max_more_%0.1f.dat", dir_out, ab.quantil_naklony);
 		if (ab.use_locals && ab.use_min_max) 
 			stream_common_razez_local_min_max_more = fopen(lpstrFile, "wt");
 		//============================================================================
@@ -14315,21 +14315,21 @@ printf("r = %u rows = %d\n", r, rows);
 		//##############################################################
 		//============================================================================
 		//FILE * stream_common_razez_positive_dima_min = NULL;
-		//sprintf(lpstrFile, "%s\\razez_positive_dima_min.dat", dir_out);
+        //sprintf(lpstrFile, "%s/razez_positive_dima_min.dat", dir_out);
 		//stream_common_razez_positive_dima_min = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_negative_dima_min = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_dima_min.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_negative_dima_min.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_dima_after_locals && ab.use_min_2) 
 			stream_common_razez_negative_dima_min = fopen(lpstrFile, "wt");
 		//============================================================================
 		//============================================================================
 		/*FILE * stream_common_razez_positive_min = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_min.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_positive_min.dat", dir_out);
 		stream_common_razez_positive_min = fopen(lpstrFile, "wt");*/
 
 		FILE * stream_common_razez_negative_min = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_min.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_negative_min.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_1_after_locals && ab.use_min_2) 
 			stream_common_razez_negative_min = fopen(lpstrFile, "wt");
 		
@@ -14338,45 +14338,45 @@ printf("r = %u rows = %d\n", r, rows);
 		//##############################################################
 		//============================================================================
 		FILE * stream_common_razez_positive_dima_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_dima_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_positive_dima_max.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_dima_after_locals && ab.use_max_2) 
 			stream_common_razez_positive_dima_max = fopen(lpstrFile, "wt");
 
 		/*FILE * stream_common_razez_negative_dima_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_dima_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_negative_dima_max.dat", dir_out);
 		stream_common_razez_negative_dima_max = fopen(lpstrFile, "wt");*/
 		//============================================================================
 		//============================================================================
 		FILE * stream_common_razez_positive_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_positive_max.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_1_after_locals && ab.use_max_2) 
 			stream_common_razez_positive_max = fopen(lpstrFile, "wt");
 
 		/*FILE * stream_common_razez_negative_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_negative_max.dat", dir_out);
 		stream_common_razez_negative_max = fopen(lpstrFile, "wt");*/
 		//============================================================================
 		//##############################################################
 		//##############################################################
 		//============================================================================
 		FILE * stream_common_razez_positive_dima_min_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_dima_min_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_positive_dima_min_max.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_dima_after_locals && ab.use_min_max_2)
 			stream_common_razez_positive_dima_min_max = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_negative_dima_min_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_dima_min_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_negative_dima_min_max.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_dima_after_locals && ab.use_min_max_2)
 			stream_common_razez_negative_dima_min_max = fopen(lpstrFile, "wt");
 		//============================================================================
 		//============================================================================
 		FILE * stream_common_razez_positive_min_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_positive_min_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_positive_min_max.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_1_after_locals && ab.use_min_max_2)
 			stream_common_razez_positive_min_max = fopen(lpstrFile, "wt");
 
 		FILE * stream_common_razez_negative_min_max = NULL;
-		sprintf(lpstrFile, "%s\\razez_negative_min_max.dat", dir_out);
+        sprintf(lpstrFile, "%s/razez_negative_min_max.dat", dir_out);
 		if (ab.use_window_cycles_algorithm_1_after_locals && ab.use_min_max_2)
 			stream_common_razez_negative_min_max = fopen(lpstrFile, "wt");
 		//============================================================================
@@ -14965,17 +14965,17 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 {
 	double k = ab.k;
 
-	sprintf(dir_out, "%s\\raz_of_%s", current_directory, filename);
+    sprintf(dir_out, "%s/raz_of_%s", current_directory, filename);
 	int n = 0;
 	while (!CreateDirectory(dir_out,NULL))
 	{
-		sprintf(dir_out, "%s\\raz_of_%s(%d)", current_directory, filename, n++);
+        sprintf(dir_out, "%s/raz_of_%s(%d)", current_directory, filename, n++);
 	}
 
 	//**********************************************
 	//формируем файл описания режима работы
 	char filename_description[4096];
-	sprintf(filename_description, "%s\\description_ivan.txt", dir_out);
+    sprintf(filename_description, "%s/description_ivan.txt", dir_out);
 	FILE *stream;
 	stream = fopen(filename_description,"wt");
 	if (stream)
@@ -15407,11 +15407,11 @@ printf("Window_Cycle start\n");
 		FILE * stream_max;
 		FILE * stream_min;
 
-		sprintf(lpstrFile, "%s\\max_min_gradient_%d.dat", dir_out, window_len);
+        sprintf(lpstrFile, "%s/max_min_gradient_%d.dat", dir_out, window_len);
 		stream = fopen(lpstrFile, "wt");
-		sprintf(lpstrFile, "%s\\max_gradient_%d.dat", dir_out, window_len);
+        sprintf(lpstrFile, "%s/max_gradient_%d.dat", dir_out, window_len);
 		stream_max = fopen(lpstrFile, "wt");
-		sprintf(lpstrFile, "%s\\min_gradient_%d.dat", dir_out, window_len);
+        sprintf(lpstrFile, "%s/min_gradient_%d.dat", dir_out, window_len);
 		stream_min = fopen(lpstrFile, "wt");
 */
 		/**fprintf(stream, "\"%s_of_max_gradient_window_len_%d\"%c\"%s_of_min_gradient_window_len_%d\"%c\n",
@@ -16566,7 +16566,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 	TCHAR blnFile[1024];
 	FILE * bln = NULL;
 #if 0
-	sprintf(blnFile, "%s\\auto_vert_%s_%s_sym_%d.bln", dir_out,
+    sprintf(blnFile, "%s/auto_vert_%s_%s_sym_%d.bln", dir_out,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 		reverse1 * reverse2
@@ -16601,7 +16601,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 
 	TCHAR lpstrFile[1024];
 	FILE * corr_v3 = NULL;
-	sprintf(lpstrFile, "%s\\auto_vert_%d_%d_%d_%s_%s_sym_%d.dat", dir_out,
+    sprintf(lpstrFile, "%s/auto_vert_%d_%d_%d_%s_%s_sym_%d.dat", dir_out,
 		2*shoulder+1, step, wlen,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -16620,7 +16620,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 	//TCHAR lpstrFile[1024];
 	FILE * corr_v_3 = NULL;
 #if 0
-	sprintf(lpstrFile, "%s\\auto0_vert_%d_%d_%d_%s_%s_sym_%d.dat", dir_out,
+    sprintf(lpstrFile, "%s/auto0_vert_%d_%d_%d_%s_%s_sym_%d.dat", dir_out,
 		2*shoulder+1, step, wlen,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -16920,7 +16920,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 
 			//
 			char file[2048];
-			sprintf(file, "%s\\corr_ivan_%s_%s_sym_%d R = %04d.grd", dir_out,
+            sprintf(file, "%s/corr_ivan_%s_%s_sym_%d R = %04d.grd", dir_out,
 				(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 				(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 				reverse1 * reverse2,
@@ -16952,7 +16952,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 
 			//
 			char file2[2048];
-			sprintf(file2, "%s\\corr_ivan_%s_%s_sym_%d R = %04d 2.grd", dir_out,
+            sprintf(file2, "%s/corr_ivan_%s_%s_sym_%d R = %04d 2.grd", dir_out,
 				(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 				(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 				reverse1 * reverse2,
@@ -16984,7 +16984,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 
 			//
 			char file3[2048];
-			sprintf(file3, "%s\\corr_ivan_%s_%s_sym_%d R = %04d 3.grd", dir_out,
+            sprintf(file3, "%s/corr_ivan_%s_%s_sym_%d R = %04d 3.grd", dir_out,
 				(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 				(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 				reverse1 * reverse2,
@@ -17016,7 +17016,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 
 			//
 			char file4[2048];
-			sprintf(file4, "%s\\corr_ivan_%s_%s_sym_%d R = %04d 4.grd", dir_out,
+            sprintf(file4, "%s/corr_ivan_%s_%s_sym_%d R = %04d 4.grd", dir_out,
 				(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 				(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 				reverse1 * reverse2,
@@ -17041,7 +17041,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 
 
 	TCHAR file_grd[1024];
-	sprintf(file_grd, "%s\\auto_vert_%d_%d_%d_%s_%s_sym_%d_.grd", dir_out,
+    sprintf(file_grd, "%s/auto_vert_%d_%d_%d_%s_%s_sym_%d_.grd", dir_out,
 		2*shoulder+1, step, wlen,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -17190,7 +17190,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 
 		char file_dat[2048];
 
-		sprintf(file_dat, "%s\\base_vert_%d_%s_%s sym %d i_1 = %04d.dat",
+        sprintf(file_dat, "%s/base_vert_%d_%s_%s sym %d i_1 = %04d.dat",
 			current_profile_interval ? current_profile_interval->dir : dir_out,
 			wlen,
 			(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
@@ -17258,7 +17258,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 
 						current_profile_interval = &profile_intervals[current_profile_number];
 
-						sprintf(file_dat, "%s\\base_vert_%d_%s_%s sym %d i_1 = %04d.dat",
+                        sprintf(file_dat, "%s/base_vert_%d_%s_%s sym %d i_1 = %04d.dat",
 							current_profile_interval ? current_profile_interval->dir : dir_out,
 							wlen,
 							(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
@@ -17455,7 +17455,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 
 		//
 		char file[2048];
-		sprintf(file, "%s\\base_vert_%d_%s_%s_sym_%d i_1 = %04d.grd", dir_out,
+        sprintf(file, "%s/base_vert_%d_%s_%s_sym_%d i_1 = %04d.grd", dir_out,
 			wlen,
 			(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 			(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -17491,7 +17491,7 @@ void DoGorizontalCorrilation(double k,
 {
 	TCHAR lpstrFile[1024];
 	FILE * stream_corr_ivan = NULL;
-	sprintf(lpstrFile, "%s\\gor_kor_%d_%d_%s_%s_sym_%d.dat", dir_out,
+    sprintf(lpstrFile, "%s/gor_kor_%d_%d_%s_%s_sym_%d.dat", dir_out,
 		2*shoulder+1, step,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -17538,9 +17538,9 @@ void DoGorizontalCorrilation(double k,
 			TCHAR testFile[1024];
 			FILE * test_x = NULL;
 			FILE * test_y = NULL;
-			sprintf(testFile, "%s\\test_x.bln", dir_out);
+            sprintf(testFile, "%s/test_x.bln", dir_out);
 			test_x = fopen(testFile, "wt");
-			sprintf(testFile, "%s\\test_y.bln", dir_out);
+            sprintf(testFile, "%s/test_y.bln", dir_out);
 			test_y = fopen(testFile, "wt");
 
 			int len = 0;
@@ -17814,7 +17814,7 @@ void BuildGrid(char * file_grd,
 	min_y = min__z;
 
 
-/*	sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d.grd",
+/*	sprintf(file_grd, "%s/corr_ivan_%s_%s sym %d.grd",
 		current_profile_interval ? current_profile_interval->dir : dir_out,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -17968,7 +17968,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 	char file_grd[2048];
 
-	sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d.grd",
+    sprintf(file_grd, "%s/corr_ivan_%s_%s sym %d.grd",
 		current_profile_interval ? current_profile_interval->dir : dir_out,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -18069,7 +18069,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 				{
 					current_profile_interval = &profile_intervals[current_profile_number];
 
-					sprintf(file_grd, "%s\\corr_ivan_%s_%s sym %d i_1 = %04d.dat",
+                    sprintf(file_grd, "%s/corr_ivan_%s_%s sym %d i_1 = %04d.dat",
 						current_profile_interval ? current_profile_interval->dir : dir_out,
 						(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 						(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
@@ -18206,7 +18206,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 	//
 	char file[2048];
-	sprintf(file, "%s\\corr_ivan_%s_%s_sym_%d i_1 = %04d.grd", dir_out,
+    sprintf(file, "%s/corr_ivan_%s_%s_sym_%d i_1 = %04d.grd", dir_out,
 		(*pnames_of_colomns)[original_col_numbers[c1]].c_str(),
 		(*pnames_of_colomns)[original_col_numbers[c2]].c_str(),
 		reverse1 * reverse2,

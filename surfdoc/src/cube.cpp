@@ -3726,7 +3726,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 					else
 						p++;				
 
-					sprintf(lpstrFile, "%s\\gor_slice_alt=%f_of_%s", directory, 
+                    sprintf(lpstrFile, "%s/gor_slice_alt=%f_of_%s", directory,
 						- me->m_pSurfDoc->m_cut_plane_d[3] / me->m_pSurfDoc->m_cut_plane_d[2],
 						p);
 
@@ -3842,7 +3842,7 @@ INT_PTR CALLBACK Cube4D::DlgProcCubeCutsPlane( HWND hDlg, UINT uMsg,
 				else
 					p++;				
 
-				sprintf(lpstrFile, "%s\\slice[%f_%f_%f_%f]_of_%s", directory, 
+                sprintf(lpstrFile, "%s/slice[%f_%f_%f_%f]_of_%s", directory,
 					me->m_pSurfDoc->m_cut_plane_d[0],
 					me->m_pSurfDoc->m_cut_plane_d[1],
 					me->m_pSurfDoc->m_cut_plane_d[2],

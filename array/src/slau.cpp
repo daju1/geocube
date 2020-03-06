@@ -5006,7 +5006,7 @@ void SaveSparseMatrixAsDat(vector<sparse_row > & m, const char *name)
 	size_t rows = m.size();
 	//
 	char file[2048];
-	sprintf(file, "%s\\sparse_martix_%s.dat", directory,
+    sprintf(file, "%s/sparse_martix_%s.dat", directory,
 		name
 		);
 	char * p;
@@ -5066,7 +5066,7 @@ void SaveSparseMatrixAsGrid(vector<sparse_row > & m, size_t cols, const char *na
 
 	//
 	char file[2048];
-	sprintf(file, "%s\\sparse_martix_%s.grd", directory,
+    sprintf(file, "%s/sparse_martix_%s.grd", directory,
 		name
 		);
 	char * p;
