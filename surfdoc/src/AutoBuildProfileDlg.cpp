@@ -1627,6 +1627,7 @@ void AutoBuildProfileDlg1::ShowWindows_RelatedWith_CheckUseLocals()
 #endif
 void AutoBuildProfileDlg1::OnButtonBrowseNumColomn()
 {
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 	if (::OpenFileDlg(hDlg, 
 		_T("Data (*.dat)\0*.dat\0")
 		_T("CSV (*.csv)\0*.csv\0")
@@ -1639,6 +1640,11 @@ void AutoBuildProfileDlg1::OnButtonBrowseNumColomn()
 #endif
 		num_col_file_selected = true;
 	}
+#else
+	QString dir = QDir("../data/rovno/rovno_u001/").absolutePath();
+	QString file = "Colomn_list_vertical.dat";
+	sprintf(this->m_ab.num_col_filename, "%s/%s", dir.toStdString().c_str(), file.toStdString().c_str());
+#endif
 }
 
 void AutoBuildProfileDlg1::OnDestroy()
@@ -7210,7 +7216,8 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
         // TODO
 #endif
 		{
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+//#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if 1
 			char sz_path_of_file[4096];
             sprintf(sz_path_of_file, "%s/%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
 #else
@@ -11683,6 +11690,37 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 		"Select one or more files to open",
 		QDir("../").absolutePath(),
 		"Comma separated files (*.csv)");
+#else
+#if 0
+	QStringList filters;
+	filters << "Comma separated files (*.csv)"
+		<< "Data files (*.dat)"
+		<< "Text files (*.txt)"
+		<< "Any files (*)";
+
+	QFileDialog dialog(hDlg);
+	dialog.setNameFilters(filters);
+	dialog.setDirectory(QDir("../").absolutePath());
+	dialog.setFileMode(QFileDialog::ExistingFiles);
+	if (!dialog.exec())
+		return false;
+
+	QDir dir = dialog.directory();
+	QString dirAbsPath = dir.absolutePath();
+	std::string dir_abs_path = dirAbsPath.toStdString();
+	strcpy(this->directory, dir_abs_path.c_str());
+
+	QStringList files = dialog.selectedFiles();
+#else
+	QDir qdir = QDir("../data/rovno/rovno_u001/");
+	QString dir = qdir.absolutePath();
+	strcpy(this->directory, dir.toStdString().c_str());
+
+	QStringList filters = QDir::nameFiltersFromString("*.csv");
+
+	QStringList files = qdir.entryList(filters, QDir::Filter::Files, QDir::SortFlag::Name);
+#endif
+#endif
 	if (files.size() > 0)
 	{
 		this->m_files_in_dir.nFilesInDirectory = files.size();
@@ -11701,50 +11739,6 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 		}
 		return true;
 	}
-	return false;
-#else
-	QStringList filters;
-	filters << "Comma separated files (*.csv)"
-		<< "Data files (*.dat)"
-		<< "Text files (*.txt)"
-		<< "Any files (*)";
-
-	QFileDialog dialog(hDlg);
-	dialog.setNameFilters(filters);
-	dialog.setDirectory(QDir("../").absolutePath());
-	dialog.setFileMode(QFileDialog::ExistingFiles);
-	if (dialog.exec())
-	{
-		QDir dir = dialog.directory();
-		QString dirAbsPath = dir.absolutePath();
-		std::string dir_abs_path = dirAbsPath.toStdString();
-		strcpy(this->directory, dir_abs_path.c_str());
-
-		QStringList files = dialog.selectedFiles();
-		if (files.size() > 0)
-		{
-			strcpy(this->filename, files[0].toStdString().c_str());
-
-
-			this->m_files_in_dir.nFilesInDirectory = files.size();
-			//память не освобождена!!!!
-			this->m_files_in_dir.vFileNameLengthes = (int*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-				sizeof(int) * this->m_files_in_dir.nFilesInDirectory);
-			this->m_files_in_dir.vFileNames = (char**)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-				sizeof(char*) * this->m_files_in_dir.nFilesInDirectory);
-			//strcpy(this->directory, ::directory);
-			for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
-			{
-				this->m_files_in_dir.vFileNameLengthes[iFile] = files[iFile].size();
-				this->m_files_in_dir.vFileNames[iFile] = (char*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-					sizeof(char) * this->m_files_in_dir.vFileNameLengthes[iFile]);
-				strcpy(this->m_files_in_dir.vFileNames[iFile], files[iFile].toStdString().c_str());
-			}
-		}
-
-		return true;
-	}
-#endif
 	return false;
 #endif
 }
