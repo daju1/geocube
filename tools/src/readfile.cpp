@@ -703,7 +703,7 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 	return 0;
 }
 
-int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, char delim )
+int ReadCellFile(HWND hWnd, const char * fpath, char* current_directory, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, char delim )
 {
 	bool bUse_Header = true;
 	double value;
@@ -715,7 +715,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			"importExcelCommonFileParam()", 0);
 		return 0;
 	}
-	char *p1, *p2, *p;
+	const char *p1, *p2, *p;
 	
 	char ext[255];
 	p = strrchr(fpath,'.');
@@ -725,7 +725,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 
 	if (p)
 	{
-		char * pp;
+		const char * pp;
 		// sscan year from filename
 		p1 = strrchr(fpath,'\\');
 		p2 = strrchr(fpath,'/');
@@ -743,6 +743,12 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 		{
 			strncpy(filename, pp+1, p-pp-1);
 			filename[p-pp-1] = '\0';
+		}
+
+		if (current_directory)
+		{
+			strncpy(current_directory, fpath, pp - fpath);
+			current_directory[pp - fpath] = '\0';
 		}
 
 
@@ -1061,7 +1067,7 @@ void ParseLine(int iLine, char *szBuff, char *title, size_t bytes_line, Delimite
 		ncol++;
 	}
 }
-int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, DelimiterData dd, unsigned int max_rows_to_read )
+int ReadCellFile(HWND hWnd, char * fpath, char* current_directory, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, DelimiterData dd, unsigned int max_rows_to_read )
 {
 	bool bUse_Header = true;
 
@@ -1110,8 +1116,11 @@ int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > 
 			filename[p-pp-1] = '\0';
 		}
 
-
-
+		if (current_directory)
+		{
+			strncpy(current_directory, fpath, pp - fpath);
+			current_directory[pp - fpath] = '\0';
+		}
 
 		FILE *stream;
 		if ((stream = fopen(fpath,"rt")) == NULL)

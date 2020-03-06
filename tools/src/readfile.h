@@ -37,8 +37,8 @@ int ReadDatFile(HWND hWnd, char * fpath, char* filename, vector<vector<double> >
 int ReadInputFile(char * fname, vdouble& x, vdouble& y);
 int GetDelimiterFromID(int delimID);
 int ReadInputFile(char * fname, Vector<vdouble>& vv, int delim);
-int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, char delim );
-int ReadCellFile(HWND hWnd, char * fpath, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, DelimiterData dd, unsigned int max_rows_to_read );
+int ReadCellFile(HWND hWnd, const char * fpath, char* current_directory, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, char delim );
+int ReadCellFile(HWND hWnd, const char * fpath, char* current_directory, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, DelimiterData dd, unsigned int max_rows_to_read );
 
 int ReadDatFile(const char * filename, vector<double> & x, vector<double> & y, vector<double> & z);
 int ReadDatFile(const char * filename, vdouble& x, vdouble& y, vdouble& z);

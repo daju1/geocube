@@ -11908,7 +11908,7 @@ bool ReadColomnNumbers(
 		vector<vector<cell> > * pcells_num_col = new vector<vector<cell> >;
 		vector<string> * pnames_of_colomns_num_col = new vector<string>;
 		char* filename_num_col = NULL;
-		ReadCellFile(NULL, ab.num_col_filename, filename_num_col, pcells_num_col, pnames_of_colomns_num_col, delim );
+		ReadCellFile(NULL, ab.num_col_filename, NULL, filename_num_col, pcells_num_col, pnames_of_colomns_num_col, delim );
 		int rows = pcells_num_col->size();
 		int _cols = pnames_of_colomns_num_col->size();
 
@@ -11944,7 +11944,7 @@ bool ReadColomnNumbers(
 }
 
 bool ReadProfileFile(
-				  char * sz_path_to_file, char * current_directory, char* filename,
+				  const char * sz_path_to_file, char * current_directory, char* filename,
 				  bool consol,
 				  AutoBuildProfile * p_auto_build_profile,
 				  auto_build_parametrs& ab,
@@ -11973,7 +11973,14 @@ bool ReadProfileFile(
 
 printf("ReadProfileFile sz_path_to_file = %s, current_directory = %s\n", sz_path_to_file, current_directory);
 
-	ReadCellFile(NULL, sz_path_to_file, filename, pcells, pnames_of_colomns, delim );
+	ReadCellFile(NULL, sz_path_to_file, 
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
+		NULL,
+#else
+		current_directory,
+#endif
+		
+		filename, pcells, pnames_of_colomns, delim );
 
 
 	//блок чтения файла

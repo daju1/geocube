@@ -3933,8 +3933,12 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 #else
 #endif
 		{
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
 			char sz_path_of_file[4096];			
 			sprintf(sz_path_of_file, "%s\\%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
+#else
+			const char* sz_path_of_file = this->m_files_in_dir.vFileNames[iFile];
+#endif
 			printf("this->directory = %s\n this->m_files_in_dir.vFileNames[iFile] = %s\n sz_path_of_file = %s\n\n",this->directory,  this->m_files_in_dir.vFileNames[iFile], sz_path_of_file);
 
 			int rows;
@@ -7206,8 +7210,12 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
         // TODO
 #endif
 		{
-			char sz_path_of_file[4096];			
+#if defined (_MSC_VER) && !defined (QT_PROJECT)
+			char sz_path_of_file[4096];
 			sprintf(sz_path_of_file, "%s\\%s", this->directory, this->m_files_in_dir.vFileNames[iFile]);
+#else
+			const char* sz_path_of_file = this->m_files_in_dir.vFileNames[iFile];
+#endif
 			printf("this->directory = %s\n this->m_files_in_dir.vFileNames[iFile] = %s\n sz_path_of_file = %s\n\n",this->directory,  this->m_files_in_dir.vFileNames[iFile], sz_path_of_file);
 
 			int rows;
@@ -11669,40 +11677,75 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 	// Display the Open dialog box. 
 	return false;
 #else
-
-	QStringList filters;
-	filters << "Comma separated files (*.csv)"
-			<< "Data files (*.dat)"
-			<< "Text files (*.txt)"
-			<< "Any files (*)";
-
-	QFileDialog dialog(hDlg);
-	dialog.setNameFilters(filters);
-	dialog.setDirectory(QDir("../../").absolutePath());
-	if (dialog.exec())
+#if 0
+	QStringList files = QFileDialog::getOpenFileNames(
+		NULL,
+		"Select one or more files to open",
+		QDir("../").absolutePath(),
+		"Comma separated files (*.csv)");
+	if (files.size() > 0)
 	{
-		QDir dir = dialog.directory();
-		QString dirAbsPath = dir.absolutePath();
-		std::string dir_abs_path = dirAbsPath.toStdString();
-		strcpy(directory, dir_abs_path.c_str());
-
-		QStringList files = dialog.selectedFiles();
-		if (files.size() > 0)
-		{
-			strcpy(this->filename, files[0].toStdString().c_str());
-		}
-
 		this->m_files_in_dir.nFilesInDirectory = files.size();
 		//память не освобождена!!!!
 		this->m_files_in_dir.vFileNameLengthes = (int*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
 			sizeof(int) * this->m_files_in_dir.nFilesInDirectory);
 		this->m_files_in_dir.vFileNames = (char**)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
 			sizeof(char*) * this->m_files_in_dir.nFilesInDirectory);
-		//strcpy(this->directory, ::directory);
-		return S_OK;
-	}
 
-	return true;
+		for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
+		{
+			this->m_files_in_dir.vFileNameLengthes[iFile] = files[iFile].size();
+			this->m_files_in_dir.vFileNames[iFile] = (char*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+				sizeof(char) * this->m_files_in_dir.vFileNameLengthes[iFile]);
+			strcpy(this->m_files_in_dir.vFileNames[iFile], files[iFile].toStdString().c_str());
+		}
+		return true;
+	}
+	return false;
+#else
+	QStringList filters;
+	filters << "Comma separated files (*.csv)"
+		<< "Data files (*.dat)"
+		<< "Text files (*.txt)"
+		<< "Any files (*)";
+
+	QFileDialog dialog(hDlg);
+	dialog.setNameFilters(filters);
+	dialog.setDirectory(QDir("../").absolutePath());
+	dialog.setFileMode(QFileDialog::ExistingFiles);
+	if (dialog.exec())
+	{
+		QDir dir = dialog.directory();
+		QString dirAbsPath = dir.absolutePath();
+		std::string dir_abs_path = dirAbsPath.toStdString();
+		strcpy(this->directory, dir_abs_path.c_str());
+
+		QStringList files = dialog.selectedFiles();
+		if (files.size() > 0)
+		{
+			strcpy(this->filename, files[0].toStdString().c_str());
+
+
+			this->m_files_in_dir.nFilesInDirectory = files.size();
+			//память не освобождена!!!!
+			this->m_files_in_dir.vFileNameLengthes = (int*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+				sizeof(int) * this->m_files_in_dir.nFilesInDirectory);
+			this->m_files_in_dir.vFileNames = (char**)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+				sizeof(char*) * this->m_files_in_dir.nFilesInDirectory);
+			//strcpy(this->directory, ::directory);
+			for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
+			{
+				this->m_files_in_dir.vFileNameLengthes[iFile] = files[iFile].size();
+				this->m_files_in_dir.vFileNames[iFile] = (char*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+					sizeof(char) * this->m_files_in_dir.vFileNameLengthes[iFile]);
+				strcpy(this->m_files_in_dir.vFileNames[iFile], files[iFile].toStdString().c_str());
+			}
+		}
+
+		return true;
+	}
+#endif
+	return false;
 #endif
 }
 

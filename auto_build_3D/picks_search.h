@@ -527,7 +527,7 @@ void DoGorizontalCorrilation(double k,
 							 int delim);
 
 bool ReadProfileFile( 
-				  char * sz_path_to_file, char * current_directory, char* filename, 
+				  const char * sz_path_to_file, char * current_directory, char* filename, 
 				  bool consol, 
 				  AutoBuildProfile * p_auto_build_profile,
 				  auto_build_parametrs& ab,
