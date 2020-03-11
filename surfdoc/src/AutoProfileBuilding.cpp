@@ -11939,8 +11939,9 @@ bool ReadColomnNumbers(
 
 		delete pcells_num_col;
 		delete pnames_of_colomns_num_col;
+        return true;
 	}
-
+    return false;
 }
 
 bool ReadProfileFile(
