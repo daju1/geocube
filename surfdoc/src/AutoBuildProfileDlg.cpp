@@ -2899,7 +2899,7 @@ void CalcDerivatives(long c_apply,
 	///
 }
 
-void CalcDerivatives_dipol(long c_apply,
+void CalcDerivatives_dipol(long c_apply, long apply_B,
 					bool apply_dgdep, 
 					bool apply_dgdni,
 					vector<short> & va,
@@ -3004,11 +3004,16 @@ void CalcDerivatives_dipol(long c_apply,
 					W_p_a_r_c_S_a_r_A = S[a][r] * W_p_A[a][r][c];
 					dGdni_A[c] += W_p_a_r_c_S_a_r_A * Er_A[a][r];
 					d2Gdni2_A[c] += W_p_a_r_c_S_a_r_A * W_p_a_r_c_S_a_r_A;
+                }
+                if (apply_B){
+                for (long r = 0; r < operator_rows; r++)
+                {
 
 					W_p_a_r_c_S_a_r_B = s[a] * S[a][r] * W_p_B[a][r][c];
 					dGdni_B[c] += W_p_a_r_c_S_a_r_B * Er_B[a][r];
 					d2Gdni2_B[c] += W_p_a_r_c_S_a_r_B * W_p_a_r_c_S_a_r_B;
 				}
+                }
 			}
 			//double agdni_c = dGdni[c];
 			//double ag2dni2_c = d2Gdni2[c];
@@ -3056,14 +3061,21 @@ void CalcDerivatives_dipol(long c_apply,
 				for (long c = 0; c < operator_cols; c++)
 				{
 					double _p_A = p_A[a][r][c];
-					double _p_B = p_B[a][r][c];
 					tmp_A += ni_A[c] * pow(_p_A, 1.5) * exp(-_p_A);
-					tmp_B += ni_B[c] * pow(_p_B, 1.5) * exp(-_p_B);
+                }
+                if (apply_B) {
+                for (long c = 0; c < operator_cols; c++)
+                {
+                    double _p_B = p_B[a][r][c];
+                    tmp_B += ni_B[c] * pow(_p_B, 1.5) * exp(-_p_B);
 				}
+                }
 				tmp_A *= S[a][r];
+                d2GdEp2[a] += tmp_A * tmp_A;
+                if (apply_B) {
 				tmp_B *= S[a][r];
-				d2GdEp2[a] += tmp_A * tmp_A;
-				d2Gdk2[a] += tmp_B * tmp_B;
+                d2Gdk2[a] += tmp_B * tmp_B;
+                }
 			}
 			d2GdEp2[a] *= four_per_sqrt_pi;
 			d2Gdk2[a] *= s[a] * four_per_sqrt_pi;
@@ -3105,6 +3117,8 @@ void CalcDerivatives_dipol(long c_apply,
 					d2det_domega2_div_det_A
 					);
 
+                if (apply_B) {
+
 				ddet_dbeta_domega_div_det(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
 					ax, ay, az,
@@ -3114,6 +3128,7 @@ void CalcDerivatives_dipol(long c_apply,
 					d2det_dbeta2_div_det_B,
 					d2det_domega2_div_det_B
 					);
+                }
 
 				double _p_A = p_A[a][r][c];
 				double tmp_A = pow(_p_A, 1.5) * exp(-_p_A) * S[a][r];
@@ -3121,47 +3136,44 @@ void CalcDerivatives_dipol(long c_apply,
 				temp_A[a][c] += tmpe_A;
 				temp52_A[a][c] += pow(_p_A, 2.5) * exp(-_p_A) * Er_A[a][r] * S[a][r];
 
-				double _p_B = p_B[a][r][c];
-				double tmp_B = pow(_p_B, 1.5) * exp(-_p_B) * S[a][r]; 
-				double tmpe_B = tmp_B * Er_B[a][r]; 
-				temp_B[a][c] += tmpe_B;
-				temp52_B[a][c] += pow(_p_B, 2.5) * exp(-_p_B) * Er_B[a][r] * S[a][r];
 
 
 				dGdbeta_A[c] += tmpe_A * ddet_dbeta_div_det_A;
-				dGdbeta_B[c] += s[a] * tmpe_B * ddet_dbeta_div_det_B;
-
 				dGdomega_A[c] += tmpe_A * ddet_domega_div_det_A;
-				dGdomega_B[c] += s[a] * tmpe_B * ddet_domega_div_det_B;
-
 
 				d2Gdbeta2_A[c] += two_per_sqrt_pi * pw * ni_A[c] * pow (tmp_A * ddet_dbeta_div_det_A, 2.0);
-				d2Gdbeta2_B[c] += two_per_sqrt_pi * pw * ni_B[c] * pow (s[a] * tmp_B * ddet_dbeta_div_det_B, 2.0);
-
 				d2Gdomega2_A[c] += two_per_sqrt_pi * pw * ni_A[c] * pow (tmp_A * ddet_domega_div_det_A, 2.0);
-				d2Gdomega2_B[c] += two_per_sqrt_pi * pw * ni_B[c] * pow (s[a] * tmp_B * ddet_domega_div_det_B, 2.0);
-
-
 
 				d2Gdbeta2_A[c] += tmpe_A * d2det_dbeta2_div_det_A;
-				d2Gdbeta2_B[c] += s[a] * tmpe_B * d2det_dbeta2_div_det_B;
-
 				d2Gdomega2_A[c] += tmpe_A * d2det_domega2_div_det_A;
-				d2Gdomega2_B[c] += s[a] * tmpe_B * d2det_domega2_div_det_B;
 
 				d2Gdbeta2_A[c] += (temp52_A[a][c] - (1.5 + (1.0 / pw)) * tmpe_A) * pw * ddet_dbeta_div_det_A * ddet_dbeta_div_det_A;
 				d2Gdomega2_A[c] += (temp52_A[a][c] - (1.5 + (1.0 / pw)) * tmpe_A) * pw * ddet_domega_div_det_A * ddet_domega_div_det_A;
 
-				d2Gdbeta2_B[c] += s[a] * (temp52_B[a][c] - (1.5 + (1.0 / pw)) * tmpe_B) * pw * ddet_dbeta_div_det_B * ddet_dbeta_div_det_B;
-				d2Gdomega2_B[c] += s[a] * (temp52_B[a][c] - (1.5 + (1.0 / pw)) * tmpe_B) * pw * ddet_domega_div_det_B * ddet_domega_div_det_B;
-
+                if (apply_B) {
+                double _p_B = p_B[a][r][c];
+                double tmp_B = pow(_p_B, 1.5) * exp(-_p_B) * S[a][r];
+                double tmpe_B = tmp_B * Er_B[a][r];
+                temp_B[a][c] += tmpe_B;
+                temp52_B[a][c] += pow(_p_B, 2.5) * exp(-_p_B) * Er_B[a][r] * S[a][r];
+                dGdbeta_B[c] += s[a] * tmpe_B * ddet_dbeta_div_det_B;
+                dGdomega_B[c] += s[a] * tmpe_B * ddet_domega_div_det_B;
+                d2Gdbeta2_B[c] += two_per_sqrt_pi * pw * ni_B[c] * pow (s[a] * tmp_B * ddet_dbeta_div_det_B, 2.0);
+                d2Gdomega2_B[c] += two_per_sqrt_pi * pw * ni_B[c] * pow (s[a] * tmp_B * ddet_domega_div_det_B, 2.0);
+                d2Gdbeta2_B[c] += s[a] * tmpe_B * d2det_dbeta2_div_det_B;
+                d2Gdomega2_B[c] += s[a] * tmpe_B * d2det_domega2_div_det_B;
+                d2Gdbeta2_B[c] += s[a] * (temp52_B[a][c] - (1.5 + (1.0 / pw)) * tmpe_B) * pw * ddet_dbeta_div_det_B * ddet_dbeta_div_det_B;
+                d2Gdomega2_B[c] += s[a] * (temp52_B[a][c] - (1.5 + (1.0 / pw)) * tmpe_B) * pw * ddet_domega_div_det_B * ddet_domega_div_det_B;
+                }
 			}
 			//double temp_a_c = temp[a][c];
 			temp_A[a][c] *= ni_A[c];
 			temp52_A[a][c] *= ni_A[c];
 
+            if (apply_B) {
 			temp_B[a][c] *= ni_B[c];
 			temp52_B[a][c] *= ni_B[c];
+            }
 			//temp_a_c = temp[a][c];
 
 			if (apply_dgdep)
@@ -3169,8 +3181,10 @@ void CalcDerivatives_dipol(long c_apply,
 				dGdEp[a] += temp_A[a][c];
 				d2GdEp2[a] += 2.0 * temp52_A[a][c] - temp_A[a][c];
 
+                if (apply_B) {
 				dGdk[a] += temp_B[a][c];
 				d2Gdk2[a] += 2.0 * temp52_B[a][c] - temp_B[a][c];
+                }
 			}
 
 		}
@@ -3212,45 +3226,55 @@ void CalcDerivatives_dipol(long c_apply,
 				double _p_A = p_A[a][r][c];
 				double tmp_A = pow(_p_A, 1.5) * exp(-_p_A) * S[a][r];
 				tmp2_A += tmp_A * tmp_A;
+            }
+            if (apply_B) {
+            for (long r = 0; r < operator_rows; r++)
+            {
 
 				double _p_B = p_B[a][r][c];
 				double tmp_B = pow(_p_B, 1.5) * exp(-_p_B) * S[a][r];
 				tmp2_B += tmp_B * tmp_B;
-
-
-
+                }
 			}
 			tmp2_A *= ni_A[c] * ni_A[c];
+            d2GdKTi2_A[c] += tmp2_A;
+            if (apply_B) {
 			tmp2_B *= s[a] * s[a] * ni_B[c] * ni_B[c];
-			d2GdKTi2_A[c] += tmp2_A;
-			d2GdKTi2_B[c] += tmp2_B;
+            d2GdKTi2_B[c] += tmp2_B;
+            }
 		}
 		d2GdKTi2_A[c] *= four_per_sqrt_pi;
+        if (apply_B) {
 		d2GdKTi2_B[c] *= four_per_sqrt_pi;
+        }
 		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены						
 			dGdKTi_A[c] +=  temp_A[a][c];	
-			d2GdKTi2_A[c] += 2.0 * temp52_A[a][c] - 5.0 * temp_A[a][c];	
+            d2GdKTi2_A[c] += 2.0 * temp52_A[a][c] - 5.0 * temp_A[a][c];
+            if (apply_B) {
 			dGdKTi_B[c] +=  s[a] * temp_B[a][c];	
 			d2GdKTi2_B[c] += s[a] * (2.0 * temp52_B[a][c] - 5.0 * temp_B[a][c]);
+            }
 		}
 		dGdKTi_A[c] *= two_per_sqrt_pi / KTi_A[c];
 		d2GdKTi2_A[c] *= one_per_sqrt_pi / (KTi_A[c] * KTi_A[c]);
+        if (apply_B) {
 		dGdKTi_B[c] *= two_per_sqrt_pi / KTi_B[c];
 		d2GdKTi2_B[c] *= one_per_sqrt_pi / (KTi_B[c] * KTi_B[c]);
+        }
 
 
 		dGdbeta_A[c] *= two_per_sqrt_pi * pw * ni_A[c];
-		dGdbeta_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-
 		dGdomega_A[c] *= two_per_sqrt_pi * pw * ni_A[c];
-		dGdomega_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-
 		d2Gdbeta2_A[c] *= two_per_sqrt_pi * pw * ni_A[c];
-		d2Gdbeta2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-
 		d2Gdomega2_A[c] *= two_per_sqrt_pi * pw * ni_A[c];
-		d2Gdomega2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-/*
+
+        if (apply_B) {
+        dGdbeta_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+        dGdomega_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+        d2Gdbeta2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+        d2Gdomega2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+        }
+        /*
 		d2Gdbeta2_A[c] = 1.0;
 		d2Gdbeta2_B[c] = 1.0;
 
@@ -3284,7 +3308,7 @@ void CalcDerivatives_dipol(long c_apply,
 	///
 }
 
-void ForwordOperatorApply_dipol(long c_apply,
+void ForwordOperatorApply_dipol(long c_apply, bool apply_B,
 						  double & GA,
 						  double & GB,
 						  vector<short> & va,
@@ -3381,6 +3405,8 @@ void ForwordOperatorApply_dipol(long c_apply,
 				if (nju_phi_A > DBL_MIN && nju_phi_A < nju_phi_min)
 					nju_phi_min = nju_phi_A;
 
+                if (apply_B){
+
 				// коэффициент выхода диаграммы направленности
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
@@ -3388,6 +3414,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 
 				if (nju_phi_B > DBL_MIN && nju_phi_B < nju_phi_min)
 					nju_phi_min = nju_phi_B;
+                }
 			}
 		}
 	}
@@ -3422,6 +3449,8 @@ void ForwordOperatorApply_dipol(long c_apply,
 				W_p_A[a][r][c] = alglib::errorfunctionc(sqrt(_p_A)) + 2.0 * sqrt (_p_A / PI) * exp(-_p_A);
 				//double W_p_a_r_c_A = W_p_A[a][r][c];
 				CJI_A[a][r][c] = S[a][r] * ni_A[c] * W_p_A[a][r][c];
+
+                if (apply_B){
 				
 				// коэффициент выхода диаграммы направленности
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
@@ -3437,6 +3466,7 @@ void ForwordOperatorApply_dipol(long c_apply,
 				W_p_B[a][r][c] = alglib::errorfunctionc(sqrt(_p_B)) + 2.0 * sqrt (_p_B / PI) * exp(-_p_B);
 				//double W_p_a_r_c_B = W_p_B[a][r][c];
 				CJI_B[a][r][c] = S[a][r] * ni_B[c] * W_p_B[a][r][c];
+                }
 			}
 		}
 	}
@@ -3451,32 +3481,47 @@ void ForwordOperatorApply_dipol(long c_apply,
 		{
 			// Выход оператора прямой задачи
 			C_A[a][r] = 0.0;
+            if (apply_B) {
 			C_B[a][r] = 0.0;
+            }
 			for (long c = 0; c < operator_cols; c++)
 			{
 				//double nic = ni[c], W_p_a_r_c = W_p[a][r][c];
 				//C_A[a][r] += S[a][r] * ni_A[c] * W_p_A[a][r][c];
 				//C_B[a][r] += S[a][r] * ni_B[c] * W_p_B[a][r][c];
 				C_A[a][r] += CJI_A[a][r][c];
-				C_B[a][r] += CJI_B[a][r][c];
+            }
+            if (apply_B) {
+                for (long c = 0; c < operator_cols; c++)
+                {
+                    C_B[a][r] += CJI_B[a][r][c];
+                }
 			}							
 			//double car = C[a][r], war = W[a][r];
 			//size_t W_a_size = W[a].size();
+            if (apply_B) {
 			mean_CB[a] += C_B[a][r];
+            }
 		}
+        if (apply_B) {
 		mean_CB[a] /= operator_rows;
 		if (mean_CB[a] != 0.0)
 			s[a] = mean_B_B[a] / mean_CB[a];
 		else
 			s[a] = 0.0;
+        }
 
 		//поправка Выхода оператора прямой задачи
 		for (long r = 0; r < operator_rows; r++)
 		{
-			C_B[a][r] *= s[a];
 			// Невязка
 			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
-			Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+        }
+        if (apply_B) {
+            for (long r = 0; r < operator_rows; r++){
+                C_B[a][r] *= s[a];
+                Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+            }
 		}
 	}
 
@@ -3491,13 +3536,20 @@ void ForwordOperatorApply_dipol(long c_apply,
 			//	double sad = 0;
 			//}
 			double ear_A = Er_A[a][r];
-			double ear_B = Er_B[a][r];
 			GA += Er_A[a][r] * Er_A[a][r];
-			GB += Er_B[a][r] * Er_B[a][r];
+        }
+        if (apply_B) {
+        for (long r = 0; r < operator_rows; r++)
+        {
+            double ear_B = Er_B[a][r];
+            GB += Er_B[a][r] * Er_B[a][r];
 		}
+        }
 	}
 	GA /= 2.0;
+    if (apply_B) {
 	GB /= 2.0;
+    }
 
 }
 
@@ -9776,11 +9828,11 @@ bool Dipol(int use_newton,
 	double one = 1.0;
 	double min_d2 = 1.0;
 
-	cout << "Enter one" << endl;
-	cin >> one;
+//	cout << "Enter one" << endl;
+//	cin >> one;
 
-	cout << "Enter min_d2" << endl;
-	cin >> min_d2;
+//	cout << "Enter min_d2" << endl;
+//	cin >> min_d2;
 
 	vector<IterationParam> iteration_params(8);
 
@@ -9849,7 +9901,7 @@ bool Dipol(int use_newton,
 		double GB = 0.0;
 		long c_apply = -1;
 
-		ForwordOperatorApply_dipol(c_apply,
+        ForwordOperatorApply_dipol(c_apply, apply_B,
 
 			GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 			R, A,
@@ -9927,7 +9979,7 @@ bool Dipol(int use_newton,
 		{
 			if (!iteration_params[n_param].apply) continue;
 
-			CalcDerivatives_dipol(c_apply, apply_dgdep, apply_dgdni, va,
+            CalcDerivatives_dipol(c_apply, apply_B, apply_dgdep, apply_dgdni, va,
 				operator_rows, operator_cols, 
 				mmd3.pw_dnp, R, A,  						
 				p_A, W_p_A,
@@ -9961,7 +10013,7 @@ bool Dipol(int use_newton,
 			GA = 0.0;
 			GB = 0.0;
 
-			ForwordOperatorApply_dipol(c_apply,
+            ForwordOperatorApply_dipol(c_apply, apply_B,
 
 				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 				R, A,
@@ -10024,7 +10076,7 @@ bool Dipol(int use_newton,
 				GA = 0.0;
 				GB = 0.0;
 
-				ForwordOperatorApply_dipol(c_apply,
+                ForwordOperatorApply_dipol(c_apply, apply_B,
 
 					GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 					R, A,
@@ -10094,7 +10146,7 @@ bool Dipol(int use_newton,
 			double GA = 0.0;
 			double GB = 0.0;
 
-			ForwordOperatorApply_dipol(c_apply,
+            ForwordOperatorApply_dipol(c_apply, apply_B,
 
 				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 				R, A,
@@ -10171,7 +10223,7 @@ bool Dipol(int use_newton,
 
 
 										
-					ForwordOperatorApply_dipol(c_apply,
+                    ForwordOperatorApply_dipol(c_apply, apply_B,
 						GA,
 						GB,
 						va,
@@ -10316,7 +10368,7 @@ bool Dipol(int use_newton,
 				}
 			}
 				
-			CalcDerivatives_dipol(c_apply, apply_dgdep, apply_dgdni, va,
+            CalcDerivatives_dipol(c_apply, apply_B, apply_dgdep, apply_dgdni, va,
 				operator_rows, operator_cols, 
 				mmd3.pw_dnp, R, A,  						
 				p_A, W_p_A,
@@ -10972,14 +11024,22 @@ bool Lamp(int use_newton,
 	vector<double> dGdni_A(operator_cols);
 	vector<double> d2Gdni2_A(operator_cols);
 
-	vector<double> dGdni_B(operator_cols);
-	vector<double> d2Gdni2_B(operator_cols);
+    vector<double> dGdni_B;
+    vector<double> d2Gdni2_B;
+    if (apply_B) {
+        dGdni_B.resize(operator_cols);
+        d2Gdni2_B.resize(operator_cols);
+    }
 
 	vector<double> dGdKTi_A(operator_cols);
 	vector<double> d2GdKTi2_A(operator_cols);
 
-	vector<double> dGdKTi_B(operator_cols);
-	vector<double> d2GdKTi2_B(operator_cols);
+    vector<double> dGdKTi_B;
+    vector<double> d2GdKTi2_B;
+    if (apply_B) {
+        dGdKTi_B.resize(operator_cols);
+        d2GdKTi2_B.resize(operator_cols);
+    }
 
 	vector<double> dGdEp(3);
 	vector<double> d2GdEp2(3);
@@ -10995,9 +11055,11 @@ bool Lamp(int use_newton,
 	
 		temp_A[a].resize(operator_cols);
 		temp52_A[a].resize(operator_cols);
+        if (apply_B) {
 
 		temp_B[a].resize(operator_cols);
 		temp52_B[a].resize(operator_cols);
+        }
 	}
 
 
