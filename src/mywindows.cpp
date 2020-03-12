@@ -1,13 +1,27 @@
 #include <mywindows.h>
+#include <stdio.h>
 
 HANDLE GetProcessHeap()
 {
     return NULL;
 }
 
-LPVOID HeapAlloc(HANDLE, DWORD /*dwFlags*/, size_t dwBytes)
+LPVOID HeapAlloc(HANDLE, DWORD dwFlags, size_t dwBytes)
 {
-    return malloc(dwBytes);
+    printf ("HeapAlloc dwBytes = %u\n", dwBytes);
+    LPVOID p = malloc(dwBytes);
+    if (NULL == p)
+    {
+        printf ("HeapAlloc dwBytes = %u unsuccessfull\n", dwBytes);
+        return NULL;
+    }
+
+    if (HEAP_ZERO_MEMORY == dwFlags)
+    {
+        memset(p,0,dwBytes);
+    }
+
+    return p;
 }
 
 BOOL HeapFree(HANDLE, DWORD /*dwFlags*/, LPVOID lpMem)

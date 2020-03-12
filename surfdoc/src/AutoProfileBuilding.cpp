@@ -1758,7 +1758,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ax = A[a][j].ax;
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
+                printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\r", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				int putted_in_row = 0;
@@ -1862,7 +1862,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ax = A[a][j].ax;
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
+                printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\r", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				for (p = 0; p < pages; p++)
@@ -1935,6 +1935,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 		ar.Close();
 		f.Close();
 	}
+    printf("\n");
 	printf("sum_operator_value_x = %e\n", sum_operator_value_x);
 	printf("sum_operator_value_y = %e\n", sum_operator_value_y);
 	printf("sum_operator_value_z = %e\n", sum_operator_value_z);
@@ -2860,7 +2861,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
 
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
+                printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\r", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				int putted_in_row = 0;
@@ -2941,7 +2942,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 			}
 		}
 	}
-
+    printf("\n");
 
 	printf("sum_operator_value_x = %e\n", sum_operator_value_x);
 	printf("sum_operator_value_y = %e\n", sum_operator_value_y);
@@ -3109,7 +3110,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
 
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
+                printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\r", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				int putted_in_row = 0;
@@ -3233,7 +3234,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
 
-				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\n", j + a * signal_len, signal_len * 3, a, ax, ay, az);
+                printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\r", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 				for (p = 0; p < pages; p++)
 				{
@@ -3320,6 +3321,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 		ar.Close();
 		f.Close();
 	}
+    printf("\n");
 	printf("sum_operator_value_x = %e\n", sum_operator_value_x);
 	printf("sum_operator_value_y = %e\n", sum_operator_value_y);
 	printf("sum_operator_value_z = %e\n", sum_operator_value_z);
@@ -3530,6 +3532,7 @@ bool FillingTheMatrix3D(double smoof_power,
 		ar.Close();
 		f.Close();
 	}
+    printf("\n");
 }
 
 

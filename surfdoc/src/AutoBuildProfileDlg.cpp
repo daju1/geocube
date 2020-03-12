@@ -2061,9 +2061,9 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 					 bool apply_log10,
 					 bool apply_bln,
 					vector<double> & KTi, const char * cube_name_KTi,
-					vector<double> & ni, const char * cube_name_ni,
-					vector<vector<double> > & C,
-					vector<vector<double> > & W,
+                    vector<double> & ni, const char * cube_name_ni,
+                    vector<vector<double> > & C,
+                    vector<vector<double> > & W,
 					int da,
 					const char * DirName,
 					const char * method_name,
@@ -2139,8 +2139,8 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 			bln = fopen (bln_name, "wt");
 			if(bln)
 			{
-				fprintf(bln, "%d,%d, reconstr\n", C[a].size(), 0);
-				for(size_t i = 0; i < C[a].size(); i++)
+                fprintf(bln, "%d,%d, reconstr\n", C[a].size(), 0);
+                for(size_t i = 0; i < C[a].size(); i++)
 				{
 					fprintf(bln, "%f,%f\n", double(i), double(C[a][i]));
 				}
@@ -3304,8 +3304,11 @@ void ForwordOperatorApply_dipol(long c_apply,
 						  vector<double> & beta_A,
 						  vector<double> & omega_A,
 						  double * Ep,
-						  
+#if 0
 						  vector<vector<vector<double> > > & CJI_A,
+#else
+                          double*** CJI_A,
+#endif
 						  vector<vector<double> > & C_A,
 						  vector<vector<double> > & Er_A,
 						  vector<vector<double> > & S,
@@ -3321,8 +3324,11 @@ void ForwordOperatorApply_dipol(long c_apply,
 						  double * k,
 						  double * s,
 						  double * mean_B_B,
-						  
+#if 0
 						  vector<vector<vector<double> > > & CJI_B,
+#else
+                          double*** CJI_B,
+#endif
 						  vector<vector<double> > & C_B,
 						  vector<vector<double> > & Er_B
 
@@ -3511,7 +3517,7 @@ void ForwordOperatorApply(long c_apply,
 						  vector<double> & ni_A,
 						  vector<double> & KTi_A,
 						  double * Ep,
-						  
+
 						  vector<vector<vector<double> > > & CJI_A,
 						  vector<vector<double> > & C_A,
 						  vector<vector<double> > & Er_A,
@@ -8674,7 +8680,10 @@ bool Dipol(int use_newton,
 		   MyMethodsData3 &mmd3,
 		   double DZ,
 		   char * common_directory)
-{		
+{
+#ifdef QT_DEBUG
+    //apply_B = true;
+#endif
 #if 1
     //sprintf(common_directory_iX_iY, "%s/whole_object_by_colomns", common_directory);
 	//if (!CreateDirectory(common_directory_iX_iY, NULL))
@@ -8815,8 +8824,8 @@ bool Dipol(int use_newton,
 	double *** p_A;
 	double *** W_p_A;
 
-	double *** p_B;
-	double *** W_p_B;
+    double *** p_B = NULL;
+    double *** W_p_B = NULL;
 
 	long signal_len = vX.size(); // длина сигнала 
 	long operator_rows = signal_len; // длина сигнала 
@@ -8825,8 +8834,10 @@ bool Dipol(int use_newton,
 	p_A = Alloc3DMat<double>(3, operator_rows, operator_cols);
 	W_p_A = Alloc3DMat<double>(3, operator_rows, operator_cols);
 
-	p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
-	W_p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
+    if (apply_B){
+        p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
+        W_p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
+    }
 
 
 	double max_m = -DBL_MAX;
@@ -8890,7 +8901,7 @@ bool Dipol(int use_newton,
 	}
 
 	mean_m /= va.size() * operator_rows * operator_cols;
-
+    printf("mean_m = %e\n", mean_m);
 
 	double max_b = -DBL_MAX;
 	double min_b = DBL_MAX;
@@ -8946,7 +8957,10 @@ bool Dipol(int use_newton,
 	//init_KT = 0.2 / mean_m;
 	init_KT = 10.0 / max_m;// это значит, что минимальный р будет равен 0.1
 	vector<double> KTi_A(operator_cols, init_KT);
-	vector<double> KTi_B(operator_cols, init_KT);
+    vector<double> KTi_B;
+    if (apply_B){
+        KTi_B.resize(operator_cols, init_KT);
+    }
 	if (false)
 	{
 		// эта инициализация "копирует" рельефные и краевые эффекты оператора прямой задачи
@@ -8960,28 +8974,36 @@ bool Dipol(int use_newton,
 	// mode_A
 	for (long c = 0; c < operator_cols; c++) KTi_A[c] = 10.0 / vmax_m[c];
 	// mode_B
+    if (apply_B){
 	for (long c = 0; c < operator_cols; c++) KTi_B[c] = 10.0 * min_Ep / vmax_m[c];
+    }
 
 
 	//beta и omega – углы в сферической системе координат, дающие ориентацию излучающего диполя в пространстве
 	//beta - отклонение вектора диполя от вертикали
 	//omega - азимут наклона диполя (угол между направлением на север и направлением диполя, отсчитываемый по часовой стрелке)
 
+    printf("before init\n");
 
 	vector<double> beta_A(operator_cols, 0.0);
-	vector<double> beta_B(operator_cols, 0.0);
+    vector<double> beta_B;
 
 	vector<double> omega_A(operator_cols, 0.0);
-	vector<double> omega_B(operator_cols, 0.0);
+    vector<double> omega_B;
+    if (apply_B){
+        beta_B.resize(operator_cols, 0.0);
+        omega_B.resize(operator_cols, 0.0);
+    }
 
 	//случайная инициализация
 	for (long c = 0; c < operator_cols; c++)
 	{
 		beta_A[c] = 0.5 * PI * ((double)rand()/(double)RAND_MAX);
+        omega_A[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
+        if (apply_B){
 		beta_B[c] = 0.5 * PI * ((double)rand()/(double)RAND_MAX);
-
-		omega_A[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
 		omega_B[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
+        }
 	}
 #if 1
 	//послойная инициализация
@@ -8998,29 +9020,32 @@ bool Dipol(int use_newton,
 				case 0:
 					{
 						beta_A[c] = 0.0;
+                        omega_A[c] = 0.0;
+                        if (apply_B){
 						beta_B[c] = 0.0;
-
-						omega_A[c] = 0.0;
 						omega_B[c] = 0.0;
+                        }
 					}
 					break;
 				case 1:
 					{
 						beta_A[c] = 0.5 * PI;
-						beta_B[c] = 0.5 * PI;
-
 						omega_A[c] = 0.0;
+                        if (apply_B){
 						omega_B[c] = 0.0;
-					}
+                        beta_B[c] = 0.5 * PI;
+                        }
+                    }
 					break;
 				case 2:
 					{
 						beta_A[c] = 0.5 * PI;
-						beta_B[c] = 0.5 * PI;
-
 						omega_A[c] = 0.5 * PI;
+                        if (apply_B){
 						omega_B[c] = 0.5 * PI;
-					}
+                        beta_B[c] = 0.5 * PI;
+                        }
+                    }
 					break;
 				}
 			}
@@ -9041,28 +9066,31 @@ bool Dipol(int use_newton,
 				case 0:
 					{
 						beta_A[c] = 0.0;
-						beta_B[c] = 0.0;
-
-						omega_A[c] = 0.0;
+                        omega_A[c] = 0.0;
+                        if (apply_B){
+                        beta_B[c] = 0.0;
 						omega_B[c] = 0.0;
+                        }
 					}
 					break;
 				case 1:
 					{
 						beta_A[c] = 0.25 * PI;
-						beta_B[c] = 0.25 * PI;
-
-						omega_A[c] = 0.25 * PI;
+                        omega_A[c] = 0.25 * PI;
+                        if (apply_B){
+                        beta_B[c] = 0.25 * PI;
 						omega_B[c] = 0.25 * PI;
+                        }
 					}
 					break;
 				case 2:
 					{
 						beta_A[c] = 0.25 * PI;
-						beta_B[c] = 0.25 * PI;
-
-						omega_A[c] = 0.75 * PI;
+                        omega_A[c] = 0.75 * PI;
+                        if (apply_B){
+                        beta_B[c] = 0.25 * PI;
 						omega_B[c] = 0.75 * PI;
+                        }
 					}
 					break;
 				}
@@ -9084,19 +9112,21 @@ bool Dipol(int use_newton,
 				case 0:
 					{
 						beta_A[c] = 0.25 * PI;
-						beta_B[c] = 0.25 * PI;
-
-						omega_A[c] = 0.25 * PI;
+                        omega_A[c] = 0.25 * PI;
+                        if (apply_B){
+                        beta_B[c] = 0.25 * PI;
 						omega_B[c] = 0.25 * PI;
+                        }
 					}
 					break;
 				case 1:
 					{
 						beta_A[c] = 0.25 * PI;
-						beta_B[c] = 0.25 * PI;
-
-						omega_A[c] = 0.75 * PI;
+                        omega_A[c] = 0.75 * PI;
+                        if (apply_B){
+                        beta_B[c] = 0.25 * PI;
 						omega_B[c] = 0.75 * PI;
+                        }
 					}
 					break;
 				}
@@ -9109,21 +9139,30 @@ bool Dipol(int use_newton,
 	for (long c = 0; c < operator_cols; c++)
 	{
 		beta_A[c] = 0.0;
-		beta_B[c] = 0.0;
-
-		omega_A[c] = 0.0;
+        omega_A[c] = 0.0;
+        if (apply_B){
+        beta_B[c] = 0.0;
 		omega_B[c] = 0.0;
+        }
 	}
 #endif
+
+    printf("after init\n");
 
 	double ax, ay, az;
 	double rx, ry, rz;
 
+    printf("calc nju_phi_min");
+
 	double nju_phi_min = DBL_MAX;
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+    for (ia = 0; ia < va.size(); ia++) {
+        printf("\nia = %d\n", ia);
+        a = va[ia]; // перебираем 3 антены
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
-			ax = A[a][r].ax;
+            printf("ia = %d r = %d operator_rows = %d\r", ia, r, operator_rows);
+
+            ax = A[a][r].ax;
 			ay = A[a][r].ay;
 			az = A[a][r].az;
 
@@ -9141,6 +9180,8 @@ bool Dipol(int use_newton,
 				if (nju_phi_A > DBL_MIN && nju_phi_A < nju_phi_min)
 					nju_phi_min = nju_phi_A;
 
+                if (apply_B){
+
 				// коэффициент выхода диаграммы направленности
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
@@ -9148,16 +9189,27 @@ bool Dipol(int use_newton,
 
 				if (nju_phi_B > DBL_MIN && nju_phi_B < nju_phi_min)
 					nju_phi_min = nju_phi_B;
+                }
 
 			}
 		}
 	}
 
-	zero_substitution = 0.9 * nju_phi_min;
+    printf("\nnju_phi_min = %e\n", nju_phi_min);
+    printf("zero_substitution = %e\n", zero_substitution);
 
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+	zero_substitution = 0.9 * nju_phi_min;
+    printf("zero_substitution = %e\n", zero_substitution);
+
+    printf("fill operators p_A and W_p_A");
+
+    for (ia = 0; ia < va.size(); ia++) {
+        printf("\nia = %d\n", ia);
+        a = va[ia]; // перебираем 3 антены
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
+            printf("ia = %d r = %d operator_rows = %d\r", ia, r, operator_rows);
+
 			ax = A[a][r].ax;
 			ay = A[a][r].ay;
 			az = A[a][r].az;
@@ -9192,6 +9244,7 @@ bool Dipol(int use_newton,
 				//	printf("Ep[a]=%f m[a][r][c]=%e nju_phi_A=%e KTi_A[c]=%f\n", Ep[a], m[a][r][c], nju_phi_A, KTi_A[c]);
 				//	printf("ax=%f, ay=%f, az=%f, rx=%f, ry=%f, rz=%f\n", ax, ay, az, rx, ry, rz);
 				//}
+                if (apply_B){
 				// коэффициент выхода диаграммы направленности
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
@@ -9204,49 +9257,89 @@ bool Dipol(int use_newton,
 				double _p_B = k[a] * W[a+6][r] / (m[a][r][c] * nju_phi_B * KTi_B[c]);
 				p_B[a][r][c] = _p_B;
 				//W_p[a][r][c] = 1.0 + 2.0 * sqrt (_p / PI) * exp(-_p) - alglib::errorfunction(sqrt(_p));
-				W_p_B[a][r][c] = alglib::errorfunctionc(sqrt(_p_B)) + 2.0 * sqrt (_p_B / PI) * exp(-_p_B);
+                W_p_B[a][r][c] = alglib::errorfunctionc(sqrt(_p_B)) + 2.0 * sqrt (_p_B / PI) * exp(-_p_B);
 				//double W_p_a_r_c = W_p[a][r][c]; double inv_W = 1.0 / W_p_a_r_c;
+                }
 			}
 		}
 	}
-
-
+    printf("\np_B and W_p_B filled\n");
+#if 0
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
 			for (long c = 0; c < operator_cols; c++)
 			{
-				//double ktic = KTi[c], epa = Ep[a], marc = m[a][r][c];
+                double ktic = KTi_A[c];
+                //double epa = Ep_A[a];
+                //double marc = m_A[a][r][c];
+                printf("ktic = %f\r", ktic);
 
 			}
 		}
 	}
-	
+    printf("\n");
+#endif
 
 	// Выход оператора прямой задачи
+    printf("alloc operators outputs C_A and CJI_A");
+#if 0
+    vector<vector<vector<double> > > CJI_A(3);
+    vector<vector<vector<double> > > CJI_B(3);
+    for (ia = 0; ia < va.size(); ia++) {
+        printf("\nia = %d\n", ia);
+        a = va[ia]; // перебираем 3 антены
+        if (!init_by_lamp)
+            S[a].resize(operator_rows, 0.0);
+
+        CJI_A[a].resize(operator_rows);
+        if (apply_B){
+        CJI_B[a].resize(operator_rows);
+        }
+
+        for (long r = 0; r < operator_rows; r++) // длина сигнала
+        {
+            printf("ia = %d r = %d operator_rows = %d\r", ia, r, operator_rows);
+            try{
+                CJI_A[a][r].resize(operator_cols, 0.0);
+                if (apply_B){
+                CJI_B[a][r].resize(operator_cols, 0.0);
+                }
+            }
+            catch(...)
+            {
+                printf("\nresize fault\n");
+            }
+        }
+    }
+#else
+    double *** CJI_A;
+    double *** CJI_B = 0;
+
+    CJI_A = Alloc3DMat<double>(3, operator_rows, operator_cols);
+    if (apply_B){
+        CJI_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
+    }
+
+#endif
+
 	vector<vector<double> > C_A(3);
-	vector<vector<vector<double> > > CJI_A(3);
 	vector<vector<double> > C_B(3);
-	vector<vector<vector<double> > > CJI_B(3);
 
-
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+    for (ia = 0; ia < va.size(); ia++) {
+        printf("\nia = %d\n", ia);
+        a = va[ia]; // перебираем 3 антены
 		if (!init_by_lamp) 
 			S[a].resize(operator_rows, 0.0);
 		C_A[a].resize(operator_rows, 0.0);
-		CJI_A[a].resize(operator_rows);
 
+        if (apply_B){
 		C_B[a].resize(operator_rows, 0.0);
-		CJI_B[a].resize(operator_rows);
-
-		for (long r = 0; r < operator_rows; r++) // длина сигнала 
-		{
-			CJI_A[a][r].resize(operator_cols, 0.0);
-			CJI_B[a][r].resize(operator_cols, 0.0);
-		}
+        }
 	}
 
 	// init ni
+    printf("\ninit ni operator_rows=%d operator_cols=%d\n", operator_rows, operator_cols);
 
 	double sum_C_a_r_A = 0.0;//суммарный выход оператора прямой задачи
 	double sum_W_a_r_A = 0.0;//сумма векторов правых членов
@@ -9257,14 +9350,22 @@ bool Dipol(int use_newton,
 	double mean_B_A[3];
 	double mean_B_B[3];
 			
-	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+    for (ia = 0; ia < va.size(); ia++) {
+    printf("\ninit ni ia = %d\n", ia);
+        a = va[ia]; // перебираем 3 антены
 		mean_B_A[a] = 0.0;
+        if (apply_B){
 		mean_B_B[a] = 0.0;
+        }
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
+            printf("init ni ia = %d r = %d\r", ia, r);
+
 			// Выход оператора прямой задачи
 			C_A[a][r] = 0.0;
+            if (apply_B){
 			C_B[a][r] = 0.0;
+            }
 			for (long c = 0; c < operator_cols; c++)
 			{
 				if (W_p_A[a][r][c] != W_p_A[a][r][c])
@@ -9273,27 +9374,38 @@ bool Dipol(int use_newton,
 				}
 				//double W_p_a_r_c = W_p[a][r][c];
 				C_A[a][r] += W_p_A[a][r][c];
+                if (apply_B){
 				C_B[a][r] += W_p_B[a][r][c];
+                }
 			}
 			//if (C_A[a][r] != C_A[a][r])
 			//{
 			//	printf("C_A[%d][%d] = %f\n", a, r, C_A[a][r]);
 			//}
 			double car_A = C_A[a][r], war_A = W[a][r];
-			double car_B = C_B[a][r], war_B = W[a+3][r];
+            double car_B, war_B;
+            if (apply_B){
+            car_B = C_B[a][r], war_B = W[a+3][r];
+            }
 
 			mean_B_A[a] += war_A;
+            if (apply_B){
 			mean_B_B[a] += war_B;
+            }
 
 
 			sum_C_a_r_A += car_A;
 			sum_W_a_r_A += war_A;
 
+            if (apply_B){
 			sum_C_a_r_B += car_B;
 			sum_W_a_r_B += war_B;
+            }
 		}
 		mean_B_A[a] /= operator_rows;
+        if (apply_B){
 		mean_B_B[a] /= operator_rows;
+        }
 	}
 
 	double init_ni_A = sum_W_a_r_A / sum_C_a_r_A;
@@ -9311,7 +9423,7 @@ bool Dipol(int use_newton,
 		return false;
 
 	}
-	if (sum_C_a_r_B == 0.0)
+    if (apply_B && sum_C_a_r_B == 0.0)
 	{
 		MessageBox(0, "Сумарный выход прямой задачи равен нулю!","Инициализация не верна", MB_OK);
 		return false;
@@ -9320,7 +9432,10 @@ bool Dipol(int use_newton,
 
 
 	vector<double> ni_A(operator_cols, init_ni_A);
-	vector<double> ni_B(operator_cols, init_ni_B);
+    vector<double> ni_B;
+    if (apply_B){
+    ni_B.resize(operator_cols, init_ni_B);
+    }
 
 
 
@@ -9329,7 +9444,9 @@ bool Dipol(int use_newton,
 	vector<vector<double> > Er_B(3);
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
 		Er_A[a].resize(operator_rows);
+        if (apply_B){
 		Er_B[a].resize(operator_rows);
+        }
 	}
 
 	char DirName[4098];
@@ -9346,13 +9463,20 @@ bool Dipol(int use_newton,
 			{
 				// Выход оператора прямой задачи
 				C_A[a][r] = 0.0;
+                if (apply_B){
 				C_B[a][r] = 0.0;
+                }
 				for (long c = 0; c < operator_cols; c++)
 				{
 					//double nic = ni[c], W_p_a_r_c = W_p[a][r][c];
 					C_A[a][r] += ni_A[c] * W_p_A[a][r][c];
-					C_B[a][r] += ni_B[c] * W_p_B[a][r][c];
-				}
+                }
+                if (apply_B){
+                    for (long c = 0; c < operator_cols; c++)
+                    {
+                        C_B[a][r] += ni_B[c] * W_p_B[a][r][c];
+                    }
+                }
 				// инициализация коэффициента симметризации
 				if (C_A[a][r] != 0)
 					S[a][r] = mean_B_A[a] / C_A[a][r]; // здесь иницивлизация не работает в том случае если имеются нулевые C_A[a][r]
@@ -9379,6 +9503,7 @@ bool Dipol(int use_newton,
 			NULL, mmd3, 
 			to_reduce_x, to_reduce_y);
 	}
+    if (apply_B){
 
 	SavingIteration(va, 0, "init",
 		true,//bool apply_log10,
@@ -9390,6 +9515,7 @@ bool Dipol(int use_newton,
 		"initial_S",//const char * method_name,
 		NULL, mmd3, 
 		to_reduce_x, to_reduce_y);
+    }
 
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
 	
@@ -9397,12 +9523,16 @@ bool Dipol(int use_newton,
 		{
 			// пересчёт выхода оператора прямой задачи с учётом коэффициента симметризации
 			C_A[a][r] = 0.0;
+            if (apply_B){
 			C_A[a][r] = 0.0;
+            }
 			for (long c = 0; c < operator_cols; c++)
 			{
 				//double nic = ni[c], W_p_a_r_c = W_p[a][r][c];
 				C_A[a][r] += S[a][r] * ni_A[c] * W_p_A[a][r][c];
+                if (apply_B){
 				C_B[a][r] += S[a][r] * ni_B[c] * W_p_B[a][r][c];
+                }
 
 				//if (C_A[a][r] != C_A[a][r])
 				//{
@@ -9414,7 +9544,9 @@ bool Dipol(int use_newton,
 			//size_t W_a_size = W[a].size();
 			// Невязка
 			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
+            if (apply_B){
 			Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+            }
 		}
 	}
 
@@ -9428,24 +9560,40 @@ bool Dipol(int use_newton,
 
 	vector<double> dGdni_B(operator_cols);
 	vector<double> d2Gdni2_B(operator_cols);
+    if (apply_B){
+        dGdni_B.resize(operator_cols);
+        d2Gdni2_B.resize(operator_cols);
+    }
 
 	vector<double> dGdKTi_A(operator_cols);
 	vector<double> d2GdKTi2_A(operator_cols);
 
 	vector<double> dGdKTi_B(operator_cols);
 	vector<double> d2GdKTi2_B(operator_cols);
+    if (apply_B){
+        dGdKTi_B.resize(operator_cols);
+        d2GdKTi2_B.resize(operator_cols);
+    }
 
 	vector<double> dGdbeta_A(operator_cols);
 	vector<double> d2Gdbeta2_A(operator_cols);
 
 	vector<double> dGdbeta_B(operator_cols);
 	vector<double> d2Gdbeta2_B(operator_cols);
+    if (apply_B){
+        dGdbeta_B.resize(operator_cols);
+        d2Gdbeta2_B.resize(operator_cols);
+    }
 
 	vector<double> dGdomega_A(operator_cols);
 	vector<double> d2Gdomega2_A(operator_cols);
 
 	vector<double> dGdomega_B(operator_cols);
 	vector<double> d2Gdomega2_B(operator_cols);
+    if (apply_B){
+        dGdomega_B.resize(operator_cols);
+        d2Gdomega2_B.resize(operator_cols);
+    }
 
 
 
@@ -9464,8 +9612,10 @@ bool Dipol(int use_newton,
 		temp_A[a].resize(operator_cols);
 		temp52_A[a].resize(operator_cols);
 
+        if (apply_B){
 		temp_B[a].resize(operator_cols);
 		temp52_B[a].resize(operator_cols);
+        }
 	}
 
 
@@ -9540,11 +9690,15 @@ bool Dipol(int use_newton,
 			//}
 			//double ear = Er[a][r];
 			MA += W[a][r] * W[a][r];
+            if (apply_B){
 			MB += W[a+3][r] * W[a+3][r];
+            }
 		}
 	}
 	MA /= 2.0;
+    if (apply_B){
 	MB /= 2.0;
+    }
 
 	
 	
@@ -9561,7 +9715,7 @@ bool Dipol(int use_newton,
 		"MXWA_Sj",//const char * method_name,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
-
+    if (apply_B){
 	SavingIteration(va, 0, "init",
 		true,//bool apply_log10,
 		true,// apply_bln,
@@ -9572,6 +9726,7 @@ bool Dipol(int use_newton,
 		"MXWB_Sj",//const char * method_name,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
+    }
 
 	SavingIteration(va, 0, "init",
 		false,//bool apply_log10,
@@ -9584,6 +9739,8 @@ bool Dipol(int use_newton,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
 
+    if (apply_B){
+
 	SavingIteration(va, 0, "init",
 		false,//bool apply_log10,
 		false,// apply_bln,
@@ -9594,6 +9751,7 @@ bool Dipol(int use_newton,
 		"MXWB_Sj",//const char * method_name,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
+    }
 
     sprintf(DirName, "%s/korr", common_directory);
 	if (!CreateDirectory(DirName,NULL))
@@ -10241,6 +10399,8 @@ bool Dipol(int use_newton,
 				cubes, mmd3, 
 				to_reduce_x, to_reduce_y);
 
+            if (apply_B){
+
 			SavingIteration(va, iteration, "",
 				true, //bool apply_log10,
 				true, //bool apply_bln,
@@ -10273,6 +10433,7 @@ bool Dipol(int use_newton,
 				"MXWB", //const char * method_name,
 				cubes, mmd3, 
 				to_reduce_x, to_reduce_y);
+            }
 		}
 
 	}
@@ -10299,9 +10460,11 @@ bool Dipol(int use_newton,
 
 	Free3DMat(m);
 	Free3DMat(p_A);
+    Free3DMat(W_p_A);
+    if (apply_B){
 	Free3DMat(p_B);
-	Free3DMat(W_p_A);
 	Free3DMat(W_p_B);
+    }
 
 	for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
 	{
@@ -10687,6 +10850,7 @@ bool Lamp(int use_newton,
 	}
 
 	// init ni
+    printf("init ni\n");
 
 	double sum_C_a_r_A = 0.0;//суммарный выход оператора прямой задачи
 	double sum_W_a_r_A = 0.0;//сумма векторов правых членов
