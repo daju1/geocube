@@ -3084,18 +3084,24 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 		{
 			temp_A[a][c] = 0.0;
 			temp52_A[a][c] = 0.0;
+            if (apply_B) {
 			temp_B[a][c] = 0.0;
 			temp52_B[a][c] = 0.0;
+            }
 
 			dGdbeta_A[c] = 0.0;
 			d2Gdbeta2_A[c] = 0.0;
+            if (apply_B) {
 			dGdbeta_B[c] = 0.0;
 			d2Gdbeta2_B[c] = 0.0;
+            }
 
 			dGdomega_A[c] = 0.0;
 			d2Gdomega2_A[c] = 0.0;
+            if (apply_B) {
 			dGdomega_B[c] = 0.0;
 			d2Gdomega2_B[c] = 0.0;
+            }
 
 			for (long r = 0; r < operator_rows; r++)
 			{
