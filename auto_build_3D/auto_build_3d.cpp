@@ -1,6 +1,9 @@
 #include "auto_build_3d.h"
 #include "ui_auto_build_3d.h"
 #include "AutoProfileBuilding.h"
+#include <QFileDialog>
+
+#include "Grid.h"
 
 
 auto_build_3D::auto_build_3D(QWidget *parent) :
@@ -28,4 +31,17 @@ void auto_build_3D::on_pushButton_handle_input_files_clicked()
 void auto_build_3D::on_pushButton_BrowseNumColomn_clicked()
 {
     abpd1->OnButtonBrowseNumColomn();
+}
+
+void auto_build_3D::on_pushButton_TestImportCube_clicked()
+{
+    QString file = QFileDialog::getOpenFileName(this, "Open File",
+                                                    QDir("../../").absolutePath(),
+                                                    "Cube (*.cub)");
+
+    Grid4 cube;
+
+    if (0 == ImportSurfer7Grid4(file.toStdString().c_str(), &cube))
+    {
+    }
 }

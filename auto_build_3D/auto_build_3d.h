@@ -23,6 +23,8 @@ private slots:
 
     void on_pushButton_BrowseNumColomn_clicked();
 
+    void on_pushButton_TestImportCube_clicked();
+
 private:
     Ui::auto_build_3D *ui;
 };

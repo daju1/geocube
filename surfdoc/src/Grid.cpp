@@ -840,10 +840,11 @@ void FreeGrid(Grid & pgrid)
 
 
 
-int ImportSurfer7Grid(char *file, Grid* pgrid, bool to_allocate)
+int ImportSurfer7Grid(const char *file, Grid* pgrid, bool to_allocate)
 {
 printf("ImportSurfer7Grid\n");
-	char *p, ext[255];
+    const char *p;
+    char ext[255];
 	FILE *stream;
 
 	p = strrchr(file,'.');
@@ -1226,10 +1227,11 @@ int SaveAsSurfer7Grid(const char *file, Grid* pgrid)
 
 
 
-int ImportSurfer7Grid4(char *file, Grid4* pgrid)
+int ImportSurfer7Grid4(const char *file, Grid4* pgrid)
 {
 printf("ImportSurfer7Grid4 %s\n", file);
-	char *p, ext[255];
+    const char *p;
+    char ext[255];
 	FILE *stream;
 
 	p = strrchr(file,'.');

@@ -394,8 +394,8 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
 					  double zMax, // maximum Z value within the grid
 					  double ** z, int ** visible);
 int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
-int ImportSurfer7Grid(char *file, Grid* pgrid, bool to_allocate = true);
-int ImportSurfer7Grid4(char *file, Grid4* pgrid);
+int ImportSurfer7Grid(const char *file, Grid* pgrid, bool to_allocate = true);
+int ImportSurfer7Grid4(const char *file, Grid4* pgrid);
 int ImportDigitalModel(Grid* pgrid,
 	long nRow,
 	long nCol,
