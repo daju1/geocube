@@ -1,7 +1,7 @@
 
 #if !defined(_SLAU_H_)
 #define _SLAU_H_
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <windows.h>
 #else
 #include <mywindows.h>
@@ -333,7 +333,7 @@ bool Tichonov(vector<vector<double> > & A,
 
 void SaveSparseMatrixAsDat(vector<sparse_row > & m, const char *name);
 void SaveSparseMatrixAsGrid(vector<sparse_row > & m, size_t cols, const char *name);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 void SparseStructureToMetafile(char * fn_spm, char * fn_emf = NULL);
 #endif
 bool solve_using_Holesski_tria_matrixes(vector<sparse_row > L, vector<double> & B, vector<double> & x);

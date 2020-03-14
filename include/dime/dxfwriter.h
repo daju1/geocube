@@ -15,7 +15,7 @@ add_layer(const char * name, int colnum, dimeModel * model, dimeTable * layers);
 void print_line(Line3D * line3D, dimeModel * model, dimeBlock * block, CrdTranslator * translator);
 bool save_as_dxf(Object * ob, char * outfile, bool useblock, CrdTranslator * translator);
 bool cutline_save_as_dxf_razrez(
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
         SurfDoc * doc,
 #endif
                                 char * outfile, bool useblock, SSaveProfData * sprData,

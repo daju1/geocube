@@ -17,7 +17,7 @@ extern void WriteRaportoA(LPCTSTR file, LPCTSTR s);
 #endif
 */
 class Archive;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #define VECT_WITH_CRITICAL_SECTION 1
 #else
 #define VECT_WITH_CRITICAL_SECTION 0
@@ -221,7 +221,7 @@ public:
 #endif
  		return retCount;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	size_t AddMsg(size_t len, Object::object_type ob_type)
 	{
 		size_t retCount;
@@ -1337,7 +1337,7 @@ public:
 	}
 };
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 template <class T> Archive& operator <<(Archive& ar, vect<T, vectItem<T> >& v)
 {
 //printf("Archive& operator <<(Archive& ar, vect<T, vectItem<T> >& v)\n");

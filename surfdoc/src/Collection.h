@@ -1,10 +1,14 @@
 #pragma once
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "Object.h"
 #include "ObjectList.h"
+#endif
 #include "../../array/src/vect.h"
 
-class Collection :
-	public Object
+class Collection
+   #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
+   : public Object
+   #endif
 {
 public:
 	vect<Object, ObjectItem<Object> >	m_objects;

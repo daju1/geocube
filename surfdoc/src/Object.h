@@ -23,7 +23,7 @@ class SurfDoc;
 class Layer;
 
 //#define UNICODE
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <GL/gl.h>
 #include <windows.h>
 #include <gdiplus.h>

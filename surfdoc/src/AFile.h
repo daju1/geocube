@@ -1,5 +1,5 @@
 #pragma once
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <windows.h>
 #else
 #include "mywindows.h"
@@ -9,7 +9,7 @@
 class AFile
 {
 public:
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	HANDLE m_hFile;
 #else
        QFile m_file;
@@ -24,7 +24,7 @@ public:
 	DWORD Write(LPCVOID  lpBuff, DWORD dwNumberOfBytesToWrite);
 	void SeekToBegin(void);
 	void SeekToEnd(void);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	LONG Seek(long lOff, DWORD dwMoveMethod);
 #else
 	bool Seek(long lOff, DWORD dwMoveMethod);

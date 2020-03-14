@@ -44,7 +44,7 @@ public:
 	void Init(const Line3D& ob);
 	Line3D(const Line3D& ob);
 	Line3D& operator=(const Line3D& ob);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void Drawing(void);
 	void DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view * v , Profile3D * on, int alpha);
 #endif
@@ -68,7 +68,7 @@ public:
 	friend Archive& operator <<(Archive& ar, Line3D& ob);
 	friend Archive& operator >>(Archive& ar, Line3D& ob);
 	bool GetLineLength(double& ans);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	virtual bool IsSelected(CPoint3 selected_view_pt, 
 		double search_radius,
 		WhatSelected& ws);
@@ -85,7 +85,7 @@ public:
 #endif
 	enum line3d_draw_mode {as_thing_lines = 10, as_lines_with_spheres = 20};
 	static line3d_draw_mode s_line3d_draw_mode;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	//void FreeMiddlePoints();
 	void FillContextMenu(HMENU& hMenu);
 

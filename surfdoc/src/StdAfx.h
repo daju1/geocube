@@ -8,7 +8,7 @@
 #define COMMON_INCLUDED_
 
 //#define _WIN32_WINNT 0x0501
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <windows.h>
 #endif
 //#define USE_PICK_FILTER
@@ -130,7 +130,7 @@ typedef struct
 
 #include <math.h>
 #include <stdio.h>
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <tchar.h>
 #include <io.h>
 #include <commctrl.h>

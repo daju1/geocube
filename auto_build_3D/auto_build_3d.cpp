@@ -1,3 +1,6 @@
+#define WINGDIAPI 
+#define APIENTRY
+
 #include "auto_build_3d.h"
 #include "ui_auto_build_3d.h"
 #include "AutoProfileBuilding.h"

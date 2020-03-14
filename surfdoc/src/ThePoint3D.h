@@ -32,7 +32,7 @@ public:
 	ThePoint3D& operator=(const ThePoint3D& ob);
 
 	bool OnProfile(Profile3D * on);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view * v, Profile3D * on);
 
 

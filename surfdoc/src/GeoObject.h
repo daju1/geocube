@@ -1,6 +1,7 @@
 #pragma once
-
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "Object.h"
+#endif
 class GeoObject : public Object
 {
 public:

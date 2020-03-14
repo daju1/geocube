@@ -23,7 +23,7 @@ class color_surface;
 /*################################################################################################*/
 
 #include "camera.h"
-
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <GL/gl.h>
 
 #include <vector>
@@ -199,7 +199,7 @@ class color_surface_object : public smart_object
 };
 
 /*################################################################################################*/
-
+#endif
 #endif	// SURFACE_H
 
 // eof

@@ -1,4 +1,4 @@
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
 #include <afx.h>
@@ -20,7 +20,7 @@
 
 #include "Grid.h"
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "winsurftree.h"
 #include "SurfDoc.h"
 #include "../../winplot/src/winplot.h"
@@ -36,7 +36,7 @@
 
 
 #include "AutoBuildProfileDlg.h"
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "./../kohonen/src/KohonenDlg.h"
 #endif
 #include "./../array/src/sorting.h"
@@ -232,12 +232,12 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 
 AutoBuildProfile::AutoBuildProfile()
 {
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
     m_pSurfDoc = NULL;
 #endif
 	OnCreate();
 }
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 AutoBuildProfile::AutoBuildProfile(SurfDoc* pSurfDoc)
 {
 	this->m_pSurfDoc				= pSurfDoc;
@@ -246,7 +246,7 @@ AutoBuildProfile::AutoBuildProfile(SurfDoc* pSurfDoc)
 #endif
 void AutoBuildProfile::OnCreate(void)
 {
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	this->m_object_type = Object::object_type::auto_profile_building;
 	this->m_object_version = 1;
 	this->m_max_object_version = 1;
@@ -254,7 +254,7 @@ void AutoBuildProfile::OnCreate(void)
 	this->m_collections.OnCreate();
 #endif
 }
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 AutoBuildProfile::AutoBuildProfile(const AutoBuildProfile & bp)
 {
 	dynamic_cast<Object*>(this)->Init(bp);
@@ -292,7 +292,7 @@ printf("AutoBuildProfile::AddInput\n");
 	}
 }*/
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 bool AutoBuildProfile::UpdateExtremums()
 {
 printf("AutoBuildProfile::UpdateExtremums\n");
@@ -892,7 +892,7 @@ void DoMyMethod(vector<double> & X,
 					{
 						MessageBox(0,str,"",0);
 					}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 					catch (CException* pe)
 					{
 						// catch errors from WinINet
@@ -1002,7 +1002,7 @@ void DoMyMethod(vector<double> & X,
 	}
 	do
 	{
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		if (!CheckMyLicense()) break;
 #endif
 		double old_add_F = add_F;
@@ -3783,7 +3783,7 @@ void LoadingTheMatrix(vector<SparseRow>& m, long & cols)
 			{
 				MessageBox(0,str,"",0);
 			}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet
@@ -3976,7 +3976,7 @@ bool LoadMatrix(const char * filename, vector<vector<double> > & m)
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -4050,7 +4050,7 @@ bool ApplyOperator(long signal_len,
 		{
 			MessageBox(0,str,"",0);
 		}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -4150,7 +4150,7 @@ bool ApplyOperator(long signal_len,
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -4249,7 +4249,7 @@ bool ApplyOperator(long signal_len,
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -4359,7 +4359,7 @@ bool ApplyOperator_SparseOut(long signal_len,
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5324,7 +5324,7 @@ void ErrorOfInverseProblemSolving(char * fn_operator, vector<double> & t, vector
 		{
 			MessageBox(0,str,"",0);
 		}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -5431,7 +5431,7 @@ void ErrorOfMinSqProblemSolving(const char * fn_operator, vector<double> & b, ve
 		{
 			MessageBox(0,str,"",0);
 		}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -5508,7 +5508,7 @@ void ErrorOfInverseProblemSolving(bool to_print, char * fn_operator, vector<doub
 		{
 			MessageBox(0,str,"",0);
 		}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet
@@ -5649,7 +5649,7 @@ bool FormMinSquareAlphaVector(char * fn_operator_wav, vector<double> & alpha_vec
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5806,7 +5806,7 @@ bool FormMinSquareMatrix(char * fn_operator_wav, char * fn_min_sq_mat, double al
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5887,7 +5887,7 @@ bool FormMinSquareB(const char * fn_operator_transponed, vector<double> & signal
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -5957,7 +5957,7 @@ bool CorrelationProblem(const char * fn_operator_transponed, vector<double> & si
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6044,7 +6044,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6075,7 +6075,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 	char buff2[BUFF_SIZE];
 	Archive ar2( &f2, Archive::store, BUFF_SIZE, buff2 );
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
@@ -6089,7 +6089,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 
 		for(long i = 0; i < rows; i++)
 		{
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			time_current = GetCurrentTime();
 			time_eplased = time_current - time_pre_current;
 			time_pre_current = time_current;
@@ -6223,7 +6223,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 				MessageBox(0,str,"",0);
 				return false;
 			}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet
@@ -6254,7 +6254,7 @@ bool Holesski(char * fn_min_sq_mat, char * fn_Lt, char * dir)
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6314,7 +6314,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6329,7 +6329,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 		MessageBox(0,"unknown error of archive read","",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
@@ -6340,7 +6340,7 @@ bool Holesski3(const char * fn_min_sq_mat, const char * fn_Lt, char * dir, long 
 	{
 		for(long j = 0; j < rows; j++)
 		{
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			time_current = GetCurrentTime();
 			time_eplased = time_current - time_pre_current;
 			time_pre_current = time_current;
@@ -6523,7 +6523,7 @@ e_start_row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6585,7 +6585,7 @@ e_start_row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6646,7 +6646,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -6661,7 +6661,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 		MessageBox(0,"unknown error of archive read 1","",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	DWORD
 		time_eplased,
 		time_start = GetCurrentTime(),
@@ -6675,7 +6675,7 @@ bool Holesski3_in_operative_memory(char * fn_min_sq_mat, char * fn_Lt, char * di
 	{
 		for(long j = 0; j < rows; j++)
 		{
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			time_current = GetCurrentTime();
 			time_eplased = time_current - time_pre_current;
 			time_pre_current = time_current;
@@ -6886,7 +6886,7 @@ e_start__row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -6955,7 +6955,7 @@ e_start__row_j:
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7099,7 +7099,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7114,7 +7114,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,"unknown error of archive read 1","",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	DWORD 
 		time_eplased,
 		time_start = GetCurrentTime(),
@@ -7153,7 +7153,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet
@@ -7219,7 +7219,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7271,7 +7271,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7318,7 +7318,7 @@ bool LUP_in_operative_memory(const char * fn_min_sq_mat, const char * fn_L, cons
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7382,7 +7382,7 @@ bool InverseProblem_Solving (bool to_print, const char * fn_operator_transponed,
 		MessageBox(0,str,"",0);
 		return false;
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -7603,7 +7603,7 @@ bool InverseProblemSolving_(char * fn_operator_wav, vector<double> & t, vector<d
 		{
 			MessageBox(0,str,"",0);
 		}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet 
@@ -7949,7 +7949,7 @@ void DoMyMethod2(FILE * description,
 		
 	printf("The matrix is filled!!!\n");
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (!CheckMyLicense()) return;
 #endif
         
@@ -8342,7 +8342,7 @@ void DoMyMethod3(int type, // тип прямой задачи
 
 		
 	printf("The matrix is filled!!!\n");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (!CheckMyLicense()) return;
 #endif
 
@@ -8729,7 +8729,7 @@ void DoMyMethod2W(FILE * description,
 	}
 		
 	printf("The matrix is filled!!!\n");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (!CheckMyLicense()) return;
 #endif
 	bool to_fill_matrix_2 = to_fill_matrix;
@@ -9420,7 +9420,7 @@ void DoMyMethod3W(int type, // тип прямой задачи
 
 		
 	printf("The matrix is filled!!!\n");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (!CheckMyLicense()) return;        
 #endif
 	// Грид по размеру геологической структуры
@@ -9759,7 +9759,7 @@ void LoadParameters (MyMethodsData& mmd)
 			{
 				MessageBox(0,str,"",0);
 			}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet 
@@ -9843,7 +9843,7 @@ void LoadParameters (MyMethodsData3& mmd)
 			{
 				MessageBox(0,str,"",0);
 			}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			catch (CException* pe)
 			{
 				// catch errors from WinINet 
@@ -9869,7 +9869,7 @@ void LoadParameters (MyMethodsData3& mmd)
 	}
 }
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 {
 	char buff[BUFF_SIZE];
@@ -9892,7 +9892,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -10062,7 +10062,7 @@ void SparseStructureToMetafile(char * fn_spm, char * fn_emf)
 		{
 			MessageBox(0,str,"",0);
 		}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		catch (CException* pe)
 		{
 			// catch errors from WinINet 
@@ -10114,7 +10114,7 @@ void SparseStructureToSurferGrid(const char * fn_spm, char * fn_grd)
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -10185,7 +10185,7 @@ void SparseStructureToSurferGrid(const char * fn_spm, char * fn_grd)
 	{
 		MessageBox(0,str,"",0);
 	}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	catch (CException* pe)
 	{
 		// catch errors from WinINet 
@@ -11978,7 +11978,7 @@ bool ReadProfileFile(
 printf("ReadProfileFile sz_path_to_file = %s, current_directory = %s\n", sz_path_to_file, current_directory);
 
 	ReadCellFile(NULL, sz_path_to_file, 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		NULL,
 #else
 		current_directory,
@@ -12203,7 +12203,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		fclose(stream);
 	}
 	//**********************************************
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (!CheckMyLicense()) return false;
 #endif
 	//##############################################################
@@ -12273,7 +12273,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		if (vvvvkp.size() > 0)
 			if (vvvvkp[0].size() > 0)
 				prof_interval.i2 = vvvvkp[0][0].size()-1;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		prof_interval.layer = NULL;
 		SurfDoc * doc = NULL;
 		if (p_auto_build_profile)
@@ -13521,7 +13521,7 @@ bool BuildingProfile_old(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 							printf("can not open file: \n%s\n", lpstrFile);
 							ErrorPrint("fopen");
 						}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 						static KohonenDlg * khd = new KohonenDlg(vX, vY, vZ, MM, filename, true);		// ...right after the dialog is closed?
 
 						if (khd != NULL) delete khd;
@@ -14192,7 +14192,7 @@ printf("r = %u rows = %d\n", r, rows);
 					}
 				}
 			}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			static KohonenDlg * khd = new KohonenDlg(vX, vY, vZ, MM, filename, true);		// ...right after the dialog is closed?
 
 			if (khd != NULL) delete khd;
@@ -14219,7 +14219,7 @@ printf("r = %u rows = %d\n", r, rows);
 		//size_t end_window_len		= 200;
 		//size_t step_vindow_len	= 100;
 #endif
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		if (!CheckMyLicense())
 		{
 			start_window_len = rows+rand();
@@ -14988,7 +14988,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		fclose(stream);
 	}
 	//**********************************************
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (!CheckMyLicense()) return false;
 #endif
 	//##############################################################
@@ -15069,7 +15069,7 @@ bool BuildingProfile(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 		if (vvvvkp.size() > 0)
 			if (vvvvkp[0].size() > 0)
 				prof_interval.i2 = vvvvkp[0][0].size()-1;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		prof_interval.layer = NULL;
 		SurfDoc * doc = NULL;
 		if (p_auto_build_profile)
@@ -15149,7 +15149,7 @@ bool BuildingProfile2(vector<vector<vector<vert_korr_points> > >& vvvvkp,
 				// а сразу все профили в функции UseWholeDirectory
 				//vector<vector<korr_point> > vvkp;
 				//vvkp.clear();
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #if MANY_COLLECTIONS_ON_EACH_COL
 				Collection *pcollection = NULL;
 				if (p_auto_build_profile)
@@ -16305,7 +16305,7 @@ void LocalsMaker(
 			double naklon = r_/delta_t;
 
 			int ans = IDYES;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			if (false)
 			{
 				WinPlot(X,in, i1, i2);
@@ -16472,7 +16472,7 @@ void SticksMaker(
 			double naklon = r_/delta_t;
 
 			int ans = IDYES;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			if (false)
 			{
 				WinPlot(X,in, i1, i2);
@@ -16547,7 +16547,7 @@ void SticksMaker(
 		}
 	}
 }
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #define COLLEC_TION FastCollection
 #endif
 
@@ -17082,7 +17082,7 @@ void DoVerticalAutoCorrelation(int shoulder,// = 50;// плечо -  длина 
 		reverse1, reverse2);*/
 }
 void DoVerticalCorrelation(	int wlen,// = 100;//длина окна корреляции
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 						   Collection * pcollection,
 #else
                            void * pcollection,
@@ -17162,7 +17162,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 		if (current_profile_number < profile_intervals.size())
 			current_profile_interval = &profile_intervals[current_profile_number];
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		COLLEC_TION * pcurrent_fast_collection = NULL;
 
 		CPoint3 pt;
@@ -17209,7 +17209,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 		}
 		printf("try to open file %s\n", file_dat);
 		dat = fopen(file_dat, "wt");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		if (pcollection)
 		{
 			COLLEC_TION current_fast_collection;
@@ -17277,7 +17277,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 						}
 						printf("try to open file %s\n", file_dat);
 						dat = fopen(file_dat, "wt");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 						if (pcollection)
 						{
 							COLLEC_TION current_fast_collection;
@@ -17406,7 +17406,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 						(vkp_0.vkp[ind+1].korr_k2 < vkp_0.vkp[ind].korr_k2 && vkp_0.vkp[ind-1].korr_k2 < vkp_0.vkp[ind].korr_k2)*/
 						)
 					{
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 						if (pcurrent_fast_collection)
 						{
 							COLORREF color = 0;
@@ -17434,7 +17434,7 @@ void DoVerticalCorrelation(	int wlen,// = 100;//длина окна коррел
 
 
 		printf("\n");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 		if (pcurrent_fast_collection)
 			pcurrent_fast_collection->InitObjectList();
 #endif
@@ -17727,7 +17727,7 @@ void BuildGrid(char * file_grd,
 			   vector<double> &vZ,
 			   vector<double> &vK,
 			   double xSize, double ySize, double max_glubina,
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
                Collection * pcollection
 #else
                void * pcollection
@@ -17740,7 +17740,7 @@ void BuildGrid(char * file_grd,
 //	if (current_profile_number < profile_intervals.size())
 //		current_profile_interval = &profile_intervals[current_profile_number];
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	COLLEC_TION * pcurrent_fast_collection = NULL;
 
 	CPoint3 pt;
@@ -17831,7 +17831,7 @@ void BuildGrid(char * file_grd,
 		*p = '_';
 	}*/
 	printf("try to open file %s\n", file_grd);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (pcollection)
 	{
 		COLLEC_TION current_fast_collection;
@@ -17906,7 +17906,7 @@ if (pcurrent_fast_collection)
 
 
 	printf("\n");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (pcurrent_fast_collection)
 		pcurrent_fast_collection->InitObjectList();
 #endif
@@ -17918,7 +17918,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 			   short value_type,// 1 - korr_k;  // коэффициент горизонтальной корреляции
 								// 2 - korr_k2; // коэффициент вертикальной корреляции с использованием базового отрезка
 								// 3 - korr_k3; // коэффициент вертикальной автокорреляции
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
                Collection * pcollection,
 #else
                void * pcollection,
@@ -17937,7 +17937,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 	if (current_profile_number < profile_intervals.size())
 		current_profile_interval = &profile_intervals[current_profile_number];
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	COLLEC_TION * pcurrent_fast_collection = NULL;
 
 
@@ -17985,7 +17985,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 		*p = '_';
 	}
 	printf("try to open file %s\n", file_grd);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (pcollection)
 	{
 		COLLEC_TION current_fast_collection;
@@ -18085,7 +18085,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 					{
 						*p = '_';
 					}
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 					if (pcollection)
 					{
 						COLLEC_TION current_fast_collection;
@@ -18185,7 +18185,7 @@ void BuildGrid(short crd_type,// 0 - x, 1 - y, 2 - profile_len
 
 
 	printf("\n");
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (pcurrent_fast_collection)
 		pcurrent_fast_collection->InitObjectList();
 #endif

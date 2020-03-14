@@ -1,7 +1,9 @@
 #pragma once
 #include "Primitive3D.h"
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "Object.h"
 #include "ObjectList.h"
+#endif
 #include "../../array/src/vect.h"
 
 class FastCollection :

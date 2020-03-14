@@ -7,7 +7,7 @@
 // MapWnd.h : header file
 //
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <windows.h>
 #else
 #include "mywindows.h"
@@ -18,7 +18,7 @@
 
 class AutoBuildProfileWnd /*: public CWnd*/
 {
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc( HWND hwnd,
 		UINT uMsg, WPARAM wParam, LPARAM lParam);
 	HWND hWnd;
@@ -57,7 +57,7 @@ public:
 
 // Implementation
 public:
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void Invalidate();
 #endif
 	virtual ~AutoBuildProfileWnd();
@@ -82,7 +82,7 @@ private:
 	// Generated message map functions
 protected:
 //	//{{AFX_MSG(CMapWnd)
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void OnPaint(HWND hwnd);
 #endif
 //	//}}AFX_MSG

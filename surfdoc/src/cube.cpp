@@ -3,11 +3,11 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "SurfDoc.h"
 #endif
 //#include "raporto.h"
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "colormap.h"
 #include "DrawScene.h"
 #include "../../winplot/src/winplot.h"
@@ -19,7 +19,7 @@
 #include "./cube.h"
 #include "./iso.h"
 //#include "errorexit.h"
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "prsht.h"
 #endif
 
@@ -35,13 +35,13 @@ extern bool getNorm(double v1[3], double v2[3], double out[3]);
 
 extern HINSTANCE hInst;   // текущий экземпляр
 //Cube4D::draw_mode Cube4D::s_draw_mode = Cube4D::draw_mode::one_isosurface;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 Cube4D::draw_mode Cube4D::s_draw_mode = Cube4D::draw_mode::many_isosurfaces;
 #endif
 SSaveProfData Cube4D::sprData;
 
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "../../wintools/src/project.h"
 #include "../../wintools/src/win32_map_views.h"
 #endif
@@ -51,7 +51,7 @@ Cube4D::Cube4D()
 	Init();
 	OnCreate();
 }
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 Cube4D::Cube4D(SurfDoc * pSurfDoc)
 {
 	Init();
@@ -66,7 +66,7 @@ Cube4D::~Cube4D()
 }
 void Cube4D::OnCreate(void)
 {
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	this->m_object_type = Object::object_type::cube4d;
 	this->m_object_version = 2;
 	this->m_max_object_version = 2;
@@ -75,7 +75,7 @@ void Cube4D::OnCreate(void)
 void Cube4D::Init()
 {
 //	this->m_izolines.OnCreate();
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	m_nColormap			= 0;
 	m_bInverseColormap	= false;
 	m_bUseColormap		= true;
@@ -85,7 +85,7 @@ void Cube4D::Init()
 	vQuadCutting.OnCreate(0);
 #endif
 	vxyz.OnCreate(0);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	APalette::InitPalette(&this->m_palette, this->m_nColormap);
 #endif
 #if !CUBE4D_AS_PRIMITIVE
@@ -135,7 +135,7 @@ void Cube4D::Init()
 }
 void Cube4D::Init(const Cube4D &ob)
 {
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	m_palette			= ob.m_palette;
 	m_nColormap			= ob.m_nColormap;
 
@@ -371,7 +371,7 @@ printf("this->lattice.grid4Section.vMin = %f\n", this->lattice.grid4Section.vMin
 	//this->m_min_isolevel = this->lattice.grid4Section.vMin;
 	//this->m_max_isolevel = this->lattice.grid4Section.vMax;
 	//this->m_step_isolevel = (this->m_max_isolevel - this->m_min_isolevel) / this->m_nIsolevels;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	this->ScaleIsolevels();
 	this->UpdateIsolevels(true);
 #endif
@@ -452,7 +452,7 @@ printf("this->lattice.grid4Section.vMin = %f\n", this->lattice.grid4Section.vMin
 	//this->m_min_isolevel = this->lattice.grid4Section.vMin;
 	//this->m_max_isolevel = this->lattice.grid4Section.vMax;
 	//this->m_step_isolevel = (this->m_max_isolevel - this->m_min_isolevel) / this->m_nIsolevels;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	this->ScaleIsolevels();
 	this->UpdateIsolevels(true);
 #endif
@@ -487,7 +487,7 @@ void gScaleCubeIsolevels (double span, double& step)
 }
 
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 void Cube4D::ScaleIsolevels()
 {
 printf("Cube4D::ScaleIsolevels()\n");
@@ -793,7 +793,7 @@ int Cube4D::Produce3DSurferGrid7(double plane[4], SURFER7GRIDSECTION & grid)
 	}
 	return 0;
 }
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 void Cube4D::Projection(Karotazh& karotazh)
 {
 	//if (well
@@ -905,7 +905,7 @@ BOOL Cube4D::GetPoint(int iz, int iy, int ix, CPoint4 *pt)
 
 
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 HTREEITEM Cube4D::AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s)
 {
 printf("Cube4D::AddItem_ToTree(HTREEITEM h1 = 0x%08x)\t\"%s\"\n", h1, this->GetName().c_str());
@@ -941,7 +941,7 @@ bool Cube4D::SaveAs()
 	file[0] = '\0';
 	strcpy(file, this->name.c_str());
     if (SaveFileDlg(
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
                 this->m_pSurfDoc ? this->m_pSurfDoc->hSurfWnd :
 #endif
                 NULL, file,
@@ -962,7 +962,7 @@ bool Cube4D::SaveAs()
 			status = SaveAsVTK(file);
 			break;
 		case 3:
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			status = SaveAsDxf_OfOneIsoSurface(file);
 #endif
 			break;
@@ -1105,7 +1105,7 @@ bool Cube4D::SaveAsSurferClices(int nProjection)
 	char lpstrFile[4098];	
     char my_name[1024];
     sprintf(my_name,
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
             this->GetName().c_str()
 #else
             this->name.c_str()
@@ -1247,7 +1247,7 @@ bool Cube4D::SaveAsSurferClicesYZ(const char * outfile, Grid & grid, double y_t_
 	return true;
 }
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 bool Cube4D::SaveAsDxf_OfOneIsoSurface(const char * outfile)
 {			
 	bool view = false;
@@ -1273,7 +1273,7 @@ bool Cube4D::SaveAsDxf_OfOneIsoSurface(const char * outfile)
 
 	double mu = (m_isolevel - this->lattice.grid4Section.vMin)/(this->lattice.grid4Section.vMax - this->lattice.grid4Section.vMin);
 	int alpha = int(255.0);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	COLORREF c = this->m_palette.GetColor(mu);		
 #else
     COLORREF c = 0;
@@ -1312,7 +1312,7 @@ bool Cube4D::SaveAsGrid_OfOneIsoSurface(const char * outfile)
 
 	double mu = (m_isolevel - this->lattice.grid4Section.vMin)/(this->lattice.grid4Section.vMax - this->lattice.grid4Section.vMin);
 	int alpha = int(255.0);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	COLORREF c = this->m_palette.GetColor(mu);		
 #else
     COLORREF c = 0;
@@ -1825,7 +1825,7 @@ void Cube4D::DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view
 
 */
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 void Cube4D::Drawing()
 {
 	printf("Cube4D::Drawing()\n");
@@ -2062,7 +2062,7 @@ void Cube4D::DrawQuadsNumbers()
 
 #endif
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 COLORREF Cube4D::GetColor(double v)
 {
 	COLORREF surfColor;
@@ -4184,7 +4184,7 @@ Cube4D& Cube4D::operator=(const Cube4D& ob)
 {
 	if (this == &ob)
 		return *this;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	dynamic_cast<Object*>(this)->Init(ob);
 #else
 #endif
@@ -4198,7 +4198,7 @@ Cube4D& Cube4D::operator=(const Cube4D& ob)
 
 Cube4D::Cube4D(const Cube4D &ob)
 {
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	dynamic_cast<Object*>(this)->Init(ob);
 #else
 #endif
@@ -4248,7 +4248,7 @@ bool Cube4D::UpdateExtremums()
 	return !start;
 }
 #else
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 bool Cube4D::UpdateExtremums()
 {
 	m_ptMin.x = m_ptMax.x = this->lattice.grid4Section.xLL;
@@ -4463,7 +4463,7 @@ bool Cube4D::GetQuadIndex(
 
 #endif
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 DWORD Cube4D::Serialize(Archive& ar)
 {
 	printf("Cube4D::Serialize(Archive& ar)\n");

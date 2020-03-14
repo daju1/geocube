@@ -30,7 +30,7 @@
 #ifndef DIME_LAYER_H
 #define DIME_LAYER_H
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <windows.h> // for COLORREF
 #endif
 

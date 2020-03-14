@@ -10,8 +10,9 @@
 #endif // _MSC_VER > 1000
 
 #include "../../surfdefs.h"
-
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "Object.h"
+#endif
 #include "../../array/src/Vector.h"
 #include "../../array/src/vect.h"
 #include "../../tools/src/filedlg.h"

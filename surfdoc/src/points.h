@@ -4,7 +4,7 @@
 #define __POINTS_H__
 
 #include "../../surfdefs.h" // define OG_DOUBLE_PRECISION
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #else
 #include "mywindows.h"
 #endif

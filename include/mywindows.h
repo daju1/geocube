@@ -72,7 +72,7 @@ typedef const char* LPCSTR;
 typedef const wchar_t* LPCWSTR;
 typedef char* PSTR, *LPSTR;
 typedef wchar_t* LPWSTR, *PWSTR;
-#if !defined (_MSC_VER)
+#if !defined (_MSC_VER) && !defined (__MINGW32__)
 typedef HANDLE HWND;
 typedef HANDLE HDC;
 typedef HANDLE HINSTANCE;
@@ -128,8 +128,8 @@ typedef struct tagLOGFONTW {
   BYTE  lfPitchAndFamily;
   WCHAR lfFaceName[LF_FACESIZE];
 } LOGFONTW, *PLOGFONTW, *NPLOGFONTW, *LPLOGFONTW;
-
-/*#ifdef _UNICODE
+#if 0
+//#ifdef _UNICODE
         #define _T(x)      L ## x
         #define LPTSTR LPWSTR
         #define LPCTSTR LPCWSTR
@@ -137,7 +137,8 @@ typedef struct tagLOGFONTW {
         #define TCHAR WCHAR
 //#define __TEXT(q) L##q
 #define __TEXT(q) q
-#else /* _UNICODE */
+//#else /* _UNICODE */
+#endif
         #define _T(x)      x
         #define LPTSTR LPSTR
         #define LPCTSTR LPCSTR
@@ -147,9 +148,9 @@ typedef struct tagLOGFONTW {
 //#endif /* _UNICODE */
 
 
-/*#if defined( _UNICODE) || defined (UNICODE)
-#define stprintf_s _snwprintf
-#else*/
+//#if defined( _UNICODE) || defined (UNICODE)
+//#define stprintf_s _snwprintf
+//#else
 #define stprintf_s sprintf_s
 //#endif
 
@@ -253,7 +254,7 @@ BOOL DeleteFileA(
 #ifndef _LDBL_RADIX
 #define _LDBL_RADIX 2
 #endif
-#if !defined (_MSC_VER)
+#if !defined (_MSC_VER) && !defined (__MINGW32__)
 int sprintf_s(char* buffer, size_t sizeOfBuffer, const char* format, ...);
 #if 0
 template<size_t sizeOfBuffer>
@@ -273,7 +274,8 @@ int MessageBox(void* /*hwnd*/, const char * title, const char * msg, int /*flags
 
 int AfxMessageBox(const char * msg );
 
-
+#define WINGDIAPI 
+#define APIENTRY
 // From gl.h
 /*
  * Datatypes

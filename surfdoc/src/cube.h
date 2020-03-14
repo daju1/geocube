@@ -10,7 +10,7 @@
 #endif // _MSC_VER > 1000
 
 #include "palette.h"
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "ObjectList.h"
 #endif
 #include "../../array/src/vect.h"
@@ -18,7 +18,7 @@
 #include "Grid.h"
 #include "Primitive3D.h"
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 class SurfDoc;
 #endif
 #define CUBE4D_AS_PRIMITIVE 0
@@ -28,12 +28,12 @@ class Cube4D
 #if CUBE4D_AS_PRIMITIVE
 	: public Primitive3D <CPoint4>
 #else
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
         : public Object
 #endif
 #endif
 {
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	APalette m_palette;
 	UINT m_nColormap;
 
@@ -43,7 +43,7 @@ class Cube4D
 #if CUBE4D_AS_PRIMITIVE
 	double  m_vMax, m_vMin;
 #endif
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void DrawingOfManyIsoSurfaces();
 	void DrawingOfOneIsoSurface();
 	void DrawingAsScatterPlot();
@@ -56,7 +56,7 @@ class Cube4D
 
 public:
 	//void DrawGDIplus(Graphics ** select_buffer, Graphics& graphics, map_view * v, Profile3D * on);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void ScaleIsolevels();
 	void UpdateIsolevels(bool);
 #endif
@@ -91,13 +91,13 @@ public:
 	bool draw_as_contours;
 	bool draw_as_vol_render;
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #else
         std::string name;
 #endif
 
 protected:
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	// Массив описаний страниц блокнота
 	PROPSHEETPAGE   psheetPage[Cube4D_npages];
 
@@ -133,7 +133,7 @@ public:
 #if CUBE4D_AS_PRIMITIVE
 	bool MakeGridSection(LPSURFER7GRID4SECTION grid4Section);
 #else
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void SetLayer(const Layer* layer)
 	{
 		this->SetLayer_NonVirtual(layer);
@@ -179,13 +179,13 @@ public:
 #endif
 	void InitThin(LPSURFER7GRID4SECTION grid4Section, COLORREF color);
 	void Init(LPSURFER7GRID4SECTION grid4Section, COLORREF color);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	virtual HTREEITEM AddItem_ToTree(HWND hwndTV, HTREEITEM h1, const char * s = "");
 	void FillContextMenu(HMENU& hMenu);
 #endif
 	bool SaveAs3DGrid(const char * file);
 	bool SaveAsVTK(const char * file);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	bool SaveAsDxf_OfOneIsoSurface(const char * outfile);
 #endif
 	bool SaveAsGrid_OfOneIsoSurface(const char * outfile);
@@ -205,13 +205,13 @@ public:
 
 	Cube4D& operator=(const Cube4D& ob);
 	Cube4D (const Cube4D& ob);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	virtual void PropertiesDialog();
 	COLORREF GetColor(double z);
 #endif
 	void DrawQuadsNumbers();
         Cube4D();
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	Cube4D(SurfDoc * pSurfDoc);
 #endif
 	BOOL GetPoint(int iz, int iy, int ix, CPoint4 *pt);
@@ -247,7 +247,7 @@ public:
 		int& ix, int& iy, int& iz);
 
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	virtual bool UpdateExtremums();
 #endif
 	void Zoom(double zoomX, double zoomY, double zoomZ, double x_mean, double y_mean, double z_mean);
@@ -263,7 +263,7 @@ public:
 	// первый вложенный вектор = массив для каждой клетки текущей поверхности
 	// второй вложенный вектор = массив точек сечения плоскостью текущей клетки текущей поверхности
         vect<VXYZ_VECTOR <VXYZ_VECTOR <CPoint3> > > vxyz;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	// самый внешний вект = контейнер для характеристик каждой поверхности
 	// вложенный вектор = массив для каждой клетки текущей поверхности
 	// структура QuadCutting, характеризуящая каждую клетку 
@@ -280,14 +280,14 @@ public:
 	void Produce3DSurferGrid7_YZ(double cut_plane_d[4], SURFER7GRIDSECTION & gridSection);
 	void Produce3DSurferGrid7_XZ(double cut_plane_d[4], SURFER7GRIDSECTION & gridSection);
 	void Produce3DSurferGrid7_XY(double cut_plane_d[4], SURFER7GRIDSECTION & gridSection);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	void Projection(Karotazh& karotazh);
 #endif
 	bool Projection(CPoint3 & pt, double & v);
 	
 		
 	void OnCreate(void);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	virtual bool IsSelected(CPoint3 selected_view_pt, 
 			double search_radius,
 			WhatSelected& ws)

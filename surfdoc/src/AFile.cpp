@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AFile.h"
 #include "../../tools/src/errorexit.h"
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_VERSION)
 AFile::AFile(void)
 {
 	m_hFile = NULL;

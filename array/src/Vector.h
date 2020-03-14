@@ -6,13 +6,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 //#include <windows.h>
 #else
 #include "mywindows.h"
 #endif
 #include <assert.h>
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 class Archive;
 #else
 #include "../../surfdoc/src/Archive.h"
@@ -636,7 +636,7 @@ template <class T> Archive& operator >>(Archive& ar, Vector<T>& v)
 	}*/
 	// число элементов вектора
 	int len;
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	ar >> len;
 #else
     ar.Read((unsigned char *)&len, sizeof(int));

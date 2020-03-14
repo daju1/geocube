@@ -376,7 +376,7 @@ struct Grid4
 Archive& operator <<(Archive& ar, Grid4& ob);
 Archive& operator >>(Archive& ar, Grid4& ob);
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 typedef HWND Widget;
 #else
 typedef QWidget* Widget;

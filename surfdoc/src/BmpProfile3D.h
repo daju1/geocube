@@ -9,7 +9,9 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "Object.h"
+#endif
 #include "points.h"
 #include "../../array/src/vect.h"
 #include "Bmp3D.h"

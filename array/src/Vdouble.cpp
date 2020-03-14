@@ -7,7 +7,7 @@
 #include "SEQUENCE.H"
 #include "wav.h"
 
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #else
 #include "mywindows.h"
 #endif

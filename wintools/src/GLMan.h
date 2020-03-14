@@ -8,6 +8,8 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
+
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <gl\gl.h>
 #include <gl\glu.h>
 //#include "glut.h"
@@ -63,5 +65,6 @@ public:
 	virtual ~CGLMan();
 
 };
+#endif
 
 #endif // !defined(AFX_GLMAN_H__CDFE1CE9_7436_45F0_A77A_DB412FC1C03F__INCLUDED_)

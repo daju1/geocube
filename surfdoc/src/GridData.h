@@ -1,6 +1,8 @@
 #pragma once
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "Object.h"
 #include "ObjectList.h"
+#endif
 #include "points.h"
 #include "ThePoint3D.h"
 struct CubeSize;

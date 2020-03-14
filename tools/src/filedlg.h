@@ -1,6 +1,6 @@
 #ifndef FILE_DLG_INCLUDED
 #define FILE_DLG_INCLUDED
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include <windows.h>
 #else
 #include <mywindows.h>
@@ -29,7 +29,7 @@ public:
 
 };
 HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData);
-#if defined (_MSC_VER) && !defined (QT_PROJECT)
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 HRESULT OpenFileDlg(HWND hWnd, const TCHAR filter[], LPTSTR lpstrFile = NULL);
 HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex);
 

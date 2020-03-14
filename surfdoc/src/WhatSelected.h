@@ -4,7 +4,9 @@
 #pragma once
 class ObjectList;
 //class Object;
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 #include "Object.h"
+#endif
 #include "points.h"
 
 class WhatSelected
