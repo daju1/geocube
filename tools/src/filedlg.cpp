@@ -326,22 +326,23 @@ HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nF
 	//===============================================================
 	//===============================================================
 	//===============================================================
-	char *p, ext[16];
-	p = filter;
+	const char *_p;
+	char ext[16];
+	_p = filter;
 	for (iext = 0; iext < 2*((int)ofn.nFilterIndex-1)+1; iext++)
 	{
-		p = strchr(p,'\0');
-		p = p+1;
+		_p = strchr(_p,'\0');
+		_p = _p+1;
 	}
-	if (p) p = p+1;
-	if (p && strcmp(p,".*") != 0)
-		strcpy(ext,p);
+	if (_p) _p = _p+1;
+	if (_p && strcmp(_p,".*") != 0)
+		strcpy(ext,_p);
 	else
 		strcpy(ext,"\0");
 	//===============================================================
 	//===============================================================
 	//===============================================================
-	p = strrchr(file,'.');
+	char * p = strrchr(file,'.');
 	if (strcmp(ext, "\0") != 0)
 	{
 		if (p)
@@ -394,13 +395,13 @@ e_Exit:
 HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex)
 {
 /*  Example:
- *			TCHAR filter[] =
+ *TCHAR filter[] =
  *                          TEXT("Bitmap files (*.bmp)\0*.bmp\0")
  *                          TEXT("Metafiles (*.emf)\0*.emf\0")
  *                          TEXT("All Files (*.*)\0*.*\0");
  */
     HRESULT hr = S_OK;
-	int iext;
+    int iext;
     SSavePlotData spdData;
     OPENFILENAME ofn;
 
@@ -537,13 +538,13 @@ HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nF
                     sprintf( s, "GetOpenFileName failed with %x", dwErr );
                     MessageBox( hWnd, s, "TexWin", MB_OK | MB_SYSTEMMODAL );
                 }
-				hr = S_FALSE;
+                hr = S_FALSE;
                 goto e_Exit;
             }
         }
         else  // just a cancel, return
         {
-			hr = S_FALSE;
+            hr = S_FALSE;
             goto e_Exit;
         }
     }
@@ -554,22 +555,23 @@ HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nF
 	//===============================================================
 	//===============================================================
 	//===============================================================
-	char *p, ext[16];
-	p = filter;
+	const char *_p;
+	char ext[16];
+	_p = filter;
 	for (iext = 0; iext < 2*((int)ofn.nFilterIndex-1)+1; iext++)
 	{
-		p = strchr(p,'\0');
-		p = p+1;
+		_p = strchr(_p,'\0');
+		_p = _p+1;
 	}
-	if (p) p = p+1;
-	if (p && strcmp(p,".*") != 0)
-		strcpy(ext,p);
+	if (_p) _p = _p+1;
+	if (_p && strcmp(_p,".*") != 0)
+		strcpy(ext,_p);
 	else
 		strcpy(ext,"\0");
 	//===============================================================
 	//===============================================================
 	//===============================================================
-	p = strrchr(file,'.');
+	char * p = strrchr(file,'.');
 	if (strcmp(ext, "\0") != 0)
 	{
 		if (p)

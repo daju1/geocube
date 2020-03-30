@@ -172,19 +172,19 @@ struct anten_direction
 	{
 		ax = 0.0;
 		ay = 0.0;
-		az = 0.0;	
+		az = 0.0;
 	}	
 	anten_direction(double _ax, double _ay, double _az)
 	{
 		ax = _ax;
 		ay = _ay;
-		az = _az;	
+		az = _az;
 	}
 	void Init(double _ax, double _ay, double _az)
 	{
 		ax = _ax;
 		ay = _ay;
-		az = _az;	
+		az = _az;
 	}
 	void Norm()
 	{

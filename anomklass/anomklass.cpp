@@ -32,7 +32,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		int delim = ',';
 
 		char* filename_result = new char[256];
-		ReadCellFile(NULL, szPath, filename_result, pcells_result, pnames_of_colomns_result, delim );
+		ReadCellFile(NULL, szPath, NULL, filename_result, pcells_result, pnames_of_colomns_result, delim );
 		//блок чтения файла
 		//##############################################################
 		int rows_result = pcells_result->size();
@@ -62,7 +62,7 @@ printf("cols_result = %d\n", cols_result);
 			int delim = ',';
 
 			char* filename_sources = new char[256];
-			ReadCellFile(NULL, szPath, filename_sources, pcells_sources, pnames_of_colomns_sources, delim );
+			ReadCellFile(NULL, szPath, NULL, filename_sources, pcells_sources, pnames_of_colomns_sources, delim );
 			//блок чтения файла
 			//##############################################################
 			int rows_sources = pcells_sources->size();

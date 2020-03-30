@@ -2,7 +2,7 @@
 #include "StdAfx.h"
 #include "generic.h"
 #include "raporto.h"
-
+#include "../../tools/src/errorexit.h"
 //typedef unsigned short WORD;
 //typedef unsigned int   DWORD;
 #include "GraphsDoc.h"
@@ -14,7 +14,7 @@ extern char szPath[];
 extern double datenum(int y, int mo, int d, int h, int mi, int s, int milli);
 extern void datevec(double dn, int& y, int& mo, int& d, int& h, int& mi, int& s, int& milli);
 extern void datevec(double dn, SYSTEMTIME& tm);
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
 
 // ярпсйрспю, йнрнпюъ охьеряъ б яюлне мювюкн тюикю х яксфхр дкъ нопедекемхъ бепяхх тюикю, пюглепю ьюойх, уюпюйрепмни дкъ щрни бепяхх
 struct VARIATIONS_FILE_VERSION

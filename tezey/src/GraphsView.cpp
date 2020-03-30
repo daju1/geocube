@@ -9,13 +9,14 @@
 #include "GraphsView.h"
 #include "XYZBuffer.h"
 #include "Graph.h"
+#include "../../tools/src/errorexit.h"
 
 #ifdef COMMON_RAPORT
 extern void WriteRaportoB(LPCTSTR s);
 #else
 extern void WriteRaportoA(LPCTSTR file, LPCTSTR s);
 #endif
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
 
 extern bool g_btoDisplayWavelet;
 

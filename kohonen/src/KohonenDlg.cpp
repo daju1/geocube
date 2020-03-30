@@ -1486,7 +1486,7 @@ DWORD KohonenDlg::GetWinners(KohonenDlg * me, float * in)
 	return 0;
 }
 extern char directory[];
-extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
+//extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex);
 
 void KohonenDlg::ResultsSaveAs()
 {

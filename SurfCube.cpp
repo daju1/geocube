@@ -573,8 +573,8 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 #include "./../array/src/slau.h"
 
 void Transponate(vector<sparse_row > & a, size_t cols, vector<sparse_row> & at);
-template <class T> bool StoreMatrix(char * filename, vector<T>& m, long cols);
-template <class T> void LoadMatrix(char * filename, vector<T>& m, long & cols);
+//template <class T> bool StoreMatrix(char * filename, vector<T>& m, long cols);
+//template <class T> void LoadMatrix(char * filename, vector<T>& m, long & cols);
 
 void test_min_sq_holesski()
 {

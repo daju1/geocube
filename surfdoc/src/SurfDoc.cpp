@@ -32,6 +32,7 @@
 #include "../../wintools/src/project.h"
 #include "../../lab/lab/labdoc.h"
 #include "../../wintools/src/listfun.h"
+#include "../../tools/src/errorexit.h"
 
 
 #include "../surfer_connect/mysurfer.h"
@@ -43,9 +44,9 @@ extern float **AllocFloatMat (int size1, int size2) ;
 extern void FreeFloatMat(float ** v);
 extern HINSTANCE hInst;   // текущий экземпляр
 extern LPCSTR colormaps[];
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
 extern char directory[];
-extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
+//extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex);
 extern char szPath[];
 
 SSaveProfData SurfDoc::sprData;
@@ -401,7 +402,7 @@ void SurfDoc::LoadSurfEngGeoElementMappingFile()
 
 		int delim = '\t';
 
-		if (1 == ReadCellFile(this->hSurfWnd, szPath, filename, pdata, pnames_of_colomns, delim ))
+		if (1 == ReadCellFile(this->hSurfWnd, szPath, NULL, filename, pdata, pnames_of_colomns, delim ))
 		{
 			if (pnames_of_colomns->size() >= 2)
 			{			
@@ -576,7 +577,7 @@ void SurfDoc::LoadSurfLithoGeoElementMappingFile()
 
 		int delim = '\t';
 
-		if (1 == ReadCellFile(this->hSurfWnd, szPath, filename, pdata, pnames_of_colomns, delim ))
+		if (1 == ReadCellFile(this->hSurfWnd, szPath, NULL, filename, pdata, pnames_of_colomns, delim ))
 		{
 			if (pnames_of_colomns->size() >= 2)
 			{			
@@ -6769,7 +6770,7 @@ to
 		cin >> param3_for_cube.slau_method;
 	}*/
 	
-	param3_for_surf.m_len_biss_type = griddata_3_param::len_biss_type::min_edges_len;
+	param3_for_surf.m_len_biss_type = griddata_3_param_len_biss_type_min_edges_len;
 	//param3_for_cube.m_len_biss_type = griddata_3_param::len_biss_type::min_edges_len;
 
 	int filter_grid_min_max_surf = 0;

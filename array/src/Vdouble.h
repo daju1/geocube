@@ -92,10 +92,10 @@ vdouble inline floor(const vdouble& ob);
 vdouble inline ceil(const vdouble& ob);
 
 vdouble inline linterp(const vdouble& x, const vdouble& y, vdouble& xx);
-bool inline hist(vdouble& v, vdouble&  n, vdouble& x);
-bool inline hist(vdouble& v, int N, vdouble&  n, vdouble& x);
-bool inline hist2(vdouble& v1, vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2);
-bool inline covar(vdouble& t,vdouble& v1, vdouble& v2,  vdouble& tcov, vdouble& cov);
+bool inline hist(const vdouble& v, vdouble& n, const vdouble& x);
+bool inline hist(const vdouble& v, const int N, vdouble& n, vdouble& x);
+bool inline hist2(const vdouble& v1, vdouble& v2,int n1, int n2, vdouble& n, vdouble& x1, vdouble& x2);
+bool inline covar(const vdouble& t, const vdouble& v1, const vdouble& v2, vdouble& tcov, vdouble& cov);
 
 Vector<bool> inline operator>(const vdouble& ob1, const vdouble& ob2);
 Vector<bool> inline operator>(const double& a, const vdouble& ob);
@@ -123,7 +123,7 @@ Vector<bool> inline operator!=(const vdouble& ob, const double& a);
 	
 vdouble inline fliplr(const vdouble& ob);
 
-void inline operator<<(vdouble& ob, const double& a);
+void inline operator<<(const vdouble& ob, const double& a);
 void inline operator>>(const double& a, vdouble& ob);
 
 #define VDOUBLE_MAX_DIMS				3
@@ -357,8 +357,8 @@ static vdouble append(const vdouble& ob, const double& a)
     friend vdouble inline ceil(const vdouble& ob);
 
     friend vdouble inline linterp(const vdouble& x, const vdouble& y, vdouble& xx);
-    friend bool inline hist(const vdouble& v, vdouble&  n, const vdouble& x);
-    friend bool inline hist(const vdouble& v, int N, vdouble&  n, vdouble& x);
+    friend bool inline hist(const vdouble& v, vdouble& n, const vdouble& x);
+    friend bool inline hist(const vdouble& v, const int N, vdouble&  n, vdouble& x);
     friend bool inline hist2(const vdouble& v1, const vdouble& v2,int n1, int n2, vdouble&  n, vdouble& x1, vdouble& x2);
     friend bool inline covar(const vdouble& t, const vdouble& v1, const vdouble& v2,  vdouble& tcov, vdouble& cov);
 
@@ -2463,7 +2463,7 @@ bool inline hist(const vdouble& v, vdouble&  n, const vdouble& x)
 	}
 	return true;
 }
-bool inline hist(const vdouble& v, int N, vdouble&  n, vdouble& x)
+bool inline hist(const vdouble& v, const int N, vdouble&  n, vdouble& x)
 {
 
 	double epsilon = 0.000001,

@@ -23,7 +23,7 @@ PROPSHEETPAGE   psheetPage[3];
 //////////////////////////////////////////////////////////////////////
 
 extern HINSTANCE hInst;
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
 
 
 
@@ -745,7 +745,7 @@ INT_PTR CALLBACK DlgProc2(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 				ReadCellFile(
 					lpCommonMeanFileDialog->hWnd, 
-					lpCommonMeanFileDialog->szFile, 
+					lpCommonMeanFileDialog->szFile, NULL,
 					lpCommonMeanFileDialog->filename, 
 					lpCommonMeanFileDialog->pcells, 
 					lpCommonMeanFileDialog->pnames_of_colomns, 

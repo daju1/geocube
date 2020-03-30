@@ -1,7 +1,7 @@
 #include "../StdAfx.h"
 #include "errorexit.h"
 #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
-void ErrorExit(LPCTSTR lpszFunction, bool toExitProcess) 
+void ErrorExit(const char * lpszFunction, bool toExitProcess) 
 {
 #define BUF_LEN 200
     TCHAR szBuf[BUF_LEN]; 
@@ -54,7 +54,7 @@ void ErrorPrint(LPCTSTR lpszFunction)
 
 }
 
-void ErrorExit(DWORD dwLastError, LPCTSTR lpszFunction, bool toExitProcess) 
+void LastErrorExit(DWORD dwLastError, LPCTSTR lpszFunction, bool toExitProcess) 
 { 
     TCHAR szBuf[BUF_LEN]; 
     LPVOID lpMsgBuf;
@@ -89,7 +89,7 @@ void ErrorPrint(LPCTSTR lpszFunction)
 {
 }
 
-void ErrorExit(DWORD dwLastError, LPCTSTR lpszFunction, bool toExitProcess)
+void LastErrorExit(DWORD dwLastError, LPCTSTR lpszFunction, bool toExitProcess)
 {
 }
 #endif

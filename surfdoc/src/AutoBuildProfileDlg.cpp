@@ -1802,45 +1802,68 @@ void GetPartOfData(double p_min, // 0.45
 	}
 }
 void GetPartOfData(int frec, // 1 2 .. 10 ...
-				   vector<double> & X,
-				   vector<double> & Y,
-				   vector<double> & Z, // альтитуда измерений - полёта самолёта
-				   vector<vector<anten_direction> > & A,
-				   vector<double> & vModul,
-				   vector<vector<double> > & v,
-				   
-				   vector<double> & pX,
-				   vector<double> & pY,
-				   vector<double> & pZ, // альтитуда измерений - полёта самолёта
-				   vector<vector<anten_direction> > & pA,
-				   vector<double> & pvModul,
-				   vector<vector<double> > & pv
-				   
-				   )
+                   vector<double> & X,
+                   vector<double> & Y,
+                   vector<double> & Z, // альтитуда измерений - полёта самолёта
+                   vector<vector<anten_direction> > & A,
+                   vector<double> & vModul,
+                   vector<vector<double> > & v,
+
+                   vector<double> & pX,
+                   vector<double> & pY,
+                   vector<double> & pZ, // альтитуда измерений - полёта самолёта
+                   vector<vector<anten_direction> > & pA,
+                   vector<double> & pvModul,
+                   vector<vector<double> > & pv
+
+                   )
 {
-	size_t cols = v.size();
-	pv.resize(cols);
-	pA.resize(3);
+   size_t cols = v.size();
+   pv.resize(cols);
+   pA.resize(3);
 
-	for (int i = 0; i < X.size(); i++)
-	{
-		if (i%frec == 0)
-		{
-			pX.push_back(X[i]);
-			pY.push_back(Y[i]);
-			pZ.push_back(Z[i]);
+   size_t X_size = X.size();
 
-			pvModul.push_back(vModul[i]);
-			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
-			{
-				pv[c].push_back(v[c][i]);
-			}
-			for (short a = 0; a < 3; a++)
-			{
-				pA[a].push_back(A[a][i]);
-			}
-		}
-	}
+   for (int i = 0; i < X_size; i++)
+   {
+      if (i%frec == frec / 2)
+      {
+         pX.push_back(X[i]);
+         pY.push_back(Y[i]);
+         pZ.push_back(Z[i]);
+
+         int j0 = i - frec/2;
+         if (j0 < 0)
+            j0 = 0;
+
+         int j1 = j0 + frec;
+         if (j1 >= X_size)
+            j1 = X_size - 1;
+
+         double meanModule = 0.0;
+         for (int j = j0; j < j1; ++j)
+         {
+            meanModule += vModul[j];
+         }
+         meanModule /= frec;
+
+         pvModul.push_back(meanModule);
+         for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+         {
+            double mean_v = 0.0;
+            for (int j = j0; j < j1; ++j)
+            {
+               mean_v += v[c][j];
+            }
+            mean_v /= frec;
+            pv[c].push_back(mean_v);
+         }
+         for (short a = 0; a < 3; a++)
+         {
+            pA[a].push_back(A[a][i]);
+         }
+      }
+   }
 }
 void SaveCubesAndSlices(const char * common_directory,
 						Grid4 *** cubes, MyMethodsData3 & mmd3, 
@@ -5270,7 +5293,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				vector<vector <long> > v_pInd;
 
 
-				size_t light_colomn_number = 0;										
+				size_t light_colomn_number = 0;
 
 				for (int c = c0; c < mmd3.cols; c++)
 				{
@@ -11769,8 +11792,7 @@ bool Lamp(int use_newton,
 bool AutoBuildProfileDlg0::OpenFileDialog(void)
 {
     HRESULT hr = S_OK;
-	
- 			
+
 	TCHAR filter[] =
 		TEXT("Comma separated files (*.csv)\0*.csv\0")
 		TEXT("Data files (*.dat*)\0*.dat\0")
@@ -11824,7 +11846,7 @@ bool AutoBuildProfileDlg0::OpenFileDialog(void)
 				strcpy(this->m_files_in_dir.szFileFilter, "*.txt");
 				break;
 			}
-            strcpy(file, ofn.lpstrFile + ofn.nFileOffset);
+			//strcpy(file, ofn.lpstrFile + ofn.nFileOffset);
 			strcpy(this->directory, ofn.lpstrFile);
 			if (ofn.nFileOffset > 1) this->directory[ofn.nFileOffset-1] = '\0';
 

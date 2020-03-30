@@ -19,7 +19,7 @@
 extern HINSTANCE hInst;   // текущий экземпляр
 extern int importFileForNNet(LPPOLYOTYFILEDLGDATA lpPolyotyDlgData, vector<vector<double> > *pvectors, vector<string> * pnames);
 extern char directory[255];
-extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
+//extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex);
 extern LRESULT CALLBACK DlgProcPolyoty( HWND hDlg, UINT uMsg,
                               WPARAM wParam, LPARAM lParam );
 

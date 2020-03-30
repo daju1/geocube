@@ -1,8 +1,9 @@
 #include "../StdAfx.h"
 #include "readfile.h"
+#include "errorexit.h"
 //#include "../datenum.h"
 extern HINSTANCE hInst;   // текущий экземпляр
-extern void ErrorExit(LPCTSTR lpszFunction, bool toExitProcess = false) ;
+//extern void ErrorExit(LPCTSTR lpszFunction, bool toExitProcess = false) ;
 
 int ReadInputFile(char * fname, vdouble& x, vdouble& y)
 {
@@ -1067,7 +1068,7 @@ void ParseLine(int iLine, char *szBuff, char *title, size_t bytes_line, Delimite
 		ncol++;
 	}
 }
-int ReadCellFile(HWND hWnd, char * fpath, char* current_directory, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, DelimiterData dd, unsigned int max_rows_to_read )
+int ReadCellFile(HWND hWnd, const char * fpath, char* current_directory, char* filename, vector<vector<cell> > *pvectors, vector<string> * pnames, DelimiterData dd, unsigned int max_rows_to_read )
 {
 	bool bUse_Header = true;
 
@@ -1086,7 +1087,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* current_directory, char* filenam
 			"ReadCellFile()", 0);
 		return 0;
 	}
-	char *p1, *p2, *p;
+	const char *p1, *p2, *p;
 	
 	char ext[255];
 	p = strrchr(fpath,'.');
@@ -1096,7 +1097,7 @@ int ReadCellFile(HWND hWnd, char * fpath, char* current_directory, char* filenam
 
 	if (p)
 	{
-		char * pp;
+		const char * pp;
 		// sscan year from filename
 		p1 = strrchr(fpath,'\\');
 		p2 = strrchr(fpath,'/');

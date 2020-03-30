@@ -15,6 +15,7 @@
 #include "../../commonOG.h"
 
 #include "../../surfdoc/src/points.h"
+#include "../../tools/src/errorexit.h"
 
 //#define USE_EARTH_ROTATE
 
@@ -24,7 +25,7 @@ extern HINSTANCE hInst;   // текущий экземпляр
 LPCTSTR lpszGeoidTitle   = "Geoid";
 LPCTSTR lpszWinGeoid   = "WINGEOID";
 LPCTSTR lpszWinGeoidName   = "MyWINGeoid";
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
 extern bool getNorm(double v1[3], double v2[3], double out[3]);
 extern BYTE **AllocByteMat (int size1, int size2);
 extern void FreeByteMat(BYTE ** v);

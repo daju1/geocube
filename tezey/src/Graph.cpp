@@ -15,7 +15,7 @@
 
 extern void datevec(double dn, int& y, int& mo, int& d, int& h, int& mi, int& s, int& milli);
 extern void numdate(double dn, int& h, int& mi, int& s, int& milli);
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess);
 extern bool g_ToScaleYOnHScroll;
 //===== Доля окна, занимаемая графиком
 /*

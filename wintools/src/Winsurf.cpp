@@ -18192,7 +18192,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 
 							int delim = '\t';
 
-							ReadCellFile(hWnd, szPath, filename, pdrills, pnames_of_colomns, delim );
+							ReadCellFile(hWnd, szPath, NULL, filename, pdrills, pnames_of_colomns, delim );
 
 							lpDrillsDlgMem->pdrills = pdrills;
 							lpDrillsDlgMem->pnames_of_colomns = pnames_of_colomns;
@@ -18263,7 +18263,7 @@ printf("ID_WINSURF_DRAW_EARTHQUAKES post glNewList\n");
 							char* filename = new char[256];
 							int delim = '\t';
 
-							ReadCellFile(hWnd, szPath, filename, pdrills, pnames, delim );
+							ReadCellFile(hWnd, szPath, NULL, filename, pdrills, pnames, delim );
 
 							win_ogl_view * woglv = (win_ogl_view *)GetWindowLongPtr(hWnd,GWLP_USERDATA);
 							project * prj; if (woglv) prj = woglv->GetProject(); else return -1;
@@ -19565,7 +19565,7 @@ LRESULT CALLBACK DlgProcPrintSurfParam( HWND hDlg, UINT uMsg,
 					}
 					else
 					{
-						ErrorExit(lastError, "EnumPrinters1");
+						LastErrorExit(lastError, "EnumPrinters1");
 						return 0;
 					}
 				}

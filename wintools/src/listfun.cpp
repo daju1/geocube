@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "listfun.h"
-#include "..\resource.h"
+#include "../resource.h"
 #include "commctrl.h"
-#include "..\..\tools\src\filedlg.h"
+#include "../../tools/src/filedlg.h"
+#include "../../tools/src/errorexit.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +39,7 @@ WNDPROC wpOrigListWndProc;
 extern HBITMAP hbmpUnchecked, hbmpChecked; 
 extern HBITMAP hbmpPicture, hbmpOld; 
 
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false) ;
 
 #define TEXT_PART 0.25
 RECT GetComboBoxRect(RECT * rcHeader)

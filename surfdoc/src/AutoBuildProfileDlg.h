@@ -30,16 +30,16 @@ struct FilesInDirectory
 };
 
 
-class AutoBuildProfileDlg0  
+class AutoBuildProfileDlg0
 {
 protected:
 #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	friend LRESULT APIENTRY AutoBuildProfileWndSubclassProc(
-		HWND hwnd, 
-		UINT uMsg, 
-		WPARAM wParam, 
-		LPARAM lParam) ;
-    HWND					hDlg;
+		HWND hwnd,
+		UINT uMsg,
+		WPARAM wParam,
+		LPARAM lParam);
+		HWND hDlg;
 #else
 public:
     QWidget*				hDlg;

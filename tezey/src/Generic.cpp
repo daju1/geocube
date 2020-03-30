@@ -10,6 +10,7 @@
 #include "../../array/src/sorting.h"
 #include "../../tools/src/filedlg.h"
 #include "../../wintools/src/abortPrint.h"
+#include "../../tools/src/errorexit.h"
 
 #include "GraphsDoc.h"
 #include "GraphsView.h"
@@ -93,8 +94,8 @@ extern void WriteRaportoB(LPCTSTR s);
 extern void WriteRaportoA(LPCTSTR file, LPCTSTR s);
 #endif
 
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
-extern void ErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void LastErrorExit(DWORD dwLastError, LPTSTR lpszFunction, bool toExitProcess = false);
 extern int openVarFile(bool);
 extern int SaveAs(LPSAVEASFILEDLGDATA lpSaveAsFileDlgData);
 extern HRESULT SavePlot(HWND hWnd, HENHMETAFILE hMetaFile, LPCTSTR lpstrFile);
@@ -1668,7 +1669,7 @@ WriteRaporto(" PrintParamDlgProc IWM_INITDIALOG 1\n");
 					}
 					else
 					{
-						ErrorExit(lastError, "EnumPrinters1");
+						LastErrorExit(lastError, "EnumPrinters1");
 						return 0;
 					}
 				}
@@ -17493,7 +17494,7 @@ WriteRaporto("ID_PRINT_START 8\n");
 								}
 								else
 								{
-									ErrorExit(lastError, "EnumPrinters1");
+									LastErrorExit(lastError, "EnumPrinters1");
 									return 0;
 								}
 							}

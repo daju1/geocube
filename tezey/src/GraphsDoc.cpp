@@ -8,6 +8,7 @@
 #include "XYZBuffer.h"
 #include "../../wintools/src/winsurf.h"
 #include "../../winplot/src/winplot.h"
+#include "../../tools/src/filedlg.h"
 
 #define USE_GRINVICH_TIME
 
@@ -3670,7 +3671,7 @@ void CGraphsDoc::RefreshPlotsData()
 	//MessageBox(0,"end","RefreshPlotsData", 0);
 
 }
-extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex);
+//extern HRESULT SaveFileDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex);
 extern char directory[];
 void CGraphsDoc::SaveEarthQuakesPerDay(HWND hWnd)
 {

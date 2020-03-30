@@ -2,13 +2,14 @@
 //#include <windows.h>
 #include "winmap.h"
 #include "../../resource.h"
+#include "../../tools/src/errorexit.h"
 
 extern HINSTANCE hInst;   // текущий экземпляр
 //extern LPCTSTR lpszAppName;
 LPCTSTR lpszMapTitle   = "Map";
 LPCTSTR lpszWinMap   = "WINMAP";
 LPCTSTR lpszWinMapName   = "MyWINMap";
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
 
 
 int WinMap()

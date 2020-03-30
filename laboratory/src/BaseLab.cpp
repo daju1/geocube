@@ -774,7 +774,9 @@ void BaseObject::Paint(
 
 
 
-void ErrorExit(LPTSTR lpszFunction, bool toExitProcess);
+//void ErrorExit(LPTSTR lpszFunction, bool toExitProcess);
+#include "../../tools/src/errorexit.h"
+
 void BaseObject::PropSaveEmf(bool context_with_plot, char * fn_emf)
 {
 	static RECT margin; 

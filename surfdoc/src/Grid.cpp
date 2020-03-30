@@ -9,7 +9,7 @@
 #include "../../array/src/Vdouble.h"
 #include "../../array/src/matrixes.h"
 #include "Archive.h"
-#include "filedlg.h"
+#include "../../tools/src/filedlg.h"
 
 #include <fstream>
 #include <iostream>

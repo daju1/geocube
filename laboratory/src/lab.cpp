@@ -42,7 +42,8 @@ using namespace std;
 bool Laboratory::context_with_plot = true;
 double CompressionLabTrialResults::deformation_module_01_02_pressure_interval[2];
 
-void ErrorExit(LPTSTR lpszFunction, bool toExitProcess);
+//void ErrorExit(LPTSTR lpszFunction, bool toExitProcess);
+#include "../../tools/src/errorexit.h"
 
 const char * GetZrizHid(long id_hid)
 {

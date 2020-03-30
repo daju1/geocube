@@ -5,14 +5,15 @@ using namespace Gdiplus;
 
 #include "../../resource.h"
 #include "winplot.h"
-#include "..\..\tools\src\filedlg.h"
+#include "../../tools/src/filedlg.h"
+#include "../../tools/src/errorexit.h"
 
 extern HINSTANCE hInst;   // текущий экземпляр
 //extern LPCTSTR lpszAppName;
 const char * lpszPlotTitle   = "Plot";
 const char * lpszWinPlot   = "WINPLOT";
 const char * lpszWinPlotName   = "MyWINPLOT";
-extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
+//extern void ErrorExit(LPTSTR lpszFunction, bool toExitProcess = false);
 
 //#define SCALE_Y 0.6
 #define S_LEN 256

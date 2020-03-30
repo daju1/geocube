@@ -28,3 +28,9 @@
 #include <vector>
 #include <string>
 using namespace std ;
+
+#if defined( _UNICODE) || defined (UNICODE)
+#define stprintf_s _snwprintf
+#else
+#define stprintf_s sprintf_s
+#endif
