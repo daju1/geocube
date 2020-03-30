@@ -7,7 +7,7 @@ char szPath[PATH_STRING_SIZE];
 char directory[255];
 
 
-HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData)
+HRESULT SaveProfDlg(HWND hWnd, LPTSTR lpstrFile, const TCHAR filter[], DWORD& nFilterIndex, SSaveProfData &sprData)
 {
 	return S_FALSE;
 }

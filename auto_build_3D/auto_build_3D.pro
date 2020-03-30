@@ -63,6 +63,7 @@ SOURCES += main.cpp\
     ../array/src/LocalExtremumsFiltering.cpp
 
 HEADERS  += auto_build_3d.h \
+    ../tools/src/filedlg.h \
     ./../surfdoc/src/AutoProfileBuilding.h \
     picks_search.h \
     ../surfdoc/src/AutoBuildProfileDlg.h \
