@@ -1230,6 +1230,10 @@ int SaveAsSurfer7Grid(const char *file, Grid* pgrid)
 int ImportSurfer7Grid4(const char *file, Grid4* pgrid)
 {
 printf("ImportSurfer7Grid4 %s\n", file);
+printf("sizeof(long) %d\n", sizeof(long));
+printf("sizeof(uint32_t) %d\n", sizeof(uint32_t));
+printf("sizeof(long) %d\n", sizeof(double));
+
     const char *p;
     char ext[255];
 	FILE *stream;
@@ -1250,10 +1254,11 @@ printf("ImportSurfer7Grid4 %s\n", file);
 		}
 		// считываем 
 		size_t read;
-		long headerID;
+        uint32_t headerID;
 		read = fread(&headerID, sizeof(long), 1, stream);
-		if (headerID != 0x42525377)
+        if (headerID != 0x42525377)
 		{
+            printf("ImportSurfer7Grid4 headerID 0x%x != 0x42525377\n", headerID);
 			MessageBox(0, "This is not Surfer 7 Grid file", "ImportSurfer7Grid4", 0);
 			fclose(stream);
 			return -1;
@@ -1275,6 +1280,7 @@ printf("ImportSurfer7Grid4 %s\n", file);
 		read = fread(&gridID, sizeof(long), 1, stream);
 		if (gridID != 0x47524433)
 		{
+            printf("ImportSurfer7Grid4 gridID 0x%x != 0x47524433\n", gridID);
 			MessageBox(0, "This is not Grid Section of file", "ImportSurfer7Grid4", 0);
 			fclose(stream);
 			return -1;
@@ -1370,7 +1376,8 @@ printf("ImportSurfer7Grid4 %s\n", file);
 		read = fread(&dataID, sizeof(long), 1, stream);
 		if (dataID != 0x44415441)
 		{
-			MessageBox(0, "This is not Data Section of file", "ImportSurfer7Grid", 0);
+            printf("ImportSurfer7Grid4 dataID 0x%x != 0x44415441\n", dataID);
+            MessageBox(0, "This is not Data Section of file", "ImportSurfer7Grid", 0);
 			fclose(stream);
 			return -1;
 		}
