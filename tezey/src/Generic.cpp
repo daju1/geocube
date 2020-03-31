@@ -4481,14 +4481,14 @@ LRESULT CALLBACK DlgProcPolyotyForNNet( HWND hDlg, UINT uMsg,
 
 						// длиной шириной
 
-						long 
+						uint32_t 
 							lenx = 9,
 							leny = 9;
 
 						// интерполируем измерения на равномерный квадрат
 						vdouble xi,yi,zi;
-						xi = dsequence(double(xmin), long(lenx), double(xmax));
-						yi = dsequence(double(ymin), long(leny), double(ymax));
+						xi = dsequence(double(xmin), uint32_t(lenx), double(xmax));
+						yi = dsequence(double(ymin), uint32_t(leny), double(ymax));
 						zi.resize(xi.Length(), yi.Length(), 0.0 );
 						if (griddata (lpPolyotyDlgData->hWnd,
 							xx, 
@@ -16235,7 +16235,7 @@ WriteRaporto("wnd WM_CREATE end\n");
 
 
 					vv.clear();
-					for (long len = 1000000; len <= 1000001;len++)
+					for (uint32_t len = 1000000; len <= 1000001;len++)
 					{
 						vv.AddMsg(&dsequence(double (0.0), double (1.0), len));
 					}
@@ -16269,7 +16269,7 @@ WriteRaporto("wnd WM_CREATE end\n");
 
 					for (i = 0; i < sz;i++)
 					{
-						vv[i] = dsequence(double (0.0), double (1.0), long(1000000));
+						vv[i] = dsequence(double (0.0), double (1.0), uint32_t(1000000));
 					}
 					
 					for ( i = 0; i < vv.Size();i++)

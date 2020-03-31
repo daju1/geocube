@@ -1493,14 +1493,14 @@ void PolyotyNnetDlg::OnButtonOK()
 
 						// длиной шириной
 
-						long 
+						uint32_t 
 							lenx = 9,
 							leny = 9;
 
 						// интерполируем измерения на равномерный квадрат
 						vdouble xi,yi,zi;
-						xi = dsequence(double(xmin), long(lenx), double(xmax));
-						yi = dsequence(double(ymin), long(leny), double(ymax));
+						xi = dsequence(double(xmin), uint32_t(lenx), double(xmax));
+						yi = dsequence(double(ymin), uint32_t(leny), double(ymax));
 						zi.resize(xi.Length(), yi.Length(), 0.0 );
 						if (griddata (m_lpPolyotyDlgData->hWnd,
 							xx, 

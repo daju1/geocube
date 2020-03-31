@@ -7899,7 +7899,7 @@ double vdouble::LagerAlphaDeterm(int maxOrder, double tend, double EnergyPart)
 
 vdouble dsequence(double d0, double dstep, double dend)
 {
-	long Len = (int)floor((dend - d0) / dstep)+1;
+	uint32_t Len = (uint32_t)floor((dend - d0) / dstep)+1;
 	vdouble seq = vdouble(Len);
 	double *p;
 	p = seq.pD;
@@ -7908,7 +7908,7 @@ vdouble dsequence(double d0, double dstep, double dend)
 	return seq;
 }
 
-vdouble dsequence(double d0, long Len, double dend)
+vdouble dsequence(double d0, uint32_t Len, double dend)
 {
 	double dstep = (dend - d0) / (Len - 1);
 	vdouble seq = vdouble(Len);
@@ -7918,7 +7918,7 @@ vdouble dsequence(double d0, long Len, double dend)
 		*(p + i) = d0 + i * dstep;
 	return seq;
 }
-vdouble dsequence(double d0, double dstep, long Len)
+vdouble dsequence(double d0, double dstep, uint32_t Len)
 {
 	vdouble seq = vdouble(Len);
 	double *p;

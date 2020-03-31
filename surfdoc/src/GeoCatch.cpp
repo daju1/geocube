@@ -813,8 +813,8 @@ bool GeoCatch::InitGorizontPlane(CPoint3& base_point)
 			// высоту извлекаем из базовой точки
 			double z_level = base_point.z;
 			// готовим равномерную сетку
-			vdouble x = dsequence(minX,this->N,maxX);
-			vdouble y = dsequence(minY,this->N,maxY);
+			vdouble x = dsequence(minX,(uint32_t)this->N,maxX);
+			vdouble y = dsequence(minY,(uint32_t)this->N,maxY);
 
 			vdouble xx;
 			vdouble yy;
@@ -968,8 +968,8 @@ void GeoCatch::BlankingOfGorizontPlaneBlankLines(void)
 			// высоту извлекаем из базовой точки
 			double z_level =this->m_base_points.GetCurrentMsg().GetFirstDocumentPoint().z;
 			// готовим равномерную сетку
-			vdouble x = dsequence(ptMin.x,this->N,ptMax.x);
-			vdouble y = dsequence(ptMin.y,this->N,ptMax.y);
+			vdouble x = dsequence(ptMin.x,(uint32_t)this->N,ptMax.x);
+			vdouble y = dsequence(ptMin.y,(uint32_t)this->N,ptMax.y);
 
 			vdouble xx;
 			vdouble yy;

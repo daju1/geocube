@@ -17,10 +17,12 @@ using namespace std;
 
 #define BLANK_VALUE 170141000918782800000000000000000000000.000000
 
+#include "../../include/stdint.h"
+
 struct Trace
 { 
-	long iFirst;// 0-based index into the vertex array for the first vertex of this trace
-	long nPts;  // number of vertices in this trace
+	uint32_t iFirst;// 0-based index into the vertex array for the first vertex of this trace
+	uint32_t nPts;  // number of vertices in this trace
 };
 
 struct Vertex
@@ -33,9 +35,9 @@ struct CubeSize
 	friend Archive& operator <<(Archive& ar, CubeSize& ob);
 	friend Archive& operator >>(Archive& ar, CubeSize& ob);
 
-	long nPag; // number of pages in the grid    (Nz)
-	long nRow; // number of rows in the grid       (Ny)
-	long nCol; // number of columns in the grid    (Nx)
+	uint32_t nPag; // number of pages in the grid    (Nz)
+	uint32_t nRow; // number of rows in the grid       (Ny)
+	uint32_t nCol; // number of columns in the grid    (Nx)
 	double xLL; // X coordinate of the lower left corner of the grid
 	double yLL; // Y coordinate of the lower left corner of the grid
 	double zLL; // Y coordinate of the lower left corner of the grid
@@ -60,7 +62,7 @@ struct CubeSize
 		defined = false;
 	}
 	bool Defined(){return defined;}
-	void Define(long npag,long nrow,long ncol,double xll,double yll,double zll,double xsize,double ysize,double zsize)
+	void Define(uint32_t npag,uint32_t nrow,uint32_t ncol,double xll,double yll,double zll,double xsize,double ysize,double zsize)
 	{
 		nPag	= npag; // number of columns in the grid    (Nz)
 		nRow	= nrow; // number of rows in the grid       (Ny)
@@ -97,8 +99,8 @@ private:
 
 typedef struct
 {
-	long nRow; // number of rows in the grid
-	long nCol; // number of columns in the grid
+	uint32_t nRow; // number of rows in the grid
+	uint32_t nCol; // number of columns in the grid
 	double xLL; // X coordinate of the lower left corner of the grid
 	double yLL; // Y coordinate of the lower left corner of the grid
 	double xSize; // spacing between adjacent nodes in the X direction (between columns)
@@ -200,9 +202,9 @@ typedef struct
 SURFER7GRIDSECTION, FAR *LPSURFER7GRIDSECTION;
 typedef struct
 {
-	long nPag; // number of columns in the grid    (Nz)
-	long nRow; // number of rows in the grid       (Ny)
-	long nCol; // number of columns in the grid    (Nx)
+	uint32_t nPag; // number of columns in the grid    (Nz)
+	uint32_t nRow; // number of rows in the grid       (Ny)
+	uint32_t nCol; // number of columns in the grid    (Nx)
 	double xLL; // X coordinate of the lower left corner of the grid
 	double yLL; // Y coordinate of the lower left corner of the grid
 	double zLL; // Y coordinate of the lower left corner of the grid
@@ -284,8 +286,8 @@ typedef struct
 {
 	//A Fault Info section describes the fault geometry used to create the grid. 
 	//Fault Info sections have the following format:
-	long nTraces;		//	number of fault traces (polylines)
-	long nVertices;		//	total number of vertices in all the traces
+	uint32_t nTraces;		//	number of fault traces (polylines)
+	uint32_t nVertices;		//	total number of vertices in all the traces
 	
 	//data section
 	//variable-sized data block consisting of an array of Trace structures 
@@ -297,8 +299,8 @@ typedef struct
 
 
 	// Trace structure:
-	//	long iFirst			0-based index into the vertex array for the first vertex of this trace
-	//	long nPts			number of vertices in this trace
+	//	uint32_t iFirst			0-based index into the vertex array for the first vertex of this trace
+	//	uint32_t nPts			number of vertices in this trace
 	Trace * traces;
 
 
@@ -316,7 +318,7 @@ struct Grid
 #define KEY_GRID_VERSION 2
 struct key_grid
 {
-	long id_surf;
+	uint32_t id_surf;
 	BYTE podoshva;
 	string key; //ключевое имя геоэлемента
 	string surfname; //имя поверхности подошвы этого геоэлемента
@@ -329,7 +331,7 @@ struct key_grid
 		id_surf = -1;
 		podoshva = 0;
 	}	
-	key_grid(long _id_surf, BYTE _podoshva, const char * surf, const char * k)
+	key_grid(uint32_t _id_surf, BYTE _podoshva, const char * surf, const char * k)
 	{
 		id_surf = _id_surf;
 		surfname = surf;
@@ -337,7 +339,7 @@ struct key_grid
 		//grid = NULL;
 		podoshva = _podoshva;
 	}
-	key_grid(long _id_surf, BYTE _podoshva, string surf, string k)
+	key_grid(uint32_t _id_surf, BYTE _podoshva, string surf, string k)
 	{
 		id_surf = _id_surf;
 		surfname = surf;
@@ -384,8 +386,8 @@ typedef QWidget* Widget;
 
 
 int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
-					  long nRow, 
-					  long nCol, 
+					  uint32_t nRow, 
+					  uint32_t nCol, 
 					  double xLL, // X coordinate of the lower left corner of the grid
 					  double yLL, // Y coordinate of the lower left corner of the grid
 					  double xSize, // spacing between adjacent nodes in the X direction (between columns)
@@ -397,8 +399,8 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, v
 int ImportSurfer7Grid(const char *file, Grid* pgrid, bool to_allocate = true);
 int ImportSurfer7Grid4(const char *file, Grid4* pgrid);
 int ImportDigitalModel(Grid* pgrid,
-	long nRow,
-	long nCol,
+	uint32_t nRow,
+	uint32_t nCol,
 	double xLL,
 	double yLL,
 	double xSize,
@@ -406,7 +408,7 @@ int ImportDigitalModel(Grid* pgrid,
 	double zMin,
 	double zMax);
 
-int ImportDigitalModelHeader(long& nRow, long& nCol, double& xLeft, double& xRight, double& yLow, double& yHigh, double& zMin, double& zMax);
+int ImportDigitalModelHeader(uint32_t& nRow, uint32_t& nCol, double& xLeft, double& xRight, double& yLow, double& yHigh, double& zMin, double& zMax);
 int SetVisiblePointsInContour(Widget hwndParent, vdouble& xi, vdouble & yi, vdouble& xc, vdouble& yc, vdouble& visible);
 int SaveAsSurfer7Grid(const char *file, Grid* pgrid);
 int SaveAsSurfer7Grid4(const char *file, Grid4* pgrid);

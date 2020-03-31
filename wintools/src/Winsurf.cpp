@@ -19184,8 +19184,8 @@ max_y += y_Size/10;
 				  break;
 			  case ID_FILE_IMPORT_DIGITAL_MODEL:
 				  {
-					  long nCol = 1201;// �� ����� *.hdr
-					  long nRow = 1681;// �� ����� *.hdr
+					  uint32_t nCol = 1201;// �� ����� *.hdr
+					  uint32_t nRow = 1681;// �� ����� *.hdr
 					  
 					  double xLeft = 46.0; double xRight = 56.0;
 					  double yLow  = 35.0; double yHigh  = 49.0;

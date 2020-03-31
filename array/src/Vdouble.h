@@ -16,6 +16,7 @@
 
 
 #include "stdafx.h"
+#include "../../include/stdint.h"
 
 double Median(double *p, int len); // Возврашает среднее арифметическое элементов вектора
 double Quantil(double qu, double *p, int len); 
@@ -120,7 +121,7 @@ Vector<bool> inline operator==(const vdouble& ob, const double& a);
 Vector<bool> inline operator!=(const vdouble& ob1, const vdouble& ob2);
 Vector<bool> inline operator!=(const double& a, const vdouble& ob);
 Vector<bool> inline operator!=(const vdouble& ob, const double& a);
-	
+
 vdouble inline fliplr(const vdouble& ob);
 
 void inline operator<<(const vdouble& ob, const double& a);
@@ -129,8 +130,8 @@ void inline operator>>(const double& a, vdouble& ob);
 #define VDOUBLE_MAX_DIMS				3
 
 vdouble dsequence(double d0, double dstep, double dend);
-vdouble dsequence(double d0, long Len, double dend);
-vdouble dsequence(double d0, double dstep, long Len);
+vdouble dsequence(double d0, uint32_t Len, double dend);
+vdouble dsequence(double d0, double dstep, uint32_t Len);
 
 //#include <exception>
 struct LagerStruct;
@@ -396,8 +397,8 @@ static vdouble append(const vdouble& ob, const double& a)
 
     friend vdouble inline conv(const vdouble& v1, const vdouble& v2);
 	friend vdouble dsequence(double d0, double dstep, double dend);
-	friend vdouble dsequence(double d0, long Len, double dend);
-	friend vdouble dsequence(double d0, double dstep, long Len);
+	friend vdouble dsequence(double d0, uint32_t Len, double dend);
+	friend vdouble dsequence(double d0, double dstep, uint32_t Len);
 //	friend int SaveAsSurferGrid7(char gridfilename[], vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
 
 	void Resetting(); // Обнуляет все элементы вектора

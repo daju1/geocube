@@ -56,9 +56,9 @@ printf ("CGrid::Init(Grid* pGrid)\n");
 	//stream = fopen("d://-.txt","wt");
 	//fclose(stream);
 
-	for (long r = 0; r < pGrid->gridSection.nRow; r++)
+	for (uint32_t r = 0; r < pGrid->gridSection.nRow; r++)
 	{
-		for (long c = 0; c < pGrid->gridSection.nCol; c++)
+		for (uint32_t c = 0; c < pGrid->gridSection.nCol; c++)
 		{
 			//stream = fopen("d://-.txt","at");
 			//fprintf(stream, "r = %d c = %d ", r,c);
@@ -123,8 +123,8 @@ double CGrid::GetYMax()
 
 
 int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
-					  long nRow, 
-					  long nCol, 
+					  uint32_t nRow, 
+					  uint32_t nCol, 
 					  double xLL, // X coordinate of the lower left corner of the grid
 					  double yLL, // Y coordinate of the lower left corner of the grid
 					  double xSize, // spacing between adjacent nodes in the X direction (between columns)
@@ -322,28 +322,28 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
 	size_t wrote;
 
 	// Записываем
-	long headerID = 0x42525344;
-	wrote = fwrite(&headerID, sizeof(long), 1, stream);
+	uint32_t headerID = 0x42525344;
+	wrote = fwrite(&headerID, sizeof(uint32_t), 1, stream);
 
-	long headerSize = 4;
-	wrote = fwrite(&headerSize, sizeof(long), 1, stream);
+	uint32_t headerSize = 4;
+	wrote = fwrite(&headerSize, sizeof(uint32_t), 1, stream);
 
-	long Version = 4;
-	wrote = fwrite(&Version, sizeof(long), 1, stream);
+	uint32_t Version = 4;
+	wrote = fwrite(&Version, sizeof(uint32_t), 1, stream);
 		
-	long gridID = 0x44495247;
-	wrote = fwrite(&gridID, sizeof(long), 1, stream);
+	uint32_t gridID = 0x44495247;
+	wrote = fwrite(&gridID, sizeof(uint32_t), 1, stream);
 	
-	long gridSize = 72;
-	wrote = fwrite(&gridSize, sizeof(long), 1, stream);
+	uint32_t gridSize = 72;
+	wrote = fwrite(&gridSize, sizeof(uint32_t), 1, stream);
 
 
-//	long nRow = yi.Length();// number of rows in the grid
-	wrote = fwrite(&nRow, sizeof(long), 1, stream);
+//	uint32_t nRow = yi.Length();// number of rows in the grid
+	wrote = fwrite(&nRow, sizeof(uint32_t), 1, stream);
 
 
-//	long nCol = xi.Length();// number of columns in the grid
-	wrote = fwrite(&nCol, sizeof(long), 1, stream);
+//	uint32_t nCol = xi.Length();// number of columns in the grid
+	wrote = fwrite(&nCol, sizeof(uint32_t), 1, stream);
 
 
 //	double xLL = xi[0];// X coordinate of the lower left corner of the grid
@@ -377,13 +377,13 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
 	double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 	wrote = fwrite(&BlankValue, sizeof(double), 1, stream);
 
-	long dataID = 0x41544144;
-	wrote = fwrite(&dataID, sizeof(long), 1, stream);
+	uint32_t dataID = 0x41544144;
+	wrote = fwrite(&dataID, sizeof(uint32_t), 1, stream);
 
-	long dataSize = nRow*nCol*sizeof(double);
-	wrote = fwrite(&dataSize, sizeof(long), 1, stream);
+	uint32_t dataSize = nRow*nCol*sizeof(double);
+	wrote = fwrite(&dataSize, sizeof(uint32_t), 1, stream);
 
-	long r, c;
+	uint32_t r, c;
 
 
 	for (r = 0; r < nRow; r++)
@@ -399,11 +399,11 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile,
 	}
 #if 0
 	//wrote = fwrite(zi_.pD, sizeof(double), nRow*nCol, stream);
-		for (long r = 0; r < nRow; r++)
+		for (uint32_t r = 0; r < nRow; r++)
 		{
 #if 1
 			double z;
-			for (long c = 0; c < nCol; c++)
+			for (uint32_t c = 0; c < nCol; c++)
 			{
 
 				z = zi_(c,r);
@@ -617,28 +617,28 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, v
 	size_t wrote;
 
 	// Записываем
-	long headerID = 0x42525344;
-	wrote = fwrite(&headerID, sizeof(long), 1, stream);
+	uint32_t headerID = 0x42525344;
+	wrote = fwrite(&headerID, sizeof(uint32_t), 1, stream);
 
-	long headerSize = 4;
-	wrote = fwrite(&headerSize, sizeof(long), 1, stream);
+	uint32_t headerSize = 4;
+	wrote = fwrite(&headerSize, sizeof(uint32_t), 1, stream);
 
-	long Version = 4;
-	wrote = fwrite(&Version, sizeof(long), 1, stream);
+	uint32_t Version = 4;
+	wrote = fwrite(&Version, sizeof(uint32_t), 1, stream);
 		
-	long gridID = 0x44495247;
-	wrote = fwrite(&gridID, sizeof(long), 1, stream);
+	uint32_t gridID = 0x44495247;
+	wrote = fwrite(&gridID, sizeof(uint32_t), 1, stream);
 	
-	long gridSize = 72;
-	wrote = fwrite(&gridSize, sizeof(long), 1, stream);
+	uint32_t gridSize = 72;
+	wrote = fwrite(&gridSize, sizeof(uint32_t), 1, stream);
 
 
-	long nRow = yi.Length();// number of rows in the grid
-	wrote = fwrite(&nRow, sizeof(long), 1, stream);
+	uint32_t nRow = yi.Length();// number of rows in the grid
+	wrote = fwrite(&nRow, sizeof(uint32_t), 1, stream);
 
 
-	long nCol = xi.Length();// number of columns in the grid
-	wrote = fwrite(&nCol, sizeof(long), 1, stream);
+	uint32_t nCol = xi.Length();// number of columns in the grid
+	wrote = fwrite(&nCol, sizeof(uint32_t), 1, stream);
 
 
 	double xLL = xi[0];// X coordinate of the lower left corner of the grid
@@ -672,11 +672,11 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, v
 	double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 	wrote = fwrite(&BlankValue, sizeof(double), 1, stream);
 
-	long dataID = 0x41544144;
-	wrote = fwrite(&dataID, sizeof(long), 1, stream);
+	uint32_t dataID = 0x41544144;
+	wrote = fwrite(&dataID, sizeof(uint32_t), 1, stream);
 
-	long dataSize = nRow*nCol*sizeof(double);
-	wrote = fwrite(&dataSize, sizeof(long), 1, stream);
+	uint32_t dataSize = nRow*nCol*sizeof(double);
+	wrote = fwrite(&dataSize, sizeof(uint32_t), 1, stream);
 
 	vdouble zi_ = zi;
 	// zi_[Find(visible == 0.0)] = BlankValue;
@@ -691,11 +691,11 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, v
 	}
 
 	//wrote = fwrite(zi_.pD, sizeof(double), nRow*nCol, stream);
-	for (long r = 0; r < nRow; r++)
+	for (uint32_t r = 0; r < nRow; r++)
 	{
 #if 1
 		double z;
-		for (long c = 0; c < nCol; c++)
+		for (uint32_t c = 0; c < nCol; c++)
 		{
 
 			z = zi_(r,c);
@@ -716,13 +716,13 @@ int SaveAsSurferGrid7(Widget hWnd, LPTSTR lpstrFile, vdouble& xi, vdouble& yi, v
 	return 0;
 }
 
-int ImportDigitalModelHeader(long& nRow, long& nCol, double& xLeft, double& xRight, double& yLow, double& yHigh, double& zMin, double& zMax)
+int ImportDigitalModelHeader(uint32_t& nRow, uint32_t& nCol, double& xLeft, double& xRight, double& yLow, double& yHigh, double& zMin, double& zMax)
 {
 	return 0;
 }
 int ImportDigitalModel(Grid* pgrid,
-	long nRow,
-	long nCol,
+	uint32_t nRow,
+	uint32_t nCol,
 
 	double xLL,
 	double yLL,
@@ -770,9 +770,9 @@ int ImportDigitalModel(Grid* pgrid,
 	pgrid->faultSection.vertexes = NULL;
 
 
-	for (long r = 0; r < nRow; r++)
+	for (uint32_t r = 0; r < nRow; r++)
 	{
-		for (long c = 0; c < nCol; c++)
+		for (uint32_t c = 0; c < nCol; c++)
 		{
 			double z;
 			ifile >> z;
@@ -863,8 +863,8 @@ printf("ImportSurfer7Grid\n");
 		}
 		// считываем 
 		size_t read;
-		long headerID;
-		read = fread(&headerID, sizeof(long), 1, stream);
+		uint32_t headerID;
+		read = fread(&headerID, sizeof(uint32_t), 1, stream);
 		if (headerID != 0x42525344)
 		{
 			MessageBox(0, "This is not Surfer 7 Grid file", "ImportSurfer7Grid", 0);
@@ -874,8 +874,8 @@ printf("ImportSurfer7Grid\n");
 		//else
 		//	MessageBox(0, "This is Surfer 7 Grid file", "ImportSurfer7Grid", 0);
 
-		long headerSize;
-		read = fread(&headerSize, sizeof(long), 1, stream);
+		uint32_t headerSize;
+		read = fread(&headerSize, sizeof(uint32_t), 1, stream);
 
 		//char str[255];
 		//sprintf(str, "headerSize = %d bytes", headerSize);
@@ -884,8 +884,8 @@ printf("ImportSurfer7Grid\n");
 		if (headerSize > 0)
 			fseek( stream, headerSize, SEEK_CUR );
 
-		long gridID;
-		read = fread(&gridID, sizeof(long), 1, stream);
+		uint32_t gridID;
+		read = fread(&gridID, sizeof(uint32_t), 1, stream);
 		if (gridID != 0x44495247)
 		{
 			MessageBox(0, "This is not Grid Section of file", "ImportSurfer7Grid", 0);
@@ -895,20 +895,20 @@ printf("ImportSurfer7Grid\n");
 		//else
 		//	MessageBox(0, "This is Grid Section of file", "ImportSurfer7Grid", 0);
 
-		long gridSize;
-		read = fread(&gridSize, sizeof(long), 1, stream);
+		uint32_t gridSize;
+		read = fread(&gridSize, sizeof(uint32_t), 1, stream);
 
 		//sprintf(str, "gridSize = %d bytes", gridSize);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
 
-		long nRow;// number of rows in the grid
-		read = fread(&nRow, sizeof(long), 1, stream);
+		uint32_t nRow;// number of rows in the grid
+		read = fread(&nRow, sizeof(uint32_t), 1, stream);
 
 		printf("number of rows in the grid nRow = %d \n", nRow);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
 
-		long nCol;// number of columns in the grid
-		read = fread(&nCol, sizeof(long), 1, stream);
+		uint32_t nCol;// number of columns in the grid
+		read = fread(&nCol, sizeof(uint32_t), 1, stream);
 
 		printf("number of columns in the grid nCol = %d \n", nCol);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
@@ -961,8 +961,8 @@ printf("ImportSurfer7Grid\n");
 		printf("nodes are blanked if greater or equal to this value = %lf \n", BlankValue);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
 
-		long dataID;
-		read = fread(&dataID, sizeof(long), 1, stream);
+		uint32_t dataID;
+		read = fread(&dataID, sizeof(uint32_t), 1, stream);
 		if (dataID != 0x41544144)
 		{
 			MessageBox(0, "This is not Data Section of file", "ImportSurfer7Grid", 0);
@@ -972,8 +972,8 @@ printf("ImportSurfer7Grid\n");
 		//else
 		//	MessageBox(0, "This is Data Section of file", "ImportSurfer7Grid", 0);
 
-		long dataSize;
-		read = fread(&dataSize, sizeof(long), 1, stream);
+		uint32_t dataSize;
+		read = fread(&dataSize, sizeof(uint32_t), 1, stream);
 
 		//sprintf(str, "dataSize = %d bytes", dataSize);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
@@ -1004,19 +1004,19 @@ printf("ImportSurfer7Grid\n");
 		pgrid->faultSection.vertexes = NULL;
 
 
-		for (long r = 0; r < nRow; r++)
+		for (uint32_t r = 0; r < nRow; r++)
 		{
 			read = fread(pgrid->gridSection.z[r], sizeof(double), nCol, stream);
 #if 1
-			for (long c = 0; c < nCol; c++)
+			for (uint32_t c = 0; c < nCol; c++)
 				printf("%e\t", pgrid->gridSection.z[r][c]);
 			printf("\n");
 #endif
 		}
 
 
-		long faultID;
-		read = fread(&faultID, sizeof(long), 1, stream);
+		uint32_t faultID;
+		read = fread(&faultID, sizeof(uint32_t), 1, stream);
 		if (!read || faultID != 0x49544c46)
 		{
 			//MessageBox(0, "This is not Fault Section of file", "ImportSurfer7Grid", 0);
@@ -1028,8 +1028,8 @@ printf("ImportSurfer7Grid\n");
 
 		//A Fault Info section describes the fault geometry used to create the grid. 
 		//Fault Info sections have the following format:
-		//	long nTraces		number of fault traces (polylines)
-		//	long nVertices		total number of vertices in all the traces
+		//	uint32_t nTraces		number of fault traces (polylines)
+		//	uint32_t nVertices		total number of vertices in all the traces
 		
 		//data section
 		//variable-sized data block consisting of an array of Trace structures 
@@ -1041,26 +1041,26 @@ printf("ImportSurfer7Grid\n");
 
 
 		// Trace structure:
-		//	long iFirst			0-based index into the vertex array for the first vertex of this trace
-		//	long nPts			number of vertices in this trace
+		//	uint32_t iFirst			0-based index into the vertex array for the first vertex of this trace
+		//	uint32_t nPts			number of vertices in this trace
  
 
 		//Vertex structure:
 		//	double x			X coordinate of the vertex
 		//	double y			Y coordinate of the vertex
 
-		long faultSize = 0;
-		read = fread(&faultSize, sizeof(long), 1, stream);
+		uint32_t faultSize = 0;
+		read = fread(&faultSize, sizeof(uint32_t), 1, stream);
 		printf("read %u, faultSize %d\n", read, faultSize);
 
-		size_t read_traces = fread(&pgrid->faultSection.nTraces, sizeof(long), 1, stream);
+		size_t read_traces = fread(&pgrid->faultSection.nTraces, sizeof(uint32_t), 1, stream);
 		printf("read %u, nTraces %d\n", read_traces, pgrid->faultSection.nTraces);
 
-		size_t read_vertices = fread(&pgrid->faultSection.nVertices, sizeof(long), 1, stream);
+		size_t read_vertices = fread(&pgrid->faultSection.nVertices, sizeof(uint32_t), 1, stream);
 		printf("read %u, nVertices %d\n", read_vertices, pgrid->faultSection.nVertices);
 
-		long faultDataID;
-		read = fread(&faultDataID, sizeof(long), 1, stream);
+		uint32_t faultDataID;
+		read = fread(&faultDataID, sizeof(uint32_t), 1, stream);
 
 		if (!read || faultDataID != 1096040772)
 		{
@@ -1069,8 +1069,8 @@ printf("ImportSurfer7Grid\n");
 			return -1;
 		}
 
-		long faultDataSize;
-		read = fread(&faultDataSize, sizeof(long), 1, stream);
+		uint32_t faultDataSize;
+		read = fread(&faultDataSize, sizeof(uint32_t), 1, stream);
 		printf("read %u, faultDataSize %d \n", read, faultDataSize);
 
 		if (faultDataID == 1096040772
@@ -1082,10 +1082,10 @@ printf("ImportSurfer7Grid\n");
 			fread(pgrid->faultSection.traces, sizeof(Trace), pgrid->faultSection.nTraces, stream);
 /*
 			//Trace tr;
-			for (long n = 0; n < pgrid->faultSection.nTraces; n++)
+			for (uint32_t n = 0; n < pgrid->faultSection.nTraces; n++)
 			{
-				//fread(&tr.iFirst, sizeof(long), 1, stream);
-				//fread(&tr.nPts, sizeof(long), 1, stream);
+				//fread(&tr.iFirst, sizeof(uint32_t), 1, stream);
+				//fread(&tr.nPts, sizeof(uint32_t), 1, stream);
 
 				printf(
 					"tr.iFirst %d, tr.nPts %d\n", 
@@ -1097,7 +1097,7 @@ printf("ImportSurfer7Grid\n");
 			pgrid->faultSection.vertexes = new Vertex[pgrid->faultSection.nVertices];
 			fread(pgrid->faultSection.vertexes, sizeof(Vertex), pgrid->faultSection.nVertices, stream);
 			//Vertex vx;
-			/*for (long n = 0; n < pgrid->faultSection.nVertices; n++)
+			/*for (uint32_t n = 0; n < pgrid->faultSection.nVertices; n++)
 			{
 				//fread(&vx.x, sizeof(double), 1, stream);
 				//fread(&vx.y, sizeof(double), 1, stream);
@@ -1105,10 +1105,10 @@ printf("ImportSurfer7Grid\n");
 				//printf("vx.x %f, vx.y %f\n", pgrid->faultSection.vertexes[n].x, pgrid->faultSection.vertexes[n].y);
 			}
 
-			for (long n = 0; n < pgrid->faultSection.nTraces; n++)
+			for (uint32_t n = 0; n < pgrid->faultSection.nTraces; n++)
 			{
-				//fread(&tr.iFirst, sizeof(long), 1, stream);
-				//fread(&tr.nPts, sizeof(long), 1, stream);
+				//fread(&tr.iFirst, sizeof(uint32_t), 1, stream);
+				//fread(&tr.nPts, sizeof(uint32_t), 1, stream);
 
 				printf(
 					"tr.iFirst %d, tr.nPts %d\n", 
@@ -1117,7 +1117,7 @@ printf("ImportSurfer7Grid\n");
 
 				fprintf(bln, "%d, %d\n", pgrid->faultSection.traces[n].nPts, 0);
 
-				for (long ii = pgrid->faultSection.traces[n].iFirst;
+				for (uint32_t ii = pgrid->faultSection.traces[n].iFirst;
 					ii < pgrid->faultSection.traces[n].iFirst + pgrid->faultSection.traces[n].nPts;
 					ii++)
 				{
@@ -1155,23 +1155,23 @@ int SaveAsSurfer7Grid(const char *file, Grid* pgrid)
 	size_t wrote;
 
 	// Записываем
-	long headerID = 0x42525344;
-	wrote = fwrite(&headerID, sizeof(long), 1, stream);
+	uint32_t headerID = 0x42525344;
+	wrote = fwrite(&headerID, sizeof(uint32_t), 1, stream);
 
-	long headerSize = 4;
-	wrote = fwrite(&headerSize, sizeof(long), 1, stream);
+	uint32_t headerSize = 4;
+	wrote = fwrite(&headerSize, sizeof(uint32_t), 1, stream);
 
-	long Version = 4;
-	wrote = fwrite(&Version, sizeof(long), 1, stream);
+	uint32_t Version = 4;
+	wrote = fwrite(&Version, sizeof(uint32_t), 1, stream);
 		
-	long gridID = 0x44495247;
-	wrote = fwrite(&gridID, sizeof(long), 1, stream);
+	uint32_t gridID = 0x44495247;
+	wrote = fwrite(&gridID, sizeof(uint32_t), 1, stream);
 	
-	long gridSize = 72;
-	wrote = fwrite(&gridSize, sizeof(long), 1, stream);
+	uint32_t gridSize = 72;
+	wrote = fwrite(&gridSize, sizeof(uint32_t), 1, stream);
 
-	wrote = fwrite(&pgrid->gridSection.nRow, sizeof(long), 1, stream);
-	wrote = fwrite(&pgrid->gridSection.nCol, sizeof(long), 1, stream);
+	wrote = fwrite(&pgrid->gridSection.nRow, sizeof(uint32_t), 1, stream);
+	wrote = fwrite(&pgrid->gridSection.nCol, sizeof(uint32_t), 1, stream);
 	wrote = fwrite(&pgrid->gridSection.xLL, sizeof(double), 1, stream);
 	wrote = fwrite(&pgrid->gridSection.yLL, sizeof(double), 1, stream);
 	wrote = fwrite(&pgrid->gridSection.xSize, sizeof(double), 1, stream);
@@ -1185,13 +1185,13 @@ int SaveAsSurfer7Grid(const char *file, Grid* pgrid)
 	double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 	wrote = fwrite(&BlankValue, sizeof(double), 1, stream);
 
-	long dataID = 0x41544144;
-	wrote = fwrite(&dataID, sizeof(long), 1, stream);
+	uint32_t dataID = 0x41544144;
+	wrote = fwrite(&dataID, sizeof(uint32_t), 1, stream);
 
-	long dataSize = pgrid->gridSection.nRow * pgrid->gridSection.nCol * sizeof(double);
-	wrote = fwrite(&dataSize, sizeof(long), 1, stream);
+	uint32_t dataSize = pgrid->gridSection.nRow * pgrid->gridSection.nCol * sizeof(double);
+	wrote = fwrite(&dataSize, sizeof(uint32_t), 1, stream);
 
-	long r, c;
+	uint32_t r, c;
 	for (r = 0; r < pgrid->gridSection.nRow; r++)
 	{
 		wrote = fwrite(pgrid->gridSection.z[r], sizeof(double), pgrid->gridSection.nCol, stream);
@@ -1202,19 +1202,19 @@ int SaveAsSurfer7Grid(const char *file, Grid* pgrid)
 		pgrid->faultSection.traces && 
 		pgrid->faultSection.vertexes)
 	{
-		long faultID = 0x49544c46;
-		wrote = fwrite(&faultID, sizeof(long), 1, stream);
-		long faultSize = 8;
-		wrote = fwrite(&faultSize, sizeof(long), 1, stream);
-		wrote = fwrite(&pgrid->faultSection.nTraces, sizeof(long), 1, stream);
-		wrote = fwrite(&pgrid->faultSection.nVertices, sizeof(long), 1, stream);
+		uint32_t faultID = 0x49544c46;
+		wrote = fwrite(&faultID, sizeof(uint32_t), 1, stream);
+		uint32_t faultSize = 8;
+		wrote = fwrite(&faultSize, sizeof(uint32_t), 1, stream);
+		wrote = fwrite(&pgrid->faultSection.nTraces, sizeof(uint32_t), 1, stream);
+		wrote = fwrite(&pgrid->faultSection.nVertices, sizeof(uint32_t), 1, stream);
 
-		long faultDataID = 1096040772;
-		wrote = fwrite(&faultDataID, sizeof(long), 1, stream);
-		long faultDataSize = 
+		uint32_t faultDataID = 1096040772;
+		wrote = fwrite(&faultDataID, sizeof(uint32_t), 1, stream);
+		uint32_t faultDataSize = 
 			pgrid->faultSection.nTraces   * sizeof(Trace) + 
 			pgrid->faultSection.nVertices * sizeof(Vertex);
-		wrote = fwrite(&faultDataSize, sizeof(long), 1, stream);
+		wrote = fwrite(&faultDataSize, sizeof(uint32_t), 1, stream);
 		wrote = fwrite(pgrid->faultSection.traces, sizeof(Trace), pgrid->faultSection.nTraces, stream);
 		wrote = fwrite(pgrid->faultSection.vertexes, sizeof(Vertex), pgrid->faultSection.nVertices, stream);
 	}
@@ -1232,7 +1232,7 @@ int ImportSurfer7Grid4(const char *file, Grid4* pgrid)
 printf("ImportSurfer7Grid4 %s\n", file);
 printf("sizeof(long) %d\n", sizeof(long));
 printf("sizeof(uint32_t) %d\n", sizeof(uint32_t));
-printf("sizeof(long) %d\n", sizeof(double));
+printf("sizeof(double) %d\n", sizeof(double));
 
     const char *p;
     char ext[255];
@@ -1254,9 +1254,9 @@ printf("sizeof(long) %d\n", sizeof(double));
 		}
 		// считываем 
 		size_t read;
-        uint32_t headerID;
-		read = fread(&headerID, sizeof(long), 1, stream);
-        if (headerID != 0x42525377)
+		uint32_t headerID;
+		read = fread(&headerID, sizeof(uint32_t), 1, stream);
+		if (headerID != 0x42525377)
 		{
             printf("ImportSurfer7Grid4 headerID 0x%x != 0x42525377\n", headerID);
 			MessageBox(0, "This is not Surfer 7 Grid file", "ImportSurfer7Grid4", 0);
@@ -1266,8 +1266,8 @@ printf("sizeof(long) %d\n", sizeof(double));
 		//else
 		//	MessageBox(0, "This is Surfer 7 Grid file", "ImportSurfer7Grid4", 0);
 
-		long headerSize;
-		read = fread(&headerSize, sizeof(long), 1, stream);
+		uint32_t headerSize;
+		read = fread(&headerSize, sizeof(uint32_t), 1, stream);
 
 		//char str[255];
 		printf("headerSize = %d bytes", headerSize);
@@ -1276,8 +1276,8 @@ printf("sizeof(long) %d\n", sizeof(double));
 		if (headerSize > 0)
 			fseek( stream, headerSize, SEEK_CUR );
 
-		long gridID;
-		read = fread(&gridID, sizeof(long), 1, stream);
+		uint32_t gridID;
+		read = fread(&gridID, sizeof(uint32_t), 1, stream);
 		if (gridID != 0x47524433)
 		{
             printf("ImportSurfer7Grid4 gridID 0x%x != 0x47524433\n", gridID);
@@ -1288,26 +1288,26 @@ printf("sizeof(long) %d\n", sizeof(double));
 		//else
 		//	MessageBox(0, "This is Grid Section of file", "ImportSurfer7Grid4", 0);
 
-		long gridSize;
-		read = fread(&gridSize, sizeof(long), 1, stream);
+		uint32_t gridSize;
+		read = fread(&gridSize, sizeof(uint32_t), 1, stream);
 
 		printf("gridSize = %d bytes", gridSize);
 		//MessageBox(0, str, "ImportSurfer7Grid4", 0);
 
-		long nPag;// number of columns in the grid
-		read = fread(&nPag, sizeof(long), 1, stream);
+		uint32_t nPag;// number of columns in the grid
+		read = fread(&nPag, sizeof(uint32_t), 1, stream);
 
 		printf("number of pages in the grid nPag = %d \n", nPag);
 		//MessageBox(0, str, "ImportSurfer7Grid4", 0);
  
-		long nRow;// number of rows in the grid
-		read = fread(&nRow, sizeof(long), 1, stream);
+		uint32_t nRow;// number of rows in the grid
+		read = fread(&nRow, sizeof(uint32_t), 1, stream);
 
 		printf("number of rows in the grid nRow = %d \n", nRow);
 		//MessageBox(0, str, "ImportSurfer7Grid4", 0);
 
-		long nCol;// number of columns in the grid
-		read = fread(&nCol, sizeof(long), 1, stream);
+		uint32_t nCol;// number of columns in the grid
+		read = fread(&nCol, sizeof(uint32_t), 1, stream);
 
 		printf("number of columns in the grid nCol = %d \n", nCol);
 		//MessageBox(0, str, "ImportSurfer7Grid4", 0);
@@ -1372,8 +1372,8 @@ printf("sizeof(long) %d\n", sizeof(double));
 		printf("nodes are blanked if greater or equal to this value = %lf \n", BlankValue);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
 
-		long dataID;
-		read = fread(&dataID, sizeof(long), 1, stream);
+		uint32_t dataID;
+		read = fread(&dataID, sizeof(uint32_t), 1, stream);
 		if (dataID != 0x44415441)
 		{
             printf("ImportSurfer7Grid4 dataID 0x%x != 0x44415441\n", dataID);
@@ -1384,8 +1384,8 @@ printf("sizeof(long) %d\n", sizeof(double));
 		//else
 		//	MessageBox(0, "This is Data Section of file", "ImportSurfer7Grid", 0);
 
-		long dataSize;
-		read = fread(&dataSize, sizeof(long), 1, stream);
+		uint32_t dataSize;
+		read = fread(&dataSize, sizeof(uint32_t), 1, stream);
 
 		//sprintf(str, "dataSize = %d bytes", dataSize);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
@@ -1412,13 +1412,13 @@ printf("sizeof(long) %d\n", sizeof(double));
 			return -1;
 		}
 
-		for (long p = 0; p < nPag; p++)
+		for (uint32_t p = 0; p < nPag; p++)
 		{
-			for (long r = 0; r < nRow; r++)
+			for (uint32_t r = 0; r < nRow; r++)
 			{
 				read = fread(pgrid->grid4Section.v[p][r], sizeof(double), nCol, stream);
 #if 0
-				for (long c = 0; c < nCol; c++)
+				for (uint32_t c = 0; c < nCol; c++)
 					printf("%f\t", pgrid->grid4Section.v[p][r][c]);
 				printf("\n");
 #endif
@@ -1427,8 +1427,8 @@ printf("sizeof(long) %d\n", sizeof(double));
 
 #if 0
 
-		long faultID;
-		read = fread(&faultID, sizeof(long), 1, stream);
+		uint32_t faultID;
+		read = fread(&faultID, sizeof(uint32_t), 1, stream);
 		if (!read || faultID != 0x49544c46)
 		{
 			//MessageBox(0, "This is not Fault Section of file", "ImportSurfer7Grid", 0);
@@ -1439,8 +1439,8 @@ printf("sizeof(long) %d\n", sizeof(double));
 //			MessageBox(0, "This is Fault Section of file", "ImportSurfer7Grid", 0);
 		//A Fault Info section describes the fault geometry used to create the grid. 
 		//Fault Info sections have the following format:
-		//	long nTraces		number of fault traces (polylines)
-		//	long nVertices		total number of vertices in all the traces
+		//	uint32_t nTraces		number of fault traces (polylines)
+		//	uint32_t nVertices		total number of vertices in all the traces
 		
 		//data section
 		//variable-sized data block consisting of an array of Trace structures 
@@ -1452,26 +1452,26 @@ printf("sizeof(long) %d\n", sizeof(double));
 
 
 		// Trace structure:
-		//	long iFirst			0-based index into the vertex array for the first vertex of this trace
-		//	long nPts			number of vertices in this trace
+		//	uint32_t iFirst			0-based index into the vertex array for the first vertex of this trace
+		//	uint32_t nPts			number of vertices in this trace
  
 
 		//Vertex structure:
 		//	double x			X coordinate of the vertex
 		//	double y			Y coordinate of the vertex
 
-		long faultSize = 0;
-		read = fread(&faultSize, sizeof(long), 1, stream);
+		uint32_t faultSize = 0;
+		read = fread(&faultSize, sizeof(uint32_t), 1, stream);
 		printf("read %u, faultSize %d\n", read, faultSize);
 
-		size_t read_traces = fread(&pgrid->faultSection.nTraces, sizeof(long), 1, stream);
+		size_t read_traces = fread(&pgrid->faultSection.nTraces, sizeof(uint32_t), 1, stream);
 		printf("read %u, nTraces %d\n", read_traces, pgrid->faultSection.nTraces);
 
-		size_t read_vertices = fread(&pgrid->faultSection.nVertices, sizeof(long), 1, stream);
+		size_t read_vertices = fread(&pgrid->faultSection.nVertices, sizeof(uint32_t), 1, stream);
 		printf("read %u, nVertices %d\n", read_vertices, pgrid->faultSection.nVertices);
 
-		long faultDataID;
-		read = fread(&faultDataID, sizeof(long), 1, stream);
+		uint32_t faultDataID;
+		read = fread(&faultDataID, sizeof(uint32_t), 1, stream);
 
 		if (!read || faultDataID != 1096040772)
 		{
@@ -1480,8 +1480,8 @@ printf("sizeof(long) %d\n", sizeof(double));
 			return -1;
 		}
 
-		long faultDataSize;
-		read = fread(&faultDataSize, sizeof(long), 1, stream);
+		uint32_t faultDataSize;
+		read = fread(&faultDataSize, sizeof(uint32_t), 1, stream);
 		printf("read %u, faultDataSize %d \n", read, faultDataSize);
 
 		if (faultDataID == 1096040772
@@ -1493,10 +1493,10 @@ printf("sizeof(long) %d\n", sizeof(double));
 			fread(pgrid->faultSection.traces, sizeof(Trace), pgrid->faultSection.nTraces, stream);
 /*
 			//Trace tr;
-			for (long n = 0; n < pgrid->faultSection.nTraces; n++)
+			for (uint32_t n = 0; n < pgrid->faultSection.nTraces; n++)
 			{
-				//fread(&tr.iFirst, sizeof(long), 1, stream);
-				//fread(&tr.nPts, sizeof(long), 1, stream);
+				//fread(&tr.iFirst, sizeof(uint32_t), 1, stream);
+				//fread(&tr.nPts, sizeof(uint32_t), 1, stream);
 
 				printf(
 					"tr.iFirst %d, tr.nPts %d\n", 
@@ -1508,7 +1508,7 @@ printf("sizeof(long) %d\n", sizeof(double));
 			pgrid->faultSection.vertexes = new Vertex[pgrid->faultSection.nVertices];
 			fread(pgrid->faultSection.vertexes, sizeof(Vertex), pgrid->faultSection.nVertices, stream);
 			//Vertex vx;
-			/*for (long n = 0; n < pgrid->faultSection.nVertices; n++)
+			/*for (uint32_t n = 0; n < pgrid->faultSection.nVertices; n++)
 			{
 				//fread(&vx.x, sizeof(double), 1, stream);
 				//fread(&vx.y, sizeof(double), 1, stream);
@@ -1516,10 +1516,10 @@ printf("sizeof(long) %d\n", sizeof(double));
 				//printf("vx.x %f, vx.y %f\n", pgrid->faultSection.vertexes[n].x, pgrid->faultSection.vertexes[n].y);
 			}
 
-			for (long n = 0; n < pgrid->faultSection.nTraces; n++)
+			for (uint32_t n = 0; n < pgrid->faultSection.nTraces; n++)
 			{
-				//fread(&tr.iFirst, sizeof(long), 1, stream);
-				//fread(&tr.nPts, sizeof(long), 1, stream);
+				//fread(&tr.iFirst, sizeof(uint32_t), 1, stream);
+				//fread(&tr.nPts, sizeof(uint32_t), 1, stream);
 
 				printf(
 					"tr.iFirst %d, tr.nPts %d\n", 
@@ -1528,7 +1528,7 @@ printf("sizeof(long) %d\n", sizeof(double));
 
 				fprintf(bln, "%d, %d\n", pgrid->faultSection.traces[n].nPts, 0);
 
-				for (long ii = pgrid->faultSection.traces[n].iFirst;
+				for (uint32_t ii = pgrid->faultSection.traces[n].iFirst;
 					ii < pgrid->faultSection.traces[n].iFirst + pgrid->faultSection.traces[n].nPts;
 					ii++)
 				{
@@ -1590,9 +1590,9 @@ int SaveAsVTK(const char *file, Grid4* pgrid, bool view)
 
 
 
-	long nCol = pgrid->grid4Section.nCol;
-	long nRow = pgrid->grid4Section.nRow;
-	long nPag = pgrid->grid4Section.nPag;
+	uint32_t nCol = pgrid->grid4Section.nCol;
+	uint32_t nRow = pgrid->grid4Section.nRow;
+	uint32_t nPag = pgrid->grid4Section.nPag;
 
 	double xLL, yLL, zLL;
 	double xSize, ySize, zSize;
@@ -1640,7 +1640,7 @@ int SaveAsVTK(const char *file, Grid4* pgrid, bool view)
 
 	size_t wrote;
 
-	long r, c, p;
+	uint32_t r, c, p;
 	double value;
 	for (p = 0; p < pgrid->grid4Section.nPag; p++)
 	{
@@ -1681,24 +1681,24 @@ int SaveAsSurfer7Grid4(const char *file, Grid4* pgrid)
 	size_t wrote;
 
 	// Записываем
-	long headerID = 0x42525377;
-	wrote = fwrite(&headerID, sizeof(long), 1, stream);
+	uint32_t headerID = 0x42525377;
+	wrote = fwrite(&headerID, sizeof(uint32_t), 1, stream);
 
-	long headerSize = 4;
-	wrote = fwrite(&headerSize, sizeof(long), 1, stream);
+	uint32_t headerSize = 4;
+	wrote = fwrite(&headerSize, sizeof(uint32_t), 1, stream);
 
-	long Version = 4;
-	wrote = fwrite(&Version, sizeof(long), 1, stream);
+	uint32_t Version = 4;
+	wrote = fwrite(&Version, sizeof(uint32_t), 1, stream);
 		
-	long gridID = 0x47524433;
-	wrote = fwrite(&gridID, sizeof(long), 1, stream);
+	uint32_t gridID = 0x47524433;
+	wrote = fwrite(&gridID, sizeof(uint32_t), 1, stream);
 	
-	long gridSize = 3*sizeof(long) + 10*sizeof(double);//72;
-	wrote = fwrite(&gridSize, sizeof(long), 1, stream);
+	uint32_t gridSize = 3*sizeof(uint32_t) + 10*sizeof(double);//72;
+	wrote = fwrite(&gridSize, sizeof(uint32_t), 1, stream);
 
-	wrote = fwrite(&pgrid->grid4Section.nPag, sizeof(long), 1, stream);
-	wrote = fwrite(&pgrid->grid4Section.nRow, sizeof(long), 1, stream);
-	wrote = fwrite(&pgrid->grid4Section.nCol, sizeof(long), 1, stream);
+	wrote = fwrite(&pgrid->grid4Section.nPag, sizeof(uint32_t), 1, stream);
+	wrote = fwrite(&pgrid->grid4Section.nRow, sizeof(uint32_t), 1, stream);
+	wrote = fwrite(&pgrid->grid4Section.nCol, sizeof(uint32_t), 1, stream);
 	wrote = fwrite(&pgrid->grid4Section.xLL, sizeof(double), 1, stream);
 	wrote = fwrite(&pgrid->grid4Section.yLL, sizeof(double), 1, stream);
 	wrote = fwrite(&pgrid->grid4Section.zLL, sizeof(double), 1, stream);
@@ -1714,13 +1714,13 @@ int SaveAsSurfer7Grid4(const char *file, Grid4* pgrid)
 	double BlankValue = BLANK_VALUE;//1.70141e38;// nodes are blanked if greater or equal to this value
 	wrote = fwrite(&BlankValue, sizeof(double), 1, stream);
 
-	long dataID = 0x44415441;
-	wrote = fwrite(&dataID, sizeof(long), 1, stream);
+	uint32_t dataID = 0x44415441;
+	wrote = fwrite(&dataID, sizeof(uint32_t), 1, stream);
 
-	long dataSize = pgrid->grid4Section.nPag * pgrid->grid4Section.nRow * pgrid->grid4Section.nCol * sizeof(double);
-	wrote = fwrite(&dataSize, sizeof(long), 1, stream);
+	uint32_t dataSize = pgrid->grid4Section.nPag * pgrid->grid4Section.nRow * pgrid->grid4Section.nCol * sizeof(double);
+	wrote = fwrite(&dataSize, sizeof(uint32_t), 1, stream);
 
-	long r, c, p;
+	uint32_t r, c, p;
 	for (p = 0; p < pgrid->grid4Section.nPag; p++)
 	{
 		for (r = 0; r < pgrid->grid4Section.nRow; r++)
@@ -1738,7 +1738,7 @@ void UpdateExtremums(SURFER7GRIDSECTION & grid)
 {
 	grid.zMax = -DBL_MAX;
 	grid.zMin = DBL_MAX;
-	long r, c;
+	uint32_t r, c;
 	for (r = 0; r < grid.nRow; r++)
 	{
 		for (c = 0; c < grid.nCol; c++)
@@ -1801,9 +1801,9 @@ void CubeSize::Define(double minx, double miny, double minz, double maxx, double
 		cin >> dz;
 	}
 
-	long npag;
-	long nrow;
-	long ncol;
+	uint32_t npag;
+	uint32_t nrow;
+	uint32_t ncol;
 	double xll;
 	double yll;
 	double zll;
@@ -1811,9 +1811,9 @@ void CubeSize::Define(double minx, double miny, double minz, double maxx, double
 	double ysize;
 	double zsize;
 
-	ncol = (long)(maxx-minx)/dx + 1;
-	nrow = (long)(maxy-miny)/dy + 1;
-	npag = (long)(maxz-minz)/dz + 1;
+	ncol = (uint32_t)(maxx-minx)/dx + 1;
+	nrow = (uint32_t)(maxy-miny)/dy + 1;
+	npag = (uint32_t)(maxz-minz)/dz + 1;
 
 	zll = minz;
 	xll = minx;
@@ -1849,7 +1849,7 @@ void CubeSize::Printf()
 Archive& operator <<(Archive& ar, CubeSize& ob)
 {
 
-	long Version = 1;
+	uint32_t Version = 1;
 	ar << Version;
 
 	ar << ob.defined;
@@ -1868,7 +1868,7 @@ Archive& operator <<(Archive& ar, CubeSize& ob)
 }
 Archive& operator >>(Archive& ar, CubeSize& ob)
 {
-	long Version;
+	uint32_t Version;
 	ar >> Version;
 
 	ar >> ob.defined;
@@ -1887,7 +1887,7 @@ Archive& operator >>(Archive& ar, CubeSize& ob)
 }
 Archive& operator <<(Archive& ar, key_grid& ob)
 {
-	long version = KEY_GRID_VERSION;
+	uint32_t version = KEY_GRID_VERSION;
 	ar << version;
 
 	switch (version)
@@ -1909,7 +1909,7 @@ Archive& operator <<(Archive& ar, key_grid& ob)
 }
 Archive& operator >>(Archive& ar, key_grid& ob)
 {
-	long version = KEY_GRID_VERSION;
+	uint32_t version = KEY_GRID_VERSION;
 	ar >> version;
 
 	switch(version)
@@ -1955,31 +1955,31 @@ Archive& operator <<(Archive& ar, Grid4& ob)
 //	size_t wrote;
 
 	// Записываем
-	long headerID = 0x42525377;
-	//wrote = fwrite(&headerID, sizeof(long), 1, stream);
+	uint32_t headerID = 0x42525377;
+	//wrote = fwrite(&headerID, sizeof(uint32_t), 1, stream);
 	ar << headerID;
 
-	long headerSize = 4;
-	//wrote = fwrite(&headerSize, sizeof(long), 1, stream);
+	uint32_t headerSize = 4;
+	//wrote = fwrite(&headerSize, sizeof(uint32_t), 1, stream);
 	ar << headerSize;
 
-	long Version = 4;
-	//wrote = fwrite(&Version, sizeof(long), 1, stream);
+	uint32_t Version = 4;
+	//wrote = fwrite(&Version, sizeof(uint32_t), 1, stream);
 	ar << Version;
 		
-	long gridID = 0x47524433;
-	//wrote = fwrite(&gridID, sizeof(long), 1, stream);
+	uint32_t gridID = 0x47524433;
+	//wrote = fwrite(&gridID, sizeof(uint32_t), 1, stream);
 	ar << gridID;
 	
-	long gridSize = 3*sizeof(long) + 10*sizeof(double);//72;
-	//wrote = fwrite(&gridSize, sizeof(long), 1, stream);
+	uint32_t gridSize = 3*sizeof(uint32_t) + 10*sizeof(double);//72;
+	//wrote = fwrite(&gridSize, sizeof(uint32_t), 1, stream);
 	ar << gridSize;
 
-	//wrote = fwrite(&pgrid->grid4Section.nPag, sizeof(long), 1, stream);
+	//wrote = fwrite(&pgrid->grid4Section.nPag, sizeof(uint32_t), 1, stream);
 	ar << ob.grid4Section.nPag;
-	//wrote = fwrite(&pgrid->grid4Section.nRow, sizeof(long), 1, stream);
+	//wrote = fwrite(&pgrid->grid4Section.nRow, sizeof(uint32_t), 1, stream);
 	ar << ob.grid4Section.nRow;
-	//wrote = fwrite(&pgrid->grid4Section.nCol, sizeof(long), 1, stream);
+	//wrote = fwrite(&pgrid->grid4Section.nCol, sizeof(uint32_t), 1, stream);
 	ar << ob.grid4Section.nCol;
 	//wrote = fwrite(&pgrid->grid4Section.xLL, sizeof(double), 1, stream);
 	ar << ob.grid4Section.xLL;
@@ -2006,15 +2006,15 @@ Archive& operator <<(Archive& ar, Grid4& ob)
 	//wrote = fwrite(&BlankValue, sizeof(double), 1, stream);
 	ar << BlankValue;
 
-	long dataID = 0x44415441;
-	//wrote = fwrite(&dataID, sizeof(long), 1, stream);
+	uint32_t dataID = 0x44415441;
+	//wrote = fwrite(&dataID, sizeof(uint32_t), 1, stream);
 	ar << dataID;
 
-	long dataSize = ob.grid4Section.nPag * ob.grid4Section.nRow * ob.grid4Section.nCol * sizeof(double);
-	//wrote = fwrite(&dataSize, sizeof(long), 1, stream);
+	uint32_t dataSize = ob.grid4Section.nPag * ob.grid4Section.nRow * ob.grid4Section.nCol * sizeof(double);
+	//wrote = fwrite(&dataSize, sizeof(uint32_t), 1, stream);
 	ar << dataSize;
 
-	long r, c, p;
+	uint32_t r, c, p;
 	for (p = 0; p < ob.grid4Section.nPag; p++)
 	{
 		for (r = 0; r < ob.grid4Section.nRow; r++)
@@ -2055,8 +2055,8 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 //		}
 		// считываем 
 //		size_t read;
-		long headerID;
-		//read = fread(&headerID, sizeof(long), 1, stream);
+		uint32_t headerID;
+		//read = fread(&headerID, sizeof(uint32_t), 1, stream);
 		ar >> headerID;
 		if (headerID != 0x42525377)
 		{
@@ -2067,8 +2067,8 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 		//else
 		//	MessageBox(0, "This is Surfer 7 Grid file", "ImportSurfer7Grid4", 0);
 
-		long headerSize;
-		//read = fread(&headerSize, sizeof(long), 1, stream);
+		uint32_t headerSize;
+		//read = fread(&headerSize, sizeof(uint32_t), 1, stream);
 		ar >> headerSize;
 
 		//char str[255];
@@ -2077,13 +2077,13 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 
 		//if (headerSize > 0)
 		//	fseek( stream, headerSize, SEEK_CUR );
-		long Version;
-		//wrote = fwrite(&Version, sizeof(long), 1, stream);
+		uint32_t Version;
+		//wrote = fwrite(&Version, sizeof(uint32_t), 1, stream);
 		ar >> Version;
 
 
-		long gridID;
-		//read = fread(&gridID, sizeof(long), 1, stream);
+		uint32_t gridID;
+		//read = fread(&gridID, sizeof(uint32_t), 1, stream);
 		ar >> gridID;
 		if (gridID != 0x47524433)
 		{
@@ -2094,29 +2094,29 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 		//else
 		//	MessageBox(0, "This is Grid Section of file", "ImportSurfer7Grid4", 0);
 
-		long gridSize;
-		//read = fread(&gridSize, sizeof(long), 1, stream);
+		uint32_t gridSize;
+		//read = fread(&gridSize, sizeof(uint32_t), 1, stream);
 		ar >> gridSize;
 
 		printf("gridSize = %d bytes", gridSize);
 		//MessageBox(0, str, "ImportSurfer7Grid4", 0);
 
-		long nPag;// number of columns in the grid
-		//read = fread(&nPag, sizeof(long), 1, stream);
+		uint32_t nPag;// number of columns in the grid
+		//read = fread(&nPag, sizeof(uint32_t), 1, stream);
 		ar >> nPag;
 
 		printf("number of pages in the grid nPag = %d \n", nPag);
 		//MessageBox(0, str, "ImportSurfer7Grid4", 0);
  
-		long nRow;// number of rows in the grid
-		//read = fread(&nRow, sizeof(long), 1, stream);
+		uint32_t nRow;// number of rows in the grid
+		//read = fread(&nRow, sizeof(uint32_t), 1, stream);
 		ar >> nRow;
 
 		printf("number of rows in the grid nRow = %d \n", nRow);
 		//MessageBox(0, str, "ImportSurfer7Grid4", 0);
 
-		long nCol;// number of columns in the grid
-		//read = fread(&nCol, sizeof(long), 1, stream);
+		uint32_t nCol;// number of columns in the grid
+		//read = fread(&nCol, sizeof(uint32_t), 1, stream);
 		ar >> nCol;
 
 		printf("number of columns in the grid nCol = %d \n", nCol);
@@ -2193,8 +2193,8 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 		printf("nodes are blanked if greater or equal to this value = %lf \n", BlankValue);
 		//MessageBox(0, str, "ImportSurfer7Grid", 0);
 
-		long dataID;
-		//read = fread(&dataID, sizeof(long), 1, stream);
+		uint32_t dataID;
+		//read = fread(&dataID, sizeof(uint32_t), 1, stream);
 		ar >> dataID;
 		if (dataID != 0x44415441)
 		{
@@ -2205,8 +2205,8 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 		//else
 		//	MessageBox(0, "This is Data Section of file", "ImportSurfer7Grid", 0);
 
-		long dataSize;
-		//read = fread(&dataSize, sizeof(long), 1, stream);
+		uint32_t dataSize;
+		//read = fread(&dataSize, sizeof(uint32_t), 1, stream);
 		ar >> dataSize;
 
 		//sprintf(str, "dataSize = %d bytes", dataSize);
@@ -2234,14 +2234,14 @@ Archive& operator >>(Archive& ar, Grid4& ob)
 			return ar;
 		}
 
-		for (long p = 0; p < nPag; p++)
+		for (uint32_t p = 0; p < nPag; p++)
 		{
-			for (long r = 0; r < nRow; r++)
+			for (uint32_t r = 0; r < nRow; r++)
 			{
 				//read = fread(pgrid->grid4Section.v[p][r], sizeof(double), nCol, stream);
 				ar.Read((unsigned char *)ob.grid4Section.v[p][r], sizeof(double) * nCol);
 #if 0
-				for (long c = 0; c < nCol; c++)
+				for (uint32_t c = 0; c < nCol; c++)
 					printf("%f\t", ob.grid4Section.v[p][r][c]);
 				printf("\n");
 #endif

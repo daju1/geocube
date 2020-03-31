@@ -2794,8 +2794,8 @@ bool GridData::griddata(CubeSize & cube_size)
 	{
 	case 0:
 		{
-			xi = dsequence(double(cube_size.xLL), double(cube_size.xSize), long(cube_size.nCol));
-			yi = dsequence(double(cube_size.yLL), double(cube_size.ySize), long(cube_size.nRow));
+			xi = dsequence(double(cube_size.xLL), double(cube_size.xSize), uint32_t(cube_size.nCol));
+			yi = dsequence(double(cube_size.yLL), double(cube_size.ySize), uint32_t(cube_size.nRow));
 			zi.resize(xi.Length(), yi.Length(), 0.0 );
 			correct_dublicate(x, y, z);
 			if (::griddata(hWnd, x, y, z, NULL, &xi, &yi, &zi) != 0)
@@ -2806,8 +2806,8 @@ bool GridData::griddata(CubeSize & cube_size)
 		break;
 	case 1:
 		{
-			xi = dsequence(double(cube_size.zLL), double(cube_size.zSize), long(cube_size.nPag));
-			yi = dsequence(double(cube_size.yLL), double(cube_size.ySize), long(cube_size.nRow));
+			xi = dsequence(double(cube_size.zLL), double(cube_size.zSize), uint32_t(cube_size.nPag));
+			yi = dsequence(double(cube_size.yLL), double(cube_size.ySize), uint32_t(cube_size.nRow));
 			zi.resize(xi.Length(), yi.Length(), 0.0 );
 			//visible.resize(xi.Length(), yi.Length(), 1.0 );
 			correct_dublicate(z, y, x);
@@ -2819,8 +2819,8 @@ bool GridData::griddata(CubeSize & cube_size)
 		break;
 	case 2:
 		{
-			xi = dsequence(double(cube_size.xLL), double(cube_size.xSize), long(cube_size.nCol));
-			yi = dsequence(double(cube_size.zLL), double(cube_size.zSize), long(cube_size.nPag));
+			xi = dsequence(double(cube_size.xLL), double(cube_size.xSize), uint32_t(cube_size.nCol));
+			yi = dsequence(double(cube_size.zLL), double(cube_size.zSize), uint32_t(cube_size.nPag));
 			zi.resize(xi.Length(), yi.Length(), 0.0 );
 			//visible.resize(xi.Length(), yi.Length(), 1.0 );
 			correct_dublicate(x, z, y);
@@ -3030,8 +3030,8 @@ zflag = 0;
 	{
 	case 0:
 		{
-			xi = dsequence(double(xmin), long(60), double(xmax));
-			yi = dsequence(double(ymin), long(50), double(ymax));
+			xi = dsequence(double(xmin), uint32_t(60), double(xmax));
+			yi = dsequence(double(ymin), uint32_t(50), double(ymax));
 			//xi = dsequence(double(x.Min()), double(40), double(x.Max()));
 			//yi = dsequence(double(y.Min()), double(40), double(y.Max()));
 			zi.resize(xi.Length(), yi.Length(), 0.0 );
@@ -3045,8 +3045,8 @@ zflag = 0;
 	case 1:
 		{
 		//if(zflag == 1)
-			xi = dsequence(double(zmin), long(50), double(zmax));
-			yi = dsequence(double(ymin), long(50), double(ymax));
+			xi = dsequence(double(zmin), uint32_t(50), double(zmax));
+			yi = dsequence(double(ymin), uint32_t(50), double(ymax));
 			//xi = dsequence(double(z.Min()), double(50), double(z.Max()));
 			//yi = dsequence(double(y.Min()), double(50), double(y.Max()));
 			zi.resize(xi.Length(), yi.Length(), 0.0 );
@@ -3060,8 +3060,8 @@ zflag = 0;
 	case 2:
 		{
 		//if(zflag == 2)
-			xi = dsequence(double(xmin), long(50), double(xmax));
-			yi = dsequence(double(zmin), long(50), double(zmax));
+			xi = dsequence(double(xmin), uint32_t(50), double(xmax));
+			yi = dsequence(double(zmin), uint32_t(50), double(zmax));
 			//xi = dsequence(double(x.Min()), double(50), double(x.Max()));
 			//yi = dsequence(double(z.Min()), double(50), double(z.Max()));
 			zi.resize(xi.Length(), yi.Length(), 0.0 );

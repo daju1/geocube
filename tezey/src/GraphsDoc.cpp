@@ -18,8 +18,8 @@
 #else
 #define GetTime GetLocalTime
 #endif
-
-extern vdouble dsequence(double d0, long Len, double dend);
+#include "../../array/src/vdouble.h"
+//extern vdouble dsequence(double d0, uint32_t Len, double dend);
 extern Vector<int> sequence(int i1, int i2); // Возвращает последовательность целых чисел от i1 до i2
 extern void /*vdouble::*/WaveletFilters(int wf, // флаг типа вейвлетов
 									int order, // порядоак вейвлета
@@ -3433,7 +3433,7 @@ void CGraphsDoc::Angle2(CGraphsDoc *pDoc1, CGraphsDoc *pDoc2, LPCSTR szTitle1, L
 void CGraphsDoc::HistOfSignal()
 {
 	// построение гистограммы по сигналу, по временным интервалам и по логарифму временных интервалов.
-	long 
+	uint32_t 
 		N_T			= 1000,
 		N_log_T		= 1000,
 		N_tau		= 1000,

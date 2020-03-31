@@ -1655,7 +1655,7 @@ void KohonenDlg::ClassesSaveAs()
 	}	
 	fclose(dat);
 }*/
-extern int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
+//extern int SaveAsSurferGrid7(HWND hWnd, LPCTSTR lpstrFile, vdouble& xi, vdouble& yi, vdouble& zi, vdouble& visible);
 DWORD KohonenDlg::SurfResults(KohonenDlg* me)
 {
 	CLayerKohonen*	layer;
