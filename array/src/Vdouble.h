@@ -16,7 +16,9 @@
 
 
 #include "stdafx.h"
-#include "../../include/stdint.h"
+#if defined (_MSC_VER)
+#include "../../include/stdint_msvc.h"
+#endif
 
 double Median(double *p, int len); // Возврашает среднее арифметическое элементов вектора
 double Quantil(double qu, double *p, int len); 

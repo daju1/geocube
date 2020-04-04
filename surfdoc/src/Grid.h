@@ -17,7 +17,9 @@ using namespace std;
 
 #define BLANK_VALUE 170141000918782800000000000000000000000.000000
 
-#include "../../include/stdint.h"
+#if defined (_MSC_VER)
+#include "../../include/stdint_msvc.h"
+#endif
 
 struct Trace
 { 
