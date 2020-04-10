@@ -1669,7 +1669,7 @@ void GetMinMaxXYOfData(
 	min_Y = DBL_MAX;
 	max_Y = -DBL_MAX;
 
-	for (int i = 0; i < X.size(); i++)
+    for (size_t i = 0; i < X.size(); i++)
 	{
 		if (min_X > X[i]) min_X = X[i];
 		if (min_Y > Y[i]) min_Y = Y[i];
@@ -9952,17 +9952,17 @@ bool Dipol(int use_newton,
 	double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 	double errorB = 100.0 * (sqrt_GB / sqrt_MB);
 
-	printf ("%d\tGA = %f\terrA=%f\tEp = %f\t%f\t%f\n", 0, GA, errorA, Ep[0], Ep[1], Ep[2]);
-	printf ("%d\tGB = %f\terrB=%f\tk = %f\t%f\t%f\n", 0, GB, errorB, k[0], k[1], k[2]);
+    printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", 0, GA, errorA, Ep[0], Ep[1], Ep[2]);
+    printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", 0, GB, errorB, k[0], k[1], k[2]);
 	printf ("%d\ts = %f\t%f\t%f\n", 0, s[0], s[1], s[2]);
 
 	iter_txt = fopen (iter_file, "at");
 	if (iter_txt)
 	{
 		fprintf(iter_txt, "%d,%d", 0, -1 );
-		fprintf(iter_txt, ",%e", 0);
-		fprintf(iter_txt, ",%f,%f,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-		fprintf(iter_txt, ",%f,%f,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
+        fprintf(iter_txt, ",%e", 0.0);
+        fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+        fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
 		fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);
 		fprintf(iter_txt, "\n");
 		fclose(iter_txt);
@@ -9992,19 +9992,28 @@ bool Dipol(int use_newton,
 		{
 		}
 
+        long n_params = 8;
+        if (false == apply_B)
+            n_params = 4;
+
+        for (long n_param = 0;
+            n_param < n_params;
+            n_param++)
+        {
+            if (iteration_params[n_param].apply) {
+                printf ("n_param=%ld one=%e min_d2=%f\n",
+                        n_param,
+                        iteration_params[n_param].one,
+                        iteration_params[n_param].min_d2);
+            }
+        }
 
 #if 1
-#if 0
 		//long n_param_pre = 2;
-		for (long n_param = 2; 
-			n_param < 4; 
-			n_param++)
-#else
 		//long n_param_pre = 7;
 		for (long n_param = 0; 
-			n_param < 8; 
+            n_param < n_params;
 			n_param++)
-#endif
 		{
 			if (!iteration_params[n_param].apply) continue;
 
@@ -10070,21 +10079,27 @@ bool Dipol(int use_newton,
 			if (we_have_bad_iteration)
 			{
 				double sqrt_GA = sqrt(2.0 * GA / operator_rows);
-				double sqrt_GB = sqrt(2.0 * GB / operator_rows);
-				double errorA = 100.0 * (sqrt_GA / sqrt_MA);
-				double errorB = 100.0 * (sqrt_GB / sqrt_MB);
+                double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 
-				printf ("bad%d\tGA = %f\terrA=%f\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
-				printf ("bad%d\tGB = %f\terrB=%f\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
+                double sqrt_GB = 0.0;
+                double errorB = 0.0;
+                if (apply_B)
+                {
+                    sqrt_GB = sqrt(2.0 * GB / operator_rows);
+                    errorB = 100.0 * (sqrt_GB / sqrt_MB);
+                }
+
+                printf ("bad%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
+                printf ("bad%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
 				printf ("bad%d\ts = %f\t%f\t%f\n", iteration, s[0], s[1], s[2]);
 
 				iter_txt = fopen (iter_file, "at");
 				if (iter_txt)
 				{
-					fprintf(iter_txt, "bad%d,%d", iteration, n_param);
+                    fprintf(iter_txt, "bad%d,%ld", iteration, n_param);
 					fprintf(iter_txt, ",%e", iteration_params[n_param].one);
-					fprintf(iter_txt, ",%f,%f,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-					fprintf(iter_txt, ",%f,%f,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
+                    fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+                    fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
 					fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);
 					fprintf(iter_txt, "\n");
 					fclose(iter_txt);
@@ -10139,22 +10154,27 @@ bool Dipol(int use_newton,
 			}
 
 			double sqrt_GA = sqrt(2.0 * GA / operator_rows);
-			double sqrt_GB = sqrt(2.0 * GB / operator_rows);
-			double errorA = 100.0 * (sqrt_GA / sqrt_MA);
-			double errorB = 100.0 * (sqrt_GB / sqrt_MB);
+            double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 
-			printf ("%d\tGA = %f\terrA=%f\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
-			printf ("%d\tGB = %f\terrB=%f\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
+            double sqrt_GB = 0.0;
+            double errorB = 0.0;
+            if (apply_B) {
+                sqrt_GB = sqrt(2.0 * GB / operator_rows);
+                errorB = 100.0 * (sqrt_GB / sqrt_MB);
+            }
+
+            printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
+            printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
 			printf ("%d\ts = %f\t%f\t%f\n", iteration, s[0], s[1], s[2]);
 
 
 			iter_txt = fopen (iter_file, "at");
 			if (iter_txt)
 			{
-				fprintf(iter_txt, "%d,%d", iteration, n_param);
+                fprintf(iter_txt, "%d,%ld", iteration, n_param);
 				fprintf(iter_txt, ",%e", iteration_params[n_param].one);
-				fprintf(iter_txt, ",%f,%f,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-				fprintf(iter_txt, ",%f,%f,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
+                fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+                fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
 				fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);
 				fprintf(iter_txt, "\n");
 				fclose(iter_txt);
@@ -11282,17 +11302,17 @@ bool Lamp(int use_newton,
 	double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 	double errorB = 100.0 * (sqrt_GB / sqrt_MB);
 
-	printf ("%d\tGA = %f\terrA=%f\tEp = %f\t%f\t%f\n", 0, GA, errorA, Ep[0], Ep[1], Ep[2]);
-	printf ("%d\tGB = %f\terrB=%f\tk = %f\t%f\t%f\n", 0, GB, errorB, k[0], k[1], k[2]);
+    printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", 0, GA, errorA, Ep[0], Ep[1], Ep[2]);
+    printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", 0, GB, errorB, k[0], k[1], k[2]);
 	printf ("%d\ts = %f\t%f\t%f\n", 0, s[0], s[1], s[2]);
 
 	iter_txt = fopen (iter_file, "at");
 	if (iter_txt)
 	{
 		fprintf(iter_txt, "%d,%d", 0, -1 );
-		fprintf(iter_txt, ",%e", 0);
-		fprintf(iter_txt, ",%f,%f,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-		fprintf(iter_txt, ",%f,%f,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
+        fprintf(iter_txt, ",%e", 0.0);
+        fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+        fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
 		fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);
 		fprintf(iter_txt, "\n");
 		fclose(iter_txt);
@@ -11390,8 +11410,8 @@ bool Lamp(int use_newton,
 				double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 				double errorB = 100.0 * (sqrt_GB / sqrt_MB);
 
-				printf ("bad%d\tGA = %f\terrA=%f\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
-				printf ("%d\tGB = %f\terrB=%f\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
+                printf ("bad%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
+                printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
 				printf ("%d\ts = %f\t%f\t%f\n", iteration, s[0], s[1], s[2]);
 
 				iter_txt = fopen (iter_file, "at");
@@ -11399,8 +11419,8 @@ bool Lamp(int use_newton,
 				{
 					fprintf(iter_txt, "bad%d, %d", iteration, n_param);		
 					fprintf(iter_txt, ",%f", iteration_params[n_param].one);
-					fprintf(iter_txt, ",%f,%f,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-					fprintf(iter_txt, ",%f,%f,%f,%f,%f", GB, errorB, k[0], k[1], k[2]);
+                    fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+                    fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0], k[1], k[2]);
 					fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);		
 					fprintf(iter_txt, "\n");
 					fclose(iter_txt);
@@ -11456,8 +11476,8 @@ bool Lamp(int use_newton,
 			double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 			double errorB = 100.0 * (sqrt_GB / sqrt_MB);
 
-			printf ("%d\tGA = %f\terrA=%f\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
-			printf ("%d\tGB = %f\terrB=%f\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
+            printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
+            printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
 			printf ("%d\ts = %f\t%f\t%f\n", iteration, s[0], s[1], s[2]);
 
 			iter_txt = fopen (iter_file, "at");
@@ -11465,8 +11485,8 @@ bool Lamp(int use_newton,
 			{
 				fprintf(iter_txt, "%d, %d", iteration, n_param);		
 				fprintf(iter_txt, ",%f", iteration_params[n_param].one);
-				fprintf(iter_txt, ",%f,%f,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-				fprintf(iter_txt, ",%f,%f,%f,%f,%f", GB, errorB, k[0], k[1], k[2]);
+                fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+                fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0], k[1], k[2]);
 				fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);		
 				fprintf(iter_txt, "\n");
 				fclose(iter_txt);
