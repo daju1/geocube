@@ -1802,6 +1802,48 @@ void GetPartOfData(double p_min, // 0.45
 	}
 }
 void GetPartOfData(int frec, // 1 2 .. 10 ...
+				   vector<double> & X,
+				   vector<double> & Y,
+				   vector<double> & Z, // альтитуда измерений - полёта самолёта
+				   vector<vector<anten_direction> > & A,
+				   vector<double> & vModul,
+				   vector<vector<double> > & v,
+				   
+				   vector<double> & pX,
+				   vector<double> & pY,
+				   vector<double> & pZ, // альтитуда измерений - полёта самолёта
+				   vector<vector<anten_direction> > & pA,
+				   vector<double> & pvModul,
+				   vector<vector<double> > & pv
+				   
+				   )
+{
+	size_t cols = v.size();
+	pv.resize(cols);
+	pA.resize(3);
+
+	for (int i = 0; i < X.size(); i++)
+	{
+		if (i%frec == 0)
+		{
+			pX.push_back(X[i]);
+			pY.push_back(Y[i]);
+			pZ.push_back(Z[i]);
+
+			pvModul.push_back(vModul[i]);
+			for(size_t c = 0; c < cols; c++) // для каждой колонки - суть для каждого параметра
+			{
+				pv[c].push_back(v[c][i]);
+			}
+			for (short a = 0; a < 3; a++)
+			{
+				pA[a].push_back(A[a][i]);
+			}
+		}
+	}
+}
+
+void GetPartOfData_with_mean(int frec, // 1 2 .. 10 ...
                    vector<double> & X,
                    vector<double> & Y,
                    vector<double> & Z, // альтитуда измерений - полёта самолёта
