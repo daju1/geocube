@@ -7329,7 +7329,11 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 	int use_time_col = AutoBuildProfile::ab.use_time_colomn;
-
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
+#else
+   // TODO
+   use_time_col = true;
+#endif
 	vector <string> fnames;
 
 	for (int iFile = 0; iFile < this->m_files_in_dir.nFilesInDirectory; iFile++)
