@@ -100,9 +100,9 @@ struct auto_build_parametrs
 	bool use_min_max_2;
 
 	bool use_whole_directory;
-	bool use_num_col;	//использовать ли номера колонок
-	int  tcols;			// число кооординатных колонок: 2 если XY 3 если XYZ
-	bool use_time_colomn; // идёт лии за координатными колонками колонка времени
+	bool use_num_col;     //использовать ли номера колонок
+	int  tcols;           // число кооординатных колонок: 2 если XY 3 если XYZ
+	bool use_time_colomn; // идёт ли за координатными колонками колонка времени
 	TCHAR num_col_filename[1024];
 	//######################################################
 	bool use_window_cycles_algorithm_1;

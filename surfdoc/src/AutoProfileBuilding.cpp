@@ -70,7 +70,14 @@ void AutoBuildProfile::auto_build_parametrs_Init()
 
 	ab.use_whole_directory = true;
 	ab.use_num_col = true;
+
+   // идёт ли за координатными колонками колонка времени
 	ab.use_time_colomn = false;
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
+#else
+   //TODO:
+	ab.use_time_colomn = true;
+#endif
 	//ab.tcols = 2;  //если в исходном файле X и Y
 	ab.tcols = 3;  //если в исходном файле X, Y и Z
 
@@ -157,7 +164,14 @@ void AutoBuildProfile::auto_build_parametrs_Init1()
 
 	ab.use_whole_directory = true;
 	ab.use_num_col = true;
+
+   // идёт ли за координатными колонками колонка времени
 	ab.use_time_colomn = false;
+#if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
+#else
+   //TODO:
+	ab.use_time_colomn = true;
+#endif
 	//ab.tcols = 2;  //если в исходном файле X и Y
 	ab.tcols = 3;  //если в исходном файле X, Y и Z
 
