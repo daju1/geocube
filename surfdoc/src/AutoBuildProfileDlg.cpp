@@ -8536,8 +8536,8 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		use_newton = 2;
 	}
 #else
-    // TODO
-    use_newton = 1;
+	// TODO
+	use_newton = 0;
 #endif
 
 #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
