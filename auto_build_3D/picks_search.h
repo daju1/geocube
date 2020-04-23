@@ -732,6 +732,7 @@ struct MyMethodsData3
 	long rows; // число точек в геологической структуре по вертикали
 	long cols; // число точек в геологической структуре по горизонтали
 	long pages;
+	long cubes;
 	double x0; double y0; // начало профиля
 	double z0;// альтитуда земной поверхности
 	double z_min;// альтитуда нижней границы куба
@@ -750,7 +751,9 @@ struct MyMethodsData3
 
 
 	bool have_pereopredelen_system;
+	int use_newton;
 
+	int frec;
 };
 
 

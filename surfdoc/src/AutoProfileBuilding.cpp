@@ -2724,7 +2724,7 @@ void FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
 					  double k_oslablenie,// коэффициент ослабления
 					  double **** m,// указатель на три матрицы njuXr, njuYr, njuZr
 					  double **** R,// указатель на три матрицы rx, ry, rz
-					  long rows, long cols, long pages,
+					  long rows, long cols, long pages, long cubes,
 					  double x0, double y0, double z0,
 					  double delta_x, double delta_y, double delta_z,
 					  vector<double> & X,
@@ -2820,7 +2820,7 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 		len, phi,
 
 		phi_k, value;
-	long j,p,r,C,i;
+	long j,p,r,C,i,cb;
 	long signal_len = X.size(); // длина сигнала
 
 	int a; //номер антены
@@ -2861,8 +2861,8 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 		//(*m).resize(signal_len * 3);
 		//template <class T> T ***Alloc3DMat (size_t npages, size_t nrows, size_t ncols)
 
-		*m = Alloc3DMat<double>(3, signal_len, rows * cols * pages);
-		*R = Alloc3DMat<double>(3, signal_len, rows * cols * pages);
+		*m = Alloc3DMat<double>(3, signal_len, rows * cols * pages * cubes);
+		*R = Alloc3DMat<double>(3, signal_len, rows * cols * pages * cubes);
 
 		for (a = 0; a < 3; a++)// перебираем 3 антены
 		{
@@ -2875,11 +2875,12 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 				double ay = A[a][j].ay;
 				double az = A[a][j].az;
 
-                printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\r", j + a * signal_len, signal_len * 3, a, ax, ay, az);
+				printf("Filling of matrix %ld %ld a=%d ax=%f ay=%f az=%f\r", j + a * signal_len, signal_len * 3, a, ax, ay, az);
 
 
 				int putted_in_row = 0;
-
+				for (cb = 0; cb < cubes; cb++)
+				{
 				for (p = 0; p < pages; p++)
 				{
 				//printf("Filling of matrix \t%ld %ld     %d\n", p, pages, putted_in_row);
@@ -2909,6 +2910,8 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 						{
 							// индекс в строке матрицы оператора прямой задачи
 							i = p * rows * cols + r * cols + C;
+							i += cb * pages * rows * cols;
+
 							// координата геологического источника
 							xi = x0 + C * delta_x;
 							rx = (X[j]-xi);
@@ -2953,10 +2956,12 @@ AL векторов луча L и антенной нормали A (ax,ay,az).
 						}
 					}
 				}
+				}
 			}
 		}
 	}
-    printf("\n");
+
+	printf("\n");
 
 	printf("sum_operator_value_x = %e\n", sum_operator_value_x);
 	printf("sum_operator_value_y = %e\n", sum_operator_value_y);

@@ -35,6 +35,7 @@ using namespace std;
 #include "./../array/src/slau.h"
 #include "cube.h"
 
+#define NCUBES_FOR_SAVE 2
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -118,7 +119,7 @@ void FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
 	double k_oslablenie,// коэффициент ослабления
 	double **** m,// указатель на три матрицы njuXr, njuYr, njuZr
 	double **** R,// указатель на три матрицы rx, ry, rz
-	long rows, long cols, long pages,
+	long rows, long cols, long pages, long cubes,
 	double x0, double y0, double z0,
 	double delta_x, double delta_y, double delta_z,
 	vector<double> & X,
@@ -2042,21 +2043,21 @@ void SaveCubesAndSlices(const char * common_directory,
 		{
 		case 1:
 			{
-				a_cube.SaveAsSurferClicesXY(lpstrFile, grid);	
+				a_cube.SaveAsSurferClicesXY(lpstrFile, grid);
 			}
 			break;
 		case 2:
 			{
-				if (mmd3.to_povorot && mmd3.need_crd_projection && to_reduce_y) 
-					a_cube.SaveAsSurferClicesXZ(lpstrFile, grid, mmd3.vX0, cos(mmd3.ugol));	
-				a_cube.SaveAsSurferClicesXZ(lpstrFile, grid);	
+				if (mmd3.to_povorot && mmd3.need_crd_projection && to_reduce_y)
+					a_cube.SaveAsSurferClicesXZ(lpstrFile, grid, mmd3.vX0, cos(mmd3.ugol));
+				a_cube.SaveAsSurferClicesXZ(lpstrFile, grid);
 			}
 			break;
 		case 3:
 			{
-				if (mmd3.to_povorot && mmd3.need_crd_projection && to_reduce_x) 
-					a_cube.SaveAsSurferClicesYZ(lpstrFile, grid, mmd3.vY0, cos(mmd3.ugol));	
-				a_cube.SaveAsSurferClicesYZ(lpstrFile, grid);	
+				if (mmd3.to_povorot && mmd3.need_crd_projection && to_reduce_x)
+					a_cube.SaveAsSurferClicesYZ(lpstrFile, grid, mmd3.vY0, cos(mmd3.ugol));
+				a_cube.SaveAsSurferClicesYZ(lpstrFile, grid);
 			}
 			break;
 		}
@@ -2123,19 +2124,19 @@ void SaveCubesAndSlices(const char * common_directory,
 
 
 void SavingIteration(vector<short> & va, int iteration, const char * folder_name,
-					 bool apply_log10,
-					 bool apply_bln,
+					bool apply_log10,
+					bool apply_bln,
 					vector<double> & KTi, const char * cube_name_KTi,
-                    vector<double> & ni, const char * cube_name_ni,
-                    vector<vector<double> > & C,
-                    vector<vector<double> > & W,
+					vector<double> & ni, const char * cube_name_ni,
+					vector<vector<double> > & C,
+					vector<vector<double> > & W,
 					int da,
 					const char * DirName,
 					const char * method_name,
 					Grid4 *** cubes, MyMethodsData3 & mmd3, 
 					bool to_reduce_x, bool to_reduce_y)
 {
-	short a, ia;  
+	short a, ia;
 	int cc = 0;
 	if (cubes)
 	{
@@ -2145,36 +2146,46 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 			{
 				for(long P = 0; P < mmd3.pages; P++)
 				{
-					// индекс в строке матрицы оператора прямой задачи
-					long i = P * mmd3.rows * mmd3.cols + r * mmd3.cols + c;
-					// rows = 1, cols = 1, i = p
-					if (apply_log10)
+					for (long cb = 0; cb < mmd3.cubes; cb++)
 					{
-						cubes[cc][0]->grid4Section.v[P][r][c] = log10(KTi[i]);
-						cubes[cc][1]->grid4Section.v[P][r][c] = log10(ni[i]);
-					}
-					else
-					{
-						cubes[cc][0]->grid4Section.v[P][r][c] = KTi[i];
-						cubes[cc][1]->grid4Section.v[P][r][c] = ni[i];
+						// индекс в строке матрицы оператора прямой задачи
+						long i = P * mmd3.rows * mmd3.cols + r * mmd3.cols + c;
+						i += cb * mmd3.pages * mmd3.rows * mmd3.cols;
+						// rows = 1, cols = 1, i = p
+						if (apply_log10)
+						{
+							cubes[cc][0 + cb * NCUBES_FOR_SAVE]->grid4Section.v[P][r][c] = log10(KTi[i]);
+							cubes[cc][1 + cb * NCUBES_FOR_SAVE]->grid4Section.v[P][r][c] = log10(ni[i]);
+						}
+						else
+						{
+							cubes[cc][0 + cb * NCUBES_FOR_SAVE]->grid4Section.v[P][r][c] = KTi[i];
+							cubes[cc][1 + cb * NCUBES_FOR_SAVE]->grid4Section.v[P][r][c] = ni[i];
+						}
 					}
 				}
 			}
 		}
 		cc = 0;
-		int i_cube = 0; 
-		SaveCubesAndSlices(DirName,
-			method_name,
-			cubes, mmd3, 
-			cube_name_KTi,
-			cc, i_cube, to_reduce_x, to_reduce_y);
+		char cube_name[1024];
+		for (long cb = 0; cb < mmd3.cubes; cb++)
+		{
+			int i_cube = 0;
+			sprintf(cube_name,"%s.%d", cube_name_KTi, cb);
+			SaveCubesAndSlices(DirName,
+				method_name,
+				cubes, mmd3,
+				cube_name,
+				cc, i_cube + cb * NCUBES_FOR_SAVE, to_reduce_x, to_reduce_y);
 
-		i_cube = 1; 
-		SaveCubesAndSlices(DirName,
-			method_name,
-			cubes, mmd3, 
-			cube_name_ni,
-			cc, i_cube, to_reduce_x, to_reduce_y);
+			i_cube = 1;
+			sprintf(cube_name,"%s.%d", cube_name_ni, cb);
+			SaveCubesAndSlices(DirName,
+				method_name,
+				cubes, mmd3,
+				cube_name,
+				cc, i_cube + cb * NCUBES_FOR_SAVE, to_reduce_x, to_reduce_y);
+		}
 
 	}
 	if (apply_bln)
@@ -2183,10 +2194,10 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 		char bln_name[1024];
 		char name[2048];
 		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; 
-		
+
 			sprintf(name, "%s_%c", method_name, 'x'+ a);
 
-            sprintf(bln_name, "%s/origin_%s.bln", DirName, name);
+			sprintf(bln_name, "%s/origin_%s.bln", DirName, name);
 			char * p; while (p=strchr (bln_name,'\"')){*p = '_';}
 			FILE * bln = fopen (bln_name, "wt");
 			if(bln)
@@ -2195,17 +2206,17 @@ void SavingIteration(vector<short> & va, int iteration, const char * folder_name
 				for(size_t i = 0; i < W[a].size(); i++)
 				{
 					fprintf(bln, "%f,%f\n", double(i), double(W[a+da][i]));
-				}	
+				}
 				fclose(bln);
 			}
-			
-            sprintf(bln_name, "%s/reconstr_%s.bln", DirName, name);
+
+			sprintf(bln_name, "%s/reconstr_%s.bln", DirName, name);
 			while (p=strchr (bln_name,'\"')){*p = '_';}
 			bln = fopen (bln_name, "wt");
 			if(bln)
 			{
-                fprintf(bln, "%d,%d, reconstr\n", C[a].size(), 0);
-                for(size_t i = 0; i < C[a].size(); i++)
+				fprintf(bln, "%d,%d, reconstr\n", C[a].size(), 0);
+				for(size_t i = 0; i < C[a].size(); i++)
 				{
 					fprintf(bln, "%f,%f\n", double(i), double(C[a][i]));
 				}
@@ -2975,7 +2986,7 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 					double pw,
 					double *** R,// указатель на три матрицы rx, ry, rz
 					vector<vector<anten_direction> > & A,
-					
+
 					double *** p_A,
 					double *** W_p_A,
 
@@ -2984,7 +2995,7 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 					vector<double> & beta_A,
 					vector<double> & omega_A,
 					double * Ep,
-					
+
 					vector<vector<double> > & Er_A,
 					vector<vector<double> > & S,
 
@@ -3001,7 +3012,7 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 
 					vector<vector<double> > & temp_A,
 					vector<vector<double> > & temp52_A,
-					
+
 					double *** p_B,
 					double *** W_p_B,
 
@@ -3026,7 +3037,7 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 					vector<double> & d2Gdk2,
 					vector<vector<double> > & temp_B,
 					vector<vector<double> > & temp52_B
-					 )
+					)
 {
 	short a, ia;
 	
@@ -3063,22 +3074,22 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 			dGdni_B[c] = 0.0;
 			d2Gdni2_B[c] = 0.0;
 			for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-			
+
 				for (long r = 0; r < operator_rows; r++)
 				{
 					W_p_a_r_c_S_a_r_A = S[a][r] * W_p_A[a][r][c];
 					dGdni_A[c] += W_p_a_r_c_S_a_r_A * Er_A[a][r];
 					d2Gdni2_A[c] += W_p_a_r_c_S_a_r_A * W_p_a_r_c_S_a_r_A;
-                }
-                if (apply_B){
-                for (long r = 0; r < operator_rows; r++)
-                {
-
-					W_p_a_r_c_S_a_r_B = s[a] * S[a][r] * W_p_B[a][r][c];
-					dGdni_B[c] += W_p_a_r_c_S_a_r_B * Er_B[a][r];
-					d2Gdni2_B[c] += W_p_a_r_c_S_a_r_B * W_p_a_r_c_S_a_r_B;
 				}
-                }
+				if (apply_B){
+					for (long r = 0; r < operator_rows; r++)
+					{
+
+						W_p_a_r_c_S_a_r_B = s[a] * S[a][r] * W_p_B[a][r][c];
+						dGdni_B[c] += W_p_a_r_c_S_a_r_B * Er_B[a][r];
+						d2Gdni2_B[c] += W_p_a_r_c_S_a_r_B * W_p_a_r_c_S_a_r_B;
+					}
+				}
 			}
 			//double agdni_c = dGdni[c];
 			//double ag2dni2_c = d2Gdni2[c];
@@ -3100,17 +3111,17 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 	double rx, ry, rz;
 
 	double ddet_dbeta_div_det_A;
-	double ddet_domega_div_det_A;				
+	double ddet_domega_div_det_A;
 	double ddet_dbeta_div_det_B;
-	double ddet_domega_div_det_B;				
+	double ddet_domega_div_det_B;
 
 	double d2det_dbeta2_div_det_A;
-	double d2det_domega2_div_det_A;				
+	double d2det_domega2_div_det_A;
 	double d2det_dbeta2_div_det_B;
-	double d2det_domega2_div_det_B;				
+	double d2det_domega2_div_det_B;
 
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-	
+
 		if (apply_dgdep)
 		{
 			dGdEp[a] = 0.0;
@@ -3127,20 +3138,20 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 				{
 					double _p_A = p_A[a][r][c];
 					tmp_A += ni_A[c] * pow(_p_A, 1.5) * exp(-_p_A);
-                }
-                if (apply_B) {
-                for (long c = 0; c < operator_cols; c++)
-                {
-                    double _p_B = p_B[a][r][c];
-                    tmp_B += ni_B[c] * pow(_p_B, 1.5) * exp(-_p_B);
 				}
-                }
+				if (apply_B) {
+					for (long c = 0; c < operator_cols; c++)
+					{
+						double _p_B = p_B[a][r][c];
+						tmp_B += ni_B[c] * pow(_p_B, 1.5) * exp(-_p_B);
+					}
+				}
 				tmp_A *= S[a][r];
-                d2GdEp2[a] += tmp_A * tmp_A;
-                if (apply_B) {
-				tmp_B *= S[a][r];
-                d2Gdk2[a] += tmp_B * tmp_B;
-                }
+				d2GdEp2[a] += tmp_A * tmp_A;
+				if (apply_B) {
+					tmp_B *= S[a][r];
+					d2Gdk2[a] += tmp_B * tmp_B;
+				}
 			}
 			d2GdEp2[a] *= four_per_sqrt_pi;
 			d2Gdk2[a] *= s[a] * four_per_sqrt_pi;
@@ -3149,24 +3160,24 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 		{
 			temp_A[a][c] = 0.0;
 			temp52_A[a][c] = 0.0;
-            if (apply_B) {
-			temp_B[a][c] = 0.0;
-			temp52_B[a][c] = 0.0;
-            }
+			if (apply_B) {
+				temp_B[a][c] = 0.0;
+				temp52_B[a][c] = 0.0;
+			}
 
 			dGdbeta_A[c] = 0.0;
 			d2Gdbeta2_A[c] = 0.0;
-            if (apply_B) {
-			dGdbeta_B[c] = 0.0;
-			d2Gdbeta2_B[c] = 0.0;
-            }
+			if (apply_B) {
+				dGdbeta_B[c] = 0.0;
+				d2Gdbeta2_B[c] = 0.0;
+			}
 
 			dGdomega_A[c] = 0.0;
 			d2Gdomega2_A[c] = 0.0;
-            if (apply_B) {
-			dGdomega_B[c] = 0.0;
-			d2Gdomega2_B[c] = 0.0;
-            }
+			if (apply_B) {
+				dGdomega_B[c] = 0.0;
+				d2Gdomega2_B[c] = 0.0;
+			}
 
 			for (long r = 0; r < operator_rows; r++)
 			{
@@ -3188,7 +3199,7 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 					d2det_domega2_div_det_A
 					);
 
-                if (apply_B) {
+				if (apply_B) {
 
 				ddet_dbeta_domega_div_det(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
@@ -3199,7 +3210,7 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 					d2det_dbeta2_div_det_B,
 					d2det_domega2_div_det_B
 					);
-                }
+				}
 
 				double _p_A = p_A[a][r][c];
 				double tmp_A = pow(_p_A, 1.5) * exp(-_p_A) * S[a][r];
@@ -3241,10 +3252,10 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 			temp_A[a][c] *= ni_A[c];
 			temp52_A[a][c] *= ni_A[c];
 
-            if (apply_B) {
-			temp_B[a][c] *= ni_B[c];
-			temp52_B[a][c] *= ni_B[c];
-            }
+			if (apply_B) {
+				temp_B[a][c] *= ni_B[c];
+				temp52_B[a][c] *= ni_B[c];
+			}
 			//temp_a_c = temp[a][c];
 
 			if (apply_dgdep)
@@ -3252,10 +3263,10 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 				dGdEp[a] += temp_A[a][c];
 				d2GdEp2[a] += 2.0 * temp52_A[a][c] - temp_A[a][c];
 
-                if (apply_B) {
-				dGdk[a] += temp_B[a][c];
-				d2Gdk2[a] += 2.0 * temp52_B[a][c] - temp_B[a][c];
-                }
+				if (apply_B) {
+					dGdk[a] += temp_B[a][c];
+					d2Gdk2[a] += 2.0 * temp52_B[a][c] - temp_B[a][c];
+				}
 			}
 
 		}
@@ -3297,41 +3308,41 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 				double _p_A = p_A[a][r][c];
 				double tmp_A = pow(_p_A, 1.5) * exp(-_p_A) * S[a][r];
 				tmp2_A += tmp_A * tmp_A;
-            }
-            if (apply_B) {
-            for (long r = 0; r < operator_rows; r++)
-            {
+			}
+			if (apply_B) {
+				for (long r = 0; r < operator_rows; r++)
+				{
 
-				double _p_B = p_B[a][r][c];
-				double tmp_B = pow(_p_B, 1.5) * exp(-_p_B) * S[a][r];
-				tmp2_B += tmp_B * tmp_B;
-                }
+					double _p_B = p_B[a][r][c];
+					double tmp_B = pow(_p_B, 1.5) * exp(-_p_B) * S[a][r];
+					tmp2_B += tmp_B * tmp_B;
+				}
 			}
 			tmp2_A *= ni_A[c] * ni_A[c];
-            d2GdKTi2_A[c] += tmp2_A;
-            if (apply_B) {
-			tmp2_B *= s[a] * s[a] * ni_B[c] * ni_B[c];
-            d2GdKTi2_B[c] += tmp2_B;
-            }
+			d2GdKTi2_A[c] += tmp2_A;
+			if (apply_B) {
+				tmp2_B *= s[a] * s[a] * ni_B[c] * ni_B[c];
+				d2GdKTi2_B[c] += tmp2_B;
+			}
 		}
 		d2GdKTi2_A[c] *= four_per_sqrt_pi;
-        if (apply_B) {
-		d2GdKTi2_B[c] *= four_per_sqrt_pi;
-        }
-		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены						
-			dGdKTi_A[c] +=  temp_A[a][c];	
-            d2GdKTi2_A[c] += 2.0 * temp52_A[a][c] - 5.0 * temp_A[a][c];
-            if (apply_B) {
-			dGdKTi_B[c] +=  s[a] * temp_B[a][c];	
-			d2GdKTi2_B[c] += s[a] * (2.0 * temp52_B[a][c] - 5.0 * temp_B[a][c]);
-            }
+		if (apply_B) {
+			d2GdKTi2_B[c] *= four_per_sqrt_pi;
+		}
+		for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
+			dGdKTi_A[c] +=  temp_A[a][c];
+			d2GdKTi2_A[c] += 2.0 * temp52_A[a][c] - 5.0 * temp_A[a][c];
+			if (apply_B) {
+				dGdKTi_B[c] +=  s[a] * temp_B[a][c];
+				d2GdKTi2_B[c] += s[a] * (2.0 * temp52_B[a][c] - 5.0 * temp_B[a][c]);
+			}
 		}
 		dGdKTi_A[c] *= two_per_sqrt_pi / KTi_A[c];
 		d2GdKTi2_A[c] *= one_per_sqrt_pi / (KTi_A[c] * KTi_A[c]);
-        if (apply_B) {
-		dGdKTi_B[c] *= two_per_sqrt_pi / KTi_B[c];
-		d2GdKTi2_B[c] *= one_per_sqrt_pi / (KTi_B[c] * KTi_B[c]);
-        }
+		if (apply_B) {
+			dGdKTi_B[c] *= two_per_sqrt_pi / KTi_B[c];
+			d2GdKTi2_B[c] *= one_per_sqrt_pi / (KTi_B[c] * KTi_B[c]);
+		}
 
 
 		dGdbeta_A[c] *= two_per_sqrt_pi * pw * ni_A[c];
@@ -3339,12 +3350,12 @@ void CalcDerivatives_dipol(long c_apply, long apply_B,
 		d2Gdbeta2_A[c] *= two_per_sqrt_pi * pw * ni_A[c];
 		d2Gdomega2_A[c] *= two_per_sqrt_pi * pw * ni_A[c];
 
-        if (apply_B) {
-        dGdbeta_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-        dGdomega_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-        d2Gdbeta2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-        d2Gdomega2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
-        }
+		if (apply_B) {
+			dGdbeta_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+			dGdomega_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+			d2Gdbeta2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+			d2Gdomega2_B[c] *= two_per_sqrt_pi * pw * ni_B[c];
+		}
         /*
 		d2Gdbeta2_A[c] = 1.0;
 		d2Gdbeta2_B[c] = 1.0;
@@ -3387,13 +3398,13 @@ void ForwordOperatorApply_dipol(long c_apply, bool apply_B,
 						  double *** R,// указатель на три матрицы rx, ry, rz
 						  vector<vector<anten_direction> > & A,
 						  vector<vector<double> > & W,
-                          
+
 						  long operator_rows,
 						  long operator_cols,
 
 						  double *** p_A,
 						  double *** W_p_A,
-						  
+
 						  vector<double> & ni_A,
 						  vector<double> & KTi_A,
 						  vector<double> & beta_A,
@@ -3410,12 +3421,12 @@ void ForwordOperatorApply_dipol(long c_apply, bool apply_B,
 
 						  double *** p_B,
 						  double *** W_p_B,
-						  
+
 						  vector<double> & ni_B,
 						  vector<double> & KTi_B,
 						  vector<double> & beta_B,
 						  vector<double> & omega_B,
-						  
+
 						  double * k,
 						  double * s,
 						  double * mean_B_B,
@@ -3476,16 +3487,16 @@ void ForwordOperatorApply_dipol(long c_apply, bool apply_B,
 				if (nju_phi_A > DBL_MIN && nju_phi_A < nju_phi_min)
 					nju_phi_min = nju_phi_A;
 
-                if (apply_B){
+				if (apply_B){
 
-				// коэффициент выхода диаграммы направленности
-				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
-					rx, ry, rz, 
-					ax, ay, az);
+					// коэффициент выхода диаграммы направленности
+					double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
+						rx, ry, rz,
+						ax, ay, az);
 
-				if (nju_phi_B > DBL_MIN && nju_phi_B < nju_phi_min)
-					nju_phi_min = nju_phi_B;
-                }
+					if (nju_phi_B > DBL_MIN && nju_phi_B < nju_phi_min)
+						nju_phi_min = nju_phi_B;
+				}
 			}
 		}
 	}
@@ -3521,23 +3532,23 @@ void ForwordOperatorApply_dipol(long c_apply, bool apply_B,
 				//double W_p_a_r_c_A = W_p_A[a][r][c];
 				CJI_A[a][r][c] = S[a][r] * ni_A[c] * W_p_A[a][r][c];
 
-                if (apply_B){
-				
-				// коэффициент выхода диаграммы направленности
-				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
-					rx, ry, rz, 
-					ax, ay, az);
+				if (apply_B){
 
-				if (nju_phi_B < zero_substitution)
-					nju_phi_B = zero_substitution;
+					// коэффициент выхода диаграммы направленности
+					double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
+						rx, ry, rz,
+						ax, ay, az);
 
-				double _p_B = k[a] * W[a+6][r] / (m[a][r][c] * nju_phi_B * KTi_B[c]);
-				p_B[a][r][c] = _p_B;
-				//W_p[a][r][c] = 1.0 + 2.0 * sqrt (_p / PI) * exp(-_p) - alglib::errorfunction(sqrt(_p));
-				W_p_B[a][r][c] = alglib::errorfunctionc(sqrt(_p_B)) + 2.0 * sqrt (_p_B / PI) * exp(-_p_B);
-				//double W_p_a_r_c_B = W_p_B[a][r][c];
-				CJI_B[a][r][c] = S[a][r] * ni_B[c] * W_p_B[a][r][c];
-                }
+					if (nju_phi_B < zero_substitution)
+						nju_phi_B = zero_substitution;
+
+					double _p_B = k[a] * W[a+6][r] / (m[a][r][c] * nju_phi_B * KTi_B[c]);
+					p_B[a][r][c] = _p_B;
+					//W_p[a][r][c] = 1.0 + 2.0 * sqrt (_p / PI) * exp(-_p) - alglib::errorfunction(sqrt(_p));
+					W_p_B[a][r][c] = alglib::errorfunctionc(sqrt(_p_B)) + 2.0 * sqrt (_p_B / PI) * exp(-_p_B);
+					//double W_p_a_r_c_B = W_p_B[a][r][c];
+					CJI_B[a][r][c] = S[a][r] * ni_B[c] * W_p_B[a][r][c];
+				}
 			}
 		}
 	}
@@ -3552,47 +3563,47 @@ void ForwordOperatorApply_dipol(long c_apply, bool apply_B,
 		{
 			// Выход оператора прямой задачи
 			C_A[a][r] = 0.0;
-            if (apply_B) {
-			C_B[a][r] = 0.0;
-            }
+			if (apply_B) {
+				C_B[a][r] = 0.0;
+			}
 			for (long c = 0; c < operator_cols; c++)
 			{
 				//double nic = ni[c], W_p_a_r_c = W_p[a][r][c];
 				//C_A[a][r] += S[a][r] * ni_A[c] * W_p_A[a][r][c];
 				//C_B[a][r] += S[a][r] * ni_B[c] * W_p_B[a][r][c];
 				C_A[a][r] += CJI_A[a][r][c];
-            }
-            if (apply_B) {
-                for (long c = 0; c < operator_cols; c++)
-                {
-                    C_B[a][r] += CJI_B[a][r][c];
-                }
-			}							
+			}
+			if (apply_B) {
+				for (long c = 0; c < operator_cols; c++)
+				{
+					C_B[a][r] += CJI_B[a][r][c];
+				}
+			}
 			//double car = C[a][r], war = W[a][r];
 			//size_t W_a_size = W[a].size();
-            if (apply_B) {
-			mean_CB[a] += C_B[a][r];
-            }
+			if (apply_B) {
+				mean_CB[a] += C_B[a][r];
+			}
 		}
-        if (apply_B) {
-		mean_CB[a] /= operator_rows;
-		if (mean_CB[a] != 0.0)
-			s[a] = mean_B_B[a] / mean_CB[a];
-		else
-			s[a] = 0.0;
-        }
+		if (apply_B) {
+			mean_CB[a] /= operator_rows;
+			if (mean_CB[a] != 0.0)
+				s[a] = mean_B_B[a] / mean_CB[a];
+			else
+				s[a] = 0.0;
+		}
 
 		//поправка Выхода оператора прямой задачи
 		for (long r = 0; r < operator_rows; r++)
 		{
 			// Невязка
 			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
-        }
-        if (apply_B) {
-            for (long r = 0; r < operator_rows; r++){
-                C_B[a][r] *= s[a];
-                Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
-            }
+		}
+		if (apply_B) {
+			for (long r = 0; r < operator_rows; r++){
+				C_B[a][r] *= s[a];
+				Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+			}
 		}
 	}
 
@@ -3607,20 +3618,20 @@ void ForwordOperatorApply_dipol(long c_apply, bool apply_B,
 			//	double sad = 0;
 			//}
 			double ear_A = Er_A[a][r];
-			GA += Er_A[a][r] * Er_A[a][r];
-        }
-        if (apply_B) {
-        for (long r = 0; r < operator_rows; r++)
-        {
-            double ear_B = Er_B[a][r];
-            GB += Er_B[a][r] * Er_B[a][r];
+			GA += ear_A * ear_A;
 		}
-        }
+		if (apply_B) {
+			for (long r = 0; r < operator_rows; r++)
+			{
+				double ear_B = Er_B[a][r];
+				GB += ear_B * ear_B;
+			}
+		}
 	}
 	GA /= 2.0;
-    if (apply_B) {
-	GB /= 2.0;
-    }
+	if (apply_B) {
+		GB /= 2.0;
+	}
 
 }
 
@@ -3630,13 +3641,13 @@ void ForwordOperatorApply(long c_apply,
 						  vector<short> & va,
 						  double *** m, // три матрицы njuX, njuY, njuZ
 						  vector<vector<double> > & W,
-                          
+
 						  long operator_rows,
 						  long operator_cols,
 
 						  double *** p_A,
 						  double *** W_p_A,
-						  
+
 						  vector<double> & ni_A,
 						  vector<double> & KTi_A,
 						  double * Ep,
@@ -3648,14 +3659,14 @@ void ForwordOperatorApply(long c_apply,
 
 						  double *** p_B,
 						  double *** W_p_B,
-						  
+
 						  vector<double> & ni_B,
 						  vector<double> & KTi_B,
-						  
+
 						  double * k,
 						  double * s,
 						  double * mean_B_B,
-						  
+
 						  vector<vector<vector<double> > > & CJI_B,
 						  vector<vector<double> > & C_B,
 						  vector<vector<double> > & Er_B
@@ -5193,7 +5204,7 @@ bool AutoBuildProfileDlg::HandlingOfInputFiles()
 				for (int cc = 0; cc < cols_3; cc++)
 				{
 					for(size_t c = cc * 3; c < (cc+1) * 3; c++) 
-					{			
+					{
 						new_names_of_colomns[cc] += 
 							names_of_colomns[original_col_numbers[c]];
 						new_names_of_colomns[cc] += "_";
@@ -8232,8 +8243,8 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	DZ = z0 - z_min;
 	cout << "DZ = " << DZ << " m" << endl;
 
-	
-	double inv_k_oslablenie;	
+
+	double inv_k_oslablenie;
 
 //	if (ans_OP == IDYES)
 //	{
@@ -8343,6 +8354,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
         mmd3.pages = 30;
         mmd3.iter_save = 100;
 #endif
+		mmd3.cubes = 2;
 
 		//cout << "Parameters of power distribution model (w0 w05 w1 w2)" << endl;
 		//cout << "number means W ~ w0*h^0 + w05*h^0.5 + w1*h^1 + w2*h^2" << endl;
@@ -8463,6 +8475,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 		fprintf(description, "rows = %d\n", mmd3.rows);
 		fprintf(description, "cols = %d\n", mmd3.cols);
 		fprintf(description, "pages = %d\n", mmd3.pages);
+		fprintf(description, "cubes = %d\n", mmd3.cubes);
 
 		fprintf(description, "w0 = %f\n", mmd3.spm.w0);
 		fprintf(description, "w05 = %f\n", mmd3.spm.w05);
@@ -8471,7 +8484,8 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 
 
 
-		
+		fprintf(description, "frec = %d\n", mmd3.frec);
+		fprintf(description, "use_newton = %d\n", mmd3.use_newton);
 
 
 		fprintf(description, "wave_type = %d\n", mmd3.wave_type);
@@ -8521,27 +8535,27 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
     to_frec = false;
 #endif
 
-    int use_newton = 0;
+	mmd3.use_newton = 0;
 #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_SPUSK) == BST_CHECKED) 
 	{
-		use_newton = 0;
+		mmd3.use_newton = 0;
 	}
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_NEWTON) == BST_CHECKED) 
 	{
-		use_newton = 1;
+		mmd3.use_newton = 1;
 	}
 	if (IsDlgButtonChecked(hDlg, IDC_RADIO_NEWTON_MODIFIED) == BST_CHECKED) 
 	{
-		use_newton = 2;
+		mmd3.use_newton = 2;
 	}
 #else
 	// TODO
-	use_newton = 0;
+	mmd3.use_newton = 0;
 #endif
 
 #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
-	bool apply_dgdni = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdni) == BST_CHECKED;	   
+	bool apply_dgdni = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdni) == BST_CHECKED;
 	bool apply_dgdKTi = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdKTi) == BST_CHECKED;
 	bool apply_dgdep = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdep) == BST_CHECKED;
 	bool apply_dgdbeta = IsDlgButtonChecked(hDlg, IDC_CHECK_apply_dgdbeta) == BST_CHECKED;
@@ -8561,27 +8575,27 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		if (to_frec)
 		{
-			int frec = 1;
+			mmd3.frec = 1;
 
 			//cout << "To get each frec? [1 2 .. 10 ... ]" << endl;
 			//cin >> frec;
 #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			GetDlgItemText(this->hDlg, IDC_EDIT_frec, str, 127);
-			frec = atoi(str);
+			mmd3.frec = atoi(str);
 #else
             // TODO
-            frec = 8;
+            mmd3.frec = 8;
 #endif
 
-			GetPartOfData(frec,
+			GetPartOfData(mmd3.frec,
 				vX,vY,vZ, A, vModul, W,
-				pX,pY,pZ,pA, pModul,pW);	
+				pX,pY,pZ,pA, pModul,pW);
 
 			bool only_init = false;
 			// массив коэффициентов симметризации
 			vector<vector<double> > S(3);
 
-			Lamp(use_newton,
+			Lamp(mmd3.use_newton,
 				type, // тип прямой задачи
 				cols,
 				apply_dgdni,
@@ -8608,7 +8622,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			// массив коэффициентов симметризации
 			vector<vector<double> > S(3);
 
-			Lamp(use_newton,
+			Lamp(mmd3.use_newton,
 				type, // тип прямой задачи
 				cols,
 				apply_dgdni,
@@ -8634,19 +8648,19 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 	{
 		if (to_frec)
 		{
-			int frec = 1;
+			mmd3.frec = 1;
 #if defined (_MSC_VER) && !defined (QT_PROJECT) && !defined (QT_VERSION)
 			//cout << "To get each frec? [1 2 .. 10 ... ]" << endl;
 			//cin >> frec;
 			GetDlgItemText(this->hDlg, IDC_EDIT_frec, str, 127);
-			frec = atoi(str);
+			mmd3.frec = atoi(str);
 #else
-            // TODO
-            frec = 8;
+			// TODO
+			mmd3.frec = 8;
 #endif
-			GetPartOfData(frec,
+			GetPartOfData(mmd3.frec,
 				vX,vY,vZ, A, vModul, W,
-				pX,pY,pZ,pA, pModul,pW);	
+				pX,pY,pZ,pA, pModul,pW);
 
 			// массив коэффициентов симметризации
 			vector<vector<double> > S(3);
@@ -8655,17 +8669,16 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			//cout << "Enter init_by_lamp" << endl;
 			//cin >> init_by_lamp;
 #else
-            // TODO
-            bool init_by_lamp = false;
+			// TODO
+			bool init_by_lamp = false;
 #endif
 
-			
 
 			if (init_by_lamp)
 			{
 				bool only_init = true;
 
-				Lamp(use_newton,
+				Lamp(mmd3.use_newton,
 					type, // тип прямой задачи
 					cols,
 					apply_dgdni,
@@ -8688,7 +8701,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			}
 
 
-			Dipol(use_newton,
+			Dipol(mmd3.use_newton,
 				type, // тип прямой задачи
 				cols,
 
@@ -8727,7 +8740,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			if (init_by_lamp)
 			{
 				bool only_init = true;
-				Lamp(use_newton,
+				Lamp(mmd3.use_newton,
 					type, // тип прямой задачи
 					cols,
 					apply_dgdni,
@@ -8750,7 +8763,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 			}
 
 
-			Dipol(use_newton,
+			Dipol(mmd3.use_newton,
 				type, // тип прямой задачи
 				cols,
 				apply_dgdni,
@@ -8787,7 +8800,7 @@ bool AutoBuildProfileDlg1::HandlingOfInputFiles()
 bool Dipol(int use_newton,
 		   int type, // тип прямой задачи
 		   long cols,
-		   bool apply_dgdni,		   
+		   bool apply_dgdni,
 		   bool apply_dgdKTi,
 		   bool apply_dgdep,
 		   bool apply_dgdbeta,
@@ -8809,15 +8822,15 @@ bool Dipol(int use_newton,
 		   char * common_directory)
 {
 #ifdef QT_DEBUG
-    //apply_B = true;
+	//apply_B = true;
 #endif
 #if 1
-    //sprintf(common_directory_iX_iY, "%s/whole_object_by_colomns", common_directory);
+	//sprintf(common_directory_iX_iY, "%s/whole_object_by_colomns", common_directory);
 	//if (!CreateDirectory(common_directory_iX_iY, NULL))
 	//{
 	//}
 
-	double min_X, max_X, min_Y, max_Y;				
+	double min_X, max_X, min_Y, max_Y;
 	GetMinMaxXYOfData(vX, vY, min_X, max_X, min_Y, max_Y);
 
 	double 
@@ -8874,14 +8887,14 @@ bool Dipol(int use_newton,
 	if (to_reduce_x && to_reduce_y)
 	{
 		char err_str[2048];
-		sprintf(err_str, 
+		sprintf(err_str,
 			"to_reduce_x && to_reduce_y\n"
 			"DX = %f DY = %f DZ = %f\n"
 			"mmd3.dx_and_dy_per_DZ = %f\n"
 			"dx = dy = %f"
 			"nFilesInDirectory = %d"
 			,
-			DX, DY, DZ, 
+			DX, DY, DZ,
 			mmd3.dx_and_dy_per_DZ,
 			dx,
 			nFilesInDirectory);
@@ -8927,7 +8940,7 @@ bool Dipol(int use_newton,
 		FillingTheMatrix3D_with_napravlennosty_diagramm_dipol(
 			mmd3.k_oslablenie, 
 			&m, &R,
-			mmd3.rows, mmd3.cols, mmd3.pages,
+			mmd3.rows, mmd3.cols, mmd3.pages, mmd3.cubes,
 			mmd3.x0, mmd3.y0, mmd3.z0,
 			mmd3.delta_x, mmd3.delta_y, mmd3.delta_z,
 			vX, vY, vZ, A,
@@ -8951,20 +8964,21 @@ bool Dipol(int use_newton,
 	double *** p_A;
 	double *** W_p_A;
 
-    double *** p_B = NULL;
-    double *** W_p_B = NULL;
+	double *** p_B = NULL;
+	double *** W_p_B = NULL;
 
 	long signal_len = vX.size(); // длина сигнала 
 	long operator_rows = signal_len; // длина сигнала 
 	long operator_cols = mmd3.rows * mmd3.cols * mmd3.pages;
+	operator_cols *= mmd3.cubes;
 
 	p_A = Alloc3DMat<double>(3, operator_rows, operator_cols);
 	W_p_A = Alloc3DMat<double>(3, operator_rows, operator_cols);
 
-    if (apply_B){
-        p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
-        W_p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
-    }
+	if (apply_B){
+		p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
+		W_p_B = Alloc3DMat<double>(3, operator_rows, operator_cols);
+	}
 
 
 	double max_m = -DBL_MAX;
@@ -8982,7 +8996,6 @@ bool Dipol(int use_newton,
 	va.push_back(1);//y
 	va.push_back(2);//z
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
-	//for (int a = 0; a < 3; a++)// перебираем 3 антены
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
 			double _Ep = W[a+6][r];
@@ -9010,6 +9023,7 @@ bool Dipol(int use_newton,
 			}
 		}
 	}
+
 	double zero_substitution = 0.9 * min_m;
 	printf("zero_substitution = %e\n", zero_substitution);
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
@@ -9028,7 +9042,7 @@ bool Dipol(int use_newton,
 	}
 
 	mean_m /= va.size() * operator_rows * operator_cols;
-    printf("mean_m = %e\n", mean_m);
+	printf("mean_m = %e\n", mean_m);
 
 	double max_b = -DBL_MAX;
 	double min_b = DBL_MAX;
@@ -9084,56 +9098,57 @@ bool Dipol(int use_newton,
 	//init_KT = 0.2 / mean_m;
 	init_KT = 10.0 / max_m;// это значит, что минимальный р будет равен 0.1
 	vector<double> KTi_A(operator_cols, init_KT);
-    vector<double> KTi_B;
-    if (apply_B){
-        KTi_B.resize(operator_cols, init_KT);
-    }
+	vector<double> KTi_B;
+	if (apply_B){
+		KTi_B.resize(operator_cols, init_KT);
+	}
 	if (false)
 	{
 		// эта инициализация "копирует" рельефные и краевые эффекты оператора прямой задачи
 		for (long c = 0; c < operator_cols; c++) KTi_A[c] = 0.2 / vmin_m[c];
 	}
-		
+
 	// эта инициализация равномерна по глубине, т.к. использует макс. m, который 
 	// для каждой геоточки соответсвует направлению вертикально вверх
 	// кроме того это означает, что минимальный р равен 0.1
-	
+
 	// mode_A
 	for (long c = 0; c < operator_cols; c++) KTi_A[c] = 10.0 / vmax_m[c];
 	// mode_B
-    if (apply_B){
-	for (long c = 0; c < operator_cols; c++) KTi_B[c] = 10.0 * min_Ep / vmax_m[c];
-    }
+	if (apply_B){
+		for (long c = 0; c < operator_cols; c++) KTi_B[c] = 10.0 * min_Ep / vmax_m[c];
+	}
 
 
 	//beta и omega – углы в сферической системе координат, дающие ориентацию излучающего диполя в пространстве
 	//beta - отклонение вектора диполя от вертикали
 	//omega - азимут наклона диполя (угол между направлением на север и направлением диполя, отсчитываемый по часовой стрелке)
 
-    printf("before init\n");
+	printf("before init\n");
 
 	vector<double> beta_A(operator_cols, 0.0);
-    vector<double> beta_B;
+	vector<double> beta_B;
 
 	vector<double> omega_A(operator_cols, 0.0);
-    vector<double> omega_B;
-    if (apply_B){
-        beta_B.resize(operator_cols, 0.0);
-        omega_B.resize(operator_cols, 0.0);
-    }
+	vector<double> omega_B;
+	if (apply_B){
+		beta_B.resize(operator_cols, 0.0);
+		omega_B.resize(operator_cols, 0.0);
+	}
 
 	//случайная инициализация
 	for (long c = 0; c < operator_cols; c++)
 	{
 		beta_A[c] = 0.5 * PI * ((double)rand()/(double)RAND_MAX);
-        omega_A[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
-        if (apply_B){
-		beta_B[c] = 0.5 * PI * ((double)rand()/(double)RAND_MAX);
-		omega_B[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
-        }
+		omega_A[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
+		if (apply_B){
+			beta_B[c] = 0.5 * PI * ((double)rand()/(double)RAND_MAX);
+			omega_B[c] = 2.0 * PI * ((double)rand()/(double)RAND_MAX);
+		}
 	}
 #if 1
 	//послойная инициализация
+#if 0
 	for (long rr = 0; rr < mmd3.rows; rr++)
 	{
 		for (long cc = 0; cc < mmd3.cols; cc++)
@@ -9147,32 +9162,32 @@ bool Dipol(int use_newton,
 				case 0:
 					{
 						beta_A[c] = 0.0;
-                        omega_A[c] = 0.0;
-                        if (apply_B){
-						beta_B[c] = 0.0;
-						omega_B[c] = 0.0;
-                        }
+						omega_A[c] = 0.0;
+						if (apply_B){
+							beta_B[c] = 0.0;
+							omega_B[c] = 0.0;
+						}
 					}
 					break;
 				case 1:
 					{
 						beta_A[c] = 0.5 * PI;
 						omega_A[c] = 0.0;
-                        if (apply_B){
-						omega_B[c] = 0.0;
-                        beta_B[c] = 0.5 * PI;
-                        }
-                    }
+						if (apply_B){
+							omega_B[c] = 0.0;
+							beta_B[c] = 0.5 * PI;
+						}
+					}
 					break;
 				case 2:
 					{
 						beta_A[c] = 0.5 * PI;
 						omega_A[c] = 0.5 * PI;
-                        if (apply_B){
-						omega_B[c] = 0.5 * PI;
-                        beta_B[c] = 0.5 * PI;
-                        }
-                    }
+						if (apply_B){
+							omega_B[c] = 0.5 * PI;
+							beta_B[c] = 0.5 * PI;
+						}
+					}
 					break;
 				}
 			}
@@ -9193,38 +9208,38 @@ bool Dipol(int use_newton,
 				case 0:
 					{
 						beta_A[c] = 0.0;
-                        omega_A[c] = 0.0;
-                        if (apply_B){
-                        beta_B[c] = 0.0;
-						omega_B[c] = 0.0;
-                        }
+						omega_A[c] = 0.0;
+						if (apply_B){
+							beta_B[c] = 0.0;
+							omega_B[c] = 0.0;
+						}
 					}
 					break;
 				case 1:
 					{
 						beta_A[c] = 0.25 * PI;
-                        omega_A[c] = 0.25 * PI;
-                        if (apply_B){
-                        beta_B[c] = 0.25 * PI;
-						omega_B[c] = 0.25 * PI;
-                        }
+						omega_A[c] = 0.25 * PI;
+						if (apply_B){
+							beta_B[c] = 0.25 * PI;
+							omega_B[c] = 0.25 * PI;
+						}
 					}
 					break;
 				case 2:
 					{
 						beta_A[c] = 0.25 * PI;
-                        omega_A[c] = 0.75 * PI;
-                        if (apply_B){
-                        beta_B[c] = 0.25 * PI;
-						omega_B[c] = 0.75 * PI;
-                        }
+						omega_A[c] = 0.75 * PI;
+						if (apply_B){
+							beta_B[c] = 0.25 * PI;
+							omega_B[c] = 0.75 * PI;
+						}
 					}
 					break;
 				}
 			}
 		}
 	}
-
+#endif
 	//послойная инициализация
 	for (long rr = 0; rr < mmd3.rows; rr++)
 	{
@@ -9232,30 +9247,34 @@ bool Dipol(int use_newton,
 		{
 			for (long pp = 0; pp < mmd3.pages; pp++)
 			{
-				long c = pp * mmd3.rows * mmd3.cols + rr * mmd3.cols + cc;
-
-				switch (pp%2)
+				for (long cb = 0; cb < mmd3.cubes; cb++)
 				{
-				case 0:
+					long c = pp * mmd3.rows * mmd3.cols + rr * mmd3.cols + cc;
+					c += cb * mmd3.pages * mmd3.rows * mmd3.cols;
+
+					switch (cb)
 					{
-						beta_A[c] = 0.25 * PI;
-                        omega_A[c] = 0.25 * PI;
-                        if (apply_B){
-                        beta_B[c] = 0.25 * PI;
-						omega_B[c] = 0.25 * PI;
-                        }
+					case 0:
+						{
+							beta_A[c] = 0.25 * PI;
+							omega_A[c] = 0.25 * PI;
+							if (apply_B){
+								beta_B[c] = 0.25 * PI;
+								omega_B[c] = 0.25 * PI;
+							}
+						}
+						break;
+					case 1:
+						{
+							beta_A[c] = 0.25 * PI;
+							omega_A[c] = 0.75 * PI;
+							if (apply_B){
+								beta_B[c] = 0.25 * PI;
+								omega_B[c] = 0.75 * PI;
+							}
+						}
+						break;
 					}
-					break;
-				case 1:
-					{
-						beta_A[c] = 0.25 * PI;
-                        omega_A[c] = 0.75 * PI;
-                        if (apply_B){
-                        beta_B[c] = 0.25 * PI;
-						omega_B[c] = 0.75 * PI;
-                        }
-					}
-					break;
 				}
 			}
 		}
@@ -9266,30 +9285,30 @@ bool Dipol(int use_newton,
 	for (long c = 0; c < operator_cols; c++)
 	{
 		beta_A[c] = 0.0;
-        omega_A[c] = 0.0;
-        if (apply_B){
-        beta_B[c] = 0.0;
-		omega_B[c] = 0.0;
-        }
+		omega_A[c] = 0.0;
+		if (apply_B){
+			beta_B[c] = 0.0;
+			omega_B[c] = 0.0;
+		}
 	}
 #endif
 
-    printf("after init\n");
+	printf("after init\n");
 
 	double ax, ay, az;
 	double rx, ry, rz;
 
-    printf("calc nju_phi_min");
+	printf("calc nju_phi_min");
 
 	double nju_phi_min = DBL_MAX;
-    for (ia = 0; ia < va.size(); ia++) {
-        printf("\nia = %d\n", ia);
-        a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) {
+		printf("\nia = %d\n", ia);
+		a = va[ia]; // перебираем 3 антены
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
-            printf("ia = %d r = %d operator_rows = %d\r", ia, r, operator_rows);
+			printf("ia = %d r = %d operator_rows = %d\r", ia, r, operator_rows);
 
-            ax = A[a][r].ax;
+			ax = A[a][r].ax;
 			ay = A[a][r].ay;
 			az = A[a][r].az;
 
@@ -9301,41 +9320,41 @@ bool Dipol(int use_newton,
 
 				// коэффициент выхода диаграммы направленности
 				double nju_phi_A = nju_phi_calc(beta_A[c], omega_A[c], 
-					rx, ry, rz, 
+					rx, ry, rz,
 					ax, ay, az);
 
 				if (nju_phi_A > DBL_MIN && nju_phi_A < nju_phi_min)
 					nju_phi_min = nju_phi_A;
 
-                if (apply_B){
+				if (apply_B){
 
-				// коэффициент выхода диаграммы направленности
-				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
-					rx, ry, rz, 
-					ax, ay, az);
+					// коэффициент выхода диаграммы направленности
+					double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
+						rx, ry, rz,
+						ax, ay, az);
 
-				if (nju_phi_B > DBL_MIN && nju_phi_B < nju_phi_min)
-					nju_phi_min = nju_phi_B;
-                }
+					if (nju_phi_B > DBL_MIN && nju_phi_B < nju_phi_min)
+						nju_phi_min = nju_phi_B;
+				}
 
 			}
 		}
 	}
 
-    printf("\nnju_phi_min = %e\n", nju_phi_min);
-    printf("zero_substitution = %e\n", zero_substitution);
+	printf("\nnju_phi_min = %e\n", nju_phi_min);
+	printf("zero_substitution = %e\n", zero_substitution);
 
 	zero_substitution = 0.9 * nju_phi_min;
-    printf("zero_substitution = %e\n", zero_substitution);
+	printf("zero_substitution = %e\n", zero_substitution);
 
-    printf("fill operators p_A and W_p_A");
+	printf("fill operators p_A and W_p_A");
 
-    for (ia = 0; ia < va.size(); ia++) {
-        printf("\nia = %d\n", ia);
-        a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) {
+		printf("\nia = %d\n", ia);
+		a = va[ia]; // перебираем 3 антены
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
-            printf("ia = %d r = %d operator_rows = %d\r", ia, r, operator_rows);
+			printf("ia = %d r = %d operator_rows = %d\r", ia, r, operator_rows);
 
 			ax = A[a][r].ax;
 			ay = A[a][r].ay;
@@ -9367,11 +9386,11 @@ bool Dipol(int use_newton,
 				
 				//if (W_p_A[a][r][c] != W_p_A[a][r][c] || W_p_A[a][r][c] == 0)
 				//{
-                //    printf("nju_phi_A[%d][%d][%d] = %f _p_A=%f W_p_A=%f\n", a, r, c, nju_phi_A, _p_A, W_p_A[a][r][c]);
+				//    printf("nju_phi_A[%d][%d][%d] = %f _p_A=%f W_p_A=%f\n", a, r, c, nju_phi_A, _p_A, W_p_A[a][r][c]);
 				//	printf("Ep[a]=%f m[a][r][c]=%e nju_phi_A=%e KTi_A[c]=%f\n", Ep[a], m[a][r][c], nju_phi_A, KTi_A[c]);
 				//	printf("ax=%f, ay=%f, az=%f, rx=%f, ry=%f, rz=%f\n", ax, ay, az, rx, ry, rz);
 				//}
-                if (apply_B){
+				if (apply_B){
 				// коэффициент выхода диаграммы направленности
 				double nju_phi_B = nju_phi_calc(beta_B[c], omega_B[c], 
 					rx, ry, rz, 
@@ -9384,9 +9403,9 @@ bool Dipol(int use_newton,
 				double _p_B = k[a] * W[a+6][r] / (m[a][r][c] * nju_phi_B * KTi_B[c]);
 				p_B[a][r][c] = _p_B;
 				//W_p[a][r][c] = 1.0 + 2.0 * sqrt (_p / PI) * exp(-_p) - alglib::errorfunction(sqrt(_p));
-                W_p_B[a][r][c] = alglib::errorfunctionc(sqrt(_p_B)) + 2.0 * sqrt (_p_B / PI) * exp(-_p_B);
+				W_p_B[a][r][c] = alglib::errorfunctionc(sqrt(_p_B)) + 2.0 * sqrt (_p_B / PI) * exp(-_p_B);
 				//double W_p_a_r_c = W_p[a][r][c]; double inv_W = 1.0 / W_p_a_r_c;
-                }
+				}
 			}
 		}
 	}
@@ -9453,20 +9472,20 @@ bool Dipol(int use_newton,
 	vector<vector<double> > C_A(3);
 	vector<vector<double> > C_B(3);
 
-    for (ia = 0; ia < va.size(); ia++) {
-        printf("\nia = %d\n", ia);
-        a = va[ia]; // перебираем 3 антены
+	for (ia = 0; ia < va.size(); ia++) {
+		printf("\nia = %d\n", ia);
+		a = va[ia]; // перебираем 3 антены
 		if (!init_by_lamp) 
 			S[a].resize(operator_rows, 0.0);
 		C_A[a].resize(operator_rows, 0.0);
 
-        if (apply_B){
-		C_B[a].resize(operator_rows, 0.0);
-        }
+		if (apply_B){
+			C_B[a].resize(operator_rows, 0.0);
+		}
 	}
 
 	// init ni
-    printf("\ninit ni operator_rows=%d operator_cols=%d\n", operator_rows, operator_cols);
+	printf("\ninit ni operator_rows=%d operator_cols=%d\n", operator_rows, operator_cols);
 
 	double sum_C_a_r_A = 0.0;//суммарный выход оператора прямой задачи
 	double sum_W_a_r_A = 0.0;//сумма векторов правых членов
@@ -9476,23 +9495,23 @@ bool Dipol(int use_newton,
 
 	double mean_B_A[3];
 	double mean_B_B[3];
-			
-    for (ia = 0; ia < va.size(); ia++) {
-    printf("\ninit ni ia = %d\n", ia);
-        a = va[ia]; // перебираем 3 антены
+
+	for (ia = 0; ia < va.size(); ia++) {
+		printf("\ninit ni ia = %d\n", ia);
+		a = va[ia]; // перебираем 3 антены
 		mean_B_A[a] = 0.0;
-        if (apply_B){
-		mean_B_B[a] = 0.0;
-        }
+		if (apply_B){
+			mean_B_B[a] = 0.0;
+		}
 		for (long r = 0; r < operator_rows; r++) // длина сигнала 
 		{
-            printf("init ni ia = %d r = %d\r", ia, r);
+			printf("init ni ia = %d r = %d\r", ia, r);
 
 			// Выход оператора прямой задачи
 			C_A[a][r] = 0.0;
-            if (apply_B){
-			C_B[a][r] = 0.0;
-            }
+			if (apply_B){
+				C_B[a][r] = 0.0;
+			}
 			for (long c = 0; c < operator_cols; c++)
 			{
 				if (W_p_A[a][r][c] != W_p_A[a][r][c])
@@ -9501,38 +9520,38 @@ bool Dipol(int use_newton,
 				}
 				//double W_p_a_r_c = W_p[a][r][c];
 				C_A[a][r] += W_p_A[a][r][c];
-                if (apply_B){
-				C_B[a][r] += W_p_B[a][r][c];
-                }
+				if (apply_B){
+					C_B[a][r] += W_p_B[a][r][c];
+				}
 			}
 			//if (C_A[a][r] != C_A[a][r])
 			//{
 			//	printf("C_A[%d][%d] = %f\n", a, r, C_A[a][r]);
 			//}
 			double car_A = C_A[a][r], war_A = W[a][r];
-            double car_B, war_B;
-            if (apply_B){
-            car_B = C_B[a][r], war_B = W[a+3][r];
-            }
+			double car_B, war_B;
+			if (apply_B){
+				car_B = C_B[a][r], war_B = W[a+3][r];
+			}
 
 			mean_B_A[a] += war_A;
-            if (apply_B){
-			mean_B_B[a] += war_B;
-            }
+			if (apply_B){
+				mean_B_B[a] += war_B;
+			}
 
 
 			sum_C_a_r_A += car_A;
 			sum_W_a_r_A += war_A;
 
-            if (apply_B){
-			sum_C_a_r_B += car_B;
-			sum_W_a_r_B += war_B;
-            }
+			if (apply_B){
+				sum_C_a_r_B += car_B;
+				sum_W_a_r_B += war_B;
+			}
 		}
 		mean_B_A[a] /= operator_rows;
-        if (apply_B){
-		mean_B_B[a] /= operator_rows;
-        }
+		if (apply_B){
+			mean_B_B[a] /= operator_rows;
+		}
 	}
 
 	double init_ni_A = sum_W_a_r_A / sum_C_a_r_A;
@@ -9548,21 +9567,20 @@ bool Dipol(int use_newton,
 	{
 		MessageBox(0, "Сумарный выход прямой задачи равен нулю!","Инициализация не верна", MB_OK);
 		return false;
-
 	}
-    if (apply_B && sum_C_a_r_B == 0.0)
+
+	if (apply_B && sum_C_a_r_B == 0.0)
 	{
 		MessageBox(0, "Сумарный выход прямой задачи равен нулю!","Инициализация не верна", MB_OK);
 		return false;
-
 	}
 
 
 	vector<double> ni_A(operator_cols, init_ni_A);
-    vector<double> ni_B;
-    if (apply_B){
-    ni_B.resize(operator_cols, init_ni_B);
-    }
+	vector<double> ni_B;
+	if (apply_B){
+		ni_B.resize(operator_cols, init_ni_B);
+	}
 
 
 
@@ -9571,13 +9589,13 @@ bool Dipol(int use_newton,
 	vector<vector<double> > Er_B(3);
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
 		Er_A[a].resize(operator_rows);
-        if (apply_B){
-		Er_B[a].resize(operator_rows);
-        }
+		if (apply_B){
+			Er_B[a].resize(operator_rows);
+		}
 	}
 
 	char DirName[4098];
-    sprintf(DirName, "%s/init", common_directory);
+	sprintf(DirName, "%s/init", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
@@ -9590,20 +9608,20 @@ bool Dipol(int use_newton,
 			{
 				// Выход оператора прямой задачи
 				C_A[a][r] = 0.0;
-                if (apply_B){
-				C_B[a][r] = 0.0;
-                }
+				if (apply_B){
+					C_B[a][r] = 0.0;
+				}
 				for (long c = 0; c < operator_cols; c++)
 				{
 					//double nic = ni[c], W_p_a_r_c = W_p[a][r][c];
 					C_A[a][r] += ni_A[c] * W_p_A[a][r][c];
-                }
-                if (apply_B){
-                    for (long c = 0; c < operator_cols; c++)
-                    {
-                        C_B[a][r] += ni_B[c] * W_p_B[a][r][c];
-                    }
-                }
+				}
+				if (apply_B){
+					for (long c = 0; c < operator_cols; c++)
+					{
+						C_B[a][r] += ni_B[c] * W_p_B[a][r][c];
+					}
+				}
 				// инициализация коэффициента симметризации
 				if (C_A[a][r] != 0)
 					S[a][r] = mean_B_A[a] / C_A[a][r]; // здесь иницивлизация не работает в том случае если имеются нулевые C_A[a][r]
@@ -9630,7 +9648,8 @@ bool Dipol(int use_newton,
 			NULL, mmd3, 
 			to_reduce_x, to_reduce_y);
 	}
-    if (apply_B){
+
+	if (apply_B){
 
 	SavingIteration(va, 0, "init",
 		true,//bool apply_log10,
@@ -9642,7 +9661,7 @@ bool Dipol(int use_newton,
 		"initial_S",//const char * method_name,
 		NULL, mmd3, 
 		to_reduce_x, to_reduce_y);
-    }
+	}
 
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
 	
@@ -9650,16 +9669,16 @@ bool Dipol(int use_newton,
 		{
 			// пересчёт выхода оператора прямой задачи с учётом коэффициента симметризации
 			C_A[a][r] = 0.0;
-            if (apply_B){
-			C_A[a][r] = 0.0;
-            }
+			if (apply_B){
+				C_B[a][r] = 0.0;
+			}
 			for (long c = 0; c < operator_cols; c++)
 			{
 				//double nic = ni[c], W_p_a_r_c = W_p[a][r][c];
 				C_A[a][r] += S[a][r] * ni_A[c] * W_p_A[a][r][c];
-                if (apply_B){
-				C_B[a][r] += S[a][r] * ni_B[c] * W_p_B[a][r][c];
-                }
+				if (apply_B){
+					C_B[a][r] += S[a][r] * ni_B[c] * W_p_B[a][r][c];
+				}
 
 				//if (C_A[a][r] != C_A[a][r])
 				//{
@@ -9671,9 +9690,9 @@ bool Dipol(int use_newton,
 			//size_t W_a_size = W[a].size();
 			// Невязка
 			Er_A[a][r] = C_A[a][r] - W[a][r];//режим А
-            if (apply_B){
-			Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
-            }
+			if (apply_B){
+				Er_B[a][r] = C_B[a][r] - W[a+3][r];//режим B
+			}
 		}
 	}
 
@@ -9681,46 +9700,46 @@ bool Dipol(int use_newton,
 	const double two_per_sqrt_pi = 2.0 / sqrt(PI);
 	const double four_per_sqrt_pi = 4.0 / sqrt(PI);
 
-			
+
 	vector<double> dGdni_A(operator_cols);
 	vector<double> d2Gdni2_A(operator_cols);
 
 	vector<double> dGdni_B(operator_cols);
 	vector<double> d2Gdni2_B(operator_cols);
-    if (apply_B){
-        dGdni_B.resize(operator_cols);
-        d2Gdni2_B.resize(operator_cols);
-    }
+	if (apply_B){
+		dGdni_B.resize(operator_cols);
+		d2Gdni2_B.resize(operator_cols);
+	}
 
 	vector<double> dGdKTi_A(operator_cols);
 	vector<double> d2GdKTi2_A(operator_cols);
 
 	vector<double> dGdKTi_B(operator_cols);
 	vector<double> d2GdKTi2_B(operator_cols);
-    if (apply_B){
-        dGdKTi_B.resize(operator_cols);
-        d2GdKTi2_B.resize(operator_cols);
-    }
+	if (apply_B){
+		dGdKTi_B.resize(operator_cols);
+		d2GdKTi2_B.resize(operator_cols);
+	}
 
 	vector<double> dGdbeta_A(operator_cols);
 	vector<double> d2Gdbeta2_A(operator_cols);
 
 	vector<double> dGdbeta_B(operator_cols);
 	vector<double> d2Gdbeta2_B(operator_cols);
-    if (apply_B){
-        dGdbeta_B.resize(operator_cols);
-        d2Gdbeta2_B.resize(operator_cols);
-    }
+	if (apply_B){
+		dGdbeta_B.resize(operator_cols);
+		d2Gdbeta2_B.resize(operator_cols);
+	}
 
 	vector<double> dGdomega_A(operator_cols);
 	vector<double> d2Gdomega2_A(operator_cols);
 
 	vector<double> dGdomega_B(operator_cols);
 	vector<double> d2Gdomega2_B(operator_cols);
-    if (apply_B){
-        dGdomega_B.resize(operator_cols);
-        d2Gdomega2_B.resize(operator_cols);
-    }
+	if (apply_B){
+		dGdomega_B.resize(operator_cols);
+		d2Gdomega2_B.resize(operator_cols);
+	}
 
 
 
@@ -9739,10 +9758,10 @@ bool Dipol(int use_newton,
 		temp_A[a].resize(operator_cols);
 		temp52_A[a].resize(operator_cols);
 
-        if (apply_B){
-		temp_B[a].resize(operator_cols);
-		temp52_B[a].resize(operator_cols);
-        }
+		if (apply_B){
+			temp_B[a].resize(operator_cols);
+			temp52_B[a].resize(operator_cols);
+		}
 	}
 
 
@@ -9755,18 +9774,17 @@ bool Dipol(int use_newton,
 
 
 
-	
-    /*sprintf(DirName, "%s/maxwell_iters", common_directory);
+	/*sprintf(DirName, "%s/maxwell_iters", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
-    sprintf(DirName, "%s/MX", common_directory);
+	sprintf(DirName, "%s/MX", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}*/
 
 	char iter_file[4098];
-    sprintf(iter_file, "%s/iterations.txt", common_directory);
+	sprintf(iter_file, "%s/iterations.txt", common_directory);
 	FILE * iter_txt = fopen (iter_file, "wt");
 	if (iter_txt)
 	{
@@ -9791,13 +9809,14 @@ bool Dipol(int use_newton,
 	for (int cc = 0; cc < cols_3; cc++)
 	{
 		for(size_t c = cc * 3; c < (cc+1) * 3; c++) 
-		{			
-			new_names_of_colomns[cc] += 
+		{
+			new_names_of_colomns[cc] +=
 				names_of_colomns[original_col_numbers[c]];
 			new_names_of_colomns[cc] += "_";
 		}
-		cubes[cc] = new GRID_POINTER[4];
-		for (int i_cube = 0; i_cube < 4; i_cube++)
+
+		cubes[cc] = new GRID_POINTER[NCUBES_FOR_SAVE * mmd3.cubes];
+		for (int i_cube = 0; i_cube < NCUBES_FOR_SAVE * mmd3.cubes; i_cube++)
 		{
 			// Грид по размеру геологической структуры
 			cubes[cc][i_cube] = CreateProfileGrid3D(mmd3);
@@ -9805,6 +9824,7 @@ bool Dipol(int use_newton,
 			Fill3DMatByValue<double>(BLANK_VALUE, cubes[cc][i_cube]->grid4Section.v, cubes[cc][i_cube]->grid4Section.nPag, cubes[cc][i_cube]->grid4Section.nRow, cubes[cc][i_cube]->grid4Section.nCol);
 		}
 	}
+
 	double MA = 0.0;
 	double MB = 0.0;
 	for (ia = 0; ia < va.size(); ia++) { a = va[ia]; // перебираем 3 антены
@@ -9817,15 +9837,15 @@ bool Dipol(int use_newton,
 			//}
 			//double ear = Er[a][r];
 			MA += W[a][r] * W[a][r];
-            if (apply_B){
-			MB += W[a+3][r] * W[a+3][r];
-            }
+			if (apply_B){
+				MB += W[a+3][r] * W[a+3][r];
+			}
 		}
 	}
 	MA /= 2.0;
-    if (apply_B){
-	MB /= 2.0;
-    }
+	if (apply_B){
+		MB /= 2.0;
+	}
 
 	
 	
@@ -9842,7 +9862,7 @@ bool Dipol(int use_newton,
 		"MXWA_Sj",//const char * method_name,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
-    if (apply_B){
+	if (apply_B){
 	SavingIteration(va, 0, "init",
 		true,//bool apply_log10,
 		true,// apply_bln,
@@ -9853,7 +9873,7 @@ bool Dipol(int use_newton,
 		"MXWB_Sj",//const char * method_name,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
-    }
+	}
 
 	SavingIteration(va, 0, "init",
 		false,//bool apply_log10,
@@ -9866,7 +9886,7 @@ bool Dipol(int use_newton,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
 
-    if (apply_B){
+	if (apply_B){
 
 	SavingIteration(va, 0, "init",
 		false,//bool apply_log10,
@@ -9878,9 +9898,9 @@ bool Dipol(int use_newton,
 		"MXWB_Sj",//const char * method_name,
 		cubes, mmd3, 
 		to_reduce_x, to_reduce_y);
-    }
+	}
 
-    sprintf(DirName, "%s/korr", common_directory);
+	sprintf(DirName, "%s/korr", common_directory);
 	if (!CreateDirectory(DirName,NULL))
 	{
 	}
@@ -9976,19 +9996,19 @@ bool Dipol(int use_newton,
 		double GB = 0.0;
 		long c_apply = -1;
 
-        ForwordOperatorApply_dipol(c_apply, apply_B,
+	ForwordOperatorApply_dipol(c_apply, apply_B,
 
 			GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 			R, A,
 			W,
-	            
+
 			operator_rows, operator_cols,
 
 			p_A,  W_p_A,  ni_A,  KTi_A, beta_A, omega_A, 
 			Ep, CJI_A,  C_A,  Er_A,  S,
 
 			p_B,  W_p_B,  ni_B,  KTi_B, beta_B, omega_B,
-			k, s,  mean_B_B,				  
+			k, s,  mean_B_B,
 			CJI_B,  C_B,  Er_B
 
 			);
@@ -9998,17 +10018,17 @@ bool Dipol(int use_newton,
 	double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 	double errorB = 100.0 * (sqrt_GB / sqrt_MB);
 
-    printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", 0, GA, errorA, Ep[0], Ep[1], Ep[2]);
-    printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", 0, GB, errorB, k[0], k[1], k[2]);
+	printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", 0, GA, errorA, Ep[0], Ep[1], Ep[2]);
+	printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", 0, GB, errorB, k[0], k[1], k[2]);
 	printf ("%d\ts = %f\t%f\t%f\n", 0, s[0], s[1], s[2]);
 
 	iter_txt = fopen (iter_file, "at");
 	if (iter_txt)
 	{
 		fprintf(iter_txt, "%d,%d", 0, -1 );
-        fprintf(iter_txt, ",%e", 0.0);
-        fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-        fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
+		fprintf(iter_txt, ",%e", 0.0);
+		fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+		fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
 		fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);
 		fprintf(iter_txt, "\n");
 		fclose(iter_txt);
@@ -10026,7 +10046,7 @@ bool Dipol(int use_newton,
 
 		char method_name[512];
 		sprintf(method_name, "MX_iter=%05d", iteration);
-        sprintf(DirName, "%s/%s", common_directory, method_name);
+		sprintf(DirName, "%s/%s", common_directory, method_name);
 		if (iteration%mmd3.iter_save == 0)
 		{
 			if (!CreateDirectory(DirName,NULL))
@@ -10057,29 +10077,27 @@ bool Dipol(int use_newton,
 #if 1
 		//long n_param_pre = 2;
 		//long n_param_pre = 7;
-		for (long n_param = 0; 
-            n_param < n_params;
-			n_param++)
+		for (long n_param = 0; n_param < n_params; n_param++)
 		{
 			if (!iteration_params[n_param].apply) continue;
 
-            CalcDerivatives_dipol(c_apply, apply_B, apply_dgdep, apply_dgdni, va,
-				operator_rows, operator_cols, 
-				mmd3.pw_dnp, R, A,  						
+			CalcDerivatives_dipol(c_apply, apply_B, apply_dgdep, apply_dgdni, va,
+				operator_rows, operator_cols,
+				mmd3.pw_dnp, R, A,
 				p_A, W_p_A,
-				ni_A, KTi_A, beta_A, omega_A, Ep,						
+				ni_A, KTi_A, beta_A, omega_A, Ep,
 				Er_A, S,
 				dGdni_A, d2Gdni2_A, dGdKTi_A, d2GdKTi2_A,
 				dGdbeta_A, d2Gdbeta2_A, dGdomega_A, d2Gdomega2_A,
 				dGdEp, d2GdEp2,
-				temp_A, temp52_A, 
+				temp_A, temp52_A,
 				p_B, W_p_B,
 				ni_B, KTi_B, beta_B, omega_B, k, s,
 				Er_B,
-				dGdni_B, d2Gdni2_B, dGdKTi_B, d2GdKTi2_B, 
-				dGdbeta_B, d2Gdbeta2_B, dGdomega_B, d2Gdomega2_B, 
-				dGdk, d2Gdk2,					
-				temp_B, temp52_B					 
+				dGdni_B, d2Gdni2_B, dGdKTi_B, d2GdKTi2_B,
+				dGdbeta_B, d2Gdbeta2_B, dGdomega_B, d2Gdomega2_B,
+				dGdk, d2Gdk2,
+				temp_B, temp52_B
 			);
 
 			for (long c = 0; c < operator_cols; c++)
@@ -10087,7 +10105,7 @@ bool Dipol(int use_newton,
 
 
 			ApplyIteration_dipol(use_newton,
-				iteration_params[n_param].one, 
+				iteration_params[n_param].one,
 				iteration_params[n_param].min_d2,
 				operator_cols, 
 				iteration_params[n_param].param,
@@ -10097,26 +10115,26 @@ bool Dipol(int use_newton,
 			GA = 0.0;
 			GB = 0.0;
 
-            ForwordOperatorApply_dipol(c_apply, apply_B,
+			ForwordOperatorApply_dipol(c_apply, apply_B,
 
 				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 				R, A,
 				W,
-		            
+
 				operator_rows, operator_cols,
 
 				p_A,  W_p_A,  ni_A,  KTi_A, beta_A, omega_A, 
 				Ep, CJI_A,  C_A,  Er_A,  S,
 
 				p_B,  W_p_B,  ni_B,  KTi_B, beta_B, omega_B,
-				k, s,  mean_B_B,				  
+				k, s,  mean_B_B,
 				CJI_B,  C_B,  Er_B
 
 				);
 
 
 
-			bool we_have_bad_iteration = 
+			bool we_have_bad_iteration =
 				n_param < 4 ?
 				GA > GA_pre:
 				GB > GB_pre;
@@ -10125,31 +10143,31 @@ bool Dipol(int use_newton,
 			if (we_have_bad_iteration)
 			{
 				double sqrt_GA = sqrt(2.0 * GA / operator_rows);
-                double errorA = 100.0 * (sqrt_GA / sqrt_MA);
+				double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 
-                double sqrt_GB = 0.0;
-                double errorB = 0.0;
-                if (apply_B)
-                {
-                    sqrt_GB = sqrt(2.0 * GB / operator_rows);
-                    errorB = 100.0 * (sqrt_GB / sqrt_MB);
-                }
+				double sqrt_GB = 0.0;
+				double errorB = 0.0;
+				if (apply_B)
+				{
+					sqrt_GB = sqrt(2.0 * GB / operator_rows);
+					errorB = 100.0 * (sqrt_GB / sqrt_MB);
+				}
 
-                printf ("bad%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
-                printf ("bad%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
+				printf ("bad%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
+				printf ("bad%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
 				printf ("bad%d\ts = %f\t%f\t%f\n", iteration, s[0], s[1], s[2]);
 
 				iter_txt = fopen (iter_file, "at");
 				if (iter_txt)
 				{
-                    fprintf(iter_txt, "bad%d,%ld", iteration, n_param);
+					fprintf(iter_txt, "bad%d,%ld", iteration, n_param);
 					fprintf(iter_txt, ",%e", iteration_params[n_param].one);
-                    fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-                    fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
+					fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+					fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
 					fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);
 					fprintf(iter_txt, "\n");
 					fclose(iter_txt);
-				}	
+				}
 
 				/*
 				ApplyIteration_dipol(-iteration_params[n_param].one, 
@@ -10166,25 +10184,25 @@ bool Dipol(int use_newton,
 				GA = 0.0;
 				GB = 0.0;
 
-                ForwordOperatorApply_dipol(c_apply, apply_B,
+				ForwordOperatorApply_dipol(c_apply, apply_B,
 
 					GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 					R, A,
 					W,
-			            
+
 					operator_rows, operator_cols,
 
-					p_A,  W_p_A,  ni_A,  KTi_A, beta_A, omega_A, 
+					p_A,  W_p_A,  ni_A,  KTi_A, beta_A, omega_A,
 					Ep, CJI_A,  C_A,  Er_A,  S,
 
 					p_B,  W_p_B,  ni_B,  KTi_B, beta_B, omega_B,
-					k, s,  mean_B_B,				  
+					k, s,  mean_B_B,
 					CJI_B,  C_B,  Er_B
 
 					);
 
 				iteration_params[n_param].one *= 0.1;
-				n_bad_iterations++;	
+				n_bad_iterations++;
 
 			}
 			else
@@ -10194,37 +10212,37 @@ bool Dipol(int use_newton,
 				n_bad_iterations = 0;
 
 				if (n_param < 4)
-                    GA_pre = GA;
+					GA_pre = GA;
 				else
 					GB_pre = GB;
 			}
 
 			double sqrt_GA = sqrt(2.0 * GA / operator_rows);
-            double errorA = 100.0 * (sqrt_GA / sqrt_MA);
+			double errorA = 100.0 * (sqrt_GA / sqrt_MA);
 
-            double sqrt_GB = 0.0;
-            double errorB = 0.0;
-            if (apply_B) {
-                sqrt_GB = sqrt(2.0 * GB / operator_rows);
-                errorB = 100.0 * (sqrt_GB / sqrt_MB);
-            }
+			double sqrt_GB = 0.0;
+			double errorB = 0.0;
+			if (apply_B) {
+				sqrt_GB = sqrt(2.0 * GB / operator_rows);
+				errorB = 100.0 * (sqrt_GB / sqrt_MB);
+			}
 
-            printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
-            printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
+			printf ("%d\tGA = %f\terrA=%e\tEp = %f\t%f\t%f\n", iteration, GA, errorA, Ep[0], Ep[1], Ep[2]);
+			printf ("%d\tGB = %f\terrB=%e\tk = %f\t%f\t%f\n", iteration, GB, errorB, k[0], k[1], k[2]);
 			printf ("%d\ts = %f\t%f\t%f\n", iteration, s[0], s[1], s[2]);
 
 
 			iter_txt = fopen (iter_file, "at");
 			if (iter_txt)
 			{
-                fprintf(iter_txt, "%d,%ld", iteration, n_param);
+				fprintf(iter_txt, "%d,%ld", iteration, n_param);
 				fprintf(iter_txt, ",%e", iteration_params[n_param].one);
-                fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
-                fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
+				fprintf(iter_txt, ",%f,%e,%f,%f,%f", GA, errorA, Ep[0], Ep[1], Ep[2]);
+				fprintf(iter_txt, ",%f,%e,%f,%f,%f", GB, errorB, k[0],  k[1],  k[2]);
 				fprintf(iter_txt, ",%f,%f,%f", s[0], s[1], s[2]);
 				fprintf(iter_txt, "\n");
 				fclose(iter_txt);
-			}			
+			}
 
 
 			//n_param_pre = n_param;
@@ -10246,7 +10264,7 @@ bool Dipol(int use_newton,
 				GA, GB, va, m, // три матрицы njuX, njuY, njuZ
 				R, A,
 				W,
-	                
+
 				operator_rows, operator_cols,
 
 				p_A,  W_p_A,  ni_A,  KTi_A, beta_A, omega_A, 
@@ -10317,7 +10335,7 @@ bool Dipol(int use_newton,
 						);
 
 
-										
+
                     ForwordOperatorApply_dipol(c_apply, apply_B,
 						GA,
 						GB,
@@ -10476,10 +10494,10 @@ bool Dipol(int use_newton,
 				p_B, W_p_B,
 				ni_B, KTi_B, beta_B, omega_B, k, s,
 				Er_B,
-				dGdni_B, d2Gdni2_B, dGdKTi_B, d2GdKTi2_B, 
-				dGdbeta_B, d2Gdbeta2_B, dGdomega_B, d2Gdomega2_B, 
-				dGdk, d2Gdk2,					
-				temp_B, temp52_B					 
+				dGdni_B, d2Gdni2_B, dGdKTi_B, d2GdKTi2_B,
+				dGdbeta_B, d2Gdbeta2_B, dGdomega_B, d2Gdomega2_B,
+				dGdk, d2Gdk2,
+				temp_B, temp52_B
 			);
 
 
@@ -10546,7 +10564,7 @@ bool Dipol(int use_newton,
 				cubes, mmd3, 
 				to_reduce_x, to_reduce_y);
 
-            if (apply_B){
+			if (apply_B){
 
 			SavingIteration(va, iteration, "",
 				true, //bool apply_log10,
@@ -10580,7 +10598,7 @@ bool Dipol(int use_newton,
 				"MXWB", //const char * method_name,
 				cubes, mmd3, 
 				to_reduce_x, to_reduce_y);
-            }
+			}
 		}
 
 	}
@@ -10607,11 +10625,11 @@ bool Dipol(int use_newton,
 
 	Free3DMat(m);
 	Free3DMat(p_A);
-    Free3DMat(W_p_A);
-    if (apply_B){
-	Free3DMat(p_B);
-	Free3DMat(W_p_B);
-    }
+	Free3DMat(W_p_A);
+	if (apply_B){
+		Free3DMat(p_B);
+		Free3DMat(W_p_B);
+	}
 
 	for (int cc = 0; cc < cols_3; cc++) // для каждой колонки - суть для каждого параметра
 	{
@@ -11204,7 +11222,7 @@ bool Lamp(int use_newton,
 	for (int cc = 0; cc < cols_3; cc++)
 	{
 		for(size_t c = cc * 3; c < (cc+1) * 3; c++) 
-		{			
+		{
 			new_names_of_colomns[cc] += 
 				names_of_colomns[original_col_numbers[c]];
 			new_names_of_colomns[cc] += "_";
